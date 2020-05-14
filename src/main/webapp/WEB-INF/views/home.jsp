@@ -29,6 +29,7 @@
     <div class="container">
     	<div class="page-header">
     		<h1>제목<small>서브제목</small></h1>
+    	
     	</div>    	
     </div>
 
