@@ -11,16 +11,42 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    
     <style>
- 
+    *:hover{text-decoration: none;}
+ .sidebar>li>a {
+  
+  display: block;
+  width: 200px;			/* 메뉴 */
+  text-align: center;
+  line-height: 3.4;
+  color: #fff;
+  background-color: #2056ac;
+  font-size: 15px;
+  
+}
+ .sidebar>li>a:hover {
+  
+  display: block;
+  width: 180px;			/* 메뉴 */
+  text-align: center;
+  line-height: 3.4;
+  color: black;
+  background-color: #fff;
+  font-size: 15px;
+  border: #2056ac;
+}
+.sidebar>li>a:first-child {
+}
     </style>
     <script>
     
     </script>
 <aside>
-	<ul style="padding-top: 250px">
-	<li><a href="#">사이드1</a></li>
+	<ul style="padding-top: 250px" class="sidebar">
+	<li ><a href="#" style="border-radius: 0px 7px 0px 0px;">사이드1</a></li>
 	<li><a href="#">사이드2</a></li>
 	<li><a href="#">사이드3</a></li>
 	<li><a href="#">사이드4</a></li>	
+	<li><a href="#" style="border-radius: 0px 0px 7px 0px;">사이드5</a></li>	
+	
 	</ul>
 </aside>

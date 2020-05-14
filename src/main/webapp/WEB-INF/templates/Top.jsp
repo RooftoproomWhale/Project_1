@@ -18,6 +18,8 @@
 * {margin: 0;padding: 0;}
 li {list-style: none}
 a{text-decoration: none}
+a:hover{text-decoration: none}
+
 header {
   
   width: 100%;
