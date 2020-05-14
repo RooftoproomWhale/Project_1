@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Quicksand:400,700|Questrial" rel="stylesheet" />
-
+	<link href="<c:url value="/bootstrap/css/bootstrap.css"/>" rel="stylesheet">
    <!--   <link href="<c:url value="/bootstrap/css/default.css"/>" rel="stylesheet" type="text/css" media="all" />
 	<link href="<c:url value="/bootstrap/css/font.css"/>" rel="stylesheet" type="text/css" media="all" />
    -->
@@ -18,7 +18,6 @@
 * {margin: 0;padding: 0;}
 li {list-style: none}
 a{text-decoration: none}
-a:hover{text-decoration: none}
 
 header {
   
@@ -60,6 +59,9 @@ header {
 .nav>li>a:hover{
   border-radius: 7px 7px 0px 0px;   /* 메뉴에 마우스 올렸을때  윗부분 둥글게 처리*/
   color: black;
+  background-color:#fff ;/* 메뉴에 마우스 올렸을때 색*/ 
+  transition-duration: 0.4s;
+ 
 }
 .sub {
   width: 200px;  /* 메뉴 마우스 안올렸을때  */
@@ -78,7 +80,7 @@ header {
   border-bottom: 1px solid #000;
   color: #fff;
   background-color: #2056ac;
-  box-sizing: border-box;
+  box-sizing: border-box;	
   
 }
 .sub>li:last-child {
@@ -86,8 +88,9 @@ header {
 }
 .sub>li>a:hover {
   background-color: #fff;   /* 서브메뉴 내용물에 마우스 올렸을때 */
-  color: black;
- 
+  color: black;			/* 글자색 */
+  transition-duration: 0.4s;
+  
 }
 
 
@@ -98,7 +101,7 @@ header {
   line-height: 3.4;
   font-size: 15px;
   font-weight: 500;
-  color: white;
+  color: white; /* 글자색*/
   
 }
 
@@ -109,10 +112,9 @@ $(function(){
 
 	$(".nav li").hover(function() {
 
-        $(this).children("ul").stop().slideToggle(200)
+        $(this).children("ul").stop().slideToggle(200);
+        })
 
-      })
-	
 });
 </script>
 

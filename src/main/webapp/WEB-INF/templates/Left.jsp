@@ -26,13 +26,15 @@
  .sidebar>li>a:hover {
   
   display: block;
-  width: 180px;			/* 메뉴 */
+  width: 190px;			/* 메뉴 */
   text-align: center;
   line-height: 3.4;
   color: black;
   background-color: #fff;
   font-size: 15px;
   border: #2056ac;
+  transition-duration: 0.4s;
+ 
 }
 .sidebar>li>a:first-child {
 }
