@@ -21,7 +21,7 @@
   color: #fff;
   background-color: #2056ac;
   font-size: 15px;
-  
+  position: sticky;
 }
  .sidebar>li>a:hover {
   
@@ -34,7 +34,7 @@
   font-size: 15px;
   border: #2056ac;
   transition-duration: 0.4s;
- 
+  position: sticky;
 }
 .sidebar>li>a:first-child {
 }
