@@ -2,99 +2,162 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Quicksand:400,700|Questrial" rel="stylesheet" />
 
+   <!--   <link href="<c:url value="/bootstrap/css/default.css"/>" rel="stylesheet" type="text/css" media="all" />
+	<link href="<c:url value="/bootstrap/css/font.css"/>" rel="stylesheet" type="text/css" media="all" />
+   -->
+    <script src="<c:url value="/bootstrap/js/script.js"/>"></script>
+    <script src="https://code.jquery.com/ui/1.12.3/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
 <style>
-	body{
-		padding-top:50px;
-	}
+* {margin: 0;padding: 0;}
+li {list-style: none}
+a{text-decoration: none}
+header {
+  
+  width: 100%;
+  height: 150px;   /* 상단바 크기조정 */
+  background-color: #2056ac;
+}
+.container {
+  width: 1200px;
+  height: 50px;
+  margin: 0 auto;
+  position: relative;
+  
+}
+.nav {
+ 
+  float: left;
+  width: 100%;
+  padding-top:100px;
+  margin-left: 60px;  /* 메뉴 위치 조정 왼쪽기준 공간 */
+}
+.nav>li {
+  float: left;
+  width: 200px;  /* 메뉴 진짜 넓이 */
+  box-sizing: border-box;
+  mar
+ 	 
+}
+.nav>li>a {
+  
+  display: block;
+  width: 200px;			/* 메뉴 */
+  text-align: center;
+  line-height: 3.4;
+  color: #fff;
+  font-size: 15px;
+  
+}
+.nav>li>a:hover{
+  border-radius: 7px 7px 0px 0px;   /* 메뉴에 마우스 올렸을때  윗부분 둥글게 처리*/
+  color: black;
+}
+.sub {
+  width: 200px;  /* 메뉴 마우스 안올렸을때  */
+  margin: 0 auto;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  z-index: 1;
+  display: none;
+  
+ 
+}
+.sub>li {
+  width: 200px;		/* 메뉴 */
+  height: 50px;  
+  border-bottom: 1px solid #000;
+  color: #fff;
+  background-color: #2056ac;
+  box-sizing: border-box;
+  
+}
+.sub>li:last-child {
+  border-radius: 0px 0px 7px 7px; /* 서브메뉴 마지막꺼에 모서리 마감처리*/
+}
+.sub>li>a:hover {
+  background-color: #fff;   /* 서브메뉴 내용물에 마우스 올렸을때 */
+  color: black;
+ 
+}
+
+
+.sub>li>a {
+  display: block;   /* 서브메뉴 내려왔을때 내용물 */
+  width: 200px;
+  text-align: center;
+  line-height: 3.4;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  
+}
+
 </style>
+	
 <script>
-	function isLogin() {
-		$.ajax({
-			url:"<c:url value='/OneMemo/Auth/IsLogin.bbs'/>",
-			dataType:'json',
-			success:function(data)
-			{
-				console.log(data);
-				if(data.isLogin=='YES') 
-				{
-					location.replace("<c:url value='/OneMemo/BBS/List.bbs'/>");
-				}
-				else
-				{
-					alert('로그인후 이용하세요');
-					location.replace("<c:url value='/OneMemo/Auth/Login.bbs'/>");
-				}
-			},
-			error:function(e)
-			{
-				console.log('에러:',e);
-			}
-		});
-	}
+$(function(){
+
+	$(".nav li").hover(function() {
+
+        $(this).children("ul").stop().slideToggle(200)
+
+      })
+	
+});
 </script>
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-	<!-- 상단메뉴 시작 -->
-	<div class="container-fluid">
-		<!--화면 크기가 작을때 보여지는 네비게이션바(모바일용)  -->
-		<div class="navbar-header">
-			<button class="navbar-toggle collapsed" data-toggle="collapse"
-				data-target="#collapse-menu">
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span>
-			</button>			
-			<a class="navbar-brand" href='<c:url value="/"/>'>
-				<span class="glyphicon glyphicon-education"></span>
-				KOSMO
-			</a>
-		</div>
-		<!-- navbar-header -->
 
-		<!-- 화면 크기가 클때 상단에 보여지는 메뉴(데스크탑용) -->
-		<div class="collapse navbar-collapse" id="collapse-menu">
-			<!-- 네비게이션바에 폼 추가 -->
-			<form class="navbar-form navbar-right">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="검색" />
-				</div>
-				<button class="btn btn-info">확인</button>
-			</form>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href='<c:url value="/"/>'>HOME</a></li>
-				<%-- 
-				<c:if test="${empty sessionScope.id }" var="isNotLogin">
-				<li><a href="<c:url value="/OneMemo/Auth/Login.bbs"/>">로그인</a></li>
-				</c:if>
-				<c:if test="${not  isNotLogin}">
-				<li><a href="<c:url value="/OneMemo/Auth/Logout.bbs"/>">로그아웃</a></li>
-				</c:if>
-				--%>
-				
-				<sec:authorize access="isAnonymous()">
-					<li><a href="<c:url value="/OneMemo/Auth/Login.bbs"/>">로그인</a></li>
-				</sec:authorize>
-				<sec:authorize access="isAuthenticated()">
-					<li><a href="javascript:Logout();">로그아웃</a></li>
-				</sec:authorize>
-				<li><a href="javascript:isLogin();">한줄 댓글 게시판</a></li>
-				<!-- 
-				<li><a href='<c:url value="/OneMemo/BBS/List.bbs"/>'>한줄 댓글 게시판</a></li>
-				 -->
-				<li><a href="javascript:isLogin();">Q&A</a>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-
+<header>
+<div id="">
+	<div class="container" id="">
+		<ul class="nav">
+			<li><a href="">메뉴1</a>
+				<ul class="sub sub1">
+					<li><a href="#">메뉴1-1</a></li>
+					<li><a href="#">메뉴1-2</a></li>
+					<li><a href="#">메뉴1-3</a></li>
+				</ul></li>
+			<li><a href="">메뉴2</a>
+				<ul class="sub sub2">
+					<li><a href="#">메뉴2-1</a></li>
+					<li><a href="#">메뉴2-2</a></li>
+					<li><a href="#">메뉴2-3</a></li>
+				</ul></li>
+			<li><a href="">메뉴3</a>
+				<ul class="sub sub3">
+					<li><a href="#">메뉴3-1</a></li>
+					<li><a href="#">메뉴3-2</a></li>
+					<li><a href="#">메뉴3-3</a></li>
+				</ul></li>
+			<li><a href="">메뉴4</a>
+				<ul class="sub sub4">
+					<li><a href="#">메뉴4-1</a></li>
+					<li><a href="#">메뉴4-2</a></li>
+					<li><a href="#">메뉴4-3</a></li>
+				</ul></li>
+			<li><a href="">메뉴5</a>
+				<ul class="sub sub5">
+					<li><a href="#">메뉴5-1</a></li>
+					<li><a href="#">메뉴5-2</a></li>
+					<li><a href="#">메뉴5-3</a></li>
+				</ul></li>	
+		
+		
+		</ul>
+		
 	</div>
-	<!-- /.container-fluid -->
-</nav>
-<!--  상단 메뉴 끝 -->
-<form id="LogoutForm" method="post" action="<c:url value='/OneMemo/Auth/Logout.bbs'/>">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
+</div>
+<div style="padding-bottom: 200px"></div>
+</header>
+
+
 <script>
-	function Logout(){
-		$('#LogoutForm').submit();
-	}
+	
 </script>

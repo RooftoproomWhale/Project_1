@@ -31,6 +31,7 @@
 	<tiles:insertAttribute name="top"/>
     <!-- body부분 -->
     <tiles:insertAttribute name="body"/> 
+    <tiles:insertAttribute name="left"/> 
     
     <!-- footer부분 -->
     <tiles:insertAttribute name="footer"/>  
