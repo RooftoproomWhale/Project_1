@@ -52,6 +52,7 @@ aside{
 position: absolute;
 position: fixed;
 top: 400px; /* 사이드바 위치 고정 */
+
 } 
     </style>
     <script>
