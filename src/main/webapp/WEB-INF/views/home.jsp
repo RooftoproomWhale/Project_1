@@ -41,7 +41,7 @@
     <![endif]-->
   </head>
   <body>
-
+	<h2 style="font-family: MD아롱체">제목입니다!<span>dascascas</span></h2>
      <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:680px;height:380px;overflow:hidden;visibility:hidden;">
         <!-- Loading Screen -->
         
