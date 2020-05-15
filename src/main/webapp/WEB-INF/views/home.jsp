@@ -41,11 +41,11 @@
     <![endif]-->
   </head>
   <body>
-	<h2 style="font-family: MD아롱체">제목입니다!<span>dascascas</span></h2>
-     <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:680px;height:380px;overflow:hidden;visibility:hidden;">
+	<h2 style="font-family: MD아롱체">제목입니다!<span>dasca</span></h2>
+     <div id="jssor_1" style="position:relative;margin:0 auto;top:-63px;left:74px;width:680px;height:380px;overflow:hidden;visibility:hidden;">
         <!-- Loading Screen -->
         
-        <div class="img-thumbnail" data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:680px;height:380px;overflow:hidden;">
+        <div class="img-thumbnail" data-u="slides" style="cursor:default;position:relative;top:-63px;left:74px ;width:415px;height:345px;overflow:hidden;">
             <div data-p="680">
                 <img  data-u="image" src="<c:url value="/Image/banner.jpg"/>" />
                 
