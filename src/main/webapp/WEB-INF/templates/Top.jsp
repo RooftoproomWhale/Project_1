@@ -37,7 +37,7 @@ li {
 
 header {
 	width: 100%;
-	height: 150px; /* 상단바 크기조정 */
+	height: 50px; /* 상단바 크기조정 */
 	background-color: #2056ac;
 }
 
@@ -51,7 +51,7 @@ header {
 .nav {
 	float: left;
 	width: 100%;
-	padding-top: 100px;
+	/*padding-top: 100px;*/
 	margin-left: 60px; /* 메뉴 위치 조정 왼쪽기준 공간 */
 }
 
@@ -91,11 +91,11 @@ header {
 }
 
 .sub>li {
-	width: 200px; /* 메뉴 */
+	width: 200px; /* 내려온 메뉴 */
 	height: 50px;
 	border-bottom: 1px solid #000;
-	color: #fff;
-	background-color: #2056ac;
+	color: #2056ac;
+	background-color: #fff;
 	box-sizing: border-box;
 	font-family: 'DWImpactamin';
 }
@@ -104,14 +104,14 @@ header {
 	border-radius: 0px 0px 7px 7px; /* 서브메뉴 마지막꺼에 모서리 마감처리*/
 		
 }
-.sub>li:last-child:hover {
+.lastmenu{
 	border-radius: 0px 0px 7px 7px; /* 서브메뉴 마지막꺼에 모서리 마감처리*/
 
 }
 
 .sub>li>a:hover {
-	background-color: #fff; /* 서브메뉴 내용물에 마우스 올렸을때 */
-	color: black; /* 글자색 */
+	background-color: #2056ac; /* 서브메뉴 내용물에 마우스 올렸을때 */
+	color: #fff; /* 글자색 */
 	transition-duration: 0.4s;
 	font-family: 'DWImpactamin';
 	text-decoration: none;
@@ -130,7 +130,7 @@ header {
 	line-height: 3.4;
 	font-size: 15px;
 	font-weight: 500;
-	color: white; /* 글자색*/
+	color: #2056ac; /* 글자색*/
 	font-family: 'DWImpactamin';
 	
 }
@@ -138,12 +138,13 @@ header {
 	
 <script>
 $(function(){
-
+	
+	
 	$(".nav li").hover(function() {
-
+		
         $(this).children("ul").stop().slideToggle(200);
-        })
-
+   })
+   
 });
 </script>
 
