@@ -15,82 +15,80 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
 <style>
-@font-face {
-	font-family: 'DWImpactamin';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/DWImpactamin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-* {
-	margin: 0;
-	padding: 0;
-}
-
-li {
-	list-style: none
-}
-
-
+* {margin: 0;padding: 0;}
+li {list-style: none}
+a{text-decoration: none}
 
 header {
+<<<<<<< HEAD
 	width: 100%;
 	height: 50px; /* 상단바 크기조정 */
 	background-color: #2056ac;
+=======
+  
+  width: 100%;
+  height: 150px;   /* 상단바 크기조정 */
+  background-color: #2056ac;
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 }
-
 .container {
-	width: 1200px;
-	height: 50px;
-	margin: 0 auto;
-	position: relative;
+  width: 1200px;
+  height: 50px;
+  margin: 0 auto;
+  position: relative;
+  
 }
-
 .nav {
+<<<<<<< HEAD
 	float: left;
 	width: 100%;
 	/*padding-top: 100px;*/
 	margin-left: 60px; /* 메뉴 위치 조정 왼쪽기준 공간 */
+=======
+ 
+  float: left;
+  width: 100%;
+  padding-top:100px;
+  margin-left: 60px;  /* 메뉴 위치 조정 왼쪽기준 공간 */
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 }
-
 .nav>li {
-	float: left;
-	width: 200px; /* 메뉴 진짜 넓이 */
-	box-sizing: border-box;
-	mar
+  float: left;
+  width: 200px;  /* 메뉴 진짜 넓이 */
+  box-sizing: border-box;
+  mar
+ 	 
 }
-
 .nav>li>a {
-	display: block;
-	width: 200px; /* 메뉴 */
-	text-align: center;
-	line-height: 3.4;
-	color: #fff;
-	font-size: 15px;
-	font-family: DWImpactamin;
+  
+  display: block;
+  width: 200px;			/* 메뉴 */
+  text-align: center;
+  line-height: 3.4;
+  color: #fff;
+  font-size: 15px;
+  
 }
-
-.nav>li>a:hover {
-	border-radius: 7px 7px 0px 0px; /* 메뉴에 마우스 올렸을때  윗부분 둥글게 처리*/
-	color: black;
-	background-color: #fff; /* 메뉴에 마우스 올렸을때 색*/
-	transition-duration: 0.4s;
-	font-family: 'DWImpactamin';
+.nav>li>a:hover{
+  border-radius: 7px 7px 0px 0px;   /* 메뉴에 마우스 올렸을때  윗부분 둥글게 처리*/
+  color: black;
+  background-color:#fff ;/* 메뉴에 마우스 올렸을때 색*/ 
+  transition-duration: 0.4s;
+ 
 }
-
 .sub {
-	width: 200px; /* 메뉴 마우스 안올렸을때  */
-	margin: 0 auto;
-	position: absolute;
-	top: 50px;
-	left: 0;
-	z-index: 1;
-	display: none;
+  width: 200px;  /* 메뉴 마우스 안올렸을때  */
+  margin: 0 auto;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  z-index: 1;
+  display: none;
+  
+ 
 }
-
 .sub>li {
+<<<<<<< HEAD
 	width: 200px; /* 내려온 메뉴 */
 	height: 50px;
 	border-bottom: 1px solid #000;
@@ -98,32 +96,46 @@ header {
 	background-color: #fff;
 	box-sizing: border-box;
 	font-family: 'DWImpactamin';
+=======
+  width: 200px;		/* 메뉴 */
+  height: 50px;  
+  border-bottom: 1px solid #000;
+  color: #fff;
+  background-color: #2056ac;
+  box-sizing: border-box;	
+  
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 }
-
 .sub>li:last-child {
-	border-radius: 0px 0px 7px 7px; /* 서브메뉴 마지막꺼에 모서리 마감처리*/
-		
+  border-radius: 0px 0px 7px 7px; /* 서브메뉴 마지막꺼에 모서리 마감처리*/
 }
+<<<<<<< HEAD
 .lastmenu{
 	border-radius: 0px 0px 7px 7px; /* 서브메뉴 마지막꺼에 모서리 마감처리*/
 
 }
 
+=======
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 .sub>li>a:hover {
+<<<<<<< HEAD
 	background-color: #2056ac; /* 서브메뉴 내용물에 마우스 올렸을때 */
 	color: #fff; /* 글자색 */
 	transition-duration: 0.4s;
 	font-family: 'DWImpactamin';
 	text-decoration: none;
 /*	border: 2px solid #2056ac; */
+=======
+  background-color: #fff;   /* 서브메뉴 내용물에 마우스 올렸을때 */
+  color: black;			/* 글자색 */
+  transition-duration: 0.4s;
+  
+}
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 
-}
-.sub>li:hover{
-	border:medium;
-	border-color: black;
-	
-}
+
 .sub>li>a {
+<<<<<<< HEAD
 	display: block; /* 서브메뉴 내려왔을때 내용물 */
 	width: 200px;
 	text-align: center;
@@ -133,7 +145,18 @@ header {
 	color: #2056ac; /* 글자색*/
 	font-family: 'DWImpactamin';
 	
+=======
+  display: block;   /* 서브메뉴 내려왔을때 내용물 */
+  width: 200px;
+  text-align: center;
+  line-height: 3.4;
+  font-size: 15px;
+  font-weight: 500;
+  color: white; /* 글자색*/
+  
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 }
+
 </style>
 	
 <script>

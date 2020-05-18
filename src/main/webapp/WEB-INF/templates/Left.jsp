@@ -11,14 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    
     <style>
-    @font-face {
-	font-family: 'DWImpactamin';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/DWImpactamin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
     *:hover{text-decoration: none;}
  .sidebar>li>a {
   
@@ -29,8 +21,7 @@
   color: #fff;
   background-color: #2056ac;
   font-size: 15px;
-  
-  font-family: 'DWImpactamin';
+  position: sticky;
 }
  .sidebar>li>a:hover {
   
@@ -43,23 +34,16 @@
   font-size: 15px;
   border: #2056ac;
   transition-duration: 0.4s;
-  font-family: 'DWImpactamin';
-  text-decoration: none;
+  position: sticky;
 }
 .sidebar>li>a:first-child {
 }
-aside{
-position: absolute;
-position: fixed;
-top: 400px; /* 사이드바 위치 고정 */
-
-} 
     </style>
     <script>
     
     </script>
 <aside>
-	<ul  class="sidebar">
+	<ul style="padding-top: 250px" class="sidebar">
 	<li ><a href="#" style="border-radius: 0px 7px 0px 0px;">사이드1</a></li>
 	<li><a href="#">사이드2</a></li>
 	<li><a href="#">사이드3</a></li>
