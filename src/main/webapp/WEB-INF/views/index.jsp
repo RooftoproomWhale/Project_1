@@ -65,7 +65,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<img src="img/about.jpg" class="img-responsive" alt="">
+					<img src="<c:url value='/img/about.jpg'/>" class="img-responsive" alt="">
 				</div>
 				<div class="col-xs-12 col-md-6">
 					<div class="about-text">
