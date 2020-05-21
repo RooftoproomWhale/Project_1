@@ -169,10 +169,10 @@
 							facilisis bibendum dolor feugiat at.</p>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Calendar/calendar.bbs'/>'">
 					<i class="fa fa-calendar"></i>
 					<div class="service-desc">
-						<a href="<c:url value='/Calendar/calendar.bbs'/>"><h3>달력</h3></a>
+						<h3>달력</h3>
 						<p>
 							달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~
 						</p>
