@@ -180,7 +180,16 @@ button{
    
    
 }
-
+	#contact{
+	position:absolute;
+	top: 1000px;
+	width: 100%;
+	}
+	#footer{
+	position:absolute;
+	top: 1300px;
+	width: 100%;
+	}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -347,14 +356,14 @@ function sample6_execDaumPostcode() {
        <input type="text" name="email" placeholder="이메일" />
        <input type="text" name="adress" placeholder="주소" />      
        <div class="form-group">
-       <div class="col-lg-10">
-           <select class="form-control" id="gender" > 
+       <div class="col-lg-10" >
+           <select class="form-control" id="gender"> 
               <option value="X"> 성별</option>
                <option value="M"> 남자</option>
                <option value="F"> 여자</option>
            </select>
        </div>
-   </div>  
+       </div>
    <div class="form-group">
        <div class="col-lg-10">
            <select class="form-control" id="gender" >
@@ -371,7 +380,8 @@ function sample6_execDaumPostcode() {
                <option value="M">90대</option>
            </select>
        </div>
-   </div>  
+   </div> 
+  
        <input type="button" name="previous" class="previous action-button" value="이전" />
        <input type="button" name="next" class="next action-button" value="다음" />
   </fieldset>

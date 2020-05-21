@@ -5,21 +5,21 @@
 
 
 
-<div class="container">
+<div class="container" style="padding-top: 200px;padding-bottom: 300px;">
 	<!-- 점보트론(Jumbotron) -->
 	
 	<!-- 작성하기 버튼 -->
 	<div class="row" style="margin-bottom: 10px">
 		<div class="col-md-12 text-right">
 			<a href="<c:url value='/OneMemo/BBS/Write.bbs'/>"
-				class="btn btn-success">등록</a>
+				class="btn btn-default">등록</a>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table table-bordered table-hover text-center">
 				<tr>
-					<!-- 각 컬럼의 폭은 <td>계열에 class="col-*-*"추가 -->
+					
 					<th class="col-md-1 text-center">번호</th>
 					<th class="text-center">제목</th>
 					<th class="col-md-1 text-center">작성자</th>
@@ -33,7 +33,7 @@
 				<c:if test="${not isEmpty}">
 					<c:forEach items="${list}" var="item" varStatus="loop">
 						<tr>
-							<!-- 각 컬럼의 폭은 <td>계열에 class="col-*-*"추가 -->
+							
 							<td>${item.no}</td>
 							<td class="text-left"><a
 								href='<c:url value="/OneMemo/BBS/View.bbs?no=${item.no}"/>'>${item.title}</a>
@@ -67,7 +67,7 @@
 				<div class="form-group">
 					<input type="text" name="searchWord" class="form-control" />
 				</div>
-				<button type="submit" class="btn btn-primary">검색</button>
+				<button type="submit" class="btn btn-default">검색</button>
 
 			</form>
 		</div>
