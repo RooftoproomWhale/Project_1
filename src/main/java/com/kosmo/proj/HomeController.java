@@ -36,9 +36,9 @@ public class HomeController {
 		return "index.tiles";
 	}
 
-		@RequestMapping("/Signup/SignUp.bbs")
-		public String SignUp() {
-			
-			return "SignUp.tiles";
-		}
+	@RequestMapping("/Home/ToHomePage.do")
+	public String toHome()
+	{
+		return "index.tiles";
+	}
 }
