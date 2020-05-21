@@ -351,36 +351,21 @@ function sample6_execDaumPostcode() {
   <fieldset>
     <h2 class="fs-title">개인 정보</h2>
     <h3 class="fs-subtitle">2번째 단계입니다.</h3>
-    <div class="col-ms-12">
        <input type="text" name="name" placeholder="이름" />
        <input type="text" name="phone" placeholder="핸드폰 번호" />
        <input type="text" name="email" placeholder="이메일" />
-<<<<<<< HEAD
        <input type="text" name="adress" placeholder="주소" />      
        <div class="form-group">
        <div class="col-lg-10" >
            <select class="form-control" id="gender"> 
-=======
-       <input type="text" name="adress" placeholder="주소" />  
-       </div>    
-       
-       <div class="col-ms-6">
-           <select class="form-control" id="gender" > 
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
               <option value="X"> 성별</option>
                <option value="M"> 남자</option>
                <option value="F"> 여자</option>
            </select>
        </div>
-<<<<<<< HEAD
        </div>
    <div class="form-group">
        <div class="col-lg-10">
-=======
-    
-   
-       <div class="col-ms-6">
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
            <select class="form-control" id="gender" >
               <option value="X">나이</option>
               <option value="M">10세 이하</option>
@@ -395,12 +380,8 @@ function sample6_execDaumPostcode() {
                <option value="M">90대</option>
            </select>
        </div>
-<<<<<<< HEAD
    </div> 
   
-=======
-    
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
        <input type="button" name="previous" class="previous action-button" value="이전" />
        <input type="button" name="next" class="next action-button" value="다음" />
   </fieldset>
@@ -415,36 +396,30 @@ function sample6_execDaumPostcode() {
 
     <div class="form-group">
     <label>약관 동의</label>
-    <div data-toggle="buttons" class="col-ms-4 control-label">
+    <div data-toggle="buttons">
     <label class="btn btn-primary active">
-    
-    
     <span class="fa fa-check"></span>
     <input id="agree" type="checkbox" autocomplete="off" checked>
     </label>
-    </div>
-    
-    <div class="col-ms-4 control-label">
     <a href="#">이용약관</a>에 동의합니다.
     </div>
     </div>
-    
             <div class="form-group" >
-             <div class="col-ms-6 control-label">
+             <div class="col-sm-2 control-label">
                 <label id="address1"></label>
              </div>
-             <div class="col-ms-6">
+             <div class="col-sm-6">
                 <input type="text" id="sample6_address"
-                placeholder="주소"  name="address1"   class="form-control">
+                placeholder="주소"  name="address1"   class="form-control" value="서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)">
              </div>   
            </div>
       
           <div class="form-group"> 
-             <div class="col-ms-6 control-label">
+             <div class="col-sm-2 control-label">
                 <label id="address1"></label>
              </div>
-             <div class="col-ms-6"> 
-               <input type="text" id="sample6_address2" placeholder="상세주소" name="address2" class="form-control">
+             <div class="col-sm-6"> 
+               <input type="text" id="sample6_address2" placeholder="상세주소" name="address2"   class="form-control" value="256-32">
                </div>
           </div>
 </fieldset>
