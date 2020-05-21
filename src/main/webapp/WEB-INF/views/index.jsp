@@ -65,7 +65,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<img src="img/about.jpg" class="img-responsive" alt="">
+					<img src="<c:url value='/img/about.jpg'/>" class="img-responsive" alt="">
 				</div>
 				<div class="col-xs-12 col-md-6">
 					<div class="about-text">
@@ -153,7 +153,7 @@
 				<div class="col-md-4">
 					<i class="fa fa-calendar"></i>
 					<div class="service-desc">
-						<h3>달력</h3>
+						<a href="<c:url value='/Calendar/calendar.bbs'/>"><h3>달력</h3></a>
 						<p>
 							달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~
 						</p>

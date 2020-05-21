@@ -56,7 +56,7 @@
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand page-scroll" href="#page-top">홈스피탈</a>
+				<a class="navbar-brand page-scroll" href='<c:url value="/Home/ToHomePage.do"/>'>홈스피탈</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,7 +65,7 @@
 					<li><a href='<c:url value="/Notice/BBS/NoticeList.bbs"/>' class="page-scroll">공지</a></li>
 					<li><a href="#services" class="page-scroll">Services</a></li>
 					<li><a href="" class="page-scroll">Login</a></li>
-					<li><a href="<c:url value='/Signup/SignUp.bbs'/>" class="page-scroll">SignUp</a></li>
+					<li><a href="<c:url value='/Signup/SignForm.do'/>">SignUp</a></li>
 					<li><a href="#contact" class="page-scroll">Contact</a></li>
 				</ul>
 			</div>
