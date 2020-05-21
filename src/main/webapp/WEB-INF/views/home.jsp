@@ -31,7 +31,7 @@
 
 
     <link href="<c:url value="/bootstrap/css/bootstrap.css"/>" rel="stylesheet">
-    <script src="<c:url value="/js/jquery-1.11.3.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/js/jquery-1.11.1.min.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/js/jssor.slider-28.0.0.min.js"/>" type="text/javascript"></script>
     <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
     <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
