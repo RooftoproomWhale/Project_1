@@ -10,12 +10,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
     <title>Layouts.jsp</title>
-
+	<meta name="description" content="">
+	<meta name="author" content="">
     <!-- 부트스트랩 -->
     
-    <link href="<c:url value="/bootstrap/css/bootstrap.css"/>" rel="stylesheet">
-
-    <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
+    <%-- <link href="<c:url value="/bootstrap/css/bootstrap.css"/>" rel="stylesheet">--%>
+	<!-- Favicons
+    ================================================== -->
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+	
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/fonts/font-awesome/css/font-awesome.css'/>">
+	
+	<!-- Stylesheet
+	    ================================================== -->
+	<link rel="stylesheet" type="text/css" href="<c:url value='/css/style.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/nivo-lightbox/nivo-lightbox.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/nivo-lightbox/default.css'/>">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+	    <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
     <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -25,6 +44,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="<c:url value="/bootstrap/js/bootstrap.min.js"/>"></script>
+	 <script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/SmoothScroll.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/nivo-lightbox.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/jqBootstrapValidation.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/contact_me.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/js/main.js'/>"></script>
   </head>
   <body>
 	<!-- top부분 -->
@@ -35,6 +61,13 @@
     
     <!-- footer부분 -->
     <tiles:insertAttribute name="footer"/>  
-    
+    <script type="text/javascript" src="js/jquery.1.11.1.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/SmoothScroll.js"></script>
+	<script type="text/javascript" src="js/nivo-lightbox.js"></script>
+	<script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
+	<script type="text/javascript" src="js/contact_me.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
   </body>
+  
 </html>
