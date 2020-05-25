@@ -5,23 +5,22 @@
 <html>
 <head>
 <meta charset='utf-8' />
-<link href="<c:url value="/calendar/bootstrap/css/bootstrap.min.css"/>"
-	rel="stylesheet">
 
-
+<!-- 캘린더 필요 -->
 <link href='<c:url value="/calendar/core/main.css"/>' rel='stylesheet' />
 <link href='<c:url value="/calendar/daygrid/main.css"/>' rel='stylesheet' />
 <link href='<c:url value="/calendar/timegrid/main.css"/>' rel='stylesheet' />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src='<c:url value="/calendar/core/main.js"/>'></script>
 <script src='<c:url value="/calendar/interaction/main.js"/>'></script>
 <script src='<c:url value="/calendar/daygrid/main.js"/>'></script>
 <script src='<c:url value="/calendar/timegrid/main.js"/>'></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -209,7 +208,6 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 
 	<script src='<c:url value="/calendar/bootstrap/js/bootstrap.min.js"/>'></script>
 
