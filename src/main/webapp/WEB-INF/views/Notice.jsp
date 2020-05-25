@@ -3,10 +3,7 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-
-
 <div class="container" style="padding-top: 200px;padding-bottom: 300px;">
-	<!-- 점보트론(Jumbotron) -->
 	
 	<!-- 작성하기 버튼 -->
 	<div class="row" style="margin-bottom: 10px">
@@ -68,7 +65,6 @@
 					<input type="text" name="searchWord" class="form-control" />
 				</div>
 				<button type="submit" class="btn btn-default">검색</button>
-
 			</form>
 		</div>
 	</div>

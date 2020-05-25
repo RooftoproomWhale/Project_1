@@ -5,6 +5,7 @@
 <html lang="ko">
 <style>
 
+		<!--캐러셀 css-->
         /*jssor slider bullet skin 057 css*/
         .jssorb057 .i {position:absolute;cursor:pointer;}
         .jssorb057 .i .b {fill:none;stroke:#fff;stroke-width:2200;stroke-miterlimit:10;stroke-opacity:0.4;}
@@ -27,37 +28,11 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<!-- Favicons
-    ================================================== -->
-<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+<!-- 캐러셀에 필요 -->
+<script src="<c:url value="/js/jssor.slider-28.0.0.min.js"/>" type="text/javascript"></script>
 
-<!-- Bootstrap -->
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
-
-<!-- Stylesheet
-    ================================================== -->
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/nivo-lightbox/nivo-lightbox.css">
-<link rel="stylesheet" type="text/css" href="css/nivo-lightbox/default.css">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet">
-    <script src="<c:url value="/js/jquery-1.11.3.min.js"/>" type="text/javascript"></script>
-    <script src="<c:url value="/js/jssor.slider-28.0.0.min.js"/>" type="text/javascript"></script>
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-	<!-- Navigation
-    ==========================================-->
 
 	<!-- Header -->
 	<header id="header">
@@ -78,47 +53,101 @@
 		</div>
 	</header>
 
-	<!-- About Section -->
-	 <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:680px;height:380px;overflow:hidden;visibility:hidden;">
-        <!-- Loading Screen -->
-        
-        <div class="img-thumbnail" data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:680px;height:380px;overflow:hidden;">
-            <div data-p="680">
-                <img  data-u="image" src="<c:url value="/img/1.jpg"/>" />
-                
-            </div>
-            <div data-p="680">
-              <img  data-u="image" src='<c:url value="/img/2.jpg"/>' />
-              
-            
-            </div>
-            <div data-p="680">
-                <a href="https://www.naver.com"><img  data-u="image" src="<c:url value="/img/3.jpg"/>" /></a>
-              </div>
-        </div>
-        <!-- Bullet Navigator -->
-        <div data-u="navigator" class="jssorb057" style="position:absolute;bottom:16px;right:16px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-            <div data-u="prototype" class="i" style="width:14px;height:14px;">
-                <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                    <circle class="b" cx="8000" cy="8000" r="5000"></circle>
+	<div class="container-fluid">
+	<div class="row" style="margin-top: 25px">
+		<div class="col-md-6 col-sm-12">
+			
+		</div>
+		<div class="col-md-5 col-md-offset-1 col-sm-12" id="issues">
+			<h3>속보</h3>
+		</div>
+	</div>
+	<div class="row">
+	
+		<div class="col-md-5 col-md-offset-1 col-sm-12">
+			<div id="jssor_1"
+				style="position: relative; margin-top: 10px; margin-bottom: 50px;top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden; visibility: hidden;"
+				align="left">
+				
+				<!-- Loading Screen -->
+				<div class="img-thumbnail" data-u="slides"
+					style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
+					<div data-p="680">
+						<a href="/corona/Corona_Status.do"><img data-u="image"
+							src="<c:url value="/img/pic1.jpg"/>" /></a>
+					</div>
+					<div data-p="680">
+						<a href="/corona/Corona_Mask.do"><img data-u="image"
+							src='<c:url value="/img/pic2.jpg"/>' /></a>
+					</div>
+					<div data-p="680">
+						<a href="/corona/Corona_Mask.do"><img data-u="image"
+							src="<c:url value="/img/pic3.jpg"/>" /></a>
+					</div>
+					<div data-p="680">
+						<a href="/prev/Season.do"><img data-u="image"
+							src="<c:url value="/img/about.jpg"/>" /></a>
+					</div>
+				</div>
+				<!-- Bullet Navigator -->
+				<div data-u="navigator" class="jssorb057"
+					style="position: absolute; bottom: 16px; right: 16px;"
+					data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+					<div data-u="prototype" class="i"
+						style="width: 14px; height: 14px;">
+						<svg viewbox="0 0 16000 16000" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    <circle class="b" cx="8000" cy="8000" r="5000" fill="red"></circle>
                 </svg>
-            </div>
-        </div>
-        <!-- Arrow Navigator -->
-        <div data-u="arrowleft" class="jssora051" style="width:65px;height:65px;top:0px;left:25px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+					</div>
+				</div>
+				<!-- Arrow Navigator -->
+				<div data-u="arrowleft" class="jssora051"
+					style="width: 65px; height: 65px; top: 0px; left: 25px;"
+					data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+					<svg viewbox="0 0 16000 16000"
+						style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                 <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
             </svg>
-        </div>
-        <div data-u="arrowright" class="jssora051" style="width:65px;height:65px;top:0px;right:25px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+				</div>
+				<div data-u="arrowright" class="jssora051"
+					style="width: 65px; height: 65px; top: 0px; right: 25px;"
+					data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+					<svg viewbox="0 0 16000 16000"
+						style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                 <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
             </svg>
-        </div>
-
-
-    </div>
-	
+				</div>
+			</div>
+		</div>
+			<!-- Issue Section -->
+			<div class="col-md-5 col-md-offset-1 col-sm-12" id="issues">
+				<table class="table table-bordered table-hover text-center" style="margin-top: 10px">
+					<tr>
+						<th class="col-md-1 text-center">번호</th>
+						<th class="text-center">제목</th>
+						<th class="col-md-1 text-center">작성자</th>
+						<th class="col-md-2 text-center">등록일</th>
+					</tr>
+					<c:if test="${empty list}" var="isEmpty">
+						<tr>
+							<td colspan="4">등록된 게시물이 없습니다.</td>
+						</tr>
+					</c:if>
+					<c:if test="${not isEmpty}">
+						<c:forEach items="${list}" var="item" varStatus="loop">
+							<tr>
+								<td>${item.no}</td>
+								<td class="text-left">
+									<a href='<c:url value="/BBS/Issue.do?no=${item.no}"/>'>${item.title}</a>
+								<td>${item.name}</td>
+								<td>${item.postDate}</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</table>
+			</div>
+		</div>
+	</div>
 	
 	<!-- Services Section -->
 	<div id="services" class="text-center">
@@ -128,8 +157,8 @@
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed dapibus leonec.</p>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
-					<i class="fa fa-plus-square"  style="cursor:pointer" onclick="location.href='<c:url value='/Homespital/Map.hst'/>'"></i>
+				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Homespital/Map.hst'/>'">
+					<i class="fa fa-plus-square"></i>
 					<div class="service-desc">
 						<h3>약국 찾기</h3>
 						<p>
@@ -160,7 +189,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Calendar/calendar2.bbs'/>'">
+				<div class="col-md-4">
 					<i class="fa fa-language"></i>
 					<div class="service-desc">
 						<h3></h3>
@@ -190,14 +219,5 @@
 			</div>
 		</div>
 	</div>
-
-	
-	<script type="text/javascript" src="js/jquery.1.11.1.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/SmoothScroll.js"></script>
-	<script type="text/javascript" src="js/nivo-lightbox.js"></script>
-	<script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
-	<script type="text/javascript" src="js/contact_me.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
