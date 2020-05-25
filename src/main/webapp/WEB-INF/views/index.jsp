@@ -160,7 +160,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Calendar/calendar2.bbs'/>'">
 					<i class="fa fa-language"></i>
 					<div class="service-desc">
 						<h3></h3>
