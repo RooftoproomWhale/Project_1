@@ -129,7 +129,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-4">
-					<i class="fa fa-plus-square"></i>
+					<i class="fa fa-plus-square"  style="cursor:pointer" onclick="location.href='<c:url value='/Homespital/Map.hst'/>'"></i>
 					<div class="service-desc">
 						<h3>약국 찾기</h3>
 						<p>
