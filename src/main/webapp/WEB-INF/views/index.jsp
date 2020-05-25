@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <style>
-		<!--캐러셀 스타일-->
+
+		<!--캐러셀 css-->
         /*jssor slider bullet skin 057 css*/
         .jssorb057 .i {position:absolute;cursor:pointer;}
         .jssorb057 .i .b {fill:none;stroke:#fff;stroke-width:2200;stroke-miterlimit:10;stroke-opacity:0.4;}
@@ -28,7 +29,8 @@
 <meta name="author" content="">
 
 <!-- 캐러셀에 필요 -->
-    <script src="<c:url value="/js/jssor.slider-28.0.0.min.js"/>" type="text/javascript"></script>
+<script src="<c:url value="/js/jssor.slider-28.0.0.min.js"/>" type="text/javascript"></script>
+
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
@@ -51,7 +53,6 @@
 		</div>
 	</header>
 
-	<!-- About Section -->
 	<div class="container-fluid">
 	<div class="row" style="margin-top: 25px">
 		<div class="col-md-6 col-sm-12">
@@ -62,64 +63,64 @@
 		</div>
 	</div>
 	<div class="row">
-
-			<div class="col-md-5 col-md-offset-1 col-sm-12">
-				<div id="jssor_1"
-					style="position: relative; margin-top: 10px; margin-bottom: 50px; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden; visibility: hidden;"
-					align="left">
-					<!-- Loading Screen -->
-
-					<div class="img-thumbnail" data-u="slides"
-						style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
-						<div data-p="680">
-							<a href="/corona/Corona_Status.do"><img data-u="image"
-								src="<c:url value="/img/pic1.jpg"/>" /></a>
-						</div>
-						<div data-p="680">
-							<a href="/corona/Corona_Mask.do"><img data-u="image"
-								src='<c:url value="/img/pic2.jpg"/>' /></a>
-						</div>
-						<div data-p="680">
-							<a href="/corona/Corona_Mask.do"><img data-u="image"
-								src="<c:url value="/img/pic3.jpg"/>" /></a>
-						</div>
-						<div data-p="680">
-							<a href="/prev/Season.do"><img data-u="image"
-								src="<c:url value="/img/about.jpg"/>" /></a>
-						</div>
+	
+		<div class="col-md-5 col-md-offset-1 col-sm-12">
+			<div id="jssor_1"
+				style="position: relative; margin-top: 10px; margin-bottom: 50px;top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden; visibility: hidden;"
+				align="left">
+				
+				<!-- Loading Screen -->
+				<div class="img-thumbnail" data-u="slides"
+					style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
+					<div data-p="680">
+						<a href="/corona/Corona_Status.do"><img data-u="image"
+							src="<c:url value="/img/pic1.jpg"/>" /></a>
 					</div>
-					<!-- Bullet Navigator -->
-					<div data-u="navigator" class="jssorb057"
-						style="position: absolute; bottom: 16px; right: 16px;"
-						data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-						<div data-u="prototype" class="i"
-							style="width: 14px; height: 14px;">
-							<svg viewbox="0 0 16000 16000" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                    <circle class="b" cx="8000" cy="8000" r="5000" fill="red"></circle>
-                </svg>
-						</div>
+					<div data-p="680">
+						<a href="/corona/Corona_Mask.do"><img data-u="image"
+							src='<c:url value="/img/pic2.jpg"/>' /></a>
 					</div>
-					<!-- Arrow Navigator -->
-					<div data-u="arrowleft" class="jssora051"
-						style="width: 65px; height: 65px; top: 0px; left: 25px;"
-						data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-						<svg viewbox="0 0 16000 16000" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-            </svg>
+					<div data-p="680">
+						<a href="/corona/Corona_Mask.do"><img data-u="image"
+							src="<c:url value="/img/pic3.jpg"/>" /></a>
 					</div>
-					<div data-u="arrowright" class="jssora051"
-						style="width: 65px; height: 65px; top: 0px; right: 25px;"
-						data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-						<svg viewbox="0 0 16000 16000" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-            </svg>
+					<div data-p="680">
+						<a href="/prev/Season.do"><img data-u="image"
+							src="<c:url value="/img/about.jpg"/>" /></a>
 					</div>
 				</div>
+				<!-- Bullet Navigator -->
+				<div data-u="navigator" class="jssorb057"
+					style="position: absolute; bottom: 16px; right: 16px;"
+					data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+					<div data-u="prototype" class="i"
+						style="width: 14px; height: 14px;">
+						<svg viewbox="0 0 16000 16000" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    <circle class="b" cx="8000" cy="8000" r="5000" fill="red"></circle>
+                </svg>
+					</div>
+				</div>
+				<!-- Arrow Navigator -->
+				<div data-u="arrowleft" class="jssora051"
+					style="width: 65px; height: 65px; top: 0px; left: 25px;"
+					data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+					<svg viewbox="0 0 16000 16000"
+						style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+            </svg>
+				</div>
+				<div data-u="arrowright" class="jssora051"
+					style="width: 65px; height: 65px; top: 0px; right: 25px;"
+					data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+					<svg viewbox="0 0 16000 16000"
+						style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+            </svg>
+				</div>
 			</div>
-
+		</div>
 			<!-- Issue Section -->
 			<div class="col-md-5 col-md-offset-1 col-sm-12" id="issues">
-
 				<table class="table table-bordered table-hover text-center" style="margin-top: 10px">
 					<tr>
 						<th class="col-md-1 text-center">번호</th>
@@ -156,7 +157,7 @@
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed dapibus leonec.</p>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Homespital/Map.hst'/>'">
 					<i class="fa fa-plus-square"></i>
 					<div class="service-desc">
 						<h3>약국 찾기</h3>

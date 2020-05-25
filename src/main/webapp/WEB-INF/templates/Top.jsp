@@ -46,9 +46,6 @@
 	
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-				
-	<!-- Navigation
-    ==========================================-->
 	
 	<nav id="menu" class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
