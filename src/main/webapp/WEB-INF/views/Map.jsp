@@ -78,7 +78,27 @@
 		// 지도의  레벨을 얻어옵니다
 	    var level = map.getLevel();
 	    
-	    console.log(level);
+		var latlng = map.getCenter(); 
+	    
+	    var bound = map.getBounds();
+	    
+	    console.log("마커길이(드래그)",markers.length);
+	    for (var i = 0; i<markers.length; i++)
+	    {
+	    	console.log(bound.contain(markers[i].getPosition()),markers[i]);
+	    	if(!bound.contain(markers[i].getPosition()))
+	    	{
+	    		markers[i].setMap(null);
+	    		markers.splice(i, 1);
+	    		
+	    		console.log("지도밖 삭제처리",markers.length,markers);
+	    	}
+	    }
+	   
+	    console.log("지도레벨(드래그)",level);
+	    console.log("위치(드래그)",latlng);
+	    console.log("바운드(드래그)",bound);
+	    storesByGeo(latlng.getLat(),latlng.getLng());
 	});
 	
 	// 마커 클러스터러를 생성합니다 
@@ -166,7 +186,7 @@
 						position : new kakao.maps.LatLng(data.stores[i].lat, data.stores[i].lng)
 					});
 					
-					var content =  '<div class="wrap">' + 
+					/* var content =  '<div class="wrap">' + 
 		            '    <div class="info">' + 
 		            '        <div class="title">' + 
 		           						 data.stores[i].name + 
@@ -179,17 +199,45 @@
 		            '            </div>' + 
 		            '        </div>' + 
 		            '    </div>' +    
-		            '</div>';
+		            '</div>'; */
 					
 					var overlay = new kakao.maps.CustomOverlay({
-					    content: content,
+					    //content: content,
 					    position: marker.getPosition()       
 					});
 					
+		            var content = document.createElement('div');
+		            
+		            var wrap = document.createElement('div');
+		            content.appendChild(wrap);
+		            
+		            var info = document.createElement('div');
+		            wrap.appendChild(info);
+		            
+		            var title = document.createElement('div');
+		            title.appendChild(document.createTextNode(data.stores[i].name));
+		            info.appendChild(title);
+		            
+		            var close = document.createElement('div');
+		            close.onclick = function() { overlay.setMap(null); };
+		            title.appendChild(close);
+		            
+		            var body = document.createElement('div');
+		            info.appendChild(body);
+		            
+		            var desc = document.createElement('div');
+		            body.appendChild(desc);
+		            
+		            var addr = document.createElement('div');
+		            addr.appendChild(document.createTextNode(data.stores[i].addr));
+		            desc.appendChild(addr);
+		            desc.appendChild(document.createElement('div').appendChild(document.createTextNode(data.stores[i].remain_stat)));
+		            
+		            overlay.setContent(content);
+		            
 					kakao.maps.event.addListener(marker, 'click', makeOverListener(map, overlay));
 				    //kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(overlay));
 					
-				   
 				    
 					var isSame = false;
 					for (var j = 0; j < markers.length; j++)
@@ -225,10 +273,28 @@
 			});
 			
 		}
+		
+		
+		
 		function makeOverListener(map, overlay) {
 		    return function() {
+		    	
+		    	var equal = false;
+		    	
+		    	for(var i = 0; i < overlays.length; i++)
+		    	{
+		    		overlays[i].setMap(null);
+		    		console.log(overlays[i]==overlay);
+		    		if(overlays[i]==overlay)
+		    		{
+		    			equal = true;
+		    		}
+		    	}
+		    	if(!equal)
+		    		overlays.push(overlay);
 		    	overlay.setMap(map);
-		    	overlays.push(overlay);
+		    	console.log("overlays:",overlays);
+		    	
 		    };
 		}
 	
@@ -238,7 +304,5 @@
 		    	overlay.setMap(null);
 		    };
 		}
-		
-		
 	}
 </script>
