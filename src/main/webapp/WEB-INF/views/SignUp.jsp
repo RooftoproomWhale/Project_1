@@ -345,8 +345,11 @@ function sample6_execDaumPostcode() {
 </script>
 
 <!-- multistep form -->
+
 <form id="msform">
   <!-- progressbar -->
+
+  <div class="col-md-offset-2 col-md-8 col-xs-6" align="center">
   <ul id="progressbar">
     <li class="active">Account Setup</li>
     <li>individual Setup</li>
@@ -365,11 +368,12 @@ function sample6_execDaumPostcode() {
     <h2 class="fs-title">개인 정보</h2>
     <h3 class="fs-subtitle">2번째 단계입니다.</h3>
     <div class="form-group">
+    <div class="col-lg-12" >
        <input type="text" name="name" placeholder="이름" />
        <input type="text" name="phone" placeholder="핸드폰 번호" />
        <input type="text" name="email" placeholder="이메일" />
        <input type="text" name="adress" placeholder="주소" />   
-    
+    </div>
        <div class="col-lg-6" >
            <select class="form-control" id="gender"> 
               <option value="X"> 성별</option>
@@ -380,17 +384,17 @@ function sample6_execDaumPostcode() {
    
        <div class="col-lg-6">
            <select class="form-control" id="age" >
-              <option value="X">나이</option>
-              <option value="M">10세 이하</option>
-               <option value="M">10대</option>
-               <option value="M">20대</option>
-               <option value="M">30대</option>
-               <option value="M">40대</option>
-               <option value="M">50대</option>
-               <option value="M">60대</option>
-               <option value="M">70대</option>
-               <option value="M">80대</option>
-               <option value="M">90대</option>
+              <option>나이</option>
+              <option value="">10세 이하</option>
+               <option value="">10대</option>
+               <option value="">20대</option>
+               <option value="">30대</option>
+               <option value="">40대</option>
+               <option value="">50대</option>
+               <option value="">60대</option>
+               <option value="">70대</option>
+               <option value="">80대</option>
+               <option value="">90대</option>
            </select>
        </div>
    </div> 
@@ -423,7 +427,7 @@ function sample6_execDaumPostcode() {
              </div>
              <div class="col-sm-6">
                 <input type="text" id="sample6_address"
-                placeholder="주소"  name="address1"   class="form-control" value="서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)">
+                placeholder="주소"  name="address1"   class="form-control">
              </div>   
            </div>
       
@@ -432,9 +436,12 @@ function sample6_execDaumPostcode() {
                 <label id="address1"></label>
              </div>
              <div class="col-sm-6"> 
-               <input type="text" id="sample6_address2" placeholder="상세주소" name="address2"   class="form-control" value="256-32">
+               <input type="text" id="sample6_address2" placeholder="상세주소" name="address2"   class="form-control">
                </div>
           </div>
 </fieldset>
+</div>
+
 </form>
+
 
