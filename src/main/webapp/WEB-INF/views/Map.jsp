@@ -11,7 +11,7 @@
     .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
     .info .close:hover {cursor: pointer;}
     .info .body {position: relative;overflow: hidden;}
-    .info .desc {position: relative;margin: 13px 0 0 10px;height: 75px;}
+    .info .desc {position: relative;margin: 13px;height: 75px;}
     .desc .addr {overflow: hidden;text-overflow: addr;white-space: nowrap;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
@@ -207,28 +207,35 @@
 					});
 					
 		            var content = document.createElement('div');
-		            
+		           
 		            var wrap = document.createElement('div');
+		            wrap.className = "wrap";
 		            content.appendChild(wrap);
 		            
 		            var info = document.createElement('div');
+		            info.className = "info";
 		            wrap.appendChild(info);
 		            
 		            var title = document.createElement('div');
+		            title.className = "title";
 		            title.appendChild(document.createTextNode(data.stores[i].name));
 		            info.appendChild(title);
 		            
-		            var close = document.createElement('div');
+		            var close = document.createElement('button');
+		            close.className = "close";
 		            close.onclick = function() { overlay.setMap(null); };
 		            title.appendChild(close);
 		            
 		            var body = document.createElement('div');
+		            body.className = "body";
 		            info.appendChild(body);
 		            
 		            var desc = document.createElement('div');
+		            desc.className = "desc";
 		            body.appendChild(desc);
 		            
 		            var addr = document.createElement('div');
+		            addr.className = "addr";
 		            addr.appendChild(document.createTextNode(data.stores[i].addr));
 		            desc.appendChild(addr);
 		            desc.appendChild(document.createElement('div').appendChild(document.createTextNode(data.stores[i].remain_stat)));
