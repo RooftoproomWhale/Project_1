@@ -54,105 +54,78 @@
 	</header>
 
 	<div class="container-fluid">
-	<div class="row" style="margin-top: 25px">
-		<div class="col-md-6 col-sm-12">
-			
-		</div>
-		<div class="col-md-5 col-md-offset-1 col-sm-12" id="issues">
-			<h3>속보</h3>
-			<div class="row" id="news">
-			<!-- 한줄 코멘트 목록-->
-			<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
-			</div>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-5 col-md-offset-1 col-sm-12">
-			<div id="jssor_1"
-				style="position: relative; margin-top: 10px; margin-bottom: 50px;top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden; visibility: hidden;"
-				align="left">
-				
-				<!-- Loading Screen -->
-				<div class="img-thumbnail" data-u="slides"
-					style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
-					<div data-p="680">
-						<a href="/corona/Corona_Status.hst"><img data-u="image"
-							src="<c:url value="/img/1.jpg"/>" /></a>
+		<div class="row" style="padding-top: 50px">
+			<div class="col-md-5 col-md-offset-1 col-sm-12">
+				<div id="jssor_1"
+					style="position: relative; margin-top: 10px; margin-bottom: 50px; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden; visibility: hidden;"
+					align="left">
+
+					<!-- Loading Screen -->
+					<div class="img-thumbnail" data-u="slides"
+						style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
+						<div data-p="680">
+							<a href="/corona/Corona_Status.hst"><img data-u="image"
+								src="<c:url value="/img/1.jpg"/>" /></a>
+						</div>
+						<div data-p="680">
+							<a href="/corona/Corona_Mask.hst"><img data-u="image"
+								src='<c:url value="/img/2.jpg"/>' /></a>
+						</div>
+						<div data-p="680">
+							<a href="/corona/Corona_Patient.hst"><img data-u="image"
+								src="<c:url value="/img/3.jpg"/>" /></a>
+						</div>
+						<div data-p="680">
+							<a href="/prev/Season.hst"><img data-u="image"
+								src="<c:url value="/img/about.jpg"/>" /></a>
+						</div>
 					</div>
-					<div data-p="680">
-						<a href="/corona/Corona_Mask.hst"><img data-u="image"
-							src='<c:url value="/img/2.jpg"/>' /></a>
-					</div>
-					<div data-p="680">
-						<a href="/corona/Corona_Patient.hst"><img data-u="image"
-							src="<c:url value="/img/3.jpg"/>" /></a>
-					</div>
-					<div data-p="680">
-						<a href="/prev/Season.hst"><img data-u="image"
-							src="<c:url value="/img/about.jpg"/>" /></a>
-					</div>
-				</div>
-				<!-- Bullet Navigator -->
-				<div data-u="navigator" class="jssorb057"
-					style="position: absolute; bottom: 16px; right: 16px;"
-					data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-					<div data-u="prototype" class="i"
-						style="width: 14px; height: 14px;">
-						<svg viewbox="0 0 16000 16000" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                    <circle class="b" cx="8000" cy="8000" r="5000" fill="red"></circle>
+					<!-- Bullet Navigator -->
+					<div data-u="navigator" class="jssorb057"
+						style="position: absolute; bottom: 16px; right: 16px;"
+						data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+						<div data-u="prototype" class="i"
+							style="width: 14px; height: 14px;">
+							<svg viewbox="0 0 16000 16000"
+								style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    <circle class="b" cx="8000" cy="8000" r="5000"
+									fill="red"></circle>
                 </svg>
+						</div>
+					</div>
+					<!-- Arrow Navigator -->
+					<div data-u="arrowleft" class="jssora051"
+						style="width: 65px; height: 65px; top: 0px; left: 25px;"
+						data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+						<svg viewbox="0 0 16000 16000"
+							style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <polyline class="a"
+								points="11040,1920 4960,8000 11040,14080 "></polyline>
+            </svg>
+					</div>
+					<div data-u="arrowright" class="jssora051"
+						style="width: 65px; height: 65px; top: 0px; right: 25px;"
+						data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+						<svg viewbox="0 0 16000 16000"
+							style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                <polyline class="a"
+								points="4960,1920 11040,8000 4960,14080 "></polyline>
+            </svg>
 					</div>
 				</div>
-				<!-- Arrow Navigator -->
-				<div data-u="arrowleft" class="jssora051"
-					style="width: 65px; height: 65px; top: 0px; left: 25px;"
-					data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-					<svg viewbox="0 0 16000 16000"
-						style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-            </svg>
-				</div>
-				<div data-u="arrowright" class="jssora051"
-					style="width: 65px; height: 65px; top: 0px; right: 25px;"
-					data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-					<svg viewbox="0 0 16000 16000"
-						style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-            </svg>
-				</div>
 			</div>
-		</div>
 			<!-- Issue Section -->
-			<div class="col-md-5 col-md-offset-1 col-sm-12" id="issues">
-				<table class="table table-bordered table-hover text-center" style="margin-top: 10px">
-					<tr>
-						<th class="col-md-1 text-center">번호</th>
-						<th class="text-center">제목</th>
-						<th class="col-md-1 text-center">작성자</th>
-						<th class="col-md-2 text-center">등록일</th>
-					</tr>
-					<c:if test="${empty list}" var="isEmpty">
-						<tr>
-							<td colspan="4">등록된 게시물이 없습니다.</td>
-						</tr>
-					</c:if>
-					<c:if test="${not isEmpty}">
-						<c:forEach items="${list}" var="item" varStatus="loop">
-							<tr>
-								<td>${item.no}</td>
-								<td class="text-left">
-									<a href='<c:url value="/BBS/Issue.hst?no=${item.no}"/>'>${item.title}</a>
-								<td>${item.name}</td>
-								<td>${item.postDate}</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-				</table>
+			<div class="col-md-5 col-md-offset-1 col-sm-12">
+				<span style="color: red; font-size: 20pt; font-weight: bold; padding-bottom: 20px">속보</span>
+				<div class="row" id="news" style="font-size: 12pt">
+					<!-- 한줄 코멘트 목록-->
+					<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
+				</div>
 			</div>
 		</div>
 	</div>
-	
+
+
 	<!-- Services Section -->
 	<div id="services" class="text-center">
 		<div class="container">

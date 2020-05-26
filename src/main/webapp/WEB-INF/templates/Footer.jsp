@@ -6,7 +6,7 @@
 	<div id="footer">
 		<div class="container text-center">
 			<p> 홈스피탈 <i class="fa fa-love"></i>
-				<a href="http://www.ikosmo.co.kr/">한소인 망해라 시팔</a>
+				<a href="http://www.ikosmo.co.kr/">한소인 KOSMO</a>
 			</p>
 		</div>
 	</div>
