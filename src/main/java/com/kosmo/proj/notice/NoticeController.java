@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class NoticeController {
 
 	
-	@RequestMapping("/Notice/BBS/NoticeList.bbs")
+	@RequestMapping("/Notice/BBS/NoticeList.hst")
 	public String home() {
 	
 

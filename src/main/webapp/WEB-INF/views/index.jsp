@@ -77,19 +77,19 @@
 				<div class="img-thumbnail" data-u="slides"
 					style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 					<div data-p="680">
-						<a href="/corona/Corona_Status.do"><img data-u="image"
+						<a href="/corona/Corona_Status.hst"><img data-u="image"
 							src="<c:url value="/img/1.jpg"/>" /></a>
 					</div>
 					<div data-p="680">
-						<a href="/corona/Corona_Mask.do"><img data-u="image"
+						<a href="/corona/Corona_Mask.hst"><img data-u="image"
 							src='<c:url value="/img/2.jpg"/>' /></a>
 					</div>
 					<div data-p="680">
-						<a href="/corona/Corona_Mask.do"><img data-u="image"
+						<a href="/corona/Corona_Patient.hst"><img data-u="image"
 							src="<c:url value="/img/3.jpg"/>" /></a>
 					</div>
 					<div data-p="680">
-						<a href="/prev/Season.do"><img data-u="image"
+						<a href="/prev/Season.hst"><img data-u="image"
 							src="<c:url value="/img/about.jpg"/>" /></a>
 					</div>
 				</div>
@@ -142,7 +142,7 @@
 							<tr>
 								<td>${item.no}</td>
 								<td class="text-left">
-									<a href='<c:url value="/BBS/Issue.do?no=${item.no}"/>'>${item.title}</a>
+									<a href='<c:url value="/BBS/Issue.hst?no=${item.no}"/>'>${item.title}</a>
 								<td>${item.name}</td>
 								<td>${item.postDate}</td>
 							</tr>
@@ -202,7 +202,7 @@
 							facilisis bibendum dolor feugiat at.</p>
 					</div>
 				</div>
-				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Calendar/calendar.bbs'/>'">
+				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Calendar/calendar.hst'/>'">
 					<i class="fa fa-calendar"></i>
 					<div class="service-desc">
 						<h3>달력</h3>
