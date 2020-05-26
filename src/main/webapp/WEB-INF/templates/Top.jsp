@@ -58,16 +58,22 @@
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand page-scroll" href='<c:url value="/Home/ToHomePage.do"/>'>홈스피탈</a>
+				<a class="navbar-brand page-scroll" href='<c:url value="/Home/ToHomePage.hst"/>'>홈스피탈</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href='<c:url value="/Notice/BBS/NoticeList.bbs"/>' class="page-scroll">공지</a></li>
+					<li><a href='<c:url value="/Notice/BBS/NoticeList.hst"/>'>공지</a></li>
 					<li><a href="#services" class="page-scroll">Services</a></li>
-					<li><a href="" class="page-scroll">Login</a></li>
-					<li><a href="<c:url value='/Signup/SignForm.do'/>">SignUp</a></li>
+					<c:if test="${USER == NULL}" var="result">
+					<li><a href="<c:url value='/User/Login.hst'/>" class="page-scroll">Login</a></li>
+					<li><a href="<c:url value='/Account/SignForm.hst'/>">SignUp</a></li>
+					</c:if>
+					<c:if test="${!result }">
+					<li><a href="<c:url value='/User/Logout.hst'/>">Logout</a></li>
+					<li><a href="<c:url value='/Account/ToMypage.hst'/>">MyPage</a></li>
+					</c:if>
 					<li><a href="#FAQ" class="page-scroll">FAQ</a></li>
 				</ul>
 			</div>

@@ -150,7 +150,7 @@ button{
    content: '';
    width: 100%;
    height: 2px;
-   background: white;
+   background: #00ff00;
    position: absolute;
    left: -50%;
    top: 9px;
@@ -163,12 +163,12 @@ button{
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-   background: #00ffff;
+   background: #00ff00;
    color: black;
 }
 
 #gender{
-   width: 50%;
+   width: 100%;
    height: 40px;
    border: 1px solid #ccc;
    border-radius: 3px;
@@ -180,20 +180,34 @@ button{
    
    
 }
-	#contact{
-	position:absolute;
-	top: 1000px;
-	width: 100%;
-	}
-	#footer{
-	position:absolute;
-	top: 1300px;
-	width: 100%;
-	}
+
+#age{
+   width: 100%;
+   height: 40px;
+   border: 1px solid #ccc;
+   border-radius: 3px;
+   font-family: montserrat;
+   color: #2C3E50;
+   font-size: 13px;
+   float: left;
+   padding: 10px 8px;   
+}
+
+#contact{
+position:absolute;
+top: 1000px;
+width: 100%;
+}
+#footer{
+position:absolute;
+top: 1300px;
+width: 100%;
+}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
 <script>
 
 $(function(){
@@ -329,7 +343,6 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 </script>
-<script type="text/javascript" src="js/jquery.test.js"></script>
 
 <!-- multistep form -->
 <form id="msform">
@@ -351,22 +364,22 @@ function sample6_execDaumPostcode() {
   <fieldset>
     <h2 class="fs-title">개인 정보</h2>
     <h3 class="fs-subtitle">2번째 단계입니다.</h3>
+    <div class="form-group">
        <input type="text" name="name" placeholder="이름" />
        <input type="text" name="phone" placeholder="핸드폰 번호" />
        <input type="text" name="email" placeholder="이메일" />
-       <input type="text" name="adress" placeholder="주소" />      
-       <div class="form-group">
-       <div class="col-lg-10" >
+       <input type="text" name="adress" placeholder="주소" />   
+    
+       <div class="col-lg-6" >
            <select class="form-control" id="gender"> 
               <option value="X"> 성별</option>
                <option value="M"> 남자</option>
                <option value="F"> 여자</option>
            </select>
        </div>
-       </div>
-   <div class="form-group">
-       <div class="col-lg-10">
-           <select class="form-control" id="gender" >
+   
+       <div class="col-lg-6">
+           <select class="form-control" id="age" >
               <option value="X">나이</option>
               <option value="M">10세 이하</option>
                <option value="M">10대</option>

@@ -15,24 +15,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class TestController {
 
-	@RequestMapping("/Calendar/View.do")
+	@RequestMapping("/Calendar/View.hst")
 	@ResponseBody
 	public List<CalendarVO> selectEventList(@RequestParam Map map) {
-			List<CalendarVO> list = new Vector<CalendarVO>();
-			
+		List<CalendarVO> list = new Vector<CalendarVO>();
+
 		HashMap<String, CalendarVO> javaMap = new HashMap<String, CalendarVO>();
-		list.add(new CalendarVO("db이벤트1","2020-05-04","2020-05-07",null,null,null,"false"));
-		list.add( new CalendarVO("db이벤트2","2019-09-23","2019-09-26",null,null,null, "false"));
-		list.add( new CalendarVO("db이벤트3","2019-09-23","2019-09-26",null,null,null, "false"));    
-	
+		list.add(new CalendarVO("db이벤트1", "2020-05-04", "2020-05-07", null, null, null, "false"));
+		list.add(new CalendarVO("db이벤트2", "2019-09-23", "2019-09-26", null, null, null, "false"));
+		list.add(new CalendarVO("db이벤트3", "2019-09-23", "2019-09-26", null, null, null, "false"));
+
 		return list;
-}
-	
-	@RequestMapping("/Calendar/calendar.bbs")
+	}
+
+	@RequestMapping("/Calendar/calendar.hst")
 	public String calendar() {
 		return "calendar.tiles";
-	}///////////login
-	
-
-	
 	}
+
+}

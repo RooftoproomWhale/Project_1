@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SignUpController {
 
-	@RequestMapping("/Signup/SignForm.do")
+	@RequestMapping("/Account/SignForm.hst")
 	public String toForm()
 	{
 		return "SignUp.tiles";

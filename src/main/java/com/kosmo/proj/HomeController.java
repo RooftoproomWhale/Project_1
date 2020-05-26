@@ -36,7 +36,7 @@ public class HomeController {
 		return "index.tiles";
 	}
 
-	@RequestMapping("/Home/ToHomePage.do")
+	@RequestMapping("/Home/ToHomePage.hst")
 	public String toHome()
 	{
 		return "index.tiles";
