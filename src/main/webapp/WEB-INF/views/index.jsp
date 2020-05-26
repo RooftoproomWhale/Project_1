@@ -29,7 +29,7 @@
 <meta name="author" content="">
 
 <!-- 캐러셀에 필요 -->
-<script src="<c:url value="/js/jssor.slider-28.0.0.min.js"/>" type="text/javascript"></script>
+<script type="text/javascript" src="<c:url value="/js/jssor.slider-28.0.0.min.js"/>" ></script>
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -62,8 +62,8 @@
 			<h3>속보</h3>
 		</div>
 	</div>
-	<div class="row">
 	
+	<div class="row">
 		<div class="col-md-5 col-md-offset-1 col-sm-12">
 			<div id="jssor_1"
 				style="position: relative; margin-top: 10px; margin-bottom: 50px;top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden; visibility: hidden;"
@@ -74,15 +74,15 @@
 					style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 					<div data-p="680">
 						<a href="/corona/Corona_Status.do"><img data-u="image"
-							src="<c:url value="/img/pic1.jpg"/>" /></a>
+							src="<c:url value="/img/1.jpg"/>" /></a>
 					</div>
 					<div data-p="680">
 						<a href="/corona/Corona_Mask.do"><img data-u="image"
-							src='<c:url value="/img/pic2.jpg"/>' /></a>
+							src='<c:url value="/img/2.jpg"/>' /></a>
 					</div>
 					<div data-p="680">
 						<a href="/corona/Corona_Mask.do"><img data-u="image"
-							src="<c:url value="/img/pic3.jpg"/>" /></a>
+							src="<c:url value="/img/3.jpg"/>" /></a>
 					</div>
 					<div data-p="680">
 						<a href="/prev/Season.do"><img data-u="image"
