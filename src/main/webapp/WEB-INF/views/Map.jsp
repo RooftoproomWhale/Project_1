@@ -12,7 +12,7 @@
     .info .close:hover {cursor: pointer;}
     .info .body {position: relative;overflow: hidden;}
     .info .desc {position: relative;margin: 13px;height: 75px;}
-    .desc .addr {overflow: hidden;text-overflow: addr;white-space: nowrap;}
+    .desc .addr {overflow: hidden;text-overflow: addr;white-space: normal;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
 </style>
@@ -238,7 +238,7 @@
 		            addr.className = "addr";
 		            addr.appendChild(document.createTextNode(data.stores[i].addr));
 		            desc.appendChild(addr);
-		            desc.appendChild(document.createElement('div').appendChild(document.createTextNode(data.stores[i].remain_stat)));
+		            desc.appendChild(document.createElement('div').appendChild(document.createTextNode(translateRemainStat(data.stores[i].remain_stat))));
 		            
 		            overlay.setContent(content);
 		            
@@ -310,6 +310,22 @@
 		    return function() {
 		    	overlay.setMap(null);
 		    };
+		}
+		
+		function translateRemainStat(remain_stat)
+		{
+			switch (remain_stat) {
+			case "plenty":
+				return "충분"
+			case "some":
+				return "보통"
+			case "few":
+				return "부족"
+			case "empty":
+				return "재고x"
+			default:
+				return "판매X"
+			}
 		}
 	}
 </script>

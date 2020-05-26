@@ -36,13 +36,13 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    <script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/SmoothScroll.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/nivo-lightbox.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/jqBootstrapValidation.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/contact_me.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/js/main.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/SmoothScroll.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/nivo-lightbox.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/jqBootstrapValidation.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/contact_me.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/main.js'/>"></script>
 	
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

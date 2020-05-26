@@ -29,7 +29,7 @@
 <meta name="author" content="">
 
 <!-- 캐러셀에 필요 -->
-<script src="<c:url value="/js/jssor.slider-28.0.0.min.js"/>" type="text/javascript"></script>
+<script type="text/javascript" src="<c:url value="/js/jssor.slider-28.0.0.min.js"/>" ></script>
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -60,10 +60,14 @@
 		</div>
 		<div class="col-md-5 col-md-offset-1 col-sm-12" id="issues">
 			<h3>속보</h3>
+			<div class="row" id="news">
+			<!-- 한줄 코멘트 목록-->
+			<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
+			</div>
 		</div>
 	</div>
-	<div class="row">
 	
+	<div class="row">
 		<div class="col-md-5 col-md-offset-1 col-sm-12">
 			<div id="jssor_1"
 				style="position: relative; margin-top: 10px; margin-bottom: 50px;top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden; visibility: hidden;"
@@ -74,15 +78,15 @@
 					style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 					<div data-p="680">
 						<a href="/corona/Corona_Status.do"><img data-u="image"
-							src="<c:url value="/img/pic1.jpg"/>" /></a>
+							src="<c:url value="/img/1.jpg"/>" /></a>
 					</div>
 					<div data-p="680">
 						<a href="/corona/Corona_Mask.do"><img data-u="image"
-							src='<c:url value="/img/pic2.jpg"/>' /></a>
+							src='<c:url value="/img/2.jpg"/>' /></a>
 					</div>
 					<div data-p="680">
 						<a href="/corona/Corona_Mask.do"><img data-u="image"
-							src="<c:url value="/img/pic3.jpg"/>" /></a>
+							src="<c:url value="/img/3.jpg"/>" /></a>
 					</div>
 					<div data-p="680">
 						<a href="/prev/Season.do"><img data-u="image"
@@ -220,4 +224,38 @@
 		</div>
 	</div>
 </body>
+<script>
+	$(function(){
+		showNews();	
+		
+		setInterval(() => {
+			showNews();	
+		}, 60000);
+	
+		function showNews(){
+			
+			$.ajax({
+				url:"<c:url value='/News'/>",
+				data:{"clientId":"GVe_m816Ap0X5nw8XFXQ","clientSecret":"6JAsTo47hF"},
+				type:'get',
+				dataType: "json",
+				success:function(data){
+					console.log(data);
+					var news = "<ul>";
+					if(data.length==0){
+						news+="<li>뉴스 데이터가 없습니다</li>";
+					} 
+					$.each(data.items, function(index, element) {
+						console.log(element.title);
+						news+="<li><a href='"+element.originallink+"' target=_blank>"+element.title+"</a></li>";
+					});
+					news+="</ul>";
+					
+					$('#news').html(news);
+				},
+				error:function(e){console.log('에러:',e)}
+			});			
+		};
+	});
+</script>
 </html>
