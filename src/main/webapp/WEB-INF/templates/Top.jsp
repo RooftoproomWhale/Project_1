@@ -35,8 +35,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
-<script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!--<script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script>-->
 <script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/SmoothScroll.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/nivo-lightbox.js'/>"></script>
@@ -45,7 +45,7 @@
 <script type="text/javascript" src="<c:url value='/js/main.js'/>"></script>
 	
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
 	
 	<nav id="menu" class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
