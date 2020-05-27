@@ -1,24 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8' />
 
 <!-- 캘린더 필요 -->
 <link href='<c:url value="/calendar/core/main.css"/>' rel='stylesheet' />
 <link href='<c:url value="/calendar/daygrid/main.css"/>' rel='stylesheet' />
 <link href='<c:url value="/calendar/timegrid/main.css"/>' rel='stylesheet' />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src='<c:url value="/calendar/core/main.js"/>'></script>
 <script src='<c:url value="/calendar/interaction/main.js"/>'></script>
 <script src='<c:url value="/calendar/daygrid/main.js"/>'></script>
 <script src='<c:url value="/calendar/timegrid/main.js"/>'></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 
 <script>
@@ -71,9 +64,9 @@
   
         editable: true,
         eventLimit: true, // allow "more" link when too many events
-     events:  function(info, successCallback,failureCallback) {
+        events:  function(info, successCallback,failureCallback) {
   			$.ajax({
-  				url: '<c:url value="/Calendar/View.do"/>',
+  				url: '<c:url value="/Calendar/View.hst"/>',
   				type: 'POST',
   				dataType:'json',
   				data:{
@@ -109,10 +102,7 @@
    
     calendar.render();
   });
-		$(function() {
-			 $( "#datepicker" ).datepicker();
-		});
-  
+	
 	
   
 
@@ -134,7 +124,7 @@
 .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
-            z-index: -1; /* Sit on top */
+            z-index: 9999; /* Sit on top */
             left: 0;
             top: 0;
             width: 100%; /* Full width */
@@ -168,12 +158,10 @@
         }
 
 </style>
-</head>
 
 
   <div id='calendar'>
   </div>
-   <h2>모달</h2>
 <div id="createEventModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -209,7 +197,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-	<script src='<c:url value="/calendar/bootstrap/js/bootstrap.min.js"/>'></script>
+	<script src='<c:url value="/js/bootstrap.min.js"/>'></script>
 
-</html>
+
 
