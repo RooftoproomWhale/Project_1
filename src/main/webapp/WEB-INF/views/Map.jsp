@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	.map_wrap {margin-top: 80px}
+	.map_wrap {margin-top: 80px;height: 100%;}
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
@@ -17,13 +17,26 @@
     .info .link {color: #5085BB;}
     .modal { position: absolute; top: 30%;}
 	.body_title {font-size: 24px;font-weight: bold;}
+	.load_wrap {position: absolute; top: 50%; left: 50%; z-index: 1231234;transform: translate(-50%, -50%);display: flex;flex-direction: column;}
+	.search {position: absolute;top:120px;left: 16px;z-index: 2;}
+	.current {position: absolute;bottom: 30px;right: 10px;z-index: 123123;}
+	.refresh_map{position: absolute;bottom: 5px;right: 10px;z-index: 123123;}
 </style>
 <div class="map_wrap">
+	<div class="load_wrap">
+		<img class="load_img" src="<c:url value='/images/mask_loader.gif'/>">
+	</div>
 	<div class="search">
-		<input class="searchInput" id="searchAddress" placeholder="목적지를 입력하세요">
+		<input class="searchInput" id="searchAddress" placeholder="검색 버튼을 클릭해주세요" disabled>
 		<button type="button" onclick="addressSearch()">검색</button>
 	</div>
-	<div id="map" style="width: 100%; height: 90vh;position: relative;overflow: hidden;"></div>
+	<div class="current">
+		<button type="button" onclick="currentPosition()">현재위치</button>
+	</div>
+	<div class="refresh_map">
+		<button type="button" onclick="refreshMap()">갱신</button>
+	</div>
+	<div id="map" style="width: 100%; height: 100%;position: relative;overflow: hidden;"></div>
 </div>
 <div class="modal fade" id="maskInfo-modal">
 	<div class="modal-dialog modal-sm">
@@ -116,19 +129,9 @@
 	    
 	    var bound = map.getBounds();
 	    
-	    console.log("마커길이(드래그)",markers.length);
-	    for (var i = 0; i<markers.length; i++)
-	    {
-	    	console.log(bound.contain(markers[i].getPosition()),markers[i]);
-	    	if(!bound.contain(markers[i].getPosition()))
-	    	{
-	    		markers[i].setMap(null);
-	    		markers.splice(i, 1);
-	    		
-	    		console.log("지도밖 삭제처리",markers.length,markers);
-	    	}
-	    }
-	   
+	    removeMarker();
+	    
+	    
 	    console.log("지도레벨(드래그)",level);
 	    console.log("위치(드래그)",latlng);
 	    console.log("바운드(드래그)",bound);
@@ -147,22 +150,7 @@
 	if (navigator.geolocation) {
 	
 		// GeoLocation을 이용해서 접속 위치를 얻어옵니다
-		navigator.geolocation.getCurrentPosition(function(position) {
-	
-			lat = position.coords.latitude, // 위도
-			lon = position.coords.longitude; // 경도
-	
-			console.log(lat);
-			console.log(lon);
-			storesByGeo(lat,lon);
-			
-			var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-			message = '<div style="padding:5px;">현재위치</div>'; // 인포윈도우에 표시될 내용입니다
-	
-			// 마커와 인포윈도우를 표시합니다
-			displayMarker(locPosition, message);
-	
-		});
+		currentPosition()
 	
 		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
 		function displayMarker(locPosition, message) {
@@ -207,7 +195,6 @@
 		{
 			
 			$.get("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+latitude+"&lng="+longitude,function(data){
-				
 				console.log(data);
 				console.log(data.stores[0].lat);
 				
@@ -262,7 +249,10 @@
 				
 				console.log("중복처리후 마커배열",markers);
 				console.log("맵",map);
-			});
+			})
+			.done(function(){ console.log("요청 성공시 호출") })
+			.fail(function(){ console.log("요청 실패시 호출") })
+			.always(function(){ console.log("성공 실패 상관없이 호출") })
 			
 		}
 		
@@ -338,10 +328,52 @@
 	            }
 	        }).open();
 		}
-	}
-	
-	$(function(){
-		console.log($('#maskInfo-modal'));
+		function currentPosition()
+		{
+			navigator.geolocation.getCurrentPosition(function(position) {
+
+				removeMarker();
+				lat = position.coords.latitude, // 위도
+				lon = position.coords.longitude; // 경도
 		
-	});
+				console.log(lat);
+				console.log(lon);
+				storesByGeo(lat,lon);
+				
+				var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+				message = '<div style="padding:5px;">현재위치</div>'; // 인포윈도우에 표시될 내용입니다
+		
+				// 마커와 인포윈도우를 표시합니다
+				displayMarker(locPosition, message);
+		
+			});
+		}
+		function refreshMap()
+		{
+			removeMarker();
+			var latlng = map.getCenter(); 
+			storesByGeo(latlng.getLat(),latlng.getLng());
+		}
+		function removeMarker()
+		{
+			for(var i = 0; i < markers.length; i++ )
+			{
+				markers[i].setMap(null);
+			}
+			markers = [];
+		}
+		function FunLoadingBarStart() {
+			var backHeight = $(document).height(); //뒷 배경의 상하 폭
+			var backWidth = window.document.body.clientWidth; //뒷 배경의 좌우 폭
+			
+			$('#load_wrap').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0.3' });
+			$('#load_wrap').show();
+			$('#load_img').show();
+		}
+		function FunLoadingBarEnd() {
+			$('#load_wrap, #load_img').hide();
+			$('#load_wrap, #load_img').remove();
+		}
+	}
+
 </script>
