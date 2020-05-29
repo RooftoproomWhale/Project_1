@@ -56,6 +56,11 @@ public class HomeController {
 		return "index.tiles";
 	}
 	
+	@RequestMapping("/Home/covid.hst")
+	public String covid()
+	{
+		return "covid.tiles";
+	}
 	@RequestMapping(value = "/News",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String news(@RequestParam Map map)
@@ -134,4 +139,6 @@ public class HomeController {
             throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
         }
     }
+	
+
 }

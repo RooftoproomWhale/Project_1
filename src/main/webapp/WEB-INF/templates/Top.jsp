@@ -47,6 +47,10 @@
 	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	
 	
+<script>
+
+</script>
+	
 	<nav id="menu" class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -75,7 +79,8 @@
 					<li><a href="<c:url value='/Account/ToMypage.hst'/>">MyPage</a></li>
 					</c:if>
 					
-					<li><a href="#FAQ" class="page-scroll">FAQ</a></li>
+					<li><a href="#FAQ" class="page-scroll" id="faq">FAQ</a></li>
+					
 				</ul>
 			</div>
 		</div>

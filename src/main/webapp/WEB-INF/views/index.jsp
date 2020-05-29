@@ -184,16 +184,62 @@
 						</p>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<a href="<c:url value='/Home/covid.hst'/>"><div class="col-md-4">
 					<i class="fa fa-pie-chart"></i>
 					<div class="service-desc">
-						<h3></h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante
-							facilisis bibendum dolor feugiat at.</p>
+						<h3>코로나 추이</h3>
+						<p>코로나 추이@@</p>
 					</div>
-				</div>
+				</div></a>
 			</div>
+		</div>
+	</div>
+	<div class="row site-section" id="FAQ">
+		<div class="col-12 text-center" data-aos="fade">
+			<h2 class="section-title">Frequently Ask Questions</h2>
+		</div>
+	</div>
+	<div class="row col-lg-offset-3">
+		<div class="col-lg-4 text-center">
+			<div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+				<h3 class="text-black h4 mb-4">Can I accept both Paypal and
+					Stripe?</h3>
+				<p>Far far away, behind the word mountains, far from the
+					countries Vokalia and Consonantia, there live the blind texts.
+					Separated they live in Bookmarksgrove right at the coast of the
+					Semantics, a large language ocean.</p>
+			</div>
+
+			<div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+				<h3 class="text-black h4 mb-4">What available is refund period?</h3>
+				<p>Far far away, behind the word mountains, far from the
+					countries Vokalia and Consonantia, there live the blind texts.
+					Separated they live in Bookmarksgrove right at the coast of the
+					Semantics, a large language ocean.</p>
+			</div>
+
+			
+		</div>
+		<div class="col-lg-4 text-center">
+
+			<div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+				<h3 class="text-black h4 mb-4">Where are you from?</h3>
+				<p>Voluptatum nobis obcaecati perferendis dolor totam unde
+					dolores quod maxime corporis officia et. Distinctio assumenda
+					minima maiores.</p>
+			</div>
+
+			<div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+				<h3 class="text-black h4 mb-4">What is your opening time?</h3>
+				<p>Far far away, behind the word mountains, far from the
+					countries Vokalia and Consonantia, there live the blind texts.
+					Separated they live in Bookmarksgrove right at the coast of the
+					Semantics, a large language ocean.</p>
+			</div>
+
+			
+
+			
 		</div>
 	</div>
 </body>

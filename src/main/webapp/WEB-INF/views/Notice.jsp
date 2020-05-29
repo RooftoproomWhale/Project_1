@@ -7,12 +7,14 @@
 	
 	<!-- 작성하기 버튼 -->
 	<div class="row" style="margin-bottom: 10px">
+		<c:if test="" var="admin">
 		<div class="col-md-12 text-right">
-			<a href="<c:url value='/OneMemo/BBS/Write.bbs'/>"
+			<a href="<c:url value='#'/>"
 				class="btn btn-default">등록</a>
 		</div>
+		</c:if>
 	</div>
-	<div class="row">
+	<div class="row" style="border-radius: 0 0 0 0 ">
 		<div class="col-md-12">
 			<table class="table table-bordered table-hover text-center">
 				<tr>
@@ -24,7 +26,7 @@
 				</tr>
 				<c:if test="${empty list}" var="isEmpty">
 					<tr>
-						<td colspan="4">등록된 게시물이 없습니다.</td>
+						<td colspan="4">등록된 공지가 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:if test="${not isEmpty}">
@@ -46,25 +48,24 @@
 	</div>
 	<!-- row -->
 	<!-- 페이징 -->
-	<div class="row">
+	<div class="row" style="border-radius: 0 0 0 0">
 		<div class="col-md-12 text-center">${pagingString}</div>
 	</div>
 	<!-- 검색용 UI -->
 	<div class="row">
 		<div class="text-center">
 			<form class="form-inline" method="post"
-				action="<c:url value='/OneMemo/BBS/List.bbs'/>">
-				<div class="form-group">
+				action="<c:url value='#'/>">
+				<div class="form-group" style="border-radius: 0 0 0 0">
 					<select name="searchColumn" class="form-control">
 						<option value="title">제목</option>
-						<option value="name">작성자</option>
 						<option value="content">내용</option>
 					</select>
 				</div>
-				<div class="form-group">
+				<div class="form-group" style="border-radius: 0 0 0 0">
 					<input type="text" name="searchWord" class="form-control" />
 				</div>
-				<button type="submit" class="btn btn-default">검색</button>
+				<button type="submit" class="btn btn-default" style="border-radius: 0 0 0 0">검색</button>
 			</form>
 		</div>
 	</div>
