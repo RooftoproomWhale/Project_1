@@ -6,20 +6,17 @@
 <link href='<c:url value="/calendar/core/main.css"/>' rel='stylesheet' />
 <link href='<c:url value="/calendar/daygrid/main.css"/>' rel='stylesheet' />
 <link href='<c:url value="/calendar/timegrid/main.css"/>' rel='stylesheet' />
-<<<<<<< HEAD
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- <link rel="stylesheet" href="/css/style.css"> -->
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-=======
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src='<c:url value="/calendar/core/main.js"/>'></script>
 <script src='<c:url value="/calendar/interaction/main.js"/>'></script>
 <script src='<c:url value="/calendar/daygrid/main.js"/>'></script>
 <script src='<c:url value="/calendar/timegrid/main.js"/>'></script>
-
 
 
 <script>
@@ -66,13 +63,12 @@
                              end: arg.end="";
                          $("#createEventModal").modal("hide");
                   })
-          calendar.unselect();
-               
+          calendar.unselect();            
         },
   
         editable: true,
         eventLimit: true, // allow "more" link when too many events
-<<<<<<< HEAD
+
      events:  function(info, successCallback,failureCallback) {
            $.ajax({
               url: '<c:url value="/Calendar/View.do"/>',
@@ -105,7 +101,7 @@
                  }//eroorr
                  });//ajax
          
-=======
+
         events:  function(info, successCallback,failureCallback) {
   			$.ajax({
   				url: '<c:url value="/Calendar/View.hst"/>',
@@ -138,20 +134,11 @@
   					}//eroorr
   					});//ajax
     	  
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
         } 
-   
-    });
-   
+    }); 
     calendar.render();
   });
-<<<<<<< HEAD
-     
-=======
-	
-	
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
-  
+
 
 </script>
 <style>
@@ -171,11 +158,11 @@
 .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
-<<<<<<< HEAD
+
             z-index: 1; /* Sit on top */
-=======
+
             z-index: 9999; /* Sit on top */
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
+
             left: 0;
             top: 0;
             width: 100%; /* Full width */
@@ -210,13 +197,8 @@
 
 </style>
 
+  <div id='calendar'></div>
 
-  <div id='calendar'>
-  </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 <div id="createEventModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -252,15 +234,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-<<<<<<< HEAD
-   <script src='<c:url value="/js/bootstrap.min.js"/>'></script>
-=======
-	<script src='<c:url value="/js/bootstrap.min.js"/>'></script>
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
+<script src='<c:url value="/js/bootstrap.min.js"/>'></script>
 
-<<<<<<< HEAD
+
+
 </html>
-=======
 
-
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git

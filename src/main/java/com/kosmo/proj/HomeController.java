@@ -56,11 +56,6 @@ public class HomeController {
 		return "index.tiles";
 	}
 	
-	@RequestMapping("/Home/covid.hst")
-	public String covid()
-	{
-		return "covid.tiles";
-	}
 	@RequestMapping(value = "/News",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String news(@RequestParam Map map)
@@ -140,7 +135,6 @@ public class HomeController {
         }
     }
 	
-<<<<<<< HEAD
 //	마이바티스test
 	@RequestMapping("/Member/select.hst")
 	public String memberSelect(Map map, Model model)
@@ -162,7 +156,4 @@ public class HomeController {
 	}
 	
 	
-=======
-
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 }

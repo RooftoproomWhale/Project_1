@@ -184,32 +184,25 @@
 						</p>
 					</div>
 				</div>
-<<<<<<< HEAD
+
 				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='.hst'/>'">
-=======
-				<a href="<c:url value='/Home/covid.hst'/>"><div class="col-md-4">
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 					<i class="fa fa-pie-chart"></i>
 					<div class="service-desc">
-<<<<<<< HEAD
 						<h3>간편 검사</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 							Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante
-							facilisis bibendum dolor feugiat at.</p>
-=======
+							facilisis bibendum dolor feugiat at.
+						</p>
+					</div>
+				</div>
 						<h3>코로나 추이</h3>
 						<p>코로나 추이@@</p>
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 					</div>
-				</div></a>
+				</div>
 			</div>
-		</div>
-	</div>
-<<<<<<< HEAD
 	
-	<div id="FAQ">
 	
-=======
+
 	<div class="row site-section" id="FAQ">
 		<div class="col-12 text-center" data-aos="fade">
 			<h2 class="section-title">Frequently Ask Questions</h2>
@@ -257,7 +250,6 @@
 
 			
 		</div>
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	</div>
 </body>
 <script>
