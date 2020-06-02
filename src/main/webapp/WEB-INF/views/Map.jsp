@@ -22,13 +22,17 @@
 	.current {position: absolute;bottom: 30px;right: 10px;z-index: 2;}
 	.refresh_map{position: absolute;bottom: 5px;right: 10px;z-index: 2;}
 	.menu_wrap{left: 13px;bottom: 19px;text-align: center;position: absolute;z-index: 2;}
+	
 </style>
 <div class="map_wrap">
+	<div id="search_wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px;position:absolute;z-index: 3">
+		<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+	</div>
 	<div class="load_wrap">
 		<img class="load_img" src="<c:url value='/images/mask_loader.gif'/>">
 	</div>
 	<div class="search">
-		<input class="searchInput" id="searchAddress" placeholder="검색 버튼을 클릭해주세요" disabled>
+		<input class="searchInput" id="searchAddress" disabled>
 		<button type="button" onclick="addressSearch()">검색</button>
 	</div>
 	<div class="current">
@@ -108,7 +112,7 @@
 	
 	    // 지도의 중심좌표를 얻어옵니다 
 	    var latlng = map.getCenter(); 
-	    
+	    searchAddrFromCoords(latlng, displayCenterInfo);
 	    var bound = map.getBounds();
 	    
 	    console.log("마커길이(드래그)",markers.length);
@@ -136,7 +140,7 @@
 	    var level = map.getLevel();
 	    
 		var latlng = map.getCenter(); 
-	    
+		searchAddrFromCoords(latlng, displayCenterInfo);
 	    var bound = map.getBounds();
 	    
 	    removeMarker();
@@ -289,7 +293,10 @@
 					$.each(jsonData.stores, function(i, item) {
 						var marker = new kakao.maps.Marker({
 							//map : map,
-							position : new kakao.maps.LatLng(item.lat, item.lng)
+							position : new kakao.maps.LatLng(item.lat, item.lng),
+							image :  new kakao.maps.MarkerImage(
+									translateRemainStatImage(item.remain_stat),
+							        new kakao.maps.Size(35, 35))
 						});
 			            
 						//kakao.maps.event.addListener(marker, 'click', makeOverListener(map));
@@ -424,6 +431,21 @@
 				return "판매X"
 			}
 		}
+		
+		function translateRemainStatImage(remain_stat)
+		{
+			switch (remain_stat) {
+			case "plenty":
+				return "<c:url value='/images/maskmap_image/mask_plenty.png'/>"
+			case "some":
+				return "<c:url value='/images/maskmap_image/mask_some.png'/>"
+			case "few":
+				return "<c:url value='/images/maskmap_image/mask_few.png'/>"
+			default:
+				return "<c:url value='/images/maskmap_image/mask_empty.png'/>"
+			}
+		}
+		
 		function translateRemainStatCount(remain_stat)
 		{
 			switch (remain_stat) {
@@ -439,8 +461,16 @@
 				return "판매중지"
 			}
 		}
+		
+		var element_wrap = document.getElementById('search_wrap');
+		
+		function foldDaumPostcode() {
+	        // iframe을 넣은 element를 안보이게 한다.
+	        element_wrap.style.display = 'none';
+	    }
 		function addressSearch()
 		{
+			var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
 			new daum.Postcode({
 	            oncomplete: function(data) {
 	                var addr = data.address; // 최종 주소 변수
@@ -463,11 +493,21 @@
 	                        // 지도 중심을 변경한다.
 	                        map.setCenter(coords);
 	                        
-	                        storesByGeo(result.y, result.x);
+	                        element_wrap.style.display = 'none';
+	                        document.body.scrollTop = currentScroll;
+	                        //storesByGeo(result.y, result.x);
+	                        loadMapApi(result.y, result.x,apiStatus);
 	                    }
 	                });
-	            }
-	        }).open();
+	            },
+	            onresize : function(size) {
+	                element_wrap.style.height = '500px';
+	            },
+	            width : '100%',
+	            height : '100%'
+	        }).embed(element_wrap);
+			
+			element_wrap.style.display = 'block';
 		}
 		function currentPosition()
 		{
@@ -479,7 +519,8 @@
 		
 				console.log(lat);
 				console.log(lon);
-				storesByGeo(lat,lon);
+				//storesByGeo(lat,lon);
+				loadMapApi(lat,lon,apiStatus);
 				
 				var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 				message = '<div style="padding:5px;">현재위치</div>'; // 인포윈도우에 표시될 내용입니다
@@ -488,6 +529,22 @@
 				displayMarker(locPosition, message);
 		
 			});
+		}
+		function searchAddrFromCoords(coords, callback) {
+		    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+		}
+		function displayCenterInfo(result, status) {
+		    if (status === kakao.maps.services.Status.OK) {
+		        var infoDiv = document.getElementById('searchAddress');
+
+		        for(var i = 0; i < result.length; i++) {
+		            // 행정동의 region_type 값은 'H' 이므로
+		            if (result[i].region_type === 'H') {
+		                infoDiv.value = result[i].address_name;
+		                break;
+		            }
+		        }
+		    }    
 		}
 		function changeApi(status)
 		{
@@ -512,12 +569,15 @@
 		}
 		function FunLoadingBarStart() {
 			console.log($('.load_wrap'),$('.load_img'));
+			
 			$('.load_img').show();
 		}
 		function FunLoadingBarEnd() {
+			
 			$('.load_img').hide();
 			
 		}
+		
 	}
 
 </script>
