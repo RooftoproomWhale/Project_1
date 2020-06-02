@@ -15,11 +15,16 @@
 	<meta name="author" content="">
 	
   </head>
+
   <body>
+  
 	<!-- top부분 -->
 	<tiles:insertAttribute name="top"/>
-    <!-- body부분 -->
-    
+	
+	<!-- 고정버튼 -->
+	<tiles:insertAttribute name="stickyButton"/>
+	
+    <!-- body부분 --> 
     <tiles:insertAttribute name="body"/> 
     
     <!-- footer부분 -->

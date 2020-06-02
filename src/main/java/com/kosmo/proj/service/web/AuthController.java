@@ -1,4 +1,4 @@
-package com.kosmo.proj;
+package com.kosmo.proj.service.web;
 
 import java.util.Map;
 

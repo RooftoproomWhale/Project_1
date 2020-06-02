@@ -1,4 +1,4 @@
-package com.kosmo.proj;
+package com.kosmo.proj.service.web;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
-public class TestController {
+import com.kosmo.proj.service.CalendarVO;
 
-	@RequestMapping("/Calendar/View.hst")
+@Controller
+public class CalendarController {
+
+	@RequestMapping("/Calendar/View.do")
 	@ResponseBody
 	public List<CalendarVO> selectEventList(@RequestParam Map map) {
 		List<CalendarVO> list = new Vector<CalendarVO>();

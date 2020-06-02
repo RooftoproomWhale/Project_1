@@ -1,4 +1,4 @@
-package com.kosmo.proj;
+package com.kosmo.proj.member.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

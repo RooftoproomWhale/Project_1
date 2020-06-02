@@ -1,4 +1,4 @@
-package com.kosmo.proj;
+package com.kosmo.proj.service;
 
 import java.sql.Date;
 
