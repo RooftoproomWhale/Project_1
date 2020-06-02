@@ -153,14 +153,6 @@
 	    loadMapApi(latlng.getLat(),latlng.getLng(),apiStatus);
 	});
 	
-	// 마커 클러스터러를 생성합니다 
-	var clusterer = new kakao.maps.MarkerClusterer({
-		map : map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-		averageCenter : true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-		minLevel : 10
-	// 클러스터 할 최소 지도 레벨 
-	});
-	
 	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 	if (navigator.geolocation) {
 	
@@ -168,44 +160,18 @@
 		currentPosition()
 	
 		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
-		function displayMarker(locPosition, message) {
+		function displayMarker(locPosition) {
 	
 			// 마커를 생성합니다
 			var marker_present = new kakao.maps.Marker({
 				map : map,
 				position : locPosition
 			});
-	
-			var iwContent = message, // 인포윈도우에 표시할 내용
-			iwRemoveable = true;
-	
-			// 인포윈도우를 생성합니다
-			var infowindow = new kakao.maps.InfoWindow({
-				content : iwContent,
-				removable : iwRemoveable
-			});
-	
-			// 인포윈도우를 마커위에 표시합니다 
-			infowindow.open(map, marker_present);
-	
+
 			// 지도 중심좌표를 접속위치로 변경합니다
 			map.setCenter(locPosition);
 		}
 		
-		/* function storesByGeo(latitude,longitude)
-		{
-			$.get("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+latitude+"&lng="+longitude,function(data){
-				console.log("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+latitude+"&lng="+longitude);
-				console.log(data.stores);
-				var markers = $(data.stores).map(function(i, position) {
-					return new kakao.maps.Marker({
-		                position : new kakao.maps.LatLng(position.lat, position.lng),
-		            	title : position.name
-		            });
-				});
-				clusterer.addMarkers(markers);
-			});
-		} */
 		function loadMapApi(latitude,longitude,status)
 		{
 			console.log('API 상태',status);
@@ -220,7 +186,7 @@
 				storesByGeo(latitude,longitude);
 				break;
 			default:
-				
+				loadCovidMap();
 				break;
 			}
 		}
@@ -242,6 +208,61 @@
 				success:function(data){
 					var jsonData = JSON.parse(data);
 					console.log("연결성공", jsonData.response.body,typeof(jsonData));
+					$.each(jsonData.response.body.items.item, function(i, item) {
+						
+						var marker = new kakao.maps.Marker({
+							//map : map,
+							position : new kakao.maps.LatLng(item.latitude, item.longitude),
+							image :  new kakao.maps.MarkerImage(
+									"<c:url value='/images/hospital_image/hospital.png'/>",
+							        new kakao.maps.Size(35, 35))
+						});
+						
+						var iwContent = '<div style="padding:5px;">'+item.dutyName+'</div>';
+			            
+						var infowindow = new kakao.maps.InfoWindow({
+						    content : iwContent
+						});
+						
+						kakao.maps.event.addListener(marker, 'mouseover', function() {
+						  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+						    infowindow.open(map, marker);
+						});
+
+						// 마커에 마우스아웃 이벤트를 등록합니다
+						kakao.maps.event.addListener(marker, 'mouseout', function() {
+						    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+						    infowindow.close();
+						});
+						
+						var isSame = false;
+						for (var j = 0; j < markers.length; j++)
+						{
+							console.log(marker.getPosition().equals(markers[j].getPosition()));
+							//console.log(j,marker.getPosition().getLat() == markers[j].getLat(),marker.getPosition().getLat(),markers[j].getLat());
+							//if(marker.getPosition().getLat() == markers[j].getLat())
+							if(marker.getPosition().equals(markers[j].getPosition()))
+							{
+								isSame = true;
+							}
+							
+						}
+						
+						if(!isSame)
+						{
+							console.log("마커배열길이",jsonData.count,markers.length);
+							//if(data.count < markers.length)
+							marker.setMap(map);
+							console.log("중복이 아닌 마커",marker.getPosition());
+							markers.push(marker);
+							
+						}
+						else
+						{
+							console.log("중복 마커",marker.getPosition());
+							//marker.setMap(null);
+						}
+					})
 				},
 				error:function(e){
 					
@@ -266,6 +287,61 @@
 				success:function(data){
 					var jsonData = JSON.parse(data);
 					console.log("연결성공", jsonData.response.body,typeof(jsonData));
+					$.each(jsonData.response.body.items.item, function(i, item) {
+						
+						var marker = new kakao.maps.Marker({
+							//map : map,
+							position : new kakao.maps.LatLng(item.latitude, item.longitude),
+							image :  new kakao.maps.MarkerImage(
+									"<c:url value='/images/pharmacy_image/pharmacy.png'/>",
+							        new kakao.maps.Size(35, 35))
+						});
+						
+						var iwContent = '<div style="padding:5px;">'+item.dutyName+'</div>';
+			            
+						var infowindow = new kakao.maps.InfoWindow({
+						    content : iwContent
+						});
+						
+						kakao.maps.event.addListener(marker, 'mouseover', function() {
+						  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+						    infowindow.open(map, marker);
+						});
+
+						// 마커에 마우스아웃 이벤트를 등록합니다
+						kakao.maps.event.addListener(marker, 'mouseout', function() {
+						    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+						    infowindow.close();
+						});
+						
+						var isSame = false;
+						for (var j = 0; j < markers.length; j++)
+						{
+							console.log(marker.getPosition().equals(markers[j].getPosition()));
+							//console.log(j,marker.getPosition().getLat() == markers[j].getLat(),marker.getPosition().getLat(),markers[j].getLat());
+							//if(marker.getPosition().getLat() == markers[j].getLat())
+							if(marker.getPosition().equals(markers[j].getPosition()))
+							{
+								isSame = true;
+							}
+							
+						}
+						
+						if(!isSame)
+						{
+							console.log("마커배열길이",jsonData.count,markers.length);
+							//if(data.count < markers.length)
+							marker.setMap(map);
+							console.log("중복이 아닌 마커",marker.getPosition());
+							markers.push(marker);
+							
+						}
+						else
+						{
+							console.log("중복 마커",marker.getPosition());
+							//marker.setMap(null);
+						}
+					})
 				},
 				error:function(e){
 					
@@ -298,7 +374,24 @@
 									translateRemainStatImage(item.remain_stat),
 							        new kakao.maps.Size(35, 35))
 						});
+						
+						var iwContent = '<div style="padding:5px;">'+item.name+'</div>';
 			            
+						var infowindow = new kakao.maps.InfoWindow({
+						    content : iwContent
+						});
+						
+						kakao.maps.event.addListener(marker, 'mouseover', function() {
+						  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+						    infowindow.open(map, marker);
+						});
+
+						// 마커에 마우스아웃 이벤트를 등록합니다
+						kakao.maps.event.addListener(marker, 'mouseout', function() {
+						    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+						    infowindow.close();
+						});
+						
 						//kakao.maps.event.addListener(marker, 'click', makeOverListener(map));
 						kakao.maps.event.addListener(marker, 'click', function(){
 							console.log("modal",item,i)
@@ -345,63 +438,68 @@
 					
 				}
 			});
-			/* $.get("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+latitude+"&lng="+longitude,function(data){
-				console.log(data);
-				console.log(data.stores[0].lat);
-				
-				console.log("위치에 따른 마커 적용 전 마커 길이",markers.length);
-				$.each(data.stores, function(i, item) {
-					var marker = new kakao.maps.Marker({
-						//map : map,
-						position : new kakao.maps.LatLng(item.lat, item.lng)
+		}
+		function loadCovidMap()
+		{
+			$.ajax({
+				url:"<c:url value='/Homespital/Map/Covid.hst'/>",
+				type:'get',
+				datatype:'json',
+				beforeSend: function () {
+					console.log("beforeSend");
+					FunLoadingBarStart();
+				},
+				complete: function () {
+					console.log("complete");
+					FunLoadingBarEnd();
+				},
+				success:function(data){
+					var jsonData = JSON.parse(data);
+					console.log("코로나 데이터",jsonData);
+					$.each(jsonData, function(i, item) {
+						console.log("코로나 데이터",item);
+						geocoder.addressSearch(item.ADDRESS, function(result, status) {
+							 if (status === kakao.maps.services.Status.OK) {
+								 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+								 
+								 var marker = new kakao.maps.Marker({
+									 image :  new kakao.maps.MarkerImage(
+												"<c:url value='/images/corona_image/corona_patient.png'/>",
+										        new kakao.maps.Size(65, 65)),
+						            position: coords
+							     });
+								 
+								 var isSame = false;
+									for (var j = 0; j < markers.length; j++)
+									{
+										console.log(marker.getPosition().equals(markers[j].getPosition()));
+										if(marker.getPosition().equals(markers[j].getPosition()))
+										{
+											isSame = true;
+										}
+										
+									}
+									
+									if(!isSame)
+									{
+										marker.setMap(map);
+										console.log("중복이 아닌 마커",marker.getPosition());
+										markers.push(marker);
+										
+									}
+									else
+									{
+										console.log("중복 마커",marker.getPosition());
+									}
+								 
+							 }
+						});
 					});
-		            
-					//kakao.maps.event.addListener(marker, 'click', makeOverListener(map));
-					kakao.maps.event.addListener(marker, 'click', function(){
-						console.log("modal",item,i)
-						$('.body_title').html(item.name);
-						$('.content_addr').html(item.addr);
-						$('.content_stock').html(translateRemainStat(item.remain_stat));
-						$('.content_stock_count').html(translateRemainStatCount(item.remain_stat));
-						$('.content_type').html(translateType(item.type));
-						$('.content_stock_at').html('입고시간:'+item.stock_at);
-						$('.content_created_at').html('갱신시간:'+item.created_at);
-						$('#maskInfo-modal').modal('show');
-					});
-				    
-					var isSame = false;
-					for (var j = 0; j < markers.length; j++)
-					{
-						console.log(marker.getPosition().equals(markers[j].getPosition()));
-						//console.log(j,marker.getPosition().getLat() == markers[j].getLat(),marker.getPosition().getLat(),markers[j].getLat());
-						//if(marker.getPosition().getLat() == markers[j].getLat())
-						if(marker.getPosition().equals(markers[j].getPosition()))
-						{
-							isSame = true;
-						}
-						
-					}
+				},
+				error:function(e){
 					
-					if(!isSame)
-					{
-						console.log("마커배열길이",data.count,markers.length);
-						//if(data.count < markers.length)
-						marker.setMap(map);
-						console.log("중복이 아닌 마커",marker.getPosition());
-						markers.push(marker);
-						
-					}
-					else
-					{
-						console.log("중복 마커",marker.getPosition());
-						//marker.setMap(null);
-					}
-				});
-				
-				console.log("중복처리후 마커배열",markers);
-				console.log("맵",map);
-			}) */
-			
+				}
+			});
 		}
 		
 		function translateType(type)
@@ -522,11 +620,10 @@
 				//storesByGeo(lat,lon);
 				loadMapApi(lat,lon,apiStatus);
 				
-				var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-				message = '<div style="padding:5px;">현재위치</div>'; // 인포윈도우에 표시될 내용입니다
+				var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 		
 				// 마커와 인포윈도우를 표시합니다
-				displayMarker(locPosition, message);
+				displayMarker(locPosition);
 		
 			});
 		}

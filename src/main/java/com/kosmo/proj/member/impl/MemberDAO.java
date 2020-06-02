@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+
 import com.kosmo.proj.member.MemberDTO;
 import com.kosmo.proj.member.MemberService;
 
@@ -58,6 +59,12 @@ public class MemberDAO implements MemberService {
 		public int update(Map map) {
 			// TODO Auto-generated method stub
 			return 0;
+		}
+
+		@Override
+		public List<Map> selectList() {
+			// TODO Auto-generated method stub
+			return sqlMapper.selectList("covidMapSelect");
 		}
 
 }

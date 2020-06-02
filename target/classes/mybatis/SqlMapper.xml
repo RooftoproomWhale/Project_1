@@ -40,4 +40,7 @@
 	<delete id="memoDelete" parameterType="java.util.Map">
 		DELETE onememo WHERE no=#{no}
 	</delete>
+	<select id="covidMapSelect" resultType="java.util.Map">
+		SELECT * FROM corona_patient
+	</select>
 </mapper>
