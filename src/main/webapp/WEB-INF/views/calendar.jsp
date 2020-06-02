@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8' />
 
 <!-- 캘린더 필요 -->
 <link href='<c:url value="/calendar/core/main.css"/>' rel='stylesheet' />
 <link href='<c:url value="/calendar/daygrid/main.css"/>' rel='stylesheet' />
 <link href='<c:url value="/calendar/timegrid/main.css"/>' rel='stylesheet' />
+<<<<<<< HEAD
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- <link rel="stylesheet" href="/css/style.css"> -->
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+=======
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src='<c:url value="/calendar/core/main.js"/>'></script>
 <script src='<c:url value="/calendar/interaction/main.js"/>'></script>
@@ -73,6 +72,7 @@
   
         editable: true,
         eventLimit: true, // allow "more" link when too many events
+<<<<<<< HEAD
      events:  function(info, successCallback,failureCallback) {
            $.ajax({
               url: '<c:url value="/Calendar/View.do"/>',
@@ -105,13 +105,52 @@
                  }//eroorr
                  });//ajax
          
+=======
+        events:  function(info, successCallback,failureCallback) {
+  			$.ajax({
+  				url: '<c:url value="/Calendar/View.hst"/>',
+  				type: 'POST',
+  				dataType:'json',
+  				data:{
+  					start:moment(info.startStr).format('YYYY-MM-DD'),
+  					end:moment(info.endStr).format('YYYY-MM-DD'),
+  				},
+  				success: function (data) {
+  					
+  					var events=[];
+  					$.each(data,function(index,valeus){
+ 					console.log(data);
+  					console.log(data[0].title);
+  					
+  					events.push({
+  						title: data[0].title,
+  						start: data[0].start,
+  						end:data[0].end,
+  				
+  						});
+  					console.log(events);
+  					
+  					})
+  					successCallback(events);
+  				},
+  					errorr:function(status, request, error){
+  					alert("에러");
+  					}//eroorr
+  					});//ajax
+    	  
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
         } 
    
     });
    
     calendar.render();
   });
+<<<<<<< HEAD
      
+=======
+	
+	
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
   
 
 </script>
@@ -132,7 +171,11 @@
 .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
+<<<<<<< HEAD
             z-index: 1; /* Sit on top */
+=======
+            z-index: 9999; /* Sit on top */
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
             left: 0;
             top: 0;
             width: 100%; /* Full width */
@@ -166,12 +209,14 @@
         }
 
 </style>
-</head>
 
 
   <div id='calendar'>
   </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 <div id="createEventModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -207,6 +252,15 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
+<<<<<<< HEAD
    <script src='<c:url value="/js/bootstrap.min.js"/>'></script>
+=======
+	<script src='<c:url value="/js/bootstrap.min.js"/>'></script>
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 
+<<<<<<< HEAD
 </html>
+=======
+
+
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git

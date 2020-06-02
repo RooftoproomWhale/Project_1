@@ -30,10 +30,15 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+<<<<<<< HEAD
     
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) 및 js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
 <script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script>
+=======
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!--<script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script>-->
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 <script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/SmoothScroll.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/nivo-lightbox.js'/>"></script>
@@ -41,6 +46,7 @@
 <script type="text/javascript" src="<c:url value='/js/contact_me.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/main.js'/>"></script>
 	
+<<<<<<< HEAD
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.css'/>">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -52,6 +58,15 @@
 .dropdown-menu:hover .dropdown-toggle {background-color: #3e8e41;}
 </style>
 
+=======
+	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+	
+	
+<script>
+
+</script>
+	
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	<nav id="menu" class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -92,10 +107,19 @@
 				<c:if test="${!result }">
 					<li><a href="<c:url value='/User/Logout.hst'/>">Logout</a></li>
 					<li><a href="<c:url value='/Account/ToMypage.hst'/>">MyPage</a></li>
+<<<<<<< HEAD
 				</c:if>
 <!-- 				<li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
 			</ul>
 		</div>
+=======
+					</c:if>
+					
+					<li><a href="#FAQ" class="page-scroll" id="faq">FAQ</a></li>
+					
+				</ul>
+			</div>
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 		</div>
 	</nav>
 	</html>
