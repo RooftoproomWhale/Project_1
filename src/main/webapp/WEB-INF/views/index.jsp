@@ -45,7 +45,7 @@
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Duis sed dapibus leo nec ornare diam sed commodo nibh ante
 								facilisis bibendum.</p>
-							<a href="#services" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
+							<a href="<c:url value='/mypage/mypage.hst'/>" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
 						</div>
 					</div>
 				</div>
