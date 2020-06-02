@@ -34,11 +34,10 @@
     
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) 및 js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
-<script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!--<script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script>-->
+<%-- <script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script> --%>
 
 <script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
+<%-- <script type="text/javascript" src="<c:url value="/js/bootstrap.min.js"/>"></script> --%>
 <script type="text/javascript" src="<c:url value='/js/SmoothScroll.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/nivo-lightbox.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/jqBootstrapValidation.js'/>"></script>
@@ -50,14 +49,12 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.css'/>">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <%-- <link rel="stylesheet" type="text/css" href="<c:url value='/fonts/font-awesome/css/font-awesome.css'/>"> --%>
-<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+
 
 <style>
 .dropdown:hover .dropdown-menu {display: block;}
 .dropdown-menu:hover .dropdown-toggle {background-color: #3e8e41;}
 </style>
-
-	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 	
 <script>
 

@@ -24,7 +24,7 @@ public class AuthController {
 	private MemberService memberService;
 	
 	//로그인 폼으로 이동]
-	@RequestMapping("/User/Login.hst")
+	@RequestMapping("/User/Login.")
 	public String login() {
 		return "Login.tiles";
 	}///////////login
