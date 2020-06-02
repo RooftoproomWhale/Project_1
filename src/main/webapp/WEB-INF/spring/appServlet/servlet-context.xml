@@ -41,5 +41,7 @@
 			value="org.springframework.web.servlet.view.tiles3.TilesView" />
 
 	</beans:bean>
+	<!-- 리소스파일(.properties) 사용을 위한 설정 -->
+<!-- 	<context:property-placeholder location="classpath:properties/value.properties"/> -->
 	
 </beans:beans>

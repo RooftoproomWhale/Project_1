@@ -9,6 +9,7 @@
 	<!-- template에 최상위 페이지명 -->
 	<definition name="layouts" template="/WEB-INF/templates/Layouts.jsp">
 		<put-attribute name="top" value="/WEB-INF/templates/Top.jsp" />
+		<put-attribute name="stickyButton" value="/WEB-INF/templates/StickyButton.jsp" />
 		<!-- 내용은 동적으로 변하기때문에 value에 ""지정 -->
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/templates/Footer.jsp" />

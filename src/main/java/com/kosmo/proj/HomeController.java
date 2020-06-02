@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,11 +27,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kosmo.proj.member.MemberDTO;
+import com.kosmo.proj.member.MemberService;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
+	
+	@Resource(name = "memberService")
+	private MemberService memberService;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -38,14 +46,6 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate );
 
 		return "index.tiles";
 	}
@@ -56,11 +56,6 @@ public class HomeController {
 		return "index.tiles";
 	}
 	
-	@RequestMapping("/Home/covid.hst")
-	public String covid()
-	{
-		return "covid.tiles";
-	}
 	@RequestMapping(value = "/News",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String news(@RequestParam Map map)
@@ -140,5 +135,25 @@ public class HomeController {
         }
     }
 	
-
+//	마이바티스test
+	@RequestMapping("/Member/select.hst")
+	public String memberSelect(Map map, Model model)
+	{
+		MemberDTO dto = memberService.selectOne(map);
+		System.out.println(dto);
+		String name = dto.getMem_name();
+		String email = dto.getMem_email();
+		String pwd = dto.getMem_pwd();
+		String gender = dto.getGender();
+		int age = dto.getAge();
+		int tel = dto.getTel();
+		int height = dto.getHeight();
+		int weight = dto.getWeight();
+		model.addAttribute("name", name);
+		model.addAttribute("age", age);
+		System.out.println("이메일: "+email + " 비밀번호:"+pwd + " 이름: "+ name + " 성별: "+ gender +" 나이: "+ age +" 번호: "+ tel +" 키: "+ height +" 몸무게: "+ weight);
+		return "SignUp.tiles";
+	}
+	
+	
 }

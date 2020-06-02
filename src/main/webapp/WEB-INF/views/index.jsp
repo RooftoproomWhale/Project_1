@@ -45,7 +45,7 @@
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Duis sed dapibus leo nec ornare diam sed commodo nibh ante
 								facilisis bibendum.</p>
-							<a href="#features" class="btn btn-custom btn-lg page-scroll">LearnMore</a>
+							<a href="#services" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
 						</div>
 					</div>
 				</div>
@@ -144,7 +144,7 @@
 						</p>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Homespital/Map.hst'/>'">
 					<i class="fa fa-hospital-o"></i>
 					<div class="service-desc">
 						<h3>병원 찾기</h3>
@@ -154,10 +154,10 @@
 						</p>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Member/select.hst'/>'">
 					<i class="fa fa-medkit"></i>
 					<div class="service-desc">
-						<h3>복용 관리</h3>
+						<h3>복약 관리</h3>
 						<p>
 							알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서
 							먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서
@@ -166,10 +166,10 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='.hst'/>'">
 					<i class="fa fa-language"></i>
 					<div class="service-desc">
-						<h3></h3>
+						<h3>예방 정보</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 							Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante
 							facilisis bibendum dolor feugiat at.</p>
@@ -178,22 +178,31 @@
 				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Calendar/calendar.hst'/>'">
 					<i class="fa fa-calendar"></i>
 					<div class="service-desc">
-						<h3>달력</h3>
+						<h3>일정 관리</h3>
 						<p>
 							달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~
 						</p>
 					</div>
 				</div>
-				<a href="<c:url value='/Home/covid.hst'/>"><div class="col-md-4">
+
+				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='.hst'/>'">
 					<i class="fa fa-pie-chart"></i>
 					<div class="service-desc">
+						<h3>간편 검사</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante
+							facilisis bibendum dolor feugiat at.
+						</p>
+					</div>
+				</div>
 						<h3>코로나 추이</h3>
 						<p>코로나 추이@@</p>
 					</div>
-				</div></a>
+				</div>
 			</div>
-		</div>
-	</div>
+	
+	
+
 	<div class="row site-section" id="FAQ">
 		<div class="col-12 text-center" data-aos="fade">
 			<h2 class="section-title">Frequently Ask Questions</h2>
