@@ -136,10 +136,12 @@
      	<ul class="list-unstyled1" >
      
      		<li>이름&emsp; &emsp; 	<span>김길동</span></li>
+     		<li>E-mail &nbsp;  &nbsp; <span>정보없음</span></li>
+     		<li>성별&nbsp;  &ensp;&emsp;   <span>남성</span></li>
+     		<li>연락처&nbsp;  &ensp;&emsp;   <span>010-1234-5678</span></li>
+     		<li>나이&nbsp;  &ensp;&emsp;   <span>30</span></li>
      		<li>키&nbsp;  &emsp;&emsp; &ensp;  <span>180cm</span></li>
      		<li>몸무게  &nbsp; &ensp;&emsp;   <span>72kg</span></li>
-     		<li>생년월일 &nbsp;  &nbsp; <span>정보없음</span></li>
-     		<li>연락처&nbsp;  &ensp;&emsp;   <span>010-1234-5678</span></li>
      	</ul>
      </div>
    
@@ -157,9 +159,8 @@
           <div class='content-one col-md-5'>
    	<h3 id="main">내 질병 관리</h3>
      	<ul class="list-unstyled1" style="height: 100%">
-     	<li>가족력 &nbsp; &ensp;&emsp; <span>당뇨병,고혈압</span></li>
      		<li>과거력  &nbsp; &ensp;&emsp;   <span>수술이력, 천식</span></li>
-     		<li>현재 질병 &nbsp;  &nbsp; <span>정보없음</span></li>
+     		<li>만성 질병 &nbsp;  &nbsp; <span>정보없음</span></li>
      	</ul>
      </div>
       <div class='content-to col-md-offset-1 col-md-5' >
@@ -184,7 +185,7 @@
 							<li><a href="" ><span>4</span> [회원탈퇴] 이메일ID 회원탈퇴를 하고 싶어요.</a></li>
 							<li><a href="" ><span>5</span> [내정보] 마이페이지 시바꺼.</a></li>
 						</ol>
-						<span class="moreBt"><a href="" target="_blank" title="내정보 도움말 더보기"><img src="https://ssl.nx.com/S2/membership/2011/button/bt_more.gif" width="36" height="10" alt="내정보 도움말 더보기" /></a></span>
+<!-- 						<span class="moreBt"><a href="" target="_blank" title="내정보 도움말 더보기"><img src="https://ssl.nx.com/S2/membership/2011/button/bt_more.gif" width="36" height="10" alt="내정보 도움말 더보기" /></a></span> -->
 					</div>
 				</li>
 				

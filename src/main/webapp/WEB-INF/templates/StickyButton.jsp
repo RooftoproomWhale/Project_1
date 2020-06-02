@@ -36,29 +36,32 @@
 </style>
 <body>
 	<div class="sticky-btn">
- 	<span class="fa-stack fa-3x" data-toggle="modal" data-target="#large-modal">
+ 	<span class="fa-stack fa-3x" data-toggle="modal" data-target="#basic-modal">
 <%--    		<i class="fa fa-circle fa-stack-2x" style=" color: #ff9900; cursor:pointer" onclick="location.href='<c:url value="/Home/ToHomePage.hst"/>'"></i>  --%>
 <%--   		<i class="fa fa-user-md fa-stack-1x fa-inverse" style=" color: #ffffff; cursor:pointer" onclick="location.href='<c:url value="/Home/ToHomePage.hst"/>'"></i>  --%>
 		<i id="fa1" class="fa fa-circle fa-stack-2x" style="color: #ff9900;"></i>
    		<i id="fa2" class="fa fa-user-md fa-stack-1x fa-inverse" style="color: #ffffff;"></i>
 	</span>
-	<!--  큰 모달창 -->
-    	<div class="modal fade" id="large-modal">
-		  <div class="modal-dialog modal-lg">
+	</div>
+	<div class="modal fade" id="basic-modal">
+		  <div class="modal-dialog">
 		    <div class="modal-content">
-		    	<div class="modal-body">
-		    		<button class="close" data-dismiss="modal">
-		    			<span>&times;</span>
-		    		</button>
-		    		<h2>모달 컨텐츠 영역입니다</h2>
-		        	<p>안녕하세요<br/>큰 모달창입니다<br/>재미 있네요</p>
-		    	</div>
+		      <div class="modal-header">
+		        <button class="close" data-dismiss="modal" >
+		        	<span>&times;</span>
+		        </button>
+		        <h4 class="modal-title" >기본 모달창</h4>
+		      </div>
+		      <div class="modal-body">
+		        <h2>모달 바디 영역입니다</h2>
+		        <p>안녕하세요<br/>기본 모달창입니다<br/>재미 있네요</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button class="btn btn-info" data-dismiss="modal">닫기</button>
+		      </div>
 		    </div>
 		  </div>
 		</div>
-		<!-- 큰 모달창 끝 -->
-	</div>
-	
 </body>
 </html>
 

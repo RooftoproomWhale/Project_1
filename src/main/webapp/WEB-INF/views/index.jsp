@@ -64,7 +64,7 @@
 					<div class="img-thumbnail" data-u="slides"
 						style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 						<div data-p="680">
-							<a href="/corona/Corona_Status.hst"><img data-u="image"
+							<a href="/Covid/status.hst"><img data-u="image"
 								src="<c:url value="/img/1.jpg"/>" /></a>
 						</div>
 						<div data-p="680">
@@ -131,42 +131,41 @@
 		<div class="container">
 			<div class="section-title">
 				<h2>Our Services</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed dapibus leonec.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit duis
+					sed dapibus leonec.</p>
 			</div>
 			<div class="row">
-				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Homespital/Map.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer"
+					onclick="location.href='<c:url value='/Homespital/Map.hst'/>'">
 					<i class="fa fa-plus-square"></i>
 					<div class="service-desc">
 						<h3>약국 찾기</h3>
-						<p>
-							알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서
-							찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서
-						</p>
+						<p>알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서
+							찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서</p>
 					</div>
 				</div>
-				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Homespital/Map.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer"
+					onclick="location.href='<c:url value='/Homespital/Map.hst'/>'">
 					<i class="fa fa-hospital-o"></i>
 					<div class="service-desc">
 						<h3>병원 찾기</h3>
-						<p>	
-							알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서
-							찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서
-						</p>
+						<p>알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서
+							찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서</p>
 					</div>
 				</div>
-				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Member/select.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer"
+					onclick="location.href='<c:url value='/Member/select.hst'/>'">
 					<i class="fa fa-medkit"></i>
 					<div class="service-desc">
 						<h3>복약 관리</h3>
-						<p>
-							알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서
-							먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서
-						</p>
+						<p>알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서
+							먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서</p>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer"
+					onclick="location.href='<c:url value='.hst'/>'">
 					<i class="fa fa-language"></i>
 					<div class="service-desc">
 						<h3>예방 정보</h3>
@@ -175,7 +174,8 @@
 							facilisis bibendum dolor feugiat at.</p>
 					</div>
 				</div>
-				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='/Calendar/calendar.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer"
+					onclick="location.href='<c:url value='/Calendar/calendar.hst'/>'">
 					<i class="fa fa-calendar"></i>
 					<div class="service-desc">
 						<h3>일정 관리</h3>
@@ -185,23 +185,20 @@
 					</div>
 				</div>
 
-				<div class="col-md-4" style="cursor:pointer" onclick="location.href='<c:url value='.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer"
+					onclick="location.href='<c:url value=''/>'">
 					<i class="fa fa-pie-chart"></i>
 					<div class="service-desc">
 						<h3>간편 검사</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 							Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante
-							facilisis bibendum dolor feugiat at.
-						</p>
-					</div>
-				</div>
-						<h3>코로나 추이</h3>
-						<p>코로나 추이@@</p>
+							facilisis bibendum dolor feugiat at.</p>
 					</div>
 				</div>
 			</div>
-	
-	
+		</div>
+	</div>
+
 
 	<div class="row site-section" id="FAQ">
 		<div class="col-12 text-center" data-aos="fade">
