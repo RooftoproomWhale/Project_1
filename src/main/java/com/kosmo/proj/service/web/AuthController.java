@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosmo.proj.member.MemberService;
 
 @Controller
-@RequestMapping("/OneMemo")
 public class AuthController {
 	
 	//서비스 주입]
