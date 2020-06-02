@@ -96,11 +96,11 @@ caption{font-size: 15px;font-weight: bold;}
       <li class="sidebar-brand">
         <a href="#">마이페이지</a>
       </li>
-     <li><a href="<c:url value='/mypage.hst'/>">개인정보</a></li>
+     <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
       <li><a href="#">복약 관리</a></li>
       <li><a href="#">진료 예약 현황</a></li>
       <li><a href="#">내 질병 관리</a></li>
-    <li><a href="<c:url value='/unmember.hst'/>">회원탈퇴</a></li>
+    <li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
     </ul>
   </div>
   <div class="main row" style="margin-top: 82px;padding-bottom:15px;">
