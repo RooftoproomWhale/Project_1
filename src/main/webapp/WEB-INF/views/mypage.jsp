@@ -119,14 +119,14 @@
       <li class="sidebar-brand">
         <a href="#">마이페이지</a>
       </li>
-      <li><a href="#">개인정보</a></li>
+      <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
       <li><a href="#">복약 관리</a></li>
       <li><a href="#">진료 예약 현황</a></li>
       <li><a href="#">내 질병 관리</a></li>
-      <li><a href="#">회원탈퇴</a></li>
+      <li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
     </ul>
   </div>
-<div class="main row" style="margin-top: 82px;padding-bottom:15px;background-color: #F3F3F3;">
+<div class="main row" style="margin-top: 82px;padding-bottom:10px;background-color: #F3F3F3;">
   <!-- 첫번째 줄 -->
 <div class="col-md-12" style="background-color: #C2E2E8; height: 54.6px;bottom: 3px"></div>
 <div class="page content col-md-8" style="padding-right: 50px;left:60px;top:60px">
@@ -192,21 +192,20 @@
 		</div>
 		<div class='col-md-3' >
      	<ul class="list-unstyled4" style="height: 100%">
-     	<li><input class="btn btn-info" style="width: 100%;height: 50%" type="button" value='회원정보 변경' onclick=""></li>
-     		<li><input class="btn btn-info" style="width: 100%;height:50%;margin-top:5px" type="button" value="비밀번호 변경" onclick=""/></li>
+     	<li><input class="btn btn-info" style="width: 100%;height: 50%" type="button" value='회원정보 변경' onclick="location.href='<c:url value='/mypage/ChangeMember.hst'/>'"/></li>
+     		<li><input class="btn btn-info" style="width: 100%;height:50%;margin-top:5px" type="button" value="비밀번호 변경" onclick="location.href='<c:url value='/mypage/ChangePassword.hst'/>'"/></li>
      	</ul>
      </div>
 </div>
 <!-- 오른쪽 사이드 -->
  <div class="page con2 col-md-3" style="padding-top: 60px">
    <img id="app" style="width: 300px;height: 600px" alt="앱사진" src="<c:url value='/img/1111.png'/>">
-   <input id="appdown"class="btn btn-primary" type="button" value="앱 다운로드" onclick=""/>
+   <input id="appdown"class="btn btn-primary" type="button" value="앱 다운로드" onclick="location.href='https://play.google.com/store/search?q=%ED%99%88%EC%8A%A4%ED%94%BC%ED%83%88'"/>
  </div>
   </div>
 </div>
+ 
   
-  
-
     
 
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
