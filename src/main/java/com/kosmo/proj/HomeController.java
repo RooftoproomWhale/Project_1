@@ -135,6 +135,12 @@ public class HomeController {
         }
     }
 	
+	@RequestMapping("/Covid/status.hst")
+	public String covid()
+	{
+		return "covid.tiles";
+	}
+	
 //	마이바티스test
 	@RequestMapping("/Member/select.hst")
 	public String memberSelect(Map map, Model model)

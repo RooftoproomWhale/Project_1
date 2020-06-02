@@ -202,21 +202,21 @@
 		
 </script>
 	<!-- 가로배치용 -->
-	<div class="col-lg-5 col-lg-offset-1" style="padding-top: 100px">
+	<div class="col-lg-5 col-lg-offset-2" style="padding-top: 100px; padding-bottom: 100px">
 <div class="row">	
-	<div id="chartContainer3" style="height: 300px; width: 500px; "></div>
+	<div id="chartContainer3" style="height: 300px; width: 500px; padding-bottom: 50px"></div>
 </div>	
 <div class="row">	
-	<div id="chartContainer2" style="height: 300px; width: 500px;"></div>
+	<div id="chartContainer2" style="height: 300px; width: 500px; padding: 50px"></div>
 </div>	
 	
 	</div>
-<div class="col-lg-5 " style="padding-top: 100px">
+<div class="col-lg-5 " style="padding-top: 100px; padding-bottom: 100px">
 <div class="row">	
-	<div id="chartContainer1" style="height: 300px; width: 500px; "></div>
+	<div id="chartContainer1" style="height: 300px; width: 500px;"></div>
 </div>	
-<div class="row">	
-	<div id="chartContainer4" style="height: 300px; width: 500px; "></div>
+<div class="row" >
+	<div id="chartContainer4" style="height: 300px; width: 500px; padding: 50px""></div>
 </div>	
 
 </div>
