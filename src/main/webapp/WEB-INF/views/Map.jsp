@@ -19,8 +19,9 @@
 	.body_title {font-size: 24px;font-weight: bold;}
 	.load_wrap {position: absolute; top: 50%; left: 50%; z-index: 1231234;transform: translate(-50%, -50%);display: flex;flex-direction: column;}
 	.search {position: absolute;top:120px;left: 16px;z-index: 2;}
-	.current {position: absolute;bottom: 30px;right: 10px;z-index: 123123;}
-	.refresh_map{position: absolute;bottom: 5px;right: 10px;z-index: 123123;}
+	.current {position: absolute;bottom: 30px;right: 10px;z-index: 2;}
+	.refresh_map{position: absolute;bottom: 5px;right: 10px;z-index: 2;}
+	.menu_wrap{left: 13px;bottom: 19px;text-align: center;position: absolute;z-index: 2;}
 </style>
 <div class="map_wrap">
 	<div class="load_wrap">
@@ -35,6 +36,12 @@
 	</div>
 	<div class="refresh_map">
 		<button type="button" onclick="refreshMap()">갱신</button>
+	</div>
+	<div class="menu_wrap">
+		<button type="button" onclick="changeApi(0)">병원</button>
+		<button type="button" onclick="changeApi(1)">약국</button>
+		<button type="button" onclick="changeApi(2)">공적마스크</button>
+		<button type="button" onclick="changeApi(3)">코로나 확진자 동선</button>
 	</div>
 	<div id="map" style="width: 100%; height: 100%;position: relative;overflow: hidden;"></div>
 </div>
@@ -85,6 +92,8 @@
 	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 	var mapTypeControl = new kakao.maps.MapTypeControl();
 	
+	var apiStatus = 2; // 0:병원, 1: 약국, 2: 공적마스크, 3: 확진자 동선
+	
 	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
 	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
 	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
@@ -118,7 +127,8 @@
 	    console.log("지도레벨(드래그)",level);
 	    console.log("위치(드래그)",latlng);
 	    console.log("바운드(드래그)",bound);
-	    storesByGeo(latlng.getLat(),latlng.getLng());
+	    //storesByGeo(latlng.getLat(),latlng.getLng());
+	    loadMapApi(latlng.getLat(),latlng.getLng(),apiStatus);
 	});
 	
 	kakao.maps.event.addListener(map, 'zoom_changed', function() {
@@ -135,7 +145,8 @@
 	    console.log("지도레벨(드래그)",level);
 	    console.log("위치(드래그)",latlng);
 	    console.log("바운드(드래그)",bound);
-	    storesByGeo(latlng.getLat(),latlng.getLng());
+	    //storesByGeo(latlng.getLat(),latlng.getLng());
+	    loadMapApi(latlng.getLat(),latlng.getLng(),apiStatus);
 	});
 	
 	// 마커 클러스터러를 생성합니다 
@@ -191,10 +202,143 @@
 				clusterer.addMarkers(markers);
 			});
 		} */
+		function loadMapApi(latitude,longitude,status)
+		{
+			console.log('API 상태',status);
+			switch (status) {
+			case 0:
+				loadHospital(latitude,longitude);
+				break;
+			case 1:
+				loadPharmacy(latitude,longitude);
+				break;
+			case 2:
+				storesByGeo(latitude,longitude);
+				break;
+			default:
+				
+				break;
+			}
+		}
+		function loadHospital(latitude,longitude)
+		{
+			$.ajax({
+				url:"<c:url value='/Homespital/Map/Hospital.hst'/>",
+				type:'get',
+				datatype:'json',
+				data:{"lat":latitude,"lng":longitude},
+				beforeSend: function () {
+					console.log("beforeSend");
+					FunLoadingBarStart();
+				},
+				complete: function () {
+					console.log("complete");
+					FunLoadingBarEnd();
+				},
+				success:function(data){
+					var jsonData = JSON.parse(data);
+					console.log("연결성공", jsonData.response.body,typeof(jsonData));
+				},
+				error:function(e){
+					
+				}
+			});
+		}
+		function loadPharmacy(latitude,longitude)
+		{
+			$.ajax({
+				url:"<c:url value='/Homespital/Map/Pharmacy.hst'/>",
+				type:'get',
+				datatype:'json',
+				data:{"lat":latitude,"lng":longitude},
+				beforeSend: function () {
+					console.log("beforeSend");
+					FunLoadingBarStart();
+				},
+				complete: function () {
+					console.log("complete");
+					FunLoadingBarEnd();
+				},
+				success:function(data){
+					var jsonData = JSON.parse(data);
+					console.log("연결성공", jsonData.response.body,typeof(jsonData));
+				},
+				error:function(e){
+					
+				}
+			});
+		}
 		function storesByGeo(latitude,longitude)
 		{
-			
-			$.get("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+latitude+"&lng="+longitude,function(data){
+			$.ajax({
+				url:"<c:url value='/Homespital/Map/Mask.hst'/>",
+				type:'get',
+				datatype:'json',
+				data:{"lat":latitude,"lng":longitude},
+				beforeSend: function () {
+					console.log("beforeSend");
+					FunLoadingBarStart();
+				},
+				complete: function () {
+					console.log("complete");
+					FunLoadingBarEnd();
+				},
+				success:function(data){
+					var jsonData = JSON.parse(data)
+					console.log("연결성공", jsonData,typeof(jsonData));
+					$.each(jsonData.stores, function(i, item) {
+						var marker = new kakao.maps.Marker({
+							//map : map,
+							position : new kakao.maps.LatLng(item.lat, item.lng)
+						});
+			            
+						//kakao.maps.event.addListener(marker, 'click', makeOverListener(map));
+						kakao.maps.event.addListener(marker, 'click', function(){
+							console.log("modal",item,i)
+							$('.body_title').html(item.name);
+							$('.content_addr').html(item.addr);
+							$('.content_stock').html(translateRemainStat(item.remain_stat));
+							$('.content_stock_count').html(translateRemainStatCount(item.remain_stat));
+							$('.content_type').html(translateType(item.type));
+							$('.content_stock_at').html('입고시간:'+item.stock_at);
+							$('.content_created_at').html('갱신시간:'+item.created_at);
+							$('#maskInfo-modal').modal('show');
+						});
+					    
+						var isSame = false;
+						for (var j = 0; j < markers.length; j++)
+						{
+							console.log(marker.getPosition().equals(markers[j].getPosition()));
+							//console.log(j,marker.getPosition().getLat() == markers[j].getLat(),marker.getPosition().getLat(),markers[j].getLat());
+							//if(marker.getPosition().getLat() == markers[j].getLat())
+							if(marker.getPosition().equals(markers[j].getPosition()))
+							{
+								isSame = true;
+							}
+							
+						}
+						
+						if(!isSame)
+						{
+							console.log("마커배열길이",jsonData.count,markers.length);
+							//if(data.count < markers.length)
+							marker.setMap(map);
+							console.log("중복이 아닌 마커",marker.getPosition());
+							markers.push(marker);
+							
+						}
+						else
+						{
+							console.log("중복 마커",marker.getPosition());
+							//marker.setMap(null);
+						}
+					});
+				},
+				error:function(e){
+					
+				}
+			});
+			/* $.get("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+latitude+"&lng="+longitude,function(data){
 				console.log(data);
 				console.log(data.stores[0].lat);
 				
@@ -249,10 +393,7 @@
 				
 				console.log("중복처리후 마커배열",markers);
 				console.log("맵",map);
-			})
-			.done(function(){ console.log("요청 성공시 호출") })
-			.fail(function(){ console.log("요청 실패시 호출") })
-			.always(function(){ console.log("성공 실패 상관없이 호출") })
+			}) */
 			
 		}
 		
@@ -348,11 +489,18 @@
 		
 			});
 		}
+		function changeApi(status)
+		{
+			apiStatus = status;
+			console.log('상태',apiStatus);
+			refreshMap();
+		}
 		function refreshMap()
 		{
 			removeMarker();
 			var latlng = map.getCenter(); 
-			storesByGeo(latlng.getLat(),latlng.getLng());
+			//storesByGeo(latlng.getLat(),latlng.getLng());
+			loadMapApi(latlng.getLat(),latlng.getLng(),apiStatus);
 		}
 		function removeMarker()
 		{
@@ -363,16 +511,12 @@
 			markers = [];
 		}
 		function FunLoadingBarStart() {
-			var backHeight = $(document).height(); //뒷 배경의 상하 폭
-			var backWidth = window.document.body.clientWidth; //뒷 배경의 좌우 폭
-			
-			$('#load_wrap').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0.3' });
-			$('#load_wrap').show();
-			$('#load_img').show();
+			console.log($('.load_wrap'),$('.load_img'));
+			$('.load_img').show();
 		}
 		function FunLoadingBarEnd() {
-			$('#load_wrap, #load_img').hide();
-			$('#load_wrap, #load_img').remove();
+			$('.load_img').hide();
+			
 		}
 	}
 
