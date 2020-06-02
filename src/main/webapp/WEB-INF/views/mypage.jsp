@@ -166,7 +166,7 @@
       <h3 id="main">병원,약국 찾기</h3>
      	<ul class="list-unstyled4" style="height: 100%">
      		<li><input class="btn btn-info" style="width: 100%" type="button" value='병원 찾기' onclick=""></li>
-     		<li><input class="btn btn-info" style="width: 100%;margin-top:3px" type="button" value="약국 찾기" onclick="location.href='<c:url value='/Map.hst'/>'"/></li>
+     		<li><input class="btn btn-info" style="width: 100%;margin-top:3px" type="button" value="약국 찾기" onclick="location.href='<c:url value='/Homespital/Map.hst'/>'"/></li>
      	</ul>
      </div>
      <!-- 3번째 줄 -->

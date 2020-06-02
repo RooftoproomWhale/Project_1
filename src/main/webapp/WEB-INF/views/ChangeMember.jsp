@@ -166,6 +166,9 @@ caption {
 <!-- 사이드 -->
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
+		  <li class="sidebar-brand">
+        <a href="#">마이페이지</a>
+      </li>
 		 <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
       <li><a href="#">복약 관리</a></li>
       <li><a href="#">진료 예약 현황</a></li>
@@ -225,7 +228,7 @@ caption {
 							<td colspan="3" class="phone">
 
 								<div class="input-inside-table">
-									<div class="input-selectbox" style="width: 22px">
+							
 										<select name="hand_no1" id="hand_no1" title="휴대폰번호 앞자리"
 											class="input-width-small" required="required">
 											<option value="">선택</option>
@@ -235,7 +238,7 @@ caption {
 											<option value="017">017</option>
 											<option value="019">019</option>
 										</select>
-									</div>
+								
 
 									<span class="input-sign">-</span> <input type="text"
 										name="hand_no2" id="hand_no2"
@@ -247,22 +250,8 @@ caption {
 										class="input-text input-width-small" title="휴대폰번호 끝자리"
 										role="textbox" required="required" onkeyup="number(this);"
 										maxlength="4" value="5678" />
-									<!--
-												<div class="input-checkbox-group">
-													<label class="input-checkbox">
-														<input type="checkbox" name="sms_rec_yn" id="sms_rec_yn" role="checkbox" onclick="goSmsPhoneYn();" value="Y" />
-														<i aria-hidden="true"></i><span class="label-text">문자(SMS) 수신동의</span>
-
-														<a href="#tooltip01" class="iconset icon-help" aria-describedby="tooltip01"><span class="visually-hidden">help</span></a>
-														<div id="tooltip01" class="tooltip" role="tootip"></div>
-													</label>
-
-													<label class="input-checkbox">
-														<input type="hidden" name="smart_phone_yn" id="smart_phone_yn" value="N"/>
-														<input type="checkbox" name="smartPhoneYn" id="smartPhoneYn" role="checkbox" value="Y" onclick="goSmartPhoneYn();" />
-														<i aria-hidden="true"></i><span class="label-text">스마트폰여부</span>
-													</label>
-												</div> -->
+								
+								
 
 									<div class="option-check">
 										<div class="input-checkbox-group ml0 is-tool-tip"
@@ -292,7 +281,7 @@ caption {
 										<p class="tip-txt">※ 예약 관련정보는 수신동의 여부와 관계없이 발송됩니다.</p>
 									</div>
 
-									<!-- 문자 : , 스마트 :  -->
+								
 
 								</div>
 
@@ -309,12 +298,7 @@ caption {
 										class="input-sign">@</span>
 
 									<div class="input-selectbox">
-										<!--<select name="" class="input-width-normal" title="이메일 선택" required="required">
-														<option value="">이메일을 선택하세요</option>
-														<option value="">gmail.com</option>
-														<option value="">naver.com</option>
-														<option value="">daum.net</option>
-													</select>-->
+								
 										<input type="hidden" name="email2" value="daum.net" /><select
 											name="email2SL"
 											onchange="if (this.form.email2SL.selectedIndex==19) { this.form.email2Text.disabled=false;this.form.email2Text.focus();this.form.email2Text.value='';} else { this.form.email2Text.disabled=true;this.form.email2.value=this.form.email2SL[this.form.email2SL.selectedIndex].value;this.form.email2Text.value=this.form.email2SL[this.form.email2SL.selectedIndex].value;}"
@@ -345,19 +329,6 @@ caption {
 											class="input-text input-width-small07" title="이메일 뒷부분" />
 
 									</div>
-									<!--
-												<div class="input-checkbox-group">
-													<label class="input-checkbox">
-														<input type="hidden" name="email_rec_yn" id="email_rec_yn" value=""/>
-
-														<input type="checkbox" name="emailChkYn" id="emailChkYn" onclick="goEmailAgree();" role="checkbox" value="Y" />
-														<i aria-hidden="true"></i><span class="label-text">이메일수신동의</span>
-
-														<a href="#tooltip02" class="iconset icon-help" aria-describedby="tooltip02"><span class="visually-hidden">help</span></a>
-														<div id="tooltip02" class="tooltip" role="tootip"></div>
-													</label>
-												</div>
- -->
 									<div class="option-check is-tool-tip">
 										<div class="input-checkbox-group ml0" style="display: none">
 											<label class="input-checkbox input-checkbox-type02">
@@ -403,7 +374,12 @@ caption {
 					</tbody>
 				</table>
 			</div>
-
+		<div class="board-util">
+						<div class="board-util-right">
+							<button type="button" class="btn btn-primary" role="button" onclick="Form();"><span class="button-text">확인</span></button>
+							<button type="button" class="btn" role="button" onclick="back();"><span class="button-text">취소</span></button>
+						</div>
+					</div>	
 			<div class="board-util board-util02">
 				<div class="board-util-left">
 					<span class="board-util-text color-blue">※ 고객님께서 입력해주신 정보를
@@ -427,7 +403,7 @@ caption {
 
 	function Form() {
 
-		var userPasswd = $('#userPasswd');
+	/* 	var userPasswd = $('#userPasswd');
 		if ($.trim(userPasswd.val()).length < 1
 				|| $.trim(userPasswd.val()) == '') {
 			alert('현재 비밀번호를 입력해 주세요.');
@@ -456,7 +432,7 @@ caption {
 
 		if (confirm('정말로 변경하시겠습니까?')) {
 			$('form[name=passForm]').submit();
-		}
+		} */
 	}
 </script>
 
