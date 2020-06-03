@@ -136,12 +136,10 @@
      	<ul class="list-unstyled1" >
      
      		<li>이름&emsp; &emsp; 	<span>김길동</span></li>
-     		<li>E-mail &nbsp;  &nbsp; <span>정보없음</span></li>
      		<li>성별&nbsp;  &ensp;&emsp;   <span>남성</span></li>
      		<li>연락처&nbsp;  &ensp;&emsp;   <span>010-1234-5678</span></li>
+     		<li>E-mail &nbsp;  &nbsp; <span>정보없음</span></li>
      		<li>나이&nbsp;  &ensp;&emsp;   <span>30</span></li>
-     		<li>키&nbsp;  &emsp;&emsp; &ensp;  <span>180cm</span></li>
-     		<li>몸무게  &nbsp; &ensp;&emsp;   <span>72kg</span></li>
      	</ul>
      </div>
    
@@ -157,8 +155,11 @@
      
        <!-- 2번째 줄 -->
           <div class='content-one col-md-5'>
-   	<h3 id="main">내 질병 관리</h3>
+   	<h3 id="main">신체정보</h3>
      	<ul class="list-unstyled1" style="height: 100%">
+     		<li>키&nbsp; &emsp; &emsp;&emsp; &ensp;  <span>180cm</span></li>
+     		<li>몸무게  &nbsp; &nbsp; &ensp;&emsp;   <span>72kg</span></li>
+     		<li>BMI  &nbsp;  &emsp; &ensp;&emsp;   <span id=bmi></span></li>
      		<li>과거력  &nbsp; &ensp;&emsp;   <span>수술이력, 천식</span></li>
      		<li>만성 질병 &nbsp;  &nbsp; <span>정보없음</span></li>
      	</ul>
@@ -206,9 +207,14 @@
   </div>
 </div>
  
-  
+  <script>
+  $(function() {
+	var bmi = 72/(180*180)*10000;
+	
+  $('#bmi').html(bmi.toFixed(2));
     
-
+    });
+</script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
     
