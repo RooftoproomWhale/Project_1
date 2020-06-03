@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosmo.proj.member.MemberService;
 
 @Controller
-@RequestMapping("/OneMemo")
 public class AuthController {
 	
 	//서비스 주입]
@@ -24,7 +23,7 @@ public class AuthController {
 	private MemberService memberService;
 	
 	//로그인 폼으로 이동]
-	@RequestMapping("/User/Login.")
+	@RequestMapping("/User/Login.hst")
 	public String login() {
 		return "Login.tiles";
 	}///////////login
