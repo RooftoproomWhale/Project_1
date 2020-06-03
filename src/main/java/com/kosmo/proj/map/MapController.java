@@ -8,8 +8,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.xml.bind.annotation.XmlRegistry;
 
 import org.json.JSONObject;
@@ -21,8 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kosmo.proj.member.MemberService;
+
 @Controller
 public class MapController {
+	
+	@Resource(name = "memberService")
+	private MemberService memberService;
+	
 	
 	@RequestMapping("/Homespital/Map.hst")
 	public String map()
@@ -63,7 +71,9 @@ public class MapController {
 
 		String apiUrl = "http://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyLcinfoInqire?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D"
 				+ "&WGS84_LON=" + longitude
-				+ "&WGS84_LAT=" + latitude;
+				+ "&WGS84_LAT=" + latitude
+				+ "&pageNo=1"
+				+ "&numOfRows=20";
 		
 		System.out.println(apiUrl);
 		
@@ -74,6 +84,21 @@ public class MapController {
         System.out.println(jsonObj);
         
 		return jsonObj.toString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/Covid.hst",produces = "text/html; charset=UTF-8")
+	public String covidMap()
+	{
+		List<Map> list = memberService.selectList();
+	
+		System.out.println(JSONArray.toJSONString(list));
+		
+		for(Map comment:list)
+			comment.put("CORONA_DATE",comment.get("CORONA_DATE").toString());
+		
+		//단,List에 저장된 객체는 반드시 Map이어야 한다
+		return JSONArray.toJSONString(list);
 	}
 
 	@ResponseBody

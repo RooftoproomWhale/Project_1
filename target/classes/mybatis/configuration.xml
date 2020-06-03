@@ -10,6 +10,7 @@
 	<typeAliases>
 		
 		<typeAlias alias="MemberDTO" type="com.kosmo.proj.member.MemberDTO"/>	
+
 		<!--MemoCommentDTO는 별칭 불필요. SELECT결과를 Map에 저장하기때문에  -->
 	</typeAliases>
 	
