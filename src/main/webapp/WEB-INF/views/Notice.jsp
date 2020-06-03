@@ -14,7 +14,7 @@
 		</div>
 		</c:if>
 	</div>
-	<div class="row" style="border-radius: 0 0 0 0 ">
+	<div class="row" style="border-radius: 0 0 0 0;border-top:2px; border-left-color: #fff;border-right-color: #fff;">
 		<div class="col-md-12">
 			<table class="table table-bordered table-hover text-center">
 				<tr>
