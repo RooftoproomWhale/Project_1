@@ -19,5 +19,7 @@ public interface MemberService {
 		int delete(Map map);
 		int insert(Map map);
 		int update(Map map);
+		
+		List<Map> selectList();
 
 }

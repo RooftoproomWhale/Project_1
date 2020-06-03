@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+
 import com.kosmo.proj.member.MemberDTO;
 import com.kosmo.proj.member.MemberService;
 
@@ -56,6 +57,12 @@ public class MemberServiceImpl implements MemberService{
 	public int update(Map map) {
 		// TODO Auto-generated method stub
 		return dao.update(map);
+	}
+
+	@Override
+	public List<Map> selectList() {
+		// TODO Auto-generated method stub
+		return dao.selectList();
 	}
 
 }
