@@ -6,12 +6,7 @@
 width: 250px;
 height: 300px;
 }
-div img {
 
-	width: 250px; 
-	height: 200px;
-
-}
 #banner{
 
 padding-top:100px;
@@ -46,7 +41,7 @@ border: 1px solid blue;
 	</a>
 
 <div class="container">
-	<div class="row">
+	<div class="row" >
 		<div class="col-md-8 col-md-offset-2" style="padding-top:50px;"id="basic1">
 			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
 			<div class="thumbnail col-md-4">
@@ -74,10 +69,10 @@ border: 1px solid blue;
 		</a>
 		</div>
 		
-		<div class="row" style="position: relative;left: 10px;">
+		<div class="row" >
 			<div class="col-md-8 col-md-offset-2"id="basic2" >
 		<a href="<c:url value="/"/>">
-		<div class="thumbnail col-md-4" style="">
+		<div class="thumbnail col-md-4" style="position: relative;left: 10px;">
 				<img src="<c:url value="/img2/대장.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
 					<h3>대장 질환</h3>
@@ -85,7 +80,7 @@ border: 1px solid blue;
 			</div><!-- 썸네일 -->
 			</a>
 			<a href="<c:url value="/"/>">
-			<div class="thumbnail col-md-4">
+			<div class="thumbnail col-md-4" style="position: relative;left: 10px;">
 				<img src="<c:url value="/img2/비만.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
 					<h3>비만/과체중</h3>
@@ -93,7 +88,7 @@ border: 1px solid blue;
 			</div>
 			</a>
 			<a href="<c:url value="/"/>">
-			<div class="thumbnail col-md-4">
+			<div class="thumbnail col-md-4" style="position: relative;left: 10px;">
 				<img src="<c:url value="/img2/피부.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
 					<h3>피부</h3>
