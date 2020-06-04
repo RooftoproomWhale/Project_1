@@ -171,8 +171,8 @@
      	</ul>
      </div>
      <!-- 3번째 줄 -->
-     <div class="homeFaqSec col-md-7">
-			<h3><img src="https://ssl.nx.com/S2/membership/2011/home/stit_faq.gif" width="77" height="14" alt="자주묻는질문"/></h3>
+     <div class="homeFaqSec col-md-5">
+			<h3><img src="https://ssl.nx.com/S2/membership/2011/home/stit_faq.gif"  alt="자주묻는질문"/></h3>
 			<ul class="faqBest5">
 				<li class="faqList1 on">
 					<h4><a href="#" name="faqService">내정보</a></h4>
