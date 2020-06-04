@@ -5,7 +5,7 @@
 <!doctype html>
 <html>
 <head>
-<title>게시판</title>
+<title>공지사항</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- 부트스트랩 CSS 추가하기 -->
@@ -17,9 +17,9 @@
 		<div class="row ">
 			<main id="main">
 				<div class="page-header">
-					<h2>자유게시판</h2>
+					<h2>공지사항</h2>
 				</div>
-				<p class="lead">홈스피탈 게시판</p>
+				<p class="lead">홈스피탈 공지사항</p>
 				<div style="max-width: 1300px; text-align: right;">
 					<a href="./boardWrite.html" class="btn btn-primary float-right">글쓰기</a>
 				</div>
