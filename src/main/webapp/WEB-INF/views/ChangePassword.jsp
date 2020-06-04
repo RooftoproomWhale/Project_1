@@ -85,6 +85,15 @@
 #passForm{width: 1200px}
 #contents{margin-top:140px;padding-left: 200px;margin-bottom: 167px}
 caption{font-size: 15px;font-weight: bold;}
+@media all and (min-width:500px) and (max-width:1024px){
+#sidebar-wrapper{    left:-250px;}
+.main{left:-150px;}
+#page-wrapper{left:-150px;padding-left: 0px;margin-left: 0px}
+#app{display: none}
+#appdown{width: 90%;float: inherit;margin-left: 76px;margin-top: 0px}
+#contents{padding-left: 20px;margin-left: 20px}
+.board-util-right{float: left;}
+}
 </style>
 <script>
 

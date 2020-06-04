@@ -7,6 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <script type="text/javascript" src="js/jquery.test.js"></script>
 <script src='<c:url value="/js/kakao.js"/>'></script>
+
 <style>
 body{
 	padding-top: 70px;
@@ -135,7 +136,7 @@ form{
 								</label>
 							</div>
 							<div class="row">
-								<input type="submit" value="Submit" class="btn">
+								<button class="btn" onclick="login();">로그인</button>
 							</div>
 						</form>
 						<div class="row">
@@ -164,6 +165,27 @@ form{
 			</div>
 		</div>
 	</div>
+<script>
+	function login(){
+		var id = $('#id');
+		var pass = $('#pass');
+		if($.trim(id.val()) == '') {
+			alert('아이디를 입력해 주세요.');
+			id.focus();
+			return;
+		}
+		if($.trim(pass.val()) == '') {
+			alert('비밀번호를 입력해 주세요.');
+			pass.focus();
+			return;
+		}
+		
+		$('#login').submit();
+	}
+
+</script>
+	
+	
 <script>
 	$(function(){
 		Kakao.init('c0e6cc61e58211222f29b50be0f8c221');

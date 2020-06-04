@@ -67,10 +67,6 @@
 	font-weight: bold;
 }
 
-.info {
-	font-size: 1.3em;
-	line-height: 3em;
-}
 
 .color-red {
 	color: red;
@@ -87,7 +83,7 @@
 	height: 70px;
 	text-align: center;
 	line-height: 70px;
-	width: 100%
+	width: 80%;
 }
 
 .table-wrapper .table-default thead .write {
@@ -99,7 +95,9 @@
 	position: relative;
 	padding-right: 0;
 	padding-left: 0;
+	padding-bottom: 10px;
 }
+
 
 .table-wrapper .table-default tbody tr td .input-conut-limit {
 	position: absolute;
@@ -115,9 +113,6 @@
 	margin-bottom: 20px;
 }
 
-.button-blue {
-	background: #57a5df;
-}
 
 table {
 	border-top: 3px #D5D5D5 solid;
@@ -128,6 +123,7 @@ table {
 	
 }
 
+
 .board-util-right {
 	float: right;
 	height: 50px
@@ -136,6 +132,7 @@ table {
 .board-util {
 	height: 48px;
 	top: 9px;
+	width: 80%;
 }
 
 .board-util button {
@@ -157,7 +154,17 @@ caption {
 	font-size: 15px;
 	font-weight: bold;
 }
-#hand_no1 option{pad}
+@media all and (min-width:500px) and (max-width:1024px){
+#sidebar-wrapper{    left:-250px;}
+.main{left:-150px;}
+#page-wrapper{left:-150px;padding-left: 0px;margin-left: 0px}
+#app{display: none}
+#appdown{width: 90%;float: inherit;margin-left: 76px;margin-top: 0px}
+.memberchange{padding-left: 20px;margin-left: 20px}
+.board-util-right{float: left;}
+.board-util-text{font-size: 5px}
+.box-default{width: 100%}
+}
 </style>
 <script>
 	
@@ -166,6 +173,9 @@ caption {
 <!-- 사이드 -->
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
+		  <li class="sidebar-brand">
+        <a href="#">마이페이지</a>
+      </li>
 		 <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
       <li><a href="#">복약 관리</a></li>
       <li><a href="#">진료 예약 현황</a></li>
@@ -174,10 +184,14 @@ caption {
 		</ul>
 	</div>
 	<!-- 사이드 끝 -->
+	
 	<div class="main row" style="margin-top: 82px; padding-bottom: 15px;">
 		<div class="col-md-12" style="background-color: #C2E2E8; height: 54.6px; bottom: 3px"></div>
-		<section class="memberchange">
-
+		<section class="memberchange" style="margin-bottom: 100px">
+		<div class="box-default">
+		<span class="board-util-text color-blue">※ 고객님께서 입력해주신 정보를
+						통하여 추후 고객 맞춤 정보 등 유익한 서비스가 제공되오니, 정확한 입력 부탁 드립니다.</span>
+						</div>
 			<div class="board-util board-util-top02">
 				<div class="board-util-right">
 					<span class="board-util-text color-red">* 필수 입력 항목</span>
@@ -197,13 +211,13 @@ caption {
 
 						<tr>
 							<th scope="row">아이디</th>
-							<td>
-								<div class="input-inside-table">
+							<td style="padding-top: 30px;width: 30%">
+								<div class="input-inside-table" style="margin-bottom: 18px">
 									<input type="text" name="" class="input-text" title="아이디"
 										value="asd1234" role="textbox" readonly="readonly" />
 								</div>
 							</td>
-							<th scope="row">이름</th>
+							<th scope="row" style="width: 7%">이름</th>
 							<td>
 								<div class="input-inside-table">
 									<input type="text" name="" class="input-text" title="이름"
@@ -221,11 +235,11 @@ caption {
 							</td>
 
 						<tr>
-							<th scope="row">휴대폰번호 <span class="required">*</span></th>
+							<th scope="row">휴대폰번호 <span class="color-red">*</span></th>
 							<td colspan="3" class="phone">
 
-								<div class="input-inside-table">
-									<div class="input-selectbox" style="width: 22px">
+								<div class="input-inside-table" style="padding-top: 10px">
+							
 										<select name="hand_no1" id="hand_no1" title="휴대폰번호 앞자리"
 											class="input-width-small" required="required">
 											<option value="">선택</option>
@@ -235,7 +249,7 @@ caption {
 											<option value="017">017</option>
 											<option value="019">019</option>
 										</select>
-									</div>
+								
 
 									<span class="input-sign">-</span> <input type="text"
 										name="hand_no2" id="hand_no2"
@@ -247,52 +261,22 @@ caption {
 										class="input-text input-width-small" title="휴대폰번호 끝자리"
 										role="textbox" required="required" onkeyup="number(this);"
 										maxlength="4" value="5678" />
-									<!--
-												<div class="input-checkbox-group">
-													<label class="input-checkbox">
-														<input type="checkbox" name="sms_rec_yn" id="sms_rec_yn" role="checkbox" onclick="goSmsPhoneYn();" value="Y" />
-														<i aria-hidden="true"></i><span class="label-text">문자(SMS) 수신동의</span>
-
-														<a href="#tooltip01" class="iconset icon-help" aria-describedby="tooltip01"><span class="visually-hidden">help</span></a>
-														<div id="tooltip01" class="tooltip" role="tootip"></div>
-													</label>
-
-													<label class="input-checkbox">
-														<input type="hidden" name="smart_phone_yn" id="smart_phone_yn" value="N"/>
-														<input type="checkbox" name="smartPhoneYn" id="smartPhoneYn" role="checkbox" value="Y" onclick="goSmartPhoneYn();" />
-														<i aria-hidden="true"></i><span class="label-text">스마트폰여부</span>
-													</label>
-												</div> -->
+								
+								
 
 									<div class="option-check">
-										<div class="input-checkbox-group ml0 is-tool-tip"
-											style="display: none">
+										<div class="input-checkbox-group ml0 is-tool-tip">
 											<label class="input-checkbox input-checkbox-type02">
 												<input type="checkbox" name="sms_rec_yn" id="sms_rec_yn"
-												role="checkbox" onclick="goSmsPhoneYn();" value="Y" /> <i
+												role="checkbox" onclick="" value="Y" /> <i
 												aria-hidden="true"></i><span class="label-text">문자(SMS)
 													수신동의</span>
-											</label> <i class="iconset icon-tooltip btn-tooltip-hover"
-												aria-hidden="true"></i>
-
-											<dl class="tool-tip tip-sms">
-												<dt>문자(SMS)서비스 안내</dt>
-												<dd>홈스피탈은 문자 수신에 동의하신 고객님들께 추후 고객 맞춤 정보 등 유익한 정보를
-													제공해드릴 예정입니다.</dd>
-											</dl>
-
-											<label class="input-checkbox input-checkbox-type02">
-												<input type="checkbox" name="smartPhoneYn" id="smartPhoneYn"
-												role="checkbox" value="Y" onclick="goSmartPhoneYn();" /> <input
-												type="hidden" name="smart_phone_yn" id="smart_phone_yn"
-												value="N" /> <i aria-hidden="true"></i><span
-												class="label-text">스마트폰 여부</span>
 											</label>
+												<br/>
 										</div>
-										<p class="tip-txt">※ 예약 관련정보는 수신동의 여부와 관계없이 발송됩니다.</p>
 									</div>
 
-									<!-- 문자 : , 스마트 :  -->
+								
 
 								</div>
 
@@ -308,13 +292,7 @@ caption {
 										role="textbox" required="required" value="kim1512" /> <span
 										class="input-sign">@</span>
 
-									<div class="input-selectbox">
-										<!--<select name="" class="input-width-normal" title="이메일 선택" required="required">
-														<option value="">이메일을 선택하세요</option>
-														<option value="">gmail.com</option>
-														<option value="">naver.com</option>
-														<option value="">daum.net</option>
-													</select>-->
+								
 										<input type="hidden" name="email2" value="daum.net" /><select
 											name="email2SL"
 											onchange="if (this.form.email2SL.selectedIndex==19) { this.form.email2Text.disabled=false;this.form.email2Text.focus();this.form.email2Text.value='';} else { this.form.email2Text.disabled=true;this.form.email2.value=this.form.email2SL[this.form.email2SL.selectedIndex].value;this.form.email2Text.value=this.form.email2SL[this.form.email2SL.selectedIndex].value;}"
@@ -344,40 +322,7 @@ caption {
 											onchange="this.form.email2.value = this.value"
 											class="input-text input-width-small07" title="이메일 뒷부분" />
 
-									</div>
-									<!--
-												<div class="input-checkbox-group">
-													<label class="input-checkbox">
-														<input type="hidden" name="email_rec_yn" id="email_rec_yn" value=""/>
-
-														<input type="checkbox" name="emailChkYn" id="emailChkYn" onclick="goEmailAgree();" role="checkbox" value="Y" />
-														<i aria-hidden="true"></i><span class="label-text">이메일수신동의</span>
-
-														<a href="#tooltip02" class="iconset icon-help" aria-describedby="tooltip02"><span class="visually-hidden">help</span></a>
-														<div id="tooltip02" class="tooltip" role="tootip"></div>
-													</label>
-												</div>
- -->
-									<div class="option-check is-tool-tip">
-										<div class="input-checkbox-group ml0" style="display: none">
-											<label class="input-checkbox input-checkbox-type02">
-												<input type="checkbox" name="emailChkYn" id="emailChkYn"
-												onclick="goEmailAgree();" role="checkbox" value="Y" /> <input
-												type="hidden" name="email_rec_yn" id="email_rec_yn" value="" />
-												<i aria-hidden="true"></i><span class="label-text">이메일
-													수신동의</span>
-											</label> <i class="iconset icon-tooltip btn-tooltip-hover"
-												aria-hidden="true"></i>
-											<dl class="tool-tip tip-email" style="height: 128px">
-												<dt>이메일 서비스 안내</dt>
-												<dd>삼성서울병원은 의학정보 및 홍보자료 제공 수신에 동의하신 고객님께 추후 이메일을 통해서
-													유익하고 다양한 정보(진료전후설명자료, 뉴스레터 등)를 제공해드릴 예정입니다.</dd>
-											</dl>
-
-										</div>
-										<p class="tip-txt">※ 예약 관련정보는 수신동의 여부와 관계없이 발송됩니다.</p>
-									</div>
-
+								
 									<!-- 이메일 :  -->
 
 								</div>
@@ -403,13 +348,16 @@ caption {
 					</tbody>
 				</table>
 			</div>
-
+		<div class="board-util">
+		<span class="board-util-text color-blue">※ 정보를 수정하신 후 확인 버튼을 클릭하셔야 정보 수정이 완료됩니다.</span>
+						<div class="board-util-right">
+							<button type="button" class="btn btn-primary" role="button" onclick="Form();"><span class="button-text">확인</span></button>
+							<button type="button" class="btn" role="button" onclick="back();"><span class="button-text">취소</span></button>
+						</div>
+					</div>	
 			<div class="board-util board-util02">
 				<div class="board-util-left">
-					<span class="board-util-text color-blue">※ 고객님께서 입력해주신 정보를
-						통하여 추후 고객 맞춤 정보 등 유익한 서비스가 제공되오니, 정확한 입력 부탁 드립니다.</span> <span
-						class="board-util-text color-blue">※ 정보를 수정하신 후 확인 버튼을
-						클릭하셔야 정보 수정이 완료됩니다.</span>
+			 
 				</div>
 			</div>
 		</section>
@@ -427,7 +375,7 @@ caption {
 
 	function Form() {
 
-		var userPasswd = $('#userPasswd');
+	/* 	var userPasswd = $('#userPasswd');
 		if ($.trim(userPasswd.val()).length < 1
 				|| $.trim(userPasswd.val()) == '') {
 			alert('현재 비밀번호를 입력해 주세요.');
@@ -453,10 +401,16 @@ caption {
 			userPasswdOK.focus();
 			return;
 		}
-
+		*/
+		var passok = $('#pass2');
+		if ($.trim(passok.val()).length < 1 || $.trim(passok.val()) == '') {
+			alert('비밀번호를 입력해주세요');
+			passok.focus();
+			return;
+		}
 		if (confirm('정말로 변경하시겠습니까?')) {
 			$('form[name=passForm]').submit();
-		}
+		} 
 	}
 </script>
 

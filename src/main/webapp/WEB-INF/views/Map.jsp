@@ -19,8 +19,21 @@
 	.body_title {font-size: 24px;font-weight: bold;}
 	.load_wrap {position: absolute; top: 50%; left: 50%; z-index: 1231234;transform: translate(-50%, -50%);display: flex;flex-direction: column;}
 	.search {position: absolute;top:120px;left: 16px;z-index: 2;}
-	.current {position: absolute;bottom: 30px;right: 10px;z-index: 2;}
-	.refresh_map{position: absolute;bottom: 5px;right: 10px;z-index: 2;}
+	.map_button{position: absolute;bottom: 32px;right: 8px;z-index: 2;flex-direction: column;}
+	.current_refresh
+	{
+		width: 44px;
+		height: 44px;
+		margin-top: 8px;
+		box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
+		background-color: white;
+		border-radius: 22px;
+		border-width: initial;
+		border-style: none;
+	    border-color: initial;
+	    border-image: initial;
+	    outline: 0;
+	}
 	.menu_wrap{left: 13px;bottom: 19px;text-align: center;position: absolute;z-index: 2;}
 	
 </style>
@@ -29,18 +42,28 @@
 		<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 	</div>
 	<div class="load_wrap">
-		<img class="load_img" src="<c:url value='/images/mask_loader.gif'/>">
+		<img class="load_img" src="<c:url value='/images/map/mask_loader.gif'/>">
 	</div>
 	<div class="search">
 		<input class="searchInput" id="searchAddress" disabled>
 		<button type="button" onclick="addressSearch()">검색</button>
 	</div>
+	<div class="map_button">
+		<button class="current_refresh" type="button" onclick="currentPosition()">
+			<img src="<c:url value='/images/map/current_position.png'/>" style="width: 34px;height: 34px;">
+		</button>
+		<button class="current_refresh" type="button" onclick="refreshMap()">
+			<img src="<c:url value='/images/map/refresh.png'/>" style="width: 34px;height: 34px;">
+		</button>
+	</div>
+	<!-- 
 	<div class="current">
 		<button type="button" onclick="currentPosition()">현재위치</button>
 	</div>
 	<div class="refresh_map">
 		<button type="button" onclick="refreshMap()">갱신</button>
 	</div>
+	 -->
 	<div class="menu_wrap">
 		<button type="button" onclick="changeApi(0)">병원</button>
 		<button type="button" onclick="changeApi(1)">약국</button>
@@ -48,6 +71,48 @@
 		<button type="button" onclick="changeApi(3)">코로나 확진자 동선</button>
 	</div>
 	<div id="map" style="width: 100%; height: 100%;position: relative;overflow: hidden;"></div>
+</div>
+<div class="modal fade" id="hospital-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+				<h4 class="modal-title">기본 모달창</h4>
+			</div>
+			<div class="modal-body">
+				<h2>모달 바디 영역입니다</h2>
+				<p>
+					안녕하세요<br />기본 모달창입니다<br />재미 있네요
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-info" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="pharmacy-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+				<h4 class="modal-title">기본 모달창</h4>
+			</div>
+			<div class="modal-body">
+				<h2>모달 바디 영역입니다</h2>
+				<p>
+					안녕하세요<br />기본 모달창입니다<br />재미 있네요
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-info" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="modal fade" id="maskInfo-modal">
 	<div class="modal-dialog modal-sm">
@@ -214,7 +279,7 @@
 							//map : map,
 							position : new kakao.maps.LatLng(item.latitude, item.longitude),
 							image :  new kakao.maps.MarkerImage(
-									"<c:url value='/images/hospital_image/hospital.png'/>",
+									"<c:url value='/images/map/hospital_image/hospital.png'/>",
 							        new kakao.maps.Size(35, 35))
 						});
 						
@@ -222,6 +287,12 @@
 			            
 						var infowindow = new kakao.maps.InfoWindow({
 						    content : iwContent
+						});
+						
+						kakao.maps.event.addListener(marker, 'click', function(){
+							console.log("modal",item,i)
+							
+							$('#hospital-modal').modal('show');
 						});
 						
 						kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -293,7 +364,7 @@
 							//map : map,
 							position : new kakao.maps.LatLng(item.latitude, item.longitude),
 							image :  new kakao.maps.MarkerImage(
-									"<c:url value='/images/pharmacy_image/pharmacy.png'/>",
+									"<c:url value='/images/map/pharmacy_image/pharmacy.png'/>",
 							        new kakao.maps.Size(35, 35))
 						});
 						
@@ -464,7 +535,7 @@
 								 
 								 var marker = new kakao.maps.Marker({
 									 image :  new kakao.maps.MarkerImage(
-												"<c:url value='/images/corona_image/corona_patient.png'/>",
+												"<c:url value='/images/map/corona_image/corona_patient.png'/>",
 										        new kakao.maps.Size(65, 65)),
 						            position: coords
 							     });
@@ -534,13 +605,13 @@
 		{
 			switch (remain_stat) {
 			case "plenty":
-				return "<c:url value='/images/maskmap_image/mask_plenty.png'/>"
+				return "<c:url value='/images/map/maskmap_image/mask_plenty.png'/>"
 			case "some":
-				return "<c:url value='/images/maskmap_image/mask_some.png'/>"
+				return "<c:url value='/images/map/maskmap_image/mask_some.png'/>"
 			case "few":
-				return "<c:url value='/images/maskmap_image/mask_few.png'/>"
+				return "<c:url value='/images/map/maskmap_image/mask_few.png'/>"
 			default:
-				return "<c:url value='/images/maskmap_image/mask_empty.png'/>"
+				return "<c:url value='/images/map/maskmap_image/mask_empty.png'/>"
 			}
 		}
 		
