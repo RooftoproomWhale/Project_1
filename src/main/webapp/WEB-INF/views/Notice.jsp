@@ -14,9 +14,9 @@
 		</div>
 		</c:if>
 	</div>
-	<div class="row" style="border-radius: 0 0 0 0;">
+	<div class="row" >
 		<div class="col-md-12">
-			<table class="table table-bordered table-hover text-center">
+			<table class="table table-hover text-center">
 				<tr>
 					
 					<th class="col-md-1 text-center">번호</th>
