@@ -1,4 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
+    pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
+<div class="container" style="padding-top: 200px;padding-bottom: 300px;">
+	
+	<!-- 작성하기 버튼 -->
+	<div class="row" style="margin-bottom: 10px">
+		<c:if test="" var="admin">
+		<div class="col-md-12 text-right">
+			<a href="<c:url value='#'/>"
+				class="btn btn-default">등록</a>
+		</div>
+		</c:if>
+	</div>
+	<div class="row" >
+		<div class="col-md-12">
+			<table class="table table-hover text-center">
+				<tr>
+					
+					<th class="col-md-1 text-center">번호</th>
+					<th class="text-center">제목</th>
+					<th class="col-md-1 text-center">작성자</th>
+					<th class="col-md-2 text-center">등록일</th>
+				</tr>
+				<c:if test="${empty list}" var="isEmpty">
+					<tr>
+						<td colspan="4">등록된 공지가 없습니다.</td>
+					</tr>
+				</c:if>
+				<c:if test="${not isEmpty}">
+					<c:forEach items="${list}" var="item" varStatus="loop">
+=======
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
@@ -26,6 +60,7 @@
 				<hr>
 				<table class="table table-striped" style="max-width: 1300px;">
 					<thead>
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 						<tr>
 							<th scope="col" class="mobile" style="width: 55px; text-align: center;">번호</th>
 							<th scope="col" class="mobile" style="text-align: center;">제목</th>
