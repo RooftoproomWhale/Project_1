@@ -43,4 +43,7 @@
 	<select id="covidMapSelect" resultType="java.util.Map">
 		SELECT * FROM corona_patient
 	</select>
+	<select id="hospitalSelect" resultType="java.util.Map">
+		SELECT * FROM hospital WHERE <![CDATA[ ROWNUM <= 10 ]]>
+	</select>
 </mapper>
