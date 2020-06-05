@@ -22,4 +22,8 @@ public class MyPageController {
 	   public String ChangeMember() {
 	      return "ChangeMember.tiles";
 	   }
+	   @RequestMapping("/mypage/Yun.hst")
+	   public String Yun() {
+	      return "Yun.tiles";
+	   }
 }
