@@ -14,41 +14,65 @@
 	width: 250px;
 	height: 82%;
 	margin-left: -250px;
-	background: #fff;
+   background:#F3F3F3;
 	overflow-x: hidden;
 	overflow-y: auto;
 	border: 1px #DAD9FF solid;
 	margin-top: 79px;
 }
 
-#page-content-wrapper {
-	width: 100%;
-	padding: 20px;
-	padding-top: 150px;
-	margin-left: 130px;
-}
-/* 사이드바 스타일 */
-.sidebar-nav {
-	width: 250px;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-.sidebar-nav li {
-	text-indent: 1.5em;
-	line-height: 2.8em;
-}
-
-.sidebar-nav li a {
-	display: block;
-	text-decoration: none;
-	color: #999;
-}
+ #page-content-wrapper {
+    width: 100%;
+    padding: 20px;
+ padding-top: 150px;
+ margin-left:130px;
+ 
+  }
+  /* 사이드바 스타일 */
+  
+  .sidebar-nav {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background:#808080;
+  }
+	
+ 	.sidebar-nav2{
+	margin-right:-1px
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border:1px #8C8C8C solid;
+	 background:#E6E6E6;
+  }
+  
+  .sidebar-nav li:first-child{ background:#4d4d4d}
+  .sidebar-nav li {
+    text-indent: 1.5em;
+    line-height: 2.8em;
+    color:#fff
+  }
+  .sidebar-nav2 li {
+    text-indent: 1.5em;
+    line-height: 2.8em;
+    color:#fff
+  }
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+  }
+   .sidebar-nav2 li a :not(first-child){
+    display: block;
+    text-decoration: none;
+  color:#A6A6A6;
+  }
 /*현재페이지*/
 .sidebar-nav :nth-child(2) a {
 	color: #fff;
-	background: #B2EBF4;
+
 }
 
 .sidebar-nav li:not (.sidebar-brand ):hover {
@@ -56,17 +80,16 @@
 	background: #B2EBF4;
 }
 
+
 .sidebar-nav>.sidebar-brand {
 	font-size: 1.3em;
 	line-height: 3em;
 }
 
-.sidebar-brand {
-	background-color: #C2E2E8;
-	margin-bottom: 0.5px;
-	font-weight: bold;
-}
-
+	.sidebar-brand{
+	margin-top:0px;
+	margin-bottom: 0px;
+	}
 
 .color-red {
 	color: red;
@@ -155,7 +178,7 @@ caption {
 	font-weight: bold;
 }
 .input-inside-table{
-margin-bottom: 10px
+margin-bottom: 15px
 }
 @media all and (min-width:500px) and (max-width:1024px){
 #sidebar-wrapper{    left:-250px;}
@@ -174,22 +197,30 @@ margin-bottom: 10px
 </script>
 <div id="page-wrapper" class="container-fluid">
 <!-- 사이드 -->
-	<div id="sidebar-wrapper">
-		<ul class="sidebar-nav">
-		  <li class="sidebar-brand">
-        <a href="#">마이페이지</a>
-      </li>
-		 <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
-      <li><a href="#">복약 관리</a></li>
-      <li><a href="#">진료 예약 현황</a></li>
+	<div  id="sidebar-wrapper">
+
+	  <h3 class="sidebar-brand" style="height: 90px;text-align: center;line-height: 90px;height: 120px">
+    	<img style="width: 100%;height: 100%" src="<c:url value='/img/mypages.PNG'/>">
+       </h3>
+	<ul class="sidebar-nav">
+	<li><span class="glyphicon glyphicon-leaf" style="left: -20px"><strong>김길동</strong>님</span></li>
+      <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
+      <li><a href="<c:url value='/mypage/Yun.hst'/>">복약 관리</a></li>
+      <li><a href="<c:url value='/mypage/ReservationList.hst'/>">진료 예약 현황</a></li>
       <li><a href="#">내 질병 관리</a></li>
       <li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
-		</ul>
-	</div>
+    </ul>
+    <ul class="sidebar-nav2" style="margin-top:10px;">
+    	  <li><a href="#" style="color:black;">서브메뉴1</a></li>
+      <li><a href="<c:url value='/mypage/Yun.hst'/>">세브메뉴2</a></li>
+      <li><a href="<c:url value='/mypage/ReservationList.hst'/>">서브메뉴3</a></li>
+      <li><a href="<c:url value='/mypage/unmember.hst'/>">세브메뉴4</a></li>
+    </ul>
+  </div>
 	<!-- 사이드 끝 -->
 	
-	<div class="main row" style="margin-top: 82px; padding-bottom: 100px;">
-		<div class="col-md-12" style="background-color: #C2E2E8; height: 54.6px; bottom: 3px"></div>
+	<div class="main row" style="margin-top: 82px;padding-bottom:10px;background-color: #F3F3F3;">
+
 		<section class="memberchange" style="margin-bottom: 37px">
 		<div class="box-default">
 		<span class="board-util-text color-blue">※ 고객님께서 입력해주신 정보를
@@ -213,35 +244,68 @@ margin-bottom: 10px
 					<tbody>
 
 						<tr>
-							<th scope="row">아이디</th>
-							<td style="padding-top: 20px;width: 30%">
-								<div class="input-inside-table">
-									<input type="text" name="" class="input-text" title="아이디"
-										value="asd1234" role="textbox" readonly="readonly" />
-								</div>
-							</td>
-							<th scope="row" style="width: 7%">이름</th>
-							<td>
+							<th scope="row">이름</th>
+							<td style="padding-top: 10px;width: 30%">
 								<div class="input-inside-table">
 									<input type="text" name="" class="input-text" title="이름"
-										value="김길동" role="textbox" readonly="readonly" />
+										value="김길동" role="textbox"  />
+								</div>
+							</td>
+							<th scope="row"  style="width: 15%;padding-left: 80px">키</th>
+							<td>
+								<div class="input-inside-table">
+									<input type="text" name="" class="input-text" title="키"
+										value="180kg" role="textbox"/>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">생년월일</th>
+							<th scope="row">나이</th>
 							<td>
 								<div class="input-inside-table">
-									<input type="text" name="" class="input-text" title="생년월일"
-										value="" role="textbox" readonly="readonly" />
+									<select style="width: 176px;height: 24px;" title="나이"
+										class="input-width-small07">
+										<option>나이</option>
+										<option value="">10세 이하</option>
+										<option value="">10대</option>
+										<option value="">20대</option>
+										<option value="">30대</option>
+										<option value="">40대</option>
+										<option value="">50대</option>
+										<option value="">60대</option>
+										<option value="">70대</option>
+										<option value="">80대</option>
+										<option value="">90대</option>
+									</select>
 								</div>
 							</td>
-
+							<th scope="row" style="padding-left:80px">몸무게</th>
+							<td>
+								<div class="input-inside-table">
+									<input type="text" name="" class="input-text" title="몸무게"
+										value="70kg" role="textbox" />
+								</div>
+							</td>
+							</tr>
+							<tr>
+							
+							<th scope="row"  style="width: 15%;margin-top: 6px">성별</th>
+							<td>
+								<div class="input-inside-table">
+									<select style="width: 176px;height: 24px;" title="성별"
+										class="input-width-small07">
+										<option>성별</option>
+										<option value="">남자</option>
+										<option value="">여자</option>
+									</select>
+								</div>
+							</td>
+							</tr>
 						<tr>
 							<th scope="row">휴대폰번호 <span class="color-red">*</span></th>
-							<td colspan="3" class="phone">
+							<td colspan="3" class="phone" >
 
-								<div class="input-inside-table" style="padding-top: 10px">
+								<div class="input-inside-table" style="padding-top: 10px;">
 							
 										<select name="hand_no1" id="hand_no1" title="휴대폰번호 앞자리"
 											class="input-width-small" required="required">
@@ -284,6 +348,7 @@ margin-bottom: 10px
 								</div>
 
 							</td>
+						
 						</tr>
 						<tr>
 							<th scope="row">이메일주소 <span class="required">*</span></th>
