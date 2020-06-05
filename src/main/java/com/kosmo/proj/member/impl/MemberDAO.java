@@ -61,10 +61,6 @@ public class MemberDAO implements MemberService {
 			return 0;
 		}
 
-		@Override
-		public List<Map> selectList() {
-			// TODO Auto-generated method stub
-			return sqlMapper.selectList("covidMapSelect");
-		}
+		
 
 }

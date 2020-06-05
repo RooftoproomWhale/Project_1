@@ -318,6 +318,8 @@ width: 100%;
          return false;
       })
       
+     
+      
       $("#auth_prev").click(function(){
          if (animating) {
               return false;
@@ -362,7 +364,62 @@ width: 100%;
                   easing : 'easeInOutBack'
            });
       })
+			
+      $("#authHos").click(function name() {
+    	  if ($("#check_1").is(":checked") == false) {
+              alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+              return;
+           } else if ($("#check_2").is(":checked") == false) {
+              alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+              return;
+           } else if ($("#check_3").is(":checked") == false) {
+              alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+              return;
+           } else {
+        	   if (animating) {
+                   return false;
+                }
+                animating = true;
+                current_fs = $(this).parent();
+                next_fs = $(this).parent().next().next().next().next();
 
+                //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+                $("#progressbar li").hide();
+
+                //다음 필드셋 표시
+                next_fs.show();
+                //현재 필드셋을 스타일로 숨긴다.
+                current_fs.animate({
+                   opacity : 0
+                }, {
+                   step : function(now, mx) {
+                      //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                      //1.current_fs 80%로 축소
+                      scale = 1 - (1 - now) * 0.2;
+                      //2.오른쪽에서 next_fs 50% 가져오기
+                      left = (now * 50) + "%";
+                      //3.next_fs의 불투명도 1로 증가시킨다
+                      opacity = 1 - now;
+                      current_fs.css({
+                         'transform' : 'scale(' + scale + ')',
+                         'position' : 'absolute'
+                      });
+                      next_fs.css({
+                         'left' : left,
+                         'opacity' : opacity
+                      });
+                   },
+                   duration : 800,
+                   complete : function() {
+                      current_fs.hide();
+                      animating = false;
+                   },
+                   //사용자가 정의 플러그인에서 나옴
+                   easing : 'easeInOutBack'
+                });  	
+           }
+	});
+      
       
          $(".nextBtn").click(function() {
             if ($("#check_1").is(":checked") == false) {
@@ -645,8 +702,8 @@ width: 100%;
 		</ul>
 		<!-- fieldsets -->
 		<fieldset>
-			<h2 class="fs-title">약관 동의</h2>
-			<h3 class="fs-subtitle">1번째 단계입니다.</h3>
+			<h1 class="fs-title">약관 동의</h1>
+			<h3 class="fs-subtitle">이용 약관에 동의 하셔야 이용이 가능합니다.</h3>
 			<h4 class="scheme-g">서비스 이용 약관</h4>
 			<textarea name="chart" style="font-size: 1em;" disabled="disabled"><%=buff1 %></textarea>
 			<p>
@@ -662,21 +719,23 @@ width: 100%;
 			<p>
 				<input type="checkbox" id="check_3" name="" /> 위의 약관에 동의 합니다.<br />
 			</p>
-			<input type="checkbox" id="check_authHos" name="" /> 병원 제휴 시 체크<br />
+<!-- 			<input type="checkbox" id="check_authHos" name="" /> 병원 제휴 시 체크<br /> -->
+			<input type="button" id="authHos" class="action-button" value="병원 제휴" />
 			<input type="button" name="nextBtn" class="nextBtn action-button" value="일반회원" />
 		</fieldset>
 		<fieldset>
-			<h2 class="fs-title">계정 정보</h2>
-			<h3 class="fs-subtitle">2번째 단계입니다.</h3>
+			<h1 class="fs-title">계정 정보</h1>
+			<h3 class="fs-subtitle">아이디로 사용할 e-mail과 비밀번호를 입력하세요.</h3>
 			<div class="form-group">
 				<div class="row">
-					<div class="col-sm-8">
+					<div class="col-md-8">
 						<input type="text" id="email" placeholder="이메일">
 					</div>
-					<div class="col-sm-2">
+					<div class="col-md-2">
 						<input type="button" class="btn btn-primary" value="이메일인증">
 					</div>
-					<div class="col-sm-12">
+					<div class="col-md-12">
+						<input type="password" name="auth" placeholder="인증번호 입력" /> 
 						<input type="password" name="pass" placeholder="비밀번호" /> 
 						<input type="password" name="cpass" placeholder="비밀번호 확인" />
 					</div>
@@ -686,36 +745,22 @@ width: 100%;
 			<input type="button" name="next" class="next action-button" value="다음" />
 		</fieldset>
 		<fieldset>
-			<h2 class="fs-title">개인 정보</h2>
-			<h3 class="fs-subtitle">3번째 단계입니다.</h3>
+			<h1 class="fs-title">개인 정보</h1>
+			<h3 class="fs-subtitle">개인 정보를 입력해주세요.</h3>
 			<div class="form-group">
-				<div class="col-lg-12">
+			<div class="row">
+				<div class="col-md-12">
 					<input type="text" name="name" placeholder="이름" /> 
 					<input type="text" name="phone" placeholder="핸드폰 번호" /> 
-					<div class="form-group">
-						<div class="col-sm-8">
-							<input type="text" id="sample4_postcode" placeholder="우편번호">
-						</div>
-						<div class="col-sm-2">
-							<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-primary">
-						</div>
-					</div>
-					<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-					<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-					<span id="guide" style="color: #999; display: none"></span> 
-					<input type="text" id="sample4_extraAddress" placeholder="참고항목">
-					<input type="text" id="sample4_detailAddress" placeholder="상세주소">
 				</div>
-				
-				<div class="col-lg-6">
+				<div class="col-md-5">
 					<select class="form-control" id="gender">
 						<option value="X">성별</option>
 						<option value="M">남자</option>
 						<option value="F">여자</option>
 					</select>
 				</div>
-
-				<div class="col-lg-6">
+				<div class="col-md-5 col-md-offset-1">
 					<select class="form-control" id="age">
 						<option>나이</option>
 						<option value="">10세 이하</option>
@@ -730,40 +775,100 @@ width: 100%;
 						<option value="">90대</option>
 					</select>
 				</div>
+				<div class="col-md-6" style="padding-top: 10px">
+					<input type="text" id="height" placeholder="키(cm)">
+				</div>
+				<div class="col-md-6" style="padding-top: 10px">
+					<input type="text" id="weight" placeholder="몸무게(kg)">
+				</div>
+				
+					<div class="form-group">
+						<div class="col-md-8">
+							<input type="text" id="sample4_postcode" placeholder="우편번호">
+						</div>
+						<div class="col-md-2">
+							<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-primary">
+						</div>
+					</div>
+
+					<div class="col-md-12">
+						<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+						<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+						<span id="guide" style="color: #999; display: none"></span> 
+						<input type="text" id="sample4_extraAddress" placeholder="참고항목">
+						<input type="text" id="sample4_detailAddress" placeholder="상세주소">
+					</div>
+			</div>
 			</div>
 			<input type="button" name="previous" class="previous action-button" value="이전" /> 
 			<input type="button" name="next" class="next action-button" value="다음" />
+
 		</fieldset>
 		<fieldset>
-			<h2 class="fs-title">기타사항</h2>
-			<h3 class="fs-subtitle">마지막 단계입니다.</h3>
-			<div class="col-sm-6">
-				<div class="row">
-				<select class="form-control">
-					<option value="">외과</option>
-					<option value="">신경외과</option>
-					<option value="">정형외과</option>
-					<option value="">비뇨기과</option>
-					<option value="">정신과</option>
-					<option value="">이비인후과</option>
-					<option value="">피부과</option>
-					<option value="">호흡기내과</option>
-					<option value="">소화기내과</option>
-					<option value="">신경과</option>
-				</select>
+			<h1 class="fs-title">증상 및 질환</h1>
+			<h3 class="fs-subtitle">증상을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
+			<div class="row">
+				<div class="col-md-4">
+					<select class="form-control">
+						<option value="">외과</option>
+						<option value="">신경외과</option>
+						<option value="">정형외과</option>
+						<option value="">비뇨기과</option>
+						<option value="">정신과</option>
+						<option value="">이비인후과</option>
+						<option value="">피부과</option>
+						<option value="">호흡기내과</option>
+						<option value="">소화기내과</option>
+						<option value="">신경과</option>
+					</select>
 				</div>
 			</div>
-			<textarea name="chart2" placeholder="만성질환"></textarea>
+			<div class="row">
+				<div class="col-md-3" style="padding:10px">
+					<input type="checkbox" id="symptom" name="symptom" /> 증상1
+				</div>
+				<div class="col-md-3" style="padding:10px">
+					<input type="checkbox" id="symptom" name="symptom" /> 증상2
+				</div>
+				<div class="col-md-3" style="padding:10px">
+					<input type="checkbox" id="symptom" name="symptom" /> 증상3
+				</div>
+			</div>
+			<h5 align="left">겪은 적이 있는 질환을 선택하세요</h5>
+			<div class="row">
+				<div class="col-md-3" style="padding:10px">
+					<input type="checkbox" id="symptom" name="symptom" /> 질환1
+				</div>
+				<div class="col-md-3" style="padding:10px">
+					<input type="checkbox" id="symptom" name="symptom" /> 질환2
+				</div>
+				<div class="col-md-3" style="padding:10px">
+					<input type="checkbox" id="symptom" name="symptom" /> 질환3
+				</div>
+			</div>
+			<textarea name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
 			<input type="button" name="previous" class="previous action-button" value="이전" /> 
 			<input type="button" name="" class="action-button" value="회원가입" />
 		</fieldset>
 		<fieldset>
-			<h2 class="fs-title">제휴</h2>
-			<h3 class="fs-subtitle">제휴</h3>
-			<textarea name="chart" placeholder="이전병력"></textarea>
-			<textarea name="chart2" placeholder="만성질환"></textarea>
+			<h1 class="fs-title">병원 제휴</h1>
+			<h3 class="fs-subtitle">병원을 선택해주세요</h3>
+			<div class="row">
+				<div class="col-md-6" style="">
+					<input type="text" placeholder="주소를 입력하세요">
+				</div>
+				<div class="col-md-2">
+					<input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기" class="btn btn-primary">
+				</div>
+			</div>
+			<textarea name="hoslist1">병원 예시 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</textarea>
+			<div class="row">
+				<div class="col-md-12">
+					<input type="checkbox" id="symptom" name="symptom" /> 위의 병원이 맞으시면 체크 후 가입 버튼을 눌러주세요
+				</div>
+			</div>
 			<input type="button" id="auth_prev" class="action-button" value="이전" />
-			<input type="button" name="signup" class="previous action-button" value="회원가입" />
+			<input type="button" name="signup" class="action-button" value="회원가입" />
 		</fieldset>
 	</div>
 </form>

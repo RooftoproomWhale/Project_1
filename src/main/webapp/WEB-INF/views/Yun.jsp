@@ -1,26 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <style>
-
+.row-padding {
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
 /* 사이드바 래퍼 스타일 */
 #page-wrapper {
 	padding-left: 250px;
 }
 
-#sidebar-wrapper {
-	position: fixed;
-	width: 250px;
-	height: 82%;
-	margin-left: -250px;
-	background: #fff;
-	overflow-x: hidden;
-	overflow-y: auto;
-	border: 1px #DAD9FF solid;
-	margin-top: 79px;
-}
+  #sidebar-wrapper {
+    position: fixed;
+    width: 250px;
+    height: 82%;
+    margin-left: -250px;
+    background: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+     border: 1px #DAD9FF solid;
+    margin-top: 79px;
+
+  
+  }
 
 #page-content-wrapper {
 	width: 100%;
@@ -29,44 +35,45 @@
 	margin-left: 130px;
 }
 /* 사이드바 스타일 */
-.sidebar-nav {
-	width: 250px;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-.sidebar-nav li {
-	text-indent: 1.5em;
-	line-height: 2.8em;
-}
-
-.sidebar-nav li a {
-	display: block;
-	text-decoration: none;
-	color: #999;
-}
-/*현재페이지*/
-.sidebar-nav :nth-child(6) a {
-	color: #fff;
-	background: #B2EBF4;
-}
-
-.sidebar-nav li:not (.sidebar-brand ):hover {
-	color: #fff;
-	background: #B2EBF4;
-}
-
-.sidebar-nav>.sidebar-brand {
-	font-size: 1.3em;
-	line-height: 3em;
-}
-
-.sidebar-brand {
+  
+  .sidebar-nav {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background:#808080;
+  }
+  .sidebar-nav li:first-child{ background:#4d4d4d}
+  .sidebar-nav li {
+    text-indent: 1.5em;
+    line-height: 2.8em;
+    color:#fff
+  }
+  
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+  }
+  /*현재페이지*/
+/*   .sidebar-nav :nth-child(2) a{ color: #fff;background: #B2EBF4; } */
+  
+  
+  .sidebar-nav li:not(.sidebar-brand):hover {
+    color: #fff;
+    background: #B2EBF4;
+  }
+  
+  .sidebar-nav > .sidebar-brand {
+    font-size: 1.3em;
+    line-height: 3em;
+  }
+	.sidebar-brand{
 	background-color: #C2E2E8;
-	margin-bottom: 0.5px;
 	font-weight: bold;
-}
+	margin-top:0px;
+	margin-bottom: 0px;
+	}
 
 .info {
 	font-size: 1.3em;
@@ -193,20 +200,32 @@ caption {
 <title>Insert title here</title>
 </head>
 <body>
-<div id="page-wrapper" class="container-fluid">
-	<div id="sidebar-wrapper">
-		<ul class="sidebar-nav">
-			<li class="sidebar-brand"><a href="#">마이페이지</a></li>
-			<li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
-			<li><a href="#">복약 관리</a></li>
-			<li><a href="#">진료 예약 현황</a></li>
-			<li><a href="#">내 질병 관리</a></li>
-			<li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
-		</ul>
+	<div id="page-wrapper" class="container-fluid">
+		<div  id="sidebar-wrapper">
+
+	  <h3 class="sidebar-brand" style="height: 90px;text-align: center;line-height: 90px;height: 120px">
+    	<img style="width: 100%;height: 100%" src="<c:url value='/img/mypages.PNG'/>">
+       </h3>
+	<ul class="sidebar-nav">
+	<li><span class="glyphicon glyphicon-leaf" style="left: -20px"><strong>김길동</strong>님</span></li>
+      <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
+      <li><a href="<c:url value='/mypage/Yun.hst'/>">복약 관리</a></li>
+      <li><a href="<c:url value='/mypage/ReservationList.hst'/>">진료 예약 현황</a></li>
+      <li><a href="#">내 질병 관리</a></li>
+      <li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
+    </ul>
+  </div>
 	</div>
-	<div class="main row" style="margin-top: 82px; padding-bottom: 15px;">
-		<div class="col-md-12"
-			style="background-color: #C2E2E8; height: 54.6px; bottom: 3px"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-header">
+					<h1>복약관리</h1>
+				</div>
+				<p>홈스피탈 복약관리</p>
+			</div>
+		</div>
 	</div>
-</div>
+</body>
 </html>
