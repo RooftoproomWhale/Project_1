@@ -91,11 +91,11 @@
 	color: #6e7179;
 }
 
-.table-wrapper .table-default tbody tr td {
+.table-wrapper .table-default tbody tr td :not(:first-child){
 	position: relative;
 	padding-right: 0;
 	padding-left: 0;
-	padding-bottom: 10px;
+	
 }
 
 
@@ -145,14 +145,17 @@ table {
 }
 
 .memberchange {
-	margin-top: 140px;
-	padding-left: 200px;
-	margin-bottom: 167px
+	margin-top: 130px;
+	padding-left: 170px;
+
 }
 
 caption {
 	font-size: 15px;
 	font-weight: bold;
+}
+.input-inside-table{
+margin-bottom: 10px
 }
 @media all and (min-width:500px) and (max-width:1024px){
 #sidebar-wrapper{    left:-250px;}
@@ -185,9 +188,9 @@ caption {
 	</div>
 	<!-- 사이드 끝 -->
 	
-	<div class="main row" style="margin-top: 82px; padding-bottom: 15px;">
+	<div class="main row" style="margin-top: 82px; padding-bottom: 100px;">
 		<div class="col-md-12" style="background-color: #C2E2E8; height: 54.6px; bottom: 3px"></div>
-		<section class="memberchange" style="margin-bottom: 100px">
+		<section class="memberchange" style="margin-bottom: 37px">
 		<div class="box-default">
 		<span class="board-util-text color-blue">※ 고객님께서 입력해주신 정보를
 						통하여 추후 고객 맞춤 정보 등 유익한 서비스가 제공되오니, 정확한 입력 부탁 드립니다.</span>
@@ -211,8 +214,8 @@ caption {
 
 						<tr>
 							<th scope="row">아이디</th>
-							<td style="padding-top: 30px;width: 30%">
-								<div class="input-inside-table" style="margin-bottom: 18px">
+							<td style="padding-top: 20px;width: 30%">
+								<div class="input-inside-table">
 									<input type="text" name="" class="input-text" title="아이디"
 										value="asd1234" role="textbox" readonly="readonly" />
 								</div>

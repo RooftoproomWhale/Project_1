@@ -41,20 +41,22 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    background:#808080;
   }
-  
+  .sidebar-nav li:first-child{ background:#4d4d4d}
   .sidebar-nav li {
     text-indent: 1.5em;
     line-height: 2.8em;
+    color:#fff
   }
   
   .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #999;
+    color: #fff;
   }
   /*현재페이지*/
-  .sidebar-nav :nth-child(2) a{ color: #fff;background: #B2EBF4; }
+/*   .sidebar-nav :nth-child(2) a{ color: #fff;background: #B2EBF4; } */
   
   
   .sidebar-nav li:not(.sidebar-brand):hover {
@@ -68,8 +70,9 @@
   }
 	.sidebar-brand{
 	background-color: #C2E2E8;
-	margin-bottom: 0.5px;
 	font-weight: bold;
+	margin-top:0px;
+	margin-bottom: 0px;
 	}
 	.info{
 		font-size: 1.3em;
@@ -115,20 +118,22 @@
 <div id="page-wrapper" class="container-fluid">
 
 <div  id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-        <a href="#">마이페이지</a>
-      </li>
+
+	  <h3 class="sidebar-brand" style="height: 90px;text-align: center;line-height: 90px;height: 120px">
+    	<img style="width: 100%;height: 100%" src="<c:url value='/img/mypage.PNG'/>">
+       </h3>
+	<ul class="sidebar-nav">
+	<li><span class="glyphicon glyphicon-leaf" style="left: -20px"><strong>김길동</strong>님</span></li>
       <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
       <li><a href="#">복약 관리</a></li>
-      <li><a href="#">진료 예약 현황</a></li>
+      <li><a href="<c:url value='/mypage/ReservationList.hst'/>">진료 예약 현황</a></li>
       <li><a href="#">내 질병 관리</a></li>
       <li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
     </ul>
   </div>
 <div class="main row" style="margin-top: 82px;padding-bottom:10px;background-color: #F3F3F3;">
   <!-- 첫번째 줄 -->
-<div class="col-md-12" style="background-color: #C2E2E8; height: 54.6px;bottom: 3px"></div>
+
 <div class="page content col-md-8" style="padding-right: 50px;left:60px;top:60px">
 
 <div class='content-one col-md-5'>
