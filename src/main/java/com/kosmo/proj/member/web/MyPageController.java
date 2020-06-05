@@ -25,9 +25,14 @@ public class MyPageController {
 	   public String ChangeMember() {
 	      return "ChangeMember.tiles";
 	   }
+
 	   //진료예약 현황
 	   @RequestMapping("/mypage/ReservationList.hst")
 	   public String ReservationList() {
 	      return "ReservationList.tiles";
+	   }
+	   @RequestMapping("/mypage/Yun.hst")
+	   public String Yun() {
+	      return "Yun.tiles";
 	   }
 }

@@ -140,6 +140,18 @@ public class HomeController {
 	{
 		return "covid.tiles";
 	}
+	@RequestMapping("/Homespital/Health_info.hst")
+	public String health()
+	{
+		return "Health_info.tiles";
+	}
+	@RequestMapping("/Homespital/Health_detail.hst")
+	public String healthDetail()
+	{
+		return "Health_detail.tiles";
+	}
+	
+	
 	
 //	마이바티스test
 	@RequestMapping("/Member/select.hst")

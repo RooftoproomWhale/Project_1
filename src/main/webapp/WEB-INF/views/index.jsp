@@ -165,7 +165,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-4" style="cursor: pointer"
-					onclick="location.href='<c:url value='.hst'/>'">
+					onclick="location.href='<c:url value='/Homespital/Health_info.hst'/>'">
 					<i class="fa fa-language"></i>
 					<div class="service-desc">
 						<h3>예방 정보</h3>
@@ -185,8 +185,8 @@
 					</div>
 				</div>
 
-				<div class="col-md-4" style="cursor: pointer"
-					onclick="location.href='<c:url value=''/>'">
+				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Covid/status.hst'/>'">
+
 					<i class="fa fa-pie-chart"></i>
 					<div class="service-desc">
 						<h3>간편 검사</h3>

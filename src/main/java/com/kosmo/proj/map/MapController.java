@@ -24,18 +24,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.proj.member.MemberService;
+import com.kosmo.proj.service.MapService;
 
 @Controller
 public class MapController {
 	
-	@Resource(name = "memberService")
-	private MemberService memberService;
+	@Resource(name = "mapService")
+	private MapService mapService;
 	
 	
 	@RequestMapping("/Homespital/Map.hst")
 	public String map()
 	{
 		return "Map.tiles";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/hospitalList.hst",produces = "text/html; charset=UTF-8")
+	public String hospitalList(@RequestParam Map map)
+	{
+		List<Map> list = mapService.selectList(map);
+		
+//		String latitude = map.get("lat").toString();
+//		String longitude = map.get("lng").toString();
+		
+		System.out.println(JSONArray.toJSONString(list));
+		
+		return JSONArray.toJSONString(list);
 	}
 	
 	@ResponseBody
@@ -90,7 +105,7 @@ public class MapController {
 	@RequestMapping(value="/Homespital/Map/Covid.hst",produces = "text/html; charset=UTF-8")
 	public String covidMap()
 	{
-		List<Map> list = memberService.selectList();
+		List<Map> list = mapService.selectList();
 	
 		System.out.println(JSONArray.toJSONString(list));
 		
