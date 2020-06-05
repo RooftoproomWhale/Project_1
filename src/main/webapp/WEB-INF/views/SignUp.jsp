@@ -695,10 +695,10 @@ width: 100%;
 <form id="msform">
 	<div class="col-md-offset-2 col-md-8 col-xs-6" align="center">
 		<ul id="progressbar">
-			<li class="active">agree</li>
+			<li class="active">Agreement</li>
 			<li>Account Setup</li>
-			<li>individual Setup</li>
-			<li>etc</li>
+			<li>Individual Setup</li>
+			<li>History</li>
 		</ul>
 		<!-- fieldsets -->
 		<fieldset>
@@ -732,10 +732,15 @@ width: 100%;
 						<input type="text" id="email" placeholder="이메일">
 					</div>
 					<div class="col-md-2">
-						<input type="button" class="btn btn-primary" value="이메일인증">
+						<input type="button" class="btn btn-success" value="이메일인증">
+					</div>
+					<div class="col-md-8">
+						<input type="password" name="auth" placeholder="인증번호 입력" /> 
+					</div>
+					<div class="col-md-2">
+						<input type="button" class="btn btn-primary" value=" 확인   ">
 					</div>
 					<div class="col-md-12">
-						<input type="password" name="auth" placeholder="인증번호 입력" /> 
 						<input type="password" name="pass" placeholder="비밀번호" /> 
 						<input type="password" name="cpass" placeholder="비밀번호 확인" />
 					</div>
@@ -848,7 +853,7 @@ width: 100%;
 			</div>
 			<textarea name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
 			<input type="button" name="previous" class="previous action-button" value="이전" /> 
-			<input type="button" name="" class="action-button" value="회원가입" />
+			<input type="button" name="signupBtn" class="action-button" value="회원가입" />
 		</fieldset>
 		<fieldset>
 			<h1 class="fs-title">병원 제휴</h1>
@@ -868,7 +873,7 @@ width: 100%;
 				</div>
 			</div>
 			<input type="button" id="auth_prev" class="action-button" value="이전" />
-			<input type="button" name="signup" class="action-button" value="회원가입" />
+			<input type="button" name="signupBtn" class="action-button" value="회원가입" />
 		</fieldset>
 	</div>
 </form>
