@@ -25,8 +25,10 @@ public class MapDao implements MapService{
 	@Override
 	public List<Map> selectList(Map map) {
 		// TODO Auto-generated method stub
+
 //		return sqlMapper.selectList("hospitalSelect",map);
 		return sqlMapper.selectList("hospitalSelectByXY",map);
+
 	}
 
 }

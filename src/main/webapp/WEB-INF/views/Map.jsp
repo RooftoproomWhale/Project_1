@@ -88,6 +88,7 @@
 	.warp_invisible{transform:translateX(-391px);}
 	.left_toggle{left:0; }
 	.search_item{margin: 0 20px;display: block;}
+
 	
 	.content_title{
 		display: inline-block;
@@ -96,6 +97,8 @@
 	.content_body{
 		
 	}
+
+
 </style>
 <div class="map_wrap">
 	<div id="search_wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px;position:absolute;z-index: 3">
@@ -140,12 +143,14 @@
 							<div class="content_title">
 								<strong>병원</strong>
 							</div>
+
 							<div class="content_body">
 								내과
 								010-1234-5678
 							</div>
 							<div class="content_body">
 								서울 금천구 가산디지털1로 186 제이플라츠 2층 애슐리
+
 							</div>
 							
 						</div>
@@ -244,7 +249,9 @@
 			$('.info-toggle').css("left","0");
 		}); */
 		$('.search_keyword_submit').click(function(){
+
 			loadHospitalList(lat,lon);
+
 		});
 		$('.info_btn_toggle').click(function(){
 			console.log($('.info_wrap'));
