@@ -294,7 +294,7 @@
 				<h3 id="main">내정보</h3>
 				<ul class="list-unstyled1">
 
-<<<<<<< HEAD
+
 <div class='content-one col-md-5'>
    <h3 id="main">내정보</h3>
      	<ul class="list-unstyled1" >
@@ -355,7 +355,7 @@
 				</li>
 				
 			</ul>
-=======
+
 					<li>이름&emsp; &emsp; <span>김길동</span></li>
 					<li>성별&nbsp; &ensp;&emsp; <span>남성</span></li>
 					<li>연락처&nbsp; &ensp;&emsp; <span>010-1234-5678</span></li>
@@ -444,7 +444,7 @@
 						onclick="location.href='<c:url value='/mypage/ChangePassword.hst'/>'" /></li>
 				</ul>
 			</div>
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
+
 		</div>
 		<!-- 오른쪽 사이드 -->
 		<div class="page con2 col-md-3" style="padding-top: 60px">

@@ -868,7 +868,7 @@ width: 100%;
 				</div>
 			</div>
 			<input type="button" id="auth_prev" class="action-button" value="이전" />
-			<input type="button" name="signup" class="previous action-button" value="회원가입" />
+			<input type="button" name="signup" class="action-button" value="회원가입" />
 		</fieldset>
 	</div>
 </form>

@@ -35,7 +35,67 @@
 	    outline: 0;
 	}
 	.menu_wrap{left: 13px;bottom: 19px;text-align: center;position: absolute;z-index: 2;}
+	.info_wrap{position: absolute;top: 80px;left: 0;bottom: 0;width: 390px;height:100%;z-index: 200;background: #fff;}
+	.info-toggle{position: absolute;top: 50%;left: 0;left: 390px;z-index: 20;}
+	.info_btn_toggle{
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin: auto;
+		width: 22px;
+		height: 54px;
+		background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/shadow/img_navi.png) no-repeat 0 0;
+		cursor: pointer;
+	}
+	.top_area{
+		position: relative;
+	    height: 94px;
+	    padding: 20px 20px 2px;
+	    
+	}
+	.top_search_area{
+		
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    width: 350px;
+	    height: 46px;
+	    border-radius: 3px;
+		background-color: #f2f2f2;
+	}
+	.search_keyword_input{
+		float: left;
+	    width: 300px;
+	    padding: 12px 16px 15px;
+	    border: 0 none;
+	    font-weight: bold;
+	    font-size: 16px;
+	    line-height: 19px;
+	    background-color: transparent;
+	    outline: 0;
+	}
+	.search_keyword_submit{
+		float: left;
+		width: 36px;
+		height: 36px;
+	    margin: 5px 0;
+	    border: 0 none;  
+	    line-height: 0;
+	    background-position: 0 -120px;
+	    cursor: pointer;
+	    background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/ico_search.png) no-repeat;
+	}
+	.warp_invisible{transform:translateX(-391px);}
+	.left_toggle{left:0; }
+	.search_item{margin: 0 20px;display: block;}
 	
+	.content_title{
+		display: inline-block;
+	    font-size: 17px;
+	}
+	.content_body{
+		
+	}
 </style>
 <div class="map_wrap">
 	<div id="search_wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px;position:absolute;z-index: 3">
@@ -64,6 +124,40 @@
 		<button type="button" onclick="refreshMap()">갱신</button>
 	</div>
 	 -->
+	<div class="info_wrap">
+		<div class="top_area">
+			<div class='top_search_area'>
+				<input class="search_keyword_input" maxlength="100" autocomplete="off">
+				<button type="button" class="search_keyword_submit"></button>
+			</div>
+		</div>
+		<div class="scroll_area">
+			<div class="search_list">
+			
+				<div class="search_item">
+					<div class="search_item_detail">
+						<div class="detail_content">
+							<div class="content_title">
+								<strong>병원</strong>
+							</div>
+							<div class="content_body">
+								내과
+								010-1234-5678
+							</div>
+							<div class="content_body">
+								서울 금천구 가산디지털1로 186 제이플라츠 2층 애슐리
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div class="info-toggle">
+		<span class="info_btn_toggle"></span>
+	</div>
 	<div class="menu_wrap">
 		<button type="button" onclick="changeApi(0)">병원</button>
 		<button type="button" onclick="changeApi(1)">약국</button>
@@ -141,6 +235,26 @@
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=12d8eede943e602b615bb4e2dc8e5e30&libraries=services,clusterer,drawing"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+	$(function() {
+		console.log($('.info_btn_toggle'))
+		/* $('.info_btn_toggle').on('click',function(){
+			console.log($('.info_wrap'));
+			$('.info_wrap').css("transform","translateX(-391px)");
+			$('.info-toggle').css("left","0");
+		}); */
+		$('.search_keyword_submit').click(function(){
+			loadHospitalList(lat,lon);
+		});
+		$('.info_btn_toggle').click(function(){
+			console.log($('.info_wrap'));
+			$('.info_wrap').toggleClass('warp_invisible');
+			$('.info-toggle').toggleClass('left_toggle');
+			
+			
+		});
+	});
+</script>
 <script>
 
 	var markers = [];
@@ -566,6 +680,62 @@
 							 }
 						});
 					});
+				},
+				error:function(e){
+					
+				}
+			});
+		}
+		function loadHospitalList(latitude,longitude)
+		{
+			$.ajax({
+				url:"<c:url value='/Homespital/Map/hospitalList.hst'/>",
+				type:'get',
+				datatype:'json',
+				data:{"cor_x":latitude,"cor_y":longitude},
+				beforeSend: function () {
+					console.log("beforeSend");
+					FunLoadingBarStart();
+				},
+				complete: function () {
+					console.log("complete");
+					FunLoadingBarEnd();
+				},
+				success:function(data){
+					var jsonData = JSON.parse(data);
+					console.log("연결성공", jsonData,typeof(jsonData));
+					var items = '';
+					$.each(jsonData, function(i, item) {
+						console.log(item);
+						/* <div class="search_item">
+							<div class="search_item_detail">
+								<div class="detail_content">
+									<div class="content_title">
+										<strong>병원</strong>
+									</div>
+									<div class="content_address">
+										서울 금천구 가산디지털1로 186 제이플라츠 2층 애슐리
+										02-2028-4248
+									</div>
+									
+								</div>
+							</div>
+						</div> */
+						
+						items += '<div class="search_item">'+
+									'<div class="search_item_detail">'+
+										'<div class="detail_content">'+
+											'<div class="content_title">'+
+												'<strong>'+item['HOSP_NAME']+'</strong>'+
+											'</div>'+
+											'<div class="content_address">'+
+												item['ADDRESS']+
+											'</div>'+
+										'</div>'+
+									'</div>'+
+								'</div>'
+					});
+					$('.search_list').html(items);
 				},
 				error:function(e){
 					

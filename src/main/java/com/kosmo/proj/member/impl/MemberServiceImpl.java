@@ -59,10 +59,5 @@ public class MemberServiceImpl implements MemberService{
 		return dao.update(map);
 	}
 
-	@Override
-	public List<Map> selectList() {
-		// TODO Auto-generated method stub
-		return dao.selectList();
-	}
 
 }

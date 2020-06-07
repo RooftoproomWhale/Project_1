@@ -4,7 +4,10 @@
 <html>
 
 <style>
-
+.row-padding {
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
 /* 사이드바 래퍼 스타일 */
 #page-wrapper {
 	padding-left: 250px;
@@ -193,20 +196,32 @@ caption {
 <title>Insert title here</title>
 </head>
 <body>
-<div id="page-wrapper" class="container-fluid">
-	<div id="sidebar-wrapper">
-		<ul class="sidebar-nav">
-			<li class="sidebar-brand"><a href="#">마이페이지</a></li>
-			<li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
-			<li><a href="#">복약 관리</a></li>
-			<li><a href="#">진료 예약 현황</a></li>
-			<li><a href="#">내 질병 관리</a></li>
-			<li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
-		</ul>
+	<div id="page-wrapper" class="container-fluid">
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><a href="#">마이페이지</a></li>
+				<li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
+				<li><a href="<c:url value='/mypage/Yun.hst'/>">복약 관리</a></li>
+				<li><a href="#">진료 예약 현황</a></li>
+				<li><a href="#">내 질병 관리</a></li>
+				<li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
+			</ul>
+		</div>
+		<div class="main row" style="margin-top: 82px; padding-bottom: 15px;">
+			<div class="col-md-12"
+				style="background-color: #C2E2E8; height: 54.6px; bottom: 3px"></div>
+		</div>
 	</div>
-	<div class="main row" style="margin-top: 82px; padding-bottom: 15px;">
-		<div class="col-md-12"
-			style="background-color: #C2E2E8; height: 54.6px; bottom: 3px"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-header">
+					<h1>복약관리</h1>
+				</div>
+				<p>홈스피탈 복약관리</p>
+			</div>
+		</div>
 	</div>
-</div>
+</body>
 </html>
