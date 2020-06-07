@@ -1,4 +1,4 @@
-package com.kosmo.proj.member.impl;
+package com.kosmo.proj.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -7,9 +7,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-
-import com.kosmo.proj.member.MemberDTO;
-import com.kosmo.proj.member.MemberService;
+import com.kosmo.proj.service.MemberDTO;
+import com.kosmo.proj.service.MemberService;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{

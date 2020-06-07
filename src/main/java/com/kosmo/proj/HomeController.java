@@ -27,8 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kosmo.proj.member.MemberDTO;
-import com.kosmo.proj.member.MemberService;
+import com.kosmo.proj.service.MemberDTO;
+import com.kosmo.proj.service.MemberService;
 
 /**
  * Handles requests for the application home page.
