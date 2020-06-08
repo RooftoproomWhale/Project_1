@@ -10,6 +10,7 @@ animation: fadein 1s;
     from {
         opacity:0;
     }
+    
     to {
         opacity:1;
     

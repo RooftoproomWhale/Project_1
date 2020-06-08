@@ -62,6 +62,7 @@
   .sidebar-nav li:not(.sidebar-brand):hover {
     color: #fff;
     background: #B2EBF4;
+    animation : 1s;
   }
   
   .sidebar-nav > .sidebar-brand {
