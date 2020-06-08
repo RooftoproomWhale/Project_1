@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kosmo.proj.member.MemberService;
+import com.kosmo.proj.service.MemberService;
 
 @Controller
 public class AuthController {

@@ -88,6 +88,17 @@
 	.warp_invisible{transform:translateX(-391px);}
 	.left_toggle{left:0; }
 	.search_item{margin: 0 20px;display: block;}
+
+	
+	.content_title{
+		display: inline-block;
+	    font-size: 17px;
+	}
+	.content_body{
+		
+	}
+
+
 </style>
 <div class="map_wrap">
 	<div id="search_wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px;position:absolute;z-index: 3">
@@ -132,9 +143,14 @@
 							<div class="content_title">
 								<strong>병원</strong>
 							</div>
-							<div class="content_address">
+
+							<div class="content_body">
+								내과
+								010-1234-5678
+							</div>
+							<div class="content_body">
 								서울 금천구 가산디지털1로 186 제이플라츠 2층 애슐리
-								02-2028-4248
+
 							</div>
 							
 						</div>
@@ -233,49 +249,9 @@
 			$('.info-toggle').css("left","0");
 		}); */
 		$('.search_keyword_submit').click(function(){
-			$.ajax({
-				url:"<c:url value='/Homespital/Map/hospitalList.hst'/>",
-				type:'get',
-				datatype:'json',
-				//data:{"lat":latitude,"lng":longitude},
-				beforeSend: function () {
-					console.log("beforeSend");
-					FunLoadingBarStart();
-				},
-				complete: function () {
-					console.log("complete");
-					FunLoadingBarEnd();
-				},
-				success:function(data){
-					var jsonData = JSON.parse(data);
-					console.log("연결성공", jsonData,typeof(jsonData));
-					var items = '';
-					$.each(jsonData, function(i, item) {
-						console.log(item);
-						/* <div class="search_item">
-							<div class="search_item_detail">
-								<div class="detail_content">
-									<div class="content_title">
-										<strong>병원</strong>
-									</div>
-									<div class="content_address">
-										서울 금천구 가산디지털1로 186 제이플라츠 2층 애슐리
-										02-2028-4248
-									</div>
-									
-								</div>
-							</div>
-						</div> */
-						
-						items += '<div class="search_item"><div class="search_item_detail"><div class="detail_content"><div class="content_title"><strong>'+item['HOSP_NAME']+'</strong></div><div class="content_address">'+item['ADDRESS']+'</div></div></div></div>'
-						
-					});
-					$('.search_list').html(items);
-				},
-				error:function(e){
-					
-				}
-			});
+
+			loadHospitalList(lat,lon);
+
 		});
 		$('.info_btn_toggle').click(function(){
 			console.log($('.info_wrap'));
@@ -711,6 +687,62 @@
 							 }
 						});
 					});
+				},
+				error:function(e){
+					
+				}
+			});
+		}
+		function loadHospitalList(latitude,longitude)
+		{
+			$.ajax({
+				url:"<c:url value='/Homespital/Map/hospitalList.hst'/>",
+				type:'get',
+				datatype:'json',
+				data:{"cor_x":latitude,"cor_y":longitude},
+				beforeSend: function () {
+					console.log("beforeSend");
+					FunLoadingBarStart();
+				},
+				complete: function () {
+					console.log("complete");
+					FunLoadingBarEnd();
+				},
+				success:function(data){
+					var jsonData = JSON.parse(data);
+					console.log("연결성공", jsonData,typeof(jsonData));
+					var items = '';
+					$.each(jsonData, function(i, item) {
+						console.log(item);
+						/* <div class="search_item">
+							<div class="search_item_detail">
+								<div class="detail_content">
+									<div class="content_title">
+										<strong>병원</strong>
+									</div>
+									<div class="content_address">
+										서울 금천구 가산디지털1로 186 제이플라츠 2층 애슐리
+										02-2028-4248
+									</div>
+									
+								</div>
+							</div>
+						</div> */
+						
+						items += '<div class="search_item">'+
+									'<div class="search_item_detail">'+
+										'<div class="detail_content">'+
+											'<div class="content_title">'+
+												'<strong>'+item['HOSP_NAME']+'</strong>'+
+											'</div>'+
+											'<div class="content_address">'+
+												item['ADDRESS']+
+											'</div>'+
+										'</div>'+
+									'</div>'+
+								'</div>'
+					});
+					$('.search_list').html(items);
 				},
 				error:function(e){
 					

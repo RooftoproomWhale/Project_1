@@ -46,4 +46,9 @@
 	<select id="hospitalSelect" resultType="java.util.Map">
 		SELECT * FROM hospital WHERE <![CDATA[ ROWNUM <= 10 ]]>
 	</select>
+
+	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM hospital WHERE <![CDATA[ ROWNUM <= 10 ]]>
+	</select>
+
 </mapper>

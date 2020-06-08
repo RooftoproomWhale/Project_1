@@ -24,7 +24,6 @@
     overflow-y: auto;
      border: 1px #DAD9FF solid;
     margin-top: 79px;
-
   
   }
   
@@ -110,11 +109,9 @@
 #app{display: none}
 #appdown{width: 90%;float: inherit;margin-left: 76px;margin-top: 0px}
 }
-
 .list-unstyled1 .list-unstyled2{height: 100%;padding-left: 20px;width: 100%}
 </style>
 <script>
-
 </script>
 <div id="page-wrapper" class="container-fluid">
 
