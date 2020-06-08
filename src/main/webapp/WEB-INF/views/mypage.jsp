@@ -13,6 +13,9 @@
 
 
 <style type="text/css">
+#jquery-accordion-menu {
+  	top: 81px;
+}
 *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
 body{background:#FFFFFF;}
 .content{width:260px;margin:100px auto;}
@@ -24,12 +27,8 @@ body{background:#FFFFFF;}
 	height:60px;
 	width:100%;
 	font-size: 16px
-}
+	}
 
-#jquery-accordion-menu {
-  	top: 81px;
-}
-/*  color: #6c757d; */
 #footer 
  	{ 
 		position: absolute; 
