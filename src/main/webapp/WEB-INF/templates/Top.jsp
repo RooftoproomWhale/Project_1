@@ -90,8 +90,7 @@
 						<li class="divider"></li>
 						<li><a href='<c:url value="/Homespital/MedicineForm.hst"/>'>안전상비의약품</a></li>
 						<li class="divider"></li>
-						<li><a href="<c:url value='/Calendar/calendar.hst'/>">일정
-								관리</a></li>
+						<li><a href="<c:url value='/Calendar/calendar.hst'/>">일정 관리</a></li>
 						<li class="divider"></li>
 						<li><a href="<c:url value='/Homespital/Health_info.hst'/>">예방 정보</a></li>
 					</ul></li>

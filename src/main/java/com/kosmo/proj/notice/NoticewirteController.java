@@ -10,7 +10,7 @@ public class NoticewirteController {
 	//공지사항 글쓰기
 	@RequestMapping("/Notice/Noticewrite.hst")
 	public String Noticewrite() {
-
+		
 		return "Noticewrite.tiles";
 	}
 

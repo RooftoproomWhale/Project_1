@@ -10,7 +10,7 @@ public class NoticeController {
 	//공지사항
 	@RequestMapping("/Homespital/Notice.hst")
 	public String Noticewrite() {
-
+		
 		return "Notice.tiles";
 	}
 
