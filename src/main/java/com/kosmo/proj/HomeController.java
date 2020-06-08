@@ -74,7 +74,7 @@ public class HomeController {
 		}
 //        String apiUrl = "https://openapi.naver.com/v1/search/news.json?query="+ text;
         
-        String apiUrl = "https://openapi.naver.com/v1/search/news.json?query="+ text + "&display=20";
+        String apiUrl = "https://openapi.naver.com/v1/search/news.json?query="+ text + "&display=12";
         
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", clientId);
@@ -143,12 +143,12 @@ public class HomeController {
 	@RequestMapping("/Homespital/Health_info.hst")
 	public String health()
 	{
-		return "Health_info.tiles";
+		return "health_info/Health_info.tiles";
 	}
 	@RequestMapping("/Homespital/Health_detail.hst")
 	public String healthDetail()
 	{
-		return "Health_detail.tiles";
+		return "health_info/Health_detail.tiles";
 	}
 	
 	
