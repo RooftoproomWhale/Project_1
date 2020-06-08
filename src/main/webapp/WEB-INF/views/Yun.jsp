@@ -3,6 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<link href="<c:url value='/css/jquery-accordion-menu.css'/>"
+	rel="stylesheet" type="text/css" />
 <style>
 a:hover, a:focus {
 	text-decoration: none;
@@ -102,180 +104,118 @@ a:hover, a:focus {
 	border-top: none;
 }
 /*사이드바*/
-#sidebar-wrapper {
-	position: fixed;
-	width: 250px;
-	height: 82%;
-	margin-left: -250px;
-	background: #fff;
-	overflow-x: hidden;
-	overflow-y: auto;
-	border: 1px #DAD9FF solid;
-	margin-top: 79px;
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
 
-@import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
-@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-h1, h2, h3, h4 {
-  font-family: 'Jeju Gothic';
-}
 body {
-  font-family: 'Nanum Gothic';
+	background: #ffffff;
 }
 
-/* 실질적인 각 내비게이션 메뉴들의 색상 등을 정의 */
-#sidebar .list-group-item {
-    background-color: #333333;
-    color: #acacac;
-    border-color: #1c1c1c;
-    border-left: 0;
-    border-right: 0;
-    border-radius: 0;
-    white-space: nowrap;
-}
-/* 내비게이션을 아래 끝까지 나열 */
-#sidebar .list-group {
-    background-color: #333333;
-    min-height: 100vh;
-}
-/* 메뉴를 선택했을 때  부모의 색상을 변경해 줌 */
-#sidebar .list-group .list-group-item[aria-expanded="true"] {
-  background-color: #1c1c1c;
-}
-/* 메뉴를 선택했을 때 자식의 색상을 변경해 줌 */
-#sidebar .list-group-item:not(.collapsed) {
-    background-color: #1c1c1c;
-}
-/* 작은 화면일 때 아이콘 선택을 가능케 함 */
-#sidebar {
-    overflow: hidden;
-    z-index: 2;
+.content {
+	width: 260px;
+	margin: 100px auto;
 }
 
-@media (max-width:768px) {
-    /* 작은 화면에서는 왼쪽 내비게이션 너비를 정해진 크기로 설정 */
-    #sidebar {
-        min-width: 35px;
-        max-width: 40px;
-        overflow-y: auto;
-        overflow-x: visible;
-        transition: all 0.25s ease;
-        transform: translateX(0px);
-        position: fixed;
-    }
-    /* 작은 화면에서 서브 메뉴를 열었을 때 글자가 보이도록 함 */
-    #sidebar, #sidebar .list-group {
-        min-width: 35px;
-        overflow: visible;
-    }
-    /* 작은 화면에서 서브 메뉴를 열었을 때 정해진 너비로 보이게 함 */
-    #sidebar .list-group .collapse.show, #sidebar .list-group .collapsing {
-        position: relative;
-        z-index: 1;
-        width: 190px;
-        top: 0;
-    }
-    /* 작아졌을 때 아이콘을 가운데 정렬해 줌 */
-    #sidebar .list-group > .list-group-item {
-        text-align: center;
-        padding: .75rem .5rem;
-    }
-    #sidebar::-webkit-scrollbar { width: 0px; }
+#demo-list a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 60px;
+	width: 100%;
+	font-size: 16px
 }
 
-#main {
-  height: 100vh;
-  overflow-y: scroll;
+#jquery-accordion-menu {
+	top: 81px;
 }
 
-@media (max-width:768px) {
-  /* 작은 화면에서는 왼쪽 내비게이션 너비를 정해진 크기로 설정 */
-  #main {
-      margin-left: 38px;
-  }
+#footer {
+	padding-top: 80px;
 }
-
-@media (max-width:560px) {
-    .mobile {
-      display: none;
-    }
-}
-
-.boardTitle {
-  background-color: #efefef;
-  padding: 6px;
-}
-
-.boardContent {
-  background-color: #efefef;
-  height: 320px;
-  overflow-y: scroll;
-  padding: 6px;
-}
-
 </style>
+
 <head>
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
-		<div class="row" style="padding-top: 100px">
-			<div class="col-lg-12">
-				<div class="page-header">
-					<h1>복약관리</h1>
+	<div class="container-fluid">
+		<div class="col-sm-2">
+			<div id="jquery-accordion-menu" class="jquery-accordion-menu">
+				<div class="col-sm-8 col-sm-offset-2">
+					<span><img style="width: 150px; height: 150px;" class="img-responsive" src='<c:url value="/img/logo.png"/>' alt="로고이미지" /></span>
 				</div>
-				<p>3세 이하 유아는 사용이 권장되지 않으며 임부는 반드시 의사와 사전에 상의하고 사용하도록 합니다</p>
+				<ul id="demo-list">
+					<li class="active"><a href="#"><i class="fa fa-home"></i>MYPAGE</a></li>
+					<li><a href="#"><i class="fa fa-file-image-o"></i>김길동님</a>
+					<li><a href="#"><i class="fa fa-cog"></i>개인정보 관리</a>
+						<ul class="submenu">
+							<li><a href="#">내 정보 보기</a></li>
+							<li><a href="#">내 정보 수정</a></li>
+							<li><a href="#">회원 탈퇴</a></li>
+						</ul></li>
+					<li><a href="#"><i class="fa fa-suitcase"></i>복약 관리</a>
+						<ul class="submenu">
+							<li><a href="#">Web Design </a></li>
+							<li><a href="#">Graphics </a><span class="jquery-accordion-menu-label">10 </span></li>
+							<li><a href="#">Photoshop </a></li>
+							<li><a href="#">Programming </a></li>
+						</ul></li>
+					<li><a href="#"><i class="fa fa-envelope"></i>진료예약 현황</a></li>
+					<li><a href="#"><i class="fa fa-envelope"></i>내 질병 관리</a></li>
+				</ul>
 			</div>
 		</div>
-	</div>
-	<div class="demo">
-		<div class="row text-center">
-			<h1 class="heading-title">복약 GUIDE</h1>
-		</div>
-		<div class="row">
-			<div class="col-md-offset-3 col-md-6">
-				<div class="panel-group" id="accordion" role="tablist"
-					aria-multiselectable="true">
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingOne">
-							<h4 class="panel-title">
-								<a class="" role="button" data-toggle="collapse"
-									data-parent="#accordion" href="#collapseOne"
-									aria-expanded="true" aria-controls="collapseOne"> Section 1
-								</a>
-							</h4>
+		<div class="col-xs-9 col-sm-offset-1" style="padding-top: 88px">
+			<div class="row">
+				<div class="page-header">
+					<h2 style="color: blue">복약관리</h2>
+				</div>
+				<p style="color: red">3세 이하 유아는 사용이 권장되지 않으며 임부는 반드시 의사와 사전에 상의하고 사용하도록 합니다</p>
+				</div><br/>
+			<div class="row">
+				<div class=" col-sm-9">
+					<div class="alert alert-warning alert-dismissible mt-3" role="alert">
+						복약 순응도란 처방받은 약을 환자가 전문 의료인의 지시에 따라 정확하게 복용. 
+						복약 순응도가 높을수록 치료효과가 높아진다.</div><br/>
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title">
+									<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+										aria-expanded="true" aria-controls="collapseOne">2020-06-08  서울 삼성병원</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+								<div class="panel-body">맥페란정 - 위장운동을 활성화시킴으로써 구역, 구토를 치료</div>
+							</div>
 						</div>
-						<div id="collapseOne" class="panel-collapse collapse in"
-							role="tabpanel" aria-labelledby="headingOne">
-							<div class="panel-body">Lorem ipsum dolor sit amet</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingTwo">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+										aria-expanded="false" aria-controls="collapseTwo"> 2020-06-08  서울 삼성병원</a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse"
+								role="tabpanel" aria-labelledby="headingTwo">
+								<div class="panel-body">티로파정 - 평활근 경축을 완화시킴으로써 항경령 및 진통 효과를 나타냄</div>
+							</div>
 						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingTwo">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#accordion" href="#collapseTwo"
-									aria-expanded="false" aria-controls="collapseTwo"> Section
-									2 </a>
-							</h4>
-						</div>
-						<div id="collapseTwo" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="headingTwo">
-							<div class="panel-body">Lorem ipsum dolor sit amet</div>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingThree">
-							<h4 class="panel-title">
-								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#accordion" href="#collapseThree"
-									aria-expanded="false" aria-controls="collapseThree">
-									Section 3 </a>
-							</h4>
-						</div>
-						<div id="collapseThree" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="headingThree">
-							<div class="panel-body">Lorem ipsum dolor sit amet</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingThree">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+										aria-expanded="false" aria-controls="collapseThree"> 2020-06-08  서울 삼성병원 </a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse"
+								role="tabpanel" aria-labelledby="headingThree">
+								<div class="panel-body">사이톱신정 - 향균작용을 통해 각종 세균감염증을 치료</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -283,6 +223,67 @@ body {
 		</div>
 	</div>
 </body>
-<script>
+<script src="<c:url value='/js/jquery-accordion-menu.js'/>"
+	type="text/javascript"></script>
+<script type="text/javascript">
+      (
+                  function($) {
+                     $.expr[":"].Contains = function(a, i, m) {
+                        return (a.textContent || a.innerText || "")
+                              .toUpperCase().indexOf(
+                                    m[3].toUpperCase()) >= 0;
+                     };
+                     function filterList(header, list) {
+                     
+                        var form = $("<form>").attr({
+                           "class" : "filterform",
+                           action : "#"
+                        }), input = $("<input>").attr({
+                           "class" : "filterinput",
+                           type : "text"
+                        });
+                        $(form).append(input).appendTo(header);
+                        $(input)
+                              .change(
+                                    function() {
+                                       var filter = $(this).val();
+                                       if (filter) {
+                                          $matches = $(list)
+                                                .find(
+                                                      "a:Contains("
+                                                            + filter
+                                                            + ")")
+                                                .parent();
+                                          $("li", list).not(
+                                                $matches)
+                                                .slideUp();
+                                          $matches.slideDown();
+                                       } else {
+                                          $(list).find("li")
+                                                .slideDown();
+                                       }
+                                       return false;
+                                    }).keyup(function() {
+                                 $(this).change();
+                              });
+                     }
+                     $(function() {
+                        filterList($("#form"), $("#demo-list"));
+                     });
+                  })(jQuery);
+   </script>
+<script type="text/javascript">
+jQuery(document).ready(function () {
+   jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+   
+});
+
+$(function(){   
+
+   $("#demo-list li").click(function(){
+      $("#demo-list li.active").removeClass("active")
+      $(this).addClass("active");
+   })   
+})   
 </script>
 </html>

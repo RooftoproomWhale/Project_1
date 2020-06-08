@@ -11,7 +11,7 @@
 		<div class="row">
 			<main id="main">
 				<div class="page-header">
-					<h2>글 쓰기</h2>
+					<h2 style="color:blue">글 쓰기</h2>
 				</div>
 				<p class="lead">게시글을 작성합니다.</p>
 				<hr>
