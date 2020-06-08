@@ -1,4 +1,4 @@
-package com.kosmo.proj.member;
+package com.kosmo.proj.service;
 
 public class MemberDTO {
 	private String mem_email;
