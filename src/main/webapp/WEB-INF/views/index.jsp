@@ -123,7 +123,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
 
 
 	<!-- Services Section -->
@@ -247,6 +247,7 @@
 
 			
 		</div>
+	</div>
 	</div>
 </body>
 <script>

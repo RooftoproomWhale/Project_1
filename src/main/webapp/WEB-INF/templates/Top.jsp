@@ -50,7 +50,6 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <%-- <link rel="stylesheet" type="text/css" href="<c:url value='/fonts/font-awesome/css/font-awesome.css'/>"> --%>
 
-
 <style>
 .dropdown:hover .dropdown-menu {display: block;}
 .dropdown-menu:hover .dropdown-toggle {background-color: #3e8e41;}
