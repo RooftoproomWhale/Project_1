@@ -27,8 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kosmo.proj.member.MemberDTO;
-import com.kosmo.proj.member.MemberService;
+import com.kosmo.proj.service.MemberDTO;
+import com.kosmo.proj.service.MemberService;
 
 /**
  * Handles requests for the application home page.
@@ -140,6 +140,18 @@ public class HomeController {
 	{
 		return "covid.tiles";
 	}
+	@RequestMapping("/Homespital/Health_info.hst")
+	public String health()
+	{
+		return "Health_info.tiles";
+	}
+	@RequestMapping("/Homespital/Health_detail.hst")
+	public String healthDetail()
+	{
+		return "Health_detail.tiles";
+	}
+	
+	
 	
 //	마이바티스test
 	@RequestMapping("/Member/select.hst")

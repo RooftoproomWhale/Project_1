@@ -24,7 +24,6 @@
     overflow-y: auto;
      border: 1px #DAD9FF solid;
     margin-top: 79px;
-
   
   }
   
@@ -41,20 +40,22 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    background:#808080;
   }
-  
+  .sidebar-nav li:first-child{ background:#4d4d4d}
   .sidebar-nav li {
     text-indent: 1.5em;
     line-height: 2.8em;
+    color:#fff
   }
   
   .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #999;
+    color: #fff;
   }
   /*현재페이지*/
-  .sidebar-nav :nth-child(2) a{ color: #fff;background: #B2EBF4; }
+/*   .sidebar-nav :nth-child(2) a{ color: #fff;background: #B2EBF4; } */
   
   
   .sidebar-nav li:not(.sidebar-brand):hover {
@@ -68,8 +69,9 @@
   }
 	.sidebar-brand{
 	background-color: #C2E2E8;
-	margin-bottom: 0.5px;
 	font-weight: bold;
+	margin-top:0px;
+	margin-bottom: 0px;
 	}
 	.info{
 		font-size: 1.3em;
@@ -77,7 +79,7 @@
 		
 	}
 	
-#main{background-color: #B2EBF4;width: 100%;height: 48px;margin: 0px;margin-bottom: 9px;text-align: center;line-height: 48px;border-radius:0.69em 0.69em 0 0;color: #5f6368}
+#main{background-color: #B2C7CC;width: 100%;height: 48px;margin: 0px;margin-bottom: 9px;text-align: center;line-height: 48px;border-radius:0.69em 0.69em 0 0;color: #5f6368}
 	/*Best5*/
 .homeFaqSec {position:relative;clear:both;float:left;width:580px;height:163px;border: 2px #BDBDBD solid;padding-bottom: 0px;margin-bottom: 0px;}
 .homeFaqSec h3 {width:101px;height:24px;padding:19px 0 0 10px;border-bottom:1px solid #e0e1e3;}
@@ -106,29 +108,29 @@
 #app{display: none}
 #appdown{width: 90%;float: inherit;margin-left: 76px;margin-top: 0px}
 }
-
 .list-unstyled1 .list-unstyled2{height: 100%;padding-left: 20px;width: 100%}
 </style>
 <script>
-
 </script>
 <div id="page-wrapper" class="container-fluid">
 
 <div  id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-        <a href="#">마이페이지</a>
-      </li>
+
+	  <h3 class="sidebar-brand" style="height: 90px;text-align: center;line-height: 90px;height: 120px">
+    	<img style="width: 100%;height: 100%" src="<c:url value='/img/mypages.PNG'/>">
+       </h3>
+	<ul class="sidebar-nav">
+	<li><span class="glyphicon glyphicon-leaf" style="left: -20px"><strong>김길동</strong>님</span></li>
       <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
-      <li><a href="#">복약 관리</a></li>
-      <li><a href="#">진료 예약 현황</a></li>
+      <li><a href="<c:url value='/mypage/Yun.hst'/>">복약 관리</a></li>
+      <li><a href="<c:url value='/mypage/ReservationList.hst'/>">진료 예약 현황</a></li>
       <li><a href="#">내 질병 관리</a></li>
       <li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
     </ul>
   </div>
 <div class="main row" style="margin-top: 82px;padding-bottom:10px;background-color: #F3F3F3;">
   <!-- 첫번째 줄 -->
-<div class="col-md-12" style="background-color: #C2E2E8; height: 54.6px;bottom: 3px"></div>
+
 <div class="page content col-md-8" style="padding-right: 50px;left:60px;top:60px">
 
 <div class='content-one col-md-5'>
@@ -186,7 +188,7 @@
 							<li><a href="" ><span>4</span> [회원탈퇴] 이메일ID 회원탈퇴를 하고 싶어요.</a></li>
 							<li><a href="" ><span>5</span> [내정보] 마이페이지 시바꺼.</a></li>
 						</ol>
-<!-- 						<span class="moreBt"><a href="" target="_blank" title="내정보 도움말 더보기"><img src="https://ssl.nx.com/S2/membership/2011/button/bt_more.gif" width="36" height="10" alt="내정보 도움말 더보기" /></a></span> -->
+<span class="moreBt"><a href="" target="_blank" title="내정보 도움말 더보기"><img src="https://ssl.nx.com/S2/membership/2011/button/bt_more.gif" width="36" height="10" alt="내정보 도움말 더보기" /></a></span>
 					</div>
 				</li>
 				

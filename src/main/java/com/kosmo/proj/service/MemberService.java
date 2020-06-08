@@ -1,9 +1,9 @@
-package com.kosmo.proj.member;
+package com.kosmo.proj.service;
 
 import java.util.List;
 import java.util.Map;
 
-import com.kosmo.proj.member.MemberDTO;
+import com.kosmo.proj.service.MemberDTO;
 
 public interface MemberService {
 		
@@ -19,7 +19,5 @@ public interface MemberService {
 		int delete(Map map);
 		int insert(Map map);
 		int update(Map map);
-		
-		List<Map> selectList();
 
 }

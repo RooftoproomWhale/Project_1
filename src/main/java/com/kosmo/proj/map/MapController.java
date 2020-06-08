@@ -23,19 +23,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kosmo.proj.member.MemberService;
+import com.kosmo.proj.service.MapService;
+import com.kosmo.proj.service.MemberService;
 
 @Controller
 public class MapController {
 	
-	@Resource(name = "memberService")
-	private MemberService memberService;
+	@Resource(name = "mapService")
+	private MapService mapService;
 	
 	
 	@RequestMapping("/Homespital/Map.hst")
 	public String map()
 	{
 		return "Map.tiles";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/hospitalList.hst",produces = "text/html; charset=UTF-8")
+	public String hospitalList(@RequestParam Map map)
+	{
+		List<Map> list = mapService.selectList(map);
+		
+
+		String latitude = map.get("cor_y").toString();
+		String longitude = map.get("cor_x").toString();
+
+
+		
+		System.out.println(JSONArray.toJSONString(list));
+		
+		return JSONArray.toJSONString(list);
 	}
 	
 	@ResponseBody
@@ -90,7 +108,7 @@ public class MapController {
 	@RequestMapping(value="/Homespital/Map/Covid.hst",produces = "text/html; charset=UTF-8")
 	public String covidMap()
 	{
-		List<Map> list = memberService.selectList();
+		List<Map> list = mapService.selectList();
 	
 		System.out.println(JSONArray.toJSONString(list));
 		
@@ -160,5 +178,34 @@ public class MapController {
         } catch (IOException e) {
             throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
         }
+    }
+	
+	private static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
+        
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+         
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+         
+        if (unit == "kilometer") {
+            dist = dist * 1.609344;
+        } else if(unit == "meter"){
+            dist = dist * 1609.344;
+        }
+ 
+        return (dist);
+    }
+     
+ 
+    // This function converts decimal degrees to radians
+    private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+     
+    // This function converts radians to decimal degrees
+    private static double rad2deg(double rad) {
+        return (rad * 180 / Math.PI);
     }
 }

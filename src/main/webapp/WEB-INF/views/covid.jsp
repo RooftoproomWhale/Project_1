@@ -124,6 +124,7 @@
 							markerType: "square",
 							xValueFormatString: "DD MMM, YYYY",
 							color: "#F08080",
+							culture: "ko",
 							yValueFormatString: "#,##0K",
 							dataPoints: [
 								{ x: new Date(2017, 10, 1), y: 63 },
