@@ -23,6 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class MedicineController {
 	
+	
+	@RequestMapping("/Homespital/Management.hst")
+	public String management() {
+		return "MedicinManage.tiles";
+	}
+	
+	
+	
 	@RequestMapping("/Homespital/MedicineForm.hst")
 	public String medicineForm(Map map) {
 		String[] medi1 = {"어린이용타이레놀정80mg","타이레놀정160mg","타이레놀정500mg","어린이타이레놀현탁액","어린이부루펜시럽"};
