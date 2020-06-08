@@ -732,7 +732,7 @@ width: 100%;
 						<input type="text" id="email" placeholder="이메일">
 					</div>
 					<div class="col-md-2">
-						<input type="button" class="btn btn-success" value="이메일인증">
+						<input type="button" style="cursor: pointer" class="btn btn-success" value="이메일인증" onclick="location.href='<c:url value='/mailauth/testMail.hst'/>'">
 					</div>
 					<div class="col-md-8">
 						<input type="password" name="auth" placeholder="인증번호 입력" /> 
