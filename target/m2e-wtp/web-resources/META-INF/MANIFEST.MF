@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: kosmo_28
+=======
+Built-By: kosmo_30
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 Build-Jdk: 1.8.0_231
 Created-By: Maven Integration for Eclipse
 

@@ -10,6 +10,7 @@ animation: fadein 1s;
     from {
         opacity:0;
     }
+    
     to {
         opacity:1;
     
@@ -70,10 +71,10 @@ margin: 5px;
 				년에 2~4회, 소아는 6~10회 정도 감기에 걸린다. 감기 바이러스는 사람의 코나 목을 통해 들어와 감염을 일으킨다.
 				감기 바이러스를 가지고 있는 환자의 코와 입에서 나오는 분비물이 재채기나 기침을 통해 외부로 나오게 되면 그 속에 있는
 				감기 바이러스가 공기 중에 존재하다가 건강한 사람의 입이나 코에 닿아 전파된다.</div>
-			<div class="col-md-12"><h3>소제목(반복)</h3></div>
-  <div class="col-md-12">내용</div>
+			<div class="col-md-12"><h3>소제목</h3></div>
+  <div class="col-md-12">내용...</div>
   <div class="col-md-12"><h3>소제목</h3></div>
-  <div class="col-md-12">내용</div>
+  <div class="col-md-12">내용...</div>
 
 </div>
 </div>
