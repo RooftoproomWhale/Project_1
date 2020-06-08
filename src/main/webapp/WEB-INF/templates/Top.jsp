@@ -78,7 +78,7 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href='<c:url value="/Notice/BBS/NoticeList.hst"/>'>Notice</a></li>
+				<li><a href='<c:url value="/Homespital/Notice.hst"/>'>Notice</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" aria-expanded="false"> Services <span
 						class="caret"></span></a>

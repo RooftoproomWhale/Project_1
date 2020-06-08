@@ -21,7 +21,7 @@
 				</div>
 				<p class="lead">홈스피탈 공지사항</p>
 				<div style="max-width: 1300px; text-align: right;">
-					<a href="./boardWrite.html" class="btn btn-primary float-right">글쓰기</a>
+					<a href="<c:url value='/Notice/Noticewrite.hst'/>">글쓰기</a>
 				</div>
 				<hr>
 				<table class="table table-striped" style="max-width: 1300px;">
