@@ -20,6 +20,15 @@
         .jssora051.jssora051dn {opacity:.5;}
         .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
     
+    	#news li {
+    	
+    
+    	
+    	}
+    	#gra{
+    	background: linear-gradient( to right,#5f8cfd, #fff);
+    	
+    	}
 </style>
 <head>
 <meta charset="utf-8">
@@ -116,10 +125,9 @@
 			</div>
 			<!-- Issue Section -->
 			<div class="col-md-5 col-md-offset-1 col-sm-12">
-				<span style="color: red; font-size: 20pt; font-weight: bold; padding-bottom: 20px">속보</span>
-				<div class="row" id="news" style="font-size: 12pt">
-					<!-- 한줄 코멘트 목록-->
-					<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
+				<span style="color:#000000; font-size: 20pt; font-weight: bold; padding-bottom: 20px">속보</span>
+				<div class="row" id="news" style="font-size: 12pt;">
+						
 				</div>
 			</div>
 		</div>
@@ -198,7 +206,7 @@
 			</div>
 		</div>
 	</div>
-
+<div id="gra" style="width: 100%;height:50px;"></div>
 
 	<div class="row site-section" id="FAQ">
 		<div class="col-12 text-center" data-aos="fade">
@@ -267,15 +275,15 @@
 				dataType: "json",
 				success:function(data){
 					console.log(data);
-					var news = "<ul>";
+					var news = "<table class='table' style='width:80%;'>";
 					if(data.length==0){
 						news+="<li>뉴스 데이터가 없습니다</li>";
 					} 
 					$.each(data.items, function(index, element) {
 						console.log(element.title);
-						news+="<li><a href='"+element.originallink+"' target=_blank>"+element.title+"</a></li>";
+						news+="<tr><td><a href='"+element.originallink+"' target=_blank>"+element.title+"</a><td></tr>";
 					});
-					news+="</ul>";
+					news+="</table>";
 					
 					$('#news').html(news);
 				},
