@@ -32,6 +32,30 @@
 					</thead>
 					<tbody>
 						<tr>
+							<th scope="row" class="" style="text-align: center;">9</th>
+							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-05</td>
+						</tr>
+							<tr>
+							<th scope="row" class="" style="text-align: center;">8</th>
+							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-05</td>
+						</tr>
+							<tr>
+							<th scope="row" class="" style="text-align: center;">7</th>
+							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-05</td>
+						</tr>
+							<tr>
+							<th scope="row" class="" style="text-align: center;">6</th>
+							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-05</td>
+						</tr>
+						<tr>
 							<th scope="row" class="" style="text-align: center;">5</th>
 							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
 							<td class="" style="text-align: center;">윤승중</td>
