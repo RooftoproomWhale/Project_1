@@ -1,5 +1,6 @@
 package com.kosmo.proj.service.web;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -7,8 +8,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,17 +55,15 @@ public class MedicineController {
             URL url = new URL(urlstr);
             HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
             urlconnection.setRequestMethod("GET");
- 
             BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8"));
- 
             String returnLine;
- 
             while((returnLine = br.readLine()) != null) {
                 result.append(returnLine+"\r");
             }
             urlconnection.disconnect();
             System.out.println(result);
             jsonMedi = XML.toJSONObject(result.toString());
+            System.out.println(jsonMedi);
         }catch(Exception e){
             e.printStackTrace();
         }
