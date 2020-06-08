@@ -40,6 +40,7 @@ a:hover, a:focus {
 	border-bottom: none;
 	position: relative;
 	transition: all 0.5s ease 0s;
+	
 }
 
 #accordion .panel-title a.collapsed {

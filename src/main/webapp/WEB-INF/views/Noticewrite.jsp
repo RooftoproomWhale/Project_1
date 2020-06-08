@@ -7,6 +7,7 @@
 <title>공지사항 글쓰기</title>
 </head>
 <body>
+
 	<div class="container" style="padding-top:88px">
 		<div class="row">
 			<main id="main">
