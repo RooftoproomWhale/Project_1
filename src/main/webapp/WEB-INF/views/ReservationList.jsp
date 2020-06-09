@@ -75,6 +75,7 @@ body {
 				</ul>
 			</div>
 		</div>
+		
 		<div class="col-md-10">
 			<div class="row" style="padding-left: 60px; padding-top: 100px">
 				<div class="page-header">
