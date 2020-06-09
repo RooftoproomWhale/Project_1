@@ -106,9 +106,16 @@ a:hover, a:focus {
 #jquery-accordion-menu {
   	top: 81px;
 }
-*{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
-body{background:#FFFFFF;}
-.content{width:260px;margin:100px auto;}
+*{
+	box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;
+}
+
+body{
+	background:#FFFFFF;
+}
+.content{
+	width:260px;margin:100px auto;
+}
 #demo-list a{
 	overflow:hidden;
 	text-overflow:ellipsis;
@@ -119,16 +126,14 @@ body{background:#FFFFFF;}
 	font-size: 14px
 	}
 
-#footer 
- 	{ 
-		position: absolute; 
-		width:100%; 
-		left:0px; 
- 		bottom:0px; 
- 		background-color:#474747;
- 		height: 150px
- 		
- 	} 
+#footer{ 
+	position: absolute; 
+	width:100%; 
+	left:0px; 
+	bottom:0px; 
+	background-color:#474747;
+	height: 150px
+} 
 </style>
 
 <head>
@@ -192,8 +197,7 @@ body{background:#FFFFFF;}
 									</a>
 								</h4>
 							</div>
-							<div id="collapseTwo" class="panel-collapse collapse"
-								role="tabpanel" aria-labelledby="headingTwo">
+							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 								<div class="panel-body">티로파정 - 평활근 경축을 완화시킴으로써 항경령 및 진통 효과를 나타냄</div>
 							</div>
 						</div>
@@ -224,14 +228,12 @@ body{background:#FFFFFF;}
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingFive">
 								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse"
-										data-parent="#accordion" href="#collapseThree"
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
 										aria-expanded="false" aria-controls="collapseThree">
 										2020-06-08 서울 삼성병원 </a>
 								</h4>
 							</div>
-							<div id="collapseThree" class="panel-collapse collapse"
-								role="tabpanel" aria-labelledby="headingThree">
+							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 								<div class="panel-body">사이톱신정 - 향균작용을 통해 각종 세균감염증을 치료</div>
 							</div>
 						</div>

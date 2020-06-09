@@ -136,7 +136,7 @@ body{background:#FFFFFF;}
 	<div class="col-md-8">
 		<section id="contents">
 			<div class="page-header">
-				<h2>회원 탈퇴</h2>
+				<h2 style="color: blue">회원 탈퇴</h2>
 			</div>
 			<p class="lead">홈스피탈 회원탈퇴</p>
 			<form id="regForm" name="regForm" method="post" action="">

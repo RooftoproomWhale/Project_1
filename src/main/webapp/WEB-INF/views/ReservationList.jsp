@@ -79,7 +79,7 @@ body {
 		<div class="col-md-10">
 			<div class="row" style="padding-left: 60px; padding-top: 100px">
 				<div class="page-header">
-					<h2>진료예약</h2>
+					<h2 style="color: blue">진료예약</h2>
 				</div>
 				<p class="lead">홈스피탈 진료예약 현황</p>
 				<div style="max-width: 1300px; text-align: right;">
