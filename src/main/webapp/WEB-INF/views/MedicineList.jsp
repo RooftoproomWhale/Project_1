@@ -4,267 +4,437 @@
 
 
 <style>
-.wrapper {
-	margin: 5em auto;
-	max-width: 1380px;
-	background-color: #fff;
-	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.06);
+body {
+  padding-top: 100px;
 }
 
-.header {
-	padding: 30px 30px 0;
-	text-align: center;
+.gridder {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none
 }
 
-.header__title {
-	margin: 0;
-	text-transform: uppercase;
-	font-size: 2.5em;
-	font-weight: 500;
-	line-height: 1.1;
+.gridder-list {
+  display: inline-block;
+  vertical-align: top
 }
 
-.header__subtitle {
-	margin: 0;
-	font-size: 1.5em;
-	color: #949fb0;
-	font-family: 'Yesteryear', cursive;
-	font-weight: 500;
-	line-height: 1.1;
+.gridder-show {
+  display: block;
+  float: left;
+  width: 100%;
+  position: relative;
+  background: #EEE
 }
 
-.cards {
-	padding: 15px;
-	display: -webkit-box;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	flex-flow: row wrap;
+.gridder-show.loading {
+  background: #EEE url("../images/loading-spin.svg") no-repeat center
 }
 
-.card {
-	margin: 15px;
-	width: 420px;
-	-webkit-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;
+.gridder-content {
+  display: none
 }
 
-@media screen and (max-width: 991px) {
-	.card {
-		width: calc(( 100%/ 2)- 30px);
-	}
+.gridder-list {
+  width: 15.83333%
 }
 
-@media screen and (max-width: 767px) {
-	.card {
-		width: 100%;
-	}
+.gridder-list:nth-child(n) {
+  margin-bottom: 1%;
+  margin-right: 1%
 }
 
-.card:hover .card__inner {
-	background-color: #1abc9c;
-	-webkit-transform: scale(1.05);
-	transform: scale(1.05);
+.gridder-list:nth-of-type(6n) {
+  margin-right: 0;
+  margin-bottom: 0
 }
 
-.card__inner {
-	width: 100%;
-	padding: 30px;
-	position: relative;
-	cursor: pointer;
-	background-color: #949fb0;
-	color: #eceef1;
-	font-size: 1.5em;
-	text-transform: uppercase;
-	text-align: center;
-	-webkit-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;
+.gridder-show {
+  padding: 20px;
+  background: #EEE;
+  margin-bottom: 1%
 }
 
-.card__inner:after {
-	-webkit-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;
+.gridder-navigation .gridder-nav.disabled {
+  opacity: .5
 }
 
-.card__inner .fa {
-	width: 100%;
-	margin-top: .25em;
+.gridder-list {
+  cursor: pointer
 }
 
-.card__expander {
-	-webkit-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;
-	background-color: #333a45;
-	width: 100%;
-	position: relative;
-	display: -webkit-box;
-	display: flex;
-	-webkit-box-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	align-items: center;
-	text-transform: uppercase;
-	color: #eceef1;
-	font-size: 1.5em;
+.gridder-list:hover {
+  opacity: 0.8
 }
 
-.card__expander .fa {
-	font-size: 0.75em;
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	cursor: pointer;
+.hasSelectedItem .gridder-list {
+  opacity: .5
 }
 
-.card__expander .fa:hover {
-	opacity: 0.9;
+.hasSelectedItem .gridder-list.selectedItem {
+  opacity: 1
 }
 
-.card.is-collapsed .card__inner:after {
-	content: "";
-	opacity: 0;
+.gridder {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  font-size: 0
 }
 
-.card.is-collapsed .card__expander {
-	max-height: 0;
-	min-height: 0;
-	overflow: hidden;
-	margin-top: 0;
-	opacity: 0;
+.gridder-list,
+.gridder-show {
+  font-size: 16px
 }
 
-.card.is-expanded .card__inner {
-	background-color: #1abc9c;
+.gridder-list {
+  display: inline-block;
+  vertical-align: top
 }
 
-.card.is-expanded .card__inner:after {
-	content: "";
-	opacity: 1;
-	display: block;
-	height: 0;
-	width: 0;
-	position: absolute;
-	bottom: -30px;
-	left: calc(50% - 15px);
-	border-left: 15px solid transparent;
-	border-right: 15px solid transparent;
-	border-bottom: 15px solid #333a45;
+.gridder-show {
+  display: block;
+  float: left;
+  width: 100%;
+  position: relative
 }
 
-.card.is-expanded .card__inner .fa:before {
-	content: "\f115";
+.gridder-content {
+  display: none
 }
 
-.card.is-expanded .card__expander {
-	max-height: 1000px;
-	min-height: 200px;
-	overflow: visible;
-	margin-top: 30px;
-	opacity: 1;
+.gridder-list {
+  width: 15.83333%
 }
 
-.card.is-expanded:hover .card__inner {
-	-webkit-transform: scale(1);
-	transform: scale(1);
+.gridder-list:nth-child(n) {
+  margin-bottom: 1%;
+  margin-right: 1%
 }
 
-.card.is-inactive .card__inner {
-	pointer-events: none;
-	opacity: 0.5;
-}
-
-.card.is-inactive:hover .card__inner {
-	background-color: #949fb0;
-	-webkit-transform: scale(1);
-	transform: scale(1);
-}
-
-@media screen and (min-width: 992px) {
-	.card:nth-of-type(3n+2) .card__expander {
-		margin-left: calc(-100% - 30px);
-	}
-	.card:nth-of-type(3n+3) .card__expander {
-		margin-left: calc(-200% - 60px);
-	}
-	.card:nth-of-type(3n+4) {
-		clear: left;
-	}
-	.card__expander {
-		width: calc(300% + 60px);
-	}
-}
-
-@media screen and (min-width: 768px) and (max-width: 991px) {
-	.card:nth-of-type(2n+2) .card__expander {
-		margin-left: calc(-100% - 30px);
-	}
-	.card:nth-of-type(2n+3) {
-		clear: left;
-	}
-	.card__expander {
-		width: calc(200% + 30px);
-	}
-}
-img{
-	width: 272px;
-	height: 204px;
+.gridder-list:nth-of-type(6n) {
+  margin-right: 0;
+  margin-bottom: 0
 }
 </style>
 
-<div class="wrapper">
+<div class="container text-center">
+  <h1>Basic example</h1>
+</div>
 
-	<div class="header">
-		<h1 class="header__title">Expanding Card Grid</h1>
-		<h2 class="header__subtitle">with Flexbox</h2>
-	</div>
+<div class="container">
 
-	<div class="cards">
-	<c:forEach items="${medi1}" var="medi">
-		<div class=" card [ is-collapsed ] ">
-			<div class="card__inner [ js-expander ]">
-				<h2>${medi}</h2> <img alt="${medi}" src='<c:url value="/img/medicine/${medi}.jpg"/>'>
-			</div>
-			<div class="card__expander">
-				<i class="fa fa-close [ js-collapser ]"></i> Expander
+  <ul class="gridder">
+  	<c:forEach items="${medi1 }" var="medi" varStatus="i">
+    	<li class="gridder-list" data-griddercontent="#gridder-content-${i.index}">
+      		<img src='<c:url value="/img/medicine/${medi }.jpg"/>' class="img-responsive" />
+    	</li>
+  	</c:forEach>
+  </ul>
+
+	<c:forEach items="${medi1 }" var="medi" varStatus="i">
+		<div id="gridder-content-${i.index }" class="gridder-content">
+			<div class="row">
+				<div class="col-sm-6">
+					<img src='<c:url value="/img/medicine/${medi }.jpg"/>' class="img-responsive" />
+				</div>
+				<div class="col-sm-6">
+					<h2>${medi}</h2>
+					<p>성상: 알약</p>
+					<p>효능: 진통제</p>
+					<p>부작용: 무감각</p>
+				</div>
 			</div>
 		</div>
 	</c:forEach>
-	</div>
 </div>
 
+
 <script>
-var $cell = $('.card');
+jQuery(document).ready(function($) {
 
-//open and close card when clicked on card
-$cell.find('.js-expander').click(function() {
+	  // Call Gridder
+	  $(".gridder").gridderExpander({
+	    scrollOffset: 60,
+	    scrollTo: "panel", // "panel" or "listitem"
+	    animationSpeed: 400,
+	    animationEasing: "easeInOutExpo",
+	    onStart: function() {
+	      console.log("Gridder Inititialized");
+	    },
+	    onExpanded: function(object) {
+	      console.log("Gridder Expanded");
+	      $(".carousel").carousel();
+	    },
+	    onChanged: function(object) {
+	      console.log("Gridder Changed");
+	    },
+	    onClosed: function() {
+	      console.log("Gridder Closed");
+	    }
+	  });
+	});
 
-var $thisCell = $(this).closest('.card');
+	/*
+	 *  Gridder - v1.4.1
+	 *  A jQuery plugin that displays a thumbnail grid expanding preview similar to the effect seen on Google Images.
+	 *  http://www.oriongunning.com/
+	 *
+	 *  Made by Orion Gunning
+	 *  Under MIT License
+	 */
+	;
+	(function($) {
 
-if ($thisCell.hasClass('is-collapsed')) {
-  $cell.not($thisCell).removeClass('is-expanded').addClass('is-collapsed').addClass('is-inactive');
-  $thisCell.removeClass('is-collapsed').addClass('is-expanded');
-  
-  if ($cell.not($thisCell).hasClass('is-inactive')) {
-    //do nothing
-  } else {
-    $cell.not($thisCell).addClass('is-inactive');
-    $('.card__expander').focus();
-  }
+	  //Ensures there will be no 'console is undefined' errors in IE
+	  window.console = window.console || (function() {
+	    var c = {};
+	    c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function() {};
+	    return c;
+	  })();
 
-} else {
-  $thisCell.removeClass('is-expanded').addClass('is-collapsed');
-  $cell.not($thisCell).removeClass('is-inactive');
-}
-});
+	  /* Custom Easing */
+	  $.fn.extend($.easing, {
+	    def: "easeInOutExpo",
+	    easeInOutExpo: function(e, f, a, h, g) {
+	      if (f === 0) {
+	        return a;
+	      }
+	      if (f === g) {
+	        return a + h;
+	      }
+	      if ((f /= g / 2) < 1) {
+	        return h / 2 * Math.pow(2, 10 * (f - 1)) + a;
+	      }
+	      return h / 2 * (-Math.pow(2, -10 * --f) + 2) + a;
+	    }
+	  });
 
-//close card when click on cross
-$cell.find('.js-collapser').click(function() {
+	  /* KEYPRESS LEFT & RIGHT ARROW */
+	  /* This will work only if a current gridder is opened. */
+	  $(document).keydown(function(e) {
+	    var keycode = e.keyCode;
+	    var $current_gridder = $(".currentGridder");
+	    var $current_target = $current_gridder.find(".gridder-show");
+	    if ($current_gridder.length) {
+	      if (keycode === 37) {
+	        console.log("Pressed Left Arrow");
+	        $current_target.prev().prev().trigger("click");
+	        e.preventDefault();
+	      }
+	      if (keycode === 39) {
+	        console.log("Pressed Right Arrow");
+	        $current_target.next().trigger("click");
+	        e.preventDefault();
+	      }
+	    } else {
+	      console.log("No active gridder.");
+	    }
+	  });
 
-var $thisCell = $(this).closest('.card');
+	  $.fn.gridderExpander = function(options) {
 
-$thisCell.removeClass('is-expanded').addClass('is-collapsed');
-$cell.not($thisCell).removeClass('is-inactive');
+	    /* GET DEFAULT OPTIONS OR USE THE ONE PASSED IN THE FUNCTION  */
+	    var settings = $.extend({}, $.fn.gridderExpander.defaults, options);
 
-});
+	    return this.each(function() {
 
+	      var mybloc;
+	      var _this = $(this);
+	      var visible = false;
+
+	      // START CALLBACK
+	      settings.onStart(_this);
+
+	      // CLOSE FUNCTION
+	      function closeExpander(base) {
+
+	        // SCROLL TO CORRECT POSITION FIRST
+	        if (settings.scroll) {
+	          $("html, body").animate({
+	            scrollTop: base.find(".selectedItem").offset().top - settings.scrollOffset
+	          }, {
+	            duration: 200,
+	            easing: settings.animationEasing
+	          });
+	        }
+
+	        _this.removeClass("hasSelectedItem");
+
+	        // REMOVES GRIDDER EXPAND AREA
+	        visible = false;
+	        base.find(".selectedItem").removeClass("selectedItem");
+
+	        base.find(".gridder-show").slideUp(settings.animationSpeed, settings.animationEasing, function() {
+	          base.find(".gridder-show").remove();
+	          settings.onClosed(base);
+	        });
+
+	        /* REMOVE CURRENT ACTIVE GRIDDER */
+	        $(".currentGridder").removeClass("currentGridder");
+	      }
+
+	      // OPEN EXPANDER
+	      function openExpander(myself) {
+
+	        /* CURRENT ACTIVE GRIDDER */
+	        $(".currentGridder").removeClass("currentGridder");
+	        _this.addClass("currentGridder");
+
+	        /* ENSURES THE CORRECT BLOC IS ACTIVE */
+	        if (!myself.hasClass("selectedItem")) {
+	          _this.find(".selectedItem").removeClass("selectedItem");
+	          myself.addClass("selectedItem");
+	        } else {
+	          // THE SAME IS ALREADY OPEN, LET"S CLOSE IT
+	          closeExpander(_this, settings);
+	          return;
+	        }
+
+	        /* REMOVES PREVIOUS BLOC */
+	        _this.find(".gridder-show").remove();
+
+	        /* ADD CLASS TO THE GRIDDER CONTAINER
+	         * So you can apply global style when item selected. 
+	         */
+	        if (!_this.hasClass("hasSelectedItem")) {
+	          _this.addClass("hasSelectedItem");
+	        }
+
+	        /* ADD LOADING BLOC */
+	        var $htmlcontent = $("<div class=\"gridder-show loading\"></div>");
+	        mybloc = $htmlcontent.insertAfter(myself);
+
+	        /* GET CONTENT VIA AJAX OR #ID*/
+	        var thecontent = "";
+
+	        if (myself.data("griddercontent").indexOf("#") === 0) {
+
+	          // Load #ID Content
+	          thecontent = $(myself.data("griddercontent")).html();
+	          processContent(myself, thecontent);
+	        } else {
+
+	          // Load AJAX Content
+	          $.ajax({
+	            type: "POST",
+	            url: myself.data("griddercontent"),
+	            success: function(data) {
+	              thecontent = data;
+	              processContent(myself, thecontent);
+	            },
+	            error: function(request) {
+	              thecontent = request.responseText;
+	              processContent(myself, thecontent);
+	            }
+	          });
+	        }
+	      }
+
+	      // PROCESS CONTENT
+	      function processContent(myself, thecontent) {
+
+	        /* FORMAT OUTPUT */
+	        var htmlcontent = "<div class=\"gridder-padding\">";
+
+	        if (settings.showNav) {
+
+	          /* CHECK IF PREV AND NEXT BUTTON HAVE ITEMS */
+	          var prevItem = ($(".selectedItem").prev());
+	          var nextItem = ($(".selectedItem").next().next());
+
+	          htmlcontent += "<div class=\"gridder-navigation\">";
+	          htmlcontent += "<a href=\"#\" class=\"gridder-close\">" + settings.closeText + "</a>";
+	          htmlcontent += "<a href=\"#\" class=\"gridder-nav prev " + (!prevItem.length ? "disabled" : "") + "\">" + settings.prevText + "</a>";
+	          htmlcontent += "<a href=\"#\" class=\"gridder-nav next " + (!nextItem.length ? "disabled" : "") + "\">" + settings.nextText + "</a>";
+	          htmlcontent += "</div>";
+	        }
+
+	        htmlcontent += "<div class=\"gridder-expanded-content\">";
+	        htmlcontent += thecontent;
+	        htmlcontent += "</div>";
+	        htmlcontent += "</div>";
+
+	        // IF EXPANDER IS ALREADY EXPANDED 
+	        if (!visible) {
+	          mybloc.hide().append(htmlcontent).slideDown(settings.animationSpeed, settings.animationEasing, function() {
+	            visible = true;
+	            /* AFTER EXPAND CALLBACK */
+	            if ($.isFunction(settings.onContent)) {
+	              settings.onContent(mybloc);
+	            }
+	          });
+	        } else {
+	          mybloc.html(htmlcontent);
+	          mybloc.find(".gridder-padding").fadeIn(settings.animationSpeed, settings.animationEasing, function() {
+	            visible = true;
+	            /* CHANGED CALLBACK */
+	            if ($.isFunction(settings.onContent)) {
+	              settings.onContent(mybloc);
+	            }
+	          });
+	        }
+
+	        /* SCROLL TO CORRECT POSITION AFTER */
+	        if (settings.scroll) {
+	          var offset = (settings.scrollTo === "panel" ? myself.offset().top + myself.height() - settings.scrollOffset : myself.offset().top - settings.scrollOffset);
+	          $("html, body").animate({
+	            scrollTop: offset
+	          }, {
+	            duration: settings.animationSpeed,
+	            easing: settings.animationEasing
+	          });
+	        }
+
+	        /* REMOVE LOADING CLASS */
+	        mybloc.removeClass("loading");
+	      }
+
+	      /* CLICK EVENT */
+	      _this.find(".gridder-list").on("click", function(e) {
+	        e.preventDefault();
+	        var myself = $(this);
+	        openExpander(myself);
+	      });
+
+	      /* NEXT BUTTON */
+	      _this.on("click", ".gridder-nav.next", function(e) {
+	        e.preventDefault();
+	        $(this).parents(".gridder-show").next().trigger("click");
+	      });
+
+	      /* PREVIOUS BUTTON */
+	      _this.on("click", ".gridder-nav.prev", function(e) {
+	        e.preventDefault();
+	        $(this).parents(".gridder-show").prev().prev().trigger("click");
+	      });
+
+	      /* CLOSE BUTTON */
+	      _this.on("click", ".gridder-close", function(e) {
+	        e.preventDefault();
+	        closeExpander(_this);
+	      });
+	    });
+	  };
+
+	  // Default Options
+	  $.fn.gridderExpander.defaults = {
+	    scroll: true,
+	    scrollOffset: 30,
+	    scrollTo: "panel", // panel or listitem
+	    animationSpeed: 400,
+	    animationEasing: "easeInOutExpo",
+	    showNav: true,
+	    nextText: "Next",
+	    prevText: "Previous",
+	    closeText: "Close",
+	    onStart: function() {},
+	    onContent: function() {},
+	    onClosed: function() {}
+	  };
+
+	})(jQuery);
 </script>
+
+
+
