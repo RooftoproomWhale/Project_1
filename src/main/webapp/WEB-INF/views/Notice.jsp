@@ -5,8 +5,8 @@
 <!doctype html>
 <html>
 <head>
-<title>공지사항</title>
 <meta charset="utf-8">
+<title>공지사항</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- 부트스트랩 CSS 추가하기 -->
 <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -16,53 +16,74 @@
 	<div class="container" style=" padding-top:88px;" >
 		<div class="row ">
 			<main id="main">
-				<div class="page-header">
-					<h2>공지사항</h2>
+				<div class="page-header board-util-text color-red">
+					<h2 style="color:blue">공지사항</h2>
 				</div>
 				<p class="lead">홈스피탈 공지사항</p>
-				<div style="max-width: 1300px; text-align: right;">
-					<a href="./boardWrite.html" class="btn btn-primary float-right">글쓰기</a>
-				</div>
 				<hr>
 				<table class="table table-striped" style="max-width: 1300px;">
 					<thead>
 						<tr>
-							<th scope="col" class="mobile" style="width: 55px; text-align: center;">번호</th>
-							<th scope="col" class="mobile" style="text-align: center;">제목</th>
-							<th scope="col" class="mobile" style="width: 80px; text-align: center;">작성자</th>
-							<th scope="col" class="mobile" style="width: 120px; text-align: center;">날짜</th>
+							<th scope="col" class="" style="width: 55px; text-align: center;">번호</th>
+							<th scope="col" class="" style="text-align: center;">제목</th>
+							<th scope="col" class="" style="width: 80px; text-align: center;">작성자</th>
+							<th scope="col" class="" style="width: 120px; text-align: center;">날짜</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<th scope="row" class="mobile" style="text-align: center;">5</th>
+							<th scope="row" class="" style="text-align: center;">9</th>
+							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-05</td>
+						</tr>
+							<tr>
+							<th scope="row" class="" style="text-align: center;">8</th>
+							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-05</td>
+						</tr>
+							<tr>
+							<th scope="row" class="" style="text-align: center;">7</th>
+							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-05</td>
+						</tr>
+							<tr>
+							<th scope="row" class="" style="text-align: center;">6</th>
+							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-05</td>
+						</tr>
+						<tr>
+							<th scope="row" class="" style="text-align: center;">5</th>
+							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-05</td>
+						</tr>
+						<tr>
+							<th scope="row" class="" style="text-align: center;">4</th>
 							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
 							<td class="mobile" style="text-align: center;">윤승중</td>
 							<td class="mobile" style="text-align: center;">2018-01-05</td>
 						</tr>
 						<tr>
-							<th scope="row" class="mobile" style="text-align: center;">4</th>
+							<th scope="row" class="" style="text-align: center;">3</th>
 							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
-							<td class="mobile" style="text-align: center;">윤승중</td>
-							<td class="mobile" style="text-align: center;">2018-01-05</td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-05</td>
 						</tr>
 						<tr>
-							<th scope="row" class="mobile" style="text-align: center;">3</th>
+							<th scope="row" class=""  style="text-align: center;">2</th>
 							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
-							<td class="mobile" style="text-align: center;">윤승중</td>
-							<td class="mobile" style="text-align: center;">2018-01-05</td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-04</td>
 						</tr>
 						<tr>
-							<th class="mobile" scope="row" style="text-align: center;">2</th>
-							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
-							<td class="mobile" style="text-align: center;">윤승중</td>
-							<td class="mobile" style="text-align: center;">2018-01-04</td>
-						</tr>
-						<tr>
-							<th class="mobile" scope="row" style="text-align: center;">1</th>
+							<th class="" scope="row" style="text-align: center;">1</th>
 							<td><a href="./boardView.html" style="color: #000000;">윤승중.</a></td>
-							<td class="mobile" style="text-align: center;">윤승중</td>
-							<td class="mobile" style="text-align: center;">2018-01-03</td>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2018-01-03</td>
 						</tr>
 					</tbody>
 				</table>
@@ -76,6 +97,12 @@
 						<li class="page-item"><a class="page-link" href="#">&raquo;</a>
 						</li>
 					</ul>
+				</div>
+				<div style="max-width: 1300px; text-align: right;">
+					<a href="<c:url value='/Notice/QnA.hst'/>" class="btn btn-primary float-right">Q&A</a>
+				</div>
+				<div style="max-width: 1300px; text-align: right;">
+					<a href="<c:url value='/Notice/Noticewrite.hst'/>" class="btn btn-primary float-right">글쓰기</a>
 				</div>
 				<!-- 검색용 UI -->
 				<div class="row">
@@ -98,12 +125,7 @@
 			</main>
 		</div>
 	</div>
-	<!-- 제이쿼리 자바스크립트 추가하기 -->
-	<script src="./js/jquery-3.2.1.min.js"></script>
-	<!-- Popper 자바스크립트 추가하기 -->
-	<script src="./js/popper.min.js"></script>
-	<!-- 부트스트랩 자바스크립트 추가하기 -->
-	<script src="./js/bootstrap.min.js"></script>
+
 </body>
 </html>
 

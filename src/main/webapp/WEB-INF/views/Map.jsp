@@ -35,7 +35,7 @@
 	    outline: 0;
 	}
 	.menu_wrap{left: 13px;bottom: 19px;text-align: center;position: absolute;z-index: 2;}
-	.info_wrap{position: absolute;top: 80px;left: 0;bottom: 0;width: 390px;height:100%;z-index: 200;background: #fff;}
+	.info_wrap{position: absolute;top: 80px;left: 0;bottom: 0;width: 390px;z-index: 200;background: #fff;flex-direction: column;}
 	.info-toggle{position: absolute;top: 50%;left: 0;left: 390px;z-index: 20;}
 	.info_btn_toggle{
 		position: absolute;
@@ -63,6 +63,9 @@
 	    border-radius: 3px;
 		background-color: #f2f2f2;
 	}
+	.top_filter_area{
+		padding: 5px 20px;
+	}
 	.search_keyword_input{
 		float: left;
 	    width: 300px;
@@ -87,18 +90,82 @@
 	}
 	.warp_invisible{transform:translateX(-391px);}
 	.left_toggle{left:0; }
+<<<<<<< HEAD
 	.search_item{margin: 0 20px;display: block;}
 
+=======
+	
+	.scroll_area{overflow:auto;height:100%;flex-direction: column;background: #fff;}
+	.search_item{border-top:1px solid #e5e5e5;margin: 0 20px;padding: 19px 20px 18px;;display: block;cursor: pointer;}
+
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	
 	.content_title{
 		display: inline-block;
 	    font-size: 17px;
 	}
 	.content_body{
-		
+		margin-top: 3px;
+		margin-bottom: 3px;
+	}
+<<<<<<< HEAD
+
+
+=======
+	
+	.inner_title_area{
+		padding-left: 20px;
+	}
+	.inner_title{
+		font-weight: 700;
+		font-size: 22px;
+	}
+	.inner_summary_info{
+		margin-top: 2px;
+		font-size: 13px;
+	}
+	.inner_btn_area{
+		padding: 17px 20px 12px;
+		border-bottom:1px solid #e5e5e5;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+	.btn_direction{
+		text-align: center;
+	}
+	.inner_final_area{
+		padding: 20px;
+	}
+	.inner_final_icon{
+	    overflow: hidden;
+	    display: inline-block;
+	    width: 30px;
+	    height: 30px;
+	    font-size: 0;
+	    color: transparent;
+	    vertical-align: top;
+	    float: left;
+    	margin-right: 15px;
+	}
+	.inner_detail_tel{
+		margin-top: 16px;
+	}
+	.inner_detail_time{
+		margin-top: 16px;
+	}
+	.inner_detail_time2{
+		margin-top: 16px;
+	}
+	.inner_end_box{
+		padding-top: 2px;
+    	line-height: 18px;
+    	overflow: hidden;
+	    position: relative;
+	    font-size: 14px;
+	    line-height: 21px;
 	}
 
-
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 </style>
 <div class="map_wrap">
 	<div id="search_wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px;position:absolute;z-index: 3">
@@ -133,11 +200,14 @@
 				<input class="search_keyword_input" maxlength="100" autocomplete="off">
 				<button type="button" class="search_keyword_submit"></button>
 			</div>
+			<div class="top_filter_area">
+				
+			</div>
 		</div>
 		<div class="scroll_area">
 			<div class="search_list">
 			
-				<div class="search_item">
+				<!-- <div class="search_item" onclick="searchItemClick('서울 금천구 가산디지털1로 186 제이플라츠 2층 애슐리');">
 					<div class="search_item_detail">
 						<div class="detail_content">
 							<div class="content_title">
@@ -155,8 +225,45 @@
 							
 						</div>
 					</div>
+				</div> -->
+				<div class="inner_top">
+					<div class="inner_title_area">
+						<div class="inner_title">
+							<strong>고래병원</strong>
+						</div>
+						<div class="inner_summary_info">
+							<span>병원</span>
+							<span>내과</span>
+						</div>
+					</div>
+					<div class="inner_btn_area">
+						<div class="btn_direction">
+							<button class="find_way_btn">길찾기</button>
+							<button class="reservation_btn" onclick="reservation_show();">예약</button>
+						</div>
+					</div>
+					<div class="inner_final_area">
+						<div class="inner_detail_address">
+							<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/address.png'/>">
+							<div class="inner_end_box">서울 동작구 만양로14다길 3</div>
+						</div>
+						<div class="inner_detail_tel">
+							<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/tel.png'/>">
+							<div class="inner_end_box">010-1234-5678</div>
+						</div>
+						<div class="inner_detail_time">
+							<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/time.png'/>">
+							<div class="inner_end_box">11:00~16:00</div>
+						</div>
+						<div class="inner_detail_time2">
+							<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/detail_info.png'/>">
+							<div class="inner_end_box">
+								영업시간 11:00~ 14:40 16:00~ 20:30<br/>
+								휴무: 매주 월요일
+							</div>
+						</div>
+					</div>
 				</div>
-				
 			</div>
 		</div>
 	</div>
@@ -171,29 +278,8 @@
 	</div>
 	<div id="map" style="width: 100%; height: 100%;position: relative;overflow: hidden;"></div>
 </div>
-<div class="modal fade" id="hospital-modal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button class="close" data-dismiss="modal">
-					<span>&times;</span>
-				</button>
-				<h4 class="modal-title">기본 모달창</h4>
-			</div>
-			<div class="modal-body">
-				<h2>모달 바디 영역입니다</h2>
-				<p>
-					안녕하세요<br />기본 모달창입니다<br />재미 있네요
-				</p>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-info" data-dismiss="modal">닫기</button>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="modal fade" id="pharmacy-modal">
-	<div class="modal-dialog">
+<div class="modal fade" id="reservation-modal">
+	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button class="close" data-dismiss="modal">
@@ -249,9 +335,19 @@
 			$('.info-toggle').css("left","0");
 		}); */
 		$('.search_keyword_submit').click(function(){
+<<<<<<< HEAD
 
 			loadHospitalList(lat,lon);
 
+=======
+			console.log('검색',$('.search_keyword_input').val().length);
+			var search_val = $('.search_keyword_input').val();
+			if($('.search_keyword_input').val().length > 0)
+			{
+				loadHospitalList(lat,lon,search_val);
+			}
+			
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 		});
 		$('.info_btn_toggle').click(function(){
 			console.log($('.info_wrap'));
@@ -693,13 +789,13 @@
 				}
 			});
 		}
-		function loadHospitalList(latitude,longitude)
+		function loadHospitalList(latitude,longitude,search_val)
 		{
 			$.ajax({
 				url:"<c:url value='/Homespital/Map/hospitalList.hst'/>",
 				type:'get',
 				datatype:'json',
-				data:{"cor_x":latitude,"cor_y":longitude},
+				data:{"cor_x":latitude,"cor_y":longitude,"search_keyword":search_val},
 				beforeSend: function () {
 					console.log("beforeSend");
 					FunLoadingBarStart();
@@ -715,27 +811,37 @@
 					$.each(jsonData, function(i, item) {
 						console.log(item);
 						/* <div class="search_item">
-							<div class="search_item_detail">
-								<div class="detail_content">
-									<div class="content_title">
-										<strong>병원</strong>
+								<div class="search_item_detail">
+									<div class="detail_content">
+										<div class="content_title">
+											<strong>병원</strong>
+										</div>
+			
+										<div class="content_body">
+											내과
+											010-1234-5678
+										</div>
+										<div class="content_body">
+											서울 금천구 가산디지털1로 186 제이플라츠 2층 애슐리
+			
+										</div>
+										
 									</div>
-									<div class="content_address">
-										서울 금천구 가산디지털1로 186 제이플라츠 2층 애슐리
-										02-2028-4248
-									</div>
-									
 								</div>
-							</div>
-						</div> */
+							</div> */
 						
-						items += '<div class="search_item">'+
+						items += '<div class="search_item" onclick="searchItemClick(\''+item['ADDRESS']+'\');">'+
 									'<div class="search_item_detail">'+
 										'<div class="detail_content">'+
 											'<div class="content_title">'+
 												'<strong>'+item['HOSP_NAME']+'</strong>'+
 											'</div>'+
-											'<div class="content_address">'+
+											'<div class="content_body">'+
+												//item['ADDRESS']+
+												'내과 '+ 
+												item['TEL']+
+											'</div>'+
+											'<div class="content_body">'+
 												item['ADDRESS']+
 											'</div>'+
 										'</div>'+
@@ -891,6 +997,27 @@
 		        }
 		    }    
 		}
+		function searchItemClick(address)
+		{
+			geocoder.addressSearch(address,function(result, status){
+				if (status === kakao.maps.services.Status.OK) {
+
+			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+			        map.setCenter(coords);
+			        
+			        loadMapApi(coords.getLat(),coords.getLng(),apiStatus);
+			        
+			        
+				}
+			});
+		}
+		function reservation_show(){
+			console.log($('#reservation-modal'))
+			$('#reservation-modal').modal('show');
+	
+		}
+
 		function changeApi(status)
 		{
 			apiStatus = status;
@@ -912,6 +1039,7 @@
 			}
 			markers = [];
 		}
+		
 		function FunLoadingBarStart() {
 			console.log($('.load_wrap'),$('.load_img'));
 			

@@ -49,6 +49,7 @@ public class MapController {
 		String latitude = map.get("cor_y").toString();
 		String longitude = map.get("cor_x").toString();
 
+		String search_keyword = map.get("search_keyword").toString();
 
 		
 		System.out.println(JSONArray.toJSONString(list));

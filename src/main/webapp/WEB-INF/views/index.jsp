@@ -25,6 +25,10 @@
     
     	
     	}
+    	#gra{
+    	background: linear-gradient( to right,#5f8cfd, #fff);
+    	
+    	}
 </style>
 <head>
 <meta charset="utf-8">
@@ -127,7 +131,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
 
 
 	<!-- Services Section -->
@@ -202,7 +206,7 @@
 			</div>
 		</div>
 	</div>
-
+<div id="gra" style="width: 100%;height:50px;"></div>
 
 	<div class="row site-section" id="FAQ">
 		<div class="col-12 text-center" data-aos="fade">
@@ -251,6 +255,7 @@
 
 			
 		</div>
+	</div>
 	</div>
 </body>
 <script>

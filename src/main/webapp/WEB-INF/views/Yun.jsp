@@ -1,231 +1,310 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
+<link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
 <style>
-.row-padding {
-	margin-top: 25px;
-	margin-bottom: 25px;
-}
-/* 사이드바 래퍼 스타일 */
-#page-wrapper {
-	padding-left: 250px;
+a:hover, a:focus {
+	text-decoration: none;
+	outline: none;
 }
 
-  #sidebar-wrapper {
-    position: fixed;
-    width: 250px;
-    height: 82%;
-    margin-left: -250px;
-    background: #fff;
-    overflow-x: hidden;
-    overflow-y: auto;
-     border: 1px #DAD9FF solid;
-    margin-top: 79px;
-
-  
-  }
-
-#page-content-wrapper {
-	width: 100%;
-	padding: 20px;
-	padding-top: 150px;
-	margin-left: 130px;
+.demo {
+	padding: 100px 0;
 }
-/* 사이드바 스타일 */
-  
-  .sidebar-nav {
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background:#808080;
-  }
-  .sidebar-nav li:first-child{ background:#4d4d4d}
-  .sidebar-nav li {
-    text-indent: 1.5em;
-    line-height: 2.8em;
-    color:#fff
-  }
-  
-  .sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #fff;
-  }
-  /*현재페이지*/
-/*   .sidebar-nav :nth-child(2) a{ color: #fff;background: #B2EBF4; } */
-  
-  
-  .sidebar-nav li:not(.sidebar-brand):hover {
-    color: #fff;
-    background: #B2EBF4;
-  }
-  
-  .sidebar-nav > .sidebar-brand {
-    font-size: 1.3em;
-    line-height: 3em;
-  }
-	.sidebar-brand{
-	background-color: #C2E2E8;
-	font-weight: bold;
-	margin-top:0px;
-	margin-bottom: 0px;
-	}
-
-.info {
-	font-size: 1.3em;
-	line-height: 3em;
+ 
+.heading-title {
+	margin-bottom: 100px;
 }
 
-.color-red {
-	color: red;
+#accordion .panel {
+	border: none;
+	background: none;
+	border-radius: 0;
+	box-shadow: none;
 }
 
-.table-wrapper .line {
-	border-left: 1px solid #dadada;
+#accordion .panel-heading {
+	padding: 0;
 }
 
-.box-default {
-	font-size: 15px;
-	color: #115bab;
-	background-color: #D5D5D5;
-	height: 70px;
-	text-align: center;
-	line-height: 70px;
-	width: 100%
-}
-
-.table-wrapper .table-default thead .write {
-	text-align: left;
-	color: #6e7179;
-}
-
-.table-wrapper .table-default tbody tr td {
+#accordion .panel-title a {
+	display: block;
+	font-size: 16px;
+	color: #9c88b9;
+	padding: 17px 40px 17px 65px;
+	background: #fff;
+	border: 1px solid #f3f3f3;
+	border-bottom: none;
 	position: relative;
-	padding-right: 0;
-	padding-left: 0;
+	transition: all 0.5s ease 0s;
 }
 
-.table-wrapper .table-default tbody tr td .input-conut-limit {
-	position: absolute;
-	bottom: 9px;
-	right: 22px;
+#accordion .panel-title a.collapsed {
+	background: #fafafa;
+	color: #959595;
 }
 
-.table-default tr th, .table-default tr td {
-	font-size: 13px
+#accordion .panel-title a.collapsed:hover {
+	color: #9c88b9;
 }
 
-.default-info-heading {
-	margin-bottom: 20px;
-}
-
-.button-blue {
-	background: #57a5df;
-}
-
-table {
-	border-top: 3px #D5D5D5 solid;
-	border-bottom: 3px #D5D5D5 solid;
-	width: 100%;
-	margin: 10px;
-	height: 220px
-}
-
-.board-util-right {
-	float: right;
-	height: 50px
-}
-
-.board-util {
-	height: 48px;
-	top: 9px;
-}
-
-.board-util button {
-	height: 48px;
-	width: 100px
-}
-
-#regForm {
-	width: 1200px
-}
-
-#contents {
-	margin-top: 140px;
-	padding-left: 200px;
-	margin-bottom: 167px
-}
-
-caption {
+#accordion .panel-title a:after, #accordion .panel-title a.collapsed:after
+	{
+	content: "\f068";
+	font-family: FontAwesome;
 	font-size: 15px;
-	font-weight: bold;
+	color: #fff;
+	width: 45px;
+	height: 100%;
+	line-height: 54px;
+	text-align: center;
+	position: absolute;
+	top: 0px;
+	left: -1px;
+	background: #9c88b9;
+	transition: all .2s;
 }
 
-@media all and (min-width:500px) and (max-width:1024px) {
-	#sidebar-wrapper {
-		left: -250px;
-	}
-	.main {
-		left: -150px;
-	}
-	#page-wrapper {
-		left: -150px;
-		padding-left: 0px;
-		margin-left: 0px
-	}
-	#app {
-		display: none
-	}
-	#appdown {
-		width: 90%;
-		float: inherit;
-		margin-left: 76px;
-		margin-top: 0px
-	}
-	#contents {
-		padding-left: 20px;
-		margin-left: 20px
-	}
-	.board-util-right {
-		float: left;
-	}
+#accordion .panel-title a.collapsed:after {
+	content: "\f067";
+	color: #959595;
+	background: #f4f4f4;
+	transition: all 0.5s ease 0s;
 }
+
+#accordion .panel-title a.collapsed:hover:after {
+	background: #9c88b9;
+	color: #fff;
+}
+
+#accordion .panel-title a:before {
+	content: "";
+	position: absolute;
+	bottom: -11px;
+	left: -1px;
+	border-bottom: 12px solid transparent;
+	border-right: 12px solid #9c88b9;
+}
+
+#accordion .panel-title a.collapsed:before {
+	display: none;
+}
+
+#accordion .panel-body {
+	font-size: 14px;
+	color: #b7b7b7;
+	padding: 0 65px 15px;
+	line-height: 20px;
+	margin-left: 12px;
+	background: #fff;
+	border: 1px solid #f3f3f3;
+	border-top: none;
+}
+/*사이드바*/
+#jquery-accordion-menu {
+  	top: 81px;
+}
+*{
+	box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;
+}
+
+body{
+	background:#FFFFFF;
+}
+.content{
+	width:260px;margin:100px auto;
+}
+#demo-list a{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	white-space:nowrap;
+	height:60px;
+	width:100%;
+	font-size: 14px
+	}
+
+#footer{ 
+	position: absolute; 
+	width:100%; 
+	left:0px; 
+	bottom:0px; 
+	background-color:#474747;
+	height: 150px
+} 
 </style>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>복약관리</title>
 </head>
 <body>
-	<div id="page-wrapper" class="container-fluid">
-		<div  id="sidebar-wrapper">
-
-	  <h3 class="sidebar-brand" style="height: 90px;text-align: center;line-height: 90px;height: 120px">
-    	<img style="width: 100%;height: 100%" src="<c:url value='/img/mypages.PNG'/>">
-       </h3>
-	<ul class="sidebar-nav">
-	<li><span class="glyphicon glyphicon-leaf" style="left: -20px"><strong>김길동</strong>님</span></li>
-      <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
-      <li><a href="<c:url value='/mypage/Yun.hst'/>">복약 관리</a></li>
-      <li><a href="<c:url value='/mypage/ReservationList.hst'/>">진료 예약 현황</a></li>
-      <li><a href="#">내 질병 관리</a></li>
-      <li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
-    </ul>
-  </div>
-	</div>
-
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="page-header">
-					<h1>복약관리</h1>
+	<div class="container-fluid">
+			<div class="col-md-2">
+			<div id="jquery-accordion-menu" class="jquery-accordion-menu">
+				<div class="col-md-8 col-md-offset-2">
+					<span><img style="width: 150px; height: 150px;" class="img-responsive" src='<c:url value="/img/logo.png"/>' alt="로고이미지" /></span>
 				</div>
-				<p>홈스피탈 복약관리</p>
+				<ul id="demo-list">
+					<li class="active"><a href="<c:url value='/mypage/mypage.hst'/>"><i class="fa fa-home"></i>MYPAGE</a></li>
+					<li><a href="#"><i class="fa fa-file-image-o"></i>김길동님</a>
+					<li><a href="#"><i class="fa fa-cog"></i>개인정보 관리</a>
+						<ul class="submenu">
+							<li><a href="<c:url value='/mypage/mypage.hst'/>">내 정보 보기</a></li>
+							<li><a href="<c:url value='/mypage/ChangeMember.hst'/>">내 정보 수정</a></li>
+							<li><a href="<c:url value='/mypage/unmember.hst'/>">회원 탈퇴</a></li>
+						</ul></li>
+					<li><a href="<c:url value='/mypage/Yun.hst'/>"><i class="fa fa-suitcase"></i>복약 관리</a>
+					<li><a href="<c:url value='/mypage/ReservationList.hst'/>"><i class="fa fa-envelope"></i>진료예약 현황</a></li>
+					<li><a href="<c:url value='/mypage/mypage.hst'/>"><i class="fa fa-envelope"></i>내 질병 관리</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="row" style="padding-top: 100px; padding-left: 70px;">
+				<div class="page-header">
+					<h2 style="color: blue">복약관리</h2>
+				</div>
+				<p style="color: red;">3세 이하 유아는 사용이 권장되지 않으며 임부는 반드시 의사와 사전에 상의하고 사용하도록 합니다</p>
+			</div>
+			<br />
+			<div class="row">
+				<div class=" col-sm-9" style=" padding-left: 70px;">
+					<div class="alert alert-warning alert-dismissible mt-3" role="alert">
+						복약 순응도란 처방받은 약을 환자가 전문 의료인의 지시에 따라 정확하게 복용. 
+						복약 순응도가 높을수록 치료효과가 높아진다.
+					</div>
+					<br />
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title">
+									<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+										aria-expanded="true" aria-controls="collapseOne">2020-06-08 서울 삼성병원
+									</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+								<div class="panel-body">맥페란정 - 위장운동을 활성화시킴으로써 구역, 구토를 치료</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingTwo">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+										aria-expanded="false" aria-controls="collapseTwo"> 2020-06-08 서울 삼성병원
+									</a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+								<div class="panel-body">티로파정 - 평활근 경축을 완화시킴으로써 항경령 및 진통 효과를 나타냄</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingThree">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+										aria-expanded="false" aria-controls="collapseThree"> 2020-06-08 서울 삼성병원 
+									</a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+								<div class="panel-body">사이톱신정 - 향균작용을 통해 각종 세균감염증을 치료</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingFour">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+										aria-expanded="false" aria-controls="collapseThree"> 2020-06-08 서울 삼성병원
+									 </a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+								<div class="panel-body">사이톱신정 - 향균작용을 통해 각종 세균감염증을 치료</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingFive">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+										aria-expanded="false" aria-controls="collapseThree">
+										2020-06-08 서울 삼성병원 </a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+								<div class="panel-body">사이톱신정 - 향균작용을 통해 각종 세균감염증을 치료</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingSix">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+										aria-expanded="false" aria-controls="collapseThree"> 2020-06-08 서울 삼성병원
+									 </a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+								<div class="panel-body">사이톱신정 - 향균작용을 통해 각종 세균감염증을 치료</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </body>
+<script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
+<script type="text/javascript">
+	(function($) {
+		$.expr[":"].Contains = function(a, i, m) {
+			return (a.textContent || a.innerText || "").toUpperCase().indexOf(
+					m[3].toUpperCase()) >= 0;
+		};
+		function filterList(header, list) {
+
+			var form = $("<form>").attr({
+				"class" : "filterform",
+				action : "#"
+			}), input = $("<input>").attr({
+				"class" : "filterinput",
+				type : "text"
+			});
+			$(form).append(input).appendTo(header);
+			$(input).change(
+					function() {
+						var filter = $(this).val();
+						if (filter) {
+							$matches = $(list).find(
+									"a:Contains(" + filter + ")").parent();
+							$("li", list).not($matches).slideUp();
+							$matches.slideDown();
+						} else {
+							$(list).find("li").slideDown();
+						}
+						return false;
+					}).keyup(function() {
+				$(this).change();
+			});
+		}
+		$(function() {
+			filterList($("#form"), $("#demo-list"));
+		});
+	})(jQuery);
+</script>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+
+	});
+
+	$(function() {
+
+		$("#demo-list li").click(function() {
+			$("#demo-list li.active").removeClass("active")
+			$(this).addClass("active");
+		})
+	})
+</script>
 </html>

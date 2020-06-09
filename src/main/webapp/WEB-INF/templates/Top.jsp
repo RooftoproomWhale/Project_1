@@ -50,7 +50,6 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <%-- <link rel="stylesheet" type="text/css" href="<c:url value='/fonts/font-awesome/css/font-awesome.css'/>"> --%>
 
-
 <style>
 .dropdown:hover .dropdown-menu {display: block;}
 .dropdown-menu:hover .dropdown-toggle {background-color: #3e8e41;}
@@ -78,20 +77,19 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href='<c:url value="/Notice/BBS/NoticeList.hst"/>'>Notice</a></li>
+				<li><a href='<c:url value="/Homespital/Notice.hst"/>'>Notice</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" aria-expanded="false"> Services <span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국
-								찾기</a></li>
+						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국 찾기</a></li>
 						<li class="divider"></li>
 						<li><a href='<c:url value="/Homespital/Management.hst"/>'>복약 관리</a></li>
+						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국 찾기</a></li>
 						<li class="divider"></li>
 						<li><a href='<c:url value="/Homespital/MedicineForm.hst"/>'>안전상비의약품</a></li>
 						<li class="divider"></li>
-						<li><a href="<c:url value='/Calendar/calendar.hst'/>">일정
-								관리</a></li>
+						<li><a href="<c:url value='/Calendar/calendar.hst'/>">일정 관리</a></li>
 						<li class="divider"></li>
 						<li><a href="<c:url value='/Homespital/Health_info.hst'/>">예방 정보</a></li>
 					</ul></li>
