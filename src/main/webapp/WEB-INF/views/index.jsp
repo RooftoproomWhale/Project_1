@@ -26,8 +26,9 @@
     	
     	}
     	#gra{
-    	background: linear-gradient( to right,#5f8cfd, #fff);
-    	
+    	/*background: linear-gradient( to right,#5f8cfd, #fff);
+    	그라데이션(보류)
+    	*/
     	}
 </style>
 <head>

@@ -100,14 +100,13 @@
 				</div>
 				<div style="max-width: 1300px; text-align: right;">
 					<a href="<c:url value='/Notice/QnA.hst'/>" class="btn btn-primary float-right">Q&A</a>
-				</div>
-				<div style="max-width: 1300px; text-align: right;">
 					<a href="<c:url value='/Notice/Noticewrite.hst'/>" class="btn btn-primary float-right">글쓰기</a>
 				</div>
+				
 				<!-- 검색용 UI -->
 				<div class="row">
 					<div class="text-center">
-						<form class="form-inline" method="post" action="">
+						<form class="form-inline" method="post" action="" style="margin-bottom: 20px;">
 							<div class="form-group">
 								<select name="searchColumn" class="form-control">
 									<option value="title">제목</option>
