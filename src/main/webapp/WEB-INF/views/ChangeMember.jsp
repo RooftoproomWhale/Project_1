@@ -1,8 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>마이페이지</title>
+<link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
+<style type="text/css">
 
-<style>
 .color-red {
 	color: red;
 }
@@ -82,9 +88,19 @@ margin-bottom: 15px
 
 #jquery-accordion-menu {
   	top: 81px;
-*{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
-body{background:#FFFFFF;}
-.content{width:260px;margin:100px auto;}
+}
+*{
+	box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;
+}
+
+body{
+	background:#FFFFFF;
+}
+
+.content{
+	width:260px;margin:100px auto;
+}
+
 #demo-list a{
 	overflow:hidden;
 	text-overflow:ellipsis;
@@ -93,20 +109,19 @@ body{background:#FFFFFF;}
 	height:60px;
 	width:100%;
 	font-size: 14px
-	}
+}
 
-#footer 
- 	{ 
-		position: absolute; 
-		width:100%; 
-		left:0px; 
- 		bottom:0px; 
- 		background-color:#474747;
- 		height: 150px
- 		
- 	} 
-
+#footer{ 
+	position: absolute; 
+	width:100%; 
+	left:0px; 
+	bottom:0px; 
+	background-color:#474747;
+	height: 150px
+} 
 </style>
+</head>
+<body>
 <div id="page-wrapper" class="container-fluid">
 	<div class="col-md-2">
 		<div id="jquery-accordion-menu" class="jquery-accordion-menu">
@@ -341,56 +356,7 @@ body{background:#FFFFFF;}
 		</section>
 	</div>
 </div>
-
-<script>
-	function back() {
-		close = confirm("취소하시겠습니까?")
-		if (close) {
-			$(location).attr('href', '<c:url value='/mypage/mypage.hst'/>');
-		}
-
-	}
-
-	function Form() {
-
-	/* 	var userPasswd = $('#userPasswd');
-		if ($.trim(userPasswd.val()).length < 1
-				|| $.trim(userPasswd.val()) == '') {
-			alert('현재 비밀번호를 입력해 주세요.');
-			userPasswd.focus();
-			return;
-		}
-		var newuserPasswd = $('#newuserPasswd');
-		if ($.trim(newuserPasswd.val()).length < 1
-				|| $.trim(newuserPasswd.val()) == '') {
-			alert('새 비밀번호를 입력해 주세요.');
-			newuserPasswd.focus();
-			return;
-		}
-		var userPasswdOK = $('#userPasswdOK');
-		if ($.trim(userPasswdOK.val()).length < 1
-				|| $.trim(userPasswdOK.val()) == '') {
-			alert('새 비밀번호 확인을 입력해 주세요.');
-			userPasswdOK.focus();
-			return;
-		}
-		if ($.trim(newuserPasswd.val()) != $.trim(userPasswdOK.val())) {
-			alert('새비밀번호가 일치하지 않습니다');
-			userPasswdOK.focus();
-			return;
-		}
-		*/
-		var passok = $('#pass2');
-		if ($.trim(passok.val()).length < 1 || $.trim(passok.val()) == '') {
-			alert('비밀번호를 입력해주세요');
-			passok.focus();
-			return;
-		}
-		if (confirm('정말로 변경하시겠습니까?')) {
-			$('form[name=passForm]').submit();
-		} 
-	}
-</script>
+</body>
 <script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
 	(function($) {
@@ -442,7 +408,53 @@ body{background:#FFFFFF;}
 			$(this).addClass("active");
 		})
 	})
+	
+	function back() {
+		close = confirm("취소하시겠습니까?")
+		if (close) {
+			$(location).attr('href', '<c:url value='/mypage/mypage.hst'/>');
+		}
+
+	}
+
+	function Form() {
+
+	/* 	var userPasswd = $('#userPasswd');
+		if ($.trim(userPasswd.val()).length < 1
+				|| $.trim(userPasswd.val()) == '') {
+			alert('현재 비밀번호를 입력해 주세요.');
+			userPasswd.focus();
+			return;
+		}
+		var newuserPasswd = $('#newuserPasswd');
+		if ($.trim(newuserPasswd.val()).length < 1
+				|| $.trim(newuserPasswd.val()) == '') {
+			alert('새 비밀번호를 입력해 주세요.');
+			newuserPasswd.focus();
+			return;
+		}
+		var userPasswdOK = $('#userPasswdOK');
+		if ($.trim(userPasswdOK.val()).length < 1
+				|| $.trim(userPasswdOK.val()) == '') {
+			alert('새 비밀번호 확인을 입력해 주세요.');
+			userPasswdOK.focus();
+			return;
+		}
+		if ($.trim(newuserPasswd.val()) != $.trim(userPasswdOK.val())) {
+			alert('새비밀번호가 일치하지 않습니다');
+			userPasswdOK.focus();
+			return;
+		}
+		*/
+		var passok = $('#pass2');
+		if ($.trim(passok.val()).length < 1 || $.trim(passok.val()) == '') {
+			alert('비밀번호를 입력해주세요');
+			passok.focus();
+			return;
+		}
+		if (confirm('정말로 변경하시겠습니까?')) {
+			$('form[name=passForm]').submit();
+		} 
+	}
 </script>
-<link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="<c:url value="/bootstrap/js/bootstrap.min.js"/>"></script>
+</html>

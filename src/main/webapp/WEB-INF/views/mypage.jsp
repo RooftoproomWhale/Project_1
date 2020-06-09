@@ -6,16 +6,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>마이페이지</title>
-
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
-
 <style type="text/css">
 #jquery-accordion-menu {
   	top: 81px;
 }
-*{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
-body{background:#FFFFFF;}
-.content{width:260px;margin:100px auto;}
+*{
+	box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;
+}
+
+body{
+	background:#FFFFFF;
+}
+
+.content{
+	width:260px;margin:100px auto;
+}
+
 #demo-list a{
 	overflow:hidden;
 	text-overflow:ellipsis;
@@ -24,20 +31,17 @@ body{background:#FFFFFF;}
 	height:60px;
 	width:100%;
 	font-size: 14px
-	}
+}
 
-#footer 
- 	{ 
-		position: absolute; 
-		width:100%; 
-		left:0px; 
- 		bottom:0px; 
- 		background-color:#474747;
- 		height: 150px
- 		
- 	} 
+#footer{ 
+	position: absolute; 
+	width:100%; 
+	left:0px; 
+	bottom:0px; 
+	background-color:#474747;
+	height: 150px
+} 
 </style>
-
 </head>
 <body>
 	<div class="container-fluid">
@@ -62,84 +66,87 @@ body{background:#FFFFFF;}
 			</div>
 		</div>
 		<div class="col-md-10">
-			<div class="page-header" style="padding-top:88px; padding-left:50px">
+			<div class="page-header" style="padding-top: 88px; padding-left: 50px">
 				<h2 style="color: blue">MyPage</h2>
 			</div>
-			<p class="lead" style="padding-left:50px">홈스피탈 MyPage</p><br/>
+			<p class="lead" style="padding-left: 50px">홈스피탈 MyPage</p>
+			<br />
 			<div class="col-md-5">
-						<div class="bg-transparent card-header pt-4 border-0">
-							<h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="15">
-								<span class="">개인정보</span>
-							</h1><br/>
-						</div>
-						<div class="col-md-10 col-md-offset-1">
-							<table class="table">
-								<tbody style="font-size: 1.2em">
-									<tr>
-										<td>이름</td>
-										<td>윤승중</td>
-									</tr>
-									<tr class="table-active">
-										<td>핸드폰 번호</td>
-										<td>010-4992-2814</td>
-									</tr>
-									<tr class="table-success">
-										<td>성별</td>
-										<td>남성</td>
-									</tr>
-									<tr class="table-warning">
-										<td>나이</td>
-										<td>27</td>
-									</tr>
-									<tr class="table-danger">
-										<td>신장</td>
-										<td>180</td>
-									</tr>
-										<tr class="table-danger">
-										<td>몸무게</td>
-										<td>80</td>
-									</tr>
-								</tbody>
-							</table>
-							<div class="row" style="text-align: right;">
-								<button class="btn btn-success" style="font-size: 1.0em">개인 정보 수정</button>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-5">
-						<div class="bg-transparent card-header pt-4 border-0">
-							<h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="30">
-								<span class="">질환 정보</span>
-							</h1><br/>
-						</div>
-						<div class="col-md-10 col-md-offset-1">
-							<table class="table">
-								<tbody style="font-size: 1.2em">
-									<tr>
-										<td>질병</td>
-										<td>감염성 질환, 호흡계 질환, 생식계 질환</td>
-									</tr>
-									<tr class="table-active">
-										<td>01/04/2012</td>
-										<td>Approved</td>
-									</tr>
-									<tr class="table-success">
-										<td>02/04/2012</td>
-										<td>Declined</td>
-									</tr>
-									<tr class="table-warning">
-										<td>03/04/2012</td>
-										<td>Pending</td>
-									</tr>
-								</tbody>
-							</table>
-							<div class="row" style="text-align: right;">
-							<button class="btn btn-success" style="font-size: 1.0em">질환 정보 수정</button>
-							</div>
-						</div>
+				<div class="bg-transparent card-header pt-4 border-0">
+					<h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="15">
+						<span class="">개인정보</span>
+					</h1>
+					<br />
+				</div>
+				<div class="col-md-10 col-md-offset-1">
+					<table class="table">
+						<tbody style="font-size: 1.2em">
+							<tr>
+								<td>이름</td>
+								<td>윤승중</td>
+							</tr>
+							<tr class="table-active">
+								<td>핸드폰 번호</td>
+								<td>010-4992-2814</td>
+							</tr>
+							<tr class="table-success">
+								<td>성별</td>
+								<td>남성</td>
+							</tr>
+							<tr class="table-warning">
+								<td>나이</td>
+								<td>27</td>
+							</tr>
+							<tr class="table-danger">
+								<td>신장</td>
+								<td>180</td>
+							</tr>
+							<tr class="table-danger">
+								<td>몸무게</td>
+								<td>80</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row" style="text-align: right;">
+						<button class="btn btn-success" style="font-size: 1.0em">개인 정보 수정</button>
 					</div>
 				</div>
 			</div>
+			<div class="col-md-5">
+				<div class="bg-transparent card-header pt-4 border-0">
+					<h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="30">
+						<span class="">질환 정보</span>
+					</h1>
+					<br />
+				</div>
+				<div class="col-md-10 col-md-offset-1">
+					<table class="table">
+						<tbody style="font-size: 1.2em">
+							<tr>
+								<td>질병</td>
+								<td>감염성 질환, 호흡계 질환, 생식계 질환</td>
+							</tr>
+							<tr class="table-active">
+								<td>01/04/2012</td>
+								<td>Approved</td>
+							</tr>
+							<tr class="table-success">
+								<td>02/04/2012</td>
+								<td>Declined</td>
+							</tr>
+							<tr class="table-warning">
+								<td>03/04/2012</td>
+								<td>Pending</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row" style="text-align: right;">
+						<button class="btn btn-success" style="font-size: 1.0em">질환 정보 수정</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
