@@ -90,10 +90,15 @@
 	}
 	.warp_invisible{transform:translateX(-391px);}
 	.left_toggle{left:0; }
+<<<<<<< HEAD
+	.search_item{margin: 0 20px;display: block;}
+
+=======
 	
 	.scroll_area{overflow:auto;height:100%;flex-direction: column;background: #fff;}
 	.search_item{border-top:1px solid #e5e5e5;margin: 0 20px;padding: 19px 20px 18px;;display: block;cursor: pointer;}
 
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	
 	.content_title{
 		display: inline-block;
@@ -103,6 +108,10 @@
 		margin-top: 3px;
 		margin-bottom: 3px;
 	}
+<<<<<<< HEAD
+
+
+=======
 	
 	.inner_title_area{
 		padding-left: 20px;
@@ -156,6 +165,7 @@
 	    line-height: 21px;
 	}
 
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 </style>
 <div class="map_wrap">
 	<div id="search_wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px;position:absolute;z-index: 3">
@@ -325,6 +335,11 @@
 			$('.info-toggle').css("left","0");
 		}); */
 		$('.search_keyword_submit').click(function(){
+<<<<<<< HEAD
+
+			loadHospitalList(lat,lon);
+
+=======
 			console.log('검색',$('.search_keyword_input').val().length);
 			var search_val = $('.search_keyword_input').val();
 			if($('.search_keyword_input').val().length > 0)
@@ -332,6 +347,7 @@
 				loadHospitalList(lat,lon,search_val);
 			}
 			
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 		});
 		$('.info_btn_toggle').click(function(){
 			console.log($('.info_wrap'));
