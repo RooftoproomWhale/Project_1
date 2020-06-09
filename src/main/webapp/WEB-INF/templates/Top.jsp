@@ -92,6 +92,7 @@
 						<li><a href="<c:url value='/Calendar/calendar.hst'/>">일정 관리</a></li>
 						<li class="divider"></li>
 						<li><a href="<c:url value='/Homespital/Health_info.hst'/>">예방 정보</a></li>
+						
 					</ul></li>
 
 				<c:if test="${USER == NULL}" var="result">
@@ -103,6 +104,7 @@
 					<li><a href="<c:url value='/User/Logout.hst'/>">Logout</a></li>
 					<li><a href="<c:url value='/Account/ToMypage.hst'/>">MyPage</a></li>
 				</c:if>
+					<li><a href="<c:url value='/Admin/Index.hst'/>">Admin</a></li>
 				<!-- 				<li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
 			</ul>
 		</div>
