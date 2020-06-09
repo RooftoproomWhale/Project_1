@@ -150,13 +150,6 @@ public class HomeController {
 	{
 		return "health_info/Health_detail.tiles";
 	}
-	
-	//관리자 화면 이동 테스트
-	@RequestMapping("/Admin/Index.hst")
-	public String adIndex()
-	{
-		return "Ad_Index.ad_tiles";
-	}
 
 	//test
 	@RequestMapping("/Test/test.hst")
