@@ -10,7 +10,7 @@
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
 
 <style>
-.color-red {
+.color-red { 
 	color: red;
 }
 

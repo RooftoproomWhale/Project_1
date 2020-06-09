@@ -10,7 +10,7 @@
 .box-default {
 	font-size: 15px;
 	color: #115bab;
-	background-color: #D5D5D5;
+	background-color: #D5D5D5; 
 	height: 70px;
 	text-align: center;
 	line-height: 70px;

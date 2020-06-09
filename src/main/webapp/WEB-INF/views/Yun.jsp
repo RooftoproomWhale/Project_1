@@ -13,7 +13,7 @@ a:hover, a:focus {
 .demo {
 	padding: 100px 0;
 }
-
+ 
 .heading-title {
 	margin-bottom: 100px;
 }
