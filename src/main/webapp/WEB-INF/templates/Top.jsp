@@ -82,10 +82,7 @@
 					data-toggle="dropdown" aria-expanded="false"> Services <span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국
-								찾기</a></li>
-						<li class="divider"></li>
-						<li><a href='#'>복약 관리</a></li>
+						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국 찾기</a></li>
 						<li class="divider"></li>
 						<li><a href='<c:url value="/Homespital/MedicineForm.hst"/>'>안전상비의약품</a></li>
 						<li class="divider"></li>
