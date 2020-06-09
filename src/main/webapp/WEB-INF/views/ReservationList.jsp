@@ -5,54 +5,53 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>마이페이지</title>
+
+<link href="<c:url value='/css/jquery-accordion-menu.css'/>"
+	rel="stylesheet" type="text/css" />
 
 <style type="text/css">
 #jquery-accordion-menu {
-  	top: 81px;
+	top: 81px;
 }
-*{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
-body{background:#FFFFFF;}
-.content{width:260px;margin:100px auto;}
-#demo-list a{
-	overflow:hidden;
-	text-overflow:ellipsis;
-	-o-text-overflow:ellipsis;
-	white-space:nowrap;
-	height:60px;
-	width:100%;
-	font-size: 14px
-	}
 
-#footer 
- 	{ 
-		position: absolute; 
-		width:100%; 
-		left:0px; 
- 		bottom:0px; 
- 		background-color:#474747;
- 		height: 150px
- 		
- 	} 
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+body {
+	background: #FFFFFF;
+}
+
+.content {
+	width: 260px;
+	margin: 100px auto;
+}
+
+#demo-list a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 60px;
+	width: 100%;
+	font-size: 14px
+}
+
+#footer {
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	bottom: 0px;
+	background-color: #474747;
+	height: 150px
+}
 </style>
 
-
-<script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
-
-	});
-
-	$(function() {
-
-		$("#demo-list li").click(function() {
-			$("#demo-list li.active").removeClass("active")
-			$(this).addClass("active");
-		})
-	})
-</script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -72,13 +71,12 @@ body{background:#FFFFFF;}
 						</ul></li>
 					<li><a href="<c:url value='/mypage/Yun.hst'/>"><i class="fa fa-suitcase"></i>복약 관리</a>
 					<li><a href="<c:url value='/mypage/ReservationList.hst'/>"><i class="fa fa-envelope"></i>진료예약 현황</a></li>
-					<li><a href="<c:url value='/mypage/mypage.hst'/>"><i class="fa fa-envelope"></i>내 질병 관리</a></li>
+					<li><a href="<c:url value='/mypage/ChangeMember.hst'/>"><i class="fa fa-envelope"></i>내 질병 관리</a></li>
 				</ul>
 			</div>
 		</div>
-	</div>
-	<div class="container">
-		<div class="row" style="margin-top: -400px; padding-left: 40px;" >
+		<div class="col-md-10">
+			<div class="row" style="padding-left: 60px; padding-top: 100px">
 				<div class="page-header">
 					<h2>진료예약</h2>
 				</div>
@@ -90,13 +88,10 @@ body{background:#FFFFFF;}
 				<table class="table table-striped" style="max-width: 1300px;">
 					<thead>
 						<tr>
-							<th scope="col" class="mobile"
-							style="width: 55px; text-align: center;">번호</th>
+							<th scope="col" class="mobile" style="width: 55px; text-align: center;">번호</th>
 							<th scope="col" class="mobile" style="text-align: center;">병원이름</th>
-							<th scope="col" class="mobile"
-							style="width: 80px; text-align: center;">예약자</th>
-							<th scope="col" class="mobile"
-							style="width: 120px; text-align: center;">예약날짜</th>
+							<th scope="col" class="mobile" style="width: 80px; text-align: center;">예약자</th>
+							<th scope="col" class="mobile" style="width: 120px; text-align: center;">예약날짜</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -132,47 +127,19 @@ body{background:#FFFFFF;}
 						</tr>
 					</tbody>
 				</table>
-				<div style="text-align: center;">
-					<ul class="pagination">
-						<li class="page-item"><span class="page-link">&laquo;</span></li>
-						<li class="page-item"><a class="page-link mobile" href="#">1</a></li>
-						<li class="page-item"><a class="page-link mobile" href="#">2</a></li>
-						<li class="page-item"><a class="page-link mobile" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">&raquo;</a>
-						</li>
-					</ul>
-				</div>
-				<!-- 검색용 UI -->
-				<div class="row">
-					<div class="text-center">
-						<form class="form-inline" method="post" action="">
-							<div class="form-group">
-								<select name="searchColumn" class="form-control">
-									<option value="title">병원</option>
-									<option value="name">예약자</option>
-									<option value="content">날짜</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<input type="text" name="searchWord" class="form-control" />
-							</div>
-							<button type="submit" class="btn btn-primary">검색</button>
-						</form>
-					</div>
-				</div>
+			</div>
 		</div>
 	</div>
-
 </body>
+<script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
-(
-	function($) {
+	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
-			return (a.textContent || a.innerText || "").toUpperCase()
-					.indexOf(m[3].toUpperCase()) >= 0;
+			return (a.textContent || a.innerText || "").toUpperCase().indexOf(
+					m[3].toUpperCase()) >= 0;
 		};
 		function filterList(header, list) {
-	
+
 			var form = $("<form>").attr({
 				"class" : "filterform",
 				action : "#"
@@ -186,8 +153,7 @@ body{background:#FFFFFF;}
 						var filter = $(this).val();
 						if (filter) {
 							$matches = $(list).find(
-									"a:Contains(" + filter + ")")
-									.parent();
+									"a:Contains(" + filter + ")").parent();
 							$("li", list).not($matches).slideUp();
 							$matches.slideDown();
 						} else {
@@ -203,5 +169,18 @@ body{background:#FFFFFF;}
 		});
 	})(jQuery);
 </script>
-				
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+
+	});
+
+	$(function() {
+
+		$("#demo-list li").click(function() {
+			$("#demo-list li.active").removeClass("active")
+			$(this).addClass("active");
+		})
+	})
+</script>
 </html>
