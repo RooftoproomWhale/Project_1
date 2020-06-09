@@ -157,12 +157,12 @@ public class HomeController {
 	{
 		return "Ad_Index.ad_tiles";
 	}
-	
+
 	//test
 	@RequestMapping("/Test/test.hst")
 	public String test()
 	{
-		return "test.jsp";
+		return "test.ad_tiles";
 	}
 	
 	
