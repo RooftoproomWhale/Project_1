@@ -49,8 +49,8 @@
 	}
 	.top_area{
 		position: relative;
-	    height: 94px;
-	    padding: 20px 20px 2px;
+	    
+	    padding: 20px 20px 10px;
 	    
 	}
 	.top_search_area{
@@ -63,8 +63,25 @@
 	    border-radius: 3px;
 		background-color: #f2f2f2;
 	}
+	.top_absfilter_area{
+		text-align: center;
+		padding: 0 0 20px 0;
+	}
 	.top_filter_area{
 		padding: 5px 20px;
+	}
+	.filter_button{
+		width: 44px;
+		height: 44px;
+		box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
+		background-color: white;
+		border-radius: 22px;
+		border-width: initial;
+		border-style: none;
+	    border-color: initial;
+	    border-image: initial;
+	    margin: 0 10px;
+	    outline: 0;
 	}
 	.search_keyword_input{
 		float: left;
@@ -84,14 +101,14 @@
 	    margin: 5px 0;
 	    border: 0 none;  
 	    line-height: 0;
-	    background-position: 0 -120px;
 	    cursor: pointer;
-	    background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/ico_search.png) no-repeat;
+	    background: url("<c:url value='/images/map/search.png'/>");
+	    background-size: cover;
 	}
 	.warp_invisible{transform:translateX(-391px);}
 	.left_toggle{left:0; }
 	
-	.scroll_area{overflow:auto;height:100%;flex-direction: column;background: #fff;}
+	.scroll_area{overflow:auto;height:90%;flex-direction: column;background: #fff;}
 	.search_item{border-top:1px solid #e5e5e5;margin: 0 20px;padding: 19px 20px 18px;;display: block;cursor: pointer;}
 
 	
@@ -186,12 +203,22 @@
 	 -->
 	<div class="info_wrap">
 		<div class="top_area">
+			<div class="top_absfilter_area">
+				<button class="filter_button"  type="button">
+					<img src="<c:url value='/images/map/hospital_image/hospital_button.png'/>" style="width: 34px;height: 34px;">
+				</button>
+				<button class="filter_button"  type="button">
+					<img src="<c:url value='/images/map/pharmacy_image/pharmacy_button.png'/>" style="width: 34px;height: 34px;">
+				</button>
+				<button class="filter_button"  type="button">
+					<img src="<c:url value='/images/map/maskmap_image/mask_button.png'/>" style="width: 34px;height: 34px;">
+				</button>
+			</div>
 			<div class='top_search_area'>
-				<input class="search_keyword_input" maxlength="100" autocomplete="off">
+				<input class="search_keyword_input" maxlength="100" autocomplete="off" placeholder="검색어를 입력하세요">
 				<button type="button" class="search_keyword_submit"></button>
 			</div>
 			<div class="top_filter_area">
-				
 			</div>
 		</div>
 		<div class="scroll_area">
@@ -261,10 +288,18 @@
 		<span class="info_btn_toggle"></span>
 	</div>
 	<div class="menu_wrap">
-		<button type="button" onclick="changeApi(0)">병원</button>
-		<button type="button" onclick="changeApi(1)">약국</button>
-		<button type="button" onclick="changeApi(2)">공적마스크</button>
-		<button type="button" onclick="changeApi(3)">코로나 확진자 동선</button>
+		<button class="current_refresh"  type="button" onclick="changeApi(0)">
+			<img src="<c:url value='/images/map/hospital_image/hospital_button.png'/>" style="width: 34px;height: 34px;">
+		</button>
+		<button class="current_refresh"  type="button" onclick="changeApi(1)">
+			<img src="<c:url value='/images/map/pharmacy_image/pharmacy_button.png'/>" style="width: 34px;height: 34px;">
+		</button>
+		<button class="current_refresh"  type="button" onclick="changeApi(2)">
+			<img src="<c:url value='/images/map/maskmap_image/mask_button.png'/>" style="width: 34px;height: 34px;">
+		</button>
+		<button class="current_refresh"  type="button" onclick="changeApi(3)">
+			<img src="<c:url value='/images/map/corona_image/corona_button.png'/>" style="width: 34px;height: 34px;">
+		</button>
 	</div>
 	<div id="map" style="width: 100%; height: 100%;position: relative;overflow: hidden;"></div>
 </div>
@@ -329,7 +364,8 @@
 			var search_val = $('.search_keyword_input').val();
 			if($('.search_keyword_input').val().length > 0)
 			{
-				loadHospitalList(lat,lon,search_val);
+				//loadHospitalList(search_val);
+				loadPharmacyList(search_val);
 			}
 			
 		});
@@ -359,18 +395,10 @@
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	
 	var geocoder = new kakao.maps.services.Geocoder();
-	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-	var mapTypeControl = new kakao.maps.MapTypeControl();
+	
 	
 	var apiStatus = 2; // 0:병원, 1: 약국, 2: 공적마스크, 3: 확진자 동선
 	
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-	
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
 	kakao.maps.event.addListener(map, 'dragend', function() {
 		// 지도의  레벨을 얻어옵니다
@@ -773,13 +801,13 @@
 				}
 			});
 		}
-		function loadHospitalList(latitude,longitude,search_val)
+		function loadHospitalList(search_val)
 		{
 			$.ajax({
 				url:"<c:url value='/Homespital/Map/hospitalList.hst'/>",
 				type:'get',
 				datatype:'json',
-				data:{"cor_x":latitude,"cor_y":longitude,"search_keyword":search_val},
+				data:{"search_keyword":search_val},
 				beforeSend: function () {
 					console.log("beforeSend");
 					FunLoadingBarStart();
@@ -794,26 +822,7 @@
 					var items = '';
 					$.each(jsonData, function(i, item) {
 						console.log(item);
-						/* <div class="search_item">
-								<div class="search_item_detail">
-									<div class="detail_content">
-										<div class="content_title">
-											<strong>병원</strong>
-										</div>
-			
-										<div class="content_body">
-											내과
-											010-1234-5678
-										</div>
-										<div class="content_body">
-											서울 금천구 가산디지털1로 186 제이플라츠 2층 애슐리
-			
-										</div>
-										
-									</div>
-								</div>
-							</div> */
-						
+					
 						items += '<div class="search_item" onclick="searchItemClick(\''+item['ADDRESS']+'\');">'+
 									'<div class="search_item_detail">'+
 										'<div class="detail_content">'+
@@ -839,7 +848,51 @@
 				}
 			});
 		}
-		
+		function loadPharmacyList(search_val)
+		{
+			$.ajax({
+				url:"<c:url value='/Homespital/Map/pharmacyList.hst'/>",
+				type:'get',
+				datatype:'json',
+				data:{"search_keyword":search_val},
+				beforeSend: function () {
+					console.log("beforeSend");
+					FunLoadingBarStart();
+				},
+				complete: function () {
+					console.log("complete");
+					FunLoadingBarEnd();
+				},
+				success:function(data){
+					var jsonData = JSON.parse(data);
+					console.log("연결성공", jsonData,typeof(jsonData));
+					var items = '';
+					$.each(jsonData, function(i, item) {
+						console.log(item);
+					
+						items += '<div class="search_item" onclick="searchItemClick(\''+item['ADDRESS']+'\');">'+
+									'<div class="search_item_detail">'+
+										'<div class="detail_content">'+
+											'<div class="content_title">'+
+												'<strong>'+item['PHAR_NAME']+'</strong>'+
+											'</div>'+
+											'<div class="content_body">'+
+												item['TEL']+
+											'</div>'+
+											'<div class="content_body">'+
+												item['ADDRESS']+
+											'</div>'+
+										'</div>'+
+									'</div>'+
+								'</div>'
+					});
+					$('.search_list').html(items);
+				},
+				error:function(e){
+					
+				}
+			});
+		}
 		function translateType(type)
 		{
 			switch (type) {

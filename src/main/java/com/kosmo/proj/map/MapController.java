@@ -44,13 +44,22 @@ public class MapController {
 	public String hospitalList(@RequestParam Map map)
 	{
 		List<Map> list = mapService.selectList(map);
-		
 
-		String latitude = map.get("cor_y").toString();
-		String longitude = map.get("cor_x").toString();
 		String search_keyword = map.get("search_keyword").toString();
 
+		System.out.println(JSONArray.toJSONString(list));
 		
+		return JSONArray.toJSONString(list);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/pharmacyList.hst",produces = "text/html; charset=UTF-8")
+	public String pharmacyList(@RequestParam Map map)
+	{
+		List<Map> list = mapService.selectPharmacyList(map);
+
+		String search_keyword = map.get("search_keyword").toString();
+
 		System.out.println(JSONArray.toJSONString(list));
 		
 		return JSONArray.toJSONString(list);

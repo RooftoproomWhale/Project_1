@@ -47,8 +47,10 @@
 		SELECT * FROM hospital WHERE <![CDATA[ ROWNUM <= 10 ]]>
 	</select>
 
-	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
-
+	<select id="pharmacySelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
+	</select>
 </mapper>
