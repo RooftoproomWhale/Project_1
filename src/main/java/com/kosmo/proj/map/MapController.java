@@ -48,6 +48,7 @@ public class MapController {
 		String search_keyword = map.get("search_keyword").toString();
 
 		System.out.println(JSONArray.toJSONString(list));
+
 		
 		return JSONArray.toJSONString(list);
 	}

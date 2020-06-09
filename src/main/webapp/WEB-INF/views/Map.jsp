@@ -107,6 +107,7 @@
 	}
 	.warp_invisible{transform:translateX(-391px);}
 	.left_toggle{left:0; }
+
 	
 	.scroll_area{overflow:auto;height:90%;flex-direction: column;background: #fff;}
 	.search_item{border-top:1px solid #e5e5e5;margin: 0 20px;padding: 19px 20px 18px;;display: block;cursor: pointer;}
@@ -120,6 +121,7 @@
 		margin-top: 3px;
 		margin-bottom: 3px;
 	}
+
 	
 	.inner_title_area{
 		padding-left: 20px;
@@ -360,14 +362,15 @@
 			$('.info-toggle').css("left","0");
 		}); */
 		$('.search_keyword_submit').click(function(){
+
 			console.log('검색',$('.search_keyword_input').val().length);
 			var search_val = $('.search_keyword_input').val();
 			if($('.search_keyword_input').val().length > 0)
 			{
-				//loadHospitalList(search_val);
-				loadPharmacyList(search_val);
+
+				loadHospitalList(search_val);
 			}
-			
+
 		});
 		$('.info_btn_toggle').click(function(){
 			console.log($('.info_wrap'));
