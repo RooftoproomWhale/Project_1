@@ -160,7 +160,7 @@
 </style>
 
 
-  <div id='calendar'>
+  <div id='calendar' style="margin-bottom: 50px;">
   </div>
 <div id="createEventModal" class="modal fade">
     <div class="modal-dialog">
