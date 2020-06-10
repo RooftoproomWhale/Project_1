@@ -992,18 +992,18 @@
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
+          labels: ["0~2", "2~4", "4~6", "6~8", "8~10", "10~12", "12~14", "14~16", "16~18", "18~20", "20~22", "22~24"],
           defaultFontFamily: "Poppins",
           datasets: [
             {
-              label: "My First dataset",
+              label: "Last Month",
               borderColor: "rgba(0,0,0,.09)",
               borderWidth: "1",
               backgroundColor: "rgba(0,0,0,.07)",
               data: [22, 44, 67, 43, 76, 45, 12]
             },
             {
-              label: "My Second dataset",
+              label: "This Month",
               borderColor: "rgba(0, 123, 255, 0.9)",
               borderWidth: "1",
               backgroundColor: "rgba(0, 123, 255, 0.5)",
@@ -1131,9 +1131,9 @@
 
           }],
           labels: [
-            "Green",
-            "Green",
-            "Green"
+            "10세 이하",
+            "10대",
+            "20대"
           ]
         },
         options: {

@@ -22,8 +22,6 @@
 		WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
 		</if>
 	</select>
-	
-	
 
 	
 	<insert id="memoInsert" parameterType="java.util.Map">

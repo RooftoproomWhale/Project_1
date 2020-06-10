@@ -7,23 +7,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 	
-	//관리자 화면 이동
+	@RequestMapping("Test.hst")
+	public String test()
+	{
+		return "Ad_Sidebar.ad_tiles";
+	}
+	
 	@RequestMapping("Index.hst")
 	public String toIndex()
 	{
 		return "Ad_Index.ad_tiles";
 	}
 	
-	@RequestMapping("Table.hst")
-	public String toTable()
+	@RequestMapping("Accounts.hst")
+	public String toAccounts()
 	{
-		return "Table.ad_tiles";
+		return "Accounts.ad_tiles";
 	}
 	
-	@RequestMapping("Map.hst")
+	@RequestMapping("Bookings.hst")
+	public String toBookings()
+	{
+		return "Bookings.ad_tiles";
+	}
+	
+	@RequestMapping("Corona_Map.hst")
 	public String toMap()
 	{
-		return "Ad_Map.ad_tiles";
+		return "CoronaMap.ad_tiles";
 	}
 	
 	@RequestMapping("Form.hst")
@@ -38,23 +49,29 @@ public class AdminController {
 		return "Chart.ad_tiles";
 	}
 	
-	@RequestMapping("Login.hst")
-	public String toLogin()
+	@RequestMapping("HosAuth.hst")
+	public String toHosAuth()
 	{
-		return "Ad_Login.ad_tiles";
+		return "HosAuth.ad_tiles";
 	}
 	
-	@RequestMapping("Register.hst")
-	public String toRegister()
-	{
-		return "Register.ad_tiles";
-	}
-	
-	@RequestMapping("Forget-pass.hst")
-	public String toForget()
-	{
-		return "Ad_Forget-pass.ad_tiles";
-	}
+//	@RequestMapping("Login.hst")
+//	public String toLogin()
+//	{
+//		return "Ad_Login.ad_tiles";
+//	}
+//	
+//	@RequestMapping("Register.hst")
+//	public String toRegister()
+//	{
+//		return "Register.ad_tiles";
+//	}
+//	
+//	@RequestMapping("Forget-pass.hst")
+//	public String toForget()
+//	{
+//		return "Ad_Forget-pass.ad_tiles";
+//	}
 	
 	
 }
