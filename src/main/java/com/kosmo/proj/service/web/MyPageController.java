@@ -35,4 +35,9 @@ public class MyPageController {
 	   public String Yun() {
 	      return "Yun.tiles";
 	   }
+	   //내 질병관리
+	   @RequestMapping("/mypage/Disease.hst")
+	   public String Disease() {
+	      return "Disease.tiles";
+	   }
 }
