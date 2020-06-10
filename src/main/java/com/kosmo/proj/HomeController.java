@@ -150,7 +150,13 @@ public class HomeController {
 	{
 		return "health_info/Health_detail.tiles";
 	}
-	
+
+	//test
+	@RequestMapping("/Test/test.hst")
+	public String test()
+	{
+		return "test.ad_tiles";
+	}
 	
 	
 //	마이바티스test
