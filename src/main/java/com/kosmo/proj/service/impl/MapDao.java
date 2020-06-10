@@ -27,13 +27,7 @@ public class MapDao implements MapService{
 		// TODO Auto-generated method stub
 
 //		return sqlMapper.selectList("hospitalSelect",map);
-<<<<<<< HEAD
-		return sqlMapper.selectList("hospitalSelectByXY",map);
-
-=======
 		return sqlMapper.selectList("hospitalSelectByKeyWord",map);
-
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	}
 
 	@Override

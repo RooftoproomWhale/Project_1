@@ -45,10 +45,10 @@ public class MapController {
 	{
 		List<Map> list = mapService.selectList(map);
 
-<<<<<<< HEAD
+
 		String latitude = map.get("cor_y").toString();
 		String longitude = map.get("cor_x").toString();
-=======
+
 		String search_keyword = map.get("search_keyword").toString();
 
 		System.out.println(JSONArray.toJSONString(list));
@@ -62,7 +62,7 @@ public class MapController {
 	public String pharmacyList(@RequestParam Map map)
 	{
 		List<Map> list = mapService.selectPharmacyList(map);
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
+
 
 		String search_keyword = map.get("search_keyword").toString();
 

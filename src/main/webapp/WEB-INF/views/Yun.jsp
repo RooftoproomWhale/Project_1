@@ -186,7 +186,7 @@ body{
 								</h4>
 							</div>
 							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-								<div class="panel-body">맥페란정 - 위장운동을 활성화시킴으로써 구역, 구토를 치료</div>
+								<div class="panel-body"><a href='<c:url value="/Homespital/Management.hst?dname=맥페란정"/>'>맥페란정</a> - 위장운동을 활성화시킴으로써 구역, 구토를 치료</div>
 							</div>
 						</div>
 						<div class="panel panel-default">
@@ -198,7 +198,7 @@ body{
 								</h4>
 							</div>
 							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-								<div class="panel-body">티로파정 - 평활근 경축을 완화시킴으로써 항경령 및 진통 효과를 나타냄</div>
+								<div class="panel-body"><a href='<c:url value="/Homespital/Management.hst?dname=티로파정"/>'>티로파정</a> - 평활근 경축을 완화시킴으로써 항경령 및 진통 효과를 나타냄</div>
 							</div>
 						</div>
 						<div class="panel panel-default">
@@ -210,7 +210,7 @@ body{
 								</h4>
 							</div>
 							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-								<div class="panel-body">사이톱신정 - 향균작용을 통해 각종 세균감염증을 치료</div>
+								<div class="panel-body"><a href='<c:url value="/Homespital/Management.hst?dname=사이톱신정"/>'>사이톱신정</a> - 향균작용을 통해 각종 세균감염증을 치료</div>
 							</div>
 						</div>
 						<div class="panel panel-default">
