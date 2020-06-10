@@ -32,6 +32,12 @@ public class AdminController {
 		return "Form.ad_tiles";
 	}
 	
+	@RequestMapping("Calendar.hst")
+	public String toCalendar()
+	{
+		return "Form.ad_tiles";
+	}
+	
 	@RequestMapping("Chart.hst")
 	public String toChart()
 	{
