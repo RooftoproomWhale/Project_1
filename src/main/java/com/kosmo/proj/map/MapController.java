@@ -40,6 +40,38 @@ public class MapController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/searchList.hst",produces = "text/html; charset=UTF-8")
+	public String searchList(@RequestParam Map map) {
+		List<Map> list = null;
+		String apiStatus = map.get("apiStatus").toString();
+		JSONArray ja = new JSONArray();
+		
+		if(apiStatus.equals("0"))
+		{
+			list = mapService.searchHospitalList(map);
+			for (int i = 0; i < list.size(); i++) {
+				ja.add(list.get(i).get("HOSP_NAME").toString() + "("  + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+			}
+		}
+		else if(apiStatus.equals("1") || apiStatus.equals("2"))
+		{
+			list = mapService.searchPharmacyList(map);
+			for (int i = 0; i < list.size(); i++) {
+				ja.add(list.get(i).get("PHAR_NAME").toString() + "(" + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+			}
+		}
+		else
+		{
+			
+		}
+		
+		
+		
+		
+		return ja.toJSONString();
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/hospitalList.hst",produces = "text/html; charset=UTF-8")
 	public String hospitalList(@RequestParam Map map)
 	{

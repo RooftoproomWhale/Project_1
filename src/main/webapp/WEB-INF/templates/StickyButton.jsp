@@ -14,14 +14,7 @@
   position: fixed;
   bottom: 30px;
   right: 50px;
-  z-index: 1;
-}
-
-.sticky-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 50px;
-  z-index: 1;
+  z-index: 1231234;
   color: #ff0000
 }
 
