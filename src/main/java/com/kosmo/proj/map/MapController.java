@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 import org.json.JSONObject;
 import org.json.XML;
 import org.json.simple.JSONArray;
-
+import org.json.simple.JSONValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,10 +65,42 @@ public class MapController {
 			
 		}
 		
-		
-		
-		
 		return ja.toJSONString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/detailView.hst",produces = "text/html; charset=UTF-8")
+	public String detailList(@RequestParam Map map) {
+		
+		List<Map> list = null;
+		String apiStatus = map.get("apiStatus").toString();
+		JSONArray ja = new JSONArray();
+		
+		if(apiStatus.equals("0"))
+		{
+			list = mapService.selectHospitalOne(map);
+			String depart = "";
+			for (int i = 0; i < list.size(); i++) {
+				if(i==list.size()-1)
+				{
+					depart += list.get(i).get("DEPT_NAME").toString();
+				}
+				else
+				{
+					depart += list.get(i).get("DEPT_NAME").toString() + ',';
+				}
+			}
+			list.get(0).replace("DEPT_NAME", depart);
+			
+		}
+		else if(apiStatus.equals("1") || apiStatus.equals("2"))
+		{
+			list = mapService.selectPharmacyOne(map);
+			
+		}
+		
+//		return JSONArray.toJSONString(list);
+		return JSONArray.toJSONString(list);
 	}
 	
 	@ResponseBody

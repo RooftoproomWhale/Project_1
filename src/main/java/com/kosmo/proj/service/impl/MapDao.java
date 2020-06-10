@@ -49,6 +49,18 @@ public class MapDao implements MapService{
 		return sqlMapper.selectList("pharmacyNameSelectByKeyWord",map);
 	}
 
+	@Override
+	public List<Map> selectHospitalOne(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("hospitalDetailSelect",map);
+	}
+
+	@Override
+	public List<Map> selectPharmacyOne(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("pharmacyDetailSelect",map);
+	}
+
 	
 
 }
