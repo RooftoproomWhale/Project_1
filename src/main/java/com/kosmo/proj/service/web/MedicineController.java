@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kosmo.proj.service.MedicineDTO;
 
 
 @Controller
@@ -46,34 +45,6 @@ public class MedicineController {
 		map.put("medi2",medi2);
 		map.put("medi3",medi3);
 		map.put("medi4",medi4);
-		
-		try{
-			for(String medi:medi1) {
-			String encodeSearch = URLEncoder.encode(medi.replace("mg","밀리그람"),"UTF-8"); 
-	        StringBuffer result = new StringBuffer();
-	            String urlstr = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?" +
-	                    "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
-	                    "&numOfRows=10" +
-	                    "&pageNo=1" +
-	                    "&item_name="+encodeSearch;
-	            
-	            URL url = new URL(urlstr);
-	            HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-	            urlconnection.setRequestMethod("GET");
-	            BufferedReader br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8"));
-	            String returnLine;
-	            while((returnLine = br.readLine()) != null) {
-	                result.append(returnLine+"\r");
-	            }
-	            urlconnection.disconnect();
-	            jsonMedi = XML.toJSONObject(result.toString());
-	            JSONObject item = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items");
-	            System.out.println(item);
-	           
-			}
-	        }catch(Exception e){
-	            e.printStackTrace();
-	        }
 		
 		return "MedicineList.tiles";
 	}
