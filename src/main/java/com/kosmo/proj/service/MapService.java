@@ -8,4 +8,6 @@ public interface MapService {
 	List<Map> selectList();
 	//병원 목록
 	List<Map> selectList(Map map);
+	//약국 목록
+	List<Map> selectPharmacyList(Map map);
 }

@@ -27,8 +27,15 @@ public class MapDao implements MapService{
 		// TODO Auto-generated method stub
 
 //		return sqlMapper.selectList("hospitalSelect",map);
-		return sqlMapper.selectList("hospitalSelectByXY",map);
+		return sqlMapper.selectList("hospitalSelectByKeyWord",map);
 
 	}
+
+	@Override
+	public List<Map> selectPharmacyList(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("pharmacySelectByKeyWord",map);
+	}
+	
 
 }
