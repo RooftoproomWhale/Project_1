@@ -174,7 +174,14 @@
 	    font-size: 14px;
 	    line-height: 21px;
 	}
-
+	 .ui-autocomplete {
+	 	max-height: 200px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+	 }
 </style>
 <div class="map_wrap">
 	<div id="search_wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px;position:absolute;z-index: 3">
@@ -206,13 +213,13 @@
 	<div class="info_wrap">
 		<div class="top_area">
 			<div class="top_absfilter_area">
-				<button class="filter_button"  type="button">
+				<button class="filter_button" id="filter_hospital" type="button">
 					<img src="<c:url value='/images/map/hospital_image/hospital_button.png'/>" style="width: 34px;height: 34px;">
 				</button>
-				<button class="filter_button"  type="button">
+				<button class="filter_button" id="filter_pharmacy" type="button">
 					<img src="<c:url value='/images/map/pharmacy_image/pharmacy_button.png'/>" style="width: 34px;height: 34px;">
 				</button>
-				<button class="filter_button"  type="button">
+				<button class="filter_button" id="filter_mask" type="button">
 					<img src="<c:url value='/images/map/maskmap_image/mask_button.png'/>" style="width: 34px;height: 34px;">
 				</button>
 			</div>
@@ -361,14 +368,61 @@
 			$('.info_wrap').css("transform","translateX(-391px)");
 			$('.info-toggle').css("left","0");
 		}); */
+		$('.search_keyword_input').autocomplete({
+			source : function(request, response) {
+				$.ajax({
+					url : "<c:url value='/Homespital/Map/searchList.hst'/>",
+					type : "GET",
+					dataType: "json",
+					data : {"search_keyword" : $(".search_keyword_input").val(),"apiStatus" : apiStatus},
+					success : function(data){
+						console.log(data);
+						response($.map(data, function(item){
+							return {
+								label: item,
+								value: item.substring(0,item.indexOf("("))
+							}
+						}));
+					},
+					error : function(){ //실패
+		               alert("통신에 실패했습니다.");
+		            }
+				});
+			},
+			minLength : 1,
+			autoFocus : false,
+			select : function(evt, ui) {
+	            console.log("전체 data: " + JSON.stringify(ui));
+	            console.log(ui.item.label);
+	            
+	            /* console.log("db Index : " + ui.item.idx);
+	            console.log("검색 데이터 : " + ui.item.value); */
+	        },
+	        focus : function(evt, ui) {
+	            return false;
+	        },
+	        close : function(evt) {
+	        	
+	        }
+		})
 		$('.search_keyword_submit').click(function(){
 
 			console.log('검색',$('.search_keyword_input').val().length);
 			var search_val = $('.search_keyword_input').val();
 			if($('.search_keyword_input').val().length > 0)
 			{
-
-				loadHospitalList(search_val);
+				switch (apiStatus) {
+				case 0:
+					loadHospitalList(search_val);
+					break;
+				case 1:
+				case 2:
+					loadPharmacyList(search_val);
+					break;
+				default:
+					
+				}
+				
 			}
 
 		});
@@ -376,7 +430,22 @@
 			console.log($('.info_wrap'));
 			$('.info_wrap').toggleClass('warp_invisible');
 			$('.info-toggle').toggleClass('left_toggle');
+		});
+		
+		$('#filter_hospital').click(function(){
+			apiStatus = 0;
+			console.log('병원 필터 클릭',apiStatus);
 			
+			
+		});
+		$('#filter_pharmacy').click(function(){
+			apiStatus = 1;
+			console.log('약국 필터 클릭',apiStatus);
+			
+		});
+		$('#filter_mask').click(function(){
+			apiStatus = 2;
+			console.log('마스크 필터 클릭',apiStatus);
 			
 		});
 	});
@@ -524,7 +593,6 @@
 						kakao.maps.event.addListener(marker, 'click', function(){
 							console.log("modal",item,i)
 							
-							$('#hospital-modal').modal('show');
 						});
 						
 						kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -1044,6 +1112,8 @@
 
 			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 	
+			        removeMarker();
+			        
 			        map.setCenter(coords);
 			        
 			        loadMapApi(coords.getLat(),coords.getLng(),apiStatus);
