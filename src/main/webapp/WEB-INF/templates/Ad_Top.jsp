@@ -10,9 +10,6 @@
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
 
-    <!-- Title Page-->
-    <title>Dashboard</title>
-
 <!--     Fontfaces CSS -->
     <link href="<c:url value='/css/font-face.css'/>" rel="stylesheet" media="all">
     <link href="<c:url value='/vendor/font-awesome-4.7/css/font-awesome.min.css'/>" rel="stylesheet" media="all">

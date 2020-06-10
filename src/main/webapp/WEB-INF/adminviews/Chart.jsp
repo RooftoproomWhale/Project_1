@@ -51,14 +51,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="au-card m-b-30">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2 m-b-40">Doughut Chart</h3>
-                                        <canvas id="doughutChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
+<!--                             <div class="col-lg-6"> -->
+<!--                                 <div class="au-card m-b-30"> -->
+<!--                                     <div class="au-card-inner"> -->
+<!--                                         <h3 class="title-2 m-b-40">Doughut Chart</h3> -->
+<%--                                         <canvas id="doughutChart"></canvas> --%>
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
                             <div class="col-lg-6">
                                 <div class="au-card m-b-30">
                                     <div class="au-card-inner">
@@ -67,14 +67,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="au-card m-b-30">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2 m-b-40">Polar Chart</h3>
-                                        <canvas id="polarChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
+<!--                             <div class="col-lg-6"> -->
+<!--                                 <div class="au-card m-b-30"> -->
+<!--                                     <div class="au-card-inner"> -->
+<!--                                         <h3 class="title-2 m-b-40">Polar Chart</h3> -->
+<%--                                         <canvas id="polarChart"></canvas> --%>
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
                             <div class="col-lg-6">
                                 <div class="au-card m-b-30">
                                     <div class="au-card-inner">
