@@ -13,24 +13,23 @@
 					<div class="col-lg-10 col-md-push-2">
 						<div class="card">
 							<div class="card-header">
-								<strong>공지사항 작성</strong>
+								<strong>공지사항 수정</strong>
 							</div>
 							<div class="card-body card-block">
-<!-- 								<form action="" method="post"  enctype="multipart/form-data" -->
-									class="form-horizontal">
+<!-- 								<form action="" method="post"  enctype="multipart/form-data" class="form-horizontal"> -->
 
 									<div class="row form-group">
 									
 										<div class="col-12 col-md-12">
 											<input type="text" id="text-input" name="text-input"
-												placeholder="제목" class="form-control"> <small
+												placeholder="제목" class="form-control" value="원래내용"> <small
 												class="form-text text-muted"></small>
 										</div>
 									</div>
 									<div class="row form-group">
 										<div class="col-12 col-md-12">
 											<textarea name="textarea-input" id="textarea-input" rows="15"
-												placeholder="내용" class="form-control"></textarea>
+												placeholder="내용" class="form-control">원래내용~</textarea>
 										</div>
 									</div>
 									<div class="row form-group">
@@ -46,7 +45,7 @@
 										<a href="<c:url value='/Homespital/Notice.hst'/>">
 										<button type="submit" class="btn btn-primary btn-sm"
 												style="position: absolute; right: 20px; bottom: 20px;">
-												<i class="fa fa-dot-circle-o"></i> 작성
+												<i class="fa fa-dot-circle-o"></i> 수정
 											</button></a>
 									</div>
 <!-- 								</form> -->

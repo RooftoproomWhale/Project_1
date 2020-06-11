@@ -33,7 +33,7 @@
 					<tbody>
 						<tr>
 							<th scope="row" class="" style="text-align: center;">9</th>
-							<td><a href="/Admin/NoticeSubmit.hst" style="color: #000000;">윤승중</a></td>
+							<td><a href="<c:url value='/Homespital/NoticeSubmit.hst'/>" style="color: #000000;">윤승중</a></td>
 							<td class="" style="text-align: center;">윤승중</td>
 							<td class="" style="text-align: center;">2018-01-05</td>
 						</tr>
@@ -101,7 +101,7 @@
 				<div style="max-width: 1300px; text-align: right;">
 <%-- 		 			 <a href="<c:url value='/Notice/QnA.hst'/>" class="btn btn-primary float-right">Q&A</a> --%>
 <%-- 		 			<a href="<c:url value='/Notice/Noticewrite.hst'/>" class="btn btn-primary float-right">글쓰기</a> --%>
-					<a href="<c:url value='/Admin/TEST2.hst'/>" class="btn btn-primary float-right">작성</a>
+<%-- 					<a href="<c:url value='/Admin/TEST2.hst'/>" class="btn btn-primary float-right">작성</a> --%>
 				
 				</div>
 				

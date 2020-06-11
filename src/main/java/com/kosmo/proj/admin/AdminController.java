@@ -59,7 +59,11 @@ public class AdminController {
 	{
 		return "NoticeWrite.ad_tiles";
 	}
-	
+	@RequestMapping("NoticeEdit.hst")
+	public String noticeEdit()
+	{
+		return "NoticeEdit.ad_tiles";
+	}
 //	@RequestMapping("Login.hst")
 //	public String toLogin()
 //	{

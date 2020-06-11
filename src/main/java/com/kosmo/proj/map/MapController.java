@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
 import com.kosmo.proj.service.MemberService;
 
@@ -107,14 +108,14 @@ public class MapController {
 	@RequestMapping(value="/Homespital/Map/hospitalList.hst",produces = "text/html; charset=UTF-8")
 	public String hospitalList(@RequestParam Map map)
 	{
-		List<Map> list = mapService.selectList(map);
-
-		String search_keyword = map.get("search_keyword").toString();
-
-		System.out.println(JSONArray.toJSONString(list));
+		List<HospitalDTO> list = mapService.selectHospitalByXY(map);
+		
+		
+		
+		System.out.println(net.sf.json.JSONArray.fromObject(list));
 
 		
-		return JSONArray.toJSONString(list);
+		return net.sf.json.JSONArray.fromObject(list).toString();
 	}
 	
 	@ResponseBody
@@ -123,6 +124,7 @@ public class MapController {
 	{
 		List<Map> list = mapService.selectPharmacyList(map);
 
+
 		String search_keyword = map.get("search_keyword").toString();
 
 		System.out.println(JSONArray.toJSONString(list));
@@ -130,6 +132,7 @@ public class MapController {
 		return JSONArray.toJSONString(list);
 	}
 	
+	/*
 	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/Hospital.hst",produces = "text/html; charset=UTF-8")
 	public String hospitalMap(@RequestParam Map map)
@@ -152,6 +155,20 @@ public class MapController {
         System.out.println(jsonObj);
         
 		return jsonObj.toString();
+	}
+	*/
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/Hospital.hst",produces = "text/html; charset=UTF-8")
+	public String hospitalMap(@RequestParam Map map)
+	{
+//		String latitude = map.get("lat").toString();
+//		String longitude = map.get("lng").toString();
+		
+		List<HospitalDTO> list = mapService.selectHospitalByXY(map);
+
+		System.out.println(net.sf.json.JSONArray.fromObject(list));
+		
+		return net.sf.json.JSONArray.fromObject(list).toString();
 	}
 	
 	@ResponseBody

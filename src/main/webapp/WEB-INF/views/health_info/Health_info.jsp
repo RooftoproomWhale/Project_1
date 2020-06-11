@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,7 +17,7 @@ animation: fadein 1s;
 .thumbnail{
 width: 240px;
 height: 260px;
-margin: 5px;
+margin: 2px;
 }
 
 #banner{

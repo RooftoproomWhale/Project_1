@@ -55,9 +55,11 @@
 	</select>
 
 	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT (6371*ACOS(COS(RADIANS(#{cor_x}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{cor_y}))+SIN(RADIANS(#{cor_x}))*SIN(RADIANS(cor_x)))) 
+		SELECT *
+		FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
 		AS distanceByXY, h.*
-		FROM hospital h
+		FROM hospital h) disData
+		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
 	</select>
 
 	<select id="pharmacySelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
@@ -66,8 +68,8 @@
 	<select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT phar_name,address FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
 	</select>
+
 	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM pharmacy WHERE address = #{address}
 	</select>
-
 </mapper>
