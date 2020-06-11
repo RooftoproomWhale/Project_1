@@ -480,7 +480,7 @@ button {
 		              
 		   
 		               if(size==0){
-		            	   $("<div class='task-box yellow'><div class='description-task'><div class='task-name'>"+txt+"</div></div><div class='more-button'></div><div class='members'></div></div>").appendTo('.right-content');
+		            	   $("<div class='task-box yellow'><div class='description-task'><div class='task-name'>"+txt+"</div></div> <div class='glyphicon glyphicon-remove more-button'></div><div class='members'></div></div>").appendTo('.right-content');
 						 }
 		               else{
 		               		for (i=0;i<size;i++){
@@ -490,7 +490,7 @@ button {
 		                  		}
 		              		}
 		               		if(is){
-		            	  			 $("<div class='task-box yellow'><div class='description-task'><div class='task-name'>"+txt+"</div></div><div class='more-button'></div><div class='members'></div></div>").appendTo('.right-content');
+		            	  			 $("<div class='task-box yellow'><div class='description-task'><div class='task-name'>"+txt+"</div></div> <div class='glyphicon glyphicon-remove more-button'></div><div class='members'></div></div>").appendTo('.right-content');
 		               	  }
 		               }
 		        	}
