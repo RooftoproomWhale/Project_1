@@ -12,9 +12,6 @@
 <link href="<c:url value='/css/theme.css'/>" rel="stylesheet"
 	media="all">
 
-<!-- Main JS-->
-<script src="<c:url value='/js/main.js'/>"></script>
-
 <style>
 .sticky-btn {
 	position: fixed;
