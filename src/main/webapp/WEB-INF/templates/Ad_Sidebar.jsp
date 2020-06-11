@@ -30,7 +30,7 @@
                                 <i class="fas fa-table"></i>회원 관리</a>
                         </li>
                         <li>
-                            <a href="<c:url value='/Admin/Bookings.hst'/>">
+                            <a href="<c:url value='/Admin/Appointment.hst'/>">
                                 <i class="fas fa-table"></i>예약 관리</a>
                         </li>
                         <li>

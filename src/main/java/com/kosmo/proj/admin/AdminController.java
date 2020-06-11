@@ -25,10 +25,10 @@ public class AdminController {
 		return "Accounts.ad_tiles";
 	}
 	
-	@RequestMapping("Bookings.hst")
+	@RequestMapping("Appointment.hst")
 	public String toBookings()
 	{
-		return "Bookings.ad_tiles";
+		return "Appointment.ad_tiles";
 	}
 	
 	@RequestMapping("Corona_Map.hst")

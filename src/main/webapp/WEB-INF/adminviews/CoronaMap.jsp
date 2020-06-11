@@ -6,7 +6,6 @@
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
-
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
@@ -15,7 +14,7 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="주소 검색" />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
@@ -37,7 +36,7 @@
                                         <i class="zmdi zmdi-map"></i>map data</h3>
                                     <div class="filters">
                                     <div class="map-wrap m-t-45 m-b-20">
-                                        <div id="vmap" style="height: 284px;"></div>
+                                        
                                     </div>
                                 </div>
                                 <!-- END MAP DATA-->
@@ -48,7 +47,7 @@
                     </div>
                 </div>
             </div>
-
+</div>
 </body>
 
 </html>
