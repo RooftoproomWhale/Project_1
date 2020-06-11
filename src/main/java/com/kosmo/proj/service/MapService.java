@@ -13,4 +13,9 @@ public interface MapService {
 	//검색 목록
 	List<Map> searchHospitalList(Map map);
 	List<Map> searchPharmacyList(Map map);
+	//목록 상세보기
+	List<Map> selectHospitalOne(Map map);
+	List<Map> selectPharmacyOne(Map map);
+	//현재 위치 기준 병원 불러오기
+	List<HospitalDTO> selectHospitalByXY(Map map);
 }

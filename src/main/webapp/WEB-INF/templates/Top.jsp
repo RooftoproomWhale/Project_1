@@ -105,7 +105,7 @@
 					<li><a href="<c:url value='/Account/ToMypage.hst'/>">MyPage</a></li>
 				</c:if>
 					<li><a href="<c:url value='/Admin/Index.hst'/>">Admin</a></li>
-				<!-- 				<li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
+<%-- 					<li><a href="<c:url value='/Admin/Test.hst'/>">Test</a></li> --%>
 			</ul>
 		</div>
 

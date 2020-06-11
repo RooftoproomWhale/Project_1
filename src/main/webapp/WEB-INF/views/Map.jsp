@@ -394,7 +394,7 @@
 			select : function(evt, ui) {
 	            console.log("전체 data: " + JSON.stringify(ui));
 	            console.log(ui.item.label);
-	            
+	            $('.search_keyword_submit').trigger('click');
 	            /* console.log("db Index : " + ui.item.idx);
 	            console.log("검색 데이터 : " + ui.item.value); */
 	        },
@@ -435,17 +435,22 @@
 		$('#filter_hospital').click(function(){
 			apiStatus = 0;
 			console.log('병원 필터 클릭',apiStatus);
-			
+			$('.search_list').html('');
+			$('.search_keyword_input').val('');
 			
 		});
 		$('#filter_pharmacy').click(function(){
 			apiStatus = 1;
 			console.log('약국 필터 클릭',apiStatus);
+			$('.search_list').html('');
+			$('.search_keyword_input').val('');
 			
 		});
 		$('#filter_mask').click(function(){
 			apiStatus = 2;
 			console.log('마스크 필터 클릭',apiStatus);
+			$('.search_list').html('');
+			$('.search_keyword_input').val('');
 			
 		});
 	});
@@ -1112,13 +1117,76 @@
 
 			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 	
+			        console.log(apiStatus);
+			        
 			        removeMarker();
 			        
 			        map.setCenter(coords);
 			        
-			        loadMapApi(coords.getLat(),coords.getLng(),apiStatus);
+			        //loadMapApi(coords.getLat(),coords.getLng(),apiStatus);
 			        
-			        
+			        $.ajax({
+						url:"<c:url value='/Homespital/Map/detailView.hst'/>",
+						type:'get',
+						datatype:'json',
+						data:{"address":address,"apiStatus" : apiStatus},
+						beforeSend: function () {
+							console.log("beforeSend");
+							FunLoadingBarStart();
+						},
+						complete: function () {
+							console.log("complete");
+							FunLoadingBarEnd();
+						},
+						success:function(data){
+							var jsonData = JSON.parse(data);
+							console.log("연결성공", jsonData,typeof(jsonData));
+							var item = '';
+							console.log(jsonData[0]['HOSP_NAME']);
+							item = '<div class="inner_top">'+
+										'<div class="inner_title_area">'+
+											'<div class="inner_title">'+
+												'<strong>'+jsonData[0]['HOSP_NAME']+'</strong>'+
+											'</div>'+
+											'<div class="inner_summary_info">'+
+												'<span>'+jsonData[0]['DEPT_NAME']+'</span>'+
+											'</div>'+
+										'</div>'+
+										'<div class="inner_btn_area">'+
+											'<div class="btn_direction">'+
+												'<button class="find_way_btn">길찾기</button>'+
+												'<button class="reservation_btn" onclick="reservation_show();">예약</button>'+
+											'</div>'+
+										'</div>'+
+										'<div class="inner_final_area">'+
+											'<div class="inner_detail_address">'+
+												'<img class="inner_final_icon" >'+
+												'<div class="inner_end_box">'+jsonData[0]['ADDRESS']+'</div>'+
+											'</div>'+
+											'<div class="inner_detail_tel">'+
+												'<img class="inner_final_icon" >'+
+												'<div class="inner_end_box">'+jsonData[0]['TEL']+'</div>'+
+											'</div>'+
+											'<div class="inner_detail_time">'+
+												'<img class="inner_final_icon" >'+
+												'<div class="inner_end_box">11:00~16:00</div>'+
+											'</div>'+
+											'<div class="inner_detail_time2">'+
+												'<img class="inner_final_icon" >'+
+												'<div class="inner_end_box">'+
+													'영업시간 11:00~ 14:40 16:00~ 20:30<br/>'+
+													'휴무: 매주 월요일'+
+												'</div>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
+							$('.search_list').html(item);
+							loadMapApi(coords.getLat(),coords.getLng(),apiStatus);
+						},
+						error:function(e){
+							
+						}
+					});
 				}
 			});
 		}

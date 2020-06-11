@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
 
 @Service("mapService")
@@ -43,6 +44,24 @@ public class MapServiceImpl implements MapService{
 	public List<Map> searchPharmacyList(Map map) {
 		// TODO Auto-generated method stub
 		return dao.searchPharmacyList(map);
+	}
+
+	@Override
+	public List<Map> selectHospitalOne(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectHospitalOne(map);
+	}
+
+	@Override
+	public List<Map> selectPharmacyOne(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectPharmacyOne(map);
+	}
+
+	@Override
+	public List<HospitalDTO> selectHospitalByXY(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectHospitalByXY(map);
 	}
 
 }

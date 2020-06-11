@@ -10,9 +10,6 @@
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
 
-    <!-- Title Page-->
-    <title>Dashboard</title>
-
 <!--     Fontfaces CSS -->
     <link href="<c:url value='/css/font-face.css'/>" rel="stylesheet" media="all">
     <link href="<c:url value='/vendor/font-awesome-4.7/css/font-awesome.min.css'/>" rel="stylesheet" media="all">
@@ -23,7 +20,7 @@
     <link href="<c:url value='/vendor/bootstrap-4.1/bootstrap.min.css'/>" rel="stylesheet" media="all">
 
 <!--     Vendor CSS -->
-    <link href="<c:url value='/vendor/animsition/animsition.min.css'/>" rel="stylesheet" media="all">
+<%--     <link href="<c:url value='/vendor/animsition/animsition.min.css'/>" rel="stylesheet" media="all"> --%>
     <link href="<c:url value='/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css'/>" rel="stylesheet" media="all">
     <link href="<c:url value='/vendor/wow/animate.css'/>" rel="stylesheet" media="all">
     <link href="<c:url value='/vendor/css-hamburgers/hamburgers.min.css'/>" rel="stylesheet" media="all">

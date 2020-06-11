@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
 
 @Repository
@@ -28,6 +29,10 @@ public class MapDao implements MapService{
 
 //		return sqlMapper.selectList("hospitalSelect",map);
 		return sqlMapper.selectList("hospitalSelectByKeyWord",map);
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	}
 
 	@Override
@@ -46,6 +51,24 @@ public class MapDao implements MapService{
 	public List<Map> searchPharmacyList(Map map) {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectList("pharmacyNameSelectByKeyWord",map);
+	}
+
+	@Override
+	public List<Map> selectHospitalOne(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("hospitalDetailSelect",map);
+	}
+
+	@Override
+	public List<Map> selectPharmacyOne(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("pharmacyDetailSelect",map);
+	}
+
+	@Override
+	public List<HospitalDTO> selectHospitalByXY(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("hospitalSelectByXY",map);
 	}
 
 	

@@ -4585,7 +4585,7 @@ Docs & License: https://fullcalendar.io/
             nextYear: 'next year',
             year: 'year',
             today: 'today',
-            month: 'month',
+            month: 'month',	
             week: 'week',
             day: 'day',
             list: 'list'

@@ -26,8 +26,9 @@
     	
     	}
     	#gra{
-    	background: linear-gradient( to right,#5f8cfd, #fff);
-    	
+    	/*background: linear-gradient( to right,#5f8cfd, #fff);
+    	그라데이션(보류)
+    	*/
     	}
 </style>
 <head>
@@ -51,9 +52,7 @@
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 intro-text">
 							<h1> We Are Interact</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Duis sed dapibus leo nec ornare diam sed commodo nibh ante
-								facilisis bibendum.</p>
+							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
 							<a href="<c:url value='/mypage/mypage.hst'/>" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
 						</div>
 					</div>
@@ -125,10 +124,10 @@
 			</div>
 			<!-- Issue Section -->
 			<div class="col-md-5 col-md-offset-1 col-sm-12">
-				<span style="color:#000000; font-size: 20pt; font-weight: bold; padding-bottom: 20px">속보</span>
-				<div class="row" id="news" style="font-size: 12pt;">
-						
+				<div class="row" style="margin-bottom: 10px">
+					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보</span>
 				</div>
+				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px"></div>
 			</div>
 		</div>
 	
@@ -139,8 +138,7 @@
 		<div class="container">
 			<div class="section-title">
 				<h2>Our Services</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit duis
-					sed dapibus leonec.</p>
+				<p>사용 가능한 기능</p>
 			</div>
 			<div class="row">
 				<div class="col-md-4" style="cursor: pointer"
@@ -148,8 +146,7 @@
 					<i class="fa fa-plus-square"></i>
 					<div class="service-desc">
 						<h3>약국 찾기</h3>
-						<p>알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서
-							찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서</p>
+						<p>약국 찾기 설명</p>
 					</div>
 				</div>
 				<div class="col-md-4" style="cursor: pointer"
@@ -157,8 +154,7 @@
 					<i class="fa fa-hospital-o"></i>
 					<div class="service-desc">
 						<h3>병원 찾기</h3>
-						<p>알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서
-							찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서 찾아가 알아서</p>
+						<p>병원 찾기 설명</p>
 					</div>
 				</div>
 				<div class="col-md-4" style="cursor: pointer"
@@ -166,8 +162,7 @@
 					<i class="fa fa-medkit"></i>
 					<div class="service-desc">
 						<h3>복약 관리</h3>
-						<p>알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서
-							먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서 먹어라 알아서</p>
+						<p>복약 관리 설명</p>
 					</div>
 				</div>
 			</div>
@@ -177,9 +172,7 @@
 					<i class="fa fa-language"></i>
 					<div class="service-desc">
 						<h3>예방 정보</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante
-							facilisis bibendum dolor feugiat at.</p>
+						<p>예방 정보 설명</p>
 					</div>
 				</div>
 				<div class="col-md-4" style="cursor: pointer"
@@ -188,7 +181,7 @@
 					<div class="service-desc">
 						<h3>일정 관리</h3>
 						<p>
-							달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~달력이다~
+							일정 관리 설명
 						</p>
 					</div>
 				</div>
@@ -197,66 +190,14 @@
 
 					<i class="fa fa-pie-chart"></i>
 					<div class="service-desc">
-						<h3>간편 검사</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante
-							facilisis bibendum dolor feugiat at.</p>
+						<h3>코로나 현황</h3>
+						<p>코로나 현황 설명</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-<div id="gra" style="width: 100%;height:50px;"></div>
-
-	<div class="row site-section" id="FAQ">
-		<div class="col-12 text-center" data-aos="fade">
-			<h2 class="section-title">Frequently Ask Questions</h2>
-		</div>
-	</div>
-	<div class="row col-lg-offset-3">
-		<div class="col-lg-4 text-center">
-			<div class="mb-5" data-aos="fade-up" data-aos-delay="100">
-				<h3 class="text-black h4 mb-4">Can I accept both Paypal and
-					Stripe?</h3>
-				<p>Far far away, behind the word mountains, far from the
-					countries Vokalia and Consonantia, there live the blind texts.
-					Separated they live in Bookmarksgrove right at the coast of the
-					Semantics, a large language ocean.</p>
-			</div>
-
-			<div class="mb-5" data-aos="fade-up" data-aos-delay="100">
-				<h3 class="text-black h4 mb-4">What available is refund period?</h3>
-				<p>Far far away, behind the word mountains, far from the
-					countries Vokalia and Consonantia, there live the blind texts.
-					Separated they live in Bookmarksgrove right at the coast of the
-					Semantics, a large language ocean.</p>
-			</div>
-
-			
-		</div>
-		<div class="col-lg-4 text-center">
-
-			<div class="mb-5" data-aos="fade-up" data-aos-delay="100">
-				<h3 class="text-black h4 mb-4">Where are you from?</h3>
-				<p>Voluptatum nobis obcaecati perferendis dolor totam unde
-					dolores quod maxime corporis officia et. Distinctio assumenda
-					minima maiores.</p>
-			</div>
-
-			<div class="mb-5" data-aos="fade-up" data-aos-delay="100">
-				<h3 class="text-black h4 mb-4">What is your opening time?</h3>
-				<p>Far far away, behind the word mountains, far from the
-					countries Vokalia and Consonantia, there live the blind texts.
-					Separated they live in Bookmarksgrove right at the coast of the
-					Semantics, a large language ocean.</p>
-			</div>
-
-			
-
-			
-		</div>
-	</div>
-	</div>
+</div>
 </body>
 <script>
 	$(function(){
