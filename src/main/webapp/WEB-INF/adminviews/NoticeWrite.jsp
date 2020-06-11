@@ -16,7 +16,7 @@
 								<strong>공지사항 작성</strong>
 							</div>
 							<div class="card-body card-block">
-								<form action="" method="post" enctype="multipart/form-data"
+<!-- 								<form action="" method="post"  enctype="multipart/form-data" -->
 									class="form-horizontal">
 
 									<div class="row form-group">
@@ -42,14 +42,14 @@
 												class="form-control-file">
 										</div>
 									</div>
-							<div class="">
-								<button type="submit" class="btn btn-primary btn-sm" style="position: absolute;right: 20px;bottom: 20px;"
-								onclick="location.href='<c:url value='/Admin/NoticeSubmit.hst'/>'"
-								>
-									<i class="fa fa-dot-circle-o"></i> 작성
-								</button>
-							</div>
-								</form>
+									<div class="">
+										<a href="<c:url value='/Homespital/Notice.hst'/>">
+										<button type="submit" class="btn btn-primary btn-sm"
+												style="position: absolute; right: 20px; bottom: 20px;">
+												<i class="fa fa-dot-circle-o"></i> 작성
+											</button></a>
+									</div>
+<!-- 								</form> -->
 							</div>
 								</div>
 					</div>
