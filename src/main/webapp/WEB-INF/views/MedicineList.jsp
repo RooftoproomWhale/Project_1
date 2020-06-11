@@ -84,7 +84,8 @@ body {
 
 .gridder-list,
 .gridder-show {
-  font-size: 16px
+  font-size: 16px;
+  border-radius:5%
 }
 
 .gridder-list {
@@ -116,33 +117,97 @@ body {
   margin-right: 0;
   margin-bottom: 0
 }
+
+#content-img{
+	width: 535px;
+	height: 370px;
+	border-radius:5%
+}
+
+#list-img{
+	width: 200px;
+	height: 150px;
+	border-radius:30%
+}
+
+
+
 </style>
 
-<div class="container text-center">
-  <h1>Basic example</h1>
+<div class="jumbotron jumbotron-fluid bg-info mb-0">
+	<div class="container text-light">
+		<h1>안전 상비 의약품</h1>
+	</div>
 </div>
-
-<div class="container">
+<div class="container py-3">
 
   <ul class="gridder">
-  	<c:forEach items="${medi1 }" var="medi" varStatus="i">
-    	<li class="gridder-list" data-griddercontent="#gridder-content-${i.index}">
-      		<img src='<c:url value="/img/medicine/${medi }.jpg"/>' class="img-responsive" />
+  	<c:forEach items="${medi1}" var="medi" varStatus="i">
+    	<li class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
+      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
+    	</li>
+  	</c:forEach>
+  	<c:forEach items="${medi2 }" var="medi" varStatus="i">
+    	<li  class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
+      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
+    	</li>
+  	</c:forEach>
+  	<c:forEach items="${medi3 }" var="medi" varStatus="i">
+    	<li  class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
+      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
+    	</li>
+  	</c:forEach>
+  	<c:forEach items="${medi4 }" var="medi" varStatus="i">
+    	<li class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
+      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
     	</li>
   	</c:forEach>
   </ul>
 
 	<c:forEach items="${medi1 }" var="medi" varStatus="i">
-		<div id="gridder-content-${i.index }" class="gridder-content">
+		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
 			<div class="row">
 				<div class="col-sm-6">
-					<img src='<c:url value="/img/medicine/${medi }.jpg"/>' class="img-responsive" />
+					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
 				</div>
 				<div class="col-sm-6">
-					<h2>${medi}</h2>
-					<p>성상: 알약</p>
-					<p>효능: 진통제</p>
-					<p>부작용: 무감각</p>
+					
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+	<c:forEach items="${medi2 }" var="medi" varStatus="i">
+		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
+			<div class="row">
+				<div class="col-sm-6">
+					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
+				</div>
+				<div class="col-sm-6">
+					
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+	<c:forEach items="${medi3 }" var="medi" varStatus="i">
+		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
+			<div class="row">
+				<div class="col-sm-6">
+					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
+				</div>
+				<div class="col-sm-6">
+					
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+	<c:forEach items="${medi4 }" var="medi" varStatus="i">
+		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
+			<div class="row">
+				<div class="col-sm-6">
+					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
+				</div>
+				<div class="col-sm-6">
+					
 				</div>
 			</div>
 		</div>
@@ -425,9 +490,9 @@ jQuery(document).ready(function($) {
 	    animationSpeed: 400,
 	    animationEasing: "easeInOutExpo",
 	    showNav: true,
-	    nextText: "Next",
-	    prevText: "Previous",
-	    closeText: "Close",
+	    nextText: "<span class='glyphicon glyphicon-chevron-right'></span>",
+	    prevText: "<span class='glyphicon glyphicon-chevron-left'></span>",
+	    closeText: "<span class='glyphicon glyphicon-remove'></span>",
 	    onStart: function() {},
 	    onContent: function() {},
 	    onClosed: function() {}
@@ -435,6 +500,4 @@ jQuery(document).ready(function($) {
 
 	})(jQuery);
 </script>
-
-
 

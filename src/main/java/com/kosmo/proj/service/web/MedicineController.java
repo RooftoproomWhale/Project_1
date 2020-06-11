@@ -10,15 +10,25 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.ibatis.javassist.expr.NewExpr;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
 import org.json.simple.parser.JSONParser;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,7 +56,7 @@ public class MedicineController {
 		try{
 		encodeSearch = URLEncoder.encode(dname,"UTF-8"); 
         }catch(Exception e){ e.printStackTrace();  }
-		
+
 		info = mediInfo(encodeSearch, info);
         shape = mediShape(encodeSearch, shape);
         
@@ -56,6 +66,21 @@ public class MedicineController {
         map.put("shape", shape);
 		
 		return "MedicinManage.tiles";
+	}
+	
+	@RequestMapping("/Homespital/MedicineForm.hst")
+	public String medicineForm(Map map) {
+		JSONObject jsonMedi = null;
+		String[] medi1 = {"어린이용타이레놀정80mg","타이레놀정160mg","타이레놀정500mg","어린이타이레놀현탁액","어린이부루펜시럽"};
+		String[] medi2 = {"판콜에이내복액","판피린티정"};
+		String[] medi3 = {"베아제정","닥터베아제정","훼스탈골드정","훼스탈플러스정"};
+		String[] medi4 = {"신신파스아렉스","제일쿨파프"};
+		map.put("medi1",medi1);
+		map.put("medi2",medi2);
+		map.put("medi3",medi3);
+		map.put("medi4",medi4);
+		
+		return "MedicineList.tiles";
 	}
 	
 	private MedicineShapeDTO mediShape(String encodeSearch,MedicineShapeDTO dto) {
@@ -143,31 +168,6 @@ public class MedicineController {
             throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
         }
     }
-	
-	@RequestMapping("/Homespital/MedicineForm.hst")
-	public String medicineForm(Map map) {
-		JSONObject jsonMedi = null;
-		String[] medi1 = {"어린이용타이레놀정80mg","타이레놀정160mg","타이레놀정500mg","어린이타이레놀현탁액","어린이부루펜시럽"};
-		String[] medi2 = {"판콜에이내복액","판피린티정"};
-		String[] medi3 = {"베아제정","닥터베아제정","훼스탈골드정","훼스탈플러스정"};
-		String[] medi4 = {"신신파스아렉스","제일쿨파프"};
-		map.put("medi1",medi1);
-		map.put("medi2",medi2);
-		map.put("medi3",medi3);
-		map.put("medi4",medi4);
-		
-		return "MedicineList.tiles";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
