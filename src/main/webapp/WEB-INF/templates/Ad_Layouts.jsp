@@ -21,6 +21,9 @@
 	<!-- top부분 -->
 	<tiles:insertAttribute name="top"/>
 	
+	<!-- sidebar부분 -->
+	<tiles:insertAttribute name="sidebar"/>
+	
     <!-- body부분 --> 
     <tiles:insertAttribute name="body"/> 
     

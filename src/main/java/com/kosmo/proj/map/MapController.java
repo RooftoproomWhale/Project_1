@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 import org.json.JSONObject;
 import org.json.XML;
 import org.json.simple.JSONArray;
-
+import org.json.simple.JSONValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,17 +40,91 @@ public class MapController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/searchList.hst",produces = "text/html; charset=UTF-8")
+	public String searchList(@RequestParam Map map) {
+		List<Map> list = null;
+		String apiStatus = map.get("apiStatus").toString();
+		JSONArray ja = new JSONArray();
+		
+		if(apiStatus.equals("0"))
+		{
+			list = mapService.searchHospitalList(map);
+			for (int i = 0; i < list.size(); i++) {
+				ja.add(list.get(i).get("HOSP_NAME").toString() + "("  + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+			}
+		}
+		else if(apiStatus.equals("1") || apiStatus.equals("2"))
+		{
+			list = mapService.searchPharmacyList(map);
+			for (int i = 0; i < list.size(); i++) {
+				ja.add(list.get(i).get("PHAR_NAME").toString() + "(" + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+			}
+		}
+		else
+		{
+			
+		}
+		
+		return ja.toJSONString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/detailView.hst",produces = "text/html; charset=UTF-8")
+	public String detailList(@RequestParam Map map) {
+		
+		List<Map> list = null;
+		String apiStatus = map.get("apiStatus").toString();
+		JSONArray ja = new JSONArray();
+		
+		if(apiStatus.equals("0"))
+		{
+			list = mapService.selectHospitalOne(map);
+			String depart = "";
+			for (int i = 0; i < list.size(); i++) {
+				if(i==list.size()-1)
+				{
+					depart += list.get(i).get("DEPT_NAME").toString();
+				}
+				else
+				{
+					depart += list.get(i).get("DEPT_NAME").toString() + ',';
+				}
+			}
+			list.get(0).replace("DEPT_NAME", depart);
+			
+		}
+		else if(apiStatus.equals("1") || apiStatus.equals("2"))
+		{
+			list = mapService.selectPharmacyOne(map);
+			
+		}
+		
+//		return JSONArray.toJSONString(list);
+		return JSONArray.toJSONString(list);
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/hospitalList.hst",produces = "text/html; charset=UTF-8")
 	public String hospitalList(@RequestParam Map map)
 	{
 		List<Map> list = mapService.selectList(map);
-		
 
-		String latitude = map.get("cor_y").toString();
-		String longitude = map.get("cor_x").toString();
 		String search_keyword = map.get("search_keyword").toString();
 
+		System.out.println(JSONArray.toJSONString(list));
+
 		
+		return JSONArray.toJSONString(list);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/pharmacyList.hst",produces = "text/html; charset=UTF-8")
+	public String pharmacyList(@RequestParam Map map)
+	{
+		List<Map> list = mapService.selectPharmacyList(map);
+
+		String search_keyword = map.get("search_keyword").toString();
+
 		System.out.println(JSONArray.toJSONString(list));
 		
 		return JSONArray.toJSONString(list);

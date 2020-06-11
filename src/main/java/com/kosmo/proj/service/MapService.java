@@ -8,4 +8,13 @@ public interface MapService {
 	List<Map> selectList();
 	//병원 목록
 	List<Map> selectList(Map map);
+	//약국 목록
+	List<Map> selectPharmacyList(Map map);
+	//검색 목록
+	List<Map> searchHospitalList(Map map);
+	List<Map> searchPharmacyList(Map map);
+	//목록 상세보기
+	List<Map> selectHospitalOne(Map map);
+	List<Map> selectPharmacyOne(Map map);
+	
 }

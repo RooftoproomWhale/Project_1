@@ -27,4 +27,34 @@ public class MapServiceImpl implements MapService{
 		return dao.selectList(map);
 	}
 
+	@Override
+	public List<Map> selectPharmacyList(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectPharmacyList(map);
+	}
+
+	@Override
+	public List<Map> searchHospitalList(Map map) {
+		// TODO Auto-generated method stub
+		return dao.searchHospitalList(map);
+	}
+
+	@Override
+	public List<Map> searchPharmacyList(Map map) {
+		// TODO Auto-generated method stub
+		return dao.searchPharmacyList(map);
+	}
+
+	@Override
+	public List<Map> selectHospitalOne(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectHospitalOne(map);
+	}
+
+	@Override
+	public List<Map> selectPharmacyOne(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectPharmacyOne(map);
+	}
+
 }
