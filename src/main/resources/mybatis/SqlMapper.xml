@@ -22,11 +22,7 @@
 		WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
 		</if>
 	</select>
-	
-	
-	<select id="memberSelectOne" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM member WHERE MEM_EMAIL='LEE@KOSMO.COM'
-	</select>
+
 	
 	
 	<insert id="memoInsert" parameterType="java.util.Map">

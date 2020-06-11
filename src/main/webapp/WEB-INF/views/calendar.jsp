@@ -38,7 +38,19 @@
         selectable: true,
         selectMirror: true,
         select: function(arg) {
-            $("#date").val(arg.start);
+  
+        		  var divTop = arg.jsEvent.clientY - 40; 
+        	  var divLeft = arg.jsEvent.clientX; 
+        	  var serial = $(this).attr("serial"); 
+        	  var idx = $(this).attr("idx"); 
+        	  $('#divView').empty().append('<div style="position:absolute;top:5px;right:5px;"id="menu1"> </div><br><input class="btn" type="button" id="menuno1" value="복용약 등록"/><BR><input class="btn" type="button" id="menuno2" value="예약하기"/>'); $('#divView').css({ "top": divTop ,"left": divLeft , "position": "absolute" }).show(); 
+        	  
+         
+        	 $('#menuno1').click(function() {
+        		 $('#menu').remove();
+   				$('#divView').css('display','none')
+   				
+        	  $("#date").val(arg.start);
             $("#createEventModal").modal("show");
                $('#submitButton').click(function() {
                var title= $('#title1').val();
@@ -60,8 +72,13 @@
                              end: arg.end="";
                          $("#createEventModal").modal("hide");
                   })
-          calendar.unselect();
-               
+          calendar.unselect(); 
+        		});  
+        	 
+        	 $(document).on("click","#menuno2",function(){
+        	     	$('#menu').remove();
+        				$('#divView').css('display','none')
+        	     }); 
         },
         eventClick:function(event) {
         	console.log(event.event.backgroundColor);
@@ -113,11 +130,25 @@
    
     calendar.render();
   });
-   
-   
- 
-
-
+	/*close*/
+	 $(document).on("click","#close",function(){
+            	$('#menu').remove();
+  				$('#divView').css('display','none')
+            });
+	$(function() {
+		
+	
+	 $('html').click(function(e) {
+		 var $target = $(e.target);
+		 console.log($target);
+		if(!$(e.target).hasClass("fc-row fc-week fc-widget-content fc-rigid")) {
+			if(!$('#divView').css('display','none')){
+			$('#menu1').remove();
+				$('#divView').css('display','none')
+			}
+		} 
+	 });
+	})
 
 </script>
 <style>
@@ -128,7 +159,8 @@
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
-
+#divView { position:absolute; display:none;z-index: 9999; }
+#menuno1,#menuno2{background: #FF8383;color: white;width: 100%}
   #calendar {
   padding-top: 95px;
     max-width: 900px;
@@ -220,33 +252,49 @@
 </div>
 <!-- 예약상세 페이지 -->
 <div id="createEventModal2" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-contentView">
+    <div class="modal-dialog" style="left: 80px;">
+        <div class="modal-contentView" style="width: 80%">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
                 <h4>예약 상세페이지</h4>
             </div>
             <div id="modalBody" class="modal-body">
                <div class="form-group">
-                    <input class="form-control" type="text" placeholder="test" >
+                   <table class="table table-bordered" style="text-align: center;">
+  <thead>
+    <tr>
+      <td scope="col">병원명</td>
+      <td scope="col">분당병원</td>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td scope="row">이름<br/></td>
+      <td>김길동</td>
+  </tr>
+    <tr>
+      <td scope="row">예약일시</td>
+      <td>2020-06-10 10:15</td>
+    </tr>
+    <tr >
+      <td scope="row" >예약신청일<br/></td>
+      <td>2020-06-01 &lt;인터넷 예약&gt;</td>
+    </tr>
+   
+     <tr>
+      <td>진찰료</td><td>미수납</td>
+ </tr>
+ <tr><td>예약상태</td> <td>미승인</td></tr>
+ <tr><td>진료과</td><td>정형외과</td></tr>
+ <tr><td>의사명</td><td>홍길동</td></tr>
+  </tbody>
+</table>
                 </div>
 
-                <div class="form-group form-inline">
-                    <div class="input-group date" data-provide="datepicker">
-                        <input type="text" class="form-control" placeholder="" id="date" >
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar" id="datepicker"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <textarea class="form-control" type="text" rows="4" placeholder="약 이름" id="title1"></textarea>
-                </div>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true" id="close">Cancel</button>
-                <button type="submit" class="btn btn-primary" id="submitButton">Save</button>
+                <button type="submit" class="btn btn-primary" id="submitButton">예약변경</button>
             </div>
         </div>
     </div>
@@ -275,8 +323,8 @@
       <th scope="row">효능 · 효과</th>
       <td>통증 및 염증 완화 및 살균:치은염, 구내염, 발치 전·후</td>
     </tr>
-    <tr>
-      <th scope="row">용법·용량<br/></th>
+    <tr >
+      <th scope="row" style="line-height: 37px">용법·용량<br/></th>
       <td colspan="3">1회 15mL 1일 2~3회 가글하여 사용한다.<br/>최대 5~7일간 사용하며, 그 이상 사용 시 의사와 상의한다.</td>
     </tr>
     <tr>
@@ -305,7 +353,7 @@
 5. 저장상의 주의사항
 1) 어린이의 손이 닿지 않는 곳에 보관한다.
 2) 의약품을 원래 용기에서 꺼내어 다른 용기에 보관하는 것은 의약품 오용에 따른 사고 발생이나 의약품 품질 저하의 원인이 될 수 있으므로 원래의 용기에 넣고 꼭 닫아 보관한다.</td>
-   
+
     </tr>
   </tbody>
 </table>
@@ -318,6 +366,7 @@
         </div>
     </div>
 </div>
+<div id="divView" class="areg"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
    <script src='<c:url value="/js/bootstrap.min.js"/>'></script>
