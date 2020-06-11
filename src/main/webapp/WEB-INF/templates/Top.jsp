@@ -79,9 +79,7 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href='<c:url value="/Homespital/Notice.hst"/>'>Notice</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" aria-expanded="false"> Services <span
-						class="caret"></span></a>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Services <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국 찾기</a></li>
 						<li class="divider"></li>
@@ -94,8 +92,7 @@
 					</ul></li>
 
 				<c:if test="${USER == NULL}" var="result">
-					<li><a href="<c:url value='/User/Login.hst'/>"
-						class="page-scroll">Login</a></li>
+					<li><a href="<c:url value='/User/Login.hst'/>" class="page-scroll">Login</a></li>
 					<li><a href="<c:url value='/Account/SignForm.hst'/>">SignUp</a></li>
 				</c:if>
 				<c:if test="${!result }">
@@ -103,6 +100,10 @@
 					<li><a href="<c:url value='/Account/ToMypage.hst'/>">MyPage</a></li>
 				</c:if>
 					<li><a href="<c:url value='/Admin/Index.hst'/>">Admin</a></li>
+					<li><a href="<c:url value='/Notice/FAQ.hst'/>">FAQ</a></li>
+					<li><a href="<c:url value='/Notice/QnA.hst'/>">QnA</a></li>
+					<li><a href="<c:url value='/Admin/Test.hst'/>">Test</a></li>
+				<!-- 				<li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
 <%-- 					<li><a href="<c:url value='/Admin/Test.hst'/>">Test</a></li> --%>
 			</ul>
 		</div>

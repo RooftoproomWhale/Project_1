@@ -98,13 +98,6 @@
 						</li>
 					</ul>
 				</div>
-				<div style="max-width: 1300px; text-align: right;">
-<%-- 		 			 <a href="<c:url value='/Notice/QnA.hst'/>" class="btn btn-primary float-right">Q&A</a> --%>
-<%-- 		 			<a href="<c:url value='/Notice/Noticewrite.hst'/>" class="btn btn-primary float-right">글쓰기</a> --%>
-					<a href="<c:url value='/Admin/TEST2.hst'/>" class="btn btn-primary float-right">작성</a>
-				
-				</div>
-				
 				<!-- 검색용 UI -->
 				<div class="row">
 					<div class="text-center">
