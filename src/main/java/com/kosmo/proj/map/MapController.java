@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
 import com.kosmo.proj.service.MemberService;
 
@@ -130,6 +131,7 @@ public class MapController {
 		return JSONArray.toJSONString(list);
 	}
 	
+	/*
 	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/Hospital.hst",produces = "text/html; charset=UTF-8")
 	public String hospitalMap(@RequestParam Map map)
@@ -152,6 +154,20 @@ public class MapController {
         System.out.println(jsonObj);
         
 		return jsonObj.toString();
+	}
+	*/
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/Hospital.hst",produces = "text/html; charset=UTF-8")
+	public String hospitalMap(@RequestParam Map map)
+	{
+//		String latitude = map.get("lat").toString();
+//		String longitude = map.get("lng").toString();
+		
+		List<HospitalDTO> list = mapService.selectHospitalByXY(map);
+
+		System.out.println(net.sf.json.JSONArray.fromObject(list));
+		
+		return net.sf.json.JSONArray.fromObject(list).toString();
 	}
 	
 	@ResponseBody
