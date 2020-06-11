@@ -13,5 +13,14 @@ public class NoticewirteController {
 		
 		return "Noticewrite.tiles";
 	}
+	
+	
 
+	//	@RequestMapping("/Notice/NoticeSelect.hst")
+//	public String noticeselect()
+//	{
+//		
+//		return "NoticeDetail.tiles";
+//	}
+	
 }

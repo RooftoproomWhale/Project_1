@@ -216,7 +216,7 @@
 </style>
 
 
-  <div id='calendar'>
+  <div id='calendar' style="margin-bottom: 50px;">
   </div>
   <!-- 복용중인 약 등록 -->
 <div id="createEventModal" class="modal fade">
