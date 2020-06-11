@@ -151,12 +151,12 @@ form{
                             </li>
                             <li style="display: inline;padding-right: 70px">
                                 <a id="kakao" href="javascript:Kakao.Auth.login()">
-                                    <img width="60" src='<c:url value="/img/kakao.png"/>' alt="카카오 로그인">
+                                    <img width="60" src='<c:url value="/images/snslogo/kakao.png"/>' alt="카카오 로그인">
 		                        </a>
                             </li>
                             <li style="display: inline;">
                                 <a id="facebook" href="javascript:FB.login()">
-                                   <img width="60" src='<c:url value="/img/facebook.png"/>' alt="페이스북 로그인">
+                                   <img width="60" src='<c:url value="/images/snslogo/facebook.png"/>' alt="페이스북 로그인">
 		                        </a>
                             </li>
                         </ul>

@@ -29,7 +29,10 @@ public class MapDao implements MapService{
 
 //		return sqlMapper.selectList("hospitalSelect",map);
 		return sqlMapper.selectList("hospitalSelectByKeyWord",map);
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	}
 
 	@Override

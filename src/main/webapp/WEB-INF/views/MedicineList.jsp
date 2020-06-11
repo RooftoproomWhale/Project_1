@@ -1,177 +1,503 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <style>
 body {
-	padding-top: 100px;
+  padding-top: 100px;
 }
 
-hr {
-	width: 100%;
-	background-color: gray;
+.gridder {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none
 }
 
-img {
-	width: 531px;
-	height: 300px;
+.gridder-list {
+  display: inline-block;
+  vertical-align: top
 }
+
+.gridder-show {
+  display: block;
+  float: left;
+  width: 100%;
+  position: relative;
+  background: #EEE
+}
+
+.gridder-show.loading {
+  background: #EEE url("../images/loading-spin.svg") no-repeat center
+}
+
+.gridder-content {
+  display: none
+}
+
+.gridder-list {
+  width: 15.83333%
+}
+
+.gridder-list:nth-child(n) {
+  margin-bottom: 1%;
+  margin-right: 1%
+}
+
+.gridder-list:nth-of-type(6n) {
+  margin-right: 0;
+  margin-bottom: 0
+}
+
+.gridder-show {
+  padding: 20px;
+  background: #EEE;
+  margin-bottom: 1%
+}
+
+.gridder-navigation .gridder-nav.disabled {
+  opacity: .5
+}
+
+.gridder-list {
+  cursor: pointer
+}
+
+.gridder-list:hover {
+  opacity: 0.8
+}
+
+.hasSelectedItem .gridder-list {
+  opacity: .5
+}
+
+.hasSelectedItem .gridder-list.selectedItem {
+  opacity: 1
+}
+
+.gridder {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  font-size: 0
+}
+
+.gridder-list,
+.gridder-show {
+  font-size: 16px;
+  border-radius:5%
+}
+
+.gridder-list {
+  display: inline-block;
+  vertical-align: top
+}
+
+.gridder-show {
+  display: block;
+  float: left;
+  width: 100%;
+  position: relative
+}
+
+.gridder-content {
+  display: none
+}
+
+.gridder-list {
+  width: 15.83333%
+}
+
+.gridder-list:nth-child(n) {
+  margin-bottom: 1%;
+  margin-right: 1%
+}
+
+.gridder-list:nth-of-type(6n) {
+  margin-right: 0;
+  margin-bottom: 0
+}
+
+#content-img{
+	width: 535px;
+	height: 370px;
+	border-radius:5%
+}
+
+#list-img{
+	width: 200px;
+	height: 150px;
+	border-radius:30%
+}
+
+
+
 </style>
-<div class="container">
-	<ul class="nav nav-tabs" role="tablist" id="myTab">
-		<li role="presentation" class="active"><a href="#medi-1"
-			role="tab" data-toggle="tab">해열/진통제</a></li>
-		<li role="presentation"><a href="#medi-2" role="tab"
-			data-toggle="tab">감기약</a></li>
-		<li role="presentation"><a href="#medi-3" role="tab"
-			data-toggle="tab">소화제</a></li>
-		<li role="presentation"><a href="#medi-4" role="tab"
-			data-toggle="tab">파스</a></li>
-	</ul>
 
-	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="medi-1">
-			<c:forEach items="${medi1}" var="medi">
-				<div class="col-lg-6 mb-4">
-					<div class="card h-100">
-						<a href="#"><img id="${medi}"  class="card-img-top"
-							src='<c:url value="/img/medicine/${medi}.jpg"/> ' /></a>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a class="mediSelec" id="${medi}" href="#">${medi}</a>
-							</h4>
-							<p class="card-text"></p>
-						</div>
-
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="medi-2">
-			<c:forEach items="${medi2}" var="medi">
-				<div class="col-lg-6 mb-4">
-					<div class="card h-100">
-						<a href="#"><img id="${medi}" class="card-img-top"
-							src='<c:url value="/img/medicine/${medi}.jpg"/> ' /></a>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a class="mediSelec" id="${medi}" href="#">${medi}</a>
-							</h4>
-							<p class="card-text"></p>
-						</div>
-
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="medi-3">
-			<c:forEach items="${medi3}" var="medi">
-				<div class="col-lg-6 mb-4">
-					<div class="card h-100">
-						<a href="#"><img id="${medi}"  class="card-img-top"
-							src='<c:url value="/img/medicine/${medi}.jpg"/> ' /></a>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a class="mediSelec" id="${medi}" href="#">${medi}</a>
-							</h4>
-							<p class="card-text"></p>
-						</div>
-
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="medi-4">
-			<c:forEach items="${medi4}" var="medi">
-				<div class="col-lg-6 mb-4">
-					<div class="card h-100">
-						<a href="#"><img id="${medi}" class="card-img-top"
-							src='<c:url value="/img/medicine/${medi}.jpg"/> ' /></a>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a class="mediSelec" id="${medi}" href="#">${medi}</a>
-							</h4>
-							<p class="card-text"></p>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<!--  
-		<form>
-				<input type="text" id="mediSearch" placeholder="검색할 약품명을 적어주세요">
-				<button onclick="mediList();">검색</button>
-				<div id="mediForm">
-				</div>
-			</form>
-		-->
+<div class="jumbotron jumbotron-fluid bg-info mb-0">
+	<div class="container text-light">
+		<h1>안전 상비 의약품</h1>
 	</div>
+</div>
+<div class="container py-3">
 
+  <ul class="gridder">
+  	<c:forEach items="${medi1}" var="medi" varStatus="i">
+    	<li class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
+      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
+    	</li>
+  	</c:forEach>
+  	<c:forEach items="${medi2 }" var="medi" varStatus="i">
+    	<li  class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
+      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
+    	</li>
+  	</c:forEach>
+  	<c:forEach items="${medi3 }" var="medi" varStatus="i">
+    	<li  class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
+      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
+    	</li>
+  	</c:forEach>
+  	<c:forEach items="${medi4 }" var="medi" varStatus="i">
+    	<li class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
+      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
+    	</li>
+  	</c:forEach>
+  </ul>
 
+	<c:forEach items="${medi1 }" var="medi" varStatus="i">
+		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
+			<div class="row">
+				<div class="col-sm-6">
+					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
+				</div>
+				<div class="col-sm-6">
+					
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+	<c:forEach items="${medi2 }" var="medi" varStatus="i">
+		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
+			<div class="row">
+				<div class="col-sm-6">
+					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
+				</div>
+				<div class="col-sm-6">
+					
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+	<c:forEach items="${medi3 }" var="medi" varStatus="i">
+		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
+			<div class="row">
+				<div class="col-sm-6">
+					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
+				</div>
+				<div class="col-sm-6">
+					
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+	<c:forEach items="${medi4 }" var="medi" varStatus="i">
+		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
+			<div class="row">
+				<div class="col-sm-6">
+					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
+				</div>
+				<div class="col-sm-6">
+					
+				</div>
+			</div>
+		</div>
+	</c:forEach>
 </div>
 
+
 <script>
-	$(function() {
-		$('#myTab a:first').tab('show')
-	})
+jQuery(document).ready(function($) {
+
+	  // Call Gridder
+	  $(".gridder").gridderExpander({
+	    scrollOffset: 60,
+	    scrollTo: "panel", // "panel" or "listitem"
+	    animationSpeed: 400,
+	    animationEasing: "easeInOutExpo",
+	    onStart: function() {
+	      console.log("Gridder Inititialized");
+	    },
+	    onExpanded: function(object) {
+	      console.log("Gridder Expanded");
+	      $(".carousel").carousel();
+	    },
+	    onChanged: function(object) {
+	      console.log("Gridder Changed");
+	    },
+	    onClosed: function() {
+	      console.log("Gridder Closed");
+	    }
+	  });
+	});
+
+	/*
+	 *  Gridder - v1.4.1
+	 *  A jQuery plugin that displays a thumbnail grid expanding preview similar to the effect seen on Google Images.
+	 *  http://www.oriongunning.com/
+	 *
+	 *  Made by Orion Gunning
+	 *  Under MIT License
+	 */
+	;
+	(function($) {
+
+	  //Ensures there will be no 'console is undefined' errors in IE
+	  window.console = window.console || (function() {
+	    var c = {};
+	    c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function() {};
+	    return c;
+	  })();
+
+	  /* Custom Easing */
+	  $.fn.extend($.easing, {
+	    def: "easeInOutExpo",
+	    easeInOutExpo: function(e, f, a, h, g) {
+	      if (f === 0) {
+	        return a;
+	      }
+	      if (f === g) {
+	        return a + h;
+	      }
+	      if ((f /= g / 2) < 1) {
+	        return h / 2 * Math.pow(2, 10 * (f - 1)) + a;
+	      }
+	      return h / 2 * (-Math.pow(2, -10 * --f) + 2) + a;
+	    }
+	  });
+
+	  /* KEYPRESS LEFT & RIGHT ARROW */
+	  /* This will work only if a current gridder is opened. */
+	  $(document).keydown(function(e) {
+	    var keycode = e.keyCode;
+	    var $current_gridder = $(".currentGridder");
+	    var $current_target = $current_gridder.find(".gridder-show");
+	    if ($current_gridder.length) {
+	      if (keycode === 37) {
+	        console.log("Pressed Left Arrow");
+	        $current_target.prev().prev().trigger("click");
+	        e.preventDefault();
+	      }
+	      if (keycode === 39) {
+	        console.log("Pressed Right Arrow");
+	        $current_target.next().trigger("click");
+	        e.preventDefault();
+	      }
+	    } else {
+	      console.log("No active gridder.");
+	    }
+	  });
+
+	  $.fn.gridderExpander = function(options) {
+
+	    /* GET DEFAULT OPTIONS OR USE THE ONE PASSED IN THE FUNCTION  */
+	    var settings = $.extend({}, $.fn.gridderExpander.defaults, options);
+
+	    return this.each(function() {
+
+	      var mybloc;
+	      var _this = $(this);
+	      var visible = false;
+
+	      // START CALLBACK
+	      settings.onStart(_this);
+
+	      // CLOSE FUNCTION
+	      function closeExpander(base) {
+
+	        // SCROLL TO CORRECT POSITION FIRST
+	        if (settings.scroll) {
+	          $("html, body").animate({
+	            scrollTop: base.find(".selectedItem").offset().top - settings.scrollOffset
+	          }, {
+	            duration: 200,
+	            easing: settings.animationEasing
+	          });
+	        }
+
+	        _this.removeClass("hasSelectedItem");
+
+	        // REMOVES GRIDDER EXPAND AREA
+	        visible = false;
+	        base.find(".selectedItem").removeClass("selectedItem");
+
+	        base.find(".gridder-show").slideUp(settings.animationSpeed, settings.animationEasing, function() {
+	          base.find(".gridder-show").remove();
+	          settings.onClosed(base);
+	        });
+
+	        /* REMOVE CURRENT ACTIVE GRIDDER */
+	        $(".currentGridder").removeClass("currentGridder");
+	      }
+
+	      // OPEN EXPANDER
+	      function openExpander(myself) {
+
+	        /* CURRENT ACTIVE GRIDDER */
+	        $(".currentGridder").removeClass("currentGridder");
+	        _this.addClass("currentGridder");
+
+	        /* ENSURES THE CORRECT BLOC IS ACTIVE */
+	        if (!myself.hasClass("selectedItem")) {
+	          _this.find(".selectedItem").removeClass("selectedItem");
+	          myself.addClass("selectedItem");
+	        } else {
+	          // THE SAME IS ALREADY OPEN, LET"S CLOSE IT
+	          closeExpander(_this, settings);
+	          return;
+	        }
+
+	        /* REMOVES PREVIOUS BLOC */
+	        _this.find(".gridder-show").remove();
+
+	        /* ADD CLASS TO THE GRIDDER CONTAINER
+	         * So you can apply global style when item selected. 
+	         */
+	        if (!_this.hasClass("hasSelectedItem")) {
+	          _this.addClass("hasSelectedItem");
+	        }
+
+	        /* ADD LOADING BLOC */
+	        var $htmlcontent = $("<div class=\"gridder-show loading\"></div>");
+	        mybloc = $htmlcontent.insertAfter(myself);
+
+	        /* GET CONTENT VIA AJAX OR #ID*/
+	        var thecontent = "";
+
+	        if (myself.data("griddercontent").indexOf("#") === 0) {
+
+	          // Load #ID Content
+	          thecontent = $(myself.data("griddercontent")).html();
+	          processContent(myself, thecontent);
+	        } else {
+
+	          // Load AJAX Content
+	          $.ajax({
+	            type: "POST",
+	            url: myself.data("griddercontent"),
+	            success: function(data) {
+	              thecontent = data;
+	              processContent(myself, thecontent);
+	            },
+	            error: function(request) {
+	              thecontent = request.responseText;
+	              processContent(myself, thecontent);
+	            }
+	          });
+	        }
+	      }
+
+	      // PROCESS CONTENT
+	      function processContent(myself, thecontent) {
+
+	        /* FORMAT OUTPUT */
+	        var htmlcontent = "<div class=\"gridder-padding\">";
+
+	        if (settings.showNav) {
+
+	          /* CHECK IF PREV AND NEXT BUTTON HAVE ITEMS */
+	          var prevItem = ($(".selectedItem").prev());
+	          var nextItem = ($(".selectedItem").next().next());
+
+	          htmlcontent += "<div class=\"gridder-navigation\">";
+	          htmlcontent += "<a href=\"#\" class=\"gridder-close\">" + settings.closeText + "</a>";
+	          htmlcontent += "<a href=\"#\" class=\"gridder-nav prev " + (!prevItem.length ? "disabled" : "") + "\">" + settings.prevText + "</a>";
+	          htmlcontent += "<a href=\"#\" class=\"gridder-nav next " + (!nextItem.length ? "disabled" : "") + "\">" + settings.nextText + "</a>";
+	          htmlcontent += "</div>";
+	        }
+
+	        htmlcontent += "<div class=\"gridder-expanded-content\">";
+	        htmlcontent += thecontent;
+	        htmlcontent += "</div>";
+	        htmlcontent += "</div>";
+
+	        // IF EXPANDER IS ALREADY EXPANDED 
+	        if (!visible) {
+	          mybloc.hide().append(htmlcontent).slideDown(settings.animationSpeed, settings.animationEasing, function() {
+	            visible = true;
+	            /* AFTER EXPAND CALLBACK */
+	            if ($.isFunction(settings.onContent)) {
+	              settings.onContent(mybloc);
+	            }
+	          });
+	        } else {
+	          mybloc.html(htmlcontent);
+	          mybloc.find(".gridder-padding").fadeIn(settings.animationSpeed, settings.animationEasing, function() {
+	            visible = true;
+	            /* CHANGED CALLBACK */
+	            if ($.isFunction(settings.onContent)) {
+	              settings.onContent(mybloc);
+	            }
+	          });
+	        }
+
+	        /* SCROLL TO CORRECT POSITION AFTER */
+	        if (settings.scroll) {
+	          var offset = (settings.scrollTo === "panel" ? myself.offset().top + myself.height() - settings.scrollOffset : myself.offset().top - settings.scrollOffset);
+	          $("html, body").animate({
+	            scrollTop: offset
+	          }, {
+	            duration: settings.animationSpeed,
+	            easing: settings.animationEasing
+	          });
+	        }
+
+	        /* REMOVE LOADING CLASS */
+	        mybloc.removeClass("loading");
+	      }
+
+	      /* CLICK EVENT */
+	      _this.find(".gridder-list").on("click", function(e) {
+	        e.preventDefault();
+	        var myself = $(this);
+	        openExpander(myself);
+	      });
+
+	      /* NEXT BUTTON */
+	      _this.on("click", ".gridder-nav.next", function(e) {
+	        e.preventDefault();
+	        $(this).parents(".gridder-show").next().trigger("click");
+	      });
+
+	      /* PREVIOUS BUTTON */
+	      _this.on("click", ".gridder-nav.prev", function(e) {
+	        e.preventDefault();
+	        $(this).parents(".gridder-show").prev().prev().trigger("click");
+	      });
+
+	      /* CLOSE BUTTON */
+	      _this.on("click", ".gridder-close", function(e) {
+	        e.preventDefault();
+	        closeExpander(_this);
+	      });
+	    });
+	  };
+
+	  // Default Options
+	  $.fn.gridderExpander.defaults = {
+	    scroll: true,
+	    scrollOffset: 30,
+	    scrollTo: "panel", // panel or listitem
+	    animationSpeed: 400,
+	    animationEasing: "easeInOutExpo",
+	    showNav: true,
+	    nextText: "<span class='glyphicon glyphicon-chevron-right'></span>",
+	    prevText: "<span class='glyphicon glyphicon-chevron-left'></span>",
+	    closeText: "<span class='glyphicon glyphicon-remove'></span>",
+	    onStart: function() {},
+	    onContent: function() {},
+	    onClosed: function() {}
+	  };
+
+	})(jQuery);
 </script>
-<script>
 
-	$('img,.mediSelec').click(function(){
-		var id = $(this).attr('id').replace('mg','밀리그람');
-		console.log(id);
-		$.ajax({
-			url : '<c:url value="/Homespital/Medicine.hst"/>',
-			type : 'get',
-			data : { "search" : id },
-			dataType : 'json',
-			success : function(data) {
-				var itemSeq='';
-				if (data.length == 0) {
-					itemSeq+='데이터가 없어요';
-				}
-				itemSeq=data.response.body.items.item['ITEM_SEQ'];
-				console.log(itemSeq);
-				var url = "https://nedrug.mfds.go.kr/pbp/CCBBB01/getItemDetail?itemSeq="+itemSeq;
-				var name = "약정보";
-				var option = "width = 1300, height = 700, top = 100, left = 300, location = no";
-				window.open(url, name, option);
-			}
-		});
-	})
-
-	function mediList() {
-		var mediSearch = $('#mediSearch').val();
-		if (mediSearch != null) {
-			$.ajax({
-				url : '<c:url value="/Homespital/Medicine.hst"/>',
-				type : 'get',
-				data : {
-					"search" : mediSearch
-				},
-				dataType : 'json',
-				success : function(data) {
-					console.log("약품정보", data);
-					var mediStr = '<ul>';
-					if (data.length == 0) {
-						mediStr += "<li>데이터가 없습니다</li>";
-						return;
-					}
-					$.each(data.response.body.items.item, function(i, item) {
-						console.log(i);
-						console.log(item['ITEM_NAME']);
-						var originName = item['ITEM_NAME'];
-						var reName = originName.replace(/밀리그람/g, "mg");
-						mediStr += "<li>제품명:" + reName + ",제조사:"
-								+ item['ENTP_NAME'] + ",성상:" + item['CHART']
-								+ "</li>"
-					})
-					mediStr += "</ul>"
-					$('#mediForm').html(mediStr)
-				}
-
-			});
-
-		}
-	}
-
-</script>
