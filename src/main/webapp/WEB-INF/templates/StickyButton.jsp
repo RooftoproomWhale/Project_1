@@ -9,8 +9,8 @@
 </head>
 
 <!-- Main CSS-->
-<link href="<c:url value='/css/theme.css'/>" rel="stylesheet"
-	media="all">
+<%-- <link href="<c:url value='/css/theme.css'/>" rel="stylesheet" --%>
+<!-- 	media="all"> -->
 
 <style>
 .sticky-btn {
