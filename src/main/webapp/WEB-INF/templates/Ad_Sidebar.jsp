@@ -7,7 +7,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="<c:url value='/Home/ToHomePage.hst'/>">
-                    <img src="<c:url value="/img/logo2.png"/>" alt="홈스피탈" />
+                    <img src="<c:url value="/images/logo2.png"/>" alt="홈스피탈" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
