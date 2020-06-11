@@ -108,14 +108,14 @@ public class MapController {
 	@RequestMapping(value="/Homespital/Map/hospitalList.hst",produces = "text/html; charset=UTF-8")
 	public String hospitalList(@RequestParam Map map)
 	{
-		List<Map> list = mapService.selectList(map);
-
-		String search_keyword = map.get("search_keyword").toString();
-
-		System.out.println(JSONArray.toJSONString(list));
+		List<HospitalDTO> list = mapService.selectHospitalByXY(map);
+		
+		
+		
+		System.out.println(net.sf.json.JSONArray.fromObject(list));
 
 		
-		return JSONArray.toJSONString(list);
+		return net.sf.json.JSONArray.fromObject(list).toString();
 	}
 	
 	@ResponseBody
@@ -123,6 +123,7 @@ public class MapController {
 	public String pharmacyList(@RequestParam Map map)
 	{
 		List<Map> list = mapService.selectPharmacyList(map);
+
 
 		String search_keyword = map.get("search_keyword").toString();
 

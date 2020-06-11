@@ -29,7 +29,6 @@ public class MapDao implements MapService{
 
 //		return sqlMapper.selectList("hospitalSelect",map);
 		return sqlMapper.selectList("hospitalSelectByKeyWord",map);
-
 	}
 
 	@Override

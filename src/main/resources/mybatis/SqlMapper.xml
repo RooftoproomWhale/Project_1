@@ -68,8 +68,8 @@
 	<select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT phar_name,address FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
 	</select>
+
 	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM pharmacy WHERE address = #{address}
 	</select>
-
 </mapper>

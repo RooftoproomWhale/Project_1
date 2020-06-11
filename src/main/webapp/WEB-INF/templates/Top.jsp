@@ -85,6 +85,8 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국 찾기</a></li>
 						<li class="divider"></li>
+						<li><a href='<c:url value="/Homespital/Management.hst"/>'>복약 관리</a></li>
+						<li class="divider"></li>
 						<li><a href='<c:url value="/Homespital/MedicineForm.hst"/>'>안전상비의약품</a></li>
 						<li class="divider"></li>
 						<li><a href="<c:url value='/Calendar/calendar.hst'/>">일정 관리</a></li>

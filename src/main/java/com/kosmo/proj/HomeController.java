@@ -150,6 +150,11 @@ public class HomeController {
 	{
 		return "health_info/Health_detail.tiles";
 	}
+	@RequestMapping("/Homespital/NoticeSubmit.hst")
+	public String noticesubmit()
+	{
+		return "NoticeDetail.tiles";
+	}
 
 	//test
 	@RequestMapping("/Test/test.hst")
@@ -157,7 +162,6 @@ public class HomeController {
 	{
 		return "test.ad_tiles";
 	}
-	
 	
 //	마이바티스test
 	@RequestMapping("/Member/select.hst")

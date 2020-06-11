@@ -3,6 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.modal-notify .modal-header {
+    border-radius: 3px 3px 0 0;
+}
+.modal-notify .modal-content {
+    border-radius: 3px;
+}
+</style>
 <body class="animsition">
 	<div class="page-wrapper">
 		<!-- PAGE CONTAINER-->
@@ -76,24 +84,29 @@
 													<td><span class="role admin">admin</span></td>
 													<td>
 														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="KOSMO" disabled="disabled">
+															<input type="text" placeholder="KOSMO"
+																disabled="disabled">
 														</div>
 													</td>
 													<td>
 														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="010-1234-7586" disabled="disabled">
+															<input type="text" placeholder="010-1234-7586"
+																disabled="disabled">
 														</div>
 													</td>
 													<td>
-	                                                    <div class="table-data-feature">
-	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="수정">
-	                                                            <i class="zmdi zmdi-edit"></i>
-	                                                        </button>
-	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="삭제">
-	                                                            <i class="zmdi zmdi-delete"></i>
-	                                                        </button>
-	                                                    </div>
-                                                	</td>
+														<div class="table-data-feature">
+															<button class="item" data-toggle="modal"
+																data-placement="top"
+																data-target="#UserModal" title="수정">
+																<i class="zmdi zmdi-edit"></i>
+															</button>
+															<button class="item" data-toggle="tooltip"
+																data-placement="top" title="삭제">
+																<i class="zmdi zmdi-delete"></i>
+															</button>
+														</div>
+													</td>
 												</tr>
 												<tr>
 													<td><label class="au-checkbox"> <input
@@ -110,24 +123,29 @@
 													<td><span class="role user">user</span></td>
 													<td>
 														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="PASSWORD" disabled="disabled">
+															<input type="text" placeholder="PASSWORD"
+																disabled="disabled">
 														</div>
 													</td>
 													<td>
 														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="010-1234-7586" disabled="disabled">
+															<input type="text" placeholder="010-1234-7586"
+																disabled="disabled">
 														</div>
 													</td>
 													<td>
-	                                                    <div class="table-data-feature">
-	                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="수정">
-	                                                            <i class="zmdi zmdi-edit"></i>
-	                                                        </button>
-	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="삭제">
-	                                                            <i class="zmdi zmdi-delete"></i>
-	                                                        </button>
-	                                                    </div>
-                                                	</td>
+														<div class="table-data-feature">
+															<button class="item" data-toggle="modal"
+																data-placement="top"
+																data-target="#UserModal" title="수정">
+																<i class="zmdi zmdi-edit"></i>
+															</button>
+															<button class="item" data-toggle="tooltip"
+																data-placement="top" title="삭제">
+																<i class="zmdi zmdi-delete"></i>
+															</button>
+														</div>
+													</td>
 												</tr>
 												<tr>
 													<td><label class="au-checkbox"> <input
@@ -143,24 +161,29 @@
 													<td><span class="role user">user</span></td>
 													<td>
 														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="PASSWORD" disabled="disabled">
+															<input type="text" placeholder="PASSWORD"
+																disabled="disabled">
 														</div>
 													</td>
 													<td>
 														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="010-1234-7586" disabled="disabled">
+															<input type="text" placeholder="010-1234-7586"
+																disabled="disabled">
 														</div>
 													</td>
 													<td>
-	                                                    <div class="table-data-feature">
-	                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="수정">
-	                                                            <i class="zmdi zmdi-edit"></i>
-	                                                        </button>
-	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="삭제">
-	                                                            <i class="zmdi zmdi-delete"></i>
-	                                                        </button>
-	                                                    </div>
-                                                	</td>
+														<div class="table-data-feature">
+															<button class="item" data-toggle="modal"
+																data-placement="top"
+																data-target="#UserModal" title="수정">
+																<i class="zmdi zmdi-edit"></i>
+															</button>
+															<button class="item" data-toggle="tooltip"
+																data-placement="top" title="삭제">
+																<i class="zmdi zmdi-delete"></i>
+															</button>
+														</div>
+													</td>
 												</tr>
 												<tr>
 													<td><label class="au-checkbox"> <input
@@ -176,24 +199,29 @@
 													<td><span class="role member">Hospital</span></td>
 													<td>
 														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="PASSWORD" disabled="disabled">
+															<input type="text" placeholder="PASSWORD"
+																disabled="disabled">
 														</div>
 													</td>
 													<td>
 														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="010-1234-7586" disabled="disabled">
+															<input type="text" placeholder="010-1234-7586"
+																disabled="disabled">
 														</div>
 													</td>
 													<td>
-	                                                    <div class="table-data-feature">
-	                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="수정">
-	                                                            <i class="zmdi zmdi-edit"></i>
-	                                                        </button>
-	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="삭제">
-	                                                            <i class="zmdi zmdi-delete"></i>
-	                                                        </button>
-	                                                    </div>
-                                                	</td>
+														<div class="table-data-feature">
+															<button class="item" data-toggle="modal"
+																data-placement="top"
+																data-target="#UserModal" title="수정">
+																<i class="zmdi zmdi-edit"></i>
+															</button>
+															<button class="item" data-toggle="tooltip"
+																data-placement="top" title="삭제">
+																<i class="zmdi zmdi-delete"></i>
+															</button>
+														</div>
+													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -207,7 +235,52 @@
 			</div>
 		</div>
 	</div>
+	<!-- 수정 모달 -->
+	<div class="modal fade" id="UserModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog modal-notify modal-warning" role="document">
+			<!--Content-->
+			<div class="modal-content">
+				<!--Header-->
+				<div class="modal-header text-center">
+					<h4 class="modal-title white-text w-100 font-weight-bold py-2">Update User</h4>
+					<button type="button" class="close" data-dismiss="modal">
+						<span class="white-text">&times;</span>
+					</button>
+				</div>
 
+				<!--Body-->
+				<div class="modal-body">
+					<div class="md-form mb-5">
+						<i class="fas fa-user prefix grey-text"></i> <input type="text"
+							id="" class="form-control validate"> <label
+							data-error="wrong" data-success="right" for="form3">Name</label>
+					</div>
+
+					<div class="md-form mb-5">
+						<input type="email" id="" class="form-control validate"> <label
+							data-error="wrong" data-success="right" for="form2">E-mail</label>
+					</div>
+					
+					<div class="md-form mb-5">
+						<input type="email" id="" class="form-control validate"> <label
+							data-error="wrong" data-success="right" for="form2">Password</label>
+					</div>
+					
+					<div class="md-form">
+						<input type="email" id="" class="form-control validate"> <label
+							data-error="wrong" data-success="right" for="form2">Tel</label>
+					</div>
+				</div>
+
+				<!--Footer-->
+				<div class="modal-footer justify-content-center">
+					<a type="button" class="btn btn-outline-warning waves-effect">Update</a>
+				</div>
+			</div>
+			<!--/.Content-->
+		</div>
+	</div>
 </body>
 
 </html>

@@ -41,6 +41,8 @@
                             <a href="<c:url value='/Admin/Corona_Map.hst'/>">
                                 <i class="fas fa-map-marker-alt"></i>확진자 동선</a>
                         </li>
+                      
+                        
 <!--                         <li class="has-sub"> -->
 <!--                             <a class="js-arrow" href="#"> -->
 <!--                                 <i class="fas fa-copy"></i>Pages</a> -->

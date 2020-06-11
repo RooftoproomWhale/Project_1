@@ -54,6 +54,11 @@ public class AdminController {
 	{
 		return "HosAuth.ad_tiles";
 	}
+	@RequestMapping("Notice.hst")
+	public String noticeWrite()
+	{
+		return "NoticeWrite.ad_tiles";
+	}
 	
 //	@RequestMapping("Login.hst")
 //	public String toLogin()
