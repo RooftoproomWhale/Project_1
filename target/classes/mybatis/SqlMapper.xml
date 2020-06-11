@@ -22,12 +22,7 @@
 		WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
 		</if>
 	</select>
-	
-	
-	<select id="memberSelectOne" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM member WHERE MEM_EMAIL='LEE@KOSMO.COM'
-	</select>
-	
+
 	
 	<insert id="memoInsert" parameterType="java.util.Map">
 		INSERT INTO onememo(no,title,content,id)
@@ -49,12 +44,15 @@
 	<select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
-<<<<<<< HEAD
 	<select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT hosp_name,address FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
-=======
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1
+	<select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT D.dept_name, HD.*
+		FROM
+		(SELECT H.*, D.dept_code FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_code = D.dept_code
+		WHERE HD.address = #{address}
+	</select>
 
 	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="java.util.Map">
 
@@ -64,12 +62,10 @@
 	<select id="pharmacySelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
 	</select>
-<<<<<<< HEAD
 	<select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT phar_name,address FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
 	</select>
-
-=======
-
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1
+	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM pharmacy WHERE address = #{address}
+	</select>
 </mapper>
