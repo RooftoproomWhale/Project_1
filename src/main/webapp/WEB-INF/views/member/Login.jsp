@@ -12,7 +12,7 @@
 body{
 	padding-top: 70px;
 }
-.main-content{
+.main-contents{
 	width: 50%;
 	border-radius: 20px;
 	box-shadow: 0 5px 5px rgba(0,0,0,.4);
@@ -110,7 +110,7 @@ form{
 
 </style>
 <div class="container-fluid">
-		<div class="row main-content bg-success text-center">
+		<div class="row main-contents bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 				<span style="width: 150px;height: 150px;align-self: center;" class="company__logo"><img style="width: 100%; height: auto;" class="img-responsive" src='<c:url value="/img/logo.png"/>' alt="로고이미지"></span></h2></span>
 				<h4 class="company_title">홈스피탈</h4>

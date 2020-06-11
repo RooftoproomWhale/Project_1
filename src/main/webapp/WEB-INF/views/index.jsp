@@ -25,11 +25,6 @@
     
     	
     	}
-    	#gra{
-    	/*background: linear-gradient( to right,#5f8cfd, #fff);
-    	그라데이션(보류)
-    	*/
-    	}
 </style>
 <head>
 <meta charset="utf-8">
@@ -127,7 +122,7 @@
 				<div class="row" style="margin-bottom: 10px">
 					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보</span>
 				</div>
-				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px"></div>
+				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px;"></div>
 			</div>
 		</div>
 	
@@ -189,6 +184,10 @@
 						<h3>코로나 현황</h3>
 						<p>코로나 현황 설명</p>
 					</div>
+					<table>
+						<tr style="border: thin; border-color: aqua;">
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
