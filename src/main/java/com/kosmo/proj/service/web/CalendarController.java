@@ -17,16 +17,14 @@ import com.kosmo.proj.service.CalendarVO;
 @Controller
 public class CalendarController {
 
-	@RequestMapping("/Calendar/View.do")
+	@RequestMapping("/Calendar/View.hst")
 	@ResponseBody
 	public List<CalendarVO> selectEventList(@RequestParam Map map) {
 		List<CalendarVO> list = new Vector<CalendarVO>();
 
 		HashMap<String, CalendarVO> javaMap = new HashMap<String, CalendarVO>();
-		list.add(new CalendarVO("db이벤트1", "2020-05-04", "2020-05-07", null, null, null, "false"));
-		list.add(new CalendarVO("db이벤트2", "2019-09-23", "2019-09-26", null, null, null, "false"));
-		list.add(new CalendarVO("db이벤트3", "2019-09-23", "2019-09-26", null, null, null, "false"));
-
+		list.add(new CalendarVO("가그린목액", "2020-06-08", "2020-06-12", null, null, null, "false"));
+		list.add(new CalendarVO("예약", "2020-06-08 13:00:00", "2020-06-08", null, "#E5D85C",null, "false"));
 		return list;
 	}
 

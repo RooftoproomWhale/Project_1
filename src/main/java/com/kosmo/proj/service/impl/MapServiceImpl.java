@@ -45,4 +45,16 @@ public class MapServiceImpl implements MapService{
 		return dao.searchPharmacyList(map);
 	}
 
+	@Override
+	public List<Map> selectHospitalOne(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectHospitalOne(map);
+	}
+
+	@Override
+	public List<Map> selectPharmacyOne(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectPharmacyOne(map);
+	}
+
 }
