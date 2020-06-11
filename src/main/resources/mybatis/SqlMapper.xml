@@ -22,7 +22,6 @@
 		WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
 		</if>
 	</select>
-
 	
 	<insert id="memoInsert" parameterType="java.util.Map">
 		INSERT INTO onememo(no,title,content,id)
@@ -47,6 +46,7 @@
 	<select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT hosp_name,address FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
+
 	<select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT D.dept_name, HD.*
 		FROM
@@ -69,4 +69,5 @@
 	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM pharmacy WHERE address = #{address}
 	</select>
+
 </mapper>
