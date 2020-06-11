@@ -6,7 +6,7 @@
 <!--     <div class="page-wrapper"> -->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="<c:url value='/Admin/Index.hst'/>">
+                <a href="<c:url value='/Home/ToHomePage.hst'/>">
                     <img src="<c:url value="/img/logo2.png"/>" alt="홈스피탈" />
                 </a>
             </div>
@@ -41,6 +41,8 @@
                             <a href="<c:url value='/Admin/Corona_Map.hst'/>">
                                 <i class="fas fa-map-marker-alt"></i>확진자 동선</a>
                         </li>
+                      
+                        
 <!--                         <li class="has-sub"> -->
 <!--                             <a class="js-arrow" href="#"> -->
 <!--                                 <i class="fas fa-copy"></i>Pages</a> -->
