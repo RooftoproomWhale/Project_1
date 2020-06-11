@@ -16,7 +16,7 @@ public class MapDao implements MapService{
 
 	@Resource(name="template")
 	private SqlSessionTemplate sqlMapper;
-	
+
 	@Override
 	public List<Map> selectList() {
 		// TODO Auto-generated method stub
@@ -68,6 +68,6 @@ public class MapDao implements MapService{
 		return sqlMapper.selectList("hospitalSelectByXY",map);
 	}
 
-	
+
 
 }
