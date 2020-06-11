@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<body class="animsition">
+<body>
 	<div class="page-container">
 		<div class="section__content section__content--p30"
 			style="padding-top: 50px">
@@ -16,8 +16,8 @@
 								<strong>공지사항 작성</strong>
 							</div>
 							<div class="card-body card-block">
-								<form action="" method="post" enctype="multipart/form-data"
-									class="form-horizontal">
+<!-- 								<form action="" method="post" enctype="multipart/form-data" -->
+<!-- 									class="form-horizontal"> -->
 
 									<div class="row form-group">
 									
@@ -43,13 +43,11 @@
 										</div>
 									</div>
 							<div class="">
-								<button type="submit" class="btn btn-primary btn-sm" style="position: absolute;right: 20px;bottom: 20px;"
-								onclick="location.href='<c:url value='/Admin/NoticeSubmit.hst'/>'"
-								>
-									<i class="fa fa-dot-circle-o"></i> 작성
-								</button>
+								<button class="btn btn-primary btn-sm" style="position: absolute;right: 20px;bottom: 20px;"
+								onclick="location.href='<c:url value='/Admin/NoticeSubmit.hst'/>'">
+									<i class="fa fa-dot-circle-o"></i> 작성 </button>
 							</div>
-								</form>
+<!-- 								</form> -->
 							</div>
 								</div>
 					</div>

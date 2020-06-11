@@ -150,11 +150,11 @@ public class HomeController {
 	{
 		return "health_info/Health_detail.tiles";
 	}
-	@RequestMapping("/Admin/NoticeSubmit.hst")
-	public String noticesubmit()
-	{
-		return "NoticeDetail.tiles";
-	}
+//	@RequestMapping("/Admin/NoticeSubmit.hst")
+//	public String noticesubmit()
+//	{
+//		return "NoticeDetail.tiles";
+//	}
 
 	//test
 	@RequestMapping("/Test/test.hst")
