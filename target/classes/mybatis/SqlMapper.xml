@@ -47,21 +47,37 @@
 		SELECT hosp_name,address FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
 
+<<<<<<< HEAD
 	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="java.util.Map"></select>
 
 		
+=======
+<<<<<<< HEAD
+	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="java.util.Map">
+
+		
+=======
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	<select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT D.dept_name, HD.*
 		FROM
 		(SELECT H.*, D.dept_code FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_code = D.dept_code
 		WHERE HD.address = #{address}
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	</select>
+<<<<<<< HEAD
+=======
 
 	<!-- <select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
 		SELECT (6371*ACOS(COS(RADIANS(#{cor_x}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{cor_y}))+SIN(RADIANS(#{cor_x}))*SIN(RADIANS(cor_x)))) 
 		AS distanceByXY, h.*
 		FROM hospital h
+<<<<<<< HEAD
 	</select> -->
+=======
+	</select>
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 
 	<select id="pharmacySelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
