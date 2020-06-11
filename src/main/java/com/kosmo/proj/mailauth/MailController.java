@@ -12,6 +12,7 @@ public class MailController {
 	@Autowired
 	private MailService service;
 
+
 	@Autowired
 	private MailHandler mailHandler;
 	@RequestMapping(value = "/mailauth/testMail.hst", method = RequestMethod.POST)

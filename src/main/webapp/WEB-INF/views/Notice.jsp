@@ -98,7 +98,7 @@
 						</li>
 					</ul>
 				</div>
-				<!-- 검색용 UI -->
+				<!-- 검색용 UI --> 
 				<div class="row">
 					<div class="text-center">
 						<form class="form-inline" method="post" action="" style="margin-bottom: 20px;">
