@@ -9,25 +9,20 @@
 
 
 <style>
-.korea-map-font-v1 {
-	width: 600px;
-	font-size: 600px;
-	color: #D4F4FA;
+
+ .col-md-5{
+  margin: 10px;
+  border: 1px solid #57b6ff;
+ }
+#banner{
+
+padding-top:100px;
+width: auto;
+height: auto;
+position: absolute;
+left: 30px;
+
 }
-
-.경기, .경북 {
-	
-}
-
-.경남, .강원 {
-	color: #d45b5b;
-}
-
-.충북 {
-	color: #e8aeae;
-}
-
-
 </style>
 <script>
 	
@@ -36,7 +31,7 @@
 					theme: "light2", // "light1", "light2", "dark1", "dark2"
 					exportEnabled: true,
 					animationEnabled: true,
-					backgroundColor: "#f6f6f6",
+					backgroundColor: "#fff",
 					title: {
 						text: "시/도별 현황"
 					},
@@ -62,7 +57,7 @@
 
 				var chart = new CanvasJS.Chart("chartContainer2", {
 					animationEnabled: true,
-					backgroundColor: "#f6f6f6",
+					backgroundColor: "#fff",
 					title:{
 						text: "검사현황",
 						horizontalAlign: "left"
@@ -95,7 +90,7 @@
 				var options = {
 						animationEnabled: true,
 						theme: "light2",
-						backgroundColor: "#f6f6f6",
+						backgroundColor: "#fff",
 						title:{
 							text: "일별 확진자 추이"
 						},
@@ -157,7 +152,7 @@
 					}
 					var chart = new CanvasJS.Chart("chartContainer4", {
 						animationEnabled: true,
-						backgroundColor: "#f6f6f6",
+						backgroundColor: "#fff",
 						title: {
 							text: "국가별"
 						},
@@ -203,21 +198,22 @@
 		
 </script>
 	<!-- 가로배치용 -->
-	<div class="col-lg-5 col-lg-offset-2" style="padding-top: 100px; padding-bottom: 100px">
-<div class="row">	
-	<div id="chartContainer3" style="height: 300px; width: 500px; padding-bottom: 50px"></div>
-</div>	
-<div class="row">	
-	<div id="chartContainer2" style="height: 300px; width: 500px; padding: 50px"></div>
-</div>	
-	
-	</div>
-<div class="col-lg-5 " style="padding-top: 100px; padding-bottom: 100px">
-<div class="row">	
-	<div id="chartContainer1" style="height: 300px; width: 500px;"></div>
-</div>	
-<div class="row" >
-	<div id="chartContainer4" style="height: 300px; width: 500px; padding: 50px""></div>
-</div>	
+<div class="container" style="">
 
+<a href="<c:url value="http://ncov.mohw.go.kr/guidelineList.do?brdId=6&brdGubun=61"/>">
+	<img id="banner" src="<c:url value="/images/healthimg/사회적 거리두기.png"/>" style="position: relative;">
+	</a>
+
+	<div class="row" style="margin-top: 40px;margin-left:50px; ">
+		<div class="col-md-12">
+			<div class="col-md-5" id="chartContainer3"
+				style="height: 300px; width: 500px;"></div>
+			<div class="col-md-5" id="chartContainer2"
+				style="height: 300px; width: 500px;"></div>
+			<div class="col-md-5" id="chartContainer1"
+				style="height: 300px; width: 500px;"></div>
+			<div class="col-md-5" id="chartContainer4"
+				style="height: 300px; width: 500px;"></div>
+		</div>
+	</div>
 </div>

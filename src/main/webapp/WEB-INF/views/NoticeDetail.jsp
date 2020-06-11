@@ -15,8 +15,8 @@
 		<div class="page-header board-util-text color-red">
 				</div>
 		<div class="col-md-3 col-md-offset-9">
-		<button class="btn btn-default" href="<c:url value="/Homespital/Notice.hst"/>">목록</button>
-		<button class="btn btn-default">수정</button>
+		<a href="<c:url value="/Homespital/Notice.hst"/>"><button class="btn btn-default" >목록</button></a>
+		<a href="<c:url value="/Admin/NoticeEdit.hst"/>"><button class="btn btn-default">수정</button></a>
 		<button class="btn btn-default">삭제</button>
 		</div>
 		</div>
