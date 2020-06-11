@@ -109,6 +109,10 @@ public class MapController {
 	{
 		List<Map> list = mapService.selectList(map);
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 		String search_keyword = map.get("search_keyword").toString();
 
 		System.out.println(JSONArray.toJSONString(list));
@@ -122,6 +126,7 @@ public class MapController {
 	public String pharmacyList(@RequestParam Map map)
 	{
 		List<Map> list = mapService.selectPharmacyList(map);
+
 
 		String search_keyword = map.get("search_keyword").toString();
 

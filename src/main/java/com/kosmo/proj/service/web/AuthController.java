@@ -25,7 +25,7 @@ public class AuthController {
 	//로그인 폼으로 이동]
 	@RequestMapping("/User/Login.hst")
 	public String login() {
-		return "Login.tiles";
+		return "member/Login.tiles";
 	}///////////login
 	//스프링씨큐리티 적용시 로그인처리 /로그아웃처리 주석처리
 	/*

@@ -27,8 +27,8 @@
     <!-- body부분 --> 
     <tiles:insertAttribute name="body"/> 
     
-    <!-- footer부분 -->
-    <tiles:insertAttribute name="footer"/>  
+    <!-- footer부분-->
+    <tiles:insertAttribute name="footer"/>   
     
   </body>
   

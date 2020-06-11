@@ -22,6 +22,10 @@
 		WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
 		</if>
 	</select>
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	
 	<insert id="memoInsert" parameterType="java.util.Map">
 		INSERT INTO onememo(no,title,content,id)
@@ -66,8 +70,11 @@
 	<select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT phar_name,address FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
 	</select>
+<<<<<<< HEAD
+=======
 	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM pharmacy WHERE address = #{address}
 	</select>
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 
 </mapper>
