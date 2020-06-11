@@ -152,8 +152,7 @@
 						<p>병원 찾기 설명</p>
 					</div>
 				</div>
-				<div class="col-md-4" style="cursor: pointer"
-					onclick="location.href='<c:url value='/Member/select.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Administration/administration.hst'/>'">
 					<i class="fa fa-medkit"></i>
 					<div class="service-desc">
 						<h3>복약 관리</h3>
@@ -170,14 +169,11 @@
 						<p>예방 정보 설명</p>
 					</div>
 				</div>
-				<div class="col-md-4" style="cursor: pointer"
-					onclick="location.href='<c:url value='/Calendar/calendar.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Calendar/calendar.hst'/>'">
 					<i class="fa fa-calendar"></i>
 					<div class="service-desc">
 						<h3>일정 관리</h3>
-						<p>
-							일정 관리 설명
-						</p>
+						<p>일정 관리 설명</p>
 					</div>
 				</div>
 

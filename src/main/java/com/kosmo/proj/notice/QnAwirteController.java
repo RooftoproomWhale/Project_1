@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-public class NoticeController {
+public class QnAwirteController {
 
-	//공지사항
-	@RequestMapping("/Homespital/Notice.hst")
-	public String Noticewrite() {
+	//공지사항 글쓰기
+	@RequestMapping("/QnA/QnAwrite.hst")
+	public String QnAwrite() {
 
-		return "Notice.tiles";
+		return "QnAwrite.tiles";
 	}
 
 }
