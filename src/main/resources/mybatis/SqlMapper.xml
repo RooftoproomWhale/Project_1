@@ -22,10 +22,6 @@
 		WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
 		</if>
 	</select>
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	
 	<insert id="memoInsert" parameterType="java.util.Map">
 		INSERT INTO onememo(no,title,content,id)
@@ -38,6 +34,8 @@
 	<delete id="memoDelete" parameterType="java.util.Map">
 		DELETE onememo WHERE no=#{no}
 	</delete>
+	
+	
 	<select id="covidMapSelect" resultType="java.util.Map">
 		SELECT * FROM corona_patient
 	</select>
@@ -51,27 +49,21 @@
 		SELECT hosp_name,address FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
 
-<<<<<<< HEAD
-	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="java.util.Map"></select>
 
 		
-=======
 	<select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT D.dept_name, HD.*
 		FROM
 		(SELECT H.*, D.dept_code FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_code = D.dept_code
 		WHERE HD.address = #{address}
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	</select>
-<<<<<<< HEAD
-=======
 
-	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT (6371*ACOS(COS(RADIANS(#{cor_x}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{cor_y}))+SIN(RADIANS(#{cor_x}))*SIN(RADIANS(cor_x)))) 
-		AS distanceByXY, h.*
-		FROM hospital h
-	</select>
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
+<!-- 	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO"> -->
+<!-- 		SELECT (6371*ACOS(COS(RADIANS(#{cor_x}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{cor_y}))+SIN(RADIANS(#{cor_x}))*SIN(RADIANS(cor_x))))  -->
+<!-- 		AS distanceByXY, h.* -->
+<!-- 		FROM hospital h -->
+<!-- 	</select> -->
 
 	<select id="pharmacySelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
@@ -79,11 +71,8 @@
 	<select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT phar_name,address FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
 	</select>
-<<<<<<< HEAD
-=======
 	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM pharmacy WHERE address = #{address}
 	</select>
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 
 </mapper>
