@@ -15,7 +15,7 @@
 	height: 150px
 } 
 </style>
-<title>공지사항 글쓰기</title>
+<title>QnA 글쓰기</title>
 </head>
 <body>
 

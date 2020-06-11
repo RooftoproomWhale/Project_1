@@ -125,7 +125,8 @@
 									고객센터의 영업시간은 <strong>09:00 ~ 18:00</strong> 입니다.
 								</div>
 							</div>
-						</div>
+						</div><br/>
+						<a href="<c:url value='/Notice/QnA.hst'/>" class="btn btn-primary float-right">QnA</a>
 					</div>
 				</div>
 			</main>

@@ -83,8 +83,6 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국 찾기</a></li>
 						<li class="divider"></li>
-						<li><a href='<c:url value="/Homespital/Management.hst"/>'>복약 관리</a></li>
-						<li class="divider"></li>
 						<li><a href='<c:url value="/Homespital/MedicineForm.hst"/>'>안전상비의약품</a></li>
 						<li class="divider"></li>
 						<li><a href="<c:url value='/Calendar/calendar.hst'/>">일정 관리</a></li>
@@ -103,8 +101,6 @@
 				</c:if>
 					<li><a href="<c:url value='/Admin/Index.hst'/>">Admin</a></li>
 					<li><a href="<c:url value='/Notice/FAQ.hst'/>">FAQ</a></li>
-					<li><a href="<c:url value='/Notice/QnA.hst'/>">QnA</a></li>
-					<li><a href="<c:url value='/Admin/Test.hst'/>">Test</a></li>
 				<!-- 				<li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
 <%-- 					<li><a href="<c:url value='/Admin/Test.hst'/>">Test</a></li> --%>
 			</ul>

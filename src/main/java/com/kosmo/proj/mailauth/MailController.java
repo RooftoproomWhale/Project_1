@@ -37,7 +37,6 @@ public class MailController {
         return "redirect:/";
     }
 
-    //�̸��� ���� �ڵ� ����
     @RequestMapping(value = "/mailauth/emailConfirm.hst", method = RequestMethod.GET)
     public String emailConfirm(MemberVO user	,Model model,RedirectAttributes rttr) throws Exception {
 
