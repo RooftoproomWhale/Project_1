@@ -577,19 +577,20 @@
 					FunLoadingBarEnd();
 				},
 				success:function(data){
+					console.log(data);
 					var jsonData = JSON.parse(data);
-					console.log("연결성공", jsonData.response.body,typeof(jsonData));
-					$.each(jsonData.response.body.items.item, function(i, item) {
+					console.log("연결성공", jsonData,typeof(jsonData));
+					$.each(jsonData, function(i, item) {
 						
 						var marker = new kakao.maps.Marker({
 							//map : map,
-							position : new kakao.maps.LatLng(item.latitude, item.longitude),
+							position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
 							image :  new kakao.maps.MarkerImage(
 									"<c:url value='/images/map/hospital_image/hospital.png'/>",
 							        new kakao.maps.Size(35, 35))
 						});
 						
-						var iwContent = '<div style="padding:5px;">'+item.dutyName+'</div>';
+						var iwContent = '<div style="padding:5px;">'+item.hosp_name+'</div>';
 			            
 						var infowindow = new kakao.maps.InfoWindow({
 						    content : iwContent
@@ -626,7 +627,7 @@
 						
 						if(!isSame)
 						{
-							console.log("마커배열길이",jsonData.count,markers.length);
+							console.log("마커배열길이",jsonData.length,markers.length);
 							//if(data.count < markers.length)
 							marker.setMap(map);
 							console.log("중복이 아닌 마커",marker.getPosition());

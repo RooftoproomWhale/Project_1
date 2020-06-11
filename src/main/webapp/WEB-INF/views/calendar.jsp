@@ -11,7 +11,7 @@
 <script src='<c:url value="/calendar/interaction/main.js"/>'></script>
 <script src='<c:url value="/calendar/daygrid/main.js"/>'></script>
 <script src='<c:url value="/calendar/timegrid/main.js"/>'></script>
-
+<!-- 휴지통, 예약스케쥴 드래그 잠금,예약모달,삭제,id부여  만들기-->
 
 
 <script>
@@ -28,7 +28,6 @@
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         defaultDate: new Date,
-        
         locale:'ko',
         navLinks: true,
         columnHeaderText: function(date) {
@@ -38,41 +37,46 @@
         selectable: true,
         selectMirror: true,
         select: function(arg) {
-  
+        	console.log(arg);
         		  var divTop = arg.jsEvent.clientY - 40; 
         	  var divLeft = arg.jsEvent.clientX; 
         	  var serial = $(this).attr("serial"); 
         	  var idx = $(this).attr("idx"); 
-        	  $('#divView').empty().append('<div style="position:absolute;top:5px;right:5px;"id="menu1"> </div><br><input class="btn" type="button" id="menuno1" value="복용약 등록"/><BR><input class="btn" type="button" id="menuno2" value="예약하기"/>'); $('#divView').css({ "top": divTop ,"left": divLeft , "position": "absolute" }).show(); 
+        	  $('#divView').empty().append('<div style="position:absolute;top:5px;right:5px;"id="calendarmenu"> </div><br><input class="btn" type="button" id="menuno1" value="복용약 등록"/><BR><input class="btn" type="button" id="menuno2" value="예약하기"/>'); $('#divView').css({ "top": divTop ,"left": divLeft , "position": "absolute" }).show(); 
         	  
          
         	 $('#menuno1').click(function() {
         		 $('#calendarmenu').remove();
    				$('#divView').css('display','none')
+   				var dates=new Date(arg.end);
+   				var Dateone =  moment(arg.start).format('YYYY-MM-DD')+"~"+moment(arg.end).format('YYYY-MM-DD');
    				
-        	  $("#date").val(arg.start);
+
+        	  $("#date").val(Dateone);
             $("#createEventModal").modal("show");
                $('#submitButton').click(function() {
                var title= $('#title1').val();
-
+               Dateone=$('#date').val();
+               var datesta = Dateone.split('~');
                 if (title) {
             calendar.addEvent({
               title: title,
-              start: arg.start,
-              end: arg.end,
+              start: datesta[0],
+              end: datesta[1],
               allDay: arg.allDay
             })
           }
-                arg.end="";
-                arg.start="";
+                close();
+           	
                 $("#createEventModal").modal("hide");
                 })
                   $('#close').click(function() {
-                         arg.start="";
-                             end: arg.end="";
+                	  calendarId.destroy();
+                	  close();
                          $("#createEventModal").modal("hide");
                   })
-          calendar.unselect(); 
+          calendar.unselect();
+      
         		});  
         	 
         	 $(document).on("click","#menuno2",function(){
@@ -81,17 +85,17 @@
         	     }); 
         },
         eventClick:function(event) {
-        	console.log(event.event.backgroundColor);
+      
            if(event.event.backgroundColor=='#E5D85C'){
-        	   console.log('예약정보페이지')
+      
         	   $("#createEventModal2").modal("show");
            }
            else{ 
-        	   console.log('복용정보페이지')
+
         	   $("#createEventModal3").modal("show");
            }
         },
-
+ 
         editable: true,
         eventLimit: true,
         events:  function(info, successCallback,failureCallback) {
@@ -107,14 +111,24 @@
             		
                  var events=[];
                  $.each(data,function(index,valeus){
-                	
+                	if(data[index].color=="#E5D85C"){
+                		 events.push({
+                             title: data[index].title,
+                             start: data[index].start,
+                             end:data[index].end,
+              				color:data[index].color,
+              				resourceEditable: true	
+
+                             });
+           
+                	}else{
                  events.push({
                     title: data[index].title,
                     start: data[index].start,
                     end:data[index].end,
      				color:data[index].color,
                     });
-                 console.log(events);
+                	}
                
                  })
                  successCallback(events);
@@ -136,11 +150,11 @@
   				$('#divView').css('display','none')
             });
 	$(function() {
-		
+	
 	
 	 $('html').click(function(e) {
 		 var $target = $(e.target);
-		 console.log($target);
+	
 		if(!$(e.target).hasClass("fc-row fc-week fc-widget-content fc-rigid")) {
 			if(!$('#divView').css('display','none')){
 			$('#calendarmenu').remove();
@@ -149,7 +163,11 @@
 		} 
 	 });
 	})
-
+	function close() {
+	     $('#title1').val("");
+      	  $('#date').val("");
+      	$('#medicinecontent').val("");
+	}
 </script>
 <style>
 	
@@ -227,20 +245,23 @@
             </div>
             <div id="modalBody" class="modal-body">
                <div class="form-group">
-                    <input class="form-control" type="text" placeholder="test" >
+                    <input class="form-control" type="text" id="title1"  placeholder="약 이름" >
                 </div>
 
                 <div class="form-group form-inline">
                     <div class="input-group date" data-provide="datepicker">
-                        <input type="text" class="form-control" placeholder="" id="date" >
+                        <input type="text" class="form-control" placeholder="" id="date" readonly >
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar" id="datepicker"></span>
                         </div>
                     </div>
                 </div>
-
+<div class="form-group form-inline">
+                    
+                </div>
+                
                 <div class="form-group">
-                    <textarea class="form-control" type="text" rows="4" placeholder="약 이름" id="title1"></textarea>
+                    <textarea class="form-control" type="text" id="medicinecontent" placeholder="내용"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -274,7 +295,7 @@
   </tr>
     <tr>
       <td scope="row">예약일시</td>
-      <td>2020-06-10 10:15</td>
+      <td>2020-06-08 13:00</td>
     </tr>
     <tr >
       <td scope="row" >예약신청일<br/></td>
@@ -367,7 +388,6 @@
     </div>
 </div>
 <div id="divView" class="areg"></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
    <script src='<c:url value="/js/bootstrap.min.js"/>'></script>
 

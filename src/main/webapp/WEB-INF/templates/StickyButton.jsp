@@ -9,11 +9,7 @@
 </head>
 
 <!-- Main CSS-->
-<link href="<c:url value='/css/theme.css'/>" rel="stylesheet"
-	media="all">
-
-<!-- Main JS-->
-<script src="<c:url value='/js/main.js'/>"></script>
+<link href="<c:url value='/css/theme.css'/>" rel="stylesheet" media="all">
 
 <style>
 .sticky-btn {
@@ -97,7 +93,7 @@
 									<input class="au-input au-input--full au-input--h65"
 										type="text" placeholder="질문을 입력하세요">
 									<button class="au-input-icon">
-										<i class="fas fa-envelope prefix grey-text"></i>
+										<i class="far fa-paper-plane"></i>
 									</button>
 								</form>
 							</div>
