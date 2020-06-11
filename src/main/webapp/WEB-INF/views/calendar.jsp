@@ -11,7 +11,7 @@
 <script src='<c:url value="/calendar/interaction/main.js"/>'></script>
 <script src='<c:url value="/calendar/daygrid/main.js"/>'></script>
 <script src='<c:url value="/calendar/timegrid/main.js"/>'></script>
-
+<!-- 휴지통, 예약스케쥴 드래그 잠금,예약모달,삭제,id부여  만들기-->
 
 
 <script>
@@ -28,7 +28,6 @@
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         defaultDate: new Date,
-        
         locale:'ko',
         navLinks: true,
         columnHeaderText: function(date) {
@@ -38,7 +37,7 @@
         selectable: true,
         selectMirror: true,
         select: function(arg) {
-  
+        	console.log(arg);
         		  var divTop = arg.jsEvent.clientY - 40; 
         	  var divLeft = arg.jsEvent.clientX; 
         	  var serial = $(this).attr("serial"); 
@@ -50,30 +49,34 @@
         		 $('#calendarmenu').remove();
    				$('#divView').css('display','none')
    				var dates=new Date(arg.end);
-   				var startDate =  moment(arg.start).format('YYYY-MM-DD')+"~"+moment(arg.end).format('YYYY-MM-'+(dates.getDate()-1));
-        	  $("#date").val(startDate);
+   				var Dateone =  moment(arg.start).format('YYYY-MM-DD')+"~"+moment(arg.end).format('YYYY-MM-DD');
+   				
+
+        	  $("#date").val(Dateone);
             $("#createEventModal").modal("show");
                $('#submitButton').click(function() {
                var title= $('#title1').val();
-			
+               Dateone=$('#date').val();
+               var datesta = Dateone.split('~');
                 if (title) {
             calendar.addEvent({
               title: title,
-              start: startDate,
-              end: endDate,
+              start: datesta[0],
+              end: datesta[1],
               allDay: arg.allDay
             })
           }
-                arg.end="";
-                arg.start="";
+                close();
+           	
                 $("#createEventModal").modal("hide");
                 })
                   $('#close').click(function() {
-                         arg.start="";
-                             end: arg.end="";
+                	  calendarId.destroy();
+                	  close();
                          $("#createEventModal").modal("hide");
                   })
-          calendar.unselect(); 
+          calendar.unselect();
+      
         		});  
         	 
         	 $(document).on("click","#menuno2",function(){
@@ -92,7 +95,7 @@
         	   $("#createEventModal3").modal("show");
            }
         },
-
+ 
         editable: true,
         eventLimit: true,
         events:  function(info, successCallback,failureCallback) {
@@ -108,14 +111,24 @@
             		
                  var events=[];
                  $.each(data,function(index,valeus){
-                	
+                	if(data[index].color=="#E5D85C"){
+                		 events.push({
+                             title: data[index].title,
+                             start: data[index].start,
+                             end:data[index].end,
+              				color:data[index].color,
+              				resourceEditable: true	
+
+                             });
+           
+                	}else{
                  events.push({
                     title: data[index].title,
                     start: data[index].start,
                     end:data[index].end,
      				color:data[index].color,
                     });
-     
+                	}
                
                  })
                  successCallback(events);
@@ -150,7 +163,11 @@
 		} 
 	 });
 	})
-
+	function close() {
+	     $('#title1').val("");
+      	  $('#date').val("");
+      	$('#medicinecontent').val("");
+	}
 </script>
 <style>
 	
@@ -244,7 +261,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <textarea class="form-control" type="text" rows="4" placeholder="내용"></textarea>
+                    <textarea class="form-control" type="text" id="medicinecontent" placeholder="내용"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
