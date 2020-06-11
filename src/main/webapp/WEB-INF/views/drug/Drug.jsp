@@ -4,500 +4,260 @@
 
 
 <style>
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body {
-  padding-top: 100px;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #333;
 }
 
-.gridder {
-  margin: 0px;
-  padding: 0px;
-  list-style-type: none
+a {
+  color: #fff;
 }
 
-.gridder-list {
-  display: inline-block;
-  vertical-align: top
-}
-
-.gridder-show {
-  display: block;
-  float: left;
+.row {
   width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0;
+  clear: both;
+}
+.row img {
+  max-width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.gallery ul li {
+  float: left;
+  margin: 0 0.8771929825%;
+  overflow: hidden;
+}
+
+header {
+  background-color: #84b4b1;
+  color: #fff;
+  text-align: center;
+  padding: 40px 0 30px;
+}
+header h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 65px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  line-height: 0.8;
+  padding-top: 50px;
+  font-family: "Montserrat", sans-serif;
+}
+header h1 span {
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  font-size: 25px;
+  line-height: 1;
+}
+header p {
+  padding-top: 30px;
+}
+
+.gallery {
+  padding: 40px 0 300px;
   position: relative;
-  background: #EEE
+  overflow: hidden;
 }
-
-.gridder-show.loading {
-  background: #EEE url("../images/loading-spin.svg") no-repeat center
+.gallery ul {
+  padding-top: 50px;
+  position: relative;
 }
-
-.gridder-content {
-  display: none
+.gallery ul li {
+  margin-bottom: 20px;
+  width: 23.2456140351%;
+  position: relative;
 }
-
-.gridder-list {
-  width: 15.83333%
-}
-
-.gridder-list:nth-child(n) {
-  margin-bottom: 1%;
-  margin-right: 1%
-}
-
-.gridder-list:nth-of-type(6n) {
-  margin-right: 0;
-  margin-bottom: 0
-}
-
-.gridder-show {
-  padding: 20px;
-  background: #EEE;
-  margin-bottom: 1%
-}
-
-.gridder-navigation .gridder-nav.disabled {
-  opacity: .5
-}
-
-.gridder-list {
-  cursor: pointer
-}
-
-.gridder-list:hover {
-  opacity: 0.8
-}
-
-.hasSelectedItem .gridder-list {
-  opacity: .5
-}
-
-.hasSelectedItem .gridder-list.selectedItem {
-  opacity: 1
-}
-
-.gridder {
-  margin: 0px;
-  padding: 0px;
-  list-style-type: none;
-  font-size: 0
-}
-
-.gridder-list,
-.gridder-show {
-  font-size: 16px;
-  border-radius:5%
-}
-
-.gridder-list {
-  display: inline-block;
-  vertical-align: top
-}
-
-.gridder-show {
+.gallery ul li a {
   display: block;
-  float: left;
+  position: relative;
   width: 100%;
-  position: relative
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+.gallery ul li a:before {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  top: 40%;
+  left: 50%;
+  margin: -14px 0 0 -16px;
+  background: url(data:image/svg+xml;utf8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3C%21--%20Generator%3A%20Adobe%20Illustrator%2017.1.0%2C%20SVG%20Export%20Plug-In%20.%20SVG%20Version%3A%206.00%20Build%200%29%20%20--%3E%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-//W3C//DTD%20SVG%201.1//EN%22%20%22http%3A//www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd%22%3E%0A%3Csvg%20version%3D%221.1%22%0A%09%20id%3D%22svg2%22%20xmlns%3Adc%3D%22http%3A//purl.org/dc/elements/1.1/%22%20xmlns%3Acc%3D%22http%3A//creativecommons.org/ns%23%22%20xmlns%3Ardf%3D%22http%3A//www.w3.org/1999/02/22-rdf-syntax-ns%23%22%20xmlns%3Asvg%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Asodipodi%3D%22http%3A//sodipodi.sourceforge.net/DTD/sodipodi-0.dtd%22%20xmlns%3Ainkscape%3D%22http%3A//www.inkscape.org/namespaces/inkscape%22%20inkscape%3Aversion%3D%220.48.4%20r9939%22%20sodipodi%3Adocname%3D%22icon-fullscreen.svg%22%0A%09%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%20960%20560%22%0A%09%20enable-background%3D%22new%200%200%20960%20560%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Csodipodi%3Anamedview%20%20borderopacity%3D%221%22%20pagecolor%3D%22%23ffffff%22%20bordercolor%3D%22%23666666%22%20objecttolerance%3D%2210%22%20gridtolerance%3D%2210%22%20guidetolerance%3D%2210%22%20showgrid%3D%22false%22%20fit-margin-top%3D%220%22%20fit-margin-left%3D%220%22%20inkscape%3Azoom%3D%227.375%22%20inkscape%3Acx%3D%22-5.1525424%22%20inkscape%3Acy%3D%2216%22%20id%3D%22namedview11%22%20inkscape%3Awindow-x%3D%22-8%22%20inkscape%3Awindow-y%3D%22-8%22%20fit-margin-right%3D%220%22%20inkscape%3Apageopacity%3D%220%22%20fit-margin-bottom%3D%220%22%20inkscape%3Awindow-width%3D%221366%22%20inkscape%3Awindow-height%3D%22706%22%20inkscape%3Awindow-maximized%3D%221%22%20inkscape%3Apageshadow%3D%222%22%20inkscape%3Acurrent-layer%3D%22svg2%22%3E%0A%09%3C/sodipodi%3Anamedview%3E%0A%3Cg%3E%0A%09%3Crect%20x%3D%22220%22%20y%3D%22260%22%20fill%3D%22%23FFFFFF%22%20width%3D%22536%22%20height%3D%2224%22/%3E%0A%3C/g%3E%0A%3Cg%3E%0A%09%3Crect%20x%3D%22476%22%20y%3D%224%22%20fill%3D%22%23FFFFFF%22%20width%3D%2224%22%20height%3D%22556%22/%3E%0A%3C/g%3E%0A%3C/svg%3E%0A) no-repeat;
+  content: "";
+  opacity: 0;
+  z-index: 1;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+.gallery ul li a:hover:before {
+  top: 50%;
+  opacity: 1;
+}
+.gallery ul li a:after {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  content: "";
+  opacity: 0;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+.gallery ul li a:hover:after {
+  opacity: 1;
 }
 
-.gridder-content {
-  display: none
+.port {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding-top: 100px;
+  background: #ffffff;
+  background-color: #fafafa;
+  z-index: 103;
+  visibility: hidden;
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+  border-bottom: 1px solid #d0d0d0;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.port img {
+  width: 50%;
+}
+.port .description {
+  float: left;
+  width: 50%;
+  max-height: 100%;
+  padding: 0 40px 40px;
+  overflow: auto;
+}
+.port h1 {
+  font-size: 35px;
+  line-height: 2.3;
+  padding: 0;
+}
+.port > * {
+  opacity: 0;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+}
+.port.item_open {
+  visibility: visible;
+  -webkit-transform: translateY(0%);
+  transform: translateY(0%);
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.port > * {
+  opacity: 1;
+  -webkit-transition-delay: 0.5s;
+  transition-delay: 0.5s;
 }
 
-.gridder-list {
-  width: 15.83333%
+.close {
+  width: 21px;
+  height: 21px;
+  background: url(data:image/svg+xml;utf8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3C%21--%20Generator%3A%20Adobe%20Illustrator%2017.1.0%2C%20SVG%20Export%20Plug-In%20.%20SVG%20Version%3A%206.00%20Build%200%29%20%20--%3E%0A%3C%21DOCTYPE%20svg%20PUBLIC%20%22-//W3C//DTD%20SVG%201.1//EN%22%20%22http%3A//www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd%22%3E%0A%3Csvg%20version%3D%221.1%22%0A%09%20id%3D%22svg2%22%20xmlns%3Adc%3D%22http%3A//purl.org/dc/elements/1.1/%22%20xmlns%3Acc%3D%22http%3A//creativecommons.org/ns%23%22%20xmlns%3Ardf%3D%22http%3A//www.w3.org/1999/02/22-rdf-syntax-ns%23%22%20xmlns%3Asvg%3D%22http%3A//www.w3.org/2000/svg%22%0A%09%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%2021%2021%22%0A%09%20enable-background%3D%22new%200%200%2021%2021%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%20id%3D%22layer1%22%20transform%3D%22translate%280%2C-1031.3622%29%22%3E%0A%09%3Cpath%20id%3D%22path2987%22%20fill%3D%22none%22%20stroke%3D%22%23000000%22%20d%3D%22M0%2C1031.4l21%2C21%22/%3E%0A%09%3Cpath%20id%3D%22path2989%22%20fill%3D%22none%22%20stroke%3D%22%23000000%22%20d%3D%22M21%2C1031.4l-21%2C21%22/%3E%0A%3C/g%3E%0A%3C/svg%3E%0A%0A) no-repeat;
+  position: absolute;
+  right: 10px;
+  top: -121px;
+  opacity: 1;
+  z-index: 1004;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
-
-.gridder-list:nth-child(n) {
-  margin-bottom: 1%;
-  margin-right: 1%
+.item_open .close {
+  opacity: 1;
+  top: 0px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-
-.gridder-list:nth-of-type(6n) {
-  margin-right: 0;
-  margin-bottom: 0
-}
-
-#content-img{
-	width: 535px;
-	height: 370px;
-	border-radius:5%
-}
-
-#list-img{
-	width: 200px;
-	height: 150px;
-	border-radius:30%
-}
-
-
-
 </style>
 
-<div class="jumbotron jumbotron-fluid bg-info mb-0">
-	<div class="container text-light">
-		<h1>안전 상비 의약품</h1>
+<header>
+	<h1>
+		Homespital <br> <span>[ 안전상비의약품 ]</span>
+	</h1>
+</header>
+
+<div id="top"></div>
+<section class="gallery">
+	<div class="row">
+		<ul>
+			<a href="#" class="close"></a>
+			<c:forEach items="${medi1 }" var="medi">
+			<li><a href="#${medi }"> 
+			<img src='<c:url value="/images/medicine/${medi }.jpg"/>' alt="">
+			</a></li>
+			</c:forEach>
+		</ul>
 	</div>
-</div>
-<div class="container py-3">
+	<!-- / row -->
 
-  <ul class="gridder">
-  	<c:forEach items="${medi1}" var="medi" varStatus="i">
-    	<li class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
-      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
-    	</li>
-  	</c:forEach>
-  	<c:forEach items="${medi2 }" var="medi" varStatus="i">
-    	<li  class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
-      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
-    	</li>
-  	</c:forEach>
-  	<c:forEach items="${medi3 }" var="medi" varStatus="i">
-    	<li  class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
-      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
-    	</li>
-  	</c:forEach>
-  	<c:forEach items="${medi4 }" var="medi" varStatus="i">
-    	<li class="gridder-list" data-griddercontent="#gridder-content-${medi}${i.index}">
-      		<img id="list-img" data-gallery-tag="해열/진통제" src='<c:url value="/images/medicine/${medi }.jpg"/>' class="img-responsive gallery-item" />
-    	</li>
-  	</c:forEach>
-  </ul>
-
-	<c:forEach items="${medi1 }" var="medi" varStatus="i">
-		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
-			<div class="row">
-				<div class="col-sm-6">
-					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
-				</div>
-				<div class="col-sm-6">
-					
-				</div>
+	<!-- Item 01 -->
+	<c:forEach items="${medi1 }" var="medi">
+	<div id="${medi }" class="port">
+		<div class="row">
+			<div class="description">
+				<h1>${medi }</h1>
+				<p>약물정보</p>
 			</div>
+			<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
 		</div>
+	</div>
 	</c:forEach>
-	<c:forEach items="${medi2 }" var="medi" varStatus="i">
-		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
-			<div class="row">
-				<div class="col-sm-6">
-					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
-				</div>
-				<div class="col-sm-6">
-					
-				</div>
-			</div>
-		</div>
-	</c:forEach>
-	<c:forEach items="${medi3 }" var="medi" varStatus="i">
-		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
-			<div class="row">
-				<div class="col-sm-6">
-					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
-				</div>
-				<div class="col-sm-6">
-					
-				</div>
-			</div>
-		</div>
-	</c:forEach>
-	<c:forEach items="${medi4 }" var="medi" varStatus="i">
-		<div id="gridder-content-${medi}${i.index}" class="gridder-content">
-			<div class="row">
-				<div class="col-sm-6">
-					<img id="content-img" src='<c:url value="/images/medicine/${medi}.jpg"/>' class="img-responsive" />
-				</div>
-				<div class="col-sm-6">
-					
-				</div>
-			</div>
-		</div>
-	</c:forEach>
-</div>
+	<!-- / row -->
+</section>
+<!-- / projects -->
 
 
 <script>
-jQuery(document).ready(function($) {
+// portfolio
+$('.gallery ul li a').click(function() {
+    var itemID = $(this).attr('href');
+    $('.gallery ul').addClass('item_open');
+    $(itemID).addClass('item_open');
+    return false;
+});
+$('.close').click(function() {
+    $('.port, .gallery ul').removeClass('item_open');
+    return false;
+});
 
-	  // Call Gridder
-	  $(".gridder").gridderExpander({
-	    scrollOffset: 60,
-	    scrollTo: "panel", // "panel" or "listitem"
-	    animationSpeed: 400,
-	    animationEasing: "easeInOutExpo",
-	    onStart: function() {
-	      console.log("Gridder Inititialized");
-	    },
-	    onExpanded: function(object) {
-	      console.log("Gridder Expanded");
-	      $(".carousel").carousel();
-	    },
-	    onChanged: function(object) {
-	      console.log("Gridder Changed");
-	    },
-	    onClosed: function() {
-	      console.log("Gridder Closed");
-	    }
-	  });
-	});
-
-	/*
-	 *  Gridder - v1.4.1
-	 *  A jQuery plugin that displays a thumbnail grid expanding preview similar to the effect seen on Google Images.
-	 *  http://www.oriongunning.com/
-	 *
-	 *  Made by Orion Gunning
-	 *  Under MIT License
-	 */
-	;
-	(function($) {
-
-	  //Ensures there will be no 'console is undefined' errors in IE
-	  window.console = window.console || (function() {
-	    var c = {};
-	    c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile = c.clear = c.exception = c.trace = c.assert = function() {};
-	    return c;
-	  })();
-
-	  /* Custom Easing */
-	  $.fn.extend($.easing, {
-	    def: "easeInOutExpo",
-	    easeInOutExpo: function(e, f, a, h, g) {
-	      if (f === 0) {
-	        return a;
-	      }
-	      if (f === g) {
-	        return a + h;
-	      }
-	      if ((f /= g / 2) < 1) {
-	        return h / 2 * Math.pow(2, 10 * (f - 1)) + a;
-	      }
-	      return h / 2 * (-Math.pow(2, -10 * --f) + 2) + a;
-	    }
-	  });
-
-	  /* KEYPRESS LEFT & RIGHT ARROW */
-	  /* This will work only if a current gridder is opened. */
-	  $(document).keydown(function(e) {
-	    var keycode = e.keyCode;
-	    var $current_gridder = $(".currentGridder");
-	    var $current_target = $current_gridder.find(".gridder-show");
-	    if ($current_gridder.length) {
-	      if (keycode === 37) {
-	        console.log("Pressed Left Arrow");
-	        $current_target.prev().prev().trigger("click");
-	        e.preventDefault();
-	      }
-	      if (keycode === 39) {
-	        console.log("Pressed Right Arrow");
-	        $current_target.next().trigger("click");
-	        e.preventDefault();
-	      }
-	    } else {
-	      console.log("No active gridder.");
-	    }
-	  });
-
-	  $.fn.gridderExpander = function(options) {
-
-	    /* GET DEFAULT OPTIONS OR USE THE ONE PASSED IN THE FUNCTION  */
-	    var settings = $.extend({}, $.fn.gridderExpander.defaults, options);
-
-	    return this.each(function() {
-
-	      var mybloc;
-	      var _this = $(this);
-	      var visible = false;
-
-	      // START CALLBACK
-	      settings.onStart(_this);
-
-	      // CLOSE FUNCTION
-	      function closeExpander(base) {
-
-	        // SCROLL TO CORRECT POSITION FIRST
-	        if (settings.scroll) {
-	          $("html, body").animate({
-	            scrollTop: base.find(".selectedItem").offset().top - settings.scrollOffset
-	          }, {
-	            duration: 200,
-	            easing: settings.animationEasing
-	          });
-	        }
-
-	        _this.removeClass("hasSelectedItem");
-
-	        // REMOVES GRIDDER EXPAND AREA
-	        visible = false;
-	        base.find(".selectedItem").removeClass("selectedItem");
-
-	        base.find(".gridder-show").slideUp(settings.animationSpeed, settings.animationEasing, function() {
-	          base.find(".gridder-show").remove();
-	          settings.onClosed(base);
-	        });
-
-	        /* REMOVE CURRENT ACTIVE GRIDDER */
-	        $(".currentGridder").removeClass("currentGridder");
-	      }
-
-	      // OPEN EXPANDER
-	      function openExpander(myself) {
-
-	        /* CURRENT ACTIVE GRIDDER */
-	        $(".currentGridder").removeClass("currentGridder");
-	        _this.addClass("currentGridder");
-
-	        /* ENSURES THE CORRECT BLOC IS ACTIVE */
-	        if (!myself.hasClass("selectedItem")) {
-	          _this.find(".selectedItem").removeClass("selectedItem");
-	          myself.addClass("selectedItem");
-	        } else {
-	          // THE SAME IS ALREADY OPEN, LET"S CLOSE IT
-	          closeExpander(_this, settings);
-	          return;
-	        }
-
-	        /* REMOVES PREVIOUS BLOC */
-	        _this.find(".gridder-show").remove();
-
-	        /* ADD CLASS TO THE GRIDDER CONTAINER
-	         * So you can apply global style when item selected. 
-	         */
-	        if (!_this.hasClass("hasSelectedItem")) {
-	          _this.addClass("hasSelectedItem");
-	        }
-
-	        /* ADD LOADING BLOC */
-	        var $htmlcontent = $("<div class=\"gridder-show loading\"></div>");
-	        mybloc = $htmlcontent.insertAfter(myself);
-
-	        /* GET CONTENT VIA AJAX OR #ID*/
-	        var thecontent = "";
-
-	        if (myself.data("griddercontent").indexOf("#") === 0) {
-
-	          // Load #ID Content
-	          thecontent = $(myself.data("griddercontent")).html();
-	          processContent(myself, thecontent);
-	        } else {
-
-	          // Load AJAX Content
-	          $.ajax({
-	            type: "POST",
-	            url: myself.data("griddercontent"),
-	            success: function(data) {
-	              thecontent = data;
-	              processContent(myself, thecontent);
-	            },
-	            error: function(request) {
-	              thecontent = request.responseText;
-	              processContent(myself, thecontent);
-	            }
-	          });
-	        }
-	      }
-
-	      // PROCESS CONTENT
-	      function processContent(myself, thecontent) {
-
-	        /* FORMAT OUTPUT */
-	        var htmlcontent = "<div class=\"gridder-padding\">";
-
-	        if (settings.showNav) {
-
-	          /* CHECK IF PREV AND NEXT BUTTON HAVE ITEMS */
-	          var prevItem = ($(".selectedItem").prev());
-	          var nextItem = ($(".selectedItem").next().next());
-
-	          htmlcontent += "<div class=\"gridder-navigation\">";
-	          htmlcontent += "<a href=\"#\" class=\"gridder-close\">" + settings.closeText + "</a>";
-	          htmlcontent += "<a href=\"#\" class=\"gridder-nav prev " + (!prevItem.length ? "disabled" : "") + "\">" + settings.prevText + "</a>";
-	          htmlcontent += "<a href=\"#\" class=\"gridder-nav next " + (!nextItem.length ? "disabled" : "") + "\">" + settings.nextText + "</a>";
-	          htmlcontent += "</div>";
-	        }
-
-	        htmlcontent += "<div class=\"gridder-expanded-content\">";
-	        htmlcontent += thecontent;
-	        htmlcontent += "</div>";
-	        htmlcontent += "</div>";
-
-	        // IF EXPANDER IS ALREADY EXPANDED 
-	        if (!visible) {
-	          mybloc.hide().append(htmlcontent).slideDown(settings.animationSpeed, settings.animationEasing, function() {
-	            visible = true;
-	            /* AFTER EXPAND CALLBACK */
-	            if ($.isFunction(settings.onContent)) {
-	              settings.onContent(mybloc);
-	            }
-	          });
-	        } else {
-	          mybloc.html(htmlcontent);
-	          mybloc.find(".gridder-padding").fadeIn(settings.animationSpeed, settings.animationEasing, function() {
-	            visible = true;
-	            /* CHANGED CALLBACK */
-	            if ($.isFunction(settings.onContent)) {
-	              settings.onContent(mybloc);
-	            }
-	          });
-	        }
-
-	        /* SCROLL TO CORRECT POSITION AFTER */
-	        if (settings.scroll) {
-	          var offset = (settings.scrollTo === "panel" ? myself.offset().top + myself.height() - settings.scrollOffset : myself.offset().top - settings.scrollOffset);
-	          $("html, body").animate({
-	            scrollTop: offset
-	          }, {
-	            duration: settings.animationSpeed,
-	            easing: settings.animationEasing
-	          });
-	        }
-
-	        /* REMOVE LOADING CLASS */
-	        mybloc.removeClass("loading");
-	      }
-
-	      /* CLICK EVENT */
-	      _this.find(".gridder-list").on("click", function(e) {
-	        e.preventDefault();
-	        var myself = $(this);
-	        openExpander(myself);
-	      });
-
-	      /* NEXT BUTTON */
-	      _this.on("click", ".gridder-nav.next", function(e) {
-	        e.preventDefault();
-	        $(this).parents(".gridder-show").next().trigger("click");
-	      });
-
-	      /* PREVIOUS BUTTON */
-	      _this.on("click", ".gridder-nav.prev", function(e) {
-	        e.preventDefault();
-	        $(this).parents(".gridder-show").prev().prev().trigger("click");
-	      });
-
-	      /* CLOSE BUTTON */
-	      _this.on("click", ".gridder-close", function(e) {
-	        e.preventDefault();
-	        closeExpander(_this);
-	      });
-	    });
-	  };
-
-	  // Default Options
-	  $.fn.gridderExpander.defaults = {
-	    scroll: true,
-	    scrollOffset: 30,
-	    scrollTo: "panel", // panel or listitem
-	    animationSpeed: 400,
-	    animationEasing: "easeInOutExpo",
-	    showNav: true,
-	    nextText: "<span class='glyphicon glyphicon-chevron-right'></span>",
-	    prevText: "<span class='glyphicon glyphicon-chevron-left'></span>",
-	    closeText: "<span class='glyphicon glyphicon-remove'></span>",
-	    onStart: function() {},
-	    onContent: function() {},
-	    onClosed: function() {}
-	  };
-
-	})(jQuery);
+$(".gallery ul li a").click(function() {
+    $('html, body').animate({
+        scrollTop: parseInt($("#top").offset().top)
+    }, 400);
+});
 </script>
-
