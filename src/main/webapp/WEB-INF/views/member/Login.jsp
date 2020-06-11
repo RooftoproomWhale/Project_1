@@ -113,7 +113,7 @@ form{
 		<div class="row main-contents bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 				<span style="width: 150px;height: 150px;align-self: center;" class="company__logo"><img style="width: 100%; height: auto;" class="img-responsive" src='<c:url value="/img/logo.png"/>' alt="로고이미지"></span></h2></span>
-				<h4 class="company_title">홈스피탈</h4>
+				<h4 class="company_title" style="color: white;">홈스피탈</h4>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
