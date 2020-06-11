@@ -1000,7 +1000,7 @@
               borderColor: "rgba(0,0,0,.09)",
               borderWidth: "1",
               backgroundColor: "rgba(0,0,0,.07)",
-              data: [22, 44, 67, 43, 76, 45, 12]
+              data: [7, 5, 4, 12, 15, 20, 22, 30, 25, 35, 40, 23]
             },
             {
               label: "This Month",
@@ -1008,7 +1008,7 @@
               borderWidth: "1",
               backgroundColor: "rgba(0, 123, 255, 0.5)",
               pointHighlightStroke: "rgba(26,179,148,1)",
-              data: [16, 32, 18, 26, 42, 33, 44]
+              data: [6, 4, 3, 15, 22, 30, 33, 36, 39, 42, 35, 30]
             }
           ]
         },
@@ -1115,11 +1115,15 @@
         type: 'pie',
         data: {
           datasets: [{
-            data: [45, 25, 20, 10],
+            data: [5, 10, 25, 20, 25, 10, 5],
             backgroundColor: [
               "rgba(0, 123, 255,0.9)",
+              "rgba(0, 123, 255,0.8)",
               "rgba(0, 123, 255,0.7)",
+              "rgba(0, 123, 255,0.6)",
               "rgba(0, 123, 255,0.5)",
+              "rgba(0, 123, 255,0.4)",
+              "rgba(0, 123, 255,0.3)",
               "rgba(0,0,0,0.07)"
             ],
             hoverBackgroundColor: [
@@ -1133,7 +1137,11 @@
           labels: [
             "10세 이하",
             "10대",
-            "20대"
+            "20대",
+            "30대",
+            "40대",
+            "50대",
+            "60세 이상"
           ]
         },
         options: {
@@ -1153,6 +1161,50 @@
   } catch (error) {
     console.log(error);
   }
+  
+  try {
+
+	    //pie chart
+	    var ctx = document.getElementById("pieChart2");
+	    if (ctx) {
+	      ctx.height = 200;
+	      var myChart = new Chart(ctx, {
+	        type: 'pie',
+	        data: {
+	          datasets: [{
+	            data: [55, 45],
+	            backgroundColor: [
+	              "rgba(0, 123, 255,0.9)",
+	              "rgba(255, 82, 122,0.7)"
+	            ],
+	            hoverBackgroundColor: [
+	              "rgba(0, 123, 255,0.9)",
+	              "rgba(255, 82, 122,0.7)"
+	            ]
+
+	          }],
+	          labels: [
+	            "남",
+	            "녀"
+	          ]
+	        },
+	        options: {
+	          legend: {
+	            position: 'top',
+	            labels: {
+	              fontFamily: 'Poppins'
+	            }
+
+	          },
+	          responsive: true
+	        }
+	      });
+	    }
+
+
+	  } catch (error) {
+	    console.log(error);
+	  }
 
   try {
 
@@ -1207,11 +1259,11 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ["Sun", "Mon", "Tu", "Wed", "Th", "Fri", "Sat"],
+          labels: ["내과", "외과", "소아과", "산부인과", "치과", "안과", "이비인후과", "비뇨기과"],
           datasets: [
             {
-              label: "My First dataset",
-              data: [40, 55, 75, 81, 56, 55, 40],
+              label: "Counts",
+              data: [40, 55, 75, 81, 56, 55, 40, 30],
               borderColor: "rgba(0, 123, 255, 0.9)",
               borderWidth: "0",
               backgroundColor: "rgba(0, 123, 255, 0.5)"

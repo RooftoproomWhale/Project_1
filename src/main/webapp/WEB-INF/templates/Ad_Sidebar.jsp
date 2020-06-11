@@ -6,7 +6,7 @@
 <!--     <div class="page-wrapper"> -->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="<c:url value='/Admin/Index.hst'/>">
+                <a href="<c:url value='/Home/ToHomePage.hst'/>">
                     <img src="<c:url value="/img/logo2.png"/>" alt="홈스피탈" />
                 </a>
             </div>
@@ -30,7 +30,7 @@
                                 <i class="fas fa-table"></i>회원 관리</a>
                         </li>
                         <li>
-                            <a href="<c:url value='/Admin/Bookings.hst'/>">
+                            <a href="<c:url value='/Admin/Appointment.hst'/>">
                                 <i class="fas fa-table"></i>예약 관리</a>
                         </li>
                         <li>

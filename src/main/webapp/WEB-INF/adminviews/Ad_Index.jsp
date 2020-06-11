@@ -131,7 +131,7 @@
                             <div class="col-xl-12">
                                 <!-- RECENT REPORT 2-->
                                 <div class="recent-report2">
-                                    <h3 class="title-3">recent reports</h3>
+                                    <h3 class="title-3">Recent Increase</h3>
                                     <div class="chart-info">
                                         <div class="chart-info__left">
                                             <div class="chart-note">
@@ -173,7 +173,7 @@
                             <div class="col-xl-6">
                             	<div class="au-card m-b-30">
                                     <div class="au-card-inner">
-                                        <h3 class="title-2 m-b-40">Line Chart</h3>
+                                        <h3 class="title-2 m-b-40">Using Times</h3>
                                         <canvas id="lineChart"></canvas>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@
                             <div class="col-xl-6">
                             	<div class="au-card m-b-30">
                                     <div class="au-card-inner">
-                                        <h3 class="title-2 m-b-40">Pie Chart</h3>
+                                        <h3 class="title-2 m-b-40">User Groups</h3>
                                         <canvas id="pieChart"></canvas>
                                     </div>
                                 </div>
