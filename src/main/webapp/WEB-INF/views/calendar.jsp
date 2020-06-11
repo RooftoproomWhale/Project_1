@@ -30,7 +30,7 @@
         defaultDate: new Date,
         
         locale:'ko',
-        navLinks: true, // can click day/week names to navigate views
+        navLinks: true,
         columnHeaderText: function(date) {
            let weekList = ["일", "월", "화", "수", "목", "금", "토"];
            return weekList[date.getDay()];
@@ -93,7 +93,7 @@
         },
 
         editable: true,
-        eventLimit: true, // allow "more" link when too many events
+        eventLimit: true,
         events:  function(info, successCallback,failureCallback) {
            $.ajax({
               url: '<c:url value="/Calendar/View.hst"/>',
