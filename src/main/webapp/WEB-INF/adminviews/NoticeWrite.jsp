@@ -18,9 +18,7 @@
 							<div class="card-body card-block">
 <!-- 								<form action="" method="post" enctype="multipart/form-data" -->
 <!-- 									class="form-horizontal"> -->
-
 									<div class="row form-group">
-									
 										<div class="col-12 col-md-12">
 											<input type="text" id="text-input" name="text-input"
 												placeholder="제목" class="form-control"> <small
@@ -47,6 +45,13 @@
 								onclick="location.href='<c:url value='/Admin/NoticeSubmit.hst'/>'">
 									<i class="fa fa-dot-circle-o"></i> 작성 </button>
 							</div>
+									<div class="">
+										<a href="<c:url value='/Homespital/Notice.hst'/>">
+										<button type="submit" class="btn btn-primary btn-sm"
+												style="position: absolute; right: 20px; bottom: 20px;">
+												<i class="fa fa-dot-circle-o"></i> 작성
+											</button></a>
+									</div>
 <!-- 								</form> -->
 							</div>
 								</div>

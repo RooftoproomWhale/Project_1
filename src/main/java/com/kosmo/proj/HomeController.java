@@ -155,6 +155,11 @@ public class HomeController {
 //	{
 //		return "NoticeDetail.tiles";
 //	}
+	@RequestMapping("/Homespital/NoticeSubmit.hst")
+	public String noticesubmit()
+	{
+		return "NoticeDetail.tiles";
+	}
 
 	//test
 	@RequestMapping("/Test/test.hst")
