@@ -47,7 +47,7 @@
         	  
          
         	 $('#menuno1').click(function() {
-        		 $('#menu').remove();
+        		 $('#calendarmenu').remove();
    				$('#divView').css('display','none')
    				
         	  $("#date").val(arg.start);
@@ -76,7 +76,7 @@
         		});  
         	 
         	 $(document).on("click","#menuno2",function(){
-        	     	$('#menu').remove();
+        	     	$('#calendarmenu').remove();
         				$('#divView').css('display','none')
         	     }); 
         },
@@ -132,7 +132,7 @@
   });
 	/*close*/
 	 $(document).on("click","#close",function(){
-            	$('#menu').remove();
+            	$('#calendarmenu').remove();
   				$('#divView').css('display','none')
             });
 	$(function() {
@@ -143,7 +143,7 @@
 		 console.log($target);
 		if(!$(e.target).hasClass("fc-row fc-week fc-widget-content fc-rigid")) {
 			if(!$('#divView').css('display','none')){
-			$('#menu1').remove();
+			$('#calendarmenu').remove();
 				$('#divView').css('display','none')
 			}
 		} 
