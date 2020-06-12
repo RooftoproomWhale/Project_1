@@ -20,7 +20,6 @@
 					<h2 style="color:blue">공지사항</h2>
 				</div>
 				<p class="lead">홈스피탈 공지사항</p>
-				<hr>
 				<table class="table table-striped" style="max-width: 1300px;">
 					<thead>
 						<tr>
@@ -98,13 +97,13 @@
 						</li>
 					</ul>
 				</div>
+				<!-- 검색용 UI --> 
 				<div style="max-width: 1300px; text-align: right;">
 <%-- 		 			 <a href="<c:url value='/Notice/QnA.hst'/>" class="btn btn-primary float-right">Q&A</a> --%>
 <%-- 		 			<a href="<c:url value='/Notice/Noticewrite.hst'/>" class="btn btn-primary float-right">글쓰기</a> --%>
 <%-- 					<a href="<c:url value='/Admin/TEST2.hst'/>" class="btn btn-primary float-right">작성</a> --%>
 				
 				</div>
-				
 				<!-- 검색용 UI -->
 				<div class="row">
 					<div class="text-center">

@@ -80,7 +80,7 @@ public class MedicineController {
 		map.put("medi3",medi3);
 		map.put("medi4",medi4);
 		
-		return "MedicineList.tiles";
+		return "/drug/Drug.tiles";
 	}
 	
 	private MedicineShapeDTO mediShape(String encodeSearch,MedicineShapeDTO dto) {

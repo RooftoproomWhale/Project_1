@@ -12,9 +12,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MailHandler {
-    private JavaMailSender mailSender;
-       private MimeMessage message;
-       private MimeMessageHelper messageHelper;
+
+	private JavaMailSender mailSender;
+    private MimeMessage message;
+    private MimeMessageHelper messageHelper;
 
 
        public MailHandler(JavaMailSender mailSender) throws MessagingException {
@@ -27,29 +28,34 @@ public class MailHandler {
        public void setSubject(String subject) throws MessagingException {
            messageHelper.setSubject(subject);
 
-           // 이메일 타이틀
+       //이메일 타이틀
        }
        public void setText(String htmlContent) throws MessagingException {
            messageHelper.setText(htmlContent, true);
 
-           //  이메일 TEXT 부분
+       //이메일 TEXT 부분
        }
        public void setFrom(String email, String name) throws UnsupportedEncodingException, MessagingException {
            messageHelper.setFrom(email, name);
-           // 보내는 사람 이메일
+
+       //보내는 사람 이메일
        }
        public void setTo(String email) throws MessagingException {
            messageHelper.setTo(email);
-           //받는 사람 이메일
+
+       //받는 사람 이메일
        }
        public void addInline(String contentId, DataSource dataSource) throws MessagingException {
            messageHelper.addInline(contentId, dataSource);
        }
        public void send() {
-           try {
-               mailSender.send(message);
-           }catch (Exception e) {
-               e.printStackTrace();
-           }
-       }
+	       try
+	       {
+	           mailSender.send(message);
+	       }
+	       catch (Exception e)
+	       {
+	           e.printStackTrace();
+	       }
+	   }
 }
