@@ -6,6 +6,103 @@
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>"
 	rel="stylesheet" type="text/css" />
 <style>
+a:hover, a:focus {
+	text-decoration: none;
+	outline: none;
+}
+
+.demo {
+	padding: 100px 0;
+}
+
+.heading-title {
+	margin-bottom: 100px;
+}
+
+#accordion .panel {
+	border: none;
+	background: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+#accordion .panel-heading {
+	padding: 0;
+}
+
+#accordion .panel-title a {
+	display: block;
+	font-size: 16px;
+	color: #9c88b9;
+	padding: 17px 40px 17px 65px;
+	background: #fff;
+	border: 1px solid #f3f3f3;
+	border-bottom: none;
+	position: relative;
+	transition: all 0.5s ease 0s;
+}
+
+#accordion .panel-title a.collapsed {
+	background: #fafafa;
+	color: #959595;
+}
+
+#accordion .panel-title a.collapsed:hover {
+	color: #9c88b9;
+}
+
+#accordion .panel-title a:after, #accordion .panel-title a.collapsed:after
+	{
+	content: "\f068";
+	font-family: FontAwesome;
+	font-size: 15px;
+	color: #fff;
+	width: 45px;
+	height: 100%;
+	line-height: 54px;
+	text-align: center;
+	position: absolute;
+	top: 0px;
+	left: -1px;
+	background: #9c88b9;
+	transition: all .2s;
+}
+
+#accordion .panel-title a.collapsed:after {
+	content: "\f067";
+	color: #959595;
+	background: #f4f4f4;
+	transition: all 0.5s ease 0s;
+}
+
+#accordion .panel-title a.collapsed:hover:after {
+	background: #9c88b9;
+	color: #fff;
+}
+
+#accordion .panel-title a:before {
+	content: "";
+	position: absolute;
+	bottom: -11px;
+	left: -1px;
+	border-bottom: 12px solid transparent;
+	border-right: 12px solid #9c88b9;
+}
+
+#accordion .panel-title a.collapsed:before {
+	display: none;
+}
+
+#accordion .panel-body {
+	font-size: 14px;
+	color: #b7b7b7;
+	padding: 0 65px 15px;
+	line-height: 20px;
+	margin-left: 12px;
+	background: #fff;
+	border: 1px solid #f3f3f3;
+	border-top: none;
+}
 /*사이드바*/
 #jquery-accordion-menu {
 	top: 81px;
@@ -47,7 +144,7 @@ body {
 </style>
 
 <head>
-<title>복약관리</title>
+<title>진료현황</title>
 </head>
 <body>
 	<div class="container-fluid">
@@ -80,122 +177,96 @@ body {
 			</div>
 			<br />
 			<div class="row">
-				<div class=" col-sm-12" style="padding-left: 70px; text-align: center;">
+				<div class=" col-sm-12" style="padding-left: 70px;">
 					<div class="alert alert-warning alert-dismissible mt-3" role="alert">
-						<strong>윤승중님</strong>의 진료예약 현황입니다. <strong>세부사항은</strong> 눌러서 확인하십시오</div>
+						<strong>윤성준님</strong>의 진료예약 현황입니다
+					</div>
 					<br />
-					<table id="report" class="table table-striped" style="max-width: 1300px;">
-						<thead>
-							<tr>
-								<th scope="col" class="" style="width: 40px; text-align: center;">번호</th>
-								<th scope="col" class="" style="width: 90px; text-align: center;">환자명</th>
-								<th scope="col" class="" style="width: 90px; text-align: center;">접수일</th>
-								<th scope="col" class="" style="width: 80px; text-align: center;">예약일</th>
-								<th scope="col" class="" style="width: 80px; text-align: center;">진료과</th>
-							</tr>
-						</thead>
-						<tr>
-							<th scope="row" class="" style="text-align: center;">10</th>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2020-06-10</td>
-							<td class="" style="text-align: center;">2020-06-10</td>
-							<td class="" style="text-align: center;">정형외과</td>
-						</tr>
-						<tr>
-							<td colspan="5">
-								<div class="form-group">
-									<label style="font-size: 0.9em; padding-top: 10px; padding-left: 10px">병원 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="병원" disabled="disabled">
-									</div>
-									<label style="font-size: 0.9em; padding-top: 10px; padding-left: 10px">부서 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="부서" disabled="disabled">
-									</div>
-									<label style="font-size: 0.9em; padding-top: 10px; padding-left: 10px">주소 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="주소" disabled="disabled">
-									</div>
-									<label style="font-size: 0.9em; padding-top: 10px; padding-left: 10px">번호 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="번호" disabled="disabled">
-									</div>
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title">
+									<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+										2020-06-02 서울 삼성병원
+									 </a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+								<div class="panel-body">
+									윤성준 정형외과 접수
 								</div>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row" class="" style="text-align: center;">9</th>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2020-06-10</td>
-							<td class="" style="text-align: center;">2020-06-10</td>
-							<td class="" style="text-align: center;">정형외과</td>
-						</tr>
-						<tr>
-							<td colspan="5">
-								<div class="form-group">
-									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">병원 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="병원" disabled="disabled">
-									</div>
-									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">부서 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="부서" disabled="disabled">
-									</div>
-									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">주소 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="주소" disabled="disabled">
-									</div>
-									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">번호 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="번호" disabled="disabled">
-									</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingTwo">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+										2020-06-04 서울 삼성병원
+									 </a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+								<div class="panel-body">
+									윤성준 신경외과 접수
 								</div>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row" class="" style="text-align: center;">8</th>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2020-06-10</td>
-							<td class="" style="text-align: center;">2020-06-10</td>
-							<td class="" style="text-align: center;">정형외과</td>
-						</tr>
-						<tr>
-							<td colspan="5">
-								<div class="form-group">
-									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">병원 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="병원" disabled="disabled">
-									</div>
-									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">부서 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="부서" disabled="disabled">
-									</div>
-									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">주소 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="주소" disabled="disabled">
-									</div>
-									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">번호 :</label>
-									<div class="col-md-11">
-										<input type="text" class="form-control" placeholder="번호" disabled="disabled">
-									</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingThree">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+										2020-06-08 서울 삼성병원
+									 </a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+								<div class="panel-body">
+									윤성준 내과 접수
 								</div>
-							</td>
-						</tr>
-					</table>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingFour">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+										2020-06-12 서울 삼성병원
+									 </a>
+								</h4>
+							</div>
+							<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+								<div class="panel-body">
+									윤성준환자 물리치료 접수
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingFive">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+										2020-06-19 서울 삼성병원
+									 </a>
+								</h4>
+							</div>
+							<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+								<div class="panel-body">
+									향균작용을 통해 각종 세균감염증을 치료
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
-<script src="<c:url value='/js/jquery-accordion-menu.js'/>"
-	type="text/javascript"></script>
+<script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
 			return (a.textContent || a.innerText || "").toUpperCase().indexOf(
 					m[3].toUpperCase()) >= 0;
 		};
-		function filterList(header, list) { 
+		function filterList(header, list) {
 
 			var form = $("<form>").attr({
 				"class" : "filterform",
@@ -239,20 +310,5 @@ body {
 			$(this).addClass("active");
 		})
 	})
-</script>
-<script>
-	$(document).ready(function() {
-
-		$("#report tr:odd").addClass("odd");
-		$("#report tr:not(.odd)").hide();
-		$("#report tr:first-child").show(); //열머리글 보여주기
-
-		$("#report tr.odd").click(function() {
-			$(this).next("tr").toggle();
-			$(this).find(".arrow").toggleClass("up");
-
-		});
-
-	});
 </script>
 </html>
