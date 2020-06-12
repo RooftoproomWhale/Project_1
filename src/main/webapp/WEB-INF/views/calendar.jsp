@@ -2,286 +2,73 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- 캘린더 필요 -->
-<link href='<c:url value="/calendar/core/main.css"/>' rel='stylesheet' />
-<link href='<c:url value="/calendar/daygrid/main.css"/>' rel='stylesheet' />
-<link href='<c:url value="/calendar/timegrid/main.css"/>' rel='stylesheet' />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src='<c:url value="/calendar/core/main.js"/>'></script>
-<script src='<c:url value="/calendar/interaction/main.js"/>'></script>
-<script src='<c:url value="/calendar/daygrid/main.js"/>'></script>
-<script src='<c:url value="/calendar/timegrid/main.js"/>'></script>
-<!-- 휴지통, 예약스케쥴 드래그 잠금,예약모달,삭제,id부여  만들기-->
 
 
-<script>
-	$('.fc-bg').remove();
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
- 
-        plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
-      header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        defaultDate: new Date,
-        locale:'ko',
-        navLinks: true,
-        columnHeaderText: function(date) {
-           let weekList = ["일", "월", "화", "수", "목", "금", "토"];
-           return weekList[date.getDay()];
-        },
-        selectable: true,
-        selectMirror: true,
-        select: function(arg) {
-        	console.log(arg);
-        		  var divTop = arg.jsEvent.clientY - 40; 
-        	  var divLeft = arg.jsEvent.clientX; 
-        	  var serial = $(this).attr("serial"); 
-        	  var idx = $(this).attr("idx"); 
-        	  $('#divView').empty().append('<div style="position:absolute;top:5px;right:5px;"id="calendarmenu"> </div><br><input class="btn" type="button" id="menuno1" value="복용약 등록"/><BR><input class="btn" type="button" id="menuno2" value="예약하기"/>'); $('#divView').css({ "top": divTop ,"left": divLeft , "position": "absolute" }).show(); 
-        	  
-         
-        	 $('#menuno1').click(function() {
-        		 $('#calendarmenu').remove();
-   				$('#divView').css('display','none')
-   				var dates=new Date(arg.end);
-   				var Dateone =  moment(arg.start).format('YYYY-MM-DD')+"~"+moment(arg.end).format('YYYY-MM-DD');
-   				
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FullCalendar Example</title>
+    <link rel="shortcut icon" href="<c:url value='/calendar/image/favicon.ico'/>">
 
-        	  $("#date").val(Dateone);
-            $("#createEventModal").modal("show");
-               $('#submitButton').click(function() {
-               var title= $('#title1').val();
-               Dateone=$('#date').val();
-               var datesta = Dateone.split('~');
-                if (title) {
-            calendar.addEvent({
-              title: title,
-              start: datesta[0],
-              end: datesta[1],
-              allDay: arg.allDay
-            })
-          }
-                close();
-           	
-                $("#createEventModal").modal("hide");
-                })
-                  $('#close').click(function() {
-                	  calendarId.destroy();
-                	  close();
-                         $("#createEventModal").modal("hide");
-                  })
-          calendar.unselect();
-      
-        		});  
-        	 
-        	 $(document).on("click","#menuno2",function(){
-        	     	$('#calendarmenu').remove();
-        				$('#divView').css('display','none')
-        	     }); 
-        },
-        eventClick:function(event) {
-      
-           if(event.event.backgroundColor=='#E5D85C'){
-      
-        	   $("#createEventModal2").modal("show");
-           }
-           else{ 
+    <link rel="stylesheet" href="<c:url value='/calendar/vendor/css/fullcalendar.min.css'/>" />
 
-        	   $("#createEventModal3").modal("show");
-           }
-        },
- 
-        editable: true,
-        eventLimit: true,
-        events:  function(info, successCallback,failureCallback) {
-           $.ajax({
-              url: '<c:url value="/Calendar/View.hst"/>',
-              type: 'POST',
-              dataType:'json',
-              data:{
-                 start:moment(info.startStr).format('YYYY-MM-DD'),
-                 end:moment(info.endStr).format('YYYY-MM-DD'),
-              },
-              success: function (data) {
-            		
-                 var events=[];
-                 $.each(data,function(index,valeus){
-                	if(data[index].color=="#E5D85C"){
-                		 events.push({
-                             title: data[index].title,
-                             start: data[index].start,
-                             end:data[index].end,
-              				color:data[index].color,
-              				resourceEditable: true	
+    <link rel="stylesheet" href="<c:url value='/calendar/vendor/css/bootstrap.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/calendar/vendor/css/select2.min.css' />"/>
+    <link rel="stylesheet" href="<c:url value='/calendar/vendor/css/bootstrap-datetimepicker.min.css'/>"/>
 
-                             });
-           
-                	}else{
-                 events.push({
-                    title: data[index].title,
-                    start: data[index].start,
-                    end:data[index].end,
-     				color:data[index].color,
-                    });
-                	}
-               
-                 })
-                 successCallback(events);
-              },
-                 errorr:function(status, request, error){
-                 alert("에러");
-                 }//eroorr
-                 });//ajax
-         
-        } 
+    <link rel="stylesheet" href="<c:url value='https://fonts.googleapis.com/css?family=Open+Sans:400,500,600'/>"/>
+    <link rel="stylesheet" href="<c:url value='https://fonts.googleapis.com/icon?family=Material+Icons'/>"/>
+<link rel="stylesheet" href="<c:url value='/calendar/css/main.css'/>"/>
    
-    });
-   
-    calendar.render();
-  });
-	/*close*/
-	 $(document).on("click","#close",function(){
-            	$('#calendarmenu').remove();
-  				$('#divView').css('display','none')
-            });
-	$(function() {
-	
-	
-	 $('html').click(function(e) {
-		 var $target = $(e.target);
-	
-		if(!$(e.target).hasClass("fc-row fc-week fc-widget-content fc-rigid")) {
-			if(!$('#divView').css('display','none')){
-			$('#calendarmenu').remove();
-				$('#divView').css('display','none')
-			}
-		} 
-	 });
-	})
-	function close() {
-	     $('#title1').val("");
-      	  $('#date').val("");
-      	$('#medicinecontent').val("");
-	}
-</script>
-<style>
-	
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-#divView { position:absolute; display:none;z-index: 9999; }
-#menuno1,#menuno2{background: #FF8383;color: white;width: 100%}
-  #calendar {
+<style>  
+#calendar {
   padding-top: 95px;
     max-width: 900px;
     margin: 0 auto;
   }
-.modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 9999; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            text-align: center;
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%; /* Could be more or less, depending on screen size */                          
-        }
-         .modal-contentView {
-         	position:fixed;
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 130%; /* Could be more or less, depending on screen size */                          
-        }
-        .modal-dialog {z-index: 1050;}
-        .view{left:-100px;top:-100px}
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-</style>
+  .Viewsds{
+  top:100px
+  ;left:115px;
+  }
+  .Views{
+  width:60%
+  }
+  .View{
+  width: 135%
+  }</style>
+</head>
 
 
-  <div id='calendar' style="margin-bottom: 50px;">
-  </div>
-  <!-- 복용중인 약 등록 -->
-<div id="createEventModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
-                <h4>복용중인 약 등록</h4>
-            </div>
-            <div id="modalBody" class="modal-body">
-               <div class="form-group">
-                    <input class="form-control" type="text" id="title1"  placeholder="약 이름" >
-                </div>
+    <div class="container">
 
-                <div class="form-group form-inline">
-                    <div class="input-group date" data-provide="datepicker">
-                        <input type="text" class="form-control" placeholder="" id="date" readonly >
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar" id="datepicker"></span>
-                        </div>
-                    </div>
-                </div>
-<div class="form-group form-inline">
-                    
-                </div>
-                
-                <div class="form-group">
-                    <textarea class="form-control" type="text" id="medicinecontent" placeholder="내용"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true" id="close">Cancel</button>
-                <button type="submit" class="btn btn-primary" id="submitButton">Save</button>
-            </div>
+        <!-- 일자 클릭시 메뉴오픈 -->
+        <div id="contextMenu" class="dropdown clearfix">
+            <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
+                style="display:block;position:static;margin-bottom:5px;">
+                <li><a tabindex="-1" href="#">병원예약</a></li>
+                <li><a tabindex="-1" href="#">복용약등록</a></li>  
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
+            </ul>
         </div>
-    </div>
-</div>
-<!-- 예약상세 페이지 -->
-<div id="createEventModal2" class="modal fade">
-    <div class="modal-dialog" style="left: 80px;">
-        <div class="modal-contentView" style="width: 80%">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
-                <h4>예약 상세페이지</h4>
-            </div>
-            <div id="modalBody" class="modal-body">
-               <div class="form-group">
-                   <table class="table table-bordered" style="text-align: center;">
+
+        <div id="wrapper">
+            <div id="loading"></div>
+            <div id="calendar"></div>
+        </div>
+        <!--병원예약정보-->
+      
+        <div class="modal fade" tabindex="-1" role="dialog" id="eventhosModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+         <table class="table table-bordered" style="text-align: center;">
   <thead>
     <tr>
       <td scope="col">병원명</td>
@@ -310,27 +97,28 @@
  <tr><td>의사명</td><td>홍길동</td></tr>
   </tbody>
 </table>
-                </div>
+                    </div>
+                    
+                    <div class="modal-footer modalBtnContainer-modifyEvent">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                          <button type="button" class="btn btn-danger" id="deleteEvent">예약취소</button>
+                        <button type="button" class="btn btn-danger" id="updateEvent1">예약변경</button>
 
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true" id="close">Cancel</button>
-                <button type="submit" class="btn btn-primary" id="submitButton">예약변경</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 복욕중인 약 상세페이지 -->
-<div id="createEventModal3" class="modal fade">
-    <div class="modal-dialog view">
-        <div class="modal-contentView">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
-                <h4 style="text-align: center;">복용중인 약 상세보기</h4>
-            </div>
-            <div id="modalBody" class="modal-body">
-               <div class="form-group">
-              		<table class="table table-bordered" style="text-align: center;">
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+  <!-- 복용약 상세보기MODAL -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="eventdrugModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content View">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+         	<table class="table table-bordered" style="text-align: center;">
   <thead>
     <tr>
       <th scope="col">제품명</th>
@@ -339,14 +127,14 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">복용기간</th>
-      <td>2020-06-10~2020-06-12</td>
-      <th scope="row">효능 · 효과</th>
-      <td>통증 및 염증 완화 및 살균:치은염, 구내염, 발치 전·후</td>
+      <th scope="row" style="line-height: 54px">복용기간</th>
+      <td  style="line-height: 44px">2020-06-10~2020-06-12</td>
+      <th scope="row" style="line-height: 54px">효능 · 효과</th>
+      <td  style="line-height: 44px">통증 및 염증 완화 및 살균:치은염, 구내염, 발치 전·후</td>
     </tr>
     <tr >
-      <th scope="row" style="line-height: 37px">용법·용량<br/></th>
-      <td colspan="3">1회 15mL 1일 2~3회 가글하여 사용한다.<br/>최대 5~7일간 사용하며, 그 이상 사용 시 의사와 상의한다.</td>
+      <th scope="row" style="line-height: 54px">용법·용량<br/></th>
+      <td colspan="3" >1회 15mL 1일 2~3회 가글하여 사용한다.<br/>최대 5~7일간 사용하며, 그 이상 사용 시 의사와 상의한다.</td>
     </tr>
     <tr>
       <th class="text-center" scope="row" colspan="5">주의사항</th>
@@ -378,17 +166,184 @@
     </tr>
   </tbody>
 </table>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true" id="close">Cancel</button>
-                <button type="submit" class="btn btn-primary" id="submitButton">수정</button>
-            </div>
-        </div>
-        </div>
-    </div>
-</div>
-<div id="divView" class="areg"></div>
+                    </div>
+                    
+                    <div class="modal-footer modalBtnContainer-modifyEvent">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                        <button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
+                        <button type="button" class="btn btn-primary" id="updateEvent2">수정</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!-- 복용약 추가 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="eventdrugModaladd">
+            <div class="modal-dialog Viewsds" role="document">
+                <div class="modal-content Views">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4>복용약 추가</h4>
+                    </div>
+                    <div class="modal-body">
+ <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-title">약이름</label>
+                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                    required="required" />
+                            </div>
+                        </div>
 
-   <script src='<c:url value="/js/bootstrap.min.js"/>'></script>
+                   <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-start">시작</label>
+                                <input class="inputModal" type="text" name="edit-start" id="edit-start" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-end">끝</label>
+                                <input class="inputModal" type="text" name="edit-end" id="edit-end" />
+                            </div>
+                        </div>
+						 <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-type">구분</label>
+                                <select class="inputModal" type="text" name="edit-type" id="edit-type">
+                                    <option value="복용약등록">복용약등록</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                <div class="form-group">
+                    <textarea class="form-control" type="text" id="medicinecontent" placeholder="내용"></textarea>
+                </div>
+                             
+        
+            
+                    </div>
+                    <div class="modal-footer modalBtnContainer-addEvent">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-primary" id="save-event1">저장</button>
+                    </div>
+                   
+                      </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <!--복용약추가 끝 -->
+        <!-- 일정 추가 MODAL -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
+            <div class="modal-dialog Viewsds" role="document">
+                <div class="modal-content Views">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+
+                                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-title">병원이름</label>
+                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                    required="required" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-start">예약날짜</label>
+                                <input class="inputModal" type="text" name="edit-start" id="edit-start" />
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-type">구분</label>
+                                <select class="inputModal" type="text" name="edit-type" id="edit-type">
+                                    <option value="병원예약">병원예약</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-desc">진료과</label>
+                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                    required="required" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-desc">의사명</label>
+                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                    required="required" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer modalBtnContainer-addEvent">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-primary" id="save-event2">저장</button>
+                    </div>
+                    
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">필터</h3>
+            </div>
+
+            <div class="panel-body">
+
+                <div class="col-lg-6">
+                    <label for="calendar_view">구분별</label>
+                    <div class="input-group">
+                        <select class="filter" id="type_filter" multiple="multiple">
+                            <option value="병원예약">병원예약</option>
+                            <option value="복용약등록">복용약등록</option>
+                      
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <label for="calendar_view">등록자별</label>
+                    <div class="input-group">
+                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="가길동"
+                                checked>가길동</label>
+                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="나길동"
+                                checked>나길동</label>
+                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="다길동"
+                                checked>다길동</label>
+                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="라길동"
+                                checked>라길동</label>
+                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="마길동"
+                                checked>마길동</label>
+                    </div>
+                </div>
+
+            </div>
+        
+        <!-- /.filter panel -->
+    </div>
+    <!-- /.container -->
+
+<script src='<c:url value="/calendar/vendor/js/moment.min.js"/>'></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src='<c:url value="/calendar/vendor/js/fullcalendar.min.js"/>'></script>
+
+<script src='<c:url value="/calendar/vendor/js/ko.js"/>'></script>
+<script src='<c:url value="/calendar/vendor/js/select2.min.js"/>'></script>
+<script src='<c:url value="/calendar/vendor/js/bootstrap-datetimepicker.min.js"/>'></script>
+<script src='<c:url value="/calendar/js/main.js"/>'></script>
+<script src='<c:url value="/calendar/js/addEvent.js"/>'></script>
+<script src='<c:url value="/calendar/js/editEvent.js"/>'></script>
+<script src='<c:url value="/calendar/js/etcSetting.js"/>'></script>
+
+
 
 

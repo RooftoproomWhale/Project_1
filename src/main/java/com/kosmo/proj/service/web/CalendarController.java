@@ -23,8 +23,8 @@ public class CalendarController {
 		List<CalendarVO> list = new Vector<CalendarVO>();
 
 		HashMap<String, CalendarVO> javaMap = new HashMap<String, CalendarVO>();
-		list.add(new CalendarVO("가그린목액", "2020-06-08", "2020-06-12", null, null, null, "false"));
-		list.add(new CalendarVO("예약", "2020-06-08 13:00:00", "2020-06-08", null, "#E5D85C",null, "false"));
+		list.add(new CalendarVO(1,"Kim","가그린목액","예약","2020-06-08", "2020-06-12", null, null,"false"));
+		list.add(new CalendarVO(2,"Kim","병원예약","예약","2020-06-08", "2020-06-12", null, "#E5D85C","false"));
 		return list;
 	}
 
@@ -32,5 +32,6 @@ public class CalendarController {
 	public String calendar() {
 		return "calendar.tiles";
 	}
+	
 
 }
