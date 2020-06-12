@@ -5,9 +5,6 @@
 <html>
 <head>
 <style>
-/********************************
-* FAQ THEME 6
-********************************/
 .jag-faq-theme6 .jag-faq-wrapper{
 	box-shadow: none;
 }
@@ -62,10 +59,6 @@
 .jag-faq-theme6.jag-faq-theme-blue .jag-faq-title{
 	border-color: #00aac4;
 }
-
-</style>
-<meta charset="UTF-8">
-<style>
 #footer{ 
 	position: absolute; 
 	width:100%; 
@@ -75,6 +68,7 @@
 	height: 150px
 } 
 </style>
+<meta charset="UTF-8">
 <title>FAQ</title>
 </head>
 <body>
@@ -115,13 +109,23 @@
 								<div class="panel-body">
 									회원 정보는 회원정보수정 페이지에서 수정하실 수 있습니다.
 								</div>
-							</div>
+							</div> 
 						</div>
 						<div class="panel jag-faq-wrapper">
 							<div class="jag-faq-title" data-toggle="collapse" data-parent="#jag-theme-6" href="#collapse6_4">
-								<i class="jag-faq-icon-2 fa fa-plus pull-right"></i> 고객센터의 영업시간은 언제인가요
+								<i class="jag-faq-icon-2 fa fa-plus pull-right"></i> 회원 정보 수정은 어디에서 할 수 있나요?
 							</div>
 							<div id="collapse6_4" class="panel-collapse collapse">
+								<div class="panel-body">
+									회원 정보는 회원정보수정 페이지에서 수정하실 수 있습니다.
+								</div>
+							</div>
+						</div>
+						<div class="panel jag-faq-wrapper">
+							<div class="jag-faq-title" data-toggle="collapse" data-parent="#jag-theme-6" href="#collapse6_5">
+								<i class="jag-faq-icon-2 fa fa-plus pull-right"></i> 고객센터의 영업시간은 언제인가요
+							</div>
+							<div id="collapse6_5" class="panel-collapse collapse">
 								<div class="panel-body">
 									고객센터의 영업시간은 <strong>09:00 ~ 18:00</strong> 입니다.
 								</div>

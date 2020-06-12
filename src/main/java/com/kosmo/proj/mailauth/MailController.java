@@ -18,8 +18,8 @@ public class MailController {
 	@RequestMapping(value = "/mailauth/testMail.hst", method = RequestMethod.POST)
 	public String testMailPost() throws Exception{
 		System.out.println("테스트 메일 컨트롤러");
-		mailHandler.setSubject("테스트 메일입니다.");
-		mailHandler.setText("sdfsfsd");
+		mailHandler.setSubject("홈스피탈 인증번호 입니다");
+		mailHandler.setText("745198");
 		mailHandler.setFrom("united0226@gmail.com", "윤승중");
 		mailHandler.setTo("united0226@naver.com");
 		mailHandler.send();

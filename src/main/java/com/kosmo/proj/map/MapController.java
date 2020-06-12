@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
 import com.kosmo.proj.service.MemberService;
+import com.kosmo.proj.service.PharmacyDTO;
 
 @Controller
 public class MapController {
@@ -51,14 +52,16 @@ public class MapController {
 		{
 			list = mapService.searchHospitalList(map);
 			for (int i = 0; i < list.size(); i++) {
-				ja.add(list.get(i).get("HOSP_NAME").toString() + "("  + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+//				ja.add(list.get(i).get("HOSP_NAME").toString() + "("  + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+				ja.add(list.get(i).get("HOSP_NAME").toString());
 			}
 		}
 		else if(apiStatus.equals("1") || apiStatus.equals("2"))
 		{
 			list = mapService.searchPharmacyList(map);
 			for (int i = 0; i < list.size(); i++) {
-				ja.add(list.get(i).get("PHAR_NAME").toString() + "(" + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+//				ja.add(list.get(i).get("PHAR_NAME").toString() + "(" + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+				ja.add(list.get(i).get("PHAR_NAME").toString());
 			}
 		}
 		else
@@ -108,14 +111,13 @@ public class MapController {
 	@RequestMapping(value="/Homespital/Map/hospitalList.hst",produces = "text/html; charset=UTF-8")
 	public String hospitalList(@RequestParam Map map)
 	{
-		List<HospitalDTO> list = mapService.selectHospitalByXY(map);
+		List<Map> list = mapService.selectList(map);
 		
-		
-		
-		System.out.println(net.sf.json.JSONArray.fromObject(list));
+		String search_keyword = map.get("search_keyword").toString();
 
+		System.out.println(JSONArray.toJSONString(list));
 		
-		return net.sf.json.JSONArray.fromObject(list).toString();
+		return JSONArray.toJSONString(list);
 	}
 	
 	@ResponseBody
@@ -170,7 +172,7 @@ public class MapController {
 		
 		return net.sf.json.JSONArray.fromObject(list).toString();
 	}
-	
+	/*
 	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/Pharmacy.hst",produces = "text/html; charset=UTF-8")
 	public String pharmacyMap(@RequestParam Map map)
@@ -193,6 +195,16 @@ public class MapController {
         System.out.println(jsonObj);
         
 		return jsonObj.toString();
+	}*/
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/Pharmacy.hst",produces = "text/html; charset=UTF-8")
+	public String pharmacyMap(@RequestParam Map map)
+	{
+		List<PharmacyDTO> list = mapService.selectPharmacyByXY(map);
+
+		System.out.println(net.sf.json.JSONArray.fromObject(list));
+		
+		return net.sf.json.JSONArray.fromObject(list).toString();
 	}
 	
 	@ResponseBody

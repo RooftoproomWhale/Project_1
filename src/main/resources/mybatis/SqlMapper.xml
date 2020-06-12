@@ -44,7 +44,7 @@
 		SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
 	<select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT hosp_name,address FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
+		SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
 
 	<select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
@@ -66,10 +66,17 @@
 		SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
 	</select>
 	<select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT phar_name,address FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
+		SELECT distinct phar_name FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
 	</select>
 
 	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM pharmacy WHERE address = #{address}
+	</select>
+	<select id="pharmacySelectByXY" parameterType="java.util.Map" resultType="pharmacyDTO">
+		SELECT *
+		FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
+		AS distanceByXY, p.*
+		FROM pharmacy p) disData
+		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
 	</select>
 </mapper>
