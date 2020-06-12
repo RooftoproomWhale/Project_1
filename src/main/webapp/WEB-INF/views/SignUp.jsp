@@ -750,7 +750,7 @@ width: 100%;
 				<input class="ab" type="checkbox" id="check_3" name="" /> 위의 약관에 동의 합니다.<br />
 			</p>
 			<p style="padding-top:5px; color: red">
-			 	<input class="check-all" type="checkbox" id="check_3" name="all" /> 전체 동의 시 체크<br />
+			 	<input class="check-all" type="checkbox" id="check_3" name="all" /> 전체 동의 시 체크<br /> 
 			</p>
 	
 <!-- 			<input type="checkbox" id="check_authHos" name="" /> 병원 제휴 시 체크<br /> -->
