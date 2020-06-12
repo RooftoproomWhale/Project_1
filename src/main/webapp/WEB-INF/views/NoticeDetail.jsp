@@ -12,8 +12,7 @@
 			<p style="min-height: 300px;">내용~</p>
 			<div class="page-header board-util-text color-red"></div>
 			<div class="col-md-3 col-md-offset-9">
-				<button class="btn btn-default"
-					href="<c:url value="/Homespital/Notice.hst"/>">목록</button>
+				<button class="btn btn-default" href="<c:url value="/Homespital/Notice.hst"/>">목록</button>
 				<button class="btn btn-default">수정</button>
 				<button class="btn btn-default">삭제</button>
 			</div>

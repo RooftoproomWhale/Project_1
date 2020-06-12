@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>마이페이지</title>
-
+<html>
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>"
 	rel="stylesheet" type="text/css" />
-
-<style type="text/css">
+<style>
+/*사이드바*/
 #jquery-accordion-menu {
 	top: 81px;
 }
@@ -52,6 +46,8 @@ body {
 }
 </style>
 
+<head>
+<title>복약관리</title>
 </head>
 <body>
 	<div class="container-fluid">
@@ -75,64 +71,124 @@ body {
 				</ul>
 			</div>
 		</div>
-		
-		<div class="col-md-10">
-			<div class="row" style="padding-left: 60px; padding-top: 100px">
+		<div class="col-md-8">
+			<div class="row" style="padding-top: 100px; padding-left: 70px;">
 				<div class="page-header">
-					<h2 style="color: blue">진료예약</h2>
+					<h2 style="color: blue">진료현황</h2>
 				</div>
-				<p class="lead">홈스피탈 진료예약 현황</p>
-				<div style="max-width: 1300px; text-align: right;">
-					<a href="./boardWrite.html" class="btn btn-primary float-right">글쓰기</a>
+				<p style="color: red;">3세 이하 유아는 사용이 권장되지 않으며 임부는 반드시 의사와 사전에 상의하고 사용하도록 합니다</p>
+			</div>
+			<br />
+			<div class="row">
+				<div class=" col-sm-12" style="padding-left: 70px; text-align: center;">
+					<div class="alert alert-warning alert-dismissible mt-3" role="alert">
+						<strong>윤승중님</strong>의 진료예약 현황입니다. <strong>세부사항은</strong> 눌러서 확인하십시오</div>
+					<br />
+					<table id="report" class="table table-striped" style="max-width: 1300px;">
+						<thead>
+							<tr>
+								<th scope="col" class="" style="width: 40px; text-align: center;">번호</th>
+								<th scope="col" class="" style="width: 90px; text-align: center;">환자명</th>
+								<th scope="col" class="" style="width: 90px; text-align: center;">접수일</th>
+								<th scope="col" class="" style="width: 80px; text-align: center;">예약일</th>
+								<th scope="col" class="" style="width: 80px; text-align: center;">진료과</th>
+							</tr>
+						</thead>
+						<tr>
+							<th scope="row" class="" style="text-align: center;">10</th>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2020-06-10</td>
+							<td class="" style="text-align: center;">2020-06-10</td>
+							<td class="" style="text-align: center;">정형외과</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<div class="form-group">
+									<label style="font-size: 0.9em; padding-top: 10px; padding-left: 10px">병원 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="병원" disabled="disabled">
+									</div>
+									<label style="font-size: 0.9em; padding-top: 10px; padding-left: 10px">부서 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="부서" disabled="disabled">
+									</div>
+									<label style="font-size: 0.9em; padding-top: 10px; padding-left: 10px">주소 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="주소" disabled="disabled">
+									</div>
+									<label style="font-size: 0.9em; padding-top: 10px; padding-left: 10px">번호 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="번호" disabled="disabled">
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row" class="" style="text-align: center;">9</th>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2020-06-10</td>
+							<td class="" style="text-align: center;">2020-06-10</td>
+							<td class="" style="text-align: center;">정형외과</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<div class="form-group">
+									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">병원 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="병원" disabled="disabled">
+									</div>
+									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">부서 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="부서" disabled="disabled">
+									</div>
+									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">주소 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="주소" disabled="disabled">
+									</div>
+									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">번호 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="번호" disabled="disabled">
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row" class="" style="text-align: center;">8</th>
+							<td class="" style="text-align: center;">윤승중</td>
+							<td class="" style="text-align: center;">2020-06-10</td>
+							<td class="" style="text-align: center;">2020-06-10</td>
+							<td class="" style="text-align: center;">정형외과</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<div class="form-group">
+									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">병원 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="병원" disabled="disabled">
+									</div>
+									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">부서 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="부서" disabled="disabled">
+									</div>
+									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">주소 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="주소" disabled="disabled">
+									</div>
+									<label style="font-size: 0.8em; padding-top: 10px; padding-left: 10px">번호 :</label>
+									<div class="col-md-11">
+										<input type="text" class="form-control" placeholder="번호" disabled="disabled">
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>
 				</div>
-				<hr>
-				<table class="table table-striped" style="max-width: 1300px;">
-					<thead>
-						<tr>
-							<th scope="col" class="mobile" style="width: 55px; text-align: center;">번호</th>
-							<th scope="col" class="mobile" style="text-align: center;">병원이름</th>
-							<th scope="col" class="mobile" style="width: 80px; text-align: center;">예약자</th>
-							<th scope="col" class="mobile" style="width: 120px; text-align: center;">예약날짜</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row" class="mobile" style="text-align: center;">5</th>
-							<td><a href="./boardView.html" style="color: #000000;">홈스피탈</a></td>
-							<td class="mobile" style="text-align: center;">김길동</td>
-							<td class="mobile" style="text-align: center;">2020-06-05</td>
-						</tr>
-						<tr>
-							<th scope="row" class="mobile" style="text-align: center;">4</th>
-							<td><a href="./boardView.html" style="color: #000000;">홈스피탈</a></td>
-							<td class="mobile" style="text-align: center;">김길동</td>
-							<td class="mobile" style="text-align: center;">2020-06-05</td>
-						</tr>
-						<tr>
-							<th scope="row" class="mobile" style="text-align: center;">3</th>
-							<td><a href="./boardView.html" style="color: #000000;">홈스피탈</a></td>
-							<td class="mobile" style="text-align: center;">김길동</td>
-							<td class="mobile" style="text-align: center;">2020-06-05</td>
-						</tr>
-						<tr>
-							<th class="mobile" scope="row" style="text-align: center;">2</th>
-							<td><a href="./boardView.html" style="color: #000000;">홈스피탈</a></td>
-							<td class="mobile" style="text-align: center;">김길동</td>
-							<td class="mobile" style="text-align: center;">2020-06-05</td>
-						</tr>
-						<tr>
-							<th class="mobile" scope="row" style="text-align: center;">1</th>
-							<td><a href="./boardView.html" style="color: #000000;">홈스피탈.</a></td>
-							<td class="mobile" style="text-align: center;">김길동</td>
-							<td class="mobile" style="text-align: center;">2020-06-05</td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
 		</div>
 	</div>
 </body>
-<script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/js/jquery-accordion-menu.js'/>"
+	type="text/javascript"></script>
 <script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
@@ -183,5 +239,20 @@ body {
 			$(this).addClass("active");
 		})
 	})
+</script>
+<script>
+	$(document).ready(function() {
+
+		$("#report tr:odd").addClass("odd");
+		$("#report tr:not(.odd)").hide();
+		$("#report tr:first-child").show(); //열머리글 보여주기
+
+		$("#report tr.odd").click(function() {
+			$(this).next("tr").toggle();
+			$(this).find(".arrow").toggleClass("up");
+
+		});
+
+	});
 </script>
 </html>
