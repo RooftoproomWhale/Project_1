@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link
 	href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap"
-	rel="stylesheet">
+	rel="stylesheet"/>
 <style>
 
 #console, #cons {
@@ -119,6 +119,7 @@ button {
 }
 
 .right-bar {
+	padding-top:150px;
 	border-left: 1px solid #e3e7f7;
 	display: flex;
 	flex-direction: column;
@@ -531,34 +532,7 @@ body {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
-			<div id="jquery-accordion-menu" class="jquery-accordion-menu">
-				<div class="col-md-8 col-md-offset-2">
-					<span><img style="width: 150px; height: 150px;"
-						class="img-responsive" src='<c:url value="/img/logo.png"/>'
-						alt="로고이미지" /></span>
-				</div>
-				<ul id="demo-list">
-					<li class="active"><a
-						href="<c:url value='/mypage/mypage.hst'/>"><i
-							class="fa fa-home"></i>MYPAGE</a></li>
-					<li><a href="#"><i class="fa fa-file-image-o"></i>김길동님</a><li><a href="#"><i class="fa fa-cog"></i>개인정보 관리</a>
-						<ul class="submenu">
-						<li><a href="<c:url value='/mypage/mypage.hst'/>">내 정보 보기</a></li>
-						<li><a href="<c:url value='/mypage/ChangeMember.hst'/>">내
-								정보 수정</a></li>
-						<li><a href="<c:url value='/mypage/unmember.hst'/>">회원 탈퇴</a></li>
-					</ul></li>
-					
-				
-					<li><a href="<c:url value='/mypage/administration.hst'/>"><i
-							class="fa fa-suitcase"></i>복약 관리</a>
-				<li><a href="<c:url value='/mypage/ReservationList.hst'/>"><i
-							class="fa fa-envelope"></i>진료예약 현황</a></li>
-				<li><a href="<c:url value='/mypage/Disease.hst'/>"><i
-							class="fa fa-envelope"></i>내 질병 관리</a></li>
-			</ul>
 		</div>
-	</div>
 	<div class="task-manager col-md-7">
 		<div class="page-content">
 			<div class="header">내 질병 관리</div>
