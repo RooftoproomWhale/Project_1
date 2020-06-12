@@ -52,6 +52,18 @@
 		<!--만약 /WEB-INF/밑에 jsp가 있다면 <put-attribute name="body" value="/WEB-INF/{1}.jsp"/> 
 			컨틀로러 클래스에서는 return "/WEB-INF/Board/List.tiles"인경우 /WEB-INF생략 -->
 	</definition>
+	
+	<definition name="*/*.no_tiles" extends="no_layouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+
+	</definition>
+
+
+	<definition name="*/*/*.no_tiles" extends="no_layouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+
+	</definition>
+	
 	<!-- 챗봇 제외 끝 -->
 
 </tiles-definitions>

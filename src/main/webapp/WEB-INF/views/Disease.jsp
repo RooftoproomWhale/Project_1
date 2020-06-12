@@ -382,7 +382,48 @@ body {
 							var size = disease.length;
 							if ($(".task-item").is(":checked")) {
 
+<<<<<<< HEAD
+		$(function() {
+			$(".task-item").change(function(){
+				 var txt = $(this).next().text();
+	             var disease=$('.task-name');
+	             var taskbox=$('.task-box');
+	             var size = disease.length;
+		        if($(".task-item").is(":checked")){
+		        	
+		             var is =true;
+		              
+		   
+		               if(size==0){
+		            	   $("<div class='task-box yellow'><div class='description-task'><div class='task-name'>"+txt+"</div></div><div class='more-button'></div><div class='members'></div></div>").appendTo('.right-content');
+						 }
+		               else{
+		               		for (i=0;i<size;i++){
+		            	   
+		                		if(disease.eq(i).text()==txt){
+		                		is = false;
+		                  		}
+		              		}
+		               		if(is){
+		            	  			 $("<div class='task-box yellow'><div class='description-task'><div class='task-name'>"+txt+"</div></div><div class='more-button'></div><div class='members'></div></div>").appendTo('.right-content');
+		               	  }
+		               }
+		        	}
+		        else{
+		
+		        	for(i=0;i <size;i++){
+		        		if(txt == disease.eq(i).text()){
+		        			taskbox.eq(i).remove()
+		        		}
+		        		
+		        	}
+		        	
+	    		}
+		    });
+		
+=======
 								var is = true;
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 
 								if (size == 0) {
 									$(

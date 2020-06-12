@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	.map_wrap {margin-top: 80px;height: 100%;}
+	.map_wrap {position: relative;height: 100%;}
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
@@ -29,7 +29,7 @@
 	.search 
 	{
 		position: absolute;
-	    top: 150px;
+	    top: 100px;
 	    left: 16px;
 	    display: flex;
 	    justify-content: space-between;
@@ -67,7 +67,7 @@
 	    outline: 0;
 	}
 	.menu_wrap{left: 13px;bottom: 19px;text-align: center;position: absolute;z-index: 2;}
-	.info_wrap{position: absolute;top: 125px;left: 0;bottom: 0;width: 390px;z-index: 200;background: #fff;flex-direction: column;}
+	.info_wrap{position: absolute;top: 80px;left: 0;bottom: 0;width: 390px;z-index: 200;background: #fff;flex-direction: column;}
 	.info-toggle{position: absolute;top: 50%;left: 0;left: 390px;z-index: 20;}
 	.info_btn_toggle{
 		position: absolute;
@@ -222,7 +222,7 @@
 		<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 	</div>
 	<div class="load_wrap">
-		<img class="load_img" src="<c:url value='/images/map/mask_loader.gif'/>">
+		<img class="load_img" style="vertical-align: bottom;" src="<c:url value='/images/map/mask_loader.gif'/>">
 	</div>
 	<div class="search">
 		<input class="searchInput" id="searchAddress" placeholder="지도상 현재 위치의 주소가 표시됩니다" disabled>
@@ -345,7 +345,7 @@
 			<img src="<c:url value='/images/map/corona_image/corona_button.png'/>" style="width: 34px;height: 34px;">
 		</button>
 	</div>
-	<div id="map" style="top: 40px;width: 100%; height: 93%;position: relative;overflow: hidden;"></div>
+	<div id="map" style="width: 100%; height: 100%;position: relative;overflow: hidden;"></div>
 </div>
 <div class="modal fade" id="reservation-modal">
 	<div class="modal-dialog">

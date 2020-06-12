@@ -9,6 +9,8 @@ import com.google.cloud.vision.v1.Feature.Type;
 import com.google.cloud.vision.v1.Image;
 import com.google.cloud.vision.v1.ImageAnnotatorClient;
 import com.google.protobuf.ByteString;
+
+import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,42 +18,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleVision {
-  public static void main(String... args) throws Exception {
-    // Instantiates a client
-    try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
-    
-      // The path to the image file to annotate
-      String fileName = "C://Users//kosmo_27//Desktop//KakaoTalk_20200609_183840004.jpg";
+	public static void main(String... args) throws Exception {
 
-      // Reads the image file into memory
-      Path path = Paths.get(fileName);
-      byte[] data = Files.readAllBytes(path);
-      ByteString imgBytes = ByteString.copyFrom(data);
+		String fileName = "C://Users//kosmo_27//Desktop//KakaoTalk_20200609_183840004.jpg";
 
-      // Builds the image annotation request
-      List<AnnotateImageRequest> requests = new ArrayList<>();
-      Image img = Image.newBuilder().setContent(imgBytes).build();
-      Feature feat = Feature.newBuilder().setType(Type.LABEL_DETECTION).build();
-      AnnotateImageRequest request =
-          AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
-      requests.add(request);
+		List<AnnotateImageRequest> requests = new ArrayList<>();
 
-      // Performs label detection on the image file
-      BatchAnnotateImagesResponse response = vision.batchAnnotateImages(requests);
-      List<AnnotateImageResponse> responses = response.getResponsesList();
+		ByteString imgBytes = ByteString.readFrom(new FileInputStream(fileName));
 
-      for (AnnotateImageResponse res : responses) {
-        if (res.hasError()) {
-          System.out.printf("Error: %s\n", res.getError().getMessage());
-          return;
-        }
+		Image img = Image.newBuilder().setContent(imgBytes).build();
+		Feature feat = Feature.newBuilder().setType(Type.TEXT_DETECTION).build();
+		AnnotateImageRequest request = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+		requests.add(request);
 
-        for (EntityAnnotation annotation : res.getLabelAnnotationsList()) {
-          annotation
-              .getAllFields()
-              .forEach((k, v) -> System.out.printf("%s : %s\n", k, v.toString()));
-        }
-      }
-    }
-  }
+		try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
+			BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
+			List<AnnotateImageResponse> responses = response.getResponsesList();
+
+			for (AnnotateImageResponse res : responses) {
+				if (res.hasError()) {
+					System.out.printf("Error: %s\n", res.getError().getMessage());
+					return;
+				}
+
+				// For full list of available annotations, see http://g.co/cloud/vision/docs
+				for (EntityAnnotation annotation : res.getTextAnnotationsList()) {
+					System.out.printf("Text: %s\n", annotation.getDescription());
+					System.out.printf("Position : %s\n", annotation.getBoundingPoly());
+				}
+			}
+		}
+	}
 }
