@@ -3,7 +3,6 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
-
 <tiles-definitions>
 
 	<!-- template에 최상위 페이지명 -->
@@ -14,9 +13,6 @@
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/templates/Footer.jsp" />
 	</definition>
-
-
-
 
 	<definition name="*.tiles" extends="layouts">
 		<!-- 와일드 카드 * 이 {1}에 대입됨 -->
@@ -56,5 +52,6 @@
 		<!--만약 /WEB-INF/밑에 jsp가 있다면 <put-attribute name="body" value="/WEB-INF/{1}.jsp"/> 
 			컨틀로러 클래스에서는 return "/WEB-INF/Board/List.tiles"인경우 /WEB-INF생략 -->
 	</definition>
+	<!-- 챗봇 제외 끝 -->
 
 </tiles-definitions>
