@@ -26,7 +26,7 @@ padding-top:100px;
 width: auto;
 height: auto;
 position: absolute;
-left: 300px;
+
 
 }
 .Hover{
@@ -49,11 +49,13 @@ border: 1px solid #58a4f5;
 		
 	//}
 </script>
+	
+
+<div class="container" id="Health_Info">
 	<a href="<c:url value="http://ncov.mohw.go.kr/guidelineList.do?brdId=6&brdGubun=61"/>">
 	<img id="banner" src="<c:url value="/images/healthimg/사회적 거리두기.png"/>" style="position: relative;">
 	</a>
-
-<div class="container" id="Health_Info">
+	
 	<div class="row" >
 		<div class="col-md-8 col-md-offset-2" style="padding-top:50px;"id="basic1">
 			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
