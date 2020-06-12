@@ -68,10 +68,10 @@ body {
 							<li><a href="<c:url value='/mypage/mypage.hst'/>">내 정보 보기</a></li>
 							<li><a href="<c:url value='/mypage/ChangeMember.hst'/>">내 정보 수정</a></li>
 							<li><a href="<c:url value='/mypage/unmember.hst'/>">회원 탈퇴</a></li>
-						</ul></li> 
+						</ul></li>
 					<li><a href="<c:url value='/mypage/administration.hst'/>"><i class="fa fa-suitcase"></i>복약 관리</a>
 					<li><a href="<c:url value='/mypage/ReservationList.hst'/>"><i class="fa fa-envelope"></i>진료예약 현황</a></li>
-					<li><a href="<c:url value='/mypage/ChangeMember.hst'/>"><i class="fa fa-envelope"></i>내 질병 관리</a></li>
+					<li><a href="<c:url value='/mypage/Disease.hst'/>"><i class="fa fa-envelope"></i>내 질병 관리</a></li>
 				</ul>
 			</div>
 		</div>
