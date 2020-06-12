@@ -195,7 +195,7 @@ body {
 			return (a.textContent || a.innerText || "").toUpperCase().indexOf(
 					m[3].toUpperCase()) >= 0;
 		};
-		function filterList(header, list) {
+		function filterList(header, list) { 
 
 			var form = $("<form>").attr({
 				"class" : "filterform",

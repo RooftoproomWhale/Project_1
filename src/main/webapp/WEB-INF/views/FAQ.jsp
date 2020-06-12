@@ -109,7 +109,7 @@
 								<div class="panel-body">
 									회원 정보는 회원정보수정 페이지에서 수정하실 수 있습니다.
 								</div>
-							</div>
+							</div> 
 						</div>
 						<div class="panel jag-faq-wrapper">
 							<div class="jag-faq-title" data-toggle="collapse" data-parent="#jag-theme-6" href="#collapse6_4">

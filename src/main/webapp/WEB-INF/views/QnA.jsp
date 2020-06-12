@@ -14,7 +14,7 @@
 	background-color: #474747;
 	height: 150px
 }
-</style>
+</style> 
 <title>Q&A</title>
 </head>
 <body>
