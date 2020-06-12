@@ -59,23 +59,23 @@ border: 1px solid #58a4f5;
 	<div class="row" >
 		<div class="col-md-8 col-md-offset-2" style="padding-top:50px;"id="basic1">
 			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
-			<div class="thumbnail col-md-4">
+			<div class="thumbnail col-md-3">
 				<img src="<c:url value="/images/healthimg/감기.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
 					<h3>감기 관련</h3>
 				</div>
 			</div><!-- 썸네일 -->
 			</a>
-			<a href="<c:url value="/"/>">
-			<div class="thumbnail col-md-4">
+			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
+			<div class="thumbnail col-md-3">
 				<img src="<c:url value="/images/healthimg/간.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
 					<h3>간 질환</h3>
 				</div>
 			</div>
 			</a>
-			<a href="<c:url value="/"/>">
-			<div class="thumbnail col-md-4">
+			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
+			<div class="thumbnail col-md-3">
 				<img src="<c:url value="/images/healthimg/신장.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
 					<h3>신장 질환</h3>
@@ -87,24 +87,24 @@ border: 1px solid #58a4f5;
 		
 		<div class="row" >
 			<div class="col-md-8 col-md-offset-2"id="basic2" >
-		<a href="<c:url value="/"/>">
-		<div class="thumbnail col-md-4" style="position: relative;left: 10px;">
+		<a href="<c:url value="/Homespital/Health_detail.hst"/>">
+		<div class="thumbnail col-md-3" style="position: relative;left: 10px;">
 				<img src="<c:url value="/images/healthimg//대장.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
 					<h3>대장 질환</h3>
 				</div>	
 			</div><!-- 썸네일 -->
 			</a>
-			<a href="<c:url value="/"/>">
-			<div class="thumbnail col-md-4" style="position: relative;left: 10px;">
+			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
+			<div class="thumbnail col-md-3" style="position: relative;left: 10px;">
 				<img src="<c:url value="/images/healthimg//비만.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
 					<h3>비만/과체중</h3>
 				</div>
 			</div>
 			</a>
-			<a href="<c:url value="/"/>">
-			<div class="thumbnail col-md-4" style="position: relative;left: 10px;">
+			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
+			<div class="thumbnail col-md-3" style="position: relative;left: 10px;">
 				<img src="<c:url value="/images/healthimg//피부.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
 					<h3>피부</h3>
