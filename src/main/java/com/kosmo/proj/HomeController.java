@@ -10,8 +10,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -35,7 +33,7 @@ import com.kosmo.proj.service.MemberService;
  */
 @Controller
 public class HomeController {
-	
+
 	@Resource(name = "memberService")
 	private MemberService memberService;
 
@@ -55,34 +53,34 @@ public class HomeController {
 	{
 		return "index.tiles";
 	}
-	
+
 	@RequestMapping(value = "/News",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String news(@RequestParam Map map)
 	{
 		String clientId = map.get("clientId").toString(); // 애플리케이션 클라이언트 아이디
         String clientSecret = map.get("clientSecret").toString();  // 애플리케이션 클라이언트 시크릿
-        
+
         String text = "";
-        try 
+        try
         {
         	text = URLEncoder.encode("코로나 속보", "utf-8");
-		} 
-        catch (UnsupportedEncodingException e) 
+		}
+        catch (UnsupportedEncodingException e)
         {
 			e.printStackTrace();
 		}
 //        String apiUrl = "https://openapi.naver.com/v1/search/news.json?query="+ text;
-        
-        String apiUrl = "https://openapi.naver.com/v1/search/news.json?query="+ text + "&display=12";
-        
+
+        String apiUrl = "https://openapi.naver.com/v1/search/news.json?query="+ text + "&display=10";
+
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
-        
+
         String responseBody = get(apiUrl, requestHeaders);
         System.out.println(responseBody);
-        
+
 		return responseBody;
 	}
 	private static String get(String apiUrl, Map<String, String> requestHeaders) {
@@ -106,7 +104,7 @@ public class HomeController {
             con.disconnect(); // Connection을 재활용할 필요가 없는 프로세스일 경우
         }
     }
-	
+
 	private static HttpURLConnection connect(String apiUrl) {
         try {
             URL url = new URL(apiUrl);
@@ -117,7 +115,7 @@ public class HomeController {
             throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
         }
     }
-	
+
 	private static String readBody(InputStream body) {
         InputStreamReader streamReader = new InputStreamReader(body, StandardCharsets.UTF_8);
 
@@ -134,7 +132,7 @@ public class HomeController {
             throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
         }
     }
-	
+
 	@RequestMapping("/Covid/status.hst")
 	public String covid()
 	{
@@ -165,9 +163,9 @@ public class HomeController {
 	@RequestMapping("/Test/test.hst")
 	public String test()
 	{
-		return "test.ad_tiles";
+		return "Hospage_Main.hos_tiles";
 	}
-	
+
 //	마이바티스test
 	@RequestMapping("/Member/select.hst")
 	public String memberSelect(Map map, Model model)
@@ -187,6 +185,6 @@ public class HomeController {
 		System.out.println("이메일: "+email + " 비밀번호:"+pwd + " 이름: "+ name + " 성별: "+ gender +" 나이: "+ age +" 번호: "+ tel +" 키: "+ height +" 몸무게: "+ weight);
 		return "SignUp.tiles";
 	}
-	
-	
+
+
 }

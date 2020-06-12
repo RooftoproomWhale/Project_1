@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
+import com.kosmo.proj.service.PharmacyDTO;
 
 @Service("mapService")
 public class MapServiceImpl implements MapService{
@@ -62,6 +63,12 @@ public class MapServiceImpl implements MapService{
 	public List<HospitalDTO> selectHospitalByXY(Map map) {
 		// TODO Auto-generated method stub
 		return dao.selectHospitalByXY(map);
+	}
+
+	@Override
+	public List<PharmacyDTO> selectPharmacyByXY(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectPharmacyByXY(map);
 	}
 
 }

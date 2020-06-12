@@ -25,6 +25,7 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.24/themes/base/jquery-ui.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,6 +38,8 @@
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) 및 js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
 <%-- <script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script> --%>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+
 
 <script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value="/js/bootstrap.min.js"/>"></script> --%>
@@ -46,6 +49,7 @@
 <script type="text/javascript" src="<c:url value='/js/contact_me.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/main.js'/>"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+<%--<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>--%>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.css'/>">
@@ -81,13 +85,9 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href='<c:url value="/Homespital/Notice.hst"/>'>Notice</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" aria-expanded="false"> Services <span
-						class="caret"></span></a>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Services <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국 찾기</a></li>
-						<li class="divider"></li>
-						<li><a href='<c:url value="/Homespital/Management.hst"/>'>복약 관리</a></li>
 						<li class="divider"></li>
 						<li><a href='<c:url value="/Homespital/MedicineForm.hst"/>'>안전상비의약품</a></li>
 						<li class="divider"></li>
@@ -98,8 +98,7 @@
 					</ul></li>
 
 				<c:if test="${USER == NULL}" var="result">
-					<li><a href="<c:url value='/User/Login.hst'/>"
-						class="page-scroll">Login</a></li>
+					<li><a href="<c:url value='/User/Login.hst'/>" class="page-scroll">Login</a></li>
 					<li><a href="<c:url value='/Account/SignForm.hst'/>">SignUp</a></li>
 				</c:if>
 				<c:if test="${!result }">
@@ -107,7 +106,9 @@
 					<li><a href="<c:url value='/Account/ToMypage.hst'/>">MyPage</a></li>
 				</c:if>
 					<li><a href="<c:url value='/Admin/Index.hst'/>">Admin</a></li>
-<%-- 					<li><a href="<c:url value='/Admin/Test.hst'/>">Test</a></li> --%>
+					<li><a href="<c:url value='/Notice/FAQ.hst'/>">FAQ</a></li>
+				<!-- 				<li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
+					<li><a href="<c:url value='/Test/test.hst'/>">Test</a></li>
 			</ul>
 		</div>
 

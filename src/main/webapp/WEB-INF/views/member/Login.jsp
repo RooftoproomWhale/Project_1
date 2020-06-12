@@ -6,7 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <script type="text/javascript" src="js/jquery.test.js"></script>
-<script src='<c:url value="/js/kakao.js"/>'></script>
+
 
 <style>
 body{
@@ -113,7 +113,7 @@ form{
 		<div class="row main-contents bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 				<span style="width: 150px;height: 150px;align-self: center;" class="company__logo"><img style="width: 100%; height: auto;" class="img-responsive" src='<c:url value="/img/logo.png"/>' alt="로고이미지"></span></h2></span>
-				<h4 class="company_title">홈스피탈</h4>
+				<h4 class="company_title" style="color: white;">홈스피탈</h4>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
@@ -144,45 +144,44 @@ form{
 					</div>
 					</div>
 					<div class="hr-sect">or</div>
-					<div class="row">
-                        <ul class="list-unstyled list-social">
-                            <li style="display: inline;padding-right: 70px">
-                                <div style="display: inline;" id="naver_id_login"></div>
-                            </li>
-                            <li style="display: inline;padding-right: 70px">
-                                <a id="kakao" href="javascript:Kakao.Auth.login()">
-                                    <img width="60" src='<c:url value="/images/snslogo/kakao.png"/>' alt="카카오 로그인">
-		                        </a>
-                            </li>
-                            <li style="display: inline;">
-                                <a id="facebook" href="javascript:FB.login()">
-                                   <img width="60" src='<c:url value="/images/snslogo/facebook.png"/>' alt="페이스북 로그인">
-		                        </a>
-                            </li>
-                        </ul>
-                    </div>
+					<div class="row" style="padding-bottom: 15px;">
+						<div class="col-md-offset-2 col-md-8">
+							<div class="col-md-4 col-xs-6">
+								<div style="display: inline;" id="naver_id_login"></div>
+							</div>
+							<div class="col-md-4 col-xs-6">
+								<a id="kakao" href="#"> <img width="60"
+									src='<c:url value="/images/snslogo/kakao.png"/>' alt="카카오 로그인">
+								</a>
+							</div>
+							<div class="col-md-4 col-xs-6">
+								<a id="facebook" href="javascript:FB.login()"> <img width="60"
+									src='<c:url value="/images/snslogo/facebook.png"/>' alt="페이스북 로그인">
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 <script>
-	function login(){
+	function login() {
 		var id = $('#id');
 		var pass = $('#pass');
-		if($.trim(id.val()) == '') {
+		if ($.trim(id.val()) == '') {
 			alert('아이디를 입력해 주세요.');
 			id.focus();
 			return;
 		}
-		if($.trim(pass.val()) == '') {
+		if ($.trim(pass.val()) == '') {
 			alert('비밀번호를 입력해 주세요.');
 			pass.focus();
 			return;
 		}
-		
+
 		$('#login').submit();
 	}
-
 </script>
 	
 	
@@ -206,7 +205,7 @@ form{
 
 	})
 </script>
-
+<script type="text/javascript" src='<c:url value="/js/kakao.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/js/naver_login.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/js/facebook_login.js"/>'></script>
 

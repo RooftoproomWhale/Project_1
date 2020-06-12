@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 /*custom font*/
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Montserrat); 
 
 /*basic reset*/
 * {margin: 0; padding: 0;}
@@ -221,6 +221,35 @@ width: 100%;
       var current_fs, next_fs, previous_fs; //필드
       var left, opacity, scale; //애니매이션 필드 셋 속성
       var animating; //빠른 멀티 클릭시 방지를 위한 플래그
+      
+      $("#sendButton").on('click',function(){
+      	alert("홈스피탈 서비스 인증 번호 해당 메일로 발송하였습니다")
+      	$.ajax({
+      		type:'post',
+      		url:'/proj/mailauth/testMail.hst',
+      		data:'',
+      		success:function(result){
+      			
+      		}
+      	})
+      })
+      
+      $("#checkButton").on('click',function(){
+      	alert("인증이 완료 되었습니다")
+      	$.ajax({
+      		type:'post',
+      		url:'/mailauth/emailConfirm.hst',
+      		data:'',
+      		success:function(result){
+      			
+      		}
+      	})
+      })
+      $( document ).ready( function() {
+        $( '.check-all' ).click( function() {
+          $( '.ab' ).prop( 'checked', this.checked );
+        } );
+      } );
 	
       $(".next").click(
             function() {
@@ -633,6 +662,7 @@ width: 100%;
             }
         }).open();
     }
+    
 </script>
 
   <!-- progressbar -->
@@ -707,18 +737,22 @@ width: 100%;
 			<h4 class="scheme-g">서비스 이용 약관</h4>
 			<textarea name="chart" style="font-size: 1em;" disabled="disabled"><%=buff1 %></textarea>
 			<p>
-				<input type="checkbox" id="check_1" name="" /> 위의 약관에 동의 합니다.<br />
-			</p>
+				<input class="ab" type="checkbox" id="check_1" name="" /> 위의 약관에 동의 합니다.
+			</p><br/>
 			<h4 class="scheme-g">개인정보 이용 약관</h4>
 			<textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff2 %></textarea>
 			<p>
-				<input type="checkbox" id="check_2" name="" /> 위의 약관에 동의 합니다.<br />
-			</p>
+				<input class="ab" type="checkbox" id="check_2" name="" /> 위의 약관에 동의 합니다.<br />
+			</p><br/>
 			<h4 class="scheme-g">위치기반서비스 이용 약관</h4>
 			<textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff3 %></textarea>
 			<p>
-				<input type="checkbox" id="check_3" name="" /> 위의 약관에 동의 합니다.<br />
+				<input class="ab" type="checkbox" id="check_3" name="" /> 위의 약관에 동의 합니다.<br />
 			</p>
+			<p style="padding-top:5px; color: red">
+			 	<input class="check-all" type="checkbox" id="check_3" name="all" /> 전체 동의 시 체크<br /> 
+			</p>
+	
 <!-- 			<input type="checkbox" id="check_authHos" name="" /> 병원 제휴 시 체크<br /> -->
 			<input type="button" id="authHos" class="action-button" value="병원 제휴" />
 			<input type="button" name="nextBtn" class="nextBtn action-button" value="일반회원" />
@@ -732,13 +766,13 @@ width: 100%;
 						<input type="text" id="email" placeholder="이메일">
 					</div>
 					<div class="col-md-2">
-						<input type="button" class="btn btn-success" value="이메일인증" onclick="location.href='<c:url value='/mailauth/testMail.hst'/>'">
+						<input type="button" style="cursor: pointer" id="sendButton" class="btn btn-success" value="이메일인증"/>
 					</div>
 					<div class="col-md-8">
-						<input type="password" name="auth" placeholder="인증번호 입력" /> 
+						<input type="text" name="auth"  placeholder="인증번호 입력" /> 
 					</div>
 					<div class="col-md-2">
-						<input type="button" class="btn btn-primary" value=" 확인   " onclick="location.href='<c:url value='/mailauth/register.hst'/>'">
+						<input type="button" class="btn btn-primary" id="checkButton" value=" 확인   ">
 					</div>
 					<div class="col-md-12">
 						<input type="password" name="pass" placeholder="비밀번호" /> 
@@ -858,15 +892,32 @@ width: 100%;
 		<fieldset>
 			<h1 class="fs-title">병원 제휴</h1>
 			<h3 class="fs-subtitle">병원을 선택해주세요</h3>
-			<div class="row">
-				<div class="col-md-6" style="">
-					<input type="text" placeholder="주소를 입력하세요">
+			<div class="row" style="padding-left:65px">
+				<div class="col-md-6">
+					<input type="text" placeholder="병원명을 입력하세요">
 				</div>
-				<div class="col-md-2">
-					<input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기" class="btn btn-primary">
+				<div class="col-md-4">
+					<input type="button" data-toggle="modal" data-target="#regi-modal" value="병원 찾기" class="btn btn-primary">
 				</div>
 			</div>
-			<textarea name="hoslist1">병원 예시 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</textarea>
+			   <div class="form-group">
+                    <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="병원" disabled="disabled">
+                    </div>
+                    <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">부서 :</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="부서" disabled="disabled">
+                    </div>
+                    <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">주소 :</label>
+                    <div class="col-md-10">
+                    	 <input type="text" class="form-control" placeholder="주소" disabled="disabled">
+                    </div>
+                    <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">번호 :</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="번호" disabled="disabled">
+                    </div>
+                </div>
 			<div class="row">
 				<div class="col-md-12">
 					<input type="checkbox" id="symptom" name="symptom" /> 위의 병원이 맞으시면 체크 후 가입 버튼을 눌러주세요
@@ -875,5 +926,61 @@ width: 100%;
 			<input type="button" id="auth_prev" class="action-button" value="이전" />
 			<input type="button" name="signupBtn" class="action-button" value="회원가입" />
 		</fieldset>
+		<div class="modal fade" id="regi-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2>제휴회원 병원 찾기</h2>
+					</div>
+					<div class="modal-body">
+						<div class="input-group">
+							<input name="q" type="text" class="form-control" />
+							<div class="input-group-addon">
+								<span class="glyphicon glyphicon-search" onclick="document.mysearchbar.submit()"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-11" style="font-size: 1.2em; padding-left:70px;">
+						<table class="table">
+							<tbody>
+								<tr onclick="javascript:alert('test')">
+									<td>삼성병원</td>
+									<td>신경외과</td>
+									<td>화곡동</td>
+									<td>02-0000-0000</td>
+								</tr>
+								<tr>
+									<td>현대병원</td>
+									<td>신경외과</td>
+									<td>도곡동</td>
+									<td>02-0000-0000</td>
+								</tr>
+								<tr>
+									<td>기아병원</td>
+									<td>신경외과</td>
+									<td>역삼동</td>
+									<td>02-0000-0000</td>
+								</tr>
+								<tr>
+									<td>기아병원</td>
+									<td>신경외과</td>
+									<td>역삼동</td>
+									<td>02-0000-0000</td>
+								</tr>
+								<tr>
+									<td>기아병원</td>
+									<td>신경외과</td>
+									<td>역삼동</td>
+									<td>02-0000-0000</td>
+								</tr>
+							</tbody>
+						</table>	
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-info" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </form>

@@ -36,7 +36,15 @@
   }
   .View{
   width: 135%
-  }</style>
+  }
+  .Viewdialog{
+  top:150px;
+  left:20px;
+  }
+  Viewdialogs{
+  left:-50px;
+  }
+  </style>
 </head>
 
 
@@ -60,7 +68,7 @@
         <!--병원예약정보-->
       
         <div class="modal fade" tabindex="-1" role="dialog" id="eventhosModal">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog Viewdialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -110,7 +118,7 @@
         </div><!-- /.modal -->
   <!-- 복용약 상세보기MODAL -->
         <div class="modal fade" tabindex="-1" role="dialog" id="eventdrugModal">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog Viewdialogs" role="document">
                 <div class="modal-content View">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
