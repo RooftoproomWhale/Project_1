@@ -52,14 +52,16 @@ public class MapController {
 		{
 			list = mapService.searchHospitalList(map);
 			for (int i = 0; i < list.size(); i++) {
-				ja.add(list.get(i).get("HOSP_NAME").toString() + "("  + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+//				ja.add(list.get(i).get("HOSP_NAME").toString() + "("  + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+				ja.add(list.get(i).get("HOSP_NAME").toString());
 			}
 		}
 		else if(apiStatus.equals("1") || apiStatus.equals("2"))
 		{
 			list = mapService.searchPharmacyList(map);
 			for (int i = 0; i < list.size(); i++) {
-				ja.add(list.get(i).get("PHAR_NAME").toString() + "(" + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+//				ja.add(list.get(i).get("PHAR_NAME").toString() + "(" + list.get(i).get("ADDRESS").toString().substring(0, 2)+ ")");
+				ja.add(list.get(i).get("PHAR_NAME").toString());
 			}
 		}
 		else
@@ -109,14 +111,13 @@ public class MapController {
 	@RequestMapping(value="/Homespital/Map/hospitalList.hst",produces = "text/html; charset=UTF-8")
 	public String hospitalList(@RequestParam Map map)
 	{
-		List<HospitalDTO> list = mapService.selectHospitalByXY(map);
+		List<Map> list = mapService.selectList(map);
 		
-		
-		
-		System.out.println(net.sf.json.JSONArray.fromObject(list));
+		String search_keyword = map.get("search_keyword").toString();
 
+		System.out.println(JSONArray.toJSONString(list));
 		
-		return net.sf.json.JSONArray.fromObject(list).toString();
+		return JSONArray.toJSONString(list);
 	}
 	
 	@ResponseBody

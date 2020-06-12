@@ -17,7 +17,15 @@
     .info .link {color: #5085BB;}
     .modal { position: absolute; top: 30%;}
 	.body_title {font-size: 24px;font-weight: bold;}
-	.load_wrap {position: absolute; top: 50%; left: 50%; z-index: 1231234;transform: translate(-50%, -50%);display: flex;flex-direction: column;}
+	.load_wrap {
+		position: absolute; 
+		width: 100%;
+	    height: 100%;
+	    line-height: 30;
+	    text-align: center;
+	    background-color: rgba( 255, 255, 255, 0.5 );
+		z-index: 1231234;
+	}
 	.search {position: absolute;top:120px;left: 16px;z-index: 2;}
 	.map_button{position: absolute;bottom: 32px;right: 8px;z-index: 2;flex-direction: column;}
 	.current_refresh
@@ -380,7 +388,7 @@
 						response($.map(data, function(item){
 							return {
 								label: item,
-								value: item.substring(0,item.indexOf("("))
+								value: item
 							}
 						}));
 					},
@@ -394,6 +402,7 @@
 			select : function(evt, ui) {
 	            console.log("전체 data: " + JSON.stringify(ui));
 	            console.log(ui.item.label);
+	            $('.search_keyword_input').val(ui.item.label);
 	            $('.search_keyword_submit').trigger('click');
 	            /* console.log("db Index : " + ui.item.idx);
 	            console.log("검색 데이터 : " + ui.item.value); */
@@ -598,7 +607,13 @@
 						
 						kakao.maps.event.addListener(marker, 'click', function(){
 							console.log("modal",item,i)
-							
+							console.log($('.info_wrap').hasClass('warp_invisible'));
+							console.log($('.info-toggle').hasClass('left_toggle'));
+							if($('.info-toggle').hasClass('left_toggle')==true)
+							{
+								$('.info_wrap').removeClass('warp_invisible');
+								$('.info-toggle').removeClass('left_toggle');
+							}
 						});
 						
 						kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -669,13 +684,13 @@
 						
 						var marker = new kakao.maps.Marker({
 							//map : map,
-							position : new kakao.maps.LatLng(item.latitude, item.longitude),
+							position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
 							image :  new kakao.maps.MarkerImage(
 									"<c:url value='/images/map/pharmacy_image/pharmacy.png'/>",
 							        new kakao.maps.Size(35, 35))
 						});
 						
-						var iwContent = '<div style="padding:5px;">'+item.dutyName+'</div>';
+						var iwContent = '<div style="padding:5px;">'+item.phar_name+'</div>';
 			            
 						var infowindow = new kakao.maps.InfoWindow({
 						    content : iwContent
@@ -707,7 +722,7 @@
 						
 						if(!isSame)
 						{
-							console.log("마커배열길이",jsonData.count,markers.length);
+							console.log("마커배열길이",jsonData.length,markers.length);
 							//if(data.count < markers.length)
 							marker.setMap(map);
 							console.log("중복이 아닌 마커",marker.getPosition());
@@ -1125,7 +1140,7 @@
 			        
 			        map.setCenter(coords);
 			        
-			        //loadMapApi(coords.getLat(),coords.getLng(),apiStatus);
+			        
 			        
 			        $.ajax({
 						url:"<c:url value='/Homespital/Map/detailView.hst'/>",
@@ -1139,6 +1154,7 @@
 						complete: function () {
 							console.log("complete");
 							FunLoadingBarEnd();
+							loadMapApi(coords.getLat(),coords.getLng(),apiStatus);
 						},
 						success:function(data){
 							var jsonData = JSON.parse(data);
@@ -1183,12 +1199,12 @@
 										'</div>'+
 									'</div>';
 							$('.search_list').html(item);
-							loadMapApi(coords.getLat(),coords.getLng(),apiStatus);
 						},
 						error:function(e){
 							
 						}
 					});
+			        
 				}
 			});
 		}
@@ -1223,11 +1239,11 @@
 		function FunLoadingBarStart() {
 			console.log($('.load_wrap'),$('.load_img'));
 			
-			$('.load_img').show();
+			$('.load_wrap').show();
 		}
 		function FunLoadingBarEnd() {
 			
-			$('.load_img').hide();
+			$('.load_wrap').hide();
 			
 		}
 		

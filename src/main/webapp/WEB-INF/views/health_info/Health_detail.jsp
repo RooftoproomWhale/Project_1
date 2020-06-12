@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-#Health_Detail{
+#Health_Title{
 animation: fadein 1s;
 }
 @keyframes fadein {
@@ -16,6 +16,21 @@ animation: fadein 1s;
     
     }   
 }
+#Main{
+animation: fadein 2s;
+animation-delay: 2s;
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    
+    to {
+        opacity:1;
+    
+    }   
+}
+
 
  #rightBar {
  font-size: 18px;
@@ -55,10 +70,10 @@ margin: 5px;
 	});
 </script>
 <div class="container" id="Health_Detail">
-<div class="col-md-6 col-md-offset-2" style="padding-top: 250px; border-right: 1px solid gray;"id="mainbar"><!-- 왼쪽꺼 -->
-<h1 style="text-align: center;font-size: 70px" >감기<small>Flu</small></h1>
+<div class="col-md-6 col-md-offset-2" style="padding-top: 250px; border-right: 1px solid gray;"id="mainbar">
+<h1 style="text-align: center;font-size: 70px" id="Health_Title">감기<small>Flu</small></h1>
 
-<div class="row" style="padding-top: 100px;">
+<div class="row" style="padding-top: 100px;" id="Main">
   <div class="col-md-12"><h3>정의</h3></div>
   <div class="col-md-12" style="padding-bottom: 50px;">감기는 바이러스에 의해 코와 목
 				부분을 포함한 상부 호흡기계의 감염 증상으로, 사람에게 나타나는 가장 흔한 급성 질환 중 하나이다. 재채기, 코막힘,

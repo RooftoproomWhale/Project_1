@@ -44,7 +44,7 @@
 		SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
 	<select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT hosp_name,address FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
+		SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
 
 	<select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
@@ -66,7 +66,7 @@
 		SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
 	</select>
 	<select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT phar_name,address FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
+		SELECT distinct phar_name FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
 	</select>
 
 	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
