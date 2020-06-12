@@ -73,9 +73,10 @@ header p {
 }
 
 .gallery {
-  padding: 40px 0 300px;
+  padding: 40px 0 30px;
   position: relative;
   overflow: hidden;
+  margin-bottom: 30px;
 }
 .gallery ul {
   padding-top: 50px;
@@ -334,8 +335,28 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 	transition-delay: 0.2s;
 }
 
+#buttons button {
+  border: 1px solid #efefef;
+  margin-right: 8px;
+  border: 0;
+  padding: 8px;
+  border-radius: 3px;
+}
 
+#buttons button.active {
+  background-color: #bbb;
+  color: #111;
+}
 
+#buttons {
+  margin: 8px;
+  padding-bottom: 8px;
+}
+
+button:hover{
+  background-color: #111;
+  color: #fff;
+}
 
 </style>
 
@@ -348,13 +369,68 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 <div id="top"></div>
 <section class="gallery">
 	<div class="row grid">
+		<div id="buttons"></div>
 		<ul>
 			<a href="#" class="close"></a>
 			<c:forEach items="${medi1 }" var="medi">
-				<li>
+				<li data-tags="해열/진통제">
 				<figure class="effect-zoe">
 				<a href="#${medi }"> 
-				<img src='<c:url value="/images/medicine/${medi }.jpg"/>' alt="">
+				<img style="width: 300px;height: 150px" src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+				</a>
+					<figcaption style="text-align: center;">
+						<h4>${medi}</h4>
+						<p class="icon-links">
+							<i class="fas fa-tablets"></i>
+							<i class="fas fa-capsules"></i>
+							<i class="fas fa-clinic-medical"></i>
+						</p>
+					</figcaption>
+				</figure>
+				</li>
+			</c:forEach>
+			
+			<c:forEach items="${medi2 }" var="medi">
+				<li data-tags="소화제">
+				<figure class="effect-zoe">
+				<a href="#${medi }"> 
+				<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+				</a>
+					<figcaption style="text-align: center;">
+						<h4>${medi}</h4>
+						<p class="icon-links">
+							<i class="fas fa-tablets"></i>
+							<i class="fas fa-capsules"></i>
+							<i class="fas fa-clinic-medical"></i>
+						</p>
+					</figcaption>
+				</figure>
+				</li>
+			</c:forEach>
+			
+			<c:forEach items="${medi3 }" var="medi">
+				<li data-tags="감기약">
+				<figure class="effect-zoe">
+				<a href="#${medi }"> 
+				<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+				</a>
+					<figcaption style="text-align: center;">
+						<h4>${medi}</h4>
+						<p class="icon-links">
+							<i class="fas fa-tablets"></i>
+							<i class="fas fa-capsules"></i>
+							<i class="fas fa-clinic-medical"></i>
+						</p>
+					</figcaption>
+				</figure>
+				</li>
+			</c:forEach>
+			
+			<c:forEach items="${medi4 }" var="medi">
+				<li data-tags="파스">
+				<figure class="effect-zoe">
+				<a href="#${medi }"> 
+				<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
 				</a>
 					<figcaption style="text-align: center;">
 						<h4>${medi}</h4>
@@ -373,10 +449,10 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 
 	<!-- Item 01 -->
 	<c:forEach items="${medi1 }" var="medi">
-	<div id="${medi }" class="port">
+	<div id="${medi}" class="port">
 		<div class="row">
 			<div class="description">
-				<h1>${medi }</h1>
+				<h1>${medi}</h1>
 				<p>약물정보</p>
 			</div>
 			<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
@@ -406,5 +482,51 @@ $(".gallery ul li a").click(function() {
         scrollTop: parseInt($("#top").offset().top)
     }, 400);
 });
+
+
+
+(function() {
+	  var $lis = $('ul li');
+	  var $buttons = $('#buttons');
+	  var tagged = {};
+
+	  $lis.each(function() {
+	    var li = this;
+	    var tags = $(this).data('tags');
+
+	    if (tags) {
+	      tags.split(',').forEach(function(tagName) {
+	        if (tagged[tagName] == null) {
+	          tagged[tagName] = [];
+	        }
+	        tagged[tagName].push(li);
+	      })
+	    }
+	  })
+
+	  $('<button/>', {
+	    text: '전체',
+	    class: 'active',
+	    click: function() { $(this).addClass('active').siblings().removeClass('active'); $lis.show(); }
+	  }).appendTo($buttons);
+
+	  $.each(tagged, function(tagName) {
+	    var $n = $(tagged[tagName]).length;
+	    $('<button/>', {
+	      text: tagName + '(' + $n + ')',
+	      click: function() {
+	        $(this)
+	          .addClass('active')
+	          .siblings()
+	          .removeClass('active');
+	        $lis
+	          .hide()
+	          .filter(tagged[tagName])
+	          .show();
+	      }
+	    }).appendTo($buttons);
+	  });
+	}())
+
 
 </script>

@@ -13,7 +13,9 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -59,7 +61,7 @@ public class MedicineController {
 
 		info = mediInfo(encodeSearch, info);
         shape = mediShape(encodeSearch, shape);
-        
+          
         System.out.println(info.getITEM_NAME());
         System.out.println(info.getENTP_NAME());
         map.put("info", info);
@@ -71,31 +73,41 @@ public class MedicineController {
 	@RequestMapping("/Homespital/MedicineForm.hst")
 	public String medicineForm(Map map) {
 		JSONObject jsonMedi = null;
+		MedicineInfoDTO dto = new MedicineInfoDTO();
 		String[] medi1 = {"어린이용타이레놀정80mg","타이레놀정160mg","타이레놀정500mg","어린이타이레놀현탁액","어린이부루펜시럽"};
 		String[] medi2 = {"판콜에이내복액","판피린티정"};
 		String[] medi3 = {"베아제정","닥터베아제정","훼스탈골드정","훼스탈플러스정"};
 		String[] medi4 = {"신신파스아렉스","제일쿨파프"};
-		map.put("medi1",medi1);
-		map.put("medi2",medi2);
-		map.put("medi3",medi3);
-		map.put("medi4",medi4);
+		map.put("medi1",medi1 );
+		map.put("medi2",medi2 );
+		map.put("medi3",medi3 );
+		map.put("medi4",medi4 );
 		
 		
 		return "/drug/Drug.tiles";
 	}
 	
 	private MedicineShapeDTO mediShape(String encodeSearch,MedicineShapeDTO dto) {
+		try{
+		encodeSearch = URLEncoder.encode(encodeSearch,"UTF-8"); 
+        }catch(Exception e){ e.printStackTrace();  }
 		String apiUrl = "http://apis.data.go.kr/1470000/MdcinGrnIdntfcInfoService/getMdcinGrnIdntfcInfoList?" +
                 "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
                 "&numOfRows=10" +
                 "&pageNo=1" +
                 "&item_name="+encodeSearch;
-		String responseBody = get(apiUrl);
-	      
+		String responseBody = get(apiUrl);   
         System.out.println(responseBody);
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
-        JSONObject selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
+        JSONObject selecOne = new JSONObject();
+        if((long)jsonMedi.getJSONObject("response").getJSONObject("body").get("totalCount")==0) {
+        	return new MedicineShapeDTO();
+        }
+        else if((long)jsonMedi.getJSONObject("response").getJSONObject("body").get("totalCount")>1) {
+        	selecOne = (JSONObject)jsonMedi.getJSONObject("response").getJSONObject("body").getJSONArray("items").get(0);
+        }
+        selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
         Gson gson = new Gson();
         dto = gson.fromJson(selecOne.toString(),MedicineShapeDTO.class);
         
@@ -104,6 +116,9 @@ public class MedicineController {
 	
 	
 	private MedicineInfoDTO mediInfo(String encodeSearch,MedicineInfoDTO dto) {
+		try{
+			encodeSearch = URLEncoder.encode(encodeSearch,"UTF-8"); 
+	        }catch(Exception e){ e.printStackTrace();  }
 		String apiUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?" +
                 "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
                 "&numOfRows=10" +
@@ -115,7 +130,16 @@ public class MedicineController {
         System.out.println(responseBody);
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
-        JSONObject selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
+        JSONObject selecOne = new JSONObject();
+        if((long)jsonMedi.getJSONObject("response").getJSONObject("body").get("totalCount")==0) {
+        	return new MedicineInfoDTO();
+        }
+        else if((long)jsonMedi.getJSONObject("response").getJSONObject("body").get("totalCount")>1) {
+        	System.out.println((JSONObject)jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").get(0));
+        	selecOne = (JSONObject)jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").get(0);
+        }
+        else 
+        	selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
         Gson gson = new Gson();
         dto = gson.fromJson(selecOne.toString(),MedicineInfoDTO.class);
 		
