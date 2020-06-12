@@ -65,4 +65,9 @@ public class MyPageController {
 	      return "Hospage_Appointment.hos_tiles";
 	   }
 	   
+//	   @RequestMapping("/Hospage/Chart.hst")
+//	   public String chart() {
+//	      return "Hospage_Chart.hos_tiles";
+//	   }
+	   
 }

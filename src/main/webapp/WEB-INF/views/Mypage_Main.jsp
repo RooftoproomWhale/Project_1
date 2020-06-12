@@ -33,7 +33,7 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
 			<div class="row">
 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-shopping-cart color-blue"></em>
+						<div class="row no-padding"><i class="far fa-file-alt color-teal"></i>
 							<div class="large">20</div>
 							<div class="text-muted">처방 등록 수</div>
 						</div>
@@ -41,7 +41,7 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
 				</div>
 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
+						<div class="row no-padding"><i class="fas fa-pills color-blue"></i>
 							<div class="large">4</div>
 							<div class="text-muted">복용 중인 약품 수</div>
 						</div>
