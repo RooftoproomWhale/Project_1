@@ -662,9 +662,10 @@
 					FunLoadingBarEnd();
 				},
 				success:function(data){
+					console.log(data);
 					var jsonData = JSON.parse(data);
-					console.log("연결성공", jsonData.response.body,typeof(jsonData));
-					$.each(jsonData.response.body.items.item, function(i, item) {
+					console.log("연결성공", jsonData,typeof(jsonData));
+					$.each(jsonData, function(i, item) {
 						
 						var marker = new kakao.maps.Marker({
 							//map : map,

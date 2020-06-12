@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
 import com.kosmo.proj.service.MemberService;
+import com.kosmo.proj.service.PharmacyDTO;
 
 @Controller
 public class MapController {
@@ -170,7 +171,7 @@ public class MapController {
 		
 		return net.sf.json.JSONArray.fromObject(list).toString();
 	}
-	
+	/*
 	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/Pharmacy.hst",produces = "text/html; charset=UTF-8")
 	public String pharmacyMap(@RequestParam Map map)
@@ -193,6 +194,16 @@ public class MapController {
         System.out.println(jsonObj);
         
 		return jsonObj.toString();
+	}*/
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/Pharmacy.hst",produces = "text/html; charset=UTF-8")
+	public String pharmacyMap(@RequestParam Map map)
+	{
+		List<PharmacyDTO> list = mapService.selectPharmacyByXY(map);
+
+		System.out.println(net.sf.json.JSONArray.fromObject(list));
+		
+		return net.sf.json.JSONArray.fromObject(list).toString();
 	}
 	
 	@ResponseBody

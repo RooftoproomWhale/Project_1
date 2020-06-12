@@ -72,4 +72,11 @@
 	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM pharmacy WHERE address = #{address}
 	</select>
+	<select id="pharmacySelectByXY" parameterType="java.util.Map" resultType="pharmacyDTO">
+		SELECT *
+		FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
+		AS distanceByXY, p.*
+		FROM pharmacy p) disData
+		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
+	</select>
 </mapper>
