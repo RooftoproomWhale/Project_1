@@ -80,6 +80,7 @@ public class MedicineController {
 		map.put("medi3",medi3);
 		map.put("medi4",medi4);
 		
+		
 		return "/drug/Drug.tiles";
 	}
 	

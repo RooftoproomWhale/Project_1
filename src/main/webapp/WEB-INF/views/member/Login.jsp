@@ -6,7 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <script type="text/javascript" src="js/jquery.test.js"></script>
-<script src='<c:url value="/js/kakao.js"/>'></script>
+
 
 <style>
 body{
@@ -150,7 +150,7 @@ form{
                                 <div style="display: inline;" id="naver_id_login"></div>
                             </li>
                             <li style="display: inline;padding-right: 70px">
-                                <a id="kakao" href="javascript:Kakao.Auth.login()">
+                                <a id="kakao" href="#">
                                     <img width="60" src='<c:url value="/images/snslogo/kakao.png"/>' alt="카카오 로그인">
 		                        </a>
                             </li>
@@ -206,7 +206,7 @@ form{
 
 	})
 </script>
-
+<script type="text/javascript" src='<c:url value="/js/kakao.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/js/naver_login.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/js/facebook_login.js"/>'></script>
 
