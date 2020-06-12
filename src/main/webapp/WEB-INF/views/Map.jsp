@@ -1246,7 +1246,6 @@
 			$('.load_wrap').hide();
 			
 		}
-		
 	}
 
 </script>
