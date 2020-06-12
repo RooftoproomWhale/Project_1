@@ -20,7 +20,7 @@
 					<h2 style="color:blue">공지사항</h2>
 				</div>
 				<p class="lead">홈스피탈 공지사항</p>
-				<table class="table table-striped" style="max-width: 1300px;">
+				<table class="table table-striped" style="max-width: 1300px; box-shadow: 5px 5px 5px 5px gray">
 					<thead>
 						<tr>
 							<th scope="col" class="" style="width: 55px; text-align: center;">번호</th>

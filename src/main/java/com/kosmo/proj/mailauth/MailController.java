@@ -19,7 +19,7 @@ public class MailController {
 	public String testMailPost() throws Exception{
 		System.out.println("테스트 메일 컨트롤러");
 		mailHandler.setSubject("홈스피탈 인증번호 입니다");
-		mailHandler.setText("745198");
+		mailHandler.setText("홈스피탈 인증 번호 : 745198");
 		mailHandler.setFrom("united0226@gmail.com", "윤승중");
 		mailHandler.setTo("united0226@naver.com");
 		mailHandler.send();

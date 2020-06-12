@@ -18,14 +18,14 @@
 <title>Q&A</title>
 </head>
 <body>
-	<div class="container" style="padding-top: 88px">
+	<div class="container" style="padding-top: 88px; ">
 		<div class="row">
 			<main id="main">
 				<div class="page-header">
 					<h2 style="color: blue">Q&A</h2>
 				</div>
 				<p class="lead">회원님의 궁금증을 풀어드립니다.</p> <br />
-				<table id="report" class="table table-striped" style="max-width: 1300px;">
+				<table id="report" class="table table-striped" style="max-width: 1300px; box-shadow: 5px 5px 5px 5px gray">
 					<tr>
 						<th scope="col" class="" style="width: 20px; text-align: center;">번호</th>
 						<th scope="col" class="" style="width: 80px; text-align: center;">제목</th>
@@ -34,7 +34,7 @@
 					</tr>
 					<tr>
 						<th scope="row" class="" style="text-align: center;">10</th>
-						<td class="" style="text-align: center;">홈스피탈은 어떤 활용도입니까</td>
+						<td class="" style="text-align: center;">홈스피탈은 무엇인가요</td>
 						<td class="" style="text-align: center;">윤승중</td>
 						<td class="" style="text-align: center;">2020-06-10</td>
 					</tr>
@@ -56,7 +56,7 @@
 					</tr>
 					<tr>
 						<th scope="row" class="" style="text-align: center;">9</th>
-						<td class="" style="text-align: center;">홈스피탈은 어떤 활용도입니까</td>
+						<td class="" style="text-align: center;">예약 접수는 어떻게 하나요</td>
 						<td class="" style="text-align: center;">윤승중</td>
 						<td class="" style="text-align: center;">2020-06-10</td>
 					</tr>

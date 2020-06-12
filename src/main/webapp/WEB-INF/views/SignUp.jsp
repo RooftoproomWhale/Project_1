@@ -245,6 +245,11 @@ width: 100%;
       		}
       	})
       })
+      $( document ).ready( function() {
+        $( '.check-all' ).click( function() {
+          $( '.ab' ).prop( 'checked', this.checked );
+        } );
+      } );
 	
       $(".next").click(
             function() {
@@ -732,18 +737,22 @@ width: 100%;
 			<h4 class="scheme-g">서비스 이용 약관</h4>
 			<textarea name="chart" style="font-size: 1em;" disabled="disabled"><%=buff1 %></textarea>
 			<p>
-				<input type="checkbox" id="check_1" name="" /> 위의 약관에 동의 합니다.<br />
-			</p>
+				<input class="ab" type="checkbox" id="check_1" name="" /> 위의 약관에 동의 합니다.
+			</p><br/>
 			<h4 class="scheme-g">개인정보 이용 약관</h4>
 			<textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff2 %></textarea>
 			<p>
-				<input type="checkbox" id="check_2" name="" /> 위의 약관에 동의 합니다.<br />
-			</p>
+				<input class="ab" type="checkbox" id="check_2" name="" /> 위의 약관에 동의 합니다.<br />
+			</p><br/>
 			<h4 class="scheme-g">위치기반서비스 이용 약관</h4>
 			<textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff3 %></textarea>
 			<p>
-				<input type="checkbox" id="check_3" name="" /> 위의 약관에 동의 합니다.<br />
+				<input class="ab" type="checkbox" id="check_3" name="" /> 위의 약관에 동의 합니다.<br />
 			</p>
+			<p style="padding-top:5px; color: red">
+			 	<input class="check-all" type="checkbox" id="check_3" name="all" /> 전체 동의 시 체크<br />
+			</p>
+	
 <!-- 			<input type="checkbox" id="check_authHos" name="" /> 병원 제휴 시 체크<br /> -->
 			<input type="button" id="authHos" class="action-button" value="병원 제휴" />
 			<input type="button" name="nextBtn" class="nextBtn action-button" value="일반회원" />
