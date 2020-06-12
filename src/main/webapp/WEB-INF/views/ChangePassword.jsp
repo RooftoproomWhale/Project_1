@@ -3,73 +3,6 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-	
-  /* 사이드바 래퍼 스타일 */
-  
-  #page-wrapper {
-    padding-left: 250px;
-  }
-  
-  #sidebar-wrapper {
-    position: fixed;
-    width: 250px;
-    height: 82%;
-    margin-left: -250px;
-    background: #fff;
-    overflow-x: hidden;
-    overflow-y: auto;
-     border: 1px #DAD9FF solid;
-    margin-top: 79px;
-
-  
-  }
-  
-  #page-content-wrapper {
-    width: 100%;
-    padding: 20px;
- padding-top: 150px;
- margin-left:130px;
-  }
-   /* 사이드바 스타일 */
-  
-  .sidebar-nav {
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background:#808080;
-  }
-  .sidebar-nav li:first-child{ background:#4d4d4d}
-  .sidebar-nav li {
-    text-indent: 1.5em;
-    line-height: 2.8em;
-    color:#fff
-  }
-  
-  .sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #fff;
-  }
-  /*현재페이지*/
-/*   .sidebar-nav :nth-child(2) a{ color: #fff;background: #B2EBF4; } */
-  
-  
-  .sidebar-nav li:not(.sidebar-brand):hover {
-    color: #fff;
-    background: #B2EBF4;
-  }
-  
-  .sidebar-nav > .sidebar-brand {
-    font-size: 1.3em;
-    line-height: 3em;
-  }
-	.sidebar-brand{
-	background-color: #C2E2E8;
-	font-weight: bold;
-	margin-top:0px;
-	margin-bottom: 0px;
-	}
 	.info{
 		font-size: 1.3em;
 		line-height: 3em;
@@ -98,32 +31,32 @@ caption{font-size: 15px;font-weight: bold;}
 #contents{padding-left: 20px;margin-left: 20px}
 .board-util-right{float: left;}
 }
+#jquery-accordion-menu {
+	top: 81px;
+}
+
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+body {
+	background: #FFFFFF;
+}
+
+.content {
+	width: 260px;
+	margin: 100px auto;
+}
 </style>
 <script>
 
 </script>
 <div id="page-wrapper" class="container-fluid">
-
-<div  id="sidebar-wrapper">
-
-	  <h3 class="sidebar-brand" style="height: 90px;text-align: center;line-height: 90px;height: 120px">
-    	<img style="width: 100%;height: 100%" src="<c:url value='/img/mypages.PNG'/>">
-       </h3>
-	<ul class="sidebar-nav">
-	<li><span class="glyphicon glyphicon-leaf" style="left: -20px"><strong>김길동</strong>님</span></li>
-      <li><a href="<c:url value='/mypage/mypage.hst'/>">개인정보</a></li>
-      <li><a href="<c:url value='/mypage/Yun.hst'/>">복약 관리</a></li>
-      <li><a href="<c:url value='/mypage/ReservationList.hst'/>">진료 예약 현황</a></li>
-      <li><a href="#">내 질병 관리</a></li>
-      <li><a href="<c:url value='/mypage/unmember.hst'/>">회원탈퇴</a></li>
-    </ul>
-  </div>
   <div class="main row" style="margin-top: 82px;padding-bottom:15px;">
- 
   		<section id="contents"> <!-- /////////////////////////////////// Contents [S] -->
-
 				<h2 class="hidden">비밀번호 변경</h2>
-
 				<form id="passForm" name="passForm" method="post" action="">
 				<input type="hidden" name="mode" value="delete"/>
 
@@ -246,11 +179,55 @@ caption{font-size: 15px;font-weight: bold;}
 
   
   </script>
-  
+  <script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
+<script type="text/javascript">
+	(function($) {
+		$.expr[":"].Contains = function(a, i, m) {
+			return (a.textContent || a.innerText || "").toUpperCase().indexOf(
+					m[3].toUpperCase()) >= 0;
+		};
+		function filterList(header, list) {
 
-    
+			var form = $("<form>").attr({
+				"class" : "filterform",
+				action : "#"
+			}), input = $("<input>").attr({
+				"class" : "filterinput",
+				type : "text"
+			});
+			$(form).append(input).appendTo(header);
+			$(input).change(
+					function() {
+						var filter = $(this).val();
+						if (filter) {
+							$matches = $(list).find(
+									"a:Contains(" + filter + ")").parent();
+							$("li", list).not($matches).slideUp();
+							$matches.slideDown();
+						} else {
+							$(list).find("li").slideDown();
+						}
+						return false;
+					}).keyup(function() {
+				$(this).change();
+			});
+		}
+		$(function() {
+			filterList($("#form"), $("#demo-list"));
+		});
+	})(jQuery);
+</script>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
 
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-    
-    <script src="<c:url value="/bootstrap/js/bootstrap.min.js"/>"></script>
+	});
+
+	$(function() {
+
+		$("#demo-list li").click(function() {
+			$("#demo-list li.active").removeClass("active")
+			$(this).addClass("active");
+		})
+	})
+</script>

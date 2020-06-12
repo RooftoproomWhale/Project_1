@@ -9,7 +9,7 @@
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
 <style type="text/css">
 #jquery-accordion-menu {
-  	top: 81px;
+  	top: 81px; 
 }
 *{
 	box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;
@@ -29,7 +29,7 @@ body{
 	-o-text-overflow:ellipsis;
 	white-space:nowrap;
 	height:60px;
-	width:100%;
+/* 	width:100%; */
 	font-size: 14px
 }
 
@@ -45,7 +45,8 @@ body{
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="col-md-2">
+	<div class="row">
+		<div class="col-md-2 col-sm-2">
 			<div id="jquery-accordion-menu" class="jquery-accordion-menu">
 				<div class="col-md-8 col-md-offset-2">
 					<span><img style="width: 150px; height: 150px;" class="img-responsive" src='<c:url value="/img/logo.png"/>' alt="로고이미지" /></span>
@@ -59,17 +60,17 @@ body{
 							<li><a href="<c:url value='/mypage/ChangeMember.hst'/>">내 정보 수정</a></li>
 							<li><a href="<c:url value='/mypage/unmember.hst'/>">회원 탈퇴</a></li>
 						</ul></li>
-					<li><a href="<c:url value='/mypage/Yun.hst'/>"><i class="fa fa-suitcase"></i>복약 관리</a>
+					<li><a href="<c:url value='/mypage/administration.hst'/>"><i class="fa fa-suitcase"></i>복약 관리</a>
 					<li><a href="<c:url value='/mypage/ReservationList.hst'/>"><i class="fa fa-envelope"></i>진료예약 현황</a></li>
 					<li><a href="<c:url value='/mypage/Disease.hst'/>"><i class="fa fa-envelope"></i>내 질병 관리</a></li>
 				</ul>
 			</div>
 		</div>
-		<div class="col-md-10">
-			<div class="page-header" style="padding-top: 88px; padding-left: 50px">
+		<div class="col-md-10 col-sm-10">
+			<div class="page-header" style="padding-top: 88px;">
 				<h2 style="color: blue">MyPage</h2>
 			</div>
-			<p class="lead" style="padding-left: 50px">홈스피탈 MyPage</p>
+			<p class="lead" style="">홈스피탈 MyPage</p>
 			<br />
 			<div class="col-md-5">
 				<div class="bg-transparent card-header pt-4 border-0">
@@ -145,6 +146,7 @@ body{
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 </body>
