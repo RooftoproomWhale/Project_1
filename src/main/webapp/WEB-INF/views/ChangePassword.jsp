@@ -3,73 +3,6 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-	
-  /* 사이드바 래퍼 스타일 */
-  
-  #page-wrapper {
-    padding-left: 250px;
-  }
-  
-  #sidebar-wrapper {
-    position: fixed;
-    width: 250px;
-    height: 82%;
-    margin-left: -250px;
-    background: #fff;
-    overflow-x: hidden;
-    overflow-y: auto;
-     border: 1px #DAD9FF solid;
-    margin-top: 79px;
-
-  
-  }
-  
-  #page-content-wrapper {
-    width: 100%;
-    padding: 20px;
- padding-top: 150px;
- margin-left:130px;
-  }
-   /* 사이드바 스타일 */
-  
-  .sidebar-nav {
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background:#808080;
-  }
-  .sidebar-nav li:first-child{ background:#4d4d4d}
-  .sidebar-nav li {
-    text-indent: 1.5em;
-    line-height: 2.8em;
-    color:#fff
-  }
-  
-  .sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #fff;
-  }
-  /*현재페이지*/
-/*   .sidebar-nav :nth-child(2) a{ color: #fff;background: #B2EBF4; } */
-  
-  
-  .sidebar-nav li:not(.sidebar-brand):hover {
-    color: #fff;
-    background: #B2EBF4;
-  }
-  
-  .sidebar-nav > .sidebar-brand {
-    font-size: 1.3em;
-    line-height: 3em;
-  }
-	.sidebar-brand{
-	background-color: #C2E2E8;
-	font-weight: bold;
-	margin-top:0px;
-	margin-bottom: 0px;
-	}
 	.info{
 		font-size: 1.3em;
 		line-height: 3em;
@@ -116,57 +49,14 @@ body {
 	width: 260px;
 	margin: 100px auto;
 }
-
-#demo-list a {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	white-space: nowrap;
-	height: 60px;
-	width: 100%;
-	font-size: 14px
-}
-
-#footer {
-	position: absolute;
-	width: 100%;
-	left: 0px;
-	bottom: 0px;
-	background-color: #474747;
-	height: 150px
-}
 </style>
 <script>
 
 </script>
 <div id="page-wrapper" class="container-fluid">
-
-<div class="col-md-2">
-			<div id="jquery-accordion-menu" class="jquery-accordion-menu">
-				<div class="col-md-8 col-md-offset-2">
-					<span><img style="width: 150px; height: 150px;" class="img-responsive" src='<c:url value="/img/logo.png"/>' alt="로고이미지" /></span>
-				</div>
-				<ul id="demo-list">
-					<li class="active"><a href="<c:url value='/mypage/mypage.hst'/>"><i class="fa fa-home"></i>MYPAGE</a></li>
-					<li><a href="#"><i class="fa fa-file-image-o"></i>김길동님</a>
-					<li><a href="#"><i class="fa fa-cog"></i>개인정보 관리</a>
-						<ul class="submenu">
-							<li><a href="<c:url value='/mypage/mypage.hst'/>">내 정보 보기</a></li>
-							<li><a href="<c:url value='/mypage/ChangeMember.hst'/>">내 정보 수정</a></li>
-							<li><a href="<c:url value='/mypage/unmember.hst'/>">회원 탈퇴</a></li>
-						</ul></li>
-					<li><a href="<c:url value='/mypage/administration.hst'/>"><i class="fa fa-suitcase"></i>복약 관리</a>
-					<li><a href="<c:url value='/mypage/ReservationList.hst'/>"><i class="fa fa-envelope"></i>진료예약 현황</a></li>
-					<li><a href="<c:url value='/mypage/Disease.hst'/>"><i class="fa fa-envelope"></i>내 질병 관리</a></li>
-				</ul>
-			</div>
-		</div>
   <div class="main row" style="margin-top: 82px;padding-bottom:15px;">
- 
   		<section id="contents"> <!-- /////////////////////////////////// Contents [S] -->
-
 				<h2 class="hidden">비밀번호 변경</h2>
-
 				<form id="passForm" name="passForm" method="post" action="">
 				<input type="hidden" name="mode" value="delete"/>
 

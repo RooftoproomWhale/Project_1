@@ -92,7 +92,8 @@
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="삭제">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="상세보기">
+                                                        <button class="item" data-toggle="modal"
+														data-placement="top" data-target="#AptModal" title="상세보기">
                                                             <i class="zmdi zmdi-more"></i>
                                                         </button>
                                                     </div>
@@ -120,7 +121,8 @@
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="삭제">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="상세보기">
+                                                        <button class="item" data-toggle="modal"
+														data-placement="top" data-target="#AptModal" title="상세보기">
                                                             <i class="zmdi zmdi-more"></i>
                                                         </button>
                                                     </div>
@@ -148,7 +150,8 @@
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="삭제">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="상세보기">
+                                                        <button class="item" data-toggle="modal"
+														data-placement="top" data-target="#AptModal" title="상세보기">
                                                             <i class="zmdi zmdi-more"></i>
                                                         </button>
                                                     </div>
@@ -176,7 +179,8 @@
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="삭제">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="상세보기">
+                                                        <button class="item" data-toggle="modal"
+														data-placement="top" data-target="#AptModal" title="상세보기">
                                                             <i class="zmdi zmdi-more"></i>
                                                         </button>
                                                     </div>
@@ -192,10 +196,61 @@
                 </div>
             </div>
         </div>
-
     </div>
 
+	<!-- 상세 보기 모달 -->
+	<div class="modal fade" id="AptModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-notify modal-warning" role="document">
+			<div class="col-lg-12 ">
+				<div class="top-campaign">
+					<h3 class="title-3">예약 정보</h3>
+					<br/>
+					<div class="table-responsive">
+						<table class="table table-top-campaign">
+							<tbody>
+								<tr>
+									<td>예약자 이름</td>
+									<td>윤성준</td>
+								</tr>
+								<tr>
+									<td>병원명</td>
+									<td>삼성병원</td>
+								</tr>
+								<tr>
+									<td>요청 과</td>
+									<td>이비인후과</td>
+								</tr>
+								<tr>
+									<td>email</td>
+									<td>busu0423@gmail.com</td>
+								</tr>
+								<tr>
+									<td>핸드폰 번호</td>
+									<td>010-1234-7586</td>
+								</tr>
+								<tr>
+									<td>성별</td>
+									<td>남성</td>
+								</tr>
+								<tr>
+									<td>나이</td>
+									<td>27</td>
+								</tr>
+								<tr>
+									<td>예약 시간</td>
+									<td>2018-09-30 10:00</td>
+								</tr>
+								<tr>
+									<td>예약 신청 시간</td>
+									<td>2018-09-27 02:12</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
-
 </html>
 <!-- end document-->

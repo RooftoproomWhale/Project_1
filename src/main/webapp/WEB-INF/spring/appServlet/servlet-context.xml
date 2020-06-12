@@ -31,6 +31,7 @@
 			<beans:list>
 				<beans:value>/WEB-INF/templates/layouts.xml</beans:value>
 				<beans:value>/WEB-INF/templates/ad_layouts.xml</beans:value>
+				<beans:value>/WEB-INF/templates/my_layouts.xml</beans:value>
 			</beans:list>
 
 		</beans:property>
