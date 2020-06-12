@@ -12,16 +12,16 @@ public class MailController {
 	@Autowired
 	private MailService service;
 
+
 	@Autowired
 	private MailHandler mailHandler;
-
 	@RequestMapping(value = "/mailauth/testMail.hst", method = RequestMethod.POST)
 	public String testMailPost() throws Exception{
 		System.out.println("테스트 메일 컨트롤러");
-		mailHandler.setSubject("테스트 메일입니다.");
-		mailHandler.setText("sdfsfsdf");
+		mailHandler.setSubject("홈스피탈 인증번호 입니다");
+		mailHandler.setText("745198");
 		mailHandler.setFrom("united0226@gmail.com", "윤승중");
-		mailHandler.setTo("tjdwns0423@naver.com");
+		mailHandler.setTo("united0226@naver.com");
 		mailHandler.send();
 
 		return "";
@@ -37,8 +37,7 @@ public class MailController {
         return "redirect:/";
     }
 
-    //이메일 인증 코드 검증
-    @RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
+    @RequestMapping(value = "/mailauth/emailConfirm.hst", method = RequestMethod.GET)
     public String emailConfirm(MemberVO user	,Model model,RedirectAttributes rttr) throws Exception {
 
         System.out.println("cont get user"+user);

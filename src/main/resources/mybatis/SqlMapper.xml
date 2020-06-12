@@ -3,73 +3,80 @@
 <!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
 <mapper namespace="mybatis.SqlMapper">
-   <select id="memoIsLogin" parameterType="java.util.Map" resultType="int">
-      SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}
-   </select>
-   <select id="selectList" parameterType="java.util.Map" resultType="MemberDTO">
-      SELECT * FROM
-      (SELECT T.*,ROWNUM R FROM (SELECT o.*,name,(SELECT COUNT(*) FROM memocomment WHERE no=o.no) AS commentCount 
-      FROM member m JOIN onememo o ON m.id=o.id 
-      <if test="searchWord != null">
-      WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
-      </if>
-      ORDER BY no DESC) T)
-      WHERE R BETWEEN #{start} AND #{end}
-   </select>
-   <select id="memoGetTotalRecord" parameterType="java.util.Map" resultType="int">
-      SELECT COUNT(*) FROM onememo
-      <if test="searchWord != null">
-      WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
-      </if>
-   </select>
-   
-   <insert id="memoInsert" parameterType="java.util.Map">
-      INSERT INTO onememo(no,title,content,id)
-      VALUES(SEQ_ONEMEMO.NEXTVAL,#{title},#{content},#{id})
-   </insert>
-   
-   <update id="memoUpdate" parameterType="java.util.Map">
-      UPDATE onememo SET title=#{title},content=#{content} WHERE no=#{no}   
-   </update>
-   <delete id="memoDelete" parameterType="java.util.Map">
-      DELETE onememo WHERE no=#{no}
-   </delete>
-   <select id="covidMapSelect" resultType="java.util.Map">
-      SELECT * FROM corona_patient
-   </select>
-   <select id="hospitalSelect" resultType="java.util.Map">
-      SELECT * FROM hospital WHERE <![CDATA[ ROWNUM <= 10 ]]>
-   </select>
-   <select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
-   </select>
-   <select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT hosp_name,address FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
-   </select>
+	<select id="memoIsLogin" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}
+	</select>
+	<select id="selectList" parameterType="java.util.Map" resultType="MemberDTO">
+		SELECT * FROM
+		(SELECT T.*,ROWNUM R FROM (SELECT o.*,name,(SELECT COUNT(*) FROM memocomment WHERE no=o.no) AS commentCount 
+		FROM member m JOIN onememo o ON m.id=o.id 
+		<if test="searchWord != null">
+		WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+		</if>
+		ORDER BY no DESC) T)
+		WHERE R BETWEEN #{start} AND #{end}
+	</select>
+	<select id="memoGetTotalRecord" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM onememo
+		<if test="searchWord != null">
+		WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
+		</if>
+	</select>
+	
+	<insert id="memoInsert" parameterType="java.util.Map">
+		INSERT INTO onememo(no,title,content,id)
+		VALUES(SEQ_ONEMEMO.NEXTVAL,#{title},#{content},#{id})
+	</insert>
+	
+	<update id="memoUpdate" parameterType="java.util.Map">
+		UPDATE onememo SET title=#{title},content=#{content} WHERE no=#{no}	
+	</update>
+	<delete id="memoDelete" parameterType="java.util.Map">
+		DELETE onememo WHERE no=#{no}
+	</delete>
+	<select id="covidMapSelect" resultType="java.util.Map">
+		SELECT * FROM corona_patient
+	</select>
+	<select id="hospitalSelect" resultType="java.util.Map">
+		SELECT * FROM hospital WHERE <![CDATA[ ROWNUM <= 10 ]]>
+	</select>
+	<select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
+	</select>
+	<select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
+	</select>
 
-   <select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="java.util.Map"></select>
+	<select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT D.dept_name, HD.*
+		FROM
+		(SELECT H.*, D.dept_code FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_code = D.dept_code
+		WHERE HD.address = #{address}
+	</select>
 
-      
-   <select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT D.dept_name, HD.*
-      FROM
-      (SELECT H.*, D.dept_code FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_code = D.dept_code
-      WHERE HD.address = #{address}
-   </select>
+	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT *
+		FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
+		AS distanceByXY, h.*
+		FROM hospital h) disData
+		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
+	</select>
 
-   <!-- <select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
-      SELECT (6371*ACOS(COS(RADIANS(#{cor_x}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{cor_y}))+SIN(RADIANS(#{cor_x}))*SIN(RADIANS(cor_x)))) 
-      AS distanceByXY, h.*
-      FROM hospital h
-   </select> -->
+	<select id="pharmacySelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
+	</select>
+	<select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT distinct phar_name FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
+	</select>
 
-   <select id="pharmacySelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
-   </select>
-   <select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT phar_name,address FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
-   </select>
-   <select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT * FROM pharmacy WHERE address = #{address}
-   </select>
+	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM pharmacy WHERE address = #{address}
+	</select>
+	<select id="pharmacySelectByXY" parameterType="java.util.Map" resultType="pharmacyDTO">
+		SELECT *
+		FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
+		AS distanceByXY, p.*
+		FROM pharmacy p) disData
+		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
+	</select>
 </mapper>

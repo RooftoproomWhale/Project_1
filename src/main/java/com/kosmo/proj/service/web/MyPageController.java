@@ -31,9 +31,9 @@ public class MyPageController {
 	      return "ReservationList.tiles";
 	   }
 	   //복약관리
-	   @RequestMapping("/mypage/Yun.hst")
-	   public String Yun() {
-	      return "Yun.tiles";
+	   @RequestMapping("/mypage/administration.hst")
+	   public String administration() {
+	      return "administration.tiles";
 	   }
 	   //내 질병관리
 	   @RequestMapping("/mypage/Disease.hst")

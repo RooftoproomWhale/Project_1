@@ -27,7 +27,8 @@ public class MailServiceImpl implements MailService {
 		 * append("' target='_blank'>이메일 인증 확인</a>").toString());
 		 * sendMail.setFrom("sososososo@gmail.com", "서어비스센터 ");
 		 *
-		 * sendMail.setTo(vo.getMemberEmail()); sendMail.send();
+		 * sendMail.setTo(vo.getMemberEmail()); \
+		 * sendMail.send();
 		 */
 	}
 

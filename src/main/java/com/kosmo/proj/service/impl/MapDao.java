@@ -10,13 +10,14 @@ import org.springframework.stereotype.Repository;
 
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
+import com.kosmo.proj.service.PharmacyDTO;
 
 @Repository
 public class MapDao implements MapService{
 
 	@Resource(name="template")
 	private SqlSessionTemplate sqlMapper;
-	
+
 	@Override
 	public List<Map> selectList() {
 		// TODO Auto-generated method stub
@@ -28,8 +29,8 @@ public class MapDao implements MapService{
 		// TODO Auto-generated method stub
 
 //		return sqlMapper.selectList("hospitalSelect",map);
-//		return sqlMapper.selectList("hospitalSelectByKeyWord",map);
-		return sqlMapper.selectList("pharmacySelectByKeyWord",map);
+		return sqlMapper.selectList("hospitalSelectByKeyWord",map);
+		
 	}
 
 	@Override
@@ -68,6 +69,12 @@ public class MapDao implements MapService{
 		return sqlMapper.selectList("hospitalSelectByXY",map);
 	}
 
-	
+	@Override
+	public List<PharmacyDTO> selectPharmacyByXY(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("pharmacySelectByXY",map);
+	}
+
+
 
 }

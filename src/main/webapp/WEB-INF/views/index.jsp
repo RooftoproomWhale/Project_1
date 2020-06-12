@@ -118,8 +118,8 @@
 				</div>
 			</div>
 			<!-- Issue Section -->
-			<div class="col-md-5 col-md-offset-1 col-sm-12">
-				<div class="row" style="margin-bottom: 10px">
+			<div class="col-md-5 col-md-offset-1 col-sm-12" style="">
+				<div class="row" style="margin-bottom: 14px">
 					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보</span>
 				</div>
 				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px;"></div>
@@ -136,7 +136,7 @@
 				<p>사용 가능한 기능</p>
 			</div>
 			<div class="row">
-				<div class="col-md-4" style="cursor: pointer"
+				<div class="col-md-4" style="cursor: pointer"  
 					onclick="location.href='<c:url value='/Homespital/Map.hst'/>'">
 					<i class="fa fa-plus-square"></i>
 					<div class="service-desc">
@@ -152,8 +152,7 @@
 						<p>병원 찾기 설명</p>
 					</div>
 				</div>
-				<div class="col-md-4" style="cursor: pointer"
-					onclick="location.href='<c:url value='/Member/select.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Administration/administration.hst'/>'">
 					<i class="fa fa-medkit"></i>
 					<div class="service-desc">
 						<h3>복약 관리</h3>
@@ -170,14 +169,11 @@
 						<p>예방 정보 설명</p>
 					</div>
 				</div>
-				<div class="col-md-4" style="cursor: pointer"
-					onclick="location.href='<c:url value='/Calendar/calendar.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Calendar/calendar.hst'/>'">
 					<i class="fa fa-calendar"></i>
 					<div class="service-desc">
 						<h3>일정 관리</h3>
-						<p>
-							일정 관리 설명
-						</p>
+						<p>일정 관리 설명</p>
 					</div>
 				</div>
 
@@ -215,7 +211,7 @@
 				dataType: "json",
 				success:function(data){
 					console.log(data);
-					var news = "<table class='table' style='width:80%;'>";
+					var news = "<table class='table' style='width:80%; border: 3px solid #0051ff'>";
 					if(data.length==0){
 						news+="<li>뉴스 데이터가 없습니다</li>";
 					} 
