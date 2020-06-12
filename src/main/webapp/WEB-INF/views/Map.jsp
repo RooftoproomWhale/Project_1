@@ -26,7 +26,31 @@
 	    background-color: rgba( 255, 255, 255, 0.5 );
 		z-index: 1231234;
 	}
-	.search {position: absolute;top:120px;left: 16px;z-index: 2;}
+	.search 
+	{
+		position: absolute;
+	    top: 150px;
+	    left: 16px;
+	    display: flex;
+	    justify-content: space-between;
+	    z-index: 2;
+	    align-items: center;
+	    border-radius: 24px;
+	    background: white;
+	    padding: 13px 24px 13px 24px;
+	    width: auto;
+	    right: 16px;
+	    max-width: 343px;
+	    height: 46px;
+	    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+	    background-color: #ffffff;
+	}
+	.searchInput
+	{
+		width: 90%;
+    	border: 0 !important;
+    	background: white;
+	}
 	.map_button{position: absolute;bottom: 32px;right: 8px;z-index: 2;flex-direction: column;}
 	.current_refresh
 	{
@@ -43,7 +67,7 @@
 	    outline: 0;
 	}
 	.menu_wrap{left: 13px;bottom: 19px;text-align: center;position: absolute;z-index: 2;}
-	.info_wrap{position: absolute;top: 80px;left: 0;bottom: 0;width: 390px;z-index: 200;background: #fff;flex-direction: column;}
+	.info_wrap{position: absolute;top: 125px;left: 0;bottom: 0;width: 390px;z-index: 200;background: #fff;flex-direction: column;}
 	.info-toggle{position: absolute;top: 50%;left: 0;left: 390px;z-index: 20;}
 	.info_btn_toggle{
 		position: absolute;
@@ -117,7 +141,7 @@
 	.left_toggle{left:0; }
 
 	
-	.scroll_area{overflow:auto;height:90%;flex-direction: column;background: #fff;}
+	.scroll_area{overflow:auto;height:85%;flex-direction: column;background: #fff;}
 	.search_item{border-top:1px solid #e5e5e5;margin: 0 20px;padding: 19px 20px 18px;;display: block;cursor: pointer;}
 
 	
@@ -201,8 +225,8 @@
 		<img class="load_img" src="<c:url value='/images/map/mask_loader.gif'/>">
 	</div>
 	<div class="search">
-		<input class="searchInput" id="searchAddress" disabled>
-		<button type="button" onclick="addressSearch()">검색</button>
+		<input class="searchInput" id="searchAddress" placeholder="지도상 현재 위치의 주소가 표시됩니다" disabled>
+		<img style="width: 43px;cursor: pointer;"src="<c:url value='/images/map/search.png'/>" onclick="addressSearch()" ></img>
 	</div>
 	<div class="map_button">
 		<button class="current_refresh" type="button" onclick="currentPosition()">
@@ -220,7 +244,7 @@
 		<button type="button" onclick="refreshMap()">갱신</button>
 	</div>
 	 -->
-	<div class="info_wrap">
+	<div class="info_wrap warp_invisible">
 		<div class="top_area">
 			<div class="top_absfilter_area">
 				<button class="filter_button" id="filter_hospital" type="button">
@@ -304,7 +328,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="info-toggle">
+	<div class="info-toggle left_toggle">
 		<span class="info_btn_toggle"></span>
 	</div>
 	<div class="menu_wrap">
@@ -321,7 +345,7 @@
 			<img src="<c:url value='/images/map/corona_image/corona_button.png'/>" style="width: 34px;height: 34px;">
 		</button>
 	</div>
-	<div id="map" style="width: 100%; height: 100%;position: relative;overflow: hidden;"></div>
+	<div id="map" style="top: 40px;width: 100%; height: 93%;position: relative;overflow: hidden;"></div>
 </div>
 <div class="modal fade" id="reservation-modal">
 	<div class="modal-dialog">
@@ -542,6 +566,7 @@
 			}
 
 		});
+		
 		$('.info_btn_toggle').click(function(){
 			console.log($('.info_wrap'));
 			$('.info_wrap').toggleClass('warp_invisible');
@@ -735,8 +760,8 @@
 								$('.info-toggle').removeClass('left_toggle');
 								
 							}
-							item = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel);
-							$('.search_list').html(item);
+							listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel);
+							$('.search_list').html(listitem);
 						});
 						
 						kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -828,8 +853,8 @@
 								$('.info-toggle').removeClass('left_toggle');
 								
 							}
-							item = getDetailPharItem(item.phar_name,item.address,item.tel);
-							$('.search_list').html(item);
+							listitem = getDetailPharItem(item.phar_name,item.address,item.tel);
+							$('.search_list').html(listitem);
 						});
 						
 						kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -1188,6 +1213,13 @@
 	    }
 		function addressSearch()
 		{
+			if($('.info-toggle').hasClass('left_toggle')==true)
+			{
+				$('.info_wrap').removeClass('warp_invisible');
+				$('.info-toggle').removeClass('left_toggle');
+				
+			}
+			/*
 			var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
 			new daum.Postcode({
 	            oncomplete: function(data) {
@@ -1226,6 +1258,7 @@
 	        }).embed(element_wrap);
 			
 			element_wrap.style.display = 'block';
+			*/
 		}
 		function currentPosition()
 		{
