@@ -51,7 +51,7 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
 					<div class="panel panel-red panel-widget ">
 						<div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
 							<div class="large">5.2k</div>
-							<div class="text-muted">방문 수</div>
+							<div class="text-muted">방문 수 </div>
 						</div>
 					</div>
 				</div>
