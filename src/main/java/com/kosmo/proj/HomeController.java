@@ -163,7 +163,7 @@ public class HomeController {
 	@RequestMapping("/Test/test.hst")
 	public String test()
 	{
-		return "test.ad_tiles";
+		return "Mypage_Main.my_tiles";
 	}
 
 //	마이바티스test

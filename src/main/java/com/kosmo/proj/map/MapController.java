@@ -38,7 +38,7 @@ public class MapController {
 	@RequestMapping("/Homespital/Map.hst")
 	public String map()
 	{
-		return "Map.tiles";
+		return "Map.no_tiles";
 	}
 	
 	@ResponseBody

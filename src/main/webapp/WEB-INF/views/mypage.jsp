@@ -124,16 +124,16 @@ body{
 					<table class="table">
 						<tbody style="font-size: 1.2em">
 							<tr>
-								<td>질병</td>
-								<td>감염성 질환, 호흡계 질환, 생식계 질환</td>
+								<td>자주 방문하는 병원</td>
+								<td>삼성병원</td>
 							</tr>
 							<tr class="table-active">
-								<td>01/04/2012</td>
-								<td>Approved</td>
+								<td>자주 방문하는 과</td>
+								<td>이비인후과</td>
 							</tr>
 							<tr class="table-success">
-								<td>02/04/2012</td>
-								<td>Declined</td>
+								<td>가지고 있는 질환</td>
+								<td>천식, 폐렴</td>
 							</tr>
 							<tr class="table-warning">
 								<td>03/04/2012</td>
