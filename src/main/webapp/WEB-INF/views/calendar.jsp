@@ -317,22 +317,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
-                    <label for="calendar_view">등록자별</label>
-                    <div class="input-group">
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="가길동"
-                                checked>가길동</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="나길동"
-                                checked>나길동</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="다길동"
-                                checked>다길동</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="라길동"
-                                checked>라길동</label>
-                        <label class="checkbox-inline"><input class='filter' type="checkbox" value="마길동"
-                                checked>마길동</label>
-                    </div>
-                </div>
-
+                
             </div>
         
         <!-- /.filter panel -->
