@@ -394,7 +394,7 @@ button:hover{
 				<li data-tags="소화제">
 				<figure class="effect-zoe">
 				<a href="#${medi }"> 
-				<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+				<img style="width: 300px;height: 150px" src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
 				</a>
 					<figcaption style="text-align: center;">
 						<h4>${medi}</h4>
@@ -412,7 +412,7 @@ button:hover{
 				<li data-tags="감기약">
 				<figure class="effect-zoe">
 				<a href="#${medi }"> 
-				<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+				<img style="width: 300px;height: 150px" src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
 				</a>
 					<figcaption style="text-align: center;">
 						<h4>${medi}</h4>
@@ -430,7 +430,7 @@ button:hover{
 				<li data-tags="파스">
 				<figure class="effect-zoe">
 				<a href="#${medi }"> 
-				<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+				<img style="width: 300px;height: 150px" src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
 				</a>
 					<figcaption style="text-align: center;">
 						<h4>${medi}</h4>
@@ -460,6 +460,39 @@ button:hover{
 	</div>
 	</c:forEach>
 	<!-- / row -->
+	<c:forEach items="${medi2 }" var="medi">
+	<div id="${medi}" class="port">
+		<div class="row">
+			<div class="description">
+				<h1>${medi}</h1>
+				<p>약물정보</p>
+			</div>
+			<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+		</div>
+	</div>
+	</c:forEach>
+	<c:forEach items="${medi3 }" var="medi">
+	<div id="${medi}" class="port">
+		<div class="row">
+			<div class="description">
+				<h1>${medi}</h1>
+				<p>약물정보</p>
+			</div>
+			<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+		</div>
+	</div>
+	</c:forEach>
+	<c:forEach items="${medi4 }" var="medi">
+	<div id="${medi}" class="port">
+		<div class="row">
+			<div class="description">
+				<h1>${medi}</h1>
+				<p>약물정보</p>
+			</div>
+			<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+		</div>
+	</div>
+	</c:forEach>
 </section>
 <!-- / projects -->
 
