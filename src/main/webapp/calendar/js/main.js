@@ -36,7 +36,7 @@ function filtering(event) {
     }
   }
 
-  return show_username && show_type;
+  return true;
 }
 
 function calDateWhenResize(event) {
@@ -126,21 +126,10 @@ var calendar = $('#calendar').fullCalendar({
 
   },
 
-  //주말 숨기기 & 보이기 버튼
-  customButtons: {
-    viewWeekends: {
-      text: '주말',
-      click: function () {
-        activeInactiveWeekends ? activeInactiveWeekends = false : activeInactiveWeekends = true;
-        $('#calendar').fullCalendar('option', {
-          weekends: activeInactiveWeekends
-        });
-      }
-    }
-  },
+
 
   header: {
-    left: 'today, prevYear, nextYear, viewWeekends',
+    left: 'today, prevYear, nextYear',
     center: 'prev, title, next',
     right: 'month,agendaWeek,agendaDay,listWeek'
   },
