@@ -121,7 +121,8 @@ form{
 						<h2 style="margin-bottom: 0;margin-top: 20px;">로그인</h2>
 					</div>
 					<div class="row">
-						<form id="login" control="#" class="form-group">
+						<form id="login" method="post" action="<c:url value='/User/LoginProcess.hst'/>" control="#" class="form-group">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<div class="row">
 								<input type="text" name="id" id="id" class="form__input" placeholder="아이디">
 							</div>
