@@ -103,6 +103,7 @@ a:hover, a:focus {
 	border: 1px solid #f3f3f3;
 	border-top: none;
 }
+
 </style>
 
 <head>
@@ -127,6 +128,9 @@ a:hover, a:focus {
 						순응도가 높을수록 치료효과가 높아진다.
 					</div>
 					<br />
+					<div class="col-md-offset-10" style="padding-bottom: 5px;">
+						<a class="btn btn-primary" href='<c:url value="/Homespital/Upload.hst"/>'><span class="glyphicon glyphicon-plus"></span> 복용약 추가</a>
+					</div>
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingOne">
