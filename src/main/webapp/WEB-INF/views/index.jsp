@@ -133,7 +133,7 @@
 		<div class="container">
 			<div class="section-title">
 				<h2>Our Services</h2>
-				<p>사용 가능한 기능</p>
+				<p>홈스피탈에서 제공 하는 서비스</p>
 			</div>
 			<div class="row">
 				<div class="col-md-4" style="cursor: pointer"  
@@ -141,7 +141,7 @@
 					<i class="fa fa-plus-square"></i>
 					<div class="service-desc">
 						<h3>약국 찾기</h3>
-						<p>홈스피탈 약국 찾기 서비스</p>
+						<p>현 위치 중심으로 공적 마스크 및 약국 찾기 서비스</p>
 					</div>
 				</div>
 				<div class="col-md-4" style="cursor: pointer"
@@ -149,14 +149,14 @@
 					<i class="fa fa-hospital-o"></i>
 					<div class="service-desc">
 						<h3>병원 찾기</h3>
-						<p>홈스피탈 병원 찾기 서비스</p>
+						<p>현 위치 중심으로  병원 위치 찾기 서비스 </p>
 					</div>
 				</div>
 				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Administration/administration.hst'/>'">
 					<i class="fa fa-medkit"></i>
 					<div class="service-desc">
 						<h3>복약 관리</h3>
-						<p>홈스피탈 복약 관리 서비스</p>
+						<p>현재 복용 중인 약에 관해 상세히 알아 볼 수 있는 서비스</p>
 					</div>
 				</div>
 			</div>
@@ -166,14 +166,14 @@
 					<i class="fa fa-language"></i>
 					<div class="service-desc">
 						<h3>예방 정보</h3>
-						<p>홈스피탈 예방 정보 서비스</p>
+						<p>시즌별 주의 해야 할 예방 정보 서비스</p>
 					</div>
 				</div>
 				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Calendar/calendar.hst'/>'">
 					<i class="fa fa-calendar"></i>
 					<div class="service-desc">
 						<h3>일정 관리</h3>
-						<p>홈스피탈 일정 관리 서비스</p>
+						<p>복용 알림 서비스 및 해당 병원 예약 서비스</p>
 					</div>
 				</div>
 
@@ -182,7 +182,7 @@
 					<i class="fa fa-pie-chart"></i>
 					<div class="service-desc">
 						<h3>코로나 현황</h3>
-						<p>홈스피탈 코로나 현황 서비스</p>
+						<p>각 국가별 코로나 현황 및 국내 (시/도) 코로나 현황 서비스</p>
 					</div>
 					<table>
 						<tr style="border: thin; border-color: aqua;">

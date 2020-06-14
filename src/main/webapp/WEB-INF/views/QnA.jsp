@@ -6,14 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <style>
-#footer {
-	position: absolute;
-	width: 100%;
-	left: 0px;
-	bottom: 0px;
-	background-color: #474747;
-	height: 150px
-}
+#footer 
+ 	{ 
+		position: absolute; 
+		width:100%; 
+		left:0px; 
+ 		bottom:0px; 
+ 		background-color:#474747;
+ 		height: 150px
+ 		
+ 	} 
 </style>
 <title>Q&A</title>
 </head>
