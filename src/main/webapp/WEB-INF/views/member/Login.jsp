@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&autoLogAppEvents=1&version=v7.0&appId=273273647151212"></script>
@@ -109,6 +110,13 @@ form{
 }
 
 </style>
+<sec:authorize access="isAnonymous()">
+	<c:if test="${not empty param.NotLogin}">
+	<script>
+		alert('존재하지 않는 아이디입니다');
+	</script>
+	</c:if>
+</sec:authorize>
 <div class="container-fluid">
 		<div class="row main-contents bg-success text-center">
 			<div class="col-md-4 text-center company__info">
@@ -141,7 +149,7 @@ form{
 							</div>
 						</form>
 						<div class="row">
-						<p>Don't have an account? <a href="#">Register Here</a></p>
+						<p>계정이 없으신가요? <a href="<c:url value='/Account/SignForm.hst'/>">회원가입</a></p>
 					</div>
 					</div>
 					<div class="hr-sect">or</div>

@@ -59,88 +59,88 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
 		</div>
 		
 		<div class="row">
-                            <div class="col-lg-6 ">
-                                <!-- TOP CAMPAIGN-->
-                                <div class="top-campaign">
-                                    <h3 class="title-3 m-b-30"> 개인정보 </h3>
-                                    <div class="table-responsive">
-                                        <table class="table table-top-campaign">
-                                            <tbody>
-                                                <tr>
-                                                    <td>이름</td>
-                                                    <td>윤성준</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>email</td>
-                                                    <td>busu0423@gmail.com</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>핸드폰 번호</td>
-                                                    <td>010-1234-7586</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>성별</td>
-                                                    <td>남성</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>나이</td>
-                                                    <td>27</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>키</td>
-                                                    <td>177(cm)</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>몸무게</td>
-                                                    <td>74(kg)</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!--  END TOP CAMPAIGN-->
-                            </div>	
-                            <div class="col-lg-6 " style="">
-                                <!-- TOP CAMPAIGN-->
-                                <div class="top-campaign">
-                                    <h3 class="title-3 m-b-30"> 질환 정보 </h3>
-                                    <div class="table-responsive">
-                                        <table class="table table-top-campaign">
-                                            <tbody>
-                                                <tr>
-                                                    <td>자주 방문하는 병원</td>
-                                                    <td>삼성병원</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>자주 방문하는 과</td>
-                                                    <td>이비인후과</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>가지고 있는 질환</td>
-                                                    <td>천식, 폐렴</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>최근 방문 증상</td>
-                                                    <td>기침, 고열</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>최근 방문 병원</td>
-                                                    <td>기침, 고열</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>최근 처방 날짜</td>
-                                                    <td>2020-06-12</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>가지고 있는 만성 질환</td>
-                                                    <td>비염, 갑각류 알레르기</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!--  END TOP CAMPAIGN-->
-                            </div>		
+            <div class="col-lg-6 ">
+                <!-- TOP CAMPAIGN-->
+                <div class="top-campaign">
+                    <h3 class="title-3 m-b-30"> 개인정보 </h3>
+                    <div class="table-responsive">
+                        <table class="table table-top-campaign">
+                            <tbody>
+                                <tr>
+                                    <td>이름</td>
+                                    <td>윤성준</td>
+                                </tr>
+                                <tr>
+                                    <td>이메일</td>
+                                    <td>busu0423@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>핸드폰 번호</td>
+                                    <td>010-1234-7586</td>
+                                </tr>
+                                <tr>
+                                    <td>성별</td>
+                                    <td>남성</td>
+                                </tr>
+                                <tr>
+                                    <td>나이</td>
+                                    <td>27</td>
+                                </tr>
+                                <tr>
+                                    <td>키</td>
+                                    <td>177(cm)</td>
+                                </tr>
+                                <tr>
+                                    <td>몸무게</td>
+                                    <td>74(kg)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--  END TOP CAMPAIGN-->
+            </div>	
+            <div class="col-lg-6 " style="">
+                <!-- TOP CAMPAIGN-->
+                <div class="top-campaign">
+                    <h3 class="title-3 m-b-30"> 질환 정보 </h3>
+                    <div class="table-responsive">
+                        <table class="table table-top-campaign">
+                            <tbody>
+                                <tr>
+                                    <td>자주 방문하는 병원</td>
+                                    <td>삼성병원</td>
+                                </tr>
+                                <tr>
+                                    <td>자주 방문하는 과</td>
+                                    <td>이비인후과</td>
+                                </tr>
+                                <tr>
+                                    <td>가지고 있는 질환</td>
+                                    <td>천식, 폐렴</td>
+                                </tr>
+                                <tr>
+                                    <td>최근 방문 증상</td>
+                                    <td>기침, 고열</td>
+                                </tr>
+                                <tr>
+                                    <td>최근 방문 병원</td>
+                                    <td>기침, 고열</td>
+                                </tr>
+                                <tr>
+                                    <td>최근 처방 날짜</td>
+                                    <td>2020-06-12</td>
+                                </tr>
+                                <tr>
+                                    <td>가지고 있는 만성 질환</td>
+                                    <td>비염, 갑각류 알레르기</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--  END TOP CAMPAIGN-->
+            </div>		
 <!--                             <div class="col-lg-3"> -->
 <!--                                 <div class="au-card au-card--bg-blue au-card-top-countries m-b-30"> -->
 <!--                                     <div class="au-card-inner"> -->

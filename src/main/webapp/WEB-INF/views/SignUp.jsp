@@ -346,7 +346,45 @@ width: 100%;
       $(".submit").click(function() {
          return false;
       })
-      
+      $(".input-group-addon").click(function() {
+         console.log($(".input-group-addon"),"검색")
+         console.log('검색',$('#input_hospital').val().length);
+			var search_val = $('#input_hospital').val();
+			if(search_val.length > 0)
+			{
+				$.ajax({
+					url:"<c:url value='/Homespital/Account/loadHospitalList.hst'/>",
+					type:'get',
+					datatype:'json',
+					data:{"search_keyword":search_val},
+					beforeSend: function () {
+						console.log("beforeSend");
+					},
+					complete: function () {
+						console.log("complete");
+					},
+					success:function(data){
+						var jsonData = JSON.parse(data);
+						console.log("연결성공", jsonData,typeof(jsonData));
+						var items = '<tbody>';
+						$.each(jsonData, function(i, item) {
+							console.log(item);
+						
+							items += "<tr>";
+							items += "<td>"+item['HOSP_NAME']+"<td>";
+							items += "<td>"+item['ADDRESS']+"<td>";
+							items += "<td>"+item['TEL']+"<td>";
+							items += "</tr>";
+						});
+						items += "<tbody>";
+						$('.table').html(items);
+					},
+					error:function(e){
+						
+					}
+				});
+			}
+      });
      
       
       $("#auth_prev").click(function(){
@@ -664,7 +702,11 @@ width: 100%;
     }
     
 </script>
-
+<script>
+	$(function() {
+		
+	});
+</script>
   <!-- progressbar -->
   <%
      StringBuffer buff1 = new StringBuffer();
@@ -723,7 +765,7 @@ width: 100%;
      }
   %>
 <form id="msform">
-	<div class="col-md-offset-2 col-md-8 col-xs-6" align="center">
+	<div class="col-md-offset-2 col-xs-offset-3 col-md-8 col-xs-6" align="center">
 		<ul id="progressbar">
 			<li class="active">Agreement</li>
 			<li>Account Setup</li>
@@ -934,9 +976,9 @@ width: 100%;
 					</div>
 					<div class="modal-body">
 						<div class="input-group">
-							<input name="q" type="text" class="form-control" />
+							<input id="input_hospital" type="text" class="form-control" />
 							<div class="input-group-addon">
-								<span class="glyphicon glyphicon-search" onclick="document.mysearchbar.submit()"></span>
+								<span class="glyphicon glyphicon-search"></span>
 							</div>
 						</div>
 					</div>
