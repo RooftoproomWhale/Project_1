@@ -3,8 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<link href="<c:url value='/css/jquery-accordion-menu.css'/>"
-	rel="stylesheet" type="text/css" />
+<link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
 <style>
 a:hover, a:focus {
 	text-decoration: none;
@@ -51,12 +50,11 @@ a:hover, a:focus {
 	color: #9c88b9;
 }
 
-#accordion .panel-title a:after, #accordion .panel-title a.collapsed:after
-	{
+#accordion .panel-title a:after, #accordion .panel-title a.collapsed:after {
 	content: "\f068";
 	font-family: FontAwesome;
 	font-size: 15px;
-	color: #fff;
+	color: #fff; 
 	width: 45px;
 	height: 100%;
 	line-height: 54px;
@@ -102,152 +100,14 @@ a:hover, a:focus {
 	background: #fff;
 	border: 1px solid #f3f3f3;
 	border-top: none;
-}
-/*사이드바*/
-#jquery-accordion-menu {
-	top: 81px;
-}
-
-* {
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-}
-
-body {
-	background: #FFFFFF;
-}
-
-.content {
-	width: 260px;
-	margin: 100px auto;
-}
-
-#demo-list a {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	white-space: nowrap;
-	height: 60px;
-	width: 100%;
-	font-size: 14px
-}
-
-#footer {
-	position: absolute;
-	width: 100%;
-	left: 0px;
-	bottom: 0px;
-	background-color: #474747;
-	height: 150px
 }
 </style>
 
 <head>
-<title>진료현황</title>
-<style>
-a:hover, a:focus {
-	text-decoration: none;
-	outline: none;
-}
-
-.demo {
-	padding: 100px 0;
-}
-
-.heading-title {
-	margin-bottom: 100px;
-}
-
-#accordion .panel {
-	border: none;
-	background: none;
-	border-radius: 0;
-	box-shadow: none;
-}
-
-#accordion .panel-heading {
-	padding: 0;
-}
-
-#accordion .panel-title a {
-	display: block;
-	font-size: 16px;
-	color: #9c88b9;
-	padding: 17px 40px 17px 65px;
-	background: #fff;
-	border: 1px solid #f3f3f3;
-	border-bottom: none;
-	position: relative;
-	transition: all 0.5s ease 0s;
-}
-
-#accordion .panel-title a.collapsed {
-	background: #fafafa;
-	color: #959595;
-}
-
-#accordion .panel-title a.collapsed:hover {
-	color: #9c88b9;
-}
-
-#accordion .panel-title a:after, #accordion .panel-title a.collapsed:after
-	{
-	content: "\f068";
-	font-family: FontAwesome;
-	font-size: 15px;
-	color: #fff;
-	width: 45px;
-	height: 100%;
-	line-height: 54px;
-	text-align: center;
-	position: absolute;
-	top: 0px;
-	left: -1px;
-	background: #9c88b9;
-	transition: all .2s;
-}
-
-#accordion .panel-title a.collapsed:after {
-	content: "\f067";
-	color: #959595;
-	background: #f4f4f4;
-	transition: all 0.5s ease 0s;
-}
-
-#accordion .panel-title a.collapsed:hover:after {
-	background: #9c88b9;
-	color: #fff;
-}
-
-#accordion .panel-title a:before {
-	content: "";
-	position: absolute;
-	bottom: -11px;
-	left: -1px;
-	border-bottom: 12px solid transparent;
-	border-right: 12px solid #9c88b9;
-}
-
-#accordion .panel-title a.collapsed:before {
-	display: none;
-}
-
-#accordion .panel-body {
-	font-size: 14px;
-	color: #b7b7b7;
-	padding: 0 65px 15px;
-	line-height: 20px;
-	margin-left: 12px;
-	background: #fff;
-	border: 1px solid #f3f3f3;
-	border-top: none;
-}
-</style>
-<title>진료현황</title>
+<title>복약관리</title>
 </head>
 <body>
-	<div class="container-fluid">
+<div class="container-fluid">
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
@@ -389,19 +249,18 @@ a:hover, a:focus {
 		});
 	})(jQuery);
 </script>
-<script>
-	$(document).ready(function() {
-
-		$("#report tr:odd").addClass("odd");
-		$("#report tr:not(.odd)").hide();
-		$("#report tr:first-child").show(); //열머리글 보여주기
-
-		$("#report tr.odd").click(function() {
-			$(this).next("tr").toggle();
-			$(this).find(".arrow").toggleClass("up");
-
-		});
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
 
 	});
+
+	$(function() {
+
+		$("#demo-list li").click(function() {
+			$("#demo-list li.active").removeClass("active")
+			$(this).addClass("active");
+		})
+	})
 </script>
 </html>

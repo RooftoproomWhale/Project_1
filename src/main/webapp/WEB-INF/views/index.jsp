@@ -60,7 +60,7 @@
 		<div class="row" style="padding-top: 50px">
 			<div class="col-md-5 col-md-offset-1 col-sm-12">
 				<div id="jssor_1"
-					style="position: relative; margin-top: 10px; margin-bottom: 50px; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden; visibility: hidden;"
+					style="position: relative; margin-top: 10px; margin-bottom: 50px; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden; visibility: hidden; "
 					align="left">
 
 					<!-- Loading Screen -->
@@ -141,7 +141,7 @@
 					<i class="fa fa-plus-square"></i>
 					<div class="service-desc">
 						<h3>약국 찾기</h3>
-						<p>약국 찾기 설명</p>
+						<p>홈스피탈 약국 찾기 서비스</p>
 					</div>
 				</div>
 				<div class="col-md-4" style="cursor: pointer"
@@ -149,14 +149,14 @@
 					<i class="fa fa-hospital-o"></i>
 					<div class="service-desc">
 						<h3>병원 찾기</h3>
-						<p>병원 찾기 설명</p>
+						<p>홈스피탈 병원 찾기 서비스</p>
 					</div>
 				</div>
 				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Administration/administration.hst'/>'">
 					<i class="fa fa-medkit"></i>
 					<div class="service-desc">
 						<h3>복약 관리</h3>
-						<p>복약 관리 설명</p>
+						<p>홈스피탈 복약 관리 서비스</p>
 					</div>
 				</div>
 			</div>
@@ -166,14 +166,14 @@
 					<i class="fa fa-language"></i>
 					<div class="service-desc">
 						<h3>예방 정보</h3>
-						<p>예방 정보 설명</p>
+						<p>홈스피탈 예방 정보 서비스</p>
 					</div>
 				</div>
 				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Calendar/calendar.hst'/>'">
 					<i class="fa fa-calendar"></i>
 					<div class="service-desc">
 						<h3>일정 관리</h3>
-						<p>일정 관리 설명</p>
+						<p>홈스피탈 일정 관리 서비스</p>
 					</div>
 				</div>
 
@@ -182,7 +182,7 @@
 					<i class="fa fa-pie-chart"></i>
 					<div class="service-desc">
 						<h3>코로나 현황</h3>
-						<p>코로나 현황 설명</p>
+						<p>홈스피탈 코로나 현황 서비스</p>
 					</div>
 					<table>
 						<tr style="border: thin; border-color: aqua;">
