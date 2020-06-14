@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -97,18 +98,24 @@
 						
 					</ul></li>
 
-				<c:if test="${USER == NULL}" var="result">
+				<sec:authorize access="isAnonymous()">
 					<li><a href="<c:url value='/User/Login.hst'/>" class="page-scroll">Login</a></li>
 					<li><a href="<c:url value='/Account/SignForm.hst'/>">SignUp</a></li>
-				</c:if>
-				<c:if test="${!result }">
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
 					<li><a href="<c:url value='/User/Logout.hst'/>">Logout</a></li>
-					<li><a href="<c:url value='/Account/ToMypage.hst'/>">MyPage</a></li>
-				</c:if>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_MEM')">
+					<li><a href="<c:url value='/mypage/mypage.hst'/>">MyPage</a></li>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_ADM')">
 					<li><a href="<c:url value='/Admin/Index.hst'/>">Admin</a></li>
+				</sec:authorize>
 					<li><a href="<c:url value='/Notice/FAQ.hst'/>">FAQ</a></li>
 				<!-- 				<li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
+				<sec:authorize access="hasRole('ROLE_HOS')">
 					<li><a href="<c:url value='/Test/test.hst'/>">Test</a></li>
+				</sec:authorize>
 			</ul>
 		</div>
 
