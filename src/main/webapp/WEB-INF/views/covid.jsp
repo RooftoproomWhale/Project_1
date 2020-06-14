@@ -1,5 +1,9 @@
+<%@page import="org.jsoup.nodes.Element"%>
+<%@page import="org.jsoup.select.Elements"%>
+<%@page import="org.jsoup.Jsoup"%>
+<%@page import="org.jsoup.nodes.Document"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -206,6 +210,19 @@ left: 30px;
 
 	<div class="row" style="margin-top: 40px;margin-left:50px; ">
 		<div class="col-md-12">
+		<%
+		Document doc = Jsoup.connect("https://en.wikipedia.org/").get();
+		System.out.println(doc);
+		out.println("<h3>도큐먼트 타이틀</h3>");
+		out.println(doc.title());
+		Elements newsHeadlines = doc.select("#mp-itn b a");
+		out.println("<h3>헤드라인 뉴스</h3>");
+		for (Element headline : newsHeadlines) 
+		{
+		 	 out.println(String.format("%s<br/>%s",  headline.attr("title"), headline.absUrl("href")));
+		}
+		
+		%>
 			<div class="col-md-5" id="chartContainer3"
 				style="height: 300px; width: 500px;"></div>
 			<div class="col-md-5" id="chartContainer2"
