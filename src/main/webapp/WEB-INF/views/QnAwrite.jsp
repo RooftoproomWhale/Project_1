@@ -6,14 +6,15 @@
 <meta charset="UTF-8">
 <style>
 #footer 
-{ 
-	position: absolute; 
-	width:100%; 
-	left:0px; 
-	bottom:0px; 
-	background-color:#474747;
-	height: 150px
-} 
+ 	{ 
+		position: absolute; 
+		width:100%; 
+		left:0px; 
+ 		bottom:0px; 
+ 		background-color:#474747;
+ 		height: 150px
+ 		
+ 	} 
 </style>
 <title>공지사항 글쓰기</title>
 </head>

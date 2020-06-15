@@ -22,6 +22,7 @@ html {
 
 body {
    font-family: montserrat, arial, verdana;
+   background-color: #ffffff;
 }
 /*form styles*/
 #msform {

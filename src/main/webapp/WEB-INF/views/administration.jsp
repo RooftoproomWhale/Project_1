@@ -3,8 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<link href="<c:url value='/css/jquery-accordion-menu.css'/>"
-	rel="stylesheet" type="text/css" />
+<link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
 <style>
 a:hover, a:focus {
 	text-decoration: none;
@@ -51,12 +50,11 @@ a:hover, a:focus {
 	color: #9c88b9;
 }
 
-#accordion .panel-title a:after, #accordion .panel-title a.collapsed:after
-	{
+#accordion .panel-title a:after, #accordion .panel-title a.collapsed:after {
 	content: "\f068";
 	font-family: FontAwesome;
 	font-size: 15px;
-	color: #fff;
+	color: #fff; 
 	width: 45px;
 	height: 100%;
 	line-height: 54px;
