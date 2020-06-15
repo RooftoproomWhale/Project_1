@@ -1,17 +1,17 @@
-package com.kosmo.proj.notice;
+package com.kosmo.proj.Notice;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-public class QnAController {
+public class QnAwirteController {
 
 	//공지사항 글쓰기
-	@RequestMapping("/Notice/QnA.hst")
-	public String QnA() {
+	@RequestMapping("/QnA/QnAwrite.hst")
+	public String QnAwrite() {
 
-		return "QnA.tiles";
+		return "QnAwrite.tiles";
 	}
 
 }

@@ -1357,7 +1357,7 @@
 								'<strong>'+hospname+'</strong>'+
 							'</div>'+
 							'<div class="inner_summary_info">'+
-								'<span>'+deptname+'</span>'+
+								'<span>내과</span>'+
 							'</div>'+
 						'</div>'+
 						'<div class="inner_btn_area">'+

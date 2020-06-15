@@ -36,7 +36,7 @@ function filtering(event) {
     }
   }
 
-  return true;
+  return show_type;
 }
 
 function calDateWhenResize(event) {
@@ -93,9 +93,10 @@ function calDateWhenDragnDrop(event) {
 
 
 var calendar = $('#calendar').fullCalendar({
+	
 	themeSystem :'standard',
   eventRender: function (event, element, view) {
-
+	
     //일정에 hover시 요약
     element.popover({
     	
@@ -125,7 +126,6 @@ var calendar = $('#calendar').fullCalendar({
     return filtering(event);
 
   },
-
 
 
   header: {
@@ -330,3 +330,6 @@ var calendar = $('#calendar').fullCalendar({
   eventLongPressDelay: 0,
   selectLongPressDelay: 0
 });
+$("<select class='filter form-control'  onchange='filtering()' id='type_filter'><option value=''>모두</option><option value='병원예약'>병원예약</option><option value='복용약등록'>복용약등록</option></select>").appendTo('.fc-left');
+
+

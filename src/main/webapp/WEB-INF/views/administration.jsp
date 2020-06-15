@@ -3,8 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<link href="<c:url value='/css/jquery-accordion-menu.css'/>"
-	rel="stylesheet" type="text/css" />
+<link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
 <style>
 a:hover, a:focus {
 	text-decoration: none;
@@ -51,12 +50,11 @@ a:hover, a:focus {
 	color: #9c88b9;
 }
 
-#accordion .panel-title a:after, #accordion .panel-title a.collapsed:after
-	{
+#accordion .panel-title a:after, #accordion .panel-title a.collapsed:after {
 	content: "\f068";
 	font-family: FontAwesome;
 	font-size: 15px;
-	color: #fff;
+	color: #fff; 
 	width: 45px;
 	height: 100%;
 	line-height: 54px;
@@ -103,6 +101,7 @@ a:hover, a:focus {
 	border: 1px solid #f3f3f3;
 	border-top: none;
 }
+
 </style>
 
 <head>
@@ -127,6 +126,9 @@ a:hover, a:focus {
 						순응도가 높을수록 치료효과가 높아진다.
 					</div>
 					<br />
+					<div class="col-md-offset-10" style="padding-bottom: 5px;">
+						<a class="btn btn-primary" href='<c:url value="/Homespital/Upload.hst"/>'><span class="glyphicon glyphicon-plus"></span> 복용약 추가</a>
+					</div>
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingOne">

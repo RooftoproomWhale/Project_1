@@ -1,4 +1,4 @@
-package com.kosmo.proj.notice;
+package com.kosmo.proj.Notice;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

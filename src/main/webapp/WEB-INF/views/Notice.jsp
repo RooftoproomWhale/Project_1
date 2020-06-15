@@ -4,6 +4,18 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!doctype html>
 <html>
+<style>
+#footer 
+ 	{ 
+		position: absolute; 
+		width:100%; 
+		left:0px; 
+ 		bottom:0px; 
+ 		background-color:#474747;
+ 		height: 150px
+ 		
+ 	} 
+</style>
 <head>
 <meta charset="utf-8">
 <title>공지사항</title>
@@ -20,7 +32,7 @@
 					<h2 style="color:blue">공지사항</h2>
 				</div>
 				<p class="lead">홈스피탈 공지사항</p>
-				<table class="table table-striped" style="max-width: 1300px; box-shadow: 5px 5px 5px 5px gray">
+				<table class="table table-striped" style="max-width: 1300px;">
 					<thead>
 						<tr>
 							<th scope="col" class="" style="width: 55px; text-align: center;">번호</th>
@@ -32,57 +44,21 @@
 					<tbody>
 						<tr>
 							<th scope="row" class="" style="text-align: center;">9</th>
-							<td><a href="<c:url value='/Homespital/NoticeSubmit.hst'/>" style="color: #000000;">윤승중</a></td>
+							<td><a href="<c:url value='/Homespital/NoticeSubmit.hst'/>" style="color: #000000;">2020-04-22 병원 회원 개인정보처리방침 변경 안내 (시행일 : 2020-05-06)</a></td>
 							<td class="" style="text-align: center;">윤승중</td>
 							<td class="" style="text-align: center;">2018-01-05</td>
 						</tr>
-							<tr>
-							<th scope="row" class="" style="text-align: center;">8</th>
-							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2018-01-05</td>
-						</tr>
-							<tr>
-							<th scope="row" class="" style="text-align: center;">7</th>
-							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2018-01-05</td>
-						</tr>
-							<tr>
+						<tr>
 							<th scope="row" class="" style="text-align: center;">6</th>
-							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td><a href="./boardView.html" style="color: #000000;">	2020-04-22 일반 회원 이용약관 변경 안내 (시행일 : 2020-05-06)</a></td>
 							<td class="" style="text-align: center;">윤승중</td>
 							<td class="" style="text-align: center;">2018-01-05</td>
 						</tr>
 						<tr>
 							<th scope="row" class="" style="text-align: center;">5</th>
-							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
+							<td><a href="./boardView.html" style="color: #000000;">	개정 전 개인정보 취급방침</a></td>
 							<td class="" style="text-align: center;">윤승중</td>
 							<td class="" style="text-align: center;">2018-01-05</td>
-						</tr>
-						<tr>
-							<th scope="row" class="" style="text-align: center;">4</th>
-							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
-							<td class="mobile" style="text-align: center;">윤승중</td>
-							<td class="mobile" style="text-align: center;">2018-01-05</td>
-						</tr>
-						<tr>
-							<th scope="row" class="" style="text-align: center;">3</th>
-							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2018-01-05</td>
-						</tr>
-						<tr>
-							<th scope="row" class=""  style="text-align: center;">2</th>
-							<td><a href="./boardView.html" style="color: #000000;">윤승중</a></td>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2018-01-04</td>
-						</tr>
-						<tr>
-							<th class="" scope="row" style="text-align: center;">1</th>
-							<td><a href="./boardView.html" style="color: #000000;">윤승중.</a></td>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2018-01-03</td>
 						</tr>
 					</tbody>
 				</table>

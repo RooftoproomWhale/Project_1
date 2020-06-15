@@ -87,10 +87,14 @@ public class MedicineController {
 		return "/drug/Drug.tiles";
 	}
 	
+	@RequestMapping("/Homespital/Upload.hst")
+	public String upload() {
+		return "Upload.my_tiles";
+	}
+	
+	
 	private MedicineShapeDTO mediShape(String encodeSearch,MedicineShapeDTO dto) {
-		try{
-		encodeSearch = URLEncoder.encode(encodeSearch,"UTF-8"); 
-        }catch(Exception e){ e.printStackTrace();  }
+	
 		String apiUrl = "http://apis.data.go.kr/1470000/MdcinGrnIdntfcInfoService/getMdcinGrnIdntfcInfoList?" +
                 "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
                 "&numOfRows=10" +
@@ -116,9 +120,7 @@ public class MedicineController {
 	
 	
 	private MedicineInfoDTO mediInfo(String encodeSearch,MedicineInfoDTO dto) {
-		try{
-			encodeSearch = URLEncoder.encode(encodeSearch,"UTF-8"); 
-	        }catch(Exception e){ e.printStackTrace();  }
+		
 		String apiUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?" +
                 "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
                 "&numOfRows=10" +
@@ -154,15 +156,15 @@ public class MedicineController {
         try {
             con.setRequestMethod("GET");
             int responseCode = con.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 응답
+            if (responseCode == HttpURLConnection.HTTP_OK) { // �젙�긽 �쓳�떟
                 return readBody(con.getInputStream());
-            } else {  // 에러 응답
+            } else {  // �뿉�윭 �쓳�떟
                 return readBody(con.getErrorStream());
             }
         } catch (IOException e) {
-            throw new RuntimeException("API 요청과 응답 실패", e);
+            throw new RuntimeException("API �슂泥�怨� �쓳�떟 �떎�뙣", e);
         } finally {
-            con.disconnect(); // Connection을 재활용할 필요가 없는 프로세스일 경우
+            con.disconnect(); // Connection�쓣 �옱�솢�슜�븷 �븘�슂媛� �뾾�뒗 �봽濡쒖꽭�뒪�씪 寃쎌슦
         }
     }
 	
@@ -171,9 +173,9 @@ public class MedicineController {
             URL url = new URL(apiUrl);
             return (HttpURLConnection) url.openConnection();
         } catch (MalformedURLException e) {
-            throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
+            throw new RuntimeException("API URL�씠 �옒紐삳릺�뿀�뒿�땲�떎. : " + apiUrl, e);
         } catch (IOException e) {
-            throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
+            throw new RuntimeException("�뿰寃곗씠 �떎�뙣�뻽�뒿�땲�떎. : " + apiUrl, e);
         }
     }
 	
@@ -190,7 +192,7 @@ public class MedicineController {
 
             return responseBody.toString();
         } catch (IOException e) {
-            throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
+            throw new RuntimeException("API �쓳�떟�쓣 �씫�뒗�뜲 �떎�뙣�뻽�뒿�땲�떎.", e);
         }
     }
 	
