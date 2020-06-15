@@ -140,6 +140,7 @@ left: 30px;
 							]
 						}]
 					};
+				
 					$("#chartContainer3").CanvasJSChart(options);
 
 					function toogleDataSeries(e){

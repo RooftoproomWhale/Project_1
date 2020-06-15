@@ -6,14 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <style>
-#footer {
-	position: absolute;
-	width: 100%;
-	left: 0px;
-	bottom: 0px;
-	background-color: #474747;
-	height: 150px
-}
+#footer 
+ 	{ 
+		position: absolute; 
+		width:100%; 
+		left:0px; 
+ 		bottom:0px; 
+ 		background-color:#474747;
+ 		height: 150px
+ 		
+ 	} 
 </style>
 <title>Q&A</title>
 </head>
@@ -25,7 +27,7 @@
 					<h2 style="color: blue">Q&A</h2>
 				</div>
 				<p class="lead">회원님의 궁금증을 풀어드립니다.</p> <br />
-				<table id="report" class="table table-striped" style="max-width: 1300px; box-shadow: 5px 5px 5px 5px gray">
+				<table id="report" class="table table-striped" style="max-width: 1300px; box-shadow: 1px 3px 1px 3px gray">
 					<tr>
 						<th scope="col" class="" style="width: 20px; text-align: center;">번호</th>
 						<th scope="col" class="" style="width: 80px; text-align: center;">제목</th>
