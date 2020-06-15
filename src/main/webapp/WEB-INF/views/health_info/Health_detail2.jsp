@@ -66,22 +66,25 @@ color: #66cfff;
 </script>
 <div class="container" id="Health_Detail">
 <div class="col-md-6 col-md-offset-2" style="padding-top: 250px; border-right: 1px solid gray;"id="mainbar">
-<h1 style="text-align: center;font-size: 70px;color:#bc7ad6" id="Health_Title">감기<small>Flu</small></h1>
+<h1 style="text-align: center;font-size: 70px;color:#bc7ad6" id="Health_Title">간<small>liver</small></h1>
 
 <div class="row" style="padding-top: 100px;" id="Main">
-  <div class="col-md-12 small"><h3>정의</h3></div>
-  <div class="col-md-12" style="padding-bottom: 50px;">감기는 바이러스에 의해 코와 목
-				부분을 포함한 상부 호흡기계의 감염 증상으로, 사람에게 나타나는 가장 흔한 급성 질환 중 하나이다. 재채기, 코막힘,
-				콧물, 인후통, 기침, 미열, 두통 및 근육통과 같은 증상이 나타나지만 대개는 특별한 치료 없이도 저절로 치유된다.</div>
-  
-  
-  <div class="col-md-12"><h3>원인</h3></div>
-			<div class="col-md-12">200여개 이상의 서로 다른 종류의 바이러스가 감기를 일으킨다. 그 중
-				30~50%가 리노바이러스(Rhinovirus)이고 10~15%가 코로나바이러스(Coronavirus)이다. 성인은 일
-				년에 2~4회, 소아는 6~10회 정도 감기에 걸린다. 감기 바이러스는 사람의 코나 목을 통해 들어와 감염을 일으킨다.
-				감기 바이러스를 가지고 있는 환자의 코와 입에서 나오는 분비물이 재채기나 기침을 통해 외부로 나오게 되면 그 속에 있는
-				감기 바이러스가 공기 중에 존재하다가 건강한 사람의 입이나 코에 닿아 전파된다.</div>
-<!-- <div class="col-md-12"><h3>소제목</h3></div> -->
+  <div class="col-md-12 small"><h3>질병</h3></div>
+			<div class="col-md-12" style="padding-bottom: 50px;">간염, 유육종증,
+				지방간, 알코올성 간 질환, 간암, 간경변증, 임신 중독증, 비호지킨 림프종, 윌슨병, 라이 증후군, 기타 신생아 황달,
+				간흡충증, 간농양, 간혈관종 등</div>
+
+
+			<div class="col-md-12"><h3>관련 검사</h3></div>
+			<div class="col-md-12">간질환의 유무는 병력, 문진, 시진, 청진, 촉진, 타진 등의 진찰
+				소견의 종합, 혈액검사, 간초음파나 컴퓨터 단층촬영(CT) 검사 등의 영상학적 검사 등 여러 가지를 종합하여 이루어진다.
+
+				혈액검사로는 간기능검사와 간염바이러스에 대한 혈청학적 표지자(標識子) 검사가 중요하다. 간기능검사 중 AST,
+				ALT(종래의 GOT, GPT)는 간염이 있을 때 손상된 간세포에서 유출되는 효소로서 간염의 정도를 대략 짐작하게 해주나
+				간염의 정도를 정확히 반영하는 검사는 아니며 전반적인 추세를 보는 것이 중요하다. 알부민이나 빌리루빈은 간의 합성 기능을
+				주로 반영하는 지표이며, 또한 간세포에서는 혈액응고인자들을 만드는 기능을 평가하는 프로트롬빈 시간(prothrombin
+				time 또는 PT)은 혈액응고 시간을 직접 측정하는 검사이며, 잔여 간기능을 평가하는 지표 중의 하나이다.</div>
+			<div class="col-md-12"><h3>소제목</h3></div>
 <!--   <div class="col-md-12">내용...</div> -->
 <!--   <div class="col-md-12"><h3>소제목</h3></div> -->
 <!--   <div class="col-md-12">내용...</div> -->

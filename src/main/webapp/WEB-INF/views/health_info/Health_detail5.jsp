@@ -66,7 +66,7 @@ color: #66cfff;
 </script>
 <div class="container" id="Health_Detail">
 <div class="col-md-6 col-md-offset-2" style="padding-top: 250px; border-right: 1px solid gray;"id="mainbar">
-<h1 style="text-align: center;font-size: 70px;color:#bc7ad6" id="Health_Title">감기<small>Flu</small></h1>
+<h1 style="text-align: center;font-size: 70px;color:#bc7ad6" id="Health_Title">비만/과체중<small>obesity</small></h1>
 
 <div class="row" style="padding-top: 100px;" id="Main">
   <div class="col-md-12 small"><h3>정의</h3></div>
@@ -76,12 +76,13 @@ color: #66cfff;
   
   
   <div class="col-md-12"><h3>원인</h3></div>
-			<div class="col-md-12">200여개 이상의 서로 다른 종류의 바이러스가 감기를 일으킨다. 그 중
-				30~50%가 리노바이러스(Rhinovirus)이고 10~15%가 코로나바이러스(Coronavirus)이다. 성인은 일
-				년에 2~4회, 소아는 6~10회 정도 감기에 걸린다. 감기 바이러스는 사람의 코나 목을 통해 들어와 감염을 일으킨다.
-				감기 바이러스를 가지고 있는 환자의 코와 입에서 나오는 분비물이 재채기나 기침을 통해 외부로 나오게 되면 그 속에 있는
-				감기 바이러스가 공기 중에 존재하다가 건강한 사람의 입이나 코에 닿아 전파된다.</div>
-<!-- <div class="col-md-12"><h3>소제목</h3></div> -->
+			<div class="col-md-12">오랜 기간에 걸쳐 에너지 소비량에 비해 영양소를 과다 섭취할 경우 에너지
+				불균형에 의해 비만이 유발된다. 유전적으로 특정 유전자의 돌연변이에 의해 식욕 조절 중추 기능에 문제가 있거나,
+				쿠싱증후군과 같은 내분비 질환, 식욕을 증가시키는 다양한 약제에 의해 발생하는 경우도 있으나, 일반적으로는 에너지 섭취량이
+				에너지 소비량보다 커서 발생한다. 일반적인 비만의 경우 유전적 영향 및 환경적 영향이 복합적으로 작용하여 발생한다. 특히
+				칼로리가 높은 식품이 풍부하고 신체 활동을 덜 해도 사는데 불편이 없는 현대의 생활환경이 비만의 폭발적 증가를 초래하고
+				있다.</div>
+<!-- 			<div class="col-md-12"><h3>소제목</h3></div> -->
 <!--   <div class="col-md-12">내용...</div> -->
 <!--   <div class="col-md-12"><h3>소제목</h3></div> -->
 <!--   <div class="col-md-12">내용...</div> -->

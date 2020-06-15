@@ -66,7 +66,7 @@ border: 1px solid #58a4f5;
 				</div>
 			</div><!-- 썸네일 -->
 			</a>
-			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
+			<a href="<c:url value="/Homespital/Health_detail2.hst"/>">
 			<div class="thumbnail col-md-3">
 				<img src="<c:url value="/images/healthimg/간.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
@@ -74,7 +74,7 @@ border: 1px solid #58a4f5;
 				</div>
 			</div>
 			</a>
-			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
+			<a href="<c:url value="/Homespital/Health_detail3.hst"/>">
 			<div class="thumbnail col-md-3">
 				<img src="<c:url value="/images/healthimg/신장.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
@@ -87,7 +87,7 @@ border: 1px solid #58a4f5;
 		
 		<div class="row" >
 			<div class="col-md-8 col-md-offset-2"id="basic2" >
-		<a href="<c:url value="/Homespital/Health_detail.hst"/>">
+		<a href="<c:url value="/Homespital/Health_detail4.hst"/>">
 		<div class="thumbnail col-md-3" style="position: relative;left: 10px;">
 				<img src="<c:url value="/images/healthimg//대장.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
@@ -95,7 +95,7 @@ border: 1px solid #58a4f5;
 				</div>	
 			</div><!-- 썸네일 -->
 			</a>
-			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
+			<a href="<c:url value="/Homespital/Health_detail5.hst"/>">
 			<div class="thumbnail col-md-3" style="position: relative;left: 10px;">
 				<img src="<c:url value="/images/healthimg//비만.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">
@@ -103,7 +103,7 @@ border: 1px solid #58a4f5;
 				</div>
 			</div>
 			</a>
-			<a href="<c:url value="/Homespital/Health_detail.hst"/>">
+			<a href="<c:url value="/Homespital/Health_detail6.hst"/>">
 			<div class="thumbnail col-md-3" style="position: relative;left: 10px;">
 				<img src="<c:url value="/images/healthimg//피부.jpg"/>" alt="..." style="width: auto; height: 180px;"/>
 				<div class="caption">

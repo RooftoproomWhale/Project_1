@@ -66,25 +66,21 @@ color: #66cfff;
 </script>
 <div class="container" id="Health_Detail">
 <div class="col-md-6 col-md-offset-2" style="padding-top: 250px; border-right: 1px solid gray;"id="mainbar">
-<h1 style="text-align: center;font-size: 70px;color:#bc7ad6" id="Health_Title">감기<small>Flu</small></h1>
+<h1 style="text-align: center;font-size: 70px;color:#bc7ad6" id="Health_Title">대장<small>intestine</small></h1>
 
 <div class="row" style="padding-top: 100px;" id="Main">
-  <div class="col-md-12 small"><h3>정의</h3></div>
-  <div class="col-md-12" style="padding-bottom: 50px;">감기는 바이러스에 의해 코와 목
-				부분을 포함한 상부 호흡기계의 감염 증상으로, 사람에게 나타나는 가장 흔한 급성 질환 중 하나이다. 재채기, 코막힘,
-				콧물, 인후통, 기침, 미열, 두통 및 근육통과 같은 증상이 나타나지만 대개는 특별한 치료 없이도 저절로 치유된다.</div>
-  
-  
-  <div class="col-md-12"><h3>원인</h3></div>
-			<div class="col-md-12">200여개 이상의 서로 다른 종류의 바이러스가 감기를 일으킨다. 그 중
-				30~50%가 리노바이러스(Rhinovirus)이고 10~15%가 코로나바이러스(Coronavirus)이다. 성인은 일
-				년에 2~4회, 소아는 6~10회 정도 감기에 걸린다. 감기 바이러스는 사람의 코나 목을 통해 들어와 감염을 일으킨다.
-				감기 바이러스를 가지고 있는 환자의 코와 입에서 나오는 분비물이 재채기나 기침을 통해 외부로 나오게 되면 그 속에 있는
-				감기 바이러스가 공기 중에 존재하다가 건강한 사람의 입이나 코에 닿아 전파된다.</div>
-<!-- <div class="col-md-12"><h3>소제목</h3></div> -->
-<!--   <div class="col-md-12">내용...</div> -->
-<!--   <div class="col-md-12"><h3>소제목</h3></div> -->
-<!--   <div class="col-md-12">내용...</div> -->
+  <div class="col-md-12 small"><h3>관련 질병</h3></div>
+			<div class="col-md-12" style="padding-bottom: 50px;">대장암, 대장용종,
+				과민성장증후군, 궤양성대장염 및 크론병, 결핵성장염, 감염성 설사 및 대장염, 혈관성장질환, 대장게실증, 장폐쇄</div>
+
+
+			<div class="col-md-12"><h3>관련 검사</h3></div>
+			<div class="col-md-12">단순복부촬영, 대장바륨조영술, 대장내시경검사, 대장통과시간검사,
+				직장항문내압검사, 풍선배출검사, 배변조영술</div>
+			<div class="col-md-12"><h3>소제목</h3></div>
+  <div class="col-md-12">내용...</div>
+  <div class="col-md-12"><h3>소제목</h3></div>
+  <div class="col-md-12">내용...</div>
 
 </div>
 </div>
