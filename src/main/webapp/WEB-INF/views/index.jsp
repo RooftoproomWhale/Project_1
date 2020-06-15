@@ -177,7 +177,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Covid/status.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Covid/View.hst'/>'">
 
 					<i class="fa fa-pie-chart"></i>
 					<div class="service-desc">

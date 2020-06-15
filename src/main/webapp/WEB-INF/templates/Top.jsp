@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +26,7 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.24/themes/base/jquery-ui.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,6 +39,8 @@
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) 및 js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
 <%-- <script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script> --%>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+
 
 <script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value="/js/bootstrap.min.js"/>"></script> --%>
@@ -46,6 +50,7 @@
 <script type="text/javascript" src="<c:url value='/js/contact_me.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/main.js'/>"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+<%--<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>--%>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.css'/>">
@@ -93,18 +98,24 @@
 						
 					</ul></li>
 
-				<c:if test="${USER == NULL}" var="result">
+				<sec:authorize access="isAnonymous()">
 					<li><a href="<c:url value='/User/Login.hst'/>" class="page-scroll">Login</a></li>
 					<li><a href="<c:url value='/Account/SignForm.hst'/>">SignUp</a></li>
-				</c:if>
-				<c:if test="${!result }">
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
 					<li><a href="<c:url value='/User/Logout.hst'/>">Logout</a></li>
-					<li><a href="<c:url value='/Account/ToMypage.hst'/>">MyPage</a></li>
-				</c:if>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_MEM')">
+					<li><a href="<c:url value='/mypage/mypage.hst'/>">MyPage</a></li>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_ADM')">
 					<li><a href="<c:url value='/Admin/Index.hst'/>">Admin</a></li>
+				</sec:authorize>
 					<li><a href="<c:url value='/Notice/FAQ.hst'/>">FAQ</a></li>
 				<!-- 				<li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
+				<sec:authorize access="hasRole('ROLE_HOS')">
 					<li><a href="<c:url value='/Test/test.hst'/>">Test</a></li>
+				</sec:authorize>
 			</ul>
 		</div>
 

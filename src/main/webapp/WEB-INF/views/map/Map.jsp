@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	.map_wrap {margin-top: 80px;height: 100%;}
+	.map_wrap {position: relative;height: 100%;}
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
@@ -15,7 +15,7 @@
     .desc .addr {overflow: hidden;text-overflow: addr;white-space: normal;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
-    .modal { position: absolute; top: 30%;}
+    .modal { position: absolute; top: 20%;}
 	.body_title {font-size: 24px;font-weight: bold;}
 	.load_wrap {
 		position: absolute; 
@@ -26,7 +26,31 @@
 	    background-color: rgba( 255, 255, 255, 0.5 );
 		z-index: 1231234;
 	}
-	.search {position: absolute;top:120px;left: 16px;z-index: 2;}
+	.search 
+	{
+		position: absolute;
+	    top: 100px;
+	    left: 16px;
+	    display: flex;
+	    justify-content: space-between;
+	    z-index: 2;
+	    align-items: center;
+	    border-radius: 24px;
+	    background: white;
+	    padding: 13px 24px 13px 24px;
+	    width: auto;
+	    right: 16px;
+	    max-width: 343px;
+	    height: 46px;
+	    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+	    background-color: #ffffff;
+	}
+	.searchInput
+	{
+		width: 90%;
+    	border: 0 !important;
+    	background: white;
+	}
 	.map_button{position: absolute;bottom: 32px;right: 8px;z-index: 2;flex-direction: column;}
 	.current_refresh
 	{
@@ -117,7 +141,7 @@
 	.left_toggle{left:0; }
 
 	
-	.scroll_area{overflow:auto;height:90%;flex-direction: column;background: #fff;}
+	.scroll_area{overflow:auto;height:85%;flex-direction: column;background: #fff;}
 	.search_item{border-top:1px solid #e5e5e5;margin: 0 20px;padding: 19px 20px 18px;;display: block;cursor: pointer;}
 
 	
@@ -183,12 +207,14 @@
 	    line-height: 21px;
 	}
 	 .ui-autocomplete {
+	 	position: absolute;
 	 	max-height: 200px;
         overflow-y: auto;
         /* prevent horizontal scrollbar */
         overflow-x: hidden;
         /* add padding to account for vertical scrollbar */
         padding-right: 20px;
+        width: 350px; !important;
 	 }
 </style>
 <div class="map_wrap">
@@ -196,11 +222,11 @@
 		<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 	</div>
 	<div class="load_wrap">
-		<img class="load_img" src="<c:url value='/images/map/mask_loader.gif'/>">
+		<img class="load_img" style="vertical-align: bottom;" src="<c:url value='/images/map/mask_loader.gif'/>">
 	</div>
 	<div class="search">
-		<input class="searchInput" id="searchAddress" disabled>
-		<button type="button" onclick="addressSearch()">검색</button>
+		<input class="searchInput" id="searchAddress" placeholder="지도상 현재 위치의 주소가 표시됩니다" disabled>
+		<img style="width: 43px;cursor: pointer;"src="<c:url value='/images/map/search.png'/>" onclick="addressSearch()" ></img>
 	</div>
 	<div class="map_button">
 		<button class="current_refresh" type="button" onclick="currentPosition()">
@@ -218,7 +244,7 @@
 		<button type="button" onclick="refreshMap()">갱신</button>
 	</div>
 	 -->
-	<div class="info_wrap">
+	<div class="info_wrap warp_invisible">
 		<div class="top_area">
 			<div class="top_absfilter_area">
 				<button class="filter_button" id="filter_hospital" type="button">
@@ -233,6 +259,7 @@
 			</div>
 			<div class='top_search_area'>
 				<input class="search_keyword_input" maxlength="100" autocomplete="off" placeholder="검색어를 입력하세요">
+
 				<button type="button" class="search_keyword_submit"></button>
 			</div>
 			<div class="top_filter_area">
@@ -259,7 +286,7 @@
 							
 						</div>
 					</div>
-				</div> -->
+				</div> 
 				<div class="inner_top">
 					<div class="inner_title_area">
 						<div class="inner_title">
@@ -297,11 +324,11 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 	</div>
-	<div class="info-toggle">
+	<div class="info-toggle left_toggle">
 		<span class="info_btn_toggle"></span>
 	</div>
 	<div class="menu_wrap">
@@ -321,23 +348,124 @@
 	<div id="map" style="width: 100%; height: 100%;position: relative;overflow: hidden;"></div>
 </div>
 <div class="modal fade" id="reservation-modal">
-	<div class="modal-dialog modal-sm">
+	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button class="close" data-dismiss="modal">
-					<span>&times;</span>
-				</button>
-				<h4 class="modal-title">기본 모달창</h4>
-			</div>
-			<div class="modal-body">
-				<h2>모달 바디 영역입니다</h2>
-				<p>
-					안녕하세요<br />기본 모달창입니다<br />재미 있네요
-				</p>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-info" data-dismiss="modal">닫기</button>
-			</div>
+			<form>
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+					<h4 class="modal-title">병원 예약</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<span class="form-label">이름</span>
+								<input class="form-control" type="text">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<span class="form-label">이메일</span>
+								<input class="form-control" type="email">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<span class="form-label">전화번호</span>
+						<input class="form-control" type="tel">
+					</div>
+					<div class="form-group">
+						<span class="form-label">병원 이름</span>
+						<input class="form-control" type="text">
+					</div>
+					<div class="form-group">
+						<span class="form-label">진료실</span>
+						<div class="btn-group">
+							<label class="radio-inline form-label"><input type="radio" name="optradio" checked>내과</label>
+							<label class="radio-inline form-label"><input type="radio" name="optradio">정형외과</label>
+							<label class="radio-inline form-label"><input type="radio" name="optradio">산부인과</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<span class="form-label">진료 항목</span>
+						<div class="btn-group">
+							<label class="radio-inline form-label"><input type="radio" name="optradio" checked>결과상담</label>
+							<label class="radio-inline form-label"><input type="radio" name="optradio">공단검진</label>
+							<label class="radio-inline form-label"><input type="radio" name="optradio">예방접종</label>
+							<label class="radio-inline form-label"><input type="radio" name="optradio">일반진료</label>
+							<label class="radio-inline form-label"><input type="radio" name="optradio">기타</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-5">
+							<div class="form-group">
+								<span class="form-label">예약 날짜</span>
+								<input class="form-control" id="reservation_date" type="text" required>
+							</div>
+						</div>
+						<div class="col-sm-7">
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="form-group">
+										<span class="form-label">오전/오후</span>
+										<select class="form-control">
+											<option>오전</option>
+											<option>오후</option>
+										</select>
+										<span class="select-arrow"></span>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<span class="form-label">시</span>
+										<select class="form-control">
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+											<option>6</option>
+											<option>7</option>
+											<option>8</option>
+											<option>9</option>
+											<option>10</option>
+											<option>11</option>
+											<option>12</option>
+										</select>
+										<span class="select-arrow"></span>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<span class="form-label">분</span>
+										<select class="form-control">
+											<option>05</option>
+											<option>10</option>
+											<option>15</option>
+											<option>20</option>
+											<option>25</option>
+											<option>30</option>
+											<option>35</option>
+											<option>40</option>
+											<option>45</option>
+											<option>50</option>
+											<option>55</option>
+										</select>
+										<span class="select-arrow"></span>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success">예약</button>
+					<button class="btn btn-info" data-dismiss="modal">닫기</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -370,6 +498,9 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(function() {
+		jQuery.curCSS = function(element, prop, val) {
+		    return jQuery(element).css(prop, val);
+		};
 		console.log($('.info_btn_toggle'))
 		/* $('.info_btn_toggle').on('click',function(){
 			console.log($('.info_wrap'));
@@ -435,6 +566,7 @@
 			}
 
 		});
+		
 		$('.info_btn_toggle').click(function(){
 			console.log($('.info_wrap'));
 			$('.info_wrap').toggleClass('warp_invisible');
@@ -461,6 +593,19 @@
 			$('.search_list').html('');
 			$('.search_keyword_input').val('');
 			
+		});
+		
+		$('#reservation_date').datepicker({
+			dateFormat: "yy년 mm월 dd일",
+			showAnim: "slide",
+			showMonthAfterYear: true ,
+			minDate: 0,
+			yearSuffix: "년",
+			monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 캘린더중 월 표시를 위한 부분
+	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],	//한글 캘린더 중 월 표시를 위한 부분
+	        dayNames: ['일', '월', '화', '수', '목', '금', '토'],	//한글 캘린더 요일 표시 부분
+	        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],	//한글 요일 표시 부분
+	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],	// 한글 요일 표시 부분
 		});
 	});
 </script>
@@ -613,7 +758,10 @@
 							{
 								$('.info_wrap').removeClass('warp_invisible');
 								$('.info-toggle').removeClass('left_toggle');
+								
 							}
+							listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel);
+							$('.search_list').html(listitem);
 						});
 						
 						kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -694,6 +842,19 @@
 			            
 						var infowindow = new kakao.maps.InfoWindow({
 						    content : iwContent
+						});
+						kakao.maps.event.addListener(marker, 'click', function(){
+							console.log("modal",item,i)
+							console.log($('.info_wrap').hasClass('warp_invisible'));
+							console.log($('.info-toggle').hasClass('left_toggle'));
+							if($('.info-toggle').hasClass('left_toggle')==true)
+							{
+								$('.info_wrap').removeClass('warp_invisible');
+								$('.info-toggle').removeClass('left_toggle');
+								
+							}
+							listitem = getDetailPharItem(item.phar_name,item.address,item.tel);
+							$('.search_list').html(listitem);
 						});
 						
 						kakao.maps.event.addListener(marker, 'mouseover', function() {
@@ -1052,6 +1213,13 @@
 	    }
 		function addressSearch()
 		{
+			if($('.info-toggle').hasClass('left_toggle')==true)
+			{
+				$('.info_wrap').removeClass('warp_invisible');
+				$('.info-toggle').removeClass('left_toggle');
+				
+			}
+			/*
 			var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
 			new daum.Postcode({
 	            oncomplete: function(data) {
@@ -1090,6 +1258,7 @@
 	        }).embed(element_wrap);
 			
 			element_wrap.style.display = 'block';
+			*/
 		}
 		function currentPosition()
 		{
@@ -1139,9 +1308,7 @@
 			        removeMarker();
 			        
 			        map.setCenter(coords);
-			        
-			        
-			        
+
 			        $.ajax({
 						url:"<c:url value='/Homespital/Map/detailView.hst'/>",
 						type:'get',
@@ -1160,44 +1327,17 @@
 							var jsonData = JSON.parse(data);
 							console.log("연결성공", jsonData,typeof(jsonData));
 							var item = '';
-							console.log(jsonData[0]['HOSP_NAME']);
-							item = '<div class="inner_top">'+
-										'<div class="inner_title_area">'+
-											'<div class="inner_title">'+
-												'<strong>'+jsonData[0]['HOSP_NAME']+'</strong>'+
-											'</div>'+
-											'<div class="inner_summary_info">'+
-												'<span>'+jsonData[0]['DEPT_NAME']+'</span>'+
-											'</div>'+
-										'</div>'+
-										'<div class="inner_btn_area">'+
-											'<div class="btn_direction">'+
-												'<button class="find_way_btn">길찾기</button>'+
-												'<button class="reservation_btn" onclick="reservation_show();">예약</button>'+
-											'</div>'+
-										'</div>'+
-										'<div class="inner_final_area">'+
-											'<div class="inner_detail_address">'+
-												'<img class="inner_final_icon" >'+
-												'<div class="inner_end_box">'+jsonData[0]['ADDRESS']+'</div>'+
-											'</div>'+
-											'<div class="inner_detail_tel">'+
-												'<img class="inner_final_icon" >'+
-												'<div class="inner_end_box">'+jsonData[0]['TEL']+'</div>'+
-											'</div>'+
-											'<div class="inner_detail_time">'+
-												'<img class="inner_final_icon" >'+
-												'<div class="inner_end_box">11:00~16:00</div>'+
-											'</div>'+
-											'<div class="inner_detail_time2">'+
-												'<img class="inner_final_icon" >'+
-												'<div class="inner_end_box">'+
-													'영업시간 11:00~ 14:40 16:00~ 20:30<br/>'+
-													'휴무: 매주 월요일'+
-												'</div>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
+							if(apiStatus == 0)
+							{
+								console.log(jsonData[0]['HOSP_NAME']);
+								item = getDetailHospItem(jsonData[0]['HOSP_NAME'],jsonData[0]['DEPT_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'])
+							}
+							else if (apiStatus == 1)
+							{
+								console.log(jsonData[0]['PHAR_NAME']);
+								item = getDetailHospItem(jsonData[0]['PHAR_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'])
+							}
+							
 							$('.search_list').html(item);
 						},
 						error:function(e){
@@ -1208,6 +1348,90 @@
 				}
 			});
 		}
+
+		function getDetailHospItem(hospname,deptname,address,tel)
+		{
+			item = '<div class="inner_top">'+
+						'<div class="inner_title_area">'+
+							'<div class="inner_title">'+
+								'<strong>'+hospname+'</strong>'+
+							'</div>'+
+							'<div class="inner_summary_info">'+
+								'<span>'+deptname+'</span>'+
+							'</div>'+
+						'</div>'+
+						'<div class="inner_btn_area">'+
+							'<div class="btn_direction">'+
+								'<button class="find_way_btn">길찾기</button>'+
+								'<button class="reservation_btn" onclick="reservation_show();">예약</button>'+
+							'</div>'+
+						'</div>'+
+						'<div class="inner_final_area">'+
+							'<div class="inner_detail_address">'+
+								'<img class="inner_final_icon" >'+
+								'<div class="inner_end_box">'+address+'</div>'+
+							'</div>'+
+							'<div class="inner_detail_tel">'+
+								'<img class="inner_final_icon" >'+
+								'<div class="inner_end_box">'+tel+'</div>'+
+							'</div>'+
+							'<div class="inner_detail_time">'+
+								'<img class="inner_final_icon" >'+
+								'<div class="inner_end_box">11:00~16:00</div>'+
+							'</div>'+
+							'<div class="inner_detail_time2">'+
+								'<img class="inner_final_icon" >'+
+								'<div class="inner_end_box">'+
+									'영업시간 11:00~ 14:40 16:00~ 20:30<br/>'+
+									'휴무: 매주 월요일'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>';
+			return item;
+		}
+		
+		function getDetailPharItem(pharname,address,tel)
+		{
+			item = '<div class="inner_top">'+
+						'<div class="inner_title_area">'+
+							'<div class="inner_title">'+
+								'<strong>'+pharname+'</strong>'+
+							'</div>'+
+							'<div class="inner_summary_info">'+
+								'<span>약국</span>'+
+							'</div>'+
+						'</div>'+
+						'<div class="inner_btn_area">'+
+							'<div class="btn_direction">'+
+								'<button class="find_way_btn">길찾기</button>'+
+							'</div>'+
+						'</div>'+
+						'<div class="inner_final_area">'+
+							'<div class="inner_detail_address">'+
+								'<img class="inner_final_icon" >'+
+								'<div class="inner_end_box">'+address+'</div>'+
+							'</div>'+
+							'<div class="inner_detail_tel">'+
+								'<img class="inner_final_icon" >'+
+								'<div class="inner_end_box">'+tel+'</div>'+
+							'</div>'+
+							'<div class="inner_detail_time">'+
+								'<img class="inner_final_icon" >'+
+								'<div class="inner_end_box">11:00~16:00</div>'+
+							'</div>'+
+							'<div class="inner_detail_time2">'+
+								'<img class="inner_final_icon" >'+
+								'<div class="inner_end_box">'+
+									'영업시간 11:00~ 14:40 16:00~ 20:30<br/>'+
+									'휴무: 매주 월요일'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>';
+			return item;
+		}
+		
 		function reservation_show(){
 			console.log($('#reservation-modal'))
 			$('#reservation-modal').modal('show');

@@ -73,9 +73,10 @@ header p {
 }
 
 .gallery {
-  padding: 40px 0 300px;
+  padding: 40px 0 30px;
   position: relative;
   overflow: hidden;
+  margin-bottom: 30px;
 }
 .gallery ul {
   padding-top: 50px;
@@ -203,6 +204,160 @@ header p {
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
+figure.snip0018:hover img {
+  opacity: 0.7;
+}
+figure.snip0018:hover figcaption h2,
+figure.snip0018:hover figcaption p {
+  -webkit-transform: translate3d(0%, 0%, 0);
+  transform: translate3d(0%, 0%, 0);
+  -webkit-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+}
+figure.snip0018:hover figcaption h2 {
+  opacity: 1;
+}
+figure.snip0018:hover figcaption p {
+  opacity: 1;
+}
+figure.snip0018:hover figcaption::before {
+  background: #ffffff;
+  left: 0px;
+  right: 0px;
+  opacity: 1;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+/****/
+figure.effect-zoe figcaption {
+	top: auto;
+	bottom: 0;
+	padding: 1em;
+	height: 3.75em;
+	background: #fff;
+	color: #3c4a50;
+	-webkit-transition: -webkit-transform 0.35s;
+	transition: transform 0.35s;
+	-webkit-transform: translate3d(0,100%,0);
+	transform: translate3d(0,100%,0);
+}
+
+figure.effect-zoe h4 {
+	float: left;
+}
+
+figure.effect-zoe p.icon-links a {
+	float: right;
+	color: #3c4a50;
+	font-size: 1.4em;
+}
+
+figure.effect-zoe:hover p.icon-links a:hover,
+figure.effect-zoe:hover p.icon-links a:focus {
+	color: #252d31;
+}
+
+figure.effect-zoe p.description {
+	position: absolute;
+	bottom: 8em;
+	padding: 2em;
+	color: #fff;
+	text-transform: none;
+	font-size: 90%;
+	opacity: 0;
+	-webkit-transition: opacity 0.35s;
+	transition: opacity 0.35s;
+	-webkit-backface-visibility: hidden; /* Fix for Chrome 37.0.2062.120 (Mac) */
+}
+
+figure.effect-zoe h2,
+figure.effect-zoe p.icon-links a {
+	-webkit-transition: -webkit-transform 0.35s;
+	transition: transform 0.35s;
+	-webkit-transform: translate3d(0,200%,0);
+	transform: translate3d(0,200%,0);
+}
+
+figure.effect-zoe p.icon-links a span::before {
+	display: inline-block;
+	padding: 8px 10px;
+	font-family: 'feathericons';
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-eye::before {
+	content: '\e000';
+}
+
+.icon-paper-clip::before {
+	content: '\e001';
+}
+
+.icon-heart::before {
+	content: '\e024';
+}
+
+figure.effect-zoe h2 {
+	display: inline-block;
+}
+
+figure.effect-zoe:hover p.description {
+	opacity: 1;
+}
+
+figure.effect-zoe:hover figcaption,
+figure.effect-zoe:hover h2,
+figure.effect-zoe:hover p.icon-links a {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+figure.effect-zoe:hover h2 {
+	-webkit-transition-delay: 0.05s;
+	transition-delay: 0.05s;
+}
+
+figure.effect-zoe:hover p.icon-links a:nth-child(3) {
+	-webkit-transition-delay: 0.1s;
+	transition-delay: 0.1s;
+}
+
+figure.effect-zoe:hover p.icon-links a:nth-child(2) {
+	-webkit-transition-delay: 0.15s;
+	transition-delay: 0.15s;
+}
+
+figure.effect-zoe:hover p.icon-links a:first-child {
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+#buttons button {
+  border: 1px solid #efefef;
+  margin-right: 8px;
+  border: 0;
+  padding: 8px;
+  border-radius: 3px;
+}
+
+#buttons button.active {
+  background-color: #bbb;
+  color: #111;
+}
+
+#buttons {
+  margin: 8px;
+  padding-bottom: 8px;
+}
+
+button:hover{
+  background-color: #111;
+  color: #fff;
+}
+
 </style>
 
 <header>
@@ -213,13 +368,80 @@ header p {
 
 <div id="top"></div>
 <section class="gallery">
-	<div class="row">
+	<div class="row grid">
+		<div id="buttons"></div>
 		<ul>
 			<a href="#" class="close"></a>
 			<c:forEach items="${medi1 }" var="medi">
-			<li><a href="#${medi }"> 
-			<img src='<c:url value="/images/medicine/${medi }.jpg"/>' alt="">
-			</a></li>
+				<li data-tags="해열/진통제">
+				<figure class="effect-zoe">
+				<a href="#${medi }"> 
+				<img style="width: 300px;height: 150px" src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+				</a>
+					<figcaption style="text-align: center;">
+						<h4>${medi}</h4>
+						<p class="icon-links">
+							<i class="fas fa-tablets"></i>
+							<i class="fas fa-capsules"></i>
+							<i class="fas fa-clinic-medical"></i>
+						</p>
+					</figcaption>
+				</figure>
+				</li>
+			</c:forEach>
+			
+			<c:forEach items="${medi2 }" var="medi">
+				<li data-tags="소화제">
+				<figure class="effect-zoe">
+				<a href="#${medi }"> 
+				<img style="width: 300px;height: 150px" src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+				</a>
+					<figcaption style="text-align: center;">
+						<h4>${medi}</h4>
+						<p class="icon-links">
+							<i class="fas fa-tablets"></i>
+							<i class="fas fa-capsules"></i>
+							<i class="fas fa-clinic-medical"></i>
+						</p>
+					</figcaption>
+				</figure>
+				</li>
+			</c:forEach>
+			
+			<c:forEach items="${medi3 }" var="medi">
+				<li data-tags="감기약">
+				<figure class="effect-zoe">
+				<a href="#${medi }"> 
+				<img style="width: 300px;height: 150px" src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+				</a>
+					<figcaption style="text-align: center;">
+						<h4>${medi}</h4>
+						<p class="icon-links">
+							<i class="fas fa-tablets"></i>
+							<i class="fas fa-capsules"></i>
+							<i class="fas fa-clinic-medical"></i>
+						</p>
+					</figcaption>
+				</figure>
+				</li>
+			</c:forEach>
+			
+			<c:forEach items="${medi4 }" var="medi">
+				<li data-tags="파스">
+				<figure class="effect-zoe">
+				<a href="#${medi }"> 
+				<img style="width: 300px;height: 150px" src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+				</a>
+					<figcaption style="text-align: center;">
+						<h4>${medi}</h4>
+						<p class="icon-links">
+							<i class="fas fa-tablets"></i>
+							<i class="fas fa-capsules"></i>
+							<i class="fas fa-clinic-medical"></i>
+						</p>
+					</figcaption>
+				</figure>
+				</li>
 			</c:forEach>
 		</ul>
 	</div>
@@ -227,10 +449,10 @@ header p {
 
 	<!-- Item 01 -->
 	<c:forEach items="${medi1 }" var="medi">
-	<div id="${medi }" class="port">
+	<div id="${medi}" class="port">
 		<div class="row">
 			<div class="description">
-				<h1>${medi }</h1>
+				<h1>${medi}</h1>
 				<p>약물정보</p>
 			</div>
 			<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
@@ -238,6 +460,39 @@ header p {
 	</div>
 	</c:forEach>
 	<!-- / row -->
+	<c:forEach items="${medi2 }" var="medi">
+	<div id="${medi}" class="port">
+		<div class="row">
+			<div class="description">
+				<h1>${medi}</h1>
+				<p>약물정보</p>
+			</div>
+			<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+		</div>
+	</div>
+	</c:forEach>
+	<c:forEach items="${medi3 }" var="medi">
+	<div id="${medi}" class="port">
+		<div class="row">
+			<div class="description">
+				<h1>${medi}</h1>
+				<p>약물정보</p>
+			</div>
+			<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+		</div>
+	</div>
+	</c:forEach>
+	<c:forEach items="${medi4 }" var="medi">
+	<div id="${medi}" class="port">
+		<div class="row">
+			<div class="description">
+				<h1>${medi}</h1>
+				<p>약물정보</p>
+			</div>
+			<img src='<c:url value="/images/medicine/${medi}.jpg"/>' alt="">
+		</div>
+	</div>
+	</c:forEach>
 </section>
 <!-- / projects -->
 
@@ -260,4 +515,51 @@ $(".gallery ul li a").click(function() {
         scrollTop: parseInt($("#top").offset().top)
     }, 400);
 });
+
+
+
+(function() {
+	  var $lis = $('ul li');
+	  var $buttons = $('#buttons');
+	  var tagged = {};
+
+	  $lis.each(function() {
+	    var li = this;
+	    var tags = $(this).data('tags');
+
+	    if (tags) {
+	      tags.split(',').forEach(function(tagName) {
+	        if (tagged[tagName] == null) {
+	          tagged[tagName] = [];
+	        }
+	        tagged[tagName].push(li);
+	      })
+	    }
+	  })
+
+	  $('<button/>', {
+	    text: '전체',
+	    class: 'active',
+	    click: function() { $(this).addClass('active').siblings().removeClass('active'); $lis.show(); }
+	  }).appendTo($buttons);
+
+	  $.each(tagged, function(tagName) {
+	    var $n = $(tagged[tagName]).length;
+	    $('<button/>', {
+	      text: tagName + '(' + $n + ')',
+	      click: function() {
+	        $(this)
+	          .addClass('active')
+	          .siblings()
+	          .removeClass('active');
+	        $lis
+	          .hide()
+	          .filter(tagged[tagName])
+	          .show();
+	      }
+	    }).appendTo($buttons);
+	  });
+	}())
+
+
 </script>
