@@ -122,7 +122,7 @@ $(function() {
                      { x: new Date(date.getFullYear(), date.getMonth(), date.getDate()-3), y: dailyPatient[3] },
                      { x: new Date(date.getFullYear(), date.getMonth(), date.getDate()-4), y: dailyPatient[4] },
                      { x: new Date(date.getFullYear(), date.getMonth(), date.getDate()-5), y: dailyPatient[5] },
-                     { x: new Date(date.getFullYear(), date.getMonth(), date.getDate()-6), y: 42 }
+                     { x: new Date(date.getFullYear(), date.getMonth(), date.getDate()-6), y: dailyPatient[6] }
                   ]
                }]
             };
@@ -132,128 +132,8 @@ $(function() {
       error:function(e){
          console.log("연결 실패")
       }
-            });
-            chart.render();   //도넛
-
-            function toggleDataSeries(e) {
-               if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                  e.dataSeries.visible = false;
-               } else {
-                  e.dataSeries.visible = true;
-               }
-               e.chart.render();
-            }// 
-            
-            var options = {
-                  animationEnabled: true,
-                  theme: "light2",
-                  backgroundColor: "#fff",
-                  title:{
-                     text: "일별 확진자 추이"
-                  },
-                  axisX:{
-                     valueFormatString: "DD MMM"
-                  },
-                  axisY: {
-                     title: "Number of Sales",
-                     suffix: "K",
-                     minimum: 30
-                  },
-                  toolTip:{
-                     shared:true
-                  },  
-                  legend:{
-                     cursor:"pointer",
-                     verticalAlign: "bottom",
-                     horizontalAlign: "left",
-                     dockInsidePlotArea: true,
-                     itemclick: toogleDataSeries
-                  },
-                  data: [{
-                     type: "line",
-                     showInLegend: true,
-                     name: "Projected Sales",
-                     markerType: "square",
-                     xValueFormatString: "DD MMM, YYYY",
-                     color: "#F08080",
-                     culture: "ko",
-                     yValueFormatString: "#,##0K",
-                     dataPoints: [
-                        { x: new Date(2017, 10, 1), y: 63 },
-                        { x: new Date(2017, 10, 2), y: 69 },
-                        { x: new Date(2017, 10, 3), y: 65 },
-                        { x: new Date(2017, 10, 4), y: 70 },
-                        { x: new Date(2017, 10, 5), y: 71 },
-                        { x: new Date(2017, 10, 6), y: 65 },
-                        { x: new Date(2017, 10, 7), y: 73 },
-                        { x: new Date(2017, 10, 8), y: 96 },
-                        { x: new Date(2017, 10, 9), y: 84 },
-                        { x: new Date(2017, 10, 10), y: 85 },
-                        { x: new Date(2017, 10, 11), y: 86 },
-                        { x: new Date(2017, 10, 12), y: 94 },
-                        { x: new Date(2017, 10, 13), y: 97 },
-                        { x: new Date(2017, 10, 14), y: 86 },
-                        { x: new Date(2017, 10, 15), y: 89 }
-                     ]
-                  }]
-               };
-            
-               $("#chartContainer3").CanvasJSChart(options);
-
-               function toogleDataSeries(e){
-                  if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                     e.dataSeries.visible = false;
-                  } else{
-                     e.dataSeries.visible = true;
-                  }
-                  e.chart.render();
-               }
-               var chart = new CanvasJS.Chart("chartContainer4", {
-                  animationEnabled: true,
-                  backgroundColor: "#fff",
-                  title: {
-                     text: "국가별"
-                  },
-                  axisX: {
-                     interval: 1
-                  },
-                  axisY: {
-                     title: "추이",
-                     scaleBreaks: {
-                        type: "wavy",
-                        customBreaks: [{
-                           startValue: 80,
-                           endValue: 210
-                           },
-                           {
-                              startValue: 230,
-                              endValue: 600
-                           }
-                     ]}
-                  },
-                  data: [{
-                     type: "bar",
-                     toolTipContent: "<img src=\"https://canvasjs.com/wp-content/uploads/images/gallery/javascript-column-bar-charts/\"{url}\"\" style=\"width:40px; height:20px;\"> <b>{label}</b><br>Budget: ${y}bn<br>{gdp}% of GDP",
-                     dataPoints: [
-                        { label: "Israel", y: 17.8, gdp: 5.8, url: "israel.png" },
-                        { label: "United Arab Emirates", y: 22.8, gdp: 5.7, url: "uae.png" },
-                        { label: "Brazil", y: 22.8, gdp: 1.3, url: "brazil.png"},
-                        { label: "Australia", y: 24.3, gdp: 2.0, url: "australia.png" },
-                        { label: "South Korea", y: 36.8, gdp: 2.7, url: "skorea.png" },
-                        { label: "Germany", y: 41.1, gdp: 1.2, url: "germany.png" },
-                        { label: "Japan", y: 46.1, gdp: 1.0, url: "japan.png" },
-                        { label: "United Kingdom", y: 48.3, gdp: 1.9, url: "uk.png" },
-                        { label: "India", y: 55.9, gdp: 2.5, url: "india.png" },
-                        { label: "Russia", y: 69.2, gdp: 5.3, url: "russia.png" },
-                        { label: "China", y: 215.7, gdp: 1.9, url: "china.png" },
-                        { label: "United States", y: 611.2, gdp: 3.3, url: "us.png" }
-                     ]
-                  }]
-               });
-               chart.render();
-         })//온로드
       
-  
+   });
    
    //검사
    $.ajax({
@@ -311,10 +191,10 @@ $(function() {
          indexLabelFontSize: 16,
          indexLabel: "{label} - {y}% -{t}",
          dataPoints: [
-            { y: decidePer, label: "확진자 수", t: decideCnt+"명"},
-            { y: deathPer, label: "사망자 수", t: deathCnt+"명"},
-            { y: carePer, label: "격리 중 수", t: careCnt+"명"},
-            { y: clearPer, label: "격리해제 수", t: clearCnt+"명"},
+            { y: decidePer.toFixed(2), label: "확진자 수", t: decideCnt+"명"},
+            { y: deathPer.toFixed(2), label: "사망자 수", t: deathCnt+"명"},
+            { y: carePer.toFixed(2), label: "격리 중 수", t: careCnt+"명"},
+            { y: clearPer.toFixed(2), label: "격리해제 수", t: clearCnt+"명"},
          ]
       }]
    });
@@ -420,13 +300,57 @@ $(function() {
          var nationArr = new Array();
          var nationCnt;
          $.each(jsonData.response.body.items.item, function(i, item) {
-            console.log(item.nationNm, " : ", item.natDefCnt);
-            nationArr[i] = item.natDefCnt;
+            console.log(item.nationNm, " : ", item.natDefCnt, "index: " ,i);
+            nationArr[i] = {"nationNm" : item.nationNm, "nationDefCnt" : item.natDefCnt};
          })
+         nationArr.sort(customSort);
          
          for(var i=0; i<nationArr.length; i++) {
              console.log(nationArr[i]);
+             console.log(nationArr[i].nationNm);
          }
+         
+         var chart = new CanvasJS.Chart("chartContainer4", {
+            animationEnabled: true,
+            backgroundColor: "#fff",
+            title: {
+               text: "국가별 현황"
+            },
+            axisX: {
+               interval: 1
+            },
+            axisY: {
+               title: "확진자 수",
+               scaleBreaks: {
+                  type: "wavy",
+                  customBreaks: [{
+                     startValue: 1000000,
+                     endValue: 2000000
+                     },
+                     {
+                        startValue: 10000,
+                        endValue: 2000000
+                     }
+               ]}
+            },
+            data: [{
+               type: "bar",
+//                toolTipContent: "<img src=\"https://canvasjs.com/wp-content/uploads/images/gallery/javascript-column-bar-charts/\"{url}\"\" style=\"width:40px; height:20px;\"> <b>{label}</b><br>Budget: ${y}bn<br>{gdp}% of GDP",
+               dataPoints: [
+                  { label: nationArr[9].nationNm, y: nationArr[9].nationDefCnt},
+                  { label: nationArr[8].nationNm, y: nationArr[8].nationDefCnt},
+                  { label: nationArr[7].nationNm, y: nationArr[7].nationDefCnt},
+                  { label: nationArr[6].nationNm, y: nationArr[6].nationDefCnt},
+                  { label: nationArr[5].nationNm, y: nationArr[5].nationDefCnt},
+                  { label: nationArr[4].nationNm, y: nationArr[4].nationDefCnt},
+                  { label: nationArr[3].nationNm, y: nationArr[3].nationDefCnt},
+                  { label: nationArr[2].nationNm, y: nationArr[2].nationDefCnt},
+                  { label: nationArr[1].nationNm, y: nationArr[1].nationDefCnt},
+                  { label: nationArr[0].nationNm, y: nationArr[0].nationDefCnt}
+               ]
+            }]
+         });
+         chart.render();
          
       },
       error:function(e){
@@ -434,6 +358,9 @@ $(function() {
       }
       
    });
+   
+   function customSort(a, b) { if(a.nationDefCnt == b.nationDefCnt){ return 0} return a.nationDefCnt < b.nationDefCnt ? 1 : -1; }
+
    function toogleDataSeries(e){
       if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
          e.dataSeries.visible = false;
@@ -442,51 +369,8 @@ $(function() {
       }
       e.chart.render();
    }
-   var chart = new CanvasJS.Chart("chartContainer4", {
-      animationEnabled: true,
-      backgroundColor: "#fff",
-      title: {
-         text: "국가별"
-      },
-      axisX: {
-         interval: 1
-      },
-      axisY: {
-         title: "추이",
-         scaleBreaks: {
-            type: "wavy",
-            customBreaks: [{
-               startValue: 80,
-               endValue: 210
-               },
-               {
-                  startValue: 230,
-                  endValue: 600
-               }
-         ]}
-      },
-      data: [{
-         type: "bar",
-         toolTipContent: "<img src=\"https://canvasjs.com/wp-content/uploads/images/gallery/javascript-column-bar-charts/\"{url}\"\" style=\"width:40px; height:20px;\"> <b>{label}</b><br>Budget: ${y}bn<br>{gdp}% of GDP",
-         dataPoints: [
-            { label: "Israel", y: 17.8, gdp: 5.8, url: "israel.png" },
-            { label: "United Arab Emirates", y: 22.8, gdp: 5.7, url: "uae.png" },
-            { label: "Brazil", y: 22.8, gdp: 1.3, url: "brazil.png"},
-            { label: "Australia", y: 24.3, gdp: 2.0, url: "australia.png" },
-            { label: "South Korea", y: 36.8, gdp: 2.7, url: "skorea.png" },
-            { label: "Germany", y: 41.1, gdp: 1.2, url: "germany.png" },
-            { label: "Japan", y: 46.1, gdp: 1.0, url: "japan.png" },
-            { label: "United Kingdom", y: 48.3, gdp: 1.9, url: "uk.png" },
-            { label: "India", y: 55.9, gdp: 2.5, url: "india.png" },
-            { label: "Russia", y: 69.2, gdp: 5.3, url: "russia.png" },
-            { label: "China", y: 215.7, gdp: 1.9, url: "china.png" },
-            { label: "United States", y: 611.2, gdp: 3.3, url: "us.png" }
-         ]
-      }]
-   });
-   chart.render();
    
-
+});
    
       
 </script>
