@@ -21,6 +21,10 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.isLogin(map);
 	}
+	
+	public MemberDTO isLogin(MemberDTO member) {		
+		return dao.isLogin(member);
+	}
 
 	@Override
 	public List<MemberDTO> selectList(Map map) {
