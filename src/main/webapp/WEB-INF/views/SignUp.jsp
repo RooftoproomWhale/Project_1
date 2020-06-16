@@ -244,7 +244,7 @@ width: 100%;
 				      "MEM_NAME" : nameSign,
 				      "MEM_GENDER" : gender,
 				      "MEM_TEL" : phone,
-				      "MEM_AGE" : age,
+				      "MEM_AGE" : age, 
 				      "MEM_HEIGHT" : height,
 				      "MEM_WEIGHT" : weight,
 				      "MEM_ROLE" : "ROLE_MEM",
