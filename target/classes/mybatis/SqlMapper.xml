@@ -16,7 +16,7 @@
 	
 	
 	 <insert id="signInsert" parameterType="java.util.Map"> 
-		INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd},#{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
+		INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
 	 </insert>
 	 
 	 <select id="signView" parameterType="MemberDTO">
