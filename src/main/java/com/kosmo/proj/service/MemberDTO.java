@@ -9,8 +9,21 @@ public class MemberDTO {
 	private int age;
 	private int height;
 	private int weight;
+	private String role;
+	private int enable;
 	
-	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public int getEnable() {
+		return enable;
+	}
+	public void setEnable(int enable) {
+		this.enable = enable;
+	}
 	public String getMem_email() {
 		return mem_email;
 	}

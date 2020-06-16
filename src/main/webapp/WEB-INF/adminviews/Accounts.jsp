@@ -10,8 +10,47 @@
 .modal-notify .modal-content {
     border-radius: 3px;
 }
+
+input[type=text] { border: none;}
 </style>
-<body class="animsition">
+
+<script>
+$(function() {
+	
+	$("#updateBtn").on('click', function(){
+		var upName = $("#upName").val();
+		var upEmail = $("#upEmail").val();
+		var upPwd = $("#upPwd").val();
+		var upTel = $("#upTel").val();
+		
+		console.log(upName, upEmail, upPwd, upTel);
+// 		var param = $("#frm").serialize();
+// 		alert(param);
+		var request = 
+			$.ajax({ 
+				url: "<c:url value='/Admin/UserUpdate.hst'/>",
+				type: "post", //get, post 방식 
+				data: {
+						"upName" : upName,
+						"upEmail" : upEmail,
+						"upPwd" : upPwd,
+						"upTel" : upTel
+						}, //넘길 파라미터 
+				dataType: 'json', //or xml or script or html 
+				async: true, // true:비동기, false:동기 
+				success: function(data){ 
+					console.log('성공');
+				},
+				error: function(json)
+				{ 
+					console.log('실패');
+				} 
+			});
+	});
+});
+</script>
+
+<body>
 	<div class="page-wrapper">
 		<!-- PAGE CONTAINER-->
 		<div class="page-container">
@@ -21,7 +60,7 @@
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search"
+								<input class="au-input au-input--xl" type="email" name="search"
 									placeholder="회원명 검색" />
 								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
@@ -70,21 +109,37 @@
 												</tr>
 											</thead>
 											<tbody>
+												<c:if test="${empty list}" var="isEmpty">
+													<tr>
+														<td colspan="4">등록된 회원이 없습니다.</td>
+													</tr>
+												</c:if>
+												<c:if test="${not isEmpty}">
+													<c:forEach items="${list}" var="item" varStatus="loop">
 												<tr>
 													<td><label class="au-checkbox"> <input
 															type="checkbox"> <span class="au-checkmark"></span>
 													</label></td>
 													<td>
 														<div class="table-data__info">
-															<h6>Admin</h6>
-															<span> <a href="#">Admin</a>
+															<h6>${item.mem_name }</h6>
+															<span> <a href="#">${item.mem_email }</a>
 															</span>
 														</div>
 													</td>
-													<td><span class="role admin">admin</span></td>
+													<c:if test="${item.role == 'ROLE_ADM' }">
+														<td><span class="role admin">${item.role }</span></td>
+													</c:if>
+													<c:if test="${item.role == 'ROLE_MEM' }">
+														<td><span class="role user">${item.role }</span></td>
+													</c:if>
+													<c:if test="${item.role == 'ROLE_HOS' }">
+														<td><span class="role member">${item.role }</span></td>
+													</c:if>
+													
 													<td>
 														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="KOSMO"
+															<input type="text" placeholder="${item.mem_pwd }"
 																disabled="disabled">
 														</div>
 													</td>
@@ -97,8 +152,7 @@
 													<td>
 														<div class="table-data-feature">
 															<button class="item" data-toggle="modal"
-																data-placement="top"
-																data-target="#UserModal" title="수정">
+																data-placement="top" data-target="#UserModal" title="수정" id="updateModal">
 																<i class="zmdi zmdi-edit"></i>
 															</button>
 															<button class="item" data-toggle="tooltip"
@@ -109,6 +163,8 @@
 													</td>
 												</tr>
 												<tr>
+												</c:forEach>
+											</c:if>
 													<td><label class="au-checkbox"> <input
 															type="checkbox" checked="checked"> <span
 															class="au-checkmark"></span>
@@ -136,8 +192,7 @@
 													<td>
 														<div class="table-data-feature">
 															<button class="item" data-toggle="modal"
-																data-placement="top"
-																data-target="#UserModal" title="수정">
+																data-placement="top" data-target="#UserModal" title="수정">
 																<i class="zmdi zmdi-edit"></i>
 															</button>
 															<button class="item" data-toggle="tooltip"
@@ -174,8 +229,7 @@
 													<td>
 														<div class="table-data-feature">
 															<button class="item" data-toggle="modal"
-																data-placement="top"
-																data-target="#UserModal" title="수정">
+																data-placement="top" data-target="#UserModal" title="수정">
 																<i class="zmdi zmdi-edit"></i>
 															</button>
 															<button class="item" data-toggle="tooltip"
@@ -212,8 +266,7 @@
 													<td>
 														<div class="table-data-feature">
 															<button class="item" data-toggle="modal"
-																data-placement="top"
-																data-target="#UserModal" title="수정">
+																data-placement="top" data-target="#UserModal" title="수정">
 																<i class="zmdi zmdi-edit"></i>
 															</button>
 															<button class="item" data-toggle="tooltip"
@@ -251,31 +304,33 @@
 
 				<!--Body-->
 				<div class="modal-body">
-					<div class="md-form mb-5">
-						<i class="fas fa-user prefix grey-text"></i> <input type="text"
-							id="" class="form-control validate"> <label
-							data-error="wrong" data-success="right" for="form3">Name</label>
-					</div>
-
-					<div class="md-form mb-5">
-						<input type="email" id="" class="form-control validate"> <label
-							data-error="wrong" data-success="right" for="form2">E-mail</label>
-					</div>
-					
-					<div class="md-form mb-5">
-						<input type="email" id="" class="form-control validate"> <label
-							data-error="wrong" data-success="right" for="form2">Password</label>
-					</div>
-					
-					<div class="md-form">
-						<input type="email" id="" class="form-control validate"> <label
-							data-error="wrong" data-success="right" for="form2">Tel</label>
-					</div>
+				<form id="frm">
+						<div class="md-form mb-5">
+							<i class="fas fa-user prefix grey-text"></i> <input type="email"
+								id="upName" class="form-control validate"> <label
+								data-error="wrong" data-success="right" for="form3">Name</label>
+						</div>
+	
+						<div class="md-form mb-5">
+							<input type="email" id="upEmail" class="form-control validate"> <label
+								data-error="wrong" data-success="right" for="form2">E-mail</label>
+						</div>
+						
+						<div class="md-form mb-5">
+							<input type="email" id="upPwd" class="form-control validate"> <label
+								data-error="wrong" data-success="right" for="form2">Password</label>
+						</div>
+						
+						<div class="md-form">
+							<input type="email" id="upTel" class="form-control validate"> <label
+								data-error="wrong" data-success="right" for="form2">Tel</label>
+						</div>
+					</form>
 				</div>
 
 				<!--Footer-->
 				<div class="modal-footer justify-content-center">
-					<a type="button" class="btn btn-outline-warning waves-effect">Update</a>
+					<a type="button" id="updateBtn" class="btn btn-outline-warning waves-effect">Update</a>
 				</div>
 			</div>
 			<!--/.Content-->

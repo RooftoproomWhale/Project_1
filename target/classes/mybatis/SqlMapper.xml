@@ -22,6 +22,9 @@
 		WHERE ${searchColumn} LIKE '%' || #{searchWord} || '%'
 		</if>
 	</select>
+	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
+		SELECT * FROM MEMBER
+	</select>
 	
 	<insert id="memoInsert" parameterType="java.util.Map">
 		INSERT INTO onememo(no,title,content,id)

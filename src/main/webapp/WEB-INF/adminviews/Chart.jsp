@@ -23,7 +23,7 @@
                                             </div>
                                             <div class="chart-note">
                                                 <span class="dot dot--green"></span>
-                                                <span>Bookings</span>
+                                                <span>Appointments</span>
                                             </div>
                                         </div>
                                         <div class="chart-info-right">
@@ -31,7 +31,7 @@
                                                 <select class="js-select2" name="property">
                                                     <option selected="selected">All Properties</option>
                                                     <option value="">Members</option>
-                                                    <option value="">Bookings</option>
+                                                    <option value="">Appointments</option>
                                                 </select>
                                                 <div class="dropDownSelect2"></div>
                                             </div>
