@@ -23,6 +23,24 @@
 		</if>
 	</select>
 	
+	
+	 <insert id="signInsert" parameterType="MemberDTO"> 
+		INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
+	 </insert>
+	 
+	 <select id="signView" parameterType="MemberDTO">
+		 SELECT * FROM MEMBER WHERE email = #{email}
+	 </select>
+	 
+ 	 <delete id="signDelete" parameterType="MemberDTO">
+		DELETE FROM MEMBER WHERE MEM_EMAIL = #{email}
+	 </delete>
+	 	
+	 <update id="signUpdate" parameterType="MemberDTO">
+		UPDATE MEMBER SET name = #{name}, age = #{age}, gender = #{gender}, phone = #{phone}, email = #{email}, height = #{height} weight = {weight} where email = #{email} 
+	 </update>
+	 
+	 
 	<insert id="memoInsert" parameterType="java.util.Map">
 		INSERT INTO onememo(no,title,content,id)
 		VALUES(SEQ_ONEMEMO.NEXTVAL,#{title},#{content},#{id})

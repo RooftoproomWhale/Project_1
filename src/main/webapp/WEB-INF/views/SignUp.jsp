@@ -218,12 +218,59 @@ width: 100%;
 
 <script>
    $(function() {
+	  
+	  	$("#signupBtn").on('click',function(){
+	  		
+	  		var email = $('#email').val();
+		  	var pass = $('#pass').val();
+		  	var nameSign = $('#nameSign').val();
+		  	var phone = $('#phone').val();
+		  	var gender = $('#gender').val();
+		  	var age = $('#age').val();
+		  	var height = $('#height').val();
+		  	var weight = $('#weight').val();
+		  	var role = "ROLE_MEM";
+		  	var enable = "1";
+		   
+		   console.log(email, pass, nameSign, phone, gender, age, height, weight, role, enable);
+		   
+		   $.ajax({
+				  url:'<c:url value="/Member/Insert.hst"/>',
+				  type:'post',
+				  data:
+				  {
+					  "MEM_EMAIL" : email,
+					  "MEM_PWD" : pass,
+				      "MEM_NAME" : nameSign,
+				      "MEM_GENDER" : gender,
+				      "MEM_TEL" : phone,
+				      "MEM_AGE" : age,
+				      "MEM_HEIGHT" : height,
+				      "MEM_WEIGHT" : weight,
+				      "MEM_ROLE" : "ROLE_MEM",
+				      "MEM_ENABLE" : "1"
+				  
+				  },
+				  success:function(data){
+		      			console.log("성공");
+		      		},
+	 			 
+		       	error:function(e){
+				         console.log("연결 실패");
+				  
+			   		}  
+	  	});
+		   
+		   
+   });
+	
+	   
       //jQuery time
       var current_fs, next_fs, previous_fs; //필드
       var left, opacity, scale; //애니매이션 필드 셋 속성
       var animating; //빠른 멀티 클릭시 방지를 위한 플래그
-      
-      $("#sendButton").on('click',function(){
+		  
+		$("#sendButton").on('click',function(){
       	alert("홈스피탈 서비스 인증 번호 해당 메일로 발송하였습니다")
       	$.ajax({
       		type:'post',
@@ -258,7 +305,7 @@ width: 100%;
                   return false;
                }
                animating = true;
-               current_fs = $(this).parent();
+               current_fs = $(this).parent();      
                next_fs = $(this).parent().next();
 
                //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
@@ -818,13 +865,14 @@ width: 100%;
 						<input type="button" class="btn btn-primary" id="checkButton" value=" 확인   ">
 					</div>
 					<div class="col-md-12">
-						<input type="password" name="pass" placeholder="비밀번호" /> 
+						<input type="password" id="pass" placeholder="비밀번호" /> 
 						<input type="password" name="cpass" placeholder="비밀번호 확인" />
 					</div>
 				</div>
 			</div>
 			<input type="button" name="previous" class="previous action-button" value="이전" /> 
-			<input type="button" name="next" class="next action-button" value="다음" />
+			<input type="button" name="next" id="yun" class="next action-button" value="다음" />
+			
 		</fieldset>
 		<fieldset>
 			<h1 class="fs-title">개인 정보</h1>
@@ -832,8 +880,8 @@ width: 100%;
 			<div class="form-group">
 			<div class="row">
 				<div class="col-md-12">
-					<input type="text" name="name" placeholder="이름" /> 
-					<input type="text" name="phone" placeholder="핸드폰 번호" /> 
+					<input type="text" id="nameSign" placeholder="이름" /> 
+					<input type="text" id="phone" placeholder="핸드폰 번호" /> 
 				</div>
 				<div class="col-md-5">
 					<select class="form-control" id="gender">
@@ -845,16 +893,16 @@ width: 100%;
 				<div class="col-md-5 col-md-offset-1">
 					<select class="form-control" id="age">
 						<option>나이</option>
-						<option value="">10세 이하</option>
-						<option value="">10대</option>
-						<option value="">20대</option>
-						<option value="">30대</option>
-						<option value="">40대</option>
-						<option value="">50대</option>
-						<option value="">60대</option>
-						<option value="">70대</option>
-						<option value="">80대</option>
-						<option value="">90대</option>
+						<option value="10세이하">10세 이하</option>
+						<option value="10대">10대</option>
+						<option value="10대">20대</option>
+						<option value="10대">30대</option>
+						<option value="10대">40대</option>
+						<option value="50대">50대</option>
+						<option value="60대">60대</option>
+						<option value="70대">70대</option>
+						<option value="80대">80대</option>
+						<option value="90대">90대</option>
 					</select>
 				</div>
 				<div class="col-md-6" style="padding-top: 10px">
@@ -930,7 +978,7 @@ width: 100%;
 			</div>
 			<textarea name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
 			<input type="button" name="previous" class="previous action-button" value="이전" /> 
-			<input type="button" name="signupBtn" class="action-button" value="회원가입" />
+			<input type="button" id="signupBtn" class="action-button" value="회원가입" />
 		</fieldset>
 		<fieldset>
 			<h1 class="fs-title">병원 제휴</h1>
