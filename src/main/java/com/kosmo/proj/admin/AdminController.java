@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.json.JSONObject;
+import org.json.XML;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,10 +39,19 @@ public class AdminController {
 		return "Accounts.ad_tiles";
 	}
 	
+	@RequestMapping("UserUpdateForm.hst")
+	public String userUpdateForm(@RequestParam Map map, Model model)
+	{
+		MemberDTO record = adminService.selectOne(map);
+		model.addAttribute("record", record);
+		return "Accounts.ad_tiles";
+	}
+	
 	
 	@RequestMapping( value= "UserUpdate.hst", method=RequestMethod.POST)
 	public String userUpdate(@RequestParam Map map, Model model)
 	{
+		MemberDTO record = adminService.selectOne(map);
 		return "Accounts.ad_tiles";
 	}
 	

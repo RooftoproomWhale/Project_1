@@ -52,7 +52,7 @@ public class AdminDAO implements AdminService {
 	@Override
 	public int update(Map map) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlMapper.update("adminUserUpdate", map);
 	}
 	
 	

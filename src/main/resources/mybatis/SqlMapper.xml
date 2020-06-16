@@ -59,4 +59,8 @@
 		FROM pharmacy p) disData
 		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
 	</select>
+	
+	<update id="adminUserUpdate" parameterType="java.util.Map">
+		UPDATE MEMBER SET MEM_EMAIL =#{email}, MEM_NAME = #{name}, MEM_PWD = #{password}, TEL = #{tel} WHERE MEM_EMAIL = #{email}
+	</update>
 </mapper>

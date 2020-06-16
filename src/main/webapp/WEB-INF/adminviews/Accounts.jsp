@@ -17,36 +17,63 @@ input[type=text] { border: none;}
 <script>
 $(function() {
 	
-	$("#updateBtn").on('click', function(){
-		var upName = $("#upName").val();
-		var upEmail = $("#upEmail").val();
-		var upPwd = $("#upPwd").val();
-		var upTel = $("#upTel").val();
-		
-		console.log(upName, upEmail, upPwd, upTel);
-// 		var param = $("#frm").serialize();
-// 		alert(param);
+	$("#updateModal").on('click', function(){
+		var userEmail = $(".userEmail").html();
+		var tr = $(this).parent().parent().parent();
+		var td = tr.children();
+		console.log("모달 클릭", userEmail ,td.eq(1).children().html());
 		var request = 
 			$.ajax({ 
-				url: "<c:url value='/Admin/UserUpdate.hst'/>",
+				url: "<c:url value='/Admin/UserUpdateForm.hst'/>",
 				type: "post", //get, post 방식 
+				dataType: 'html', //or xml or script or html or json or text
 				data: {
 						"upName" : upName,
 						"upEmail" : upEmail,
 						"upPwd" : upPwd,
 						"upTel" : upTel
 						}, //넘길 파라미터 
-				dataType: 'json', //or xml or script or html 
 				async: true, // true:비동기, false:동기 
 				success: function(data){ 
 					console.log('성공');
 				},
-				error: function(json)
-				{ 
+				error:function(request,status,error){
 					console.log('실패');
+					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 				} 
 			});
 	});
+	
+// 	$("#updateBtn").on('click', function(){
+// 		var upName = $("#upName").val();
+// 		var upEmail = $("#upEmail").val();
+// 		var upPwd = $("#upPwd").val();
+// 		var upTel = $("#upTel").val();
+		
+// 		console.log(upName, upEmail, upPwd, upTel);
+// // 		var param = $("#frm").serialize();
+// // 		alert(param);
+// 		var request = 
+// 			$.ajax({ 
+// 				url: "<c:url value='/Admin/UserUpdate.hst'/>",
+// 				type: "post", //get, post 방식 
+// 				dataType: 'html', //or xml or script or html 
+// 				data: {
+// 						"upName" : upName,
+// 						"upEmail" : upEmail,
+// 						"upPwd" : upPwd,
+// 						"upTel" : upTel
+// 						}, //넘길 파라미터 
+// 				async: true, // true:비동기, false:동기 
+// 				success: function(data){ 
+// 					console.log('성공');
+// 				},
+// 				error:function(request,status,error){
+// 					console.log('실패');
+// 					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+// 				} 
+// 			});
+// 	});
 });
 </script>
 
@@ -123,8 +150,7 @@ $(function() {
 													<td>
 														<div class="table-data__info">
 															<h6>${item.mem_name }</h6>
-															<span> <a href="#">${item.mem_email }</a>
-															</span>
+															<a href="#"><span class="userEmail"> ${item.mem_email }</span></a>
 														</div>
 													</td>
 													<c:if test="${item.role == 'ROLE_ADM' }">
@@ -151,7 +177,7 @@ $(function() {
 													</td>
 													<td>
 														<div class="table-data-feature">
-															<button class="item" data-toggle="modal"
+															<button class="item" data-toggle="modal" <%-- onclick="location.href='<c:url value = "/Admin/UserUpdateForm.hst"/>'" --%>
 																data-placement="top" data-target="#UserModal" title="수정" id="updateModal">
 																<i class="zmdi zmdi-edit"></i>
 															</button>
@@ -165,117 +191,6 @@ $(function() {
 												<tr>
 												</c:forEach>
 											</c:if>
-													<td><label class="au-checkbox"> <input
-															type="checkbox" checked="checked"> <span
-															class="au-checkmark"></span>
-													</label></td>
-													<td>
-														<div class="table-data__info">
-															<h6>윤성준</h6>
-															<span> <a href="#">busu0423@gmail.com</a>
-															</span>
-														</div>
-													</td>
-													<td><span class="role user">user</span></td>
-													<td>
-														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="PASSWORD"
-																disabled="disabled">
-														</div>
-													</td>
-													<td>
-														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="010-1234-7586"
-																disabled="disabled">
-														</div>
-													</td>
-													<td>
-														<div class="table-data-feature">
-															<button class="item" data-toggle="modal"
-																data-placement="top" data-target="#UserModal" title="수정">
-																<i class="zmdi zmdi-edit"></i>
-															</button>
-															<button class="item" data-toggle="tooltip"
-																data-placement="top" title="삭제">
-																<i class="zmdi zmdi-delete"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td><label class="au-checkbox"> <input
-															type="checkbox"> <span class="au-checkmark"></span>
-													</label></td>
-													<td>
-														<div class="table-data__info">
-															<h6>신건웅</h6>
-															<span> <a href="#">shin@gmail.com</a>
-															</span>
-														</div>
-													</td>
-													<td><span class="role user">user</span></td>
-													<td>
-														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="PASSWORD"
-																disabled="disabled">
-														</div>
-													</td>
-													<td>
-														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="010-1234-7586"
-																disabled="disabled">
-														</div>
-													</td>
-													<td>
-														<div class="table-data-feature">
-															<button class="item" data-toggle="modal"
-																data-placement="top" data-target="#UserModal" title="수정">
-																<i class="zmdi zmdi-edit"></i>
-															</button>
-															<button class="item" data-toggle="tooltip"
-																data-placement="top" title="삭제">
-																<i class="zmdi zmdi-delete"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td><label class="au-checkbox"> <input
-															type="checkbox"> <span class="au-checkmark"></span>
-													</label></td>
-													<td>
-														<div class="table-data__info">
-															<h6>김이중피부과의원</h6>
-															<span> <a href="#">02-484-6455</a>
-															</span>
-														</div>
-													</td>
-													<td><span class="role member">Hospital</span></td>
-													<td>
-														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="PASSWORD"
-																disabled="disabled">
-														</div>
-													</td>
-													<td>
-														<div class="rs-select2--trans rs-select2--sm">
-															<input type="text" placeholder="010-1234-7586"
-																disabled="disabled">
-														</div>
-													</td>
-													<td>
-														<div class="table-data-feature">
-															<button class="item" data-toggle="modal"
-																data-placement="top" data-target="#UserModal" title="수정">
-																<i class="zmdi zmdi-edit"></i>
-															</button>
-															<button class="item" data-toggle="tooltip"
-																data-placement="top" title="삭제">
-																<i class="zmdi zmdi-delete"></i>
-															</button>
-														</div>
-													</td>
-												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -330,7 +245,7 @@ $(function() {
 
 				<!--Footer-->
 				<div class="modal-footer justify-content-center">
-					<a type="button" id="updateBtn" class="btn btn-outline-warning waves-effect">Update</a>
+					<a type="button" id="updateBtn" <%-- onclick="location.href='<c:url value = "/Admin/UserUpdate.hst"/>'" --%> class="btn btn-outline-warning waves-effect">Update</a>
 				</div>
 			</div>
 			<!--/.Content-->
