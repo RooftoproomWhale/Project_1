@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<!-- Jquery JS-->
-    <script src="<c:url value='/vendor/jquery-3.2.1.min.js'/>"></script>
 <!--     Bootstrap JS -->
     <script src="<c:url value='/vendor/bootstrap-4.1/popper.min.js'/>"></script>
     <script src="<c:url value='/vendor/bootstrap-4.1/bootstrap.min.js'/>"></script>

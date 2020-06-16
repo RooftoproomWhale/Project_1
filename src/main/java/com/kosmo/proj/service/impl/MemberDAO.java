@@ -21,13 +21,20 @@ public class MemberDAO implements MemberService {
 		@Override
 		public boolean isLogin(Map map) {
 			// TODO Auto-generated method stub
-			return false;
+			return (Integer)sqlMapper.selectOne("memberIsLogin",map)==0 ? false : true;
 		}
+		
+		@Override
+		public MemberDTO isLogin(MemberDTO member) {
+			// TODO Auto-generated method stub
+			return sqlMapper.selectOne("memberIsLoginJson",member);
+		}
+
 
 		@Override
 		public List<MemberDTO> selectList(Map map) {
 			// TODO Auto-generated method stub
-			return null;
+			return sqlMapper.selectList("selectMemberList", map);
 		}
 
 		@Override
@@ -60,6 +67,7 @@ public class MemberDAO implements MemberService {
 			return 0;
 		}
 
+		
 		
 
 }
