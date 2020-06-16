@@ -2,17 +2,12 @@
  *  일정 편집
  * ************** */
 var editEvent = function (event, element, view) {
-
+	var start ="";
     $('#deleteEvent').data('id', event._id); //클릭한 이벤트 ID
 
     $('.popover.fade.top').remove();
     $(element).popover("hide");
-
-    if (event.allDay === true) {
-        editAllDay.prop('checked', true);
-    } else {
-        editAllDay.prop('checked', false);
-    }
+  
 
     if (event.end === null) {
         event.end = event.start;
@@ -26,18 +21,21 @@ var editEvent = function (event, element, view) {
     
     if(event.type=="복용약등록"){
     	 modalTitle.html('복용중인 약 상세보기');
+    	 
     }
+   
     else if(event.type=="병원예약"){
-    	 modalTitle.html('예약 상세페이지');
-    }else{
-    modalTitle.html('일정 수정');
-    }
-    editTitle.val(event.title);
-    editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
-    editType.val(event.type);
-    editDesc.val(event.description);
-    editColor.val(event.backgroundColor).css('color', event.backgroundColor);
-
+    	 start = moment(event.start).format('YYYY-MM-DD HH:mm');
+    	change();
+    	 }
+function change() {
+	 modalTitle.html('예약 상세페이지');
+	 $('#titlecall').html(event.title);
+/*	 $('#timecall').html(start);*/
+	 $('#namecall').html(event.username);
+	 $('#updateEvents_no1').css('display','none');
+ 	$('#updateEvent_no1').css('display','inline');
+}
     addBtnContainer.hide();
     modifyBtnContainer.show();
     if(event.type=="복용약등록"){
@@ -50,8 +48,25 @@ var editEvent = function (event, element, view) {
     eventModal.modal('show');
     }
     //업데이트 버튼 클릭시
-    $('#updateEvent1,#updateEvent2').unbind();
-    $('#updateEvent1,#updateEvent2').on('click', function () {
+    $('#updateEvent_no1,#updateEvent2').unbind();
+    $('#updateEvent_no1,#updateEvent2').on('click', function () {
+    	console.log(start)
+    	if($(this).attr('id')=='updateEvent_no1'){
+    		 modalTitle.html('예약 변경');
+    		$('#updateEvents_no1').css('display','inline');
+        	$('#updateEvent_no1').css('display','none');
+        	$('#titlecall').html('<input type="text" id="update-title" value='+event.title+'>')
+        	$('#namecall').html('<input type="text" id="update_name" value='+event.username+'>')
+        	$('#timecall').html('<input  type="datetime-local" id="update_start" value="'+event.start+'">')
+        	
+    	}
+    	
+    	 
+
+    });
+    /*예약변경후 */
+$('#updateEvents_no1').on('click',function(){
+/*
         if (editStart.val() > editEnd.val()) {
             alert('끝나는 날짜가 앞설 수 없습니다.');
             return false;
@@ -62,33 +77,17 @@ var editEvent = function (event, element, view) {
             return false;
         }
 
-        var statusAllDay;
-        var startDate;
-        var endDate;
-        var displayDate;
-
-        if (editAllDay.is(':checked')) {
-            statusAllDay = true;
-            startDate = moment(editStart.val()).format('YYYY-MM-DD');
-            endDate = moment(editEnd.val()).format('YYYY-MM-DD');
-            displayDate = moment(editEnd.val()).add(1, 'days').format('YYYY-MM-DD');
-        } else {
-            statusAllDay = false;
-            startDate = editStart.val();
-            endDate = editEnd.val();
-            displayDate = endDate;
-        }
-
-        eventModal.modal('hide');
-        eventdrugModal.modal('hide');
-        eventhosModal.modal('hide');
-        event.allDay = statusAllDay;
-        event.title = editTitle.val();
-        event.start = startDate;
+*/		console.log("테스트1"+$('#update_start').val())     
+		
+		event.title= $('#update_title').val();
+        event.start = moment($('#update_start').val()).format('YYYY-MM-DD HH:mm');
+        console.log(event.start);
+       /* event.title = editTitle.val();*/
+        event.username=$('#update_name').val();
+ /*       event.start = startDate;
         event.end = displayDate;
         event.type = editType.val();
-        event.backgroundColor = editColor.val();
-        event.description = editDesc.val();
+        event.description = editDesc.val();*/
 
         $("#calendar").fullCalendar('updateEvent', event);
 
@@ -104,7 +103,8 @@ var editEvent = function (event, element, view) {
             }
         });
 
-    });
+	change();
+});
 };
 
 // 삭제버튼
@@ -126,5 +126,5 @@ $('#deleteEvent').on('click', function () {
             alert('삭제되었습니다.');
         }
     });
-
+    change();
 });

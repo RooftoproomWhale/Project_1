@@ -9,10 +9,9 @@ var eventdrugModaladd=$('#eventdrugModaladd');
 var modalTitle = $('.modal-title');
 var editAllDay = $('#edit-allDay');
 var editTitle = $("input[name='edit-title']");
-var editStart = $('#edit-start');
-var editEnd = $('#edit-end');
-var editType = $('#edit-type');
-var editColor = $('#edit-color');
+var editStart = $('input[name="edit-start"]');
+var editEnd =  $('input[name="edit-end"]');
+var editType = $("select[name='edit-type'] ");
 var editDesc = $('#edit-desc');
 
 var addBtnContainer = $('.modalBtnContainer-addEvent');
@@ -32,7 +31,7 @@ var newEvent = function (start, end, eventType) {
     modalTitle.html('병원 예약');
      }
     editType.val(eventType).prop('selected', true);
-    editTitle.val('');
+    editTitle.val(null);
     editStart.val(start);
     editEnd.val(end);
     editDesc.val('');
@@ -54,38 +53,56 @@ var newEvent = function (start, end, eventType) {
     var eventId = 1 + Math.floor(Math.random() * 1000);
     /******** 임시 RAMDON ID - 실제 DB 연동시 삭제 **********/
 
-    
+ 
     //새로운 일정 저장버튼 클릭
     $('#save-event1,#save-event2').unbind();
     $('#save-event1,#save-event2').on('click',function () {
-    	var editTitles="";
-
-    	for(i=0;i <= editTitle.length;i++){
-    		if(editTitle.eq(i).val()!=null)
-    			editTitles = editTitle.eq(i).val();	
-    	};
+    
+    		var editTypes="";
+        	for(i=0;i <= editType.length;i++){
+        		if($.trim(editType.eq(i).val())!=''){
+        			var editTypes = editType.eq(i).val();	
+        		}};
+        		
+            		var one=0;
+            		var to=1;
+            		if(editTypes=='병원예약'){
+            			editTitles = editTitle.eq(to).val();	
+            			editStarts= editStart.eq(to).val();
+            			editEnds =editStart.eq(to).val();;
+            			editColor='#D25565'
+            			allday=false;
+            		}
+            		else{
+            			editTitles = editTitle.eq(one).val();	
+            			editStarts= editStart.eq(one).val();
+            			editEnds=editEnd.eq(one).val();
+            			editColor='#9775fa'
+            			allday=true;
+            		}
+ 
         var eventData = {
-        	
+        		
             _id: eventId,
         	
             title: editTitles,
 
-            start: editStart.val(),
-            end: editEnd.val(),
+            start: editStarts,
+            end: editEnds,
             description: editDesc.val(),
-            type: editType.val(),
+            type: editTypes,
             username: '가길동',
-            backgroundColor: editColor.val(),
+            backgroundColor: editColor,
             textColor: '#ffffff',
-            allDay: false
+            allDay: allday
         	
         };
-
+            		
         if (eventData.start > eventData.end) {
             alert('끝나는 날짜가 앞설 수 없습니다.');
-            return false;
+            return false; 
         }
-
+  
         if (eventData.title === '') {
             alert('일정명은 필수입니다.');
             return false;
@@ -93,19 +110,11 @@ var newEvent = function (start, end, eventType) {
 
         var realEndDay;
 
-        if (editAllDay.is(':checked')) {
-            eventData.start = moment(eventData.start).format('YYYY-MM-DD');
-            //render시 날짜표기수정
-            eventData.end = moment(eventData.end).add(1, 'days').format('YYYY-MM-DD');
-            //DB에 넣을때(선택)
-            realEndDay = moment(eventData.end).format('YYYY-MM-DD');
-
-            eventData.allDay = true;
-        }
+        
 
         $("#calendar").fullCalendar('renderEvent', eventData, true);
         eventModal.find('input, textarea').val('');
-        editAllDay.prop('checked', false);
+      
         eventModal.modal('hide');
         eventdrugModaladd.modal('hide');
    	

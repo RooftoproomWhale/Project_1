@@ -3,17 +3,19 @@ var draggedEventIsAllDay;
 var activeInactiveWeekends = true;
 
 function getDisplayEventDate(event) {
-
   var displayEventDate;
 
-  if (event.allDay == false) {
-    var startTimeEventInfo = moment(event.start).format('HH:mm');
-    var endTimeEventInfo = moment(event.end).format('HH:mm');
-    displayEventDate = startTimeEventInfo + " - " + endTimeEventInfo;
-  } else {
-    displayEventDate = "하루종일";
-  }
 
+	  if(event.type=='병원예약'){
+    var startTimeEventInfo = moment(event.start).format('YYYY-MM-DD HH:mm');
+    displayEventDate = startTimeEventInfo;
+	  }
+	  else{
+		  var startTimeEventInfo = moment(event.start).format('YYYY-MM-DD');
+		    var endTimeEventInfo = moment(event.end).subtract(1, 'days').format('YYYY-MM-DD');
+		    displayEventDate = startTimeEventInfo + " - " + endTimeEventInfo;
+	  }
+  
   return displayEventDate;
 }
 
@@ -71,7 +73,6 @@ function calDateWhenDragnDrop(event) {
 
   //하루짜리 all day
   if (event.allDay && event.end === event.start) {
-    console.log('1111')
     newDates.startDate = moment(event.start._d).format('YYYY-MM-DD');
     newDates.endDate = newDates.startDate;
   }
@@ -96,7 +97,14 @@ var calendar = $('#calendar').fullCalendar({
 	
 	themeSystem :'standard',
   eventRender: function (event, element, view) {
-	
+	if(event.type=='병원예약'){
+		h = '예약날짜';
+		name ='환자';
+	}
+	else{
+		h= '복용기간';
+		name ='복용자'
+	}
     //일정에 hover시 요약
     element.popover({
     	
@@ -107,11 +115,12 @@ var calendar = $('#calendar').fullCalendar({
         'background': event.backgroundColor,
         'color': event.textColor
       }),
+     
       content: $('<div />', {
           class: 'popoverInfoCalendar'
-        }).append('<p><strong>등록자:</strong> ' + event.username + '</p>')
+        }).append('<p><strong>'+name+':</strong> ' + event.username + '</p>')
         .append('<p><strong>구분:</strong> ' + event.type + '</p>')
-        .append('<p><strong>시간:</strong> ' + getDisplayEventDate(event) + '</p>')
+        .append('<p><strong>'+h+':</strong> ' + getDisplayEventDate(event) + '</p>')
         .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
       delay: {
         show: "800",
@@ -240,7 +249,7 @@ var calendar = $('#calendar').fullCalendar({
   select: function (startDate, endDate, jsEvent, view) {
 
     $(".fc-body").unbind('click');
-    $(".fc-body").on('click', 'td', function (e) {
+    $(".fc-body:not(.fc-event-container)").on('click', 'td', function (e) {
 
       $("#contextMenu")
         .addClass("contextOpened")
@@ -330,6 +339,7 @@ var calendar = $('#calendar').fullCalendar({
   eventLongPressDelay: 0,
   selectLongPressDelay: 0
 });
+/*필터*/
 $("<select class='filter form-control'  onchange='filtering()' id='type_filter'><option value=''>모두</option><option value='병원예약'>병원예약</option><option value='복용약등록'>복용약등록</option></select>").appendTo('.fc-left');
 
 
