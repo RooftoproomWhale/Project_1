@@ -18,6 +18,7 @@ public class SignUpController {
 	@Resource(name = "memberService")//서비스주입
 	private MemberService memberService;
 
+
 	@RequestMapping("/Account/SignForm.hst")
 	public String toForm()
 	{

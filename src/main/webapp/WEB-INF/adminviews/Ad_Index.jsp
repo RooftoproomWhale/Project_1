@@ -51,9 +51,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="header-button-item mr-0 js-sidebar-btn">
-                                    <i class="zmdi zmdi-menu"></i>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -114,7 +111,7 @@
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item">
                                     <h2 class="number">60,386</h2>
-                                    <span class="desc">bookings</span>
+                                    <span class="desc">appointments</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-money"></i>
                                     </div>
@@ -142,7 +139,7 @@
                                             </div>
                                             <div class="chart-note">
                                                 <span class="dot dot--green"></span>
-                                                <span>Bookings</span>
+                                                <span>Appointments</span>
                                             </div>
                                         </div>
                                         <div class="chart-info-right">
@@ -150,7 +147,7 @@
                                                 <select class="js-select2" name="property">
                                                     <option selected="selected">All Properties</option>
                                                     <option value="">Members</option>
-                                                    <option value="">Bookings</option>
+                                                    <option value="">Appointments</option>
                                                 </select>
                                                 <div class="dropDownSelect2"></div>
                                             </div>

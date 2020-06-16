@@ -1,4 +1,4 @@
-package com.kosmo.proj.service.impl;
+package com.kosmo.proj.admin;
 
 import java.util.List;
 import java.util.Map;
@@ -8,52 +8,50 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.kosmo.proj.service.MemberDTO;
-import com.kosmo.proj.service.MemberService;
 
-@Service("memberService")
-public class MemberServiceImpl implements MemberService{
+@Service("adminService")
+public class AdminServiceImpl implements AdminService {
 
-	@Resource(name="memberDAO")
-	private MemberDAO dao;
-
+	@Resource(name = "adminDAO")
+	private AdminDAO dao;
+	
+	
 	@Override
 	public boolean isLogin(Map map) {
-		return dao.isLogin(map);
-	}
-	
-	public MemberDTO isLogin(MemberDTO member) {		
-		return dao.isLogin(member);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public List<MemberDTO> selectList(Map map) {
+		// TODO Auto-generated method stub
 		return dao.selectList(map);
 	}
 
 	@Override
 	public int getTotalRecord(Map map) {
-		return dao.getTotalRecord(map);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public MemberDTO selectOne(Map map) {
-		return dao.selectOne(map);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public int delete(Map map) {
-		return dao.delete(map);
-	}
-
-	@Override
-	public int insert(Map map) {
-		return dao.insert(map);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public int update(Map map) {
-		return dao.update(map);
+		// TODO Auto-generated method stub
+		return 0;
 	}
-
+	
+	
 
 }

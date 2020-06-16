@@ -1,6 +1,5 @@
 package com.kosmo.proj.service;
 
-
 public class MemberDTO {
 	   private String mem_email;
 	   private String mem_pwd;
@@ -74,6 +73,4 @@ public class MemberDTO {
 	      this.weight = weight;
 	   }
 
-
-	}
-
+}

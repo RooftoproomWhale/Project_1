@@ -80,26 +80,23 @@
   <thead>
     <tr>
       <td scope="col">병원명</td>
-      <td scope="col">분당병원</td>
+      <td scope="col" id='titlecall'></td>
     </tr>
   </thead>
   <tbody>
   <tr>
-  <td scope="row">이름<br/></td>
-      <td>김길동</td>
+  <td scope="row">환자<br/></td>
+      <td id='namecall'></td>
   </tr>
     <tr>
       <td scope="row">예약일시</td>
-      <td>2020-06-08 13:00</td>
+      <td id='timecall'><input class="inputModal" type="text" name="edit-start" id="" style="display: none;"/></td>
     </tr>
     <tr >
       <td scope="row" >예약신청일<br/></td>
       <td>2020-06-01 &lt;인터넷 예약&gt;</td>
     </tr>
    
-     <tr>
-      <td>진찰료</td><td>미수납</td>
- </tr>
  <tr><td>예약상태</td> <td>미승인</td></tr>
  <tr><td>진료과</td><td>정형외과</td></tr>
  <tr><td>의사명</td><td>홍길동</td></tr>
@@ -109,9 +106,11 @@
                     
                     <div class="modal-footer modalBtnContainer-modifyEvent">
                         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                          <button type="button" class="btn btn-danger" id="deleteEvent">예약취소</button>
-                        <button type="button" class="btn btn-danger" id="updateEvent1">예약변경</button>
-
+                          <button type="button" class="btn btn-danger" id="deleteEvent_no1">예약취소</button>
+                          <button type="button" class="btn btn-danger" id="updateEvents_no1" style="display: none;">예약변경확인</button>
+                        <button type="button" class="btn btn-danger" id="updateEvent_no1">예약변경</button>
+						
+					
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -178,8 +177,8 @@
                     
                     <div class="modal-footer modalBtnContainer-modifyEvent">
                         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                        <button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
-                        <button type="button" class="btn btn-primary" id="updateEvent2">수정</button>
+                        <button type="button" class="btn btn-danger" id="deleteEvent_no2">삭제</button>
+                        <button type="button" class="btn btn-primary" id="updateEvent_no2">수정</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -194,10 +193,10 @@
                         <h4>복용약 추가</h4>
                     </div>
                     <div class="modal-body">
- <div class="row">
+ 						<div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-title">약이름</label>
-                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                <input class="inputModal" type="text" name="edit-title" id="edit-one"
                                     required="required" />
                             </div>
                         </div>
@@ -232,7 +231,7 @@
                     </div>
                     <div class="modal-footer modalBtnContainer-addEvent">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary" id="save-event1">저장</button>
+                        <button type="button" class="btn btn-primary" id="save-event1">등록</button>
                     </div>
                    
                       </div>
@@ -254,7 +253,7 @@
                                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-title">병원이름</label>
-                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                <input class="inputModal" type="text" name="edit-title" id="edit-to"
                                     required="required" />
                             </div>
                         </div>
@@ -277,21 +276,28 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-desc">진료과</label>
-                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                <input class="inputModal" type="text" name="" id=""
                                     required="required" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
                                 <label class="col-xs-4" for="edit-desc">의사명</label>
-                                <input class="inputModal" type="text" name="edit-title" id="edit-title"
+                                <input class="inputModal" type="text" name="" id=""
+                                    required="required" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label class="col-xs-4" for="edit-title">환자명</label>
+                                <input class="inputModal" type="text" name="edit-title" id="edit-name"
                                     required="required" />
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer modalBtnContainer-addEvent">
                         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary" id="save-event2">저장</button>
+                        <button type="button" class="btn btn-primary" id="save-event2">예약하기</button>
                     </div>
                     
                 </div><!-- /.modal-content -->

@@ -252,14 +252,24 @@ width: 100%;
 				  
 				  },
 				  success:function(data){
-		      			console.log("성공");
+					  if (result == 1) {
+		                    $('#checkMessage').html("you can use this ID"); 
+		                    $('#checkType')
+		                    	.attr('class', 'modal-content panel-success');
+					  } else {
+		                    $('#checkMessage').html("you can not use this ID");
+		                    $('#checkType')
+		                            .attr('class', 'modal-content panel-warning'); 
+		                }
+		                $('#checkModal').modal("show"); 
 		      		},
 	 			 
 		       	error:function(e){
 				         console.log("연결 실패");
 				  
-			   		}  
-	  	});
+		       	}  
+	  	
+		   });
 		   
 		   
    });
@@ -1015,7 +1025,7 @@ width: 100%;
 				</div>
 			</div>
 			<input type="button" id="auth_prev" class="action-button" value="이전" />
-			<input type="button" name="signupBtn" class="action-button" value="회원가입" />
+			<input type="button" name="signupBtn" class="action-button" style="background-color: Yellow" value="회원가입" />
 		</fieldset>
 		<div class="modal fade" id="regi-modal">
 			<div class="modal-dialog">

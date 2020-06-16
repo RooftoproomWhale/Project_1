@@ -30,3 +30,6 @@
 
     <!-- Main CSS-->
     <link href="<c:url value='/css/theme.css'/>" rel="stylesheet" media="all">
+    
+    <!-- Jquery JS-->
+    <script src="<c:url value='/vendor/jquery-3.2.1.min.js'/>"></script>

@@ -52,7 +52,6 @@ a {
 	-task-color: #777982;
 }
 
-%
 flex {
 	display: flex;
 	align-items: center;
@@ -261,6 +260,19 @@ button {
 	transition: .4s ease-in;
 	padding: 20px;
 	cursor: pointer;
+#opt-1:checked + label ,
+#opt-2:checked +  label ,
+#opt-3:checked +  label ,
+#opt-4:checked +  label,
+#opt-5:checked +  label,
+#opt-6:checked +  label,
+#opt-7:checked +  label,
+#opt-8:checked +  label,
+#opt-9:checked +  label,
+#opt-10:checked +  label,
+#opt-11:checked +  label {
+  color: var(--checkbox-color);
+  border-bottom: 2px solid var(--checkbox-color);
 }
 
 #opt-1:checked+label, #opt-2:checked+label, #opt-3:checked+label, #opt-4:checked+label

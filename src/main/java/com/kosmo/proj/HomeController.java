@@ -133,11 +133,6 @@ public class HomeController {
         }
     }
 
-	@RequestMapping("/Covid/status.hst")
-	public String covid()
-	{
-		return "covid.tiles";
-	}
 	@RequestMapping("/Homespital/Health_info.hst")
 	public String health()
 	{

@@ -152,7 +152,7 @@
 						<p>현 위치 중심으로  병원 위치 찾기 서비스 </p>
 					</div>
 				</div>
-				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Administration/administration.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/mypage/administration.hst'/>'">
 					<i class="fa fa-medkit"></i>
 					<div class="service-desc">
 						<h3>복약 관리</h3>
@@ -177,7 +177,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Covid/status.hst'/>'">
+				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Covid/View.hst'/>'">
 
 					<i class="fa fa-pie-chart"></i>
 					<div class="service-desc">
