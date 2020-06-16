@@ -90,7 +90,7 @@
   </tr>
     <tr>
       <td scope="row">예약일시</td>
-      <td id='timecall'><input class="inputModal" type="text" name="edit-start" id="" style="display: none;"/></td>
+      <td id='timecall'><input class="inputModal chdate" type="text" name="edit-start" id="edit-start" style="display: none;"/></td>
     </tr>
     <tr >
       <td scope="row" >예약신청일<br/></td>

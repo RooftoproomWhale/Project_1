@@ -23,19 +23,21 @@ var editEvent = function (event, element, view) {
     	 modalTitle.html('복용중인 약 상세보기');
     	 
     }
-   
-    else if(event.type=="병원예약"){
+     else if(event.type=="병원예약"){
     	 start = moment(event.start).format('YYYY-MM-DD HH:mm');
     	change();
     	 }
+    
+   //상세보기로 변경
 function change() {
 	 modalTitle.html('예약 상세페이지');
 	 $('#titlecall').html(event.title);
-/*	 $('#timecall').html(start);*/
+	 $('#timecall').text(start);
 	 $('#namecall').html(event.username);
 	 $('#updateEvents_no1').css('display','none');
  	$('#updateEvent_no1').css('display','inline');
 }
+
     addBtnContainer.hide();
     modifyBtnContainer.show();
     if(event.type=="복용약등록"){
@@ -57,12 +59,10 @@ function change() {
         	$('#updateEvent_no1').css('display','none');
         	$('#titlecall').html('<input type="text" id="update-title" value='+event.title+'>')
         	$('#namecall').html('<input type="text" id="update_name" value='+event.username+'>')
-        	$('#timecall').html('<input  type="datetime-local" id="update_start" value="'+event.start+'">')
+/*        	$('#timecall').html('<input  type="datetime-local" id="update_start" value="'+event.start+'">')*/
+        	$('.chdate').text("");$('.chdate').css('display','inline');
         	
     	}
-    	
-    	 
-
     });
     /*예약변경후 */
 $('#updateEvents_no1').on('click',function(){
