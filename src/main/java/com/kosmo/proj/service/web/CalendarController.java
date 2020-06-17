@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kosmo.proj.service.CalendarVO;
+import com.kosmo.proj.service.CalendarDTO;
 
 @Controller
 public class CalendarController {
 
 	@RequestMapping("/Calendar/View.hst")
 	@ResponseBody
-	public List<CalendarVO> selectEventList(@RequestParam Map map) {
-		List<CalendarVO> list = new Vector<CalendarVO>();
+	public List<CalendarDTO> selectEventList(@RequestParam Map map) {
+		List<CalendarDTO> list = new Vector<CalendarDTO>();
 
-		HashMap<String, CalendarVO> javaMap = new HashMap<String, CalendarVO>();
-		list.add(new CalendarVO(1,"Kim","가그린목액","예약","2020-06-08", "2020-06-12", null, null,"false"));
-		list.add(new CalendarVO(2,"Kim","병원예약","예약","2020-06-08", "2020-06-12", null, "#E5D85C","false"));
+//		HashMap<String, CalendarVO> javaMap = new HashMap<String, CalendarVO>();
+//		list.add(new CalendarVO(1,"Kim","가그린목액","복용약등록","2020-06-08", "2020-06-12", null, null,"false"));
+//		list.add(new CalendarVO(2,"Kim","병원예약","병원예약","2020-06-08", "2020-06-12", null, "#E5D85C","false"));
 		return list;
 	}
 

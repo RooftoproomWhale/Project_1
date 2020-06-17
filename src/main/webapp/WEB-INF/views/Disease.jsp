@@ -3,251 +3,263 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link
 	href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap"
-	rel="stylesheet"/>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.8.24/themes/base/jquery-ui.css">
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.8.24/themes/base/jquery-ui.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
-
 #console, #cons {
 	border: 1px solid #ccc;
 }
 
-#console li :not(:last-child),#cons li:not(:last-child){
-border-bottom:1px solid #ccc
-
+#console li :not (:last-child ), #cons li:not (:last-child ){
+	border-bottom: 1px solid #ccc
 }
+
 a {
 	color: black;
 }
 
 /*메인*/
 * {
-  box-sizing: border-box;
-  outline: none;
+	box-sizing: border-box;
+	outline: none;
 }
 
-:root {
-  --bg-color: #f5f8ff;;
-  --main-color: #353536;
-  --secondary-color: #8e92a4;
-  --main-text-color: #5d606b;
-  --secondary-dark-color: #9496a5;
-  --tag-color-one: #e0fbf6;
-  --tag-color-text-one: #58c2a9;
-  --tag-color-two: #ece7fe;
-  --tag-color-text-two: #8972f3;
-  --tag-color-three: #fde7ea;
-  --tag-color-text-three: #e77f89;
-  --tag-color-four: #f7f8fc;
-  --tag-color-text-four: #a0a6b5;
-  --checkbox-color: #009e90;
-  --button-color: #49beb7;
-  --box-color: #fff1d6;
-  --box-color-2: #d3e6ff;
-  --box-color-3: #ffd9d9;
-  --box-color-4: #daffe5;
-  --task-color: #777982;
+:root { -
+	-bg-color: #f5f8ff;; -
+	-main-color: #353536; -
+	-secondary-color: #8e92a4; -
+	-main-text-color: #5d606b; -
+	-secondary-dark-color: #9496a5; -
+	-tag-color-one: #e0fbf6; -
+	-tag-color-text-one: #58c2a9; -
+	-tag-color-two: #ece7fe; -
+	-tag-color-text-two: #8972f3; -
+	-tag-color-three: #fde7ea; -
+	-tag-color-text-three: #e77f89; -
+	-tag-color-four: #f7f8fc; -
+	-tag-color-text-four: #a0a6b5; -
+	-checkbox-color: #009e90; -
+	-button-color: #49beb7; -
+	-box-color: #fff1d6; -
+	-box-color-2: #d3e6ff; -
+	-box-color-3: #ffd9d9; -
+	-box-color-4: #daffe5; -
+	-task-color: #777982;
 }
 
-%flex {
-  display: flex;
-  align-items: center;
+flex {
+	display: flex;
+	align-items: center;
 }
 
 body {
-  margin: 0;
-  @extend %flex;
-  justify-content: center;
-  flex-direction: column;
-  overflow: auto;
-  width: 100%;
-  height: 100vh;
-  padding: 20px;
-  font-family: 'DM Sans', sans-serif;;
-  font-size: 12px;
-  background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 68%, rgba(255, 206, 196, 0.5) 163%),linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%, rgba(239, 112, 138, 0.5) 40%),linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%, rgba(237, 106, 134, 0.5) 169%),linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%, rgba(247, 126, 132, 0.5) 43%); background-blend-mode: overlay,multiply,color,normal;
+	margin: 0; @ extend %flex;
+	justify-content: center;
+	flex-direction: column;
+	overflow: auto;
+	width: 100%;
+	height: 100vh;
+	padding: 20px;
+	font-family: 'DM Sans', sans-serif;;
+	font-size: 12px;
+	background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773)
+		68%, rgba(255, 206, 196, 0.5) 163%),
+		linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%,
+		rgba(239, 112, 138, 0.5) 40%),
+		linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%,
+		rgba(237, 106, 134, 0.5) 169%),
+		linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%,
+		rgba(247, 126, 132, 0.5) 43%);
+	background-blend-mode: overlay, multiply, color, normal;
 }
 
 ul {
-  list-style-type: none;
-  padding: 0;
+	list-style-type: none;
+	padding: 0;
 }
 
-button { 
-  border: none; 
-  background: none;
-  cursor: pointer;
+button {
+	border: none;
+	background: none;
+	cursor: pointer;
 }
 
 .task-manager {
-  display: flex;
-  justify-content: space-between;
-  width: 120%;
-
-  max-width: 1200px;
-  height: 90vh;
-  max-height: 900px;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow:
-
- ; overflow: hidden;
+	display: flex;
+	justify-content: space-between;
+	width: 120%;
+	max-width: 1200px;
+	height: 90vh;
+	max-height: 900px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow:;
+	overflow: hidden;
 }
 
-
-
-.item {
-  @extend %flex;
-  color: var(--main-color);
-  margin-bottom: 14px;
-  font-weight: 500;
-  
-  svg {
-    width: 14px;
-    height: 14px;
-    color: currentcolor;
-    margin-right: 10px;
-  }
+.item { @extend %flex;
+	color: var(- -main-color);
+	margin-bottom: 14px;
+	font-weight: 500; svg { width : 14px;
+	height: 14px;
+	color: currentcolor;
+	margin-right: 10px;
 }
 
-.category-list{
-  margin-top: 50px;
-  
-  .item{ color: var(--secondary-color); }
-} 
+}
+.category-list {
+	margin-top: 50px;
+	.
+	item
+	{
+	color
+	:
+	var(
+	-
+	-secondary-color
+	);
+}
 
+}
 .actions {
-  padding: 12px;
-  display: flex;
-  justify-content: space-between;
+	padding: 12px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .circle {
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  background-color: #fe4d46;
-  box-shadow: 14px 0 0 0 #fbc023, 28px 0 0 0 #7dd21f;
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	background-color: #fe4d46;
+	box-shadow: 14px 0 0 0 #fbc023, 28px 0 0 0 #7dd21f;
 }
 
 .circle-2 {
-  border-radius: 50%;
-  width: 4px;
-  height: 4px;
-  background-color: #d5d7e3;
-  box-shadow: -6px 0 0 0 #d5d7e3, 6px 0 0 0 #d5d7e3;
+	border-radius: 50%;
+	width: 4px;
+	height: 4px;
+	background-color: #d5d7e3;
+	box-shadow: -6px 0 0 0 #d5d7e3, 6px 0 0 0 #d5d7e3;
 }
 
 .right-bar {
-
-  width: 340px;
-  border-left: 1px solid #e3e7f7;
-  display: flex;
-  flex-direction: column;
-  padding-top: 180px;
-  height: 100%;
- 
+	width: 340px;
+	border-left: 1px solid #e3e7f7;
+	display: flex;
+	flex-direction: column;
+	padding-top: 180px;
+	height: 100%;
 }
-.right-bar .header { 
-width:100%;
-  border-top: 1px solid #e3e7f7;
-    font-size: 20px; 
-    color: var(--main-text-color);
-    left:100px;
-  }
-  
 
+.right-bar .header {
+	width: 100%;
+	border-top: 1px solid #e3e7f7;
+	font-size: 20px;
+	color: var(- -main-text-color);
+	left: 100px;
+}
 
 .right-content {
-  padding: 10px 30px;
-  overflow-y: auto;
-  flex: 1;
+	padding: 10px 30px;
+	overflow-y: auto;
+	flex: 1;
 }
 
 .task-box {
-  position: relative;
-  border-radius: 12px;
-  width: 100%;
-  margin: 20px 0;
-  padding: 16px;
-  cursor: pointer;
-  box-shadow: 2px 2px 4px 0px rgba(235,235,235,1);
-  
-  
+	position: relative;
+	border-radius: 12px;
+	width: 100%;
+	margin: 20px 0;
+	padding: 16px;
+	cursor: pointer;
+	box-shadow: 2px 2px 4px 0px rgba(235, 235, 235, 1);
 }
+
 .tack-box:hover {
-    transform: scale(1.02);
-  }
-
-.time { margin-bottom: 6px; opacity: 0.4; font-size: 10px; }
-
-.task-name { 
-  font-size: 14px; 
-  font-weight: 500;
-  opacity: 0.6;
-  padding-bottom: 10px
+	transform: scale(1.02);
 }
 
-.yellow { 
-  background-color: var(--box-color);
+.time {
+	margin-bottom: 6px;
+	opacity: 0.4;
+	font-size: 10px;
 }
 
-.blue { background-color: var(--box-color-2); }
+.task-name {
+	font-size: 14px;
+	font-weight: 500;
+	opacity: 0.6;
+	padding-bottom: 10px
+}
 
-.red { background-color: var(--box-color-3); }
+.yellow {
+	background-color: var(- -box-color);
+}
 
-.green { background-color: var(--box-color-4); }
+.blue {
+	background-color: var(- -box-color-2);
+}
+
+.red {
+	background-color: var(- -box-color-3);
+}
+
+.green {
+	background-color: var(- -box-color-4);
+}
 
 .more-button {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background-color: #8e92a4;
-  box-shadow: 0 -4px 0 0 #8e92a4, 0 4px 0 0 #8e92a4;
-  opacity: 0.4;
-  right: 20px;
-  top: 15px;
-  cursor: pointer;
+	position: absolute;
+	width: 3px;
+	height: 3px;
+	border-radius: 50%;
+	background-color: #8e92a4;
+	box-shadow: 0 -4px 0 0 #8e92a4, 0 4px 0 0 #8e92a4;
+	opacity: 0.4;
+	right: 20px;
+	top: 15px;
+	cursor: pointer;
 }
-
 
 .page-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 40px 20px 0 20px;
-  background:#FFFFFF;
-    border-bottom: 1px solid #ddd;
-
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: 40px 20px 0 20px;
+	background: #FFFFFF;
+	border-bottom: 1px solid #ddd;
 }
-.page-content .header { 
-    font-size: 26px; 
-    color: var(--main-color); 
-    margin-top: 30px;
-  }
-  
+
+.page-content .header {
+	font-size: 26px;
+	color: var(- -main-color);
+	margin-top: 30px;
+}
+
 .content-categories {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-
-  padding: 20px 0;
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	padding: 20px 0;
 }
 
-.nav-item { display: none; }
-
-.category { 
-  font-weight: 500; 
-  color: var(--secondary-color); 
-  border-bottom: 1px solid #ddd;
-  transition: .4s ease-in;
-  padding: 20px ;
-  cursor: pointer;
+.nav-item {
+	display: none;
 }
 
+.category {
+	font-weight: 500;
+	color: var(- -secondary-color);
+	border-bottom: 1px solid #ddd;
+	transition: .4s ease-in;
+	padding: 20px;
+	cursor: pointer;
 #opt-1:checked + label ,
 #opt-2:checked +  label ,
 #opt-3:checked +  label ,
@@ -263,115 +275,134 @@ width:100%;
   border-bottom: 2px solid var(--checkbox-color);
 }
 
-.task-item { display: none; }
+#opt-1:checked+label, #opt-2:checked+label, #opt-3:checked+label, #opt-4:checked+label
+	{
+	color: var(- -checkbox-color);
+	border-bottom: 2px solid var(- -checkbox-color);
+}
+
+.task-item {
+	display: none;
+}
 
 .tasks-wrapper {
-  padding: 20px 0;
-  flex: 1;
-  overflow-y: auto;
-  height: 100%;
-  padding-right: 8px;
+	padding: 20px 0;
+	flex: 1;
+	overflow-y: auto;
+	height: 100%;
+	padding-right: 8px;
 }
 
 .task {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  margin-bottom: 16px;
-  padding-left: 30px;
-  color: var(--task-color);
-  font-size: 13px;
-  font-weight: 500;
-  
-  &:hover {
-    transform: translatex(2px);
-  }
-  
-  label {
-    cursor: pointer;
-  }
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	margin-bottom: 16px;
+	padding-left: 30px;
+	color: var(- -task-color);
+	font-size: 13px;
+	font-weight: 500;
+	&:
+	hover
+	{
+	transform
+	:
+	translatex(
+	2px
+	);
 }
 
- label .label-text { position: relative; }
-
- label .label-text:before {
-  content:'';
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border: 1px solid #ddd;
-  border-radius: 2px;
-  left: -24px;
-  transition: .2s ease;
+label {
+	cursor: pointer;
 }
 
-.task-item:checked + label .label-text:before {
-  background-color: var(--checkbox-color);
-  border: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: 10px;
-  background-position: center;
-  border: 1px solid var(--checkbox-color);
+}
+label .label-text {
+	position: relative;
+}
+
+label .label-text:before {
+	content: '';
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	left: -24px;
+	transition: .2s ease;
+}
+
+.task-item:checked+label .label-text:before {
+	background-color: var(- -checkbox-color);
+	border: none;
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-size: 10px;
+	background-position: center;
+	border: 1px solid var(- -checkbox-color);
 }
 
 .tag {
-  font-size: 10px;
-  padding: 4px 8px;
-  border-radius: 20px;
-  }
-.approved {
-    background-color: var(--tag-color-one);
-    color: var(--tag-color-text-one);
-  }
-  
-.progress {
-    background-color: var(--tag-color-two);
-    color: var(--tag-color-text-two);
-    margin: 0px;
-    height: 26px;
-  }
-  
-.review {
-    background-color: var(--tag-color-three);
-    color: var(--tag-color-text-three);
-  }
-  
-.waiting {
-    background-color: var(--tag-color-four);
-    color: var(--tag-color-text-four);
-  }
-
-
-.upcoming { 
-  border-bottom: 1px solid #ddd; 
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+	font-size: 10px;
+	padding: 4px 8px;
+	border-radius: 20px;
 }
 
+.approved {
+	background-color: var(- -tag-color-one);
+	color: var(- -tag-color-text-one);
+}
 
+.progress {
+	background-color: var(- -tag-color-two);
+	color: var(- -tag-color-text-two);
+	margin: 0px;
+	height: 26px;
+}
+
+.review {
+	background-color: var(- -tag-color-three);
+	color: var(- -tag-color-text-three);
+}
+
+.waiting {
+	background-color: var(- -tag-color-four);
+	color: var(- -tag-color-text-four);
+}
+
+.upcoming {
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 30px;
+	margin-bottom: 30px;
+}
 
 @media screen and (max-width: 700px) {
-  .task-manager {
-    flex-direction: column;
-    overflow-y: auto;
-  }
-  
-  .right-bar, .page-content {
-    width: 100%;
-    display: block;
-  }
-  
-  .tasks-wrapper { height: auto; }
+	.task-manager {
+		flex-direction: column;
+		overflow-y: auto;
+	}
+	.right-bar, .page-content {
+		width: 100%;
+		display: block;
+	}
+	.tasks-wrapper {
+		height: auto;
+	}
 }
 
 @media screen and (max-width: 520px) {
-  .page-content { padding: 40px 10px 0 10px; }
-  
-  .right-content { padding: 10px 16px; }
-  
-  .category { padding: 20px; }
+	.page-content {
+		padding: 40px 10px 0 10px;
+	}
+	.right-content {
+		padding: 10px 16px;
+	}
+	.category {
+		padding: 20px;
+	}
 }
+
 #jquery-accordion-menu {
 	top: 81px;
 }
@@ -568,176 +599,184 @@ body {
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-	<div class="task-manager col-md-7">
-		<div class="page-content">
-			<div class="header">내 질병 관리</div>
-			<div class="content-categories">
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-1" checked>
-					<label class="category" for="opt-1">모두</label>
+		<div class="col-md-2"></div>
+		<div class="task-manager col-md-7">
+			<div class="page-content">
+				<div class="header">내 질병 관리</div>
+				<div class="content-categories">
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-1" checked>
+						<label class="category" for="opt-1">모두</label>
+					</div>
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-2">
+						<label class="category" for="opt-2">외과</label>
+					</div>
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-3">
+						<label class="category" for="opt-3">신경외과</label>
+					</div>
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-4">
+						<label class="category" for="opt-4">정형외과</label>
+					</div>
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-5">
+						<label class="category" for="opt-5">비뇨기과</label>
+					</div>
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-6">
+						<label class="category" for="opt-6">정신과</label>
+					</div>
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-7">
+						<label class="category" for="opt-7">이비인후과</label>
+					</div>
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-8">
+						<label class="category" for="opt-8">신경과 </label>
+					</div>
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-9">
+						<label class="category" for="opt-9">소화기내과 </label>
+					</div>
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-10">
+						<label class="category" for="opt-10">호흡기내과 </label>
+					</div>
+					<div class="label-wrapper">
+						<input class="nav-item" name="nav" type="radio" id="opt-11">
+						<label class="category" for="opt-11">피부과 </label>
+					</div>
 				</div>
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-2">
-					<label class="category" for="opt-2">외과</label>
-				</div>
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-3">
-					<label class="category" for="opt-3">신경외과</label>
-				</div>
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-4">
-					<label class="category" for="opt-4">정형외과</label>
-				</div>
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-5">
-					<label class="category" for="opt-5">비뇨기과</label>
-				</div>
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-6">
-					<label class="category" for="opt-6">정신과</label>
-				</div>
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-7">
-					<label class="category" for="opt-7">이비인후과</label>
-				</div>
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-8">
-					<label class="category" for="opt-8">신경과 </label>
-				</div>
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-9">
-					<label class="category" for="opt-9">소화기내과 </label>
-				</div>
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-10">
-					<label class="category" for="opt-10">호흡기내과 </label>
-				</div>
-				<div class="label-wrapper">
-					<input class="nav-item" name="nav" type="radio" id="opt-11">
-					<label class="category" for="opt-11">피부과 </label>
-				</div>
-			</div>
-			
-			<!-- task wrapper 시작 -->
-			<div class="tasks-wrapper">
-				<!-- 외과 -->
-				<div class="task">
-					<input class="task-item" name="task-gs" type="checkbox" id="item-1">
-					<label for="item-1"> <span class="label-text">만성폐쇄성
-							폐질환</span>
-					</label> <span class="tag approved">Approved</span>
-				</div>
-				<div class="task">
-					<input class="task-item" name="task-gs" type="checkbox" id="item-2">
-					<label for="item-2"> <span class="label-text">당뇨병</span>
-					</label> <span class="tag progress">In Progress</span>
-				</div>
-				<div class="task">
-					<input class="task-item" name="task-gs" type="checkbox" id="item-3">
-					<label for="item-3"> <span class="label-text">고혈압</span>
-					</label> <span class="tag review">In Review</span>
-				</div>
-				<!-- 외과 끝-->
-				<!-- 신경외과 -->
-				<div class="task">
-					<input class="task-item" name="task-ns" type="checkbox" id="item-4">
-					<label for="item-4"> <span class="label-text">천식</span>
-					</label> <span class="tag progress">In Progress</span>
-				</div>
-				<!-- 신경외과 끝 -->
-				<!-- 정형외과 -->
-				<div class="task">
-					<input class="task-item" name="task-os" type="checkbox" id="item-5">
-					<label for="item-5"> <span class="label-text">치매</span>
-					</label> <span class="tag approved">Approved</span>
-				</div>
-				<div class="task">
-					<input class="task-item" name="task-os" type="checkbox" id="item-6">
-					<label for="item-6"> <span class="label-text">골관절염</span>
-					</label> <span class="tag review">In Review</span>
-				</div>
-				<!-- 정형외과 끝 -->
-				<!-- 비뇨 기과 -->
-				<div class="task">
-					<input class="task-item" name="task-uro" type="checkbox"
+
+				<!-- task wrapper 시작 -->
+				<div class="tasks-wrapper">
+					<!-- 외과 -->
+					<div class="task">
+						<input class="task-item" name="task-gs" type="checkbox"
+							id="item-1"> <label for="item-1"> <span
+							class="label-text">만성폐쇄성 폐질환</span>
+						</label> <span class="tag approved">Approved</span>
+					</div>
+					<div class="task">
+						<input class="task-item" name="task-gs" type="checkbox"
+							id="item-2"> <label for="item-2"> <span
+							class="label-text">당뇨병</span>
+						</label> <span class="tag progress">In Progress</span>
+					</div>
+					<div class="task">
+						<input class="task-item" name="task-gs" type="checkbox"
+							id="item-3"> <label for="item-3"> <span
+							class="label-text">고혈압</span>
+						</label> <span class="tag review">In Review</span>
+					</div>
+					<!-- 외과 끝-->
+					<!-- 신경외과 -->
+					<div class="task">
+						<input class="task-item" name="task-ns" type="checkbox"
+							id="item-4"> <label for="item-4"> <span
+							class="label-text">천식</span>
+						</label> <span class="tag progress">In Progress</span>
+					</div>
+					<!-- 신경외과 끝 -->
+					<!-- 정형외과 -->
+					<div class="task">
+						<input class="task-item" name="task-os" type="checkbox"
+							id="item-5"> <label for="item-5"> <span
+							class="label-text">치매</span>
+						</label> <span class="tag approved">Approved</span>
+					</div>
+					<div class="task">
+						<input class="task-item" name="task-os" type="checkbox"
+							id="item-6"> <label for="item-6"> <span
+							class="label-text">골관절염</span>
+						</label> <span class="tag review">In Review</span>
+					</div>
+					<!-- 정형외과 끝 -->
+					<!-- 비뇨 기과 -->
+					<div class="task">
+						<input class="task-item" name="task-uro" type="checkbox"
 							id="item-7"> <label for="item-7"> <span
 							class="label-text">심장</span>
-					</label> <span class="tag waiting">Waiting</span>
-				</div>
-				<!-- 비뇨 기과 끝 -->
-				<!-- 정신과 -->
-				<div class="task">
-					<input class="task-item" name="task-np" type="checkbox" id="item-8">
-					<label for="item-8"> <span class="label-text">암</span>
-					</label> <span class="tag waiting">Waiting</span>
-				</div>
-				<!-- 정신과 끝 -->
-				<!-- 이비인후과 -->
-				<div class="task">
-					<input class="task-item" name="task-ent" type="checkbox"
+						</label> <span class="tag waiting">Waiting</span>
+					</div>
+					<!-- 비뇨 기과 끝 -->
+					<!-- 정신과 -->
+					<div class="task">
+						<input class="task-item" name="task-np" type="checkbox"
+							id="item-8"> <label for="item-8"> <span
+							class="label-text">암</span>
+						</label> <span class="tag waiting">Waiting</span>
+					</div>
+					<!-- 정신과 끝 -->
+					<!-- 이비인후과 -->
+					<div class="task">
+						<input class="task-item" name="task-ent" type="checkbox"
 							id="item-9"> <label for="item-9"> <span
 							class="label-text">질병</span>
-					</label> <span class="tag waiting">Waiting</span>
-				</div>
-				<!-- 이비인후과 끝 -->
-				<!-- 신경과 -->
-				<div class="task">
-					<input class="task-item" name="task-nr" type="checkbox" id="item-9">
-					<label for="item-9"> <span class="label-text">질병</span>
-					</label> <span class="tag waiting">Waiting</span>
-				</div>
-				<!-- 신경과 끝 -->
-				<!-- 소화기내과  -->
-				<div class="task">
-					<input class="task-item" name="task-gi" type="checkbox" id="item-9">
-					<label for="item-9"> <span class="label-text">질병</span>
-					</label> <span class="tag waiting">Waiting</span>
-				</div>
-				<!-- 소화기내과  끝 -->
-				<!-- 호흡기내과 -->
-				<div class="task">
-					<input class="task-item" name="task-p" type="checkbox" id="item-9">
-					<label for="item-9"> <span class="label-text">질병</span>
-					</label> <span class="tag waiting">Waiting</span>
-				</div>
-				<!-- 호흡기내과 끝 -->
-				<!-- 피부과  -->
-				<div class="task">
-					<input class="task-item" name="task-der" type="checkbox"
+						</label> <span class="tag waiting">Waiting</span>
+					</div>
+					<!-- 이비인후과 끝 -->
+					<!-- 신경과 -->
+					<div class="task">
+						<input class="task-item" name="task-nr" type="checkbox"
 							id="item-9"> <label for="item-9"> <span
 							class="label-text">질병</span>
-					</label> <span class="tag waiting">Waiting</span>
+						</label> <span class="tag waiting">Waiting</span>
+					</div>
+					<!-- 신경과 끝 -->
+					<!-- 소화기내과  -->
+					<div class="task">
+						<input class="task-item" name="task-gi" type="checkbox"
+							id="item-9"> <label for="item-9"> <span
+							class="label-text">질병</span>
+						</label> <span class="tag waiting">Waiting</span>
+					</div>
+					<!-- 소화기내과  끝 -->
+					<!-- 호흡기내과 -->
+					<div class="task">
+						<input class="task-item" name="task-p" type="checkbox" id="item-9">
+						<label for="item-9"> <span class="label-text">질병</span>
+						</label> <span class="tag waiting">Waiting</span>
+					</div>
+					<!-- 호흡기내과 끝 -->
+					<!-- 피부과  -->
+					<div class="task">
+						<input class="task-item" name="task-der" type="checkbox"
+							id="item-9"> <label for="item-9"> <span
+							class="label-text">질병</span>
+						</label> <span class="tag waiting">Waiting</span>
+					</div>
+					<!-- 피부과  끝 -->
+
+
+
 				</div>
-				<!-- 피부과  끝 -->
-
-		
-
+				<!-- task wrapper 끝 -->
 			</div>
-			<!-- task wrapper 끝 -->
-		</div>
 		</div>
 		<!-- task manager 끝 -->
 		<div class="right-bar col-md-2">
-		
+
 			<div class="header">질병 선택 목록</div>
 			<div class="right-content">
 				<div class="task-box blue">
 					<div class="description-task">
-					
+
 						<div class="task-name">도움말</div>
 						<div class="time">///// 도움말 들어갈자리 ////</div>
 					</div>
 					<div class="glyphicon glyphicon-remove more-button"></div>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
 
-<script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/js/jquery-accordion-menu.js'/>"
+	type="text/javascript"></script>
 <script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {

@@ -48,7 +48,7 @@
 <script type="text/javascript" src="<c:url value='/js/nivo-lightbox.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/jqBootstrapValidation.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/js/contact_me.js'/>"></script>
-<script type="text/javascript" src="<c:url value='/js/main.js'/>"></script>
+<%-- <script type="text/javascript" src="<c:url value='/js/main.js'/>"></script> --%>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 <%--<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>--%>
 
@@ -95,8 +95,8 @@
 						<li><a href="<c:url value='/Calendar/calendar.hst'/>">일정 관리</a></li>
 						<li class="divider"></li>
 						<li><a href="<c:url value='/Homespital/Health_info.hst'/>">예방 정보</a></li>
-						
-					</ul></li>
+					</ul>
+				</li>
 
 				<sec:authorize access="isAnonymous()">
 					<li><a href="<c:url value='/User/Login.hst'/>" class="page-scroll">Login</a></li>
@@ -118,10 +118,6 @@
 				</sec:authorize>
 			</ul>
 		</div>
-
-
 	</div>
-
-
 </nav>
 </html>

@@ -1,40 +1,53 @@
 package com.kosmo.proj.service.web;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.json.simple.JSONArray;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kosmo.proj.service.MapService;
+import com.kosmo.proj.service.MemberService;
 
 @Controller
 public class SignUpController {
-	
-	@Resource(name = "mapService")
-	private MapService mapService;
+
+	@Resource(name = "memberService")//서비스주입
+	private MemberService memberService;
+
 
 	@RequestMapping("/Account/SignForm.hst")
 	public String toForm()
 	{
 		return "SignUp.tiles";
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/Homespital/Account/loadHospitalList.hst",produces = "text/html; charset=UTF-8")
-	public String hospitalList(@RequestParam Map map)
-	{
-		List<Map> list = mapService.selectList(map);
-		
-		String search_keyword = map.get("search_keyword").toString();
 
-		System.out.println(JSONArray.toJSONString(list));
-		
-		return JSONArray.toJSONString(list);
+	//입력
+	@RequestMapping(value = "/Member/Insert.hst", method = RequestMethod.POST)
+	public String insert(@RequestParam Map map, Model model)
+	{
+		memberService.insert(map);
+		return "index.tiles";
 	}
+
+	//삭제
+	@RequestMapping("/Member/Delete.hst")
+	public String delete(@RequestParam Map map, Model model)
+	{
+		memberService.delete(map);
+		return "index.tiles";
+	}
+
+	//수정
+	@RequestMapping("/Member/Update.hst")
+	public String update(@RequestParam Map map, Model model)
+	{
+		memberService.update(map);
+		return "";
+	}
+
+
 }

@@ -41,26 +41,6 @@
 							<th scope="col" class="" style="width: 120px; text-align: center;">날짜</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<th scope="row" class="" style="text-align: center;">9</th>
-							<td><a href="<c:url value='/Homespital/NoticeSubmit.hst'/>" style="color: #000000;">2020-04-22 병원 회원 개인정보처리방침 변경 안내 (시행일 : 2020-05-06)</a></td>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2018-01-05</td>
-						</tr>
-						<tr>
-							<th scope="row" class="" style="text-align: center;">6</th>
-							<td><a href="./boardView.html" style="color: #000000;">	2020-04-22 일반 회원 이용약관 변경 안내 (시행일 : 2020-05-06)</a></td>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2018-01-05</td>
-						</tr>
-						<tr>
-							<th scope="row" class="" style="text-align: center;">5</th>
-							<td><a href="./boardView.html" style="color: #000000;">	개정 전 개인정보 취급방침</a></td>
-							<td class="" style="text-align: center;">윤승중</td>
-							<td class="" style="text-align: center;">2018-01-05</td>
-						</tr>
-					</tbody>
 				</table>
 				<div style="text-align: center;">
 					<ul class="pagination">
