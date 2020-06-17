@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.kosmo.proj.service.MedicineInfoDTO;
-import com.kosmo.proj.service.MedicineShapeDTO;
+
 
 
 @Controller
@@ -53,19 +53,14 @@ public class MedicineController {
 	public String management(@RequestParam String dname,Map map) {
 		System.out.println(dname);
 		MedicineInfoDTO info = new MedicineInfoDTO();
-		MedicineShapeDTO shape = new MedicineShapeDTO();
 		String encodeSearch="";
-		try{
-		encodeSearch = URLEncoder.encode(dname,"UTF-8"); 
-        }catch(Exception e){ e.printStackTrace();  }
-
-		info = mediInfo(encodeSearch, info);
-        shape = mediShape(encodeSearch, shape);
+		
+		info = mediInfo(dname, info);
+        info = mediShape(dname, info);
           
         System.out.println(info.getITEM_NAME());
         System.out.println(info.getENTP_NAME());
         map.put("info", info);
-        map.put("shape", shape);
 		
 		return "MedicinManage.tiles";
 	}
@@ -82,7 +77,9 @@ public class MedicineController {
 		map.put("medi2",medi2 );
 		map.put("medi3",medi3 );
 		map.put("medi4",medi4 );
-		
+		for(String medi:medi1) {
+			mediInfo(medi, dto);
+		}
 		
 		return "/drug/Drug.tiles";
 	}
@@ -93,7 +90,10 @@ public class MedicineController {
 	}
 	
 	
-	private MedicineShapeDTO mediShape(String encodeSearch,MedicineShapeDTO dto) {
+	private MedicineInfoDTO mediShape(String encodeSearch,MedicineInfoDTO dto) {
+		try{
+			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람"),"UTF-8"); 
+	        }catch(Exception e){ e.printStackTrace();  }
 	
 		String apiUrl = "http://apis.data.go.kr/1470000/MdcinGrnIdntfcInfoService/getMdcinGrnIdntfcInfoList?" +
                 "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
@@ -106,20 +106,28 @@ public class MedicineController {
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
         if((long)jsonMedi.getJSONObject("response").getJSONObject("body").get("totalCount")==0) {
-        	return new MedicineShapeDTO();
+        	return new MedicineInfoDTO();
         }
         else if((long)jsonMedi.getJSONObject("response").getJSONObject("body").get("totalCount")>1) {
         	selecOne = (JSONObject)jsonMedi.getJSONObject("response").getJSONObject("body").getJSONArray("items").get(0);
         }
-        selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
-        Gson gson = new Gson();
-        dto = gson.fromJson(selecOne.toString(),MedicineShapeDTO.class);
+        else
+        	selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
+        System.out.println(selecOne.get("ITEM_IMAGE"));
+        dto.setITEM_IMAGE(selecOne.getString("ITEM_IMAGE"));
+        dto.setCHART(selecOne.getString("CHART"));
+        dto.setCOLOR_CLASS1(selecOne.getString("COLOR_CLASS1"));
+        dto.setDRUG_SHAPE(selecOne.getString("DRUG_SHAPE"));
         
 		return dto;
 	}
 	
 	
 	private MedicineInfoDTO mediInfo(String encodeSearch,MedicineInfoDTO dto) {
+		
+		try{
+			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람"),"UTF-8"); 
+	        }catch(Exception e){ e.printStackTrace();  }
 		
 		String apiUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?" +
                 "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
@@ -144,12 +152,10 @@ public class MedicineController {
         	selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
         Gson gson = new Gson();
         dto = gson.fromJson(selecOne.toString(),MedicineInfoDTO.class);
-		
+        
 		return dto;
 	}
-	
-	
-	
+		
 	private static String get(String apiUrl) {
         HttpURLConnection con = connect(apiUrl);
 
