@@ -636,6 +636,7 @@ a:hover, a:focus {
 						 	<i class="fas fa-plus"></i> 복용약 추가</div>
 					</div>
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingOne">
 								<h4 class="panel-title">
@@ -647,62 +648,6 @@ a:hover, a:focus {
 							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 								<div class="panel-body">
 									<a href='<c:url value="/Homespital/Management.hst?dname=맥페란정"/>'>맥페란정</a> - 위장운동을 활성화시킴으로써 구역, 구토를 치료
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingTwo">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-										2020-06-08 서울 삼성병원
-									 </a>
-								</h4>
-							</div>
-							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-								<div class="panel-body">
-									<a href='<c:url value="/Homespital/Management.hst?dname=티로파정"/>'>티로파정</a> - 평활근 경축을 완화시킴으로써 항경령 및 진통 효과를 나타냄
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingThree">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-										2020-06-08 서울 삼성병원
-									 </a>
-								</h4>
-							</div>
-							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-								<div class="panel-body">
-									<a href='<c:url value="/Homespital/Management.hst?dname=사이톱신정"/>'>사이톱신정</a> - 향균작용을 통해 각종 세균감염증을 치료
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingFour">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-										2020-06-08 서울 삼성병원
-									 </a>
-								</h4>
-							</div>
-							<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-								<div class="panel-body">
-									<a href='<c:url value="/Homespital/Management.hst?dname=사이톱신정"/>'>사이톱신정</a> - 향균작용을 통해 각종 세균감염증을 치료
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingFive">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-										2020-06-08 서울 삼성병원
-									 </a>
-								</h4>
-							</div>
-							<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-								<div class="panel-body">
-									<a href='<c:url value="/Homespital/Management.hst?dname=사이톱신정"/>'>사이톱신정</a> - 향균작용을 통해 각종 세균감염증을 치료
 								</div>
 							</div>
 						</div>
@@ -844,5 +789,22 @@ function toggleSignup(){
 	    document.getElementById("login-form").style.display="block";
 	}
 </script>
+<script>
+function vision(){
+	$.ajax({
+		url:"<c:url value='/mapping/mapping.hst'/>",
+		data:formdata,
+		type:'post',
+		dataType:'json',
+		success:function(){
+			console.log(data);
+		}
+	});
+}
+
+
+</script>
+
+
 
 </html>

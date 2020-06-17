@@ -43,6 +43,7 @@ public class GoogleVisionController {
 		String presDate = "";
 		StringBuffer totalMedi = new StringBuffer();
 		String duration = "";
+		String hospital = "";
 		//new FileInputStream(fileName)
 		ByteString imgBytes = ByteString.readFrom(file.getInputStream());
 		Image img = Image.newBuilder().setContent(imgBytes).build();
@@ -80,6 +81,13 @@ public class GoogleVisionController {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										duration = duration + symbol.getText();
+									}
+								}
+								/*진료기관*/
+								if(min_x>=340 && max_x<=492 && min_y>=118 && max_y<=143) {
+									System.out.println(word);
+									for (Symbol symbol: word.getSymbolsList()) {
+										hospital = hospital + symbol.getText();
 									}
 								}
 								/*의약품명1*/
@@ -141,6 +149,9 @@ public class GoogleVisionController {
 		}
 		totalMedi.append(medi1+",").append(medi2+",").append(medi3+",").append(medi4+",").append(medi5+",").append(medi6+",").append(medi7+",").append(medi8);
 		map.put("MEDI_NAME", totalMedi.toString());
+		map.put("preDate", presDate);
+		map.put("duration",duration);
+		map.put("hospital",hospital);
 		return "testView.tiles";
 	}
 }
