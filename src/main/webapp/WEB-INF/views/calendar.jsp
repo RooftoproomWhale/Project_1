@@ -90,7 +90,8 @@
   </tr>
     <tr>
       <td scope="row">예약일시</td>
-      <td id='timecall'><input class="inputModal chdate" type="text" name="edit-start" id="edit-start" style="display: none;"/></td>
+      <td id='timecall'></td>
+      <td id='timecall2' style='display: none;padding: 0px'><input class="inputModal" type="text" name="update-start" id="edit-start"  style="margin: 0px;margin-top: 6px;width: 162px;"/></td>
     </tr>
     <tr >
       <td scope="row" >예약신청일<br/></td>
@@ -304,7 +305,6 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
-        
 <script src='<c:url value="/calendar/vendor/js/moment.min.js"/>'></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

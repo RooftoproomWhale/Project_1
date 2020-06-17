@@ -102,6 +102,11 @@ var newEvent = function (start, end, eventType) {
             alert('끝나는 날짜가 앞설 수 없습니다.');
             return false; 
         }
+        today = moment(new Date).format('YYYY년MM월DD일 HH:mm');
+ /*       if(eventData.start < today){
+        	alert('스케줄은 '+today+' 이후에만 등록 가능합니다')
+        	return false;
+        }*/
   
         if (eventData.title === '') {
             alert('일정명은 필수입니다.');
@@ -123,7 +128,7 @@ var newEvent = function (start, end, eventType) {
         //새로운 일정 저장
         $.ajax({
             type: "get",
-            url: "",
+            url: "",////<c:url value='/Calendar/insert.hst'/>
             data: {
                 //.....
             },

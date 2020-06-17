@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kosmo.proj.service.CalendarDTO;
 import com.kosmo.proj.service.CalendarService;
+import com.kosmo.proj.service.ReservationDTO;
 
 @Repository("calendarDAO")
 public class CalendarDAO implements CalendarService {
@@ -28,10 +29,7 @@ public class CalendarDAO implements CalendarService {
 		return list;
 	}
 
-	@Override
-	public CalendarDTO selectOne(Map map) {
-		return null;
-	}
+
 
 	@Override
 	public int insert(Map map) {
@@ -50,6 +48,16 @@ public class CalendarDAO implements CalendarService {
 	@Override
 	public int delete(Map map) {
 		return sqlMapper.delete("calendarDelete",map);
+	}
+
+
+
+	@Override
+	public List<ReservationDTO> selectList2(Map map) {
+	
+		List<ReservationDTO> list = sqlMapper.selectList("calendarSelectList2",map);
+
+		return list;
 	}
 
 	}

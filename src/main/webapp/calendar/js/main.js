@@ -1,7 +1,7 @@
 
 var draggedEventIsAllDay;
 var activeInactiveWeekends = true;
-
+var todays = moment(new Date).format('YYYY년MM월DD일 HH:mm');
 function getDisplayEventDate(event) {
   var displayEventDate;
 
@@ -59,38 +59,6 @@ function calDateWhenResize(event) {
   return newDates;
 }
 
-function calDateWhenDragnDrop(event) {
-  // 드랍시 수정된 날짜반영
-  var newDates = {
-    startDate: '',
-    endDate: ''
-  }
-
-  // 날짜 & 시간이 모두 같은 경우
-  if(!event.end) {
-    event.end = event.start;
-  }
-
-  //하루짜리 all day
-  if (event.allDay && event.end === event.start) {
-    newDates.startDate = moment(event.start._d).format('YYYY-MM-DD');
-    newDates.endDate = newDates.startDate;
-  }
-
-  //2일이상 all day
-  else if (event.allDay && event.end !== null) {
-    newDates.startDate = moment(event.start._d).format('YYYY-MM-DD');
-    newDates.endDate = moment(event.end._d).subtract(1, 'days').format('YYYY-MM-DD');
-  }
-
-  //all day가 아님
-  else if (!event.allDay) {
-    newDates.startDate = moment(event.start._d).format('YYYY-MM-DD HH:mm');
-    newDates.endDate = moment(event.end._d).format('YYYY-MM-DD HH:mm');
-  }
-
-  return newDates;
-}
 
 
 var calendar = $('#calendar').fullCalendar({
@@ -163,14 +131,20 @@ var calendar = $('#calendar').fullCalendar({
   /* ****************
    *  일정 받아옴 
    * ************** */
+
   events: function (start, end, timezone, callback) {
     $.ajax({
       type: "get",
-      url: "/proj/calendar/data.json",
+      url: "View.hst",/*"/proj/calendar/data.json",*/
+      dataType:"json",
       data: {
+  
         // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
       },
       success: function (response) {
+    	  console.log(response);
+    	  console.log("테스트");
+//    	  console.log(response);
         var fixedDate = response.map(function (array) {
           if (array.allDay && array.start !== array.end) {
             // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
@@ -180,6 +154,12 @@ var calendar = $('#calendar').fullCalendar({
         })
         callback(fixedDate);
       }
+      ,error:function(request,error){
+			console.log('상태코드:',request.status);
+			console.log('서버로 부터 받은 HTML 데이타:',request.responseText);
+			console.log('에러:',error);
+		
+		}
     });
   },
 
@@ -189,76 +169,28 @@ var calendar = $('#calendar').fullCalendar({
     }
   },
 
-  //일정 리사이즈
-  eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
-    $('.popover.fade.top').remove();
-
-    /** 리사이즈시 수정된 날짜반영
-     * 하루를 빼야 정상적으로 반영됨. */
-    var newDates = calDateWhenResize(event);
-
-    //리사이즈한 일정 업데이트
-    $.ajax({
-      type: "get",
-      url: "",
-      data: {
-        //id: event._id,
-        //....
-      },
-      success: function (response) {
-        alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-      }
-    });
-
-  },
 
   eventDragStart: function (event, jsEvent, ui, view) {
     draggedEventIsAllDay = event.allDay;
   },
 
   //일정 드래그앤드롭
-  eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
-    $('.popover.fade.top').remove();
 
-    //주,일 view일때 종일 <-> 시간 변경불가
-    if (view.type === 'agendaWeek' || view.type === 'agendaDay') {
-      if (draggedEventIsAllDay !== event.allDay) {
-        alert('드래그앤드롭으로 종일<->시간 변경은 불가합니다.');
-        location.reload();
-        return false;
-      }
-    }
-
-    // 드랍시 수정된 날짜반영
-    var newDates = calDateWhenDragnDrop(event);
-
-    //드롭한 일정 업데이트
-    $.ajax({
-      type: "get",
-      url: "",
-      data: {
-        //...
-      },
-      success: function (response) {
-        alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-      }
-    });
-
-  },
 
   select: function (startDate, endDate, jsEvent, view) {
 
     $(".fc-body").unbind('click');
     $(".fc-body:not(.fc-event-container)").on('click', 'td', function (e) {
-
-      $("#contextMenu")
+    $("#contextMenu")
         .addClass("contextOpened")
         .css({
           display: "block",
           left: e.pageX,
           top: e.pageY
         });
+    	
       return false;
+    	
     });
 
     var today = moment();
@@ -328,7 +260,7 @@ var calendar = $('#calendar').fullCalendar({
   defaultDate: new Date, 
   timeFormat: 'HH:mm',
   defaultTimedEventDuration: '01:00:00',
-  editable: true,
+  editable: false,
   minTime: '00:00:00',
   maxTime: '24:00:00',
   slotLabelFormat: 'HH:mm',

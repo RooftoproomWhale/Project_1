@@ -3,8 +3,7 @@
  * ************** */
 var editEvent = function (event, element, view) {
 	var start ="";
-    $('#deleteEvent').data('id', event._id); //클릭한 이벤트 ID
-
+    $('#deleteEvent_no1').data('id', event._id); //클릭한 이벤트 ID
     $('.popover.fade.top').remove();
     $(element).popover("hide");
   
@@ -19,48 +18,41 @@ var editEvent = function (event, element, view) {
         editEnd.val(event.end.format('YYYY-MM-DD HH:mm'));
     }
     
+    addBtnContainer.hide();
+    modifyBtnContainer.show();
+    
+    
     if(event.type=="복용약등록"){
     	 modalTitle.html('복용중인 약 상세보기');
+    	 	eventdrugModal.modal('show');
     	 
     }
      else if(event.type=="병원예약"){
     	 start = moment(event.start).format('YYYY-MM-DD HH:mm');
+    	 $('input[name="update-start"]').val(start)
+    	 	eventhosModal.modal('show');
     	change();
     	 }
-    
-   //상세보기로 변경
-function change() {
-	 modalTitle.html('예약 상세페이지');
-	 $('#titlecall').html(event.title);
-	 $('#timecall').text(start);
-	 $('#namecall').html(event.username);
-	 $('#updateEvents_no1').css('display','none');
- 	$('#updateEvent_no1').css('display','inline');
-}
+     else{
+    	   eventModal.modal('show');
+     }
 
-    addBtnContainer.hide();
-    modifyBtnContainer.show();
-    if(event.type=="복용약등록"){
-    	eventdrugModal.modal('show');
-    }
-    else if(event.type=="병원예약"){
-    	eventhosModal.modal('show');
-    }else{
-    
-    eventModal.modal('show');
-    }
-    //업데이트 버튼 클릭시
+
+    //업데이트 버튼 클릭시-
     $('#updateEvent_no1,#updateEvent2').unbind();
     $('#updateEvent_no1,#updateEvent2').on('click', function () {
-    	console.log(start)
+    
     	if($(this).attr('id')=='updateEvent_no1'){
     		 modalTitle.html('예약 변경');
-    		$('#updateEvents_no1').css('display','inline');
+    		 
+    		$('#updateEvents_no1').css('display','');
         	$('#updateEvent_no1').css('display','none');
-        	$('#titlecall').html('<input type="text" id="update-title" value='+event.title+'>')
+        	$('#titlecall').html('<input type="text" id="update_title" value='+event.title+'>')
         	$('#namecall').html('<input type="text" id="update_name" value='+event.username+'>')
-/*        	$('#timecall').html('<input  type="datetime-local" id="update_start" value="'+event.start+'">')*/
-        	$('.chdate').text("");$('.chdate').css('display','inline');
+        	
+        	$('#timecall').css('display','none');
+        	$('#timecall2').css('display','');
+        	
         	
     	}
     });
@@ -76,25 +68,23 @@ $('#updateEvents_no1').on('click',function(){
             alert('일정명은 필수입니다.')
             return false;
         }
-
-*/		console.log("테스트1"+$('#update_start').val())     
+	
+*/		
 		
 		event.title= $('#update_title').val();
-        event.start = moment($('#update_start').val()).format('YYYY-MM-DD HH:mm');
-        console.log(event.start);
+     
        /* event.title = editTitle.val();*/
         event.username=$('#update_name').val();
- /*       event.start = startDate;
-        event.end = displayDate;
+       event.start = $('input[name="update-start"]').val();
+       /*        event.end = displayDate;
         event.type = editType.val();
         event.description = editDesc.val();*/
-
         $("#calendar").fullCalendar('updateEvent', event);
 
         //일정 업데이트
         $.ajax({
             type: "get",
-            url: "",
+            url: "",//<c:url value='/Calendar/update.hst'/>
             data: {
                 //...
             },
@@ -105,20 +95,32 @@ $('#updateEvents_no1').on('click',function(){
 
 	change();
 });
+//상세보기로 변경
+function change() {
+	 modalTitle.html('예약 상세페이지');
+	 $('#titlecall').html(event.title);
+	 $('#namecall').html(event.username);
+	 starts= moment(event.start).format('YYYY-MM-DD HH:mm')
+	 $('#timecall').text(starts);
+	 $('#timecall').css('display','');
+ 	$('#timecall2').css('display','none');
+	 $('#updateEvents_no1').css('display','none');
+ 	$('#updateEvent_no1').css('display','');
+}
 };
 
 // 삭제버튼
-$('#deleteEvent').on('click', function () {
-    console.log('삭제')
-    $('#deleteEvent').unbind();
+$('#deleteEvent_no1').on('click', function () {
+    $('#deleteEvent_no1').unbind();
     $("#calendar").fullCalendar('removeEvents', $(this).data('id'));
+  
     eventModal.modal('hide');
     eventdrugModal.modal('hide');
     eventhosModal.modal('hide');
     //삭제시
     $.ajax({
         type: "get",
-        url: "",
+        url: "",//<c:url value='/Calendar/delete.hst'/>
         data: {
             //...
         },
@@ -126,5 +128,4 @@ $('#deleteEvent').on('click', function () {
             alert('삭제되었습니다.');
         }
     });
-    change();
 });

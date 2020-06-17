@@ -3,55 +3,48 @@ package com.kosmo.proj.service;
 import java.sql.Date;
 
 public class CalendarDTO {
-		private int _calendarno;
-		private String MEM_EMAIL;
-		private String title;
-		private String type;
-		private String Start;
-		private String end;
-		private String patient;
-		private String backgroundColor;
-		public CalendarDTO(int _calendarno, String mEM_EMAIL, String title, String type, String start, String end,
-				String patient, String backgroundColor, String allDay) {
-			super();
-			this._calendarno = _calendarno;
-			MEM_EMAIL = mEM_EMAIL;
-			this.title = title;
-			this.type = type;
-			Start = start;
-			this.end = end;
-			this.patient = patient;
-			this.backgroundColor = backgroundColor;
-			this.allDay = allDay;
-		}
-		private String allDay;
-		public int get_calendarno() {
-			return _calendarno;
-		}
-		public String getMEM_EMAIL() {
-			return MEM_EMAIL;
-		}
-		public String getTitle() {
-			return title;
-		}
-		public String getType() {
-			return type;
-		}
-		public String getStart() {
-			return Start;
-		}
-		public String getEnd() {
-			return end;
-		}
-		public String getPatient() {
-			return patient;
-		}
-		public String getBackgroundColor() {
-			return backgroundColor;
-		}
-		public String getAllDay() {
-			return allDay;
-		}
-	
-}
 		
+		private int pre_no;
+		private String mem_email;
+		private Date pres_date;
+		private int duration;
+		private int count;
+		private String medi_name;
+		public int getPre_no() {
+			return pre_no;
+		}
+		public void setPre_no(int pre_no) {
+			this.pre_no = pre_no;
+		}
+		public String getMem_email() {
+			return mem_email;
+		}
+		public void setMem_email(String mem_email) {
+			this.mem_email = mem_email;
+		}
+		public Date getPres_date() {
+			return pres_date;
+		}
+		public void setPres_date(Date pres_date) {
+			this.pres_date = pres_date;
+		}
+		public int getDuration() {
+			return duration;
+		}
+		public void setDuration(int duration) {
+			this.duration = duration;
+		}
+		public int getCount() {
+			return count;
+		}
+		public void setCount(int count) {
+			this.count = count;
+		}
+		public String getMedi_name() {
+			return medi_name;
+		}
+		public void setMedi_name(String medi_name) {
+			this.medi_name = medi_name;
+		}
+		
+}

@@ -8,9 +8,7 @@ public interface CalendarService {
 	//목록 불러오기
 	List<CalendarDTO> selectList(Map map);
 	
-	//하나 불러오기
-	CalendarDTO selectOne(Map map);
-	
+	List<ReservationDTO> selectList2(Map map);
 	//입력 수정 삭제
 	int insert(Map map);
 	int update(Map map);
