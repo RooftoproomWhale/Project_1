@@ -4,6 +4,7 @@ import com.google.cloud.vision.v1.AnnotateImageRequest;
 import com.google.cloud.vision.v1.AnnotateImageResponse;
 import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
 import com.google.cloud.vision.v1.Block;
+import com.google.cloud.vision.v1.BoundingPoly;
 import com.google.cloud.vision.v1.EntityAnnotation;
 import com.google.cloud.vision.v1.Feature;
 import com.google.cloud.vision.v1.Feature.Type;
@@ -28,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class GoogleVision {
+
 	public static void main(String... args) throws Exception {
 
 		String fileName = "C://Users//kosmo_12//Desktop//KakaoTalk_20200616_164617420.jpg";
@@ -46,12 +48,14 @@ public class GoogleVision {
 			List<AnnotateImageResponse> responses = response.getResponsesList();
 			String wordText = "";
 			String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
+			String count = "";
 			for (AnnotateImageResponse res : responses) {
 				if (res.hasError()) {
 					System.out.printf("Error: %s\n", res.getError().getMessage());
 					return;
 				}
 				TextAnnotation annotation = res.getFullTextAnnotation();
+				
 				for (Page page: annotation.getPagesList()) {
 					String pageText = ""; 
 					for (Block block : page.getBlocksList()) {
@@ -64,10 +68,20 @@ public class GoogleVision {
 									int max_x = word.getBoundingBox().getVertices(2).getX();
 									int min_y = word.getBoundingBox().getVertices(0).getY();
 									int max_y = word.getBoundingBox().getVertices(2).getY();
-									if(min_x>=806 && max_x<=100 && min_y>=895 && max_y<=121) {
+									
+									if(min_x>=804 && max_x<=900 && min_y>=100 && max_y<=122) {
 										System.out.println(word);
 										for (Symbol symbol: word.getSymbolsList()) {
 											wordText = wordText + symbol.getText();
+											//System.out.println("심볼:"+wordText);
+//											System.out.format("Symbol text: %s (confidence: %f)\n", symbol.getText(),symbol.getConfidence());
+										}
+									}
+
+									if(min_x>=132 && max_x<=154 && min_y>=101 && max_y<=119) {
+										System.out.println(word);
+										for (Symbol symbol: word.getSymbolsList()) {
+											count = count + symbol.getText();
 											//System.out.println("심볼:"+wordText);
 //											System.out.format("Symbol text: %s (confidence: %f)\n", symbol.getText(),symbol.getConfidence());
 										}
@@ -151,7 +165,7 @@ public class GoogleVision {
 					//System.out.println("심볼:"+wordText);
 					totalMedi.append(medi1+",").append(medi2+",").append(medi3+",").append(medi4+",").append(medi5+",").append(medi6+",").append(medi7+",").append(medi8);
 					System.out.println(totalMedi.toString());
-					System.out.println(String.format("1번약:%s,2번약:%s,3번약:%s,4번약:%s,조제일:%s",medi1,medi2,medi3,medi4,wordText));
+					System.out.println(String.format("1번약:%s,2번약:%s,3번약:%s,4번약:%s,조제일:%s,카운트:%s",medi1,medi2,medi3,medi4,wordText,count));
 				}
 				
 

@@ -40,7 +40,9 @@ public class GoogleVisionController {
 		//fileName = "C://Users//kosmo_12//Desktop//about.jpg";
 		List<AnnotateImageRequest> requests = new ArrayList<>();
 		String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
+		String presDate = "";
 		StringBuffer totalMedi = new StringBuffer();
+		String duration = "";
 		//new FileInputStream(fileName)
 		ByteString imgBytes = ByteString.readFrom(file.getInputStream());
 		Image img = Image.newBuilder().setContent(imgBytes).build();
@@ -61,19 +63,26 @@ public class GoogleVisionController {
 					for (Block block : page.getBlocksList()) {
 						String blockText = "";
 						for (Paragraph para : block.getParagraphsList()) {
-							String paraText = "";
 							for (Word word: para.getWordsList()) {
-								String wordText = "";
 								int min_x = word.getBoundingBox().getVertices(0).getX();
 								int max_x = word.getBoundingBox().getVertices(2).getX();
 								int min_y = word.getBoundingBox().getVertices(0).getY();
 								int max_y = word.getBoundingBox().getVertices(2).getY();
-								if(min_x>=806 && max_x<=100 && min_y>=895 && max_y<=121) {
+								/*약 제조일 */
+								if(min_x>=804 && max_x<=900 && min_y>=100 && max_y<=122) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
-										wordText = wordText + symbol.getText();
+										presDate = presDate + symbol.getText();
 									}
 								}
+								/*복용기간*/
+								if(min_x>=132 && max_x<=154 && min_y>=101 && max_y<=119) {
+									System.out.println(word);
+									for (Symbol symbol: word.getSymbolsList()) {
+										duration = duration + symbol.getText();
+									}
+								}
+								/*의약품명1*/
 								if(min_x>=274 && max_x<=453 && min_y>=140 && max_y<=164) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi1 = medi1 + symbol.getText();
@@ -95,10 +104,9 @@ public class GoogleVisionController {
 								if(min_x>=274 && max_x<=453 && min_y>=554 && max_y<=574) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi4 = medi4 + symbol.getText();
-										
 									}
-									
 								}
+								/*의약품명2*/
 								if(min_x>=620 && max_x<=800 && min_y>=143 && max_y<=163) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi5 = medi5 + symbol.getText();
@@ -126,7 +134,6 @@ public class GoogleVisionController {
 									
 								}
 							}
-							
 						}
 					}
 				}

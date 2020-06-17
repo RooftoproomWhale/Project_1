@@ -723,11 +723,9 @@ a:hover, a:focus {
 			    </div>
 
 			    <div id="login-form">
-			        <form>
-			            <input type="text" placeholder="Enter email or username"/>
-			            <input type="password" placeholder="Enter password"/>
-			            <button type="button" class="btn login">login</button>
-			            <p><a href="javascript:void(0)">Forgotten account</a></p>
+			        <form action='<c:url value="/mapping/mapping.hst"/>' enctype="multipart/form-data" method="post">
+			            <input type="file" name="filename">
+			            <input type="submit" value="등록">
 			        </form>
 			    </div>
 
