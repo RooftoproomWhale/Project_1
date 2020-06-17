@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,5 +35,12 @@ public class AndroidAuthController {
 	public MemberDTO isMemberJsonGet(MemberDTO member)
 	{
 		return service.isLogin(member);
+	}
+	
+	@CrossOrigin
+	@PostMapping(value = "/member/register")
+	public int insert(@RequestParam Map map)
+	{
+		return service.insert(map);
 	}
 }
