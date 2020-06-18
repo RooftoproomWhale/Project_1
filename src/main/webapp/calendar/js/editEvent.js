@@ -3,7 +3,13 @@
  * ************** */
 var editEvent = function (event, element, view) {
 	var start ="";
-    $('#deleteEvent_no1').data('id', event._id); //클릭한 이벤트 ID
+	var no ="";
+	if(event.type == "병원예약"){
+	    no = event.reserv_NO
+		}else{
+		no = event.pre_no
+		}
+
     $('.popover.fade.top').remove();
     $(element).popover("hide");
   
@@ -29,9 +35,12 @@ var editEvent = function (event, element, view) {
     }
      else if(event.type=="병원예약"){
     	 start = moment(event.start).format('YYYY-MM-DD HH:mm');
-    	 $('input[name="update-start"]').val(start)
+  
+    	 $('#apply_time').html(event.apply_TIME);
+    	 $('input[name="update-start"]').val(start);
+    	 change();
     	 	eventhosModal.modal('show');
-    	change();
+    	
     	 }
      else{
     	   eventModal.modal('show');
@@ -48,7 +57,7 @@ var editEvent = function (event, element, view) {
     		$('#updateEvents_no1').css('display','');
         	$('#updateEvent_no1').css('display','none');
         	$('#titlecall').html('<input type="text" id="update_title" value='+event.title+'>')
-        	$('#namecall').html('<input type="text" id="update_name" value='+event.username+'>')
+        	$('#namecall').html('<input type="text" id="update_name" value='+event.mem_NAME+'>')
         	
         	$('#timecall').css('display','none');
         	$('#timecall2').css('display','');
@@ -57,7 +66,7 @@ var editEvent = function (event, element, view) {
     	}
     });
     /*예약변경후 */
-$('#updateEvents_no1').on('click',function(){
+$('#updateEvents_no1,#updateEvents_no1').on('click',function(){
 /*
         if (editStart.val() > editEnd.val()) {
             alert('끝나는 날짜가 앞설 수 없습니다.');
@@ -98,8 +107,9 @@ $('#updateEvents_no1').on('click',function(){
 //상세보기로 변경
 function change() {
 	 modalTitle.html('예약 상세페이지');
+	 $('#apply_time').html(event.apply_Time);
 	 $('#titlecall').html(event.title);
-	 $('#namecall').html(event.username);
+	 $('#namecall').html(event.mem_NAME);
 	 starts= moment(event.start).format('YYYY-MM-DD HH:mm')
 	 $('#timecall').text(starts);
 	 $('#timecall').css('display','');
@@ -107,25 +117,31 @@ function change() {
 	 $('#updateEvents_no1').css('display','none');
  	$('#updateEvent_no1').css('display','');
 }
-};
-
-// 삭제버튼
-$('#deleteEvent_no1').on('click', function () {
-    $('#deleteEvent_no1').unbind();
-    $("#calendar").fullCalendar('removeEvents', $(this).data('id'));
-  
+//삭제버튼
+$('#deleteEvent_no1,#deleteEvent_no2').on('click', function () {
+    $('#deleteEvent_no1,#deleteEvent_no2').unbind();
     eventModal.modal('hide');
     eventdrugModal.modal('hide');
     eventhosModal.modal('hide');
+  
     //삭제시
     $.ajax({
         type: "get",
-        url: "",//<c:url value='/Calendar/delete.hst'/>
+        url: "delete.hst",
         data: {
-            //...
+            "type" :event.type,
+            "no" :no
+            
         },
         success: function (response) {
+        	if(event.type =="병원예약"){
+        		alert('예약 취소 되었습니다');
+        	}else{
             alert('삭제되었습니다.');
+        	}
+        	history.go(0);
         }
     });
 });
+};
+
