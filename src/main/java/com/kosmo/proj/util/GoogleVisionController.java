@@ -16,6 +16,7 @@ import com.google.cloud.vision.v1.TextAnnotation;
 import com.google.cloud.vision.v1.Vertex;
 import com.google.cloud.vision.v1.Word;
 import com.google.protobuf.ByteString;
+import com.kosmo.proj.service.PrescriptionService;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,20 +24,33 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+import javax.mail.Session;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Controller
 public class GoogleVisionController {
+	@Resource(name = "presService")
+	private PrescriptionService service;
+	
+	
 	@RequestMapping("/mapping/mapping.hst")
-	public String vision(MultipartHttpServletRequest req,Map map) throws IOException {
+	public String vision(MultipartHttpServletRequest req,Authentication auth,Map map) throws IOException {
 		MultipartFile file = req.getFile("filename");
 		//fileName = "C://Users//kosmo_12//Desktop//about.jpg";
 		List<AnnotateImageRequest> requests = new ArrayList<>();
@@ -156,13 +170,25 @@ public class GoogleVisionController {
 				}
 			}
 		}
+		UserDetails userDetails = (UserDetails)auth.getPrincipal();
+		Collection authorities =  userDetails.getAuthorities();
+		for(Object authority:authorities) {
+			System.out.println(((GrantedAuthority)authority).getAuthority());
+		}
+		System.out.println(userDetails.getUsername());
+		String mem_email = userDetails.getUsername();
 		totalMedi.append(medi1+",").append(medi2+",").append(medi3+",").append(medi4+",").append(medi5+",").append(medi6+",").append(medi7+",").append(medi8);
-		map.put("MEDI_NAME", totalMedi.toString());
-		map.put("preDate", presDate);
+		map.put("medi_name", totalMedi.toString());
+		map.put("mem_email", mem_email);
+		Date pres_date = Date.valueOf(presDate);
+		map.put("pres_date", pres_date);
 		map.put("duration",duration);
 		map.put("hospital",hospital);
 		map.put("count",count);
-		return "testView.tiles";
+		
+		service.insertPre(map);
+		
+		return "administration.tiles";
 	}
 	
 	

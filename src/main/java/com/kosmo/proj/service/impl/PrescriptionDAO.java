@@ -14,7 +14,7 @@ import com.kosmo.proj.service.PrescriptionService;
 @Repository("presDAO")
 public class PrescriptionDAO implements PrescriptionService {
  
-	@Resource(name = "templet")
+	@Resource(name = "template")
 	private SqlSessionTemplate sqlMapper;
 	
 	
