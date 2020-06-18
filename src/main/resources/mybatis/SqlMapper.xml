@@ -44,7 +44,7 @@
 	</delete>
 
 	<insert id="presInsert" parameterType="java.util.Map">
-		INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count})
+		INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
 	</insert>
 	
 	<select id="covidMapSelect" resultType="java.util.Map">

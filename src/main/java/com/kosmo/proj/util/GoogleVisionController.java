@@ -50,8 +50,9 @@ public class GoogleVisionController {
 	
 	
 	@RequestMapping("/mapping/mapping.hst")
-	public String vision(MultipartHttpServletRequest req,Authentication auth,Map map) throws IOException {
-		MultipartFile file = req.getFile("filename");
+	public String vision(MultipartFile file,Authentication auth,Map map) throws IOException {
+		//MultipartFile로 직접 받기MultipartHttpServletRequest req
+		//MultipartFile file = req.getFile("filename");
 		//fileName = "C://Users//kosmo_12//Desktop//about.jpg";
 		List<AnnotateImageRequest> requests = new ArrayList<>();
 		String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
@@ -186,9 +187,9 @@ public class GoogleVisionController {
 		map.put("hospital",hospital);
 		map.put("count",count);
 		
-		service.insertPre(map);
+		//service.insertPre(map);
 		
-		return "administration.tiles";
+		return "testView.tiles";
 	}
 	
 	
