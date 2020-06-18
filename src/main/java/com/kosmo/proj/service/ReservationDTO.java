@@ -3,6 +3,7 @@ package com.kosmo.proj.service;
 import java.sql.Date;
 
 public class ReservationDTO {
+	private String MEM_NAME;
 	private String HOSP_NAME;
 	private int RESERV_NO;
 	private String HOSP_CODE;
@@ -14,6 +15,12 @@ public class ReservationDTO {
 	private String SEL_SYMP;
 	
 	
+	public String getMEM_NAME() {
+		return MEM_NAME;
+	}
+	public void setMEM_NAME(String mEM_NAME) {
+		MEM_NAME = mEM_NAME;
+	}
 	public String getHOSP_NAME() {
 		return HOSP_NAME;
 	}

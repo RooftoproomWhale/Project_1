@@ -87,7 +87,7 @@ var calendar = $('#calendar').fullCalendar({
      
       content: $('<div />', {
           class: 'popoverInfoCalendar'
-        }).append('<p><strong>'+name+':</strong> ' + event.username + '</p>')
+        }).append('<p><strong>'+name+':</strong> ' + event.mem_NAME + '</p>')
         .append('<p><strong>구분:</strong> ' + event.type + '</p>')
         .append('<p><strong>'+h+':</strong> ' + getDisplayEventDate(event) + '</p>')
         .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
@@ -147,7 +147,6 @@ var calendar = $('#calendar').fullCalendar({
     
     	  response.forEach(el=>{
     		if(el.count != null){
-    		
     			
     			el.backgroundColor = '#9775fa';
     			el.title = el.medi_name;
@@ -155,8 +154,6 @@ var calendar = $('#calendar').fullCalendar({
     			el.start =  moment(el.pres_date).format('YYYY-MM-DD');
     			var dates=new Date(el.start);
     			el.end = moment(dates.setDate(dates.getDate()+el.duration)).format('YYYY-MM-DD');
-    			
-    		
     		}
     		else{
     			el.backgroundColor = '#D25565';
@@ -164,6 +161,7 @@ var calendar = $('#calendar').fullCalendar({
     			el.type="병원예약";
     			el.start =el.res_DATE+" "+el.res_TIME; 
     			el.apply_TIME = moment(el.apply_TIME).format('YYYY-MM-DD HH:mm');
+    		
     		}
     		console.log(el);
     	  })
