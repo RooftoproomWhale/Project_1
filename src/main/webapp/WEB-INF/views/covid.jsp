@@ -294,7 +294,7 @@ $(function() {
 //          FunLoadingBarEnd();
       },
       success:function(data){
-//          console.log(data);
+//           console.log(data);
          var jsonData = JSON.parse(data);
          console.log("연결성공", jsonData, typeof(jsonData));
          var nationArr = new Array();
@@ -306,8 +306,8 @@ $(function() {
          nationArr.sort(customSort);
          
          for(var i=0; i<nationArr.length; i++) {
-             console.log(nationArr[i]);
-             console.log(nationArr[i].nationNm);
+//              console.log(nationArr[i]);
+//              console.log(nationArr[i].nationNm);
          }
          
          var chart = new CanvasJS.Chart("chartContainer4", {

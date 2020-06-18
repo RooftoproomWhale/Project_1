@@ -10,9 +10,35 @@
 	<select id="memberIsLoginJson" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
 	</select>
-	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM MEMBER
-	</select>
+	
+	 <insert id="signInsert" parameterType="MemberDTO"> 
+		INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
+	 </insert>
+	 
+	 <select id="signView" parameterType="MemberDTO">
+		 SELECT * FROM MEMBER WHERE MEM_EMAIL = #{email}
+	 </select>
+	 
+ 	 <delete id="signDelete" parameterType="MemberDTO">
+		DELETE FROM MEMBER WHERE MEM_EMAIL = #{email}
+	 </delete>
+	 	
+	 <update id="signUpdate" parameterType="MemberDTO">
+		UPDATE MEMBER SET name = #{name}, age = #{age}, gender = #{gender}, phone = #{phone}, email = #{email}, height = #{height} weight = {weight} where email = #{email} 
+	 </update>
+	 
+	 
+	<insert id="memoInsert" parameterType="java.util.Map">
+		INSERT INTO onememo(no,title,content,id)
+		VALUES(SEQ_ONEMEMO.NEXTVAL,#{title},#{content},#{id})
+	</insert>
+	
+	<update id="memoUpdate" parameterType="java.util.Map">
+		UPDATE onememo SET title=#{title},content=#{content} WHERE no=#{no}	
+	</update>
+	<delete id="memoDelete" parameterType="java.util.Map">
+		DELETE onememo WHERE no=#{no}
+	</delete>
 	
 	<select id="covidMapSelect" resultType="java.util.Map">
 		SELECT * FROM corona_patient
@@ -60,7 +86,53 @@
 		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
 	</select>
 	
+<!--관리자단 -->
+	<!-- 대쉬보드 -->
+	<select id="memberCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	<select id="hospCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH = '제휴승인됨'
+	</select>
+	<select id="presCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM PRESCRIPTION
+	</select>
+	<select id="aptCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION
+	</select>
+	<!-- 차트 -->
+
+	<!-- 사용자 관리 -->
+	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
+		SELECT * FROM MEMBER
+	</select>
+	<select id="selectMemberListUser" parameterType="java.util.Map" resultType="MemberDTO">
+		SELECT * FROM MEMBER WHERE ROLE='ROLE_MEM'
+	</select>
+	<select id="selectMemberListHosp" parameterType="java.util.Map" resultType="MemberDTO">
+		SELECT * FROM MEMBER WHERE ROLE='ROLE_HOS'
+	</select>
+	<select id="selectOne" parameterType="java.util.Map" resultType="MemberDTO">
+		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{userEmail}
+	</select>
 	<update id="adminUserUpdate" parameterType="java.util.Map">
-		UPDATE MEMBER SET MEM_EMAIL =#{email}, MEM_NAME = #{name}, MEM_PWD = #{password}, TEL = #{tel} WHERE MEM_EMAIL = #{email}
+		UPDATE MEMBER SET MEM_EMAIL =#{upEmail}, MEM_NAME = #{upName}, MEM_PWD = #{upPwd}, TEL = #{upTel} WHERE MEM_EMAIL = #{userEmail}
 	</update>
+	<delete id="adminUserDelete" parameterType="java.util.Map">
+		DELETE FROM MEMBER WHERE MEM_EMAIL = #{userEmail}
+	</delete>
+	<!-- 병원 제휴 -->
+	<select id="selectAuthList" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL
+	</select>
+	<update id="updateAuth_O" parameterType="java.util.Map">
+		UPDATE HOSPITAL SET AUTH = '제휴승인됨', APPROVED_DATE = SYSDATE WHERE HOSP_NAME = #{hosp_name}
+	</update>
+	<update id="updateAuth_X" parameterType="java.util.Map">
+		UPDATE HOSPITAL SET AUTH = '제휴거절됨' WHERE HOSP_NAME = #{hosp_name}
+	</update>
+	<!-- 예약 관리 -->
+	<select id="selectAptList" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * FROM RESERVATION
+	</select>
 </mapper>

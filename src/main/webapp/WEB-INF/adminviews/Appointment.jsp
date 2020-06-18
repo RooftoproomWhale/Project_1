@@ -42,14 +42,6 @@
                                             </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>
-                                        <div class="rs-select2--light rs-select2--sm">
-                                            <select class="js-select2" name="time">
-                                                <option selected="selected">Today</option>
-                                                <option value="">1 Week</option>
-                                                <option value="">1 Month</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">

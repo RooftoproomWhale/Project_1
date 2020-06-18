@@ -83,21 +83,8 @@ $(function() {
 	
 	$(".table-data-feature .item:first-child").on('click', function(){
 		
-		
 		var tr = $(this).parent().parent().parent();
 		var td = tr.children();
-		
-		var name = td.eq(1).children().eq(0).text().trim();
-		var email = td.eq(1).children().eq(1).text().trim();
-		var pwd = td.eq(3).text().trim();
-		var tel = td.eq(4).text().trim();
-		console.log("name:" +name +"email:" + email +"pwd:" + pwd +"tel:" + tel);
-		$("#upName").html(upName);
-		$("#upEmail").html(upEmail);
-		$("#upPwd").html(upPwd);
-		$("#upTel").html(upTel);
-		
-
 		var userEmail = td.eq(1).children().eq(1).text().trim();
 		console.log("모달 클릭", userEmail);
 		var request = 
@@ -127,7 +114,7 @@ $(function() {
 		var upEmail = $("#upEmail").val();
 		var upPwd = $("#upPwd").val();
 		var upTel = $("#upTel").val();
-
+		
 		console.log(userEmail, upName, upEmail, upPwd, upTel);
 // 		var param = $("#frm").serialize();
 // 		alert(param);
@@ -228,7 +215,7 @@ $(".table-data-feature .item:last-child").on('click', function(){
 											<select class="js-select2" name="filter" id="filter">
 												<option value="all">All Users</option>
 												<option value="user">User</option>
-												<option value="hospital">Hospital</option>
+												<option value="hospital" selected="selected">Hospital</option>
 											</select>
 											<div class="dropDownSelect2"></div>
 										</div>
@@ -250,64 +237,61 @@ $(".table-data-feature .item:last-child").on('click', function(){
 											<tbody>
 												<c:if test="${empty list}" var="isEmpty">
 													<tr>
-														<td colspan="4">승인 대기중인 병원이 없습니다.</td>
+														<td colspan="4">등록된 회원이 없습니다.</td>
 													</tr>
 												</c:if>
 												<c:if test="${not isEmpty}">
 													<c:forEach items="${list}" var="item" varStatus="loop">
-														<tr>
-															<td><label class="au-checkbox"> <input
-																	type="checkbox"> <span class="au-checkmark"></span>
-															</label></td>
-															<td>
-																<div class="table-data__info">
-																	<h6>${item.mem_name }</h6>
-																</div>
-																<div>
-																	<a href="#"><span class="userEmail">
-																			${item.mem_email }</span></a>
-																</div>
-															</td>
-															<c:if test="${item.role == 'ROLE_ADM' }">
-																<td><span class="role admin">${item.role }</span></td>
-															</c:if>
-															<c:if test="${item.role == 'ROLE_MEM' }">
-																<td><span class="role user">${item.role }</span></td>
-															</c:if>
-															<c:if test="${item.role == 'ROLE_HOS' }">
-																<td><span class="role member">${item.role }</span></td>
-															</c:if>
-
-															<td>
-																<div class="rs-select2--trans rs-select2--sm">
-																	<input type="text" placeholder="${item.mem_pwd }"
-																		disabled="disabled">
-																</div>
-															</td>
-															<td>
-																<div class="rs-select2--trans rs-select2--sm">
-																	<input type="text" placeholder="${item.tel }"
-																		disabled="disabled">
-																</div>
-															</td>
-															<td>
-																<div class="table-data-feature">
-																	<button class="item update" data-toggle="modal"
-																		<%-- onclick="location.href='<c:url value = "/Admin/UserUpdateForm.hst"/>'" --%>
-																data-placement="top"
-																		data-target="#UserModal" title="수정" id="updateModal">
-																		<i class="zmdi zmdi-edit"></i>
-																	</button>
-																	<button class="item" data-toggle="tooltip"
-																		id="deleteBtn" data-placement="top" title="삭제">
-																		<i class="zmdi zmdi-delete"></i>
-																	</button>
-																</div>
-															</td>
-														</tr>
-														<tr>
-													</c:forEach>
-												</c:if>
+												<tr>
+													<td><label class="au-checkbox"> <input
+															type="checkbox"> <span class="au-checkmark"></span>
+													</label></td>
+													<td>
+														<div class="table-data__info">
+															<h6>${item.mem_name }</h6>
+														</div>
+														<div>
+															<a href="#"><span class="userEmail"> ${item.mem_email }</span></a>
+														</div>
+													</td>
+													<c:if test="${item.role == 'ROLE_ADM' }">
+														<td><span class="role admin">${item.role }</span></td>
+													</c:if>
+													<c:if test="${item.role == 'ROLE_MEM' }">
+														<td><span class="role user">${item.role }</span></td>
+													</c:if>
+													<c:if test="${item.role == 'ROLE_HOS' }">
+														<td><span class="role member">${item.role }</span></td>
+													</c:if>
+													
+													<td>
+														<div class="rs-select2--trans rs-select2--sm">
+															<input type="text" placeholder="${item.mem_pwd }"
+																disabled="disabled">
+														</div>
+													</td>
+													<td>
+														<div class="rs-select2--trans rs-select2--sm">
+															<input type="text" placeholder="010-1234-7586"
+																disabled="disabled">
+														</div>
+													</td>
+													<td>
+														<div class="table-data-feature">
+															<button class="item update" data-toggle="modal" <%-- onclick="location.href='<c:url value = "/Admin/UserUpdateForm.hst"/>'" --%>
+																data-placement="top" data-target="#UserModal" title="수정" id="updateModal">
+																<i class="zmdi zmdi-edit"></i>
+															</button>
+															<button class="item" data-toggle="tooltip" id="deleteBtn"
+																data-placement="top" title="삭제">
+																<i class="zmdi zmdi-delete"></i>
+															</button>
+														</div>
+													</td>
+												</tr>
+												<tr>
+												</c:forEach>
+											</c:if>
 											</tbody>
 										</table>
 									</div>

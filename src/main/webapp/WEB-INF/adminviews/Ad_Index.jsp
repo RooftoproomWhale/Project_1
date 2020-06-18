@@ -3,6 +3,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
+<script>
+$(function() {
+	
+	$.ajax({
+	      url:"<c:url value='/Admin/Counts.hst'/>",
+	      type:'get',
+	      datatype:'json',
+	      data:{},
+	      beforeSend: function () {
+	         console.log("beforeSend");
+//	          FunLoadingBarStart();
+	      },
+	      complete: function () {
+	         console.log("complete");
+//	          FunLoadingBarEnd();
+	      },
+	      success:function(data){
+	    	  console.log("성공", data);
+	    	  
+	      },
+	      error:function(request,status,error){
+				console.log("연결 실패");
+				alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			} 
+	       
+	    });
+});
+</script>
+
 <body class="animsition">
     <div class="page-wrapper">
         <!-- PAGE CONTAINER-->
@@ -83,7 +112,7 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item">
-                                    <h2 class="number">1,368</h2>
+                                    <h2 class="number">${memberCount }</h2>
                                     <span class="desc">members</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-account-o"></i>
@@ -92,7 +121,7 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item">
-                                    <h2 class="number">688</h2>
+                                    <h2 class="number">${hospCount }</h2>
                                     <span class="desc">authorzied hospitals</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-shopping-cart"></i>
@@ -101,7 +130,7 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item">
-                                    <h2 class="number">1,0861</h2>
+                                    <h2 class="number">${presCount }</h2>
                                     <span class="desc">prescriptions</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
@@ -110,7 +139,7 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item">
-                                    <h2 class="number">60,386</h2>
+                                    <h2 class="number">${aptCount }</h2>
                                     <span class="desc">appointments</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-money"></i>
@@ -140,16 +169,6 @@
                                             <div class="chart-note">
                                                 <span class="dot dot--green"></span>
                                                 <span>Appointments</span>
-                                            </div>
-                                        </div>
-                                        <div class="chart-info-right">
-                                            <div class="rs-select2--dark rs-select2--md m-r-10">
-                                                <select class="js-select2" name="property">
-                                                    <option selected="selected">All Properties</option>
-                                                    <option value="">Members</option>
-                                                    <option value="">Appointments</option>
-                                                </select>
-                                                <div class="dropDownSelect2"></div>
                                             </div>
                                         </div>
                                     </div>

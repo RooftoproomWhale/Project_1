@@ -1,9 +1,10 @@
 package com.kosmo.proj.service;
 
+import java.sql.Date;
+
 public class HospitalDTO {
 	private String hosp_code;
 	private String hosp_name;
-	private int authorized;
 	private String tel;
 	private int weekday_open;
 	private int weekday_close;
@@ -14,8 +15,28 @@ public class HospitalDTO {
 	private String address;
 	private float cor_x;
 	private float cor_y;
+	private String id;
+	private String auth;
+	private Date approved_date;
 	
-	
+	public Date getApproved_date() {
+		return approved_date;
+	}
+	public void setApproved_date(Date approved_date) {
+		this.approved_date = approved_date;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
 	public String getHosp_code() {
 		return hosp_code;
 	}
@@ -27,12 +48,6 @@ public class HospitalDTO {
 	}
 	public void setHosp_name(String hosp_name) {
 		this.hosp_name = hosp_name;
-	}
-	public int getAuthorized() {
-		return authorized;
-	}
-	public void setAuthorized(int authorized) {
-		this.authorized = authorized;
 	}
 	public String getTel() {
 		return tel;

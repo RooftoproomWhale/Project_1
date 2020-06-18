@@ -13,7 +13,7 @@ import com.kosmo.proj.service.MemberService;
 
 @Repository
 public class MemberDAO implements MemberService {
-	
+
 	//SqlSessionTemplate객체 주입]
 		@Resource(name="template")
 		private SqlSessionTemplate sqlMapper;
@@ -23,7 +23,7 @@ public class MemberDAO implements MemberService {
 			// TODO Auto-generated method stub
 			return (Integer)sqlMapper.selectOne("memberIsLogin",map)==0 ? false : true;
 		}
-		
+
 		@Override
 		public MemberDTO isLogin(MemberDTO member) {
 			// TODO Auto-generated method stub
@@ -51,23 +51,17 @@ public class MemberDAO implements MemberService {
 
 		@Override
 		public int delete(Map map) {
-			// TODO Auto-generated method stub
-			return 0;
+			return sqlMapper.delete("signDelete", map);
 		}
 
 		@Override
 		public int insert(Map map) {
-			// TODO Auto-generated method stub
-			return 0;
+			return sqlMapper.insert("signInsert", map);
 		}
 
 		@Override
 		public int update(Map map) {
-			// TODO Auto-generated method stub
-			return 0;
+			return sqlMapper.update("signUpdate", map);
 		}
-
-		
-		
 
 }

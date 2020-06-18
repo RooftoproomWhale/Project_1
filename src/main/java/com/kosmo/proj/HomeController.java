@@ -172,7 +172,7 @@ public class HomeController {
 		String pwd = dto.getMem_pwd();
 		String gender = dto.getGender();
 		int age = dto.getAge();
-		int tel = dto.getTel();
+		String tel = dto.getTel();
 		int height = dto.getHeight();
 		int weight = dto.getWeight();
 		model.addAttribute("name", name);
