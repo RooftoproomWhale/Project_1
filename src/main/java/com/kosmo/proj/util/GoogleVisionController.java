@@ -17,6 +17,7 @@ import com.google.cloud.vision.v1.Vertex;
 import com.google.cloud.vision.v1.Word;
 import com.google.protobuf.ByteString;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -78,7 +79,7 @@ public class GoogleVisionController {
 									}
 								}
 								/*복용횟수*/
-								if(min_x>=475 && max_x<=528 && min_y>=25 && max_y<=57) {
+								if(min_x>=540 && max_x<=582 && min_y>=252 && max_y<=281) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										count = count + symbol.getText();
@@ -163,4 +164,7 @@ public class GoogleVisionController {
 		map.put("count",count);
 		return "testView.tiles";
 	}
+	
+	
+	
 }
