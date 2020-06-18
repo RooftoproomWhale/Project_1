@@ -147,7 +147,7 @@ public class AdminController {
 		}
 		model.addAttribute("list", list);
 		
-		return "HosAuth.ad_tiles";
+		return "HosAuth.ad_tiles"; 
 	}
 	
 	@RequestMapping("ApproveAuth.hst")
