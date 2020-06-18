@@ -44,6 +44,7 @@ public class GoogleVisionController {
 		StringBuffer totalMedi = new StringBuffer();
 		String duration = "";
 		String hospital = "";
+		String count = "";
 		//new FileInputStream(fileName)
 		ByteString imgBytes = ByteString.readFrom(file.getInputStream());
 		Image img = Image.newBuilder().setContent(imgBytes).build();
@@ -70,72 +71,79 @@ public class GoogleVisionController {
 								int min_y = word.getBoundingBox().getVertices(0).getY();
 								int max_y = word.getBoundingBox().getVertices(2).getY();
 								/*약 제조일 */
-								if(min_x>=804 && max_x<=900 && min_y>=100 && max_y<=122) {
+								if(min_x>=770 && max_x<=885 && min_y>=105 && max_y<=130) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										presDate = presDate + symbol.getText();
 									}
 								}
+								/*복용횟수*/
+								if(min_x>=475 && max_x<=528 && min_y>=25 && max_y<=57) {
+									System.out.println(word);
+									for (Symbol symbol: word.getSymbolsList()) {
+										count = count + symbol.getText();
+									}
+								}
 								/*복용기간*/
-								if(min_x>=132 && max_x<=154 && min_y>=101 && max_y<=119) {
+								if(min_x>=120 && max_x<=158 && min_y>=110 && max_y<=130) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										duration = duration + symbol.getText();
 									}
 								}
 								/*진료기관*/
-								if(min_x>=340 && max_x<=492 && min_y>=118 && max_y<=143) {
+								if(min_x>=320 && max_x<=465 && min_y>=125 && max_y<=155) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										hospital = hospital + symbol.getText();
 									}
 								}
 								/*의약품명1*/
-								if(min_x>=274 && max_x<=453 && min_y>=140 && max_y<=164) {
+								if(min_x>=240 && max_x<=440 && min_y>=145 && max_y<=170) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi1 = medi1 + symbol.getText();
 									}
 									
 								}
-								if(min_x>=274 && max_x<=453 && min_y>=280 && max_y<=304) {
+								if(min_x>=240 && max_x<=440 && min_y>=275 && max_y<=300) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi2 = medi2 + symbol.getText();
 									}
 									
 								}
-								if(min_x>=274 && max_x<=453 && min_y>=414 && max_y<=431) {
+								if(min_x>=240 && max_x<=440 && min_y>=405 && max_y<=430) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi3 = medi3 + symbol.getText();
 									}
 									
 								}
-								if(min_x>=274 && max_x<=453 && min_y>=554 && max_y<=574) {
+								if(min_x>=240 && max_x<=440 && min_y>=535 && max_y<=560) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi4 = medi4 + symbol.getText();
 									}
 								}
 								/*의약품명2*/
-								if(min_x>=620 && max_x<=800 && min_y>=143 && max_y<=163) {
+								if(min_x>=580 && max_x<=780 && min_y>=145 && max_y<=170) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi5 = medi5 + symbol.getText();
 										
 									}
 									
 								}
-								if(min_x>=620 && max_x<=800 && min_y>=276 && max_y<=296) {
+								if(min_x>=580 && max_x<=780 && min_y>=275 && max_y<=300) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi6 = medi6 + symbol.getText();
 										
 									}
 									
 								}
-								if(min_x>=620 && max_x<=800 && min_y>=407 && max_y<=427) {
+								if(min_x>=580 && max_x<=780 && min_y>=405 && max_y<=430) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi7 = medi7 + symbol.getText();
 									}
 									
 								}
-								if(min_x>=620 && max_x<=800 && min_y>=547 && max_y<=567) {
+								if(min_x>=580 && max_x<=780 && min_y>=535 && max_y<=560) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi8 = medi8+ symbol.getText();
 									}
@@ -152,6 +160,7 @@ public class GoogleVisionController {
 		map.put("preDate", presDate);
 		map.put("duration",duration);
 		map.put("hospital",hospital);
+		map.put("count",count);
 		return "testView.tiles";
 	}
 }
