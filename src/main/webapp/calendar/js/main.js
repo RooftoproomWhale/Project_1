@@ -143,8 +143,28 @@ var calendar = $('#calendar').fullCalendar({
       },
       success: function (response) {
     	  console.log(response);
-    	  console.log("테스트");
-//    	  console.log(response);
+    	
+    	  response.forEach(el=>{
+    		if(el.count != null){
+    			el.backgroundColor = '#9775fa';
+    			el.title = el.medi_name;
+    			el.type = "복용약등록";
+    			el.start =  moment(el.pres_date).format('YYYY-MM-DD');
+    
+    		}
+    		else{
+    			el.backgroundColor = '#D25565';
+    			el.title = el.hosp_NAME;
+    			el.type="병원예약";
+    			el.start =  moment(res_DATE).format('YYYY-MM-DD');
+    		}
+    		console.log(el);
+    	  })
+    	  
+    	  
+    	  
+    	  
+    	  
         var fixedDate = response.map(function (array) {
           if (array.allDay && array.start !== array.end) {
             // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
