@@ -95,7 +95,7 @@
     </tr>
     <tr >
       <td scope="row" >예약신청일<br/></td>
-      <td>2020-06-01 &lt;인터넷 예약&gt;</td>
+      <td id="apply_time"></td>
     </tr>
    
  <tr><td>예약상태</td> <td>미승인</td></tr>

@@ -29,9 +29,12 @@ var editEvent = function (event, element, view) {
     }
      else if(event.type=="병원예약"){
     	 start = moment(event.start).format('YYYY-MM-DD HH:mm');
-    	 $('input[name="update-start"]').val(start)
+  
+    	 $('#apply_time').html(event.apply_TIME);
+    	 $('input[name="update-start"]').val(start);
+    	 change();
     	 	eventhosModal.modal('show');
-    	change();
+    	
     	 }
      else{
     	   eventModal.modal('show');
@@ -98,6 +101,7 @@ $('#updateEvents_no1').on('click',function(){
 //상세보기로 변경
 function change() {
 	 modalTitle.html('예약 상세페이지');
+	 $('#apply_time').html(event.apply_Time);
 	 $('#titlecall').html(event.title);
 	 $('#namecall').html(event.username);
 	 starts= moment(event.start).format('YYYY-MM-DD HH:mm')
