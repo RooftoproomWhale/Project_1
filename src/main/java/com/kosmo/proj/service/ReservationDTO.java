@@ -13,13 +13,34 @@ public class ReservationDTO {
 	private String RES_TIME;
 	private Date APPLY_TIME;
 	private String SEL_SYMP;
-	
+	private String TEL;
+	private String gender;
+	private int age;
+	private String APPROVED;
 	
 	public String getMEM_NAME() {
 		return MEM_NAME;
 	}
 	public void setMEM_NAME(String mEM_NAME) {
 		MEM_NAME = mEM_NAME;
+	}
+	public String getTEL() {
+		return TEL;
+	}
+	public void setTEL(String tEL) {
+		TEL = tEL;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 	public String getHOSP_NAME() {
 		return HOSP_NAME;
@@ -75,6 +96,11 @@ public class ReservationDTO {
 	public void setSEL_SYMP(String SEL_SYMP) {
 		this.SEL_SYMP = SEL_SYMP;
 	}
-	
+	public String getAPPROVED() {
+		return APPROVED;
+	}
+	public void setAPPROVED(String aPPROVED) {
+		APPROVED = aPPROVED;
+	}
 	
 }

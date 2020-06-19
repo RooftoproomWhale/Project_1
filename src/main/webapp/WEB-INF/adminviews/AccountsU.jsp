@@ -80,29 +80,25 @@ $(function() {
 		}
 		
 	});
-	// 필터 끝
 	
 	$(".table-data-feature .item:first-child").on('click', function(){
 		
-		btnId = $(this).attr("id");
-		var email = document.getElementById("idEmail"+btnId).innerHTML.trim();
-		console.log("수정 모달 클릭", email);
+		var tr = $(this).parent().parent().parent();
+		var td = tr.children();
+		var userEmail = td.eq(1).children().eq(1).text().trim();
+		console.log("모달 클릭", userEmail);
 		var request = 
 			$.ajax({ 
 				url: "<c:url value='/Admin/UserUpdateForm.hst'/>",
 				type: "post", //get, post 방식 
-				dataType: 'json', //or xml or script or html or json or text
+				dataType: 'html', //or xml or script or html or json or text
 				data: {
-						"userEmail" : email
+						"userEmail" : userEmail
 						}, //넘길 파라미터 
 				async: true, // true:비동기, false:동기 
 				success: function(data){ 
-					console.log('성공', data[0]);
-					document.getElementById("upName").value = data[0].mem_name;
-					document.getElementById("upEmail").value = data[0].mem_email;
-					document.getElementById("upPwd").value = data[0].mem_pwd;
-					document.getElementById("upTel").value = data[0].tel;
-					document.getElementById("userEmail").value = email;
+					console.log('성공');
+					
 				},
 				error:function(request,status,error){
 					console.log('실패');
@@ -113,13 +109,13 @@ $(function() {
 	
 	$("#updateBtn").on('click', function(){
 		
-		var userEmail = $("#userEmail").val();
+		var userEmail = "";
 		var upName = $("#upName").val();
 		var upEmail = $("#upEmail").val();
 		var upPwd = $("#upPwd").val();
 		var upTel = $("#upTel").val();
-
-		console.log(userEmail +"///", upName, upEmail, upPwd, upTel);
+		
+		console.log(userEmail, upName, upEmail, upPwd, upTel);
 // 		var param = $("#frm").serialize();
 // 		alert(param);
 		var request = 
@@ -137,15 +133,13 @@ $(function() {
 				async: true, // true:비동기, false:동기 
 				success: function(data){ 
 					console.log('성공');
-					window.location.href = "<c:url value='/Admin/Accounts.hst'/>";
 				},
 				error:function(request,status,error){
 					console.log('실패');
 					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 				} 
 			});
-		
-		});
+	});
 	
 $(".table-data-feature .item:last-child").on('click', function(){
 		
@@ -179,32 +173,6 @@ $(".table-data-feature .item:last-child").on('click', function(){
 		});
 			
 	});
-	
-	$("#searchBtn").on("click", function(){
-	var keyword = $("#search").val();
-	console.log(keyword, "계정 검색");
-	$.ajax({ 
-		url: "<c:url value='/Admin/AccountsSearch.hst'/>",
-		type: "get", //get, post 방식 
-		dataType: 'html', //or xml or script or html 
-		data: {
-			"search_keyword" : keyword
-			}, //넘길 파라미터 
-		async: true, // true:비동기, false:동기 
-		success: function(data){ 
-			console.log(data);
-				console.log('성공');
-				var renewURL = location.href;
-				history.pushState(null, null, renewURL);
-//					window.location.href = "<c:url value='/Admin/HosAuthSearchNew.hst'/>";
-//					location.reload(true);
-		},
-		error:function(request,status,error){
-			console.log("에러");
-			alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-		} 
-		});
-	});
 });
 </script>
 
@@ -217,10 +185,10 @@ $(".table-data-feature .item:last-child").on('click', function(){
 				<div class="section__content section__content--p30">
 					<div class="container-fluid">
 						<div class="header-wrap">
-							<form class="form-header" action="" method="">
-								<input class="au-input au-input--xl" type="text" id="search"
+							<form class="form-header" action="" method="POST">
+								<input class="au-input au-input--xl" type="email" name="search"
 									placeholder="회원명 검색" />
-								<button class="au-btn--submit" type="button" id="searchBtn">
+								<button class="au-btn--submit" type="submit">
 									<i class="zmdi zmdi-search"></i>
 								</button>
 							</form>
@@ -246,7 +214,7 @@ $(".table-data-feature .item:last-child").on('click', function(){
 											class="rs-select2--dark rs-select2--md m-r-10 rs-select2--border">
 											<select class="js-select2" name="filter" id="filter">
 												<option value="all">All Users</option>
-												<option value="user">User</option>
+												<option value="user" selected="selected">User</option>
 												<option value="hospital">Hospital</option>
 											</select>
 											<div class="dropDownSelect2"></div>
@@ -269,64 +237,61 @@ $(".table-data-feature .item:last-child").on('click', function(){
 											<tbody>
 												<c:if test="${empty list}" var="isEmpty">
 													<tr>
-														<td colspan="4">회원이 없습니다.</td>
+														<td colspan="4">등록된 회원이 없습니다.</td>
 													</tr>
 												</c:if>
 												<c:if test="${not isEmpty}">
 													<c:forEach items="${list}" var="item" varStatus="loop">
-														<tr>
-															<td><label class="au-checkbox"> <input
-																	type="checkbox"> <span class="au-checkmark"></span>
-															</label></td>
-															<td>
-																<div class="table-data__info">
-																	<h6 id="idName${loop.index }">${item.mem_name }</h6>
-																</div>
-																<div>
-																	<a href="#"><span class="userEmail" id="idEmail${loop.index }">
-																			${item.mem_email }</span></a>
-																</div>
-															</td>
-															<c:if test="${item.role == 'ROLE_ADM' }">
-																<td><span class="role admin">${item.role }</span></td>
-															</c:if>
-															<c:if test="${item.role == 'ROLE_MEM' }">
-																<td><span class="role user">${item.role }</span></td>
-															</c:if>
-															<c:if test="${item.role == 'ROLE_HOS' }">
-																<td><span class="role member">${item.role }</span></td>
-															</c:if>
-
-															<td>
-																<div class="rs-select2--trans rs-select2--sm">
-																	<input type="text" placeholder="${item.mem_pwd }"
-																		disabled="disabled" id="idPwd${loop.index }">
-																</div>
-															</td>
-															<td>
-																<div class="rs-select2--trans rs-select2--sm">
-																	<input type="text" placeholder="${item.tel }"
-																		disabled="disabled" id="idTel${loop.index }">
-																</div>
-															</td>
-															<td>
-																<div class="table-data-feature">
-																	<button class="item update" data-toggle="modal"
-																		<%-- onclick="location.href='<c:url value = "/Admin/UserUpdateForm.hst"/>'" --%>
-																data-placement="top"
-																		data-target="#UserModal" title="수정" id="${loop.index }">
-																		<i class="zmdi zmdi-edit"></i>
-																	</button>
-																	<button class="item" data-toggle="tooltip"
-																		id="deleteBtn" data-placement="top" title="삭제">
-																		<i class="zmdi zmdi-delete"></i>
-																	</button>
-																</div>
-															</td>
-														</tr>
-														<tr>
-													</c:forEach>
-												</c:if>
+												<tr>
+													<td><label class="au-checkbox"> <input
+															type="checkbox"> <span class="au-checkmark"></span>
+													</label></td>
+													<td>
+														<div class="table-data__info">
+															<h6>${item.mem_name }</h6>
+														</div>
+														<div>
+															<a href="#"><span class="userEmail"> ${item.mem_email }</span></a>
+														</div>
+													</td>
+													<c:if test="${item.role == 'ROLE_ADM' }">
+														<td><span class="role admin">${item.role }</span></td>
+													</c:if>
+													<c:if test="${item.role == 'ROLE_MEM' }">
+														<td><span class="role user">${item.role }</span></td>
+													</c:if>
+													<c:if test="${item.role == 'ROLE_HOS' }">
+														<td><span class="role member">${item.role }</span></td>
+													</c:if>
+													
+													<td>
+														<div class="rs-select2--trans rs-select2--sm">
+															<input type="text" placeholder="${item.mem_pwd }"
+																disabled="disabled">
+														</div>
+													</td>
+													<td>
+														<div class="rs-select2--trans rs-select2--sm">
+															<input type="text" placeholder="010-1234-7586"
+																disabled="disabled">
+														</div>
+													</td>
+													<td>
+														<div class="table-data-feature">
+															<button class="item update" data-toggle="modal" <%-- onclick="location.href='<c:url value = "/Admin/UserUpdateForm.hst"/>'" --%>
+																data-placement="top" data-target="#UserModal" title="수정" id="updateModal">
+																<i class="zmdi zmdi-edit"></i>
+															</button>
+															<button class="item" data-toggle="tooltip" id="deleteBtn"
+																data-placement="top" title="삭제">
+																<i class="zmdi zmdi-delete"></i>
+															</button>
+														</div>
+													</td>
+												</tr>
+												<tr>
+												</c:forEach>
+											</c:if>
 											</tbody>
 										</table>
 									</div>
@@ -358,25 +323,24 @@ $(".table-data-feature .item:last-child").on('click', function(){
 				<form id="frm">
 						<div class="md-form mb-5">
 							<i class="fas fa-user prefix grey-text"></i> <input type="email"
-								id="upName" class="form-control validate" value=""> <label
+								id="upName" class="form-control validate" value="${record.mem_name }"> <label
 								data-error="wrong" data-success="right" for="form3" >NAME</label>
 						</div>
 	
 						<div class="md-form mb-5">
-							<input type="email" id="upEmail" class="form-control validate" value=""> <label
+							<input type="email" id="upEmail" class="form-control validate" value="${record.mem_email }"> <label
 								data-error="wrong" data-success="right" for="form2">EMAIL</label>
 						</div>
 						
 						<div class="md-form mb-5">
-							<input type="email" id="upPwd" class="form-control validate" value=""> <label
+							<input type="email" id="upPwd" class="form-control validate" value="${record.mem_pwd }"> <label
 								data-error="wrong" data-success="right" for="form2">PASSWORD</label>
 						</div>
 						
 						<div class="md-form">
-							<input type="email" id="upTel" class="form-control validate" value=""> <label
+							<input type="email" id="upTel" class="form-control validate" value="${record.tel }"> <label
 								data-error="wrong" data-success="right" for="form2" >TEL</label>
 						</div>
-						<input type="hidden" id="userEmail" class="form-control validate" value="">
 					</form>
 				</div>
 

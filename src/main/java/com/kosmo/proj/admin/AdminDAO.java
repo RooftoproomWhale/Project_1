@@ -8,8 +8,11 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.MemberService;
+import com.kosmo.proj.service.Paging;
+import com.kosmo.proj.service.ReservationDTO;
 import com.kosmo.proj.service.impl.MemberServiceImpl;
 
 @Repository
@@ -25,35 +28,143 @@ public class AdminDAO implements AdminService {
 	}
 
 	@Override
-	public List<MemberDTO> selectList(Map map) {
+	public List<MemberDTO> selectList_All(Map map) {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectList("selectMemberList", map);
 	}
 
 	@Override
-	public int getTotalRecord(Map map) {
+	public List<MemberDTO> selectList_User(Map map) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlMapper.selectList("selectMemberListUser", map);
 	}
 
 	@Override
-	public MemberDTO selectOne(Map map) {
+	public List<MemberDTO> selectList_Hosp(Map map) {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlMapper.selectList("selectMemberListHosp", map);
+	}
+
+	@Override
+	public List<MemberDTO> selectOne(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectOne", map);
 	}
 
 	@Override
 	public int delete(Map map) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlMapper.delete("adminUserDelete", map);
 	}
-
 
 	@Override
 	public int update(Map map) {
 		// TODO Auto-generated method stub
+		return sqlMapper.update("adminUserUpdate", map);
+	}
+
+	@Override
+	public List<ReservationDTO> selectList_Apt_All(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectAptList", map);
+	}
+
+	@Override
+	public List<HospitalDTO> selectList_Auth_All(Paging vo) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectAuthList", vo);
+	}
+
+	@Override
+	public int approveAuth(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.update("updateAuth_O", map);
+	}
+
+	@Override
+	public int denyAuth(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.update("updateAuth_X", map);
+	}
+
+	@Override
+	public int memberCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("memberCount");
+	}
+
+	@Override
+	public int genderCount() {
+		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int hospCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("hospCount");
+	}
+
+	@Override
+	public int presCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("presCount");
+	}
+
+	@Override
+	public int aptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("aptCount");
+	}
+
+	@Override
+	public List<ReservationDTO> selectOneApt(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectOneApt", map);
+	}
+
+	@Override
+	public int deleteApt(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deleteApt", map);
+	}
+
+	@Override
+	public List<HospitalDTO> selectList_Auth_Search(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectAuth_Search", map);
+	}
+
+	@Override
+	public List<MemberDTO> selectList_Account_Search(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectAccount_Search", map);
+	}
+
+	@Override
+	public List<ReservationDTO> selectList_Appointment_Search(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectApt_Search", map);
+	}
+
+	@Override
+	public int getTotalRecordAccount(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("countRecordAccount", map);
+	}
+
+	@Override
+	public int getTotalRecordAppointment(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("countRecordAppointment", map);
+	}
+
+	@Override
+	public int getTotalRecordHosAuth(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("countRecordHosAuth", map);
+	}
+
 	
 	
 }

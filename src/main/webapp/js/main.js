@@ -412,7 +412,7 @@
           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', ''],
           datasets: [
             {
-              label: 'My First dataset',
+              label: '예약 수',
               backgroundColor: brandService2,
               borderColor: bd_brandService2,
               pointHoverBackgroundColor: '#fff',
@@ -421,7 +421,7 @@
 
             },
             {
-              label: 'My Second dataset',
+              label: '회원 수',
               backgroundColor: brandProduct2,
               borderColor: bd_brandProduct2,
               pointHoverBackgroundColor: '#fff',

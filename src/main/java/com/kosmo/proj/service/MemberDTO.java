@@ -5,15 +5,21 @@ public class MemberDTO {
 	   private String mem_pwd;
 	   private String mem_name;
 	   private String gender;
-	   private int tel;
+	   private String tel;
 	   private int age;
 	   private int height;
 	   private int weight;
 	   private String role;
 	   private int enable;
 
-	   public String getRole() {
-	      return role;
+	   public String getTel() {
+		return tel;
+		}
+		public void setTel(String tel) {
+			this.tel = tel;
+		}
+		public String getRole() {
+		      return role;
 	   }
 	   public void setRole(String role) {
 	      this.role = role;
@@ -47,12 +53,6 @@ public class MemberDTO {
 	   }
 	   public void setGender(String gender) {
 	      this.gender = gender;
-	   }
-	   public int getTel() {
-	      return tel;
-	   }
-	   public void setTel(int tel) {
-	      this.tel = tel;
 	   }
 	   public int getAge() {
 	      return age;

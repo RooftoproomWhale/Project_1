@@ -38,7 +38,7 @@ public class CovidViewController {
 		String todayStr = obj.toString();
 		int today = Integer.parseInt(todayStr);
 		
-		String apiUrl = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+(today-7)+"&endCreateDt="+today+"&";
+		String apiUrl = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+(today-8)+"&endCreateDt="+(today-1)+"&";
 		
 		System.out.println(apiUrl);
 		
@@ -60,7 +60,7 @@ public class CovidViewController {
 		String todayStr = obj.toString();
 		int today = Integer.parseInt(todayStr);
 		
-		String apiUrl = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+today+"&endCreateDt="+today+"&";
+		String apiUrl = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+(today-1)+"&endCreateDt="+(today-1)+"&";
 		
 		System.out.println(apiUrl);
 		
@@ -82,7 +82,7 @@ public class CovidViewController {
 		String todayStr = obj.toString();
 		int today = Integer.parseInt(todayStr);
 		
-		String apiUrl = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+today+"&endCreateDt"+today+"&";
+		String apiUrl = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+(today-1)+"&endCreateDt"+(today-1)+"&";
 		
 		System.out.println(apiUrl);
 		
@@ -103,7 +103,7 @@ public class CovidViewController {
 		System.out.println(obj);
 		String todayStr = obj.toString();
 		int today = Integer.parseInt(todayStr);
-		String apiUrl = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt=20200614&endCreateDt="+today+"&endCreateDt="+today+"&";
+		String apiUrl = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+(today-1)+"&endCreateDt="+(today-1)+"&";
 		
 		System.out.println(apiUrl);
 		
