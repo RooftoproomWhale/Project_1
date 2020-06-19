@@ -44,9 +44,9 @@ public class CalendarController {
 		  }catch (JsonProcessingException
 		  e) { e.printStackTrace(); }
 		 String str="";
-		 if(jsonStr == null || jsonStr2 ==null) {
+		 if(jsonStr.equals("[]") || jsonStr2.equals("[]")) {
 			str = jsonStr;
-			if(str == null) {
+			if(str.equals("[]")) {
 				str = jsonStr2;
 			}
 		 }

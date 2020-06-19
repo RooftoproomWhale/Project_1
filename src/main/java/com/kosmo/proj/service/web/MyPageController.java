@@ -1,19 +1,42 @@
 package com.kosmo.proj.service.web;
 
+import javax.annotation.Resource;
+import javax.swing.JOptionPane;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kosmo.proj.service.impl.MemberServiceImpl;
+
+
+
+
 
 @Controller
 public class MyPageController {
-
+	@Resource(name="memberService")
+	private MemberServiceImpl memberDAO;
+	
+	
 	// 유저 페이지
 	/// 내정보
 	@RequestMapping("/mypage/mypage.hst")
-	public String mypage() {
+	public String mypage(Authentication auth,Model model) {
+		if(auth == null) {
+			JOptionPane.showMessageDialog(null,"로그인후 이용해주세요.","홈스피탈",1);
+			return "member/Login.tiles";
+		}
+		
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
 		
 		
-
+		
 		return "Mypage_Main.my_tiles";
+		
 	}
 
 	// 회원탈퇴

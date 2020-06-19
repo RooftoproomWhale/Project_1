@@ -8,7 +8,6 @@
 	</select>
 	
 	<select id="calendarSelectList2" parameterType="java.util.Map" resultType="reservationDTO">
-		
 		select m.mem_name,h.hosp_name, r.* from member m join reservation r on m.mem_email = r.mem_email join hospital h on r.hosp_code = h.hosp_code where m.mem_email = #{id}
 	</select>
 	

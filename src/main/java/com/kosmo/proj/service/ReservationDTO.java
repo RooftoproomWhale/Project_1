@@ -13,7 +13,7 @@ public class ReservationDTO {
 	private String RES_TIME;
 	private Date APPLY_TIME;
 	private String SEL_SYMP;
-	
+	private String APPROVED;
 	
 	public String getMEM_NAME() {
 		return MEM_NAME;
@@ -75,6 +75,11 @@ public class ReservationDTO {
 	public void setSEL_SYMP(String SEL_SYMP) {
 		this.SEL_SYMP = SEL_SYMP;
 	}
-	
+	public String getAPPROVED() {
+		return APPROVED;
+	}
+	public void setAPPROVED(String aPPROVED) {
+		APPROVED = aPPROVED;
+	}
 	
 }
