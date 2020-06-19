@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
+import com.kosmo.proj.service.Paging;
+import com.kosmo.proj.service.ReservationDTO;
 
 public interface AdminService {
 	
@@ -18,7 +20,7 @@ public interface AdminService {
 		int aptCount();
 		//회원 관리
 		//회원 상세보기용]
-		MemberDTO selectOne(Map map);
+		List<MemberDTO> selectOne(Map map);
 		List<MemberDTO> selectList_All(Map map);
 		List<MemberDTO> selectList_User(Map map);
 		List<MemberDTO> selectList_Hosp(Map map);
@@ -26,16 +28,23 @@ public interface AdminService {
 		int delete(Map map);
 		//회원 수정
 		int update(Map map);
-		//전체 레코드 수]
-		int getTotalRecord(Map map);
+		List<MemberDTO> selectList_Account_Search(Map map);	
+		int getTotalRecordAccount(Map map);
 		
 		//예약 관리
-		List<HospitalDTO> selectList_Apt_All(Map map);
-
+		List<ReservationDTO> selectList_Apt_All(Map map);
+		List<ReservationDTO> selectOneApt(Map map);
+		int deleteApt(Map map);
+		List<ReservationDTO> selectList_Appointment_Search(Map map);	
+		int getTotalRecordAppointment(Map map);
+		
 		//병원 제휴
-		List<HospitalDTO> selectList_Auth_All(Map map);	
+		List<HospitalDTO> selectList_Auth_All(Paging vo);	
 		int approveAuth(Map map);
 		int denyAuth(Map map);
+		List<HospitalDTO> selectList_Auth_Search(Map map);	
+		int getTotalRecordHosAuth(Map map);
+		
 		
 		
 }

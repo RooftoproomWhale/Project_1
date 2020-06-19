@@ -4,7 +4,8 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <style>
 #sidebar-collapse{
-	box-shadow: 0 20px 30px #333
+	box-shadow: 0 20px 30px #333;
+	height: 500px;
 }
 </style>
 

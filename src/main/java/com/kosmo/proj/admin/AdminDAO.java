@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.MemberService;
+import com.kosmo.proj.service.Paging;
+import com.kosmo.proj.service.ReservationDTO;
 import com.kosmo.proj.service.impl.MemberServiceImpl;
 
 @Repository
@@ -42,16 +44,11 @@ public class AdminDAO implements AdminService {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectList("selectMemberListHosp", map);
 	}
-	@Override
-	public int getTotalRecord(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
-	public MemberDTO selectOne(Map map) {
+	public List<MemberDTO> selectOne(Map map) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectOne("selectOne", map);
+		return sqlMapper.selectList("selectOne", map);
 	}
 
 	@Override
@@ -67,15 +64,15 @@ public class AdminDAO implements AdminService {
 	}
 
 	@Override
-	public List<HospitalDTO> selectList_Apt_All(Map map) {
+	public List<ReservationDTO> selectList_Apt_All(Map map) {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectList("selectAptList", map);
 	}
 
 	@Override
-	public List<HospitalDTO> selectList_Auth_All(Map map) {
+	public List<HospitalDTO> selectList_Auth_All(Paging vo) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectList("selectAuthList", map);
+		return sqlMapper.selectList("selectAuthList", vo);
 	}
 
 	@Override
@@ -118,6 +115,54 @@ public class AdminDAO implements AdminService {
 	public int aptCount() {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("aptCount");
+	}
+
+	@Override
+	public List<ReservationDTO> selectOneApt(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectOneApt", map);
+	}
+
+	@Override
+	public int deleteApt(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deleteApt", map);
+	}
+
+	@Override
+	public List<HospitalDTO> selectList_Auth_Search(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectAuth_Search", map);
+	}
+
+	@Override
+	public List<MemberDTO> selectList_Account_Search(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectAccount_Search", map);
+	}
+
+	@Override
+	public List<ReservationDTO> selectList_Appointment_Search(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectApt_Search", map);
+	}
+
+	@Override
+	public int getTotalRecordAccount(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("countRecordAccount", map);
+	}
+
+	@Override
+	public int getTotalRecordAppointment(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("countRecordAppointment", map);
+	}
+
+	@Override
+	public int getTotalRecordHosAuth(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("countRecordHosAuth", map);
 	}
 
 	

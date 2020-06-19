@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
+import com.kosmo.proj.service.Paging;
+import com.kosmo.proj.service.ReservationDTO;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
@@ -42,13 +44,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int getTotalRecord(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public MemberDTO selectOne(Map map) {
+	public List<MemberDTO> selectOne(Map map) {
 		// TODO Auto-generated method stub
 		return dao.selectOne(map);
 	}
@@ -66,15 +62,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<HospitalDTO> selectList_Apt_All(Map map) {
+	public List<ReservationDTO> selectList_Apt_All(Map map) {
 		// TODO Auto-generated method stub
 		return dao.selectList_Apt_All(map);
 	}
 
 	@Override
-	public List<HospitalDTO> selectList_Auth_All(Map map) {
+	public List<HospitalDTO> selectList_Auth_All(Paging vo) {
 		// TODO Auto-generated method stub
-		return dao.selectList_Auth_All(map);
+		return dao.selectList_Auth_All(vo);
 	}
 
 	@Override
@@ -117,6 +113,54 @@ public class AdminServiceImpl implements AdminService {
 	public int aptCount() {
 		// TODO Auto-generated method stub
 		return dao.aptCount();
+	}
+
+	@Override
+	public List<ReservationDTO> selectOneApt(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectOneApt(map);
+	}
+
+	@Override
+	public int deleteApt(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deleteApt(map);
+	}
+
+	@Override
+	public List<HospitalDTO> selectList_Auth_Search(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectList_Auth_Search(map);
+	}
+
+	@Override
+	public List<MemberDTO> selectList_Account_Search(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectList_Account_Search(map);
+	}
+
+	@Override
+	public List<ReservationDTO> selectList_Appointment_Search(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectList_Appointment_Search(map);
+	}
+
+	@Override
+	public int getTotalRecordAccount(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordAccount(map);
+	}
+
+	@Override
+	public int getTotalRecordAppointment(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordAppointment(map);
+	}
+
+	@Override
+	public int getTotalRecordHosAuth(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordHosAuth(map);
 	}
 	
 	

@@ -11,8 +11,8 @@
 		SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
 	</select>
 	
-	 <insert id="signInsert" parameterType="MemberDTO"> 
-		INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
+	 <insert id="signInsert" parameterType="java.util.Map"> 
+		INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
 	 </insert>
 	 
 	 <select id="signView" parameterType="MemberDTO">
@@ -85,6 +85,17 @@
 		FROM pharmacy p) disData
 		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
 	</select>
+<!-- 페이징 -->
+	<select id="countRecordHosAuth" resultType="int">
+		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
+	</select>
+	<select id="countRecordAccount" resultType="int">
+		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
+	</select>
+	<select id="countRecordAppointment" resultType="int">
+		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
+	</select>
+	
 	
 <!--관리자단 -->
 	<!-- 대쉬보드 -->
@@ -121,9 +132,20 @@
 	<delete id="adminUserDelete" parameterType="java.util.Map">
 		DELETE FROM MEMBER WHERE MEM_EMAIL = #{userEmail}
 	</delete>
+	<select id="selectAccount_Search" parameterType="java.util.Map" resultType="MemberDTO">
+		SELECT * FROM MEMBER WHERE MEM_NAME LIKE '%' || #{search_keyword} || '%'
+	</select>
+	
 	<!-- 병원 제휴 -->
 	<select id="selectAuthList" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL 
+						) A
+				)
+	WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<update id="updateAuth_O" parameterType="java.util.Map">
 		UPDATE HOSPITAL SET AUTH = '제휴승인됨', APPROVED_DATE = SYSDATE WHERE HOSP_NAME = #{hosp_name}
@@ -131,8 +153,21 @@
 	<update id="updateAuth_X" parameterType="java.util.Map">
 		UPDATE HOSPITAL SET AUTH = '제휴거절됨' WHERE HOSP_NAME = #{hosp_name}
 	</update>
+	<select id="selectAuth_Search" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
+	</select>
+	
 	<!-- 예약 관리 -->
-	<select id="selectAptList" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT * FROM RESERVATION
+	<select id="selectAptList" parameterType="java.util.Map" resultType="ReservationDTO">
+		select h.*, r.* from reservation r join hospital h on r.hosp_code = h.hosp_code
+	</select>
+	<select id="selectOneApt" parameterType="java.util.Map" resultType="ReservationDTO">
+		SELECT M.*, R.* FROM MEMBER M JOIN RESERVATION R ON M.MEM_EMAIL = R.MEM_EMAIL WHERE M.MEM_EMAIL = #{userEmail} 
+	</select>
+	<delete id="deleteApt" parameterType="java.util.Map">
+		DELETE FROM RESERVATION WHERE MEM_EMAIL = #{userEmail}
+	</delete>
+	<select id="selectApt_Search" parameterType="java.util.Map" resultType="ReservationDTO">
+		select h.*, r.* from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
 </mapper>

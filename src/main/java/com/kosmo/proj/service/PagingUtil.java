@@ -45,6 +45,7 @@ public class PagingUtil {
 		
 		return pagingStr;
 	}
+	
 	public static String pagingBootStrapStyle(int totalRecordCount,int pageSize,int blockPage,int nowPage,String page){
 		
 		String pagingStr="<nav><ul class=\"pagination\" >";
