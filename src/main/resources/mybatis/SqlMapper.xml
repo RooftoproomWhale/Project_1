@@ -32,13 +32,16 @@
 		INSERT INTO onememo(no,title,content,id)
 		VALUES(SEQ_ONEMEMO.NEXTVAL,#{title},#{content},#{id})
 	</insert>
-	
 	<update id="memoUpdate" parameterType="java.util.Map">
 		UPDATE onememo SET title=#{title},content=#{content} WHERE no=#{no}	
 	</update>
 	<delete id="memoDelete" parameterType="java.util.Map">
 		DELETE onememo WHERE no=#{no}
 	</delete>
+
+	<insert id="presInsert" parameterType="java.util.Map">
+		INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
+	</insert>
 	
 	<select id="covidMapSelect" resultType="java.util.Map">
 		SELECT * FROM corona_patient
@@ -52,7 +55,10 @@
 	<select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
-
+	<select id="presSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM prescription WHERE mem_email = #{mem_email}
+	</select>
+	
 	<select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT D.dept_name, HD.*
 		FROM
