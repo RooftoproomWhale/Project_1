@@ -16,7 +16,7 @@ public class PrescriptionServiceImpl implements PrescriptionService{
 	private PrescriptionDAO dao;
 
 	@Override
-	public List<PrescriptionDTO> selectPre(Map map) {
+	public List<Map> selectPre(Map map) {
 		return dao.selectPre(map);
 	}
 

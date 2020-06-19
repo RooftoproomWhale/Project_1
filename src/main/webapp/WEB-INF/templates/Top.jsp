@@ -61,11 +61,7 @@
 <style>
 .dropdown:hover .dropdown-menu {display: block;}
 .dropdown-menu:hover .dropdown-toggle {background-color: #3e8e41;}
-</style>
-	
-<script>
-
-</script>
+</style>	
 	
 <nav id="menu" class="navbar navbar-default navbar-fixed-top">
 	<div class="container">

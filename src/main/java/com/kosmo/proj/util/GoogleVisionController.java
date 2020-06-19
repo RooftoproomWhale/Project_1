@@ -16,6 +16,7 @@ import com.google.cloud.vision.v1.TextAnnotation;
 import com.google.cloud.vision.v1.Vertex;
 import com.google.cloud.vision.v1.Word;
 import com.google.protobuf.ByteString;
+import com.kosmo.proj.service.PrescriptionDTO;
 import com.kosmo.proj.service.PrescriptionService;
 
 import java.io.File;
@@ -33,6 +34,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.mail.Session;
 
+import org.json.simple.JSONArray;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,6 +42,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -48,16 +51,34 @@ public class GoogleVisionController {
 	@Resource(name = "presService")
 	private PrescriptionService service;
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/mapping/mappingList.hst",produces = "text/html; charset=UTF-8")
+	public String list(Authentication auth,Map map) {
+		UserDetails userDetails = (UserDetails)auth.getPrincipal();
+		String mem_email = userDetails.getUsername();
+		System.out.println(mem_email);
+		map.put("mem_email", mem_email);
+		//서비스 호출]
+		List<Map> list=service.selectPre(map);
+		for(Map comment:list) {
+			comment.put("PRES_DATE",comment.get("PRES_DATE").toString().substring(0, 10));
+		}
+		System.out.println(list);
+		System.out.println(JSONArray.toJSONString(list));
+		
+		return JSONArray.toJSONString(list);
+	}
+
+
 	@RequestMapping("/mapping/mapping.hst")
-	public String vision(MultipartFile file,Authentication auth,Map map) throws IOException {
+	public String vision(MultipartHttpServletRequest req,Authentication auth,Map map) throws IOException {
 		//MultipartFile로 직접 받기MultipartHttpServletRequest req
-		//MultipartFile file = req.getFile("filename");
+		MultipartFile file = req.getFile("filename");
 		//fileName = "C://Users//kosmo_12//Desktop//about.jpg";
 		List<AnnotateImageRequest> requests = new ArrayList<>();
 		String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
 		String presDate = "";
-		StringBuffer totalMedi = new StringBuffer();
+		StringBuffer medi_name = new StringBuffer();
 		String duration = "";
 		String hospital = "";
 		String count = "";
@@ -172,14 +193,10 @@ public class GoogleVisionController {
 			}
 		}
 		UserDetails userDetails = (UserDetails)auth.getPrincipal();
-		Collection authorities =  userDetails.getAuthorities();
-		for(Object authority:authorities) {
-			System.out.println(((GrantedAuthority)authority).getAuthority());
-		}
-		System.out.println(userDetails.getUsername());
 		String mem_email = userDetails.getUsername();
-		totalMedi.append(medi1+",").append(medi2+",").append(medi3+",").append(medi4+",").append(medi5+",").append(medi6+",").append(medi7+",").append(medi8);
-		map.put("medi_name", totalMedi.toString());
+		String totalMedi = String.format("%s,%s,%s,%s,%s,%s,%s,%s", medi1,medi2,medi3,medi4,medi5,medi6,medi7,medi8);
+		medi_name.append(totalMedi);
+		map.put("medi_name", medi_name.toString());
 		map.put("mem_email", mem_email);
 		Date pres_date = Date.valueOf(presDate);
 		map.put("pres_date", pres_date);
@@ -187,7 +204,7 @@ public class GoogleVisionController {
 		map.put("hospital",hospital);
 		map.put("count",count);
 		
-		//service.insertPre(map);
+		service.insertPre(map);
 		
 		return "testView.tiles";
 	}

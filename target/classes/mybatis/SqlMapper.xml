@@ -59,7 +59,7 @@
 	<select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
 	</select>
-	<select id="presSelectList" parameterType="java.util.Map" resultType="PrescriptionDTO">
+	<select id="presSelectList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM prescription WHERE mem_email = #{mem_email}
 	</select>
 	

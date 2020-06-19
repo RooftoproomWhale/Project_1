@@ -3,6 +3,46 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
+<script>
+$(function(){
+	console.log('실행전');
+	showList();
+	function showList(){
+		$.ajax({
+			url:"<c:url value='/mapping/mappingList.hst'/>",
+			type:'post',
+			success:showList_,
+			error:function(e){console.log('에러:',e)}
+		});			
+	};
+	
+	function showList_(data){		
+		console.log('처방전 목록:',data);
+		var comments="";
+		if(data.length==0){
+			comments+="<h2 style='color:red'>등록된 처방전 없어요</h2>";
+		}
+		else{
+			$.each(JSON.parse(data),function(i,element){
+				comments+="<div class='panel panel-default'>";
+				comments+='<div class="panel-heading" role="tab" id="heading'+i+'">';
+				comments+='<h4 class="panel-title">';
+				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
+				comments+=element['PRES_DATE']+"</a></h4></div>";
+				comments+='<div id="collapse'+i+'" class="panel-collapse collapse in" role="tabpanel">';
+				comments+='<div class="panel-body">';
+				$.each(element['MEDI_NAME'].split(','),function(k,val){
+					if(val!="")
+						comments+=val+"</br>";
+				})
+				comments+="</div></div></div>";
+			});
+		}
+		$('#accordion').html(comments);
+		
+	};
+});
+</script>
 <style>
 a:hover, a:focus {
 	text-decoration: none;
@@ -635,21 +675,6 @@ a:hover, a:focus {
 						 	<i class="fas fa-plus"></i> 복용약 추가</div>
 					</div>
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingOne">
-								<h4 class="panel-title">
-									<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										2020-06-08 서울 삼성병원
-									 </a>
-								</h4>
-							</div>
-							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-								<div class="panel-body">
-									<a href='<c:url value="/Homespital/Management.hst?dname=맥페란정"/>'>맥페란정</a> - 위장운동을 활성화시킴으로써 구역, 구토를 치료
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -686,6 +711,7 @@ a:hover, a:focus {
 	</div>
 </div>
 <script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
+
 <script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
@@ -739,8 +765,6 @@ a:hover, a:focus {
 </script>
 <script>
 
-console.clear();
-
 const loginBtn = document.getElementById('login');
 const signupBtn = document.getElementById('signup');
 
@@ -788,18 +812,4 @@ function toggleSignup(){
 	    document.getElementById("login-form").style.display="block";
 	}
 </script>
-<script>
-function vision(){
-	$.ajax({
-		url:"<c:url value='/mapping/mapping.hst'/>",
-		data:formdata,
-		type:'post',
-		dataType:'json',
-		success:function(){
-			console.log(data);
-		}
-	});
-}
 
-
-</script>

@@ -19,8 +19,8 @@ public class PrescriptionDAO implements PrescriptionService {
 	
 	
 	@Override
-	public List<PrescriptionDTO> selectPre(Map map) {
-		List<PrescriptionDTO> list = sqlMapper.selectList("presSelectList",map);
+	public List<Map> selectPre(Map map) {
+		List<Map> list = sqlMapper.selectList("presSelectList",map);
 		return list;
 	}
 
