@@ -21,7 +21,7 @@ public interface AdminService {
 		//회원 관리
 		//회원 상세보기용]
 		List<MemberDTO> selectOne(Map map);
-		List<MemberDTO> selectList_All(Map map);
+		List<MemberDTO> selectList_All(Paging vo);
 		List<MemberDTO> selectList_User(Map map);
 		List<MemberDTO> selectList_Hosp(Map map);
 		//회원 삭제
@@ -32,7 +32,7 @@ public interface AdminService {
 		int getTotalRecordAccount(Map map);
 		
 		//예약 관리
-		List<ReservationDTO> selectList_Apt_All(Map map);
+		List<ReservationDTO> selectList_Apt_All(Paging vo);
 		List<ReservationDTO> selectOneApt(Map map);
 		int deleteApt(Map map);
 		List<ReservationDTO> selectList_Appointment_Search(Map map);	

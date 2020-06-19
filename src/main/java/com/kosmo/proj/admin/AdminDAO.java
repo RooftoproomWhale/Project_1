@@ -28,9 +28,9 @@ public class AdminDAO implements AdminService {
 	}
 
 	@Override
-	public List<MemberDTO> selectList_All(Map map) {
+	public List<MemberDTO> selectList_All(Paging vo) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectList("selectMemberList", map);
+		return sqlMapper.selectList("selectMemberList", vo);
 	}
 
 	@Override
@@ -64,9 +64,9 @@ public class AdminDAO implements AdminService {
 	}
 
 	@Override
-	public List<ReservationDTO> selectList_Apt_All(Map map) {
+	public List<ReservationDTO> selectList_Apt_All(Paging vo) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectList("selectAptList", map);
+		return sqlMapper.selectList("selectAptList", vo);
 	}
 
 	@Override

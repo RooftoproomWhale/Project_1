@@ -94,10 +94,7 @@ $(function() {
 				success: function(data){ 
 					console.log(data);
 						console.log('성공');
-						var renewURL = location.href;
-						history.pushState(null, null, renewURL);
-//	 					window.location.href = "<c:url value='/Admin/HosAuthSearchNew.hst'/>";
-//	 					location.reload(true);
+						window.location.href = "<c:url value='/Admin/AppointmentSearch.hst?search_keyword="+keyword+"'/>";
 				},
 				error:function(request,status,error){
 					console.log("에러");
@@ -206,6 +203,27 @@ $(function() {
 								<!-- END DATA TABLE -->
 							</div>
 						</div>
+						<div style="display: block; text-align: center;">
+						<c:if test="${paging.startPage != 1 }">
+							<a href="<c:url value='/Admin/Appointment.hst?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}'/>">&lt;</a>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+							var="p">
+							<c:choose>
+								<c:when test="${p == paging.nowPage }">
+									<b>${p }</b>
+								</c:when>
+								<c:when test="${p != paging.nowPage }">
+									<a
+										href="<c:url value='/Admin/Appointment.hst?nowPage=${p }&cntPerPage=${paging.cntPerPage}'/>">${p }</a>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${paging.endPage != paging.lastPage}">
+							<a
+								href="<c:url value='/Admin/Appointment.hst?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}'/>">&gt;</a>
+						</c:if>
+					</div>
 					</div>
 				</div>
 			</div>
