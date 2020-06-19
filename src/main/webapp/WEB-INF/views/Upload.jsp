@@ -77,8 +77,8 @@ input {
 .container {
 	background-color: #fff;
 	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-			0 10px 10px rgba(0,0,0,0.22);
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px
+		rgba(0, 0, 0, 0.22);
 	position: relative;
 	overflow: hidden;
 	width: 768px;
@@ -117,18 +117,25 @@ input {
 	animation: show 0.6s;
 }
 
-@keyframes show {
-	0%, 49.99% {
-		opacity: 0;
-		z-index: 1;
-	}
-	
-	50%, 100% {
-		opacity: 1;
-		z-index: 5;
-	}
+@
+keyframes show { 0%, 49.99% {
+	opacity: 0;
+	z-index: 1;
 }
 
+50%,
+100%
+{
+opacity
+:
+ 
+1;
+z-index
+:
+ 
+5;
+}
+}
 .overlay-container {
 	position: absolute;
 	top: 0;
@@ -140,7 +147,7 @@ input {
 	z-index: 100;
 }
 
-.container.right-panel-active .overlay-container{
+.container.right-panel-active .overlay-container {
 	transform: translateX(-100%);
 }
 
@@ -156,12 +163,12 @@ input {
 	left: -100%;
 	height: 100%;
 	width: 200%;
-  	transform: translateX(0);
+	transform: translateX(0);
 	transition: transform 0.6s ease-in-out;
 }
 
 .container.right-panel-active .overlay {
-  	transform: translateX(50%);
+	transform: translateX(50%);
 }
 
 .overlay-panel {
@@ -195,144 +202,155 @@ input {
 .container.right-panel-active .overlay-right {
 	transform: translateX(20%);
 }
-
-.file-upload {
-  background-color: #ffffff;
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
+<!--이미지 업로드-->
+.button_outer {
+	background: #83ccd3;
+	border-radius: 30px;
+	text-align: center;
+	height: 50px;
+	width: 200px;
+	display: inline-block;
+	transition: .2s;
+	position: relative;
+	overflow: hidden;
 }
 
-.file-upload-btn {
-  width: 100%;
-  margin: 0;
-  color: #fff;
-  background: #1FB264;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  border-bottom: 4px solid #15824B;
-  transition: all .2s ease;
-  outline: none;
-  text-transform: uppercase;
-  font-weight: 700;
+.btn_upload {
+	padding: 17px 30px 12px;
+	color: #fff;
+	text-align: center;
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	z-index: 3;
+	white-space: nowrap;
 }
 
-.file-upload-btn:hover {
-  background: #1AA059;
-  color: #ffffff;
-  transition: all .2s ease;
-  cursor: pointer;
+.btn_upload input {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 105%;
+	cursor: pointer;
+	opacity: 0;
 }
 
-.file-upload-btn:active {
-  border: 0;
-  transition: all .2s ease;
+.file_uploading {
+	width: 100%;
+	height: 10px;
+	margin-top: 20px;
+	background: #ccc;
 }
 
-.file-upload-content {
-  display: none;
-  text-align: center;
+.file_uploading .btn_upload {
+	display: none;
 }
 
-.file-upload-input {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  opacity: 0;
-  cursor: pointer;
+.processing_bar {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 100%;
+	border-radius: 30px;
+	background: #83ccd3;
+	transition: 3s;
 }
 
-.image-upload-wrap {
-  border: 1px solid #ff0000;
-  position: relative;
-  border-radius: 5%;
+.file_uploading .processing_bar {
+	width: 100%;
 }
 
-.image-dropping,
-.image-upload-wrap:hover {
-  background-color: #000000;
-  border: 4px solid #ffffff;
+.success_box {
+	display: none;
+	width: 50px;
+	height: 50px;
+	position: relative;
 }
 
-.image-title-wrap {
-  padding: 0 15px 15px 15px;
-  color: #222;
+.success_box:before {
+	content: '';
+	display: block;
+	width: 9px;
+	height: 18px;
+	border-bottom: 6px solid #fff;
+	border-right: 6px solid #fff;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: absolute;
+	left: 17px;
+	top: 10px;
 }
 
-.drag-text {
-  text-align: center;
+.file_uploaded .success_box {
+	display: inline-block;
 }
 
-.drag-text h3 {
-  font-weight: 100;
-  text-transform: uppercase;
-  color: #15824B;
-  padding: 60px 0;
+.file_uploaded {
+	margin-top: 0;
+	width: 50px;
+	background: #83ccd3;
+	height: 50px;
 }
 
-.file-upload-image {
-  max-height: 200px;
-  max-width: 200px;
-  margin: auto;
-  padding: 20px;
+.uploaded_file_view {
+	max-width: 300px;
+	margin: 40px auto;
+	text-align: center;
+	position: relative;
+	transition: .2s;
+	opacity: 0;
+	border: 2px solid #ddd;
+	padding: 15px;
 }
 
-.remove-image {
-  width: 200px;
-  margin: 0;
-  color: #fff;
-  background: #cd4535;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  border-bottom: 4px solid #b02818;
-  transition: all .2s ease;
-  outline: none;
-  text-transform: uppercase;
-  font-weight: 700;
+.file_remove {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: block;
+	position: absolute;
+	background: #aaa;
+	line-height: 30px;
+	color: #fff;
+	font-size: 12px;
+	cursor: pointer;
+	right: -15px;
+	top: -15px;
 }
 
-.remove-image:hover {
-  background: #c13b2a;
-  color: #ffffff;
-  transition: all .2s ease;
-  cursor: pointer;
+.file_remove:hover {
+	background: #222;
+	transition: .2s;
 }
 
-.remove-image:active {
-  border: 0;
-  transition: all .2s ease;
+.uploaded_file_view img {
+	max-width: 100%;
+}
+
+.uploaded_file_view.show {
+	opacity: 1;
+}
+
+.error_msg {
+	text-align: center;
+	color: #f00
 }
 </style>
 
 <div class="container" id="container">
 	<div class="form-container sign-in-container">
-		<form action="#">
+		<form enctype="multipart/form-data" action='<c:url value="/mapping/mapping.hst"/>' method="post">
 			<h1>처방전 등록</h1>
 			<span>처방전 사진을 등록하세요</span>
-			<div class="file-upload">
-				<div class="image-upload-wrap">
-					<input class="file-upload-input" type='file'
-						onchange="readURL(this);" accept="image/*" />
-					<div class="drag-text">
-						<i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
-					</div>
-				</div>
-				<div class="file-upload-content">
-					<img class="file-upload-image" src="#" alt="your image" />
-					<div class="image-title-wrap">
-						<button type="button" onclick="removeUpload()"
-							class="remove-image">
-							삭제 
-						</button>
-					</div>
-				</div>
-			</div>
-			<button>등록</button>
+			
+			<input type="file" name="filename"> Upload Image
+			
+			<input type="submit" value="등록">
 		</form>
 	</div>
 	<div class="form-container sign-up-container">
@@ -384,36 +402,30 @@ signInButton.addEventListener('click', () => {
 });
 
 
-function readURL(input) {
-	  if (input.files && input.files[0]) {
+var btnUpload = $("#upload_file"),
+btnOuter = $(".button_outer");
+btnUpload.on("change", function(e){
+	var ext = btnUpload.val().split('.').pop().toLowerCase();
+	if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+		$(".error_msg").text("Not an Image...");
+	} 
+	else {
+		$(".error_msg").text("");
+		btnOuter.addClass("file_uploading");
+		setTimeout(function(){
+			btnOuter.addClass("file_uploaded");
+		},3000);
+		var uploadedFile = URL.createObjectURL(e.target.files[0]);
+		setTimeout(function(){
+		$("#uploaded_view").append('<img src="'+uploadedFile+'" />').addClass("show");
+		},3500);
+}
+});
+$(".file_remove").on("click", function(e){
+	$("#uploaded_view").removeClass("show");
+	$("#uploaded_view").find("img").remove();
+	btnOuter.removeClass("file_uploading");
+	btnOuter.removeClass("file_uploaded");
+});
 
-	    var reader = new FileReader();
-
-	    reader.onload = function(e) {
-	      $('.image-upload-wrap').hide();
-
-	      $('.file-upload-image').attr('src', e.target.result);
-	      $('.file-upload-content').show();
-
-	      $('.image-title').html(input.files[0].name);
-	    };
-
-	    reader.readAsDataURL(input.files[0]);
-
-	  } else {
-	    removeUpload();
-	  }
-	}
-
-	function removeUpload() {
-	  $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-	  $('.file-upload-content').hide();
-	  $('.image-upload-wrap').show();
-	}
-	$('.image-upload-wrap').bind('dragover', function () {
-			$('.image-upload-wrap').addClass('image-dropping');
-		});
-		$('.image-upload-wrap').bind('dragleave', function () {
-			$('.image-upload-wrap').removeClass('image-dropping');
-	});
 </script>

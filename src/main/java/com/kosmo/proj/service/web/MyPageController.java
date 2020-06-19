@@ -1,5 +1,8 @@
 package com.kosmo.proj.service.web;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
 
@@ -8,7 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kosmo.proj.service.MemberDTO;
+import com.kosmo.proj.service.impl.MemberDAO;
 import com.kosmo.proj.service.impl.MemberServiceImpl;
 
 
@@ -24,7 +30,7 @@ public class MyPageController {
 	// 유저 페이지
 	/// 내정보
 	@RequestMapping("/mypage/mypage.hst")
-	public String mypage(Authentication auth,Model model) {
+	public String mypage(@RequestParam Map map,Authentication auth,Model model) {
 		if(auth == null) {
 			JOptionPane.showMessageDialog(null,"로그인후 이용해주세요.","홈스피탈",1);
 			return "member/Login.tiles";
@@ -32,9 +38,22 @@ public class MyPageController {
 		
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
+		System.out.println(id);
+		map.put("id", id);
 		
-		
-		
+		List<MemberDTO> list = memberDAO.selectList(map);
+		for(MemberDTO data :list) {
+		System.out.println(data.getMem_name());
+		System.out.println(data.getMem_email());
+		System.out.println(data.getMem_pwd());
+		System.out.println(data.getAge());
+		System.out.println(data.getTel());
+		System.out.println(data.getWeight());
+		System.out.println(data.getHeight());
+		System.out.println(data.getGender());
+		}
+		model.addAttribute("list", list);
+	
 		return "Mypage_Main.my_tiles";
 		
 	}

@@ -1,5 +1,7 @@
 package com.kosmo.proj.service;
 
+import java.util.Date;
+
 public class MemberDTO {
 	   private String mem_email;
 	   private String mem_pwd;
@@ -11,8 +13,9 @@ public class MemberDTO {
 	   private int weight;
 	   private String role;
 	   private int enable;
+	   private Date signup_date;
 
-	   public String getTel() {
+	public String getTel() {
 		return tel;
 		}
 		public void setTel(String tel) {
@@ -72,5 +75,11 @@ public class MemberDTO {
 	   public void setWeight(int weight) {
 	      this.weight = weight;
 	   }
+	   public Date getSignup_date() {
+		return signup_date;
+	}
+	public void setSignup_date(Date signup_date) {
+		this.signup_date = signup_date;
+	}
 
 }
