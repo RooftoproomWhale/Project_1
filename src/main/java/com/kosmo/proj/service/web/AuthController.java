@@ -27,6 +27,7 @@ public class AuthController {
 	public String login() {
 		return "member/Login.tiles";
 	}///////////login
+
 	
 	//로그인 여부 판단]
 	@RequestMapping(value="/Auth/IsLogin.bbs",produces = "text/html; charset=UTF-8")

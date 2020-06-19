@@ -35,19 +35,28 @@ a:hover, a:focus {
 	color: #9c88b9;
 	padding: 17px 40px 17px 65px;
 	background: #fff;
-	border: 1px solid #f3f3f3;
+	border: 2px solid #8C8C8C;
 	border-bottom: none;
 	position: relative;
 	transition: all 0.5s ease 0s;
+	
 }
 
 #accordion .panel-title a.collapsed {
 	background: #fafafa;
 	color: #959595;
+	
+}#accordion .panel-title a.collapsed{
+border: 2px solid #8C8C8C
 }
-
+.panel-body{border: 2px solid red;}
+.panel-body a{
+border: 1px solid 
+}
 #accordion .panel-title a.collapsed:hover {
 	color: #9c88b9;
+}
+.panel-heading{border: 2px solid #8C8C8C
 }
 
 #accordion .panel-title a:after, #accordion .panel-title a.collapsed:after {
@@ -94,14 +103,30 @@ a:hover, a:focus {
 #accordion .panel-body {
 	font-size: 14px;
 	color: #b7b7b7;
-	padding: 0 65px 15px;
+	padding: 7px 65px 15px;
 	line-height: 20px;
 	margin-left: 12px;
 	background: #fff;
-	border: 1px solid #f3f3f3;
-	border-top: none;
+    border: 1px solid #BDBDBD;
+    border-top: 2px solid #BDBDBD;
+  
+}
+.panel-group{
+    margin-top: 7px;
 }
 
+
+body {
+background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 68%, rgba(255, 206, 196, 0.5) 163%),linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%, rgba(239, 112, 138, 0.5) 40%),linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%, rgba(237, 106, 134, 0.5) 169%),linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%, rgba(247, 126, 132, 0.5) 43%); background-blend-mode: overlay,multiply,color,normal;}
+.contents{
+	background: white;
+	top: 100px;
+	left: 120px;
+	padding-bottom: 100px;}
+ @media (min-width: 992px){
+.col-md-offset-10 {
+    margin-left: 89.33333333%;
+}}
 </style>
 
 <head>
@@ -111,8 +136,8 @@ a:hover, a:focus {
 	<div class="container-fluid">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-8">
-			<div class="row" style="padding-top: 100px; padding-left: 70px;">
+		<div class="contents col-md-8">
+			<div class="row" style="padding-left: 70px;">
 				<div class="page-header">
 					<h2 style="color: blue">복약관리</h2>
 				</div>

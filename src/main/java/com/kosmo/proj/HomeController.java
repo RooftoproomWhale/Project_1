@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -18,6 +19,9 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,8 +53,25 @@ public class HomeController {
 	}
 
 	@RequestMapping("/Home/ToHomePage.hst")
-	public String toHome()
+	public String toHome(Authentication auth)
 	{
+		System.out.println(auth);
+		if(auth != null)
+		{
+			UserDetails userDetails = (UserDetails)auth.getPrincipal();
+			Collection authorities = userDetails.getAuthorities();
+			
+			for(Object authority:authorities)
+			{
+				System.out.println(((GrantedAuthority)authority).getAuthority());
+				if(((GrantedAuthority)authority).getAuthority().equals("ROLE_ADM"))
+				{
+					return "redirect:/Admin/Index.hst";
+				}
+			}
+		}
+		
+		
 		return "index.tiles";
 	}
 
@@ -161,25 +182,25 @@ public class HomeController {
 		return "Hospage_Main.hos_tiles";
 	}
 
-//	마이바티스test
-	@RequestMapping("/Member/select.hst")
-	public String memberSelect(Map map, Model model)
-	{
-		MemberDTO dto = memberService.selectOne(map);
-		System.out.println(dto);
-		String name = dto.getMem_name();
-		String email = dto.getMem_email();
-		String pwd = dto.getMem_pwd();
-		String gender = dto.getGender();
-		int age = dto.getAge();
-		String tel = dto.getTel();
-		int height = dto.getHeight();
-		int weight = dto.getWeight();
-		model.addAttribute("name", name);
-		model.addAttribute("age", age);
-		System.out.println("이메일: "+email + " 비밀번호:"+pwd + " 이름: "+ name + " 성별: "+ gender +" 나이: "+ age +" 번호: "+ tel +" 키: "+ height +" 몸무게: "+ weight);
-		return "SignUp.tiles";
-	}
+////	마이바티스test
+//	@RequestMapping("/Member/select.hst")
+//	public String memberSelect(Map map, Model model)
+//	{
+//		MemberDTO dto = memberService.selectOne(map);
+//		System.out.println(dto);
+//		String name = dto.getMem_name();
+//		String email = dto.getMem_email();
+//		String pwd = dto.getMem_pwd();
+//		String gender = dto.getGender();
+//		int age = dto.getAge();
+//		String tel = dto.getTel();
+//		int height = dto.getHeight();
+//		int weight = dto.getWeight();
+//		model.addAttribute("name", name);
+//		model.addAttribute("age", age);
+//		System.out.println("이메일: "+email + " 비밀번호:"+pwd + " 이름: "+ name + " 성별: "+ gender +" 나이: "+ age +" 번호: "+ tel +" 키: "+ height +" 몸무게: "+ weight);
+//		return "SignUp.tiles";
+//	}
 
 
 }

@@ -3,6 +3,7 @@ package com.kosmo.proj.service;
 import java.sql.Date;
 
 public class ReservationDTO {
+	private String MEM_NAME;
 	private String HOSP_NAME;
 	private int RESERV_NO;
 	private String HOSP_CODE;
@@ -12,19 +13,11 @@ public class ReservationDTO {
 	private String RES_TIME;
 	private Date APPLY_TIME;
 	private String SEL_SYMP;
-	private String MEM_NAME;
 	private String TEL;
 	private String gender;
 	private int age;
 	private String APPROVED;
 	
-	
-	public String getAPPROVED() {
-		return APPROVED;
-	}
-	public void setAPPROVED(String aPPROVED) {
-		APPROVED = aPPROVED;
-	}
 	public String getMEM_NAME() {
 		return MEM_NAME;
 	}
@@ -103,6 +96,11 @@ public class ReservationDTO {
 	public void setSEL_SYMP(String SEL_SYMP) {
 		this.SEL_SYMP = SEL_SYMP;
 	}
-	
+	public String getAPPROVED() {
+		return APPROVED;
+	}
+	public void setAPPROVED(String aPPROVED) {
+		APPROVED = aPPROVED;
+	}
 	
 }

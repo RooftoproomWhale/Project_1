@@ -43,10 +43,19 @@ public class CalendarController {
 		  jsonStr2 = mapper.writeValueAsString(list2); 
 		  }catch (JsonProcessingException
 		  e) { e.printStackTrace(); }
+		 String str="";
+		 if(jsonStr.equals("[]") || jsonStr2.equals("[]")) {
+			str = jsonStr;
+			if(str.equals("[]")) {
+				str = jsonStr2;
+			}
+		 }
+		 else{
 		 jsonStr = jsonStr.substring(0,jsonStr.length()-1);
 		 jsonStr2 = jsonStr2.substring(1);
-		
-		return jsonStr+","+jsonStr2;
+		 str = jsonStr+","+jsonStr2;
+		 }
+		return str;
 	}/////selectEventList  
 	
 	
@@ -55,7 +64,7 @@ public class CalendarController {
 	public String insertCalendar(@RequestParam Map map,HttpSession session) {
 		String id = session.getAttribute("").toString();
 		map.put("id",id);
-		
+		//insert into prescription VALUES(SEQ_PRESCRIPTION.nextval,#{},#{},#{],#{},#{});
 		
 		int result = calendarDAO.insert(map);
 		
@@ -74,7 +83,14 @@ public class CalendarController {
 	@RequestMapping(value="/Calendar/delete.hst")
 	@ResponseBody
 	public String deleteCalendar(@RequestParam Map map) {
-		int result = calendarDAO.delete(map);
+		int result;
+
+		if(map.get("type").equals("복용약등록")) {
+		result = calendarDAO.delete(map);
+		}
+		else {
+		result = calendarDAO.delete2(map);
+		}
 		return String.valueOf(result);
 	}///delete
 	
