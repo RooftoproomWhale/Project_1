@@ -21,13 +21,19 @@ public class CalendarDAO implements CalendarService {
 
 	@Override
 	public List<CalendarDTO> selectList(Map map) {
-		
-
-		
 		List<CalendarDTO> list = sqlMapper.selectList("calendarSelectList",map);
 
 		return list;
 	}
+	
+	@Override
+	public List<ReservationDTO> selectList2(Map map) {
+	
+		List<ReservationDTO> list = sqlMapper.selectList("calendarSelectList2",map);
+
+		return list;
+	}
+
 
 
 
@@ -49,16 +55,16 @@ public class CalendarDAO implements CalendarService {
 	public int delete(Map map) {
 		return sqlMapper.delete("calendarDelete",map);
 	}
-
-
-
 	@Override
-	public List<ReservationDTO> selectList2(Map map) {
-	
-		List<ReservationDTO> list = sqlMapper.selectList("calendarSelectList2",map);
+	public int delete2(Map map) {
 
-		return list;
+		return sqlMapper.delete("calendarDelete2",map);
 	}
+
+
+	
+
+
 
 	}
 

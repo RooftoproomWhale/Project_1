@@ -1,5 +1,6 @@
 package com.kosmo.proj.service.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -31,35 +32,30 @@ public class CalendarController {
 	public String ViewCalendar(@RequestParam Map map,Authentication auth) {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
-		 
 		 map.put("id",id); 
-		 System.out.println(id);
+	
 		 List<CalendarDTO> list = calendarDAO.selectList(map);
-		 System.out.println(list);
-		for(CalendarDTO date :list) {
-			System.out.println(date.getMedi_name());
-		}
-		
-		List<ReservationDTO> list2 = calendarDAO.selectList2(map);
-		System.out.println(list2);
-		for(ReservationDTO date :list2) {
-			System.out.println(date.getHOSP_NAME());
-			System.out.println(date.getDEPT_CODE());
-			System.out.println(date.getMEM_EMAIL());
-		}
-		
-		//title = 제품명 or 병원이름 
-		
-		
-		 ObjectMapper mapper = new ObjectMapper(); String jsonStr = null; 
+	List<ReservationDTO> list2 = calendarDAO.selectList2(map);
+	 ObjectMapper mapper = new ObjectMapper(); String jsonStr = null; 
+		 String jsonStr2 = null; 
 		 try {
 		  jsonStr = mapper.writeValueAsString(list); 
-		 
+		  jsonStr2 = mapper.writeValueAsString(list2); 
 		  }catch (JsonProcessingException
 		  e) { e.printStackTrace(); }
-		 
-		
-		return jsonStr;
+		 String str="";
+		 if(jsonStr == null || jsonStr2 ==null) {
+			str = jsonStr;
+			if(str == null) {
+				str = jsonStr2;
+			}
+		 }
+		 else{
+		 jsonStr = jsonStr.substring(0,jsonStr.length()-1);
+		 jsonStr2 = jsonStr2.substring(1);
+		 str = jsonStr+","+jsonStr2;
+		 }
+		return str;
 	}/////selectEventList  
 	
 	
@@ -68,7 +64,7 @@ public class CalendarController {
 	public String insertCalendar(@RequestParam Map map,HttpSession session) {
 		String id = session.getAttribute("").toString();
 		map.put("id",id);
-		
+		//insert into prescription VALUES(SEQ_PRESCRIPTION.nextval,#{},#{},#{],#{},#{});
 		
 		int result = calendarDAO.insert(map);
 		
@@ -87,7 +83,14 @@ public class CalendarController {
 	@RequestMapping(value="/Calendar/delete.hst")
 	@ResponseBody
 	public String deleteCalendar(@RequestParam Map map) {
-		int result = calendarDAO.delete(map);
+		int result;
+
+		if(map.get("type").equals("복용약등록")) {
+		result = calendarDAO.delete(map);
+		}
+		else {
+		result = calendarDAO.delete2(map);
+		}
 		return String.valueOf(result);
 	}///delete
 	

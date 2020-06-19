@@ -65,6 +65,7 @@ var calendar = $('#calendar').fullCalendar({
 	
 	themeSystem :'standard',
   eventRender: function (event, element, view) {
+
 	if(event.type=='병원예약'){
 		h = '예약날짜';
 		name ='환자';
@@ -86,7 +87,7 @@ var calendar = $('#calendar').fullCalendar({
      
       content: $('<div />', {
           class: 'popoverInfoCalendar'
-        }).append('<p><strong>'+name+':</strong> ' + event.username + '</p>')
+        }).append('<p><strong>'+name+':</strong> ' + event.mem_NAME + '</p>')
         .append('<p><strong>구분:</strong> ' + event.type + '</p>')
         .append('<p><strong>'+h+':</strong> ' + getDisplayEventDate(event) + '</p>')
         .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
@@ -143,8 +144,32 @@ var calendar = $('#calendar').fullCalendar({
       },
       success: function (response) {
     	  console.log(response);
-    	  console.log("테스트");
-//    	  console.log(response);
+    
+    	  response.forEach(el=>{
+    		if(el.count != null){
+    			
+    			el.backgroundColor = '#9775fa';
+    			el.title = el.medi_name;
+    			el.type = "복용약등록";
+    			el.start =  moment(el.pres_date).format('YYYY-MM-DD');
+    			var dates=new Date(el.start);
+    			el.end = moment(dates.setDate(dates.getDate()+el.duration)).format('YYYY-MM-DD');
+    		}
+    		else{
+    			el.backgroundColor = '#D25565';
+    			el.title = el.hosp_NAME;
+    			el.type="병원예약";
+    			el.start =el.res_DATE+" "+el.res_TIME; 
+    			el.apply_TIME = moment(el.apply_TIME).format('YYYY-MM-DD HH:mm');
+    		
+    		}
+    		console.log(el);
+    	  })
+    	  
+    	  
+    	  
+    	  
+    	  
         var fixedDate = response.map(function (array) {
           if (array.allDay && array.start !== array.end) {
             // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력

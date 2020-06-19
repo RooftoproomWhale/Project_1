@@ -29,27 +29,27 @@ a {
 	outline: none;
 }
 
-:root { -
-	-bg-color: #f5f8ff;; -
-	-main-color: #353536; -
-	-secondary-color: #8e92a4; -
-	-main-text-color: #5d606b; -
-	-secondary-dark-color: #9496a5; -
-	-tag-color-one: #e0fbf6; -
-	-tag-color-text-one: #58c2a9; -
-	-tag-color-two: #ece7fe; -
-	-tag-color-text-two: #8972f3; -
-	-tag-color-three: #fde7ea; -
-	-tag-color-text-three: #e77f89; -
-	-tag-color-four: #f7f8fc; -
-	-tag-color-text-four: #a0a6b5; -
-	-checkbox-color: #009e90; -
-	-button-color: #49beb7; -
-	-box-color: #fff1d6; -
-	-box-color-2: #d3e6ff; -
-	-box-color-3: #ffd9d9; -
-	-box-color-4: #daffe5; -
-	-task-color: #777982;
+:root {
+	- -bg-color: #f5f8ff;
+	- -main-color: #353536;
+	- -secondary-color: #8e92a4;
+	- -main-text-color: #5d606b;
+	- -secondary-dark-color: #9496a5;
+	- -tag-color-one: #e0fbf6;
+	- -tag-color-text-one: #58c2a9;
+	- -tag-color-two: #ece7fe;
+	- -tag-color-text-two: #8972f3;
+	- -tag-color-three: #fde7ea;
+	- -tag-color-text-three: #e77f89;
+	- -tag-color-four: #f7f8fc;
+	- -tag-color-text-four: #a0a6b5;
+	- -checkbox-color: #009e90;
+	- -button-color: #49beb7;
+	- -box-color: #fff1d6;
+	- -box-color-2: #d3e6ff;
+	- -box-color-3: #ffd9d9;
+	- -box-color-4: #daffe5;
+	- -task-color: #777982;
 }
 
 flex {
@@ -114,8 +114,7 @@ button {
 }
 .category-list {
 	margin-top: 50px;
-	.
-	item
+	.item
 	{
 	color
 	:
@@ -260,6 +259,7 @@ button {
 	transition: .4s ease-in;
 	padding: 20px;
 	cursor: pointer;
+	}
 #opt-1:checked + label ,
 #opt-2:checked +  label ,
 #opt-3:checked +  label ,
@@ -272,7 +272,7 @@ button {
 #opt-10:checked +  label,
 #opt-11:checked +  label {
   color: var(--checkbox-color);
-  border-bottom: 2px solid var(--checkbox-color);
+  border-bottom: 2px solid var(--yeckbox-color);
 }
 
 #opt-1:checked+label, #opt-2:checked+label, #opt-3:checked+label, #opt-4:checked+label

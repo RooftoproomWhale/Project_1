@@ -8,7 +8,14 @@
 	</select>
 	
 	<select id="calendarSelectList2" parameterType="java.util.Map" resultType="reservationDTO">
-		select h.hosp_name, r.* from reservation r join hospital h on r.hosp_code = h.hosp_code where mem_email = #{id}
+		
+		select m.mem_name,h.hosp_name, r.* from member m join reservation r on m.mem_email = r.mem_email join hospital h on r.hosp_code = h.hosp_code where m.mem_email = #{id}
 	</select>
 	
+	<delete id="calendarDelete" parameterType="java.util.Map">
+		delete prescription WHERE pre_no= #{no}
+	</delete>
+	<delete id="calendarDelete2" parameterType="java.util.Map">
+		delete reservation WHERE reserv_no= #{no}
+	</delete>
 </mapper>

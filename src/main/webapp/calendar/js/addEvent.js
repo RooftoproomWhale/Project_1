@@ -13,7 +13,7 @@ var editStart = $('input[name="edit-start"]');
 var editEnd =  $('input[name="edit-end"]');
 var editType = $("select[name='edit-type'] ");
 var editDesc = $('#edit-desc');
-
+var apply_time = $("#apply_time");
 var addBtnContainer = $('.modalBtnContainer-addEvent');
 var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
 
@@ -86,7 +86,7 @@ var newEvent = function (start, end, eventType) {
             _id: eventId,
         	
             title: editTitles,
-
+            
             start: editStarts,
             end: editEnds,
             description: editDesc.val(),
