@@ -5,7 +5,7 @@
 <style>
 #sidebar-collapse{
 	box-shadow: 0 20px 30px #333;
-	height: 500px;
+	height: 850px;
 }
 </style>
 

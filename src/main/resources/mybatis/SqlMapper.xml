@@ -115,7 +115,7 @@
 
 	<!-- 사용자 관리 -->
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM MEMBER
+		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
 	</select>
 	<select id="selectMemberListUser" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT * FROM MEMBER WHERE ROLE='ROLE_MEM'
