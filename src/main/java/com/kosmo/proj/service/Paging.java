@@ -105,7 +105,6 @@ public class Paging {
 			this.id = id;
 		}
 		
-		
 		@Override
 		public String toString() {
 			return "Paging [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total

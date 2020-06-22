@@ -92,23 +92,23 @@ padding-bottom: 150px}
                                 </tr>
                                 <tr>
                                     <td>핸드폰 번호</td>
-                                    <td>010-1234-7586</td>
+                                    <td>${list[0]['tel']}</td>
                                 </tr>
                                 <tr>
                                     <td>성별</td>
-                                    <td>남성</td>
+                                    <td>${list[0]['gender'] }</td>
                                 </tr>
                                 <tr>
                                     <td>나이</td>
-                                    <td>27</td>
+                                    <td>${list[0]['age'] }</td>
                                 </tr>
                                 <tr>
                                     <td>키</td>
-                                    <td>177(cm)</td>
+                                    <td>${list[0]['height'] }cm</td>
                                 </tr>
                                 <tr>
                                     <td>몸무게</td>
-                                    <td>74(kg)</td>
+                                    <td>${list[0]['weight'] }kg</td>
                                 </tr>
                     
                             </tbody>

@@ -29,6 +29,203 @@ $(function() {
 			} 
 	       
 	    });
+	
+	$.ajax({
+	    url:"<c:url value='/Admin/RecentChart.hst'/>",
+	    type:'get',
+	    datatype:'html',
+	    data:{},
+	    beforeSend: function () {
+	       console.log("beforeSend");
+//	        FunLoadingBarStart();
+	    },
+	    complete: function () {
+	       console.log("complete");
+//	        FunLoadingBarEnd();
+	    },
+	    success:function(data){
+//	        console.log(data);
+	       console.log("연결성공", typeof(data));
+	       try {
+	    	   	var janMemCount = $('#janMemCount').val();
+	    	   	var febMemCount = $('#febMemCount').val();
+	    	   	var marMemCount = $('#marMemCount').val();
+	    	   	var aprMemCount = $('#aprMemCount').val();
+	    	   	var mayMemCount = $('#mayMemCount').val();
+	    	   	var junMemCount = $('#junMemCount').val();
+	    	   	var julMemCount = $('#julMemCount').val();
+	    	   	
+	    	   	var janAptCount = $('#janAptCount').val();
+	    	   	var febAptCount = $('#febAptCount').val();
+	    	   	var marAptCount = $('#marAptCount').val();
+	    	   	var aprAptCount = $('#aprAptCount').val();
+	    	   	var mayAptCount = $('#mayAptCount').val();
+	    	   	var junAptCount = $('#junAptCount').val();
+	    	   	var julAptCount = $('#julAptCount').val();
+	    	    // Recent Report 2
+	    	    const bd_brandProduct2 = 'rgba(0,181,233,0.9)'
+	    	    const bd_brandService2 = 'rgba(0,173,95,0.9)'
+	    	    const brandProduct2 = 'rgba(0,181,233,0.2)'
+	    	    const brandService2 = 'rgba(0,173,95,0.2)'
+
+	    	    var data3 = [janMemCount, febMemCount, marMemCount, aprMemCount, mayMemCount, junMemCount, julMemCount, ""]
+	    	    var data4 = [janAptCount, febAptCount, marAptCount, aprAptCount, mayAptCount, junAptCount, julAptCount, ""]
+
+	    	    var ctx = document.getElementById("recentChart");
+	    	    if (ctx) {
+	    	      ctx.height = 230;
+	    	      var myChart = new Chart(ctx, {
+	    	        type: 'line',
+	    	        data: {
+	    	          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', ''],
+	    	          datasets: [
+	    	            {
+	    	              label: '예약 수',
+	    	              backgroundColor: brandService2,
+	    	              borderColor: bd_brandService2,
+	    	              pointHoverBackgroundColor: '#fff',
+	    	              borderWidth: 0,
+	    	              data: data3
+	    	            },
+	    	            {
+	    	              label: '회원 수',
+	    	              backgroundColor: brandProduct2,
+	    	              borderColor: bd_brandProduct2,
+	    	              pointHoverBackgroundColor: '#fff',
+	    	              borderWidth: 0,
+	    	              data: data4
+	    	            }
+	    	          ]
+	    	        },
+	    	        options: {
+	    	          maintainAspectRatio: true,
+	    	          legend: {
+	    	            display: false
+	    	          },
+	    	          responsive: true,
+	    	          scales: {
+	    	            xAxes: [{
+	    	              gridLines: {
+	    	                drawOnChartArea: true,
+	    	                color: '#f2f2f2'
+	    	              },
+	    	              ticks: {
+	    	                fontFamily: "Poppins",
+	    	                fontSize: 12
+	    	              }
+	    	            }],
+	    	            yAxes: [{
+	    	              ticks: {
+	    	                beginAtZero: true,
+	    	                maxTicksLimit: 1,
+	    	                stepSize: 10,
+	    	                max: 50,
+	    	                fontFamily: "Poppins",
+	    	                fontSize: 12
+	    	              },
+	    	              gridLines: {
+	    	                display: true,
+	    	                color: '#f2f2f2'
+	    	              }
+	    	            }]
+	    	          },
+	    	          elements: {
+	    	            point: {
+	    	              radius: 0,
+	    	              hitRadius: 10,
+	    	              hoverRadius: 4,
+	    	              hoverBorderWidth: 3
+	    	            },
+	    	            line: {
+	    	              tension: 0
+	    	            }
+	    	          }
+	    	        }
+	    	      });
+	    	    }
+	    	  } catch (error) {
+	    	    console.log(error);
+	    	  }
+	    }
+	});
+	
+	//Age Chart
+	$.ajax({
+	    url:"<c:url value='/Admin/AgeChart.hst'/>",
+	    type:'get',
+	    datatype:'html',
+	    data:{},
+	    beforeSend: function () {
+	       console.log("beforeSend");
+//	        FunLoadingBarStart();
+	    },
+	    complete: function () {
+	       console.log("complete");
+//	        FunLoadingBarEnd();
+	    },
+	    success:function(data){
+//	        console.log(data);
+	       console.log("연결성공", typeof(data));
+	       try {
+	    	    //pie chart
+	    	    var ctx = document.getElementById("ageChart");
+	    	    var under10 = $('#under10').val();
+	    	    var over10under20 = $('#over10under20').val();
+	    	    var over20under30 = $('#over20under30').val();
+	    	    var over30under40 = $('#over30under40').val();
+	    	    var over40under50 = $('#over40under50').val();
+	    	    var over50under60 = $('#over50under60').val();
+	    	    var over60 = $('#over60').val();
+	    	    if (ctx) {
+	    	      ctx.height = 200;
+	    	      var myChart = new Chart(ctx, {
+	    	        type: 'pie',
+	    	        data: {
+	    	          datasets: [{
+	    	            data: [under10, over10under20, over20under30, over30under40, over40under50, over50under60, over60],
+	    	            backgroundColor: [
+	    	              "rgba(0, 123, 255,0.9)",
+	    	              "rgba(0, 123, 255,0.8)",
+	    	              "rgba(0, 123, 255,0.7)",
+	    	              "rgba(0, 123, 255,0.6)",
+	    	              "rgba(0, 123, 255,0.5)",
+	    	              "rgba(0, 123, 255,0.4)",
+	    	              "rgba(0, 123, 255,0.3)",
+	    	              "rgba(0,0,0,0.07)"
+	    	            ],
+	    	            hoverBackgroundColor: [
+	    	              "rgba(0, 123, 255,0.9)",
+	    	              "rgba(0, 123, 255,0.7)",
+	    	              "rgba(0, 123, 255,0.5)",
+	    	              "rgba(0,0,0,0.07)"
+	    	            ]
+	    	          }],
+	    	          labels: [
+	    	            "10세 이하",
+	    	            "10대",
+	    	            "20대",
+	    	            "30대",
+	    	            "40대",
+	    	            "50대",
+	    	            "60세 이상"
+	    	          ]
+	    	        },
+	    	        options: {
+	    	          legend: {
+	    	            position: 'top',
+	    	            labels: {
+	    	              fontFamily: 'Poppins'
+	    	            }
+	    	          },
+	    	          responsive: true
+	    	        }
+	    	      });
+	    	    }
+	    	  } catch (error) {
+	    	    console.log(error);
+	    	  }
+	    }
+	});
 });
 </script>
 
@@ -95,7 +292,7 @@ $(function() {
                             <div class="col-md-12">
                             <div class="overview-wrap">
                                     <h2 class="title-1">overview</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue" onClick="location.href='<c:url value='/Admin/Notice.hst'/>'">
+                                    <button class="au-btn au-btn-icon au-btn--blue" onClick="location.href='<c:url value='/Admin/NoticeWrite.hst'/>'">
                                         <i class="zmdi zmdi-plus"></i>공지작성</button>
                                 </div>
                             </div>
@@ -160,20 +357,35 @@ $(function() {
                                 <!-- RECENT REPORT 2-->
                                 <div class="recent-report2">
                                     <h3 class="title-3">Recent Increase</h3>
-                                    <div class="chart-info">
-                                        <div class="chart-info__left">
-                                            <div class="chart-note">
-                                                <span class="dot dot--blue"></span>
-                                                <span>Members</span>
-                                            </div>
-                                            <div class="chart-note">
-                                                <span class="dot dot--green"></span>
-                                                <span>Appointments</span>
-                                            </div>
-                                        </div>
-                                    </div>
+<!--                                     <div class="chart-info"> -->
+<!--                                         <div class="chart-info__left"> -->
+<!--                                             <div class="chart-note"> -->
+<!--                                                 <span class="dot dot--blue"></span> -->
+<!--                                                 <span>Members</span> -->
+<!--                                             </div> -->
+<!--                                             <div class="chart-note"> -->
+<!--                                                 <span class="dot dot--green"></span> -->
+<!--                                                 <span>Appointments</span> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
                                     <div class="recent-report__chart">
-                                        <canvas id="recent-rep2-chart"></canvas>
+                                    <input type="hidden" value="${janMemCount }" id="janMemCount"/>
+                                    <input type="hidden" value="${febMemCount }" id="febMemCount"/>
+                                    <input type="hidden" value="${marMemCount }" id="marMemCount"/>
+                                    <input type="hidden" value="${aprMemCount }" id="aprMemCount"/>
+                                    <input type="hidden" value="${mayMemCount }" id="mayMemCount"/>
+                                    <input type="hidden" value="${junMemCount }" id="junMemCount"/>
+                                    <input type="hidden" value="${julMemCount }" id="julMemCount"/>
+                                    
+                                    <input type="hidden" value="${janAptCount }" id="janAptCount"/>
+                                    <input type="hidden" value="${febAptCount }" id="febAptCount"/>
+                                    <input type="hidden" value="${marAptCount }" id="marAptCount"/>
+                                    <input type="hidden" value="${aprAptCount }" id="aprAptCount"/>
+                                    <input type="hidden" value="${mayAptCount }" id="mayAptCount"/>
+                                    <input type="hidden" value="${junAptCount }" id="junAptCount"/>
+                                    <input type="hidden" value="${julAptCount }" id="julAptCount"/>
+                                        <canvas id="recentChart"></canvas>
                                     </div>
                                 </div>
                                 <!-- END RECENT REPORT 2             -->
@@ -200,7 +412,14 @@ $(function() {
                             	<div class="au-card m-b-30">
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-40">User Groups</h3>
-                                        <canvas id="pieChart"></canvas>
+                                        <input type="hidden" value="${under10 }" id="under10"/>
+                                        <input type="hidden" value="${over10under20 }" id="over10under20"/>
+                                        <input type="hidden" value="${over20under30 }" id="over20under30"/>
+                                        <input type="hidden" value="${over30under40 }" id="over30under40"/>
+                                        <input type="hidden" value="${over40under50 }" id="over40under50"/>
+                                        <input type="hidden" value="${over50under60 }" id="over50under60"/>
+                                        <input type="hidden" value="${over60 }" id="over60"/>
+                                        <canvas id="ageChart"></canvas>
                                     </div>
                                 </div>
                             </div>

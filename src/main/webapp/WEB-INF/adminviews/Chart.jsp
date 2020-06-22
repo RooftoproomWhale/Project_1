@@ -22,50 +22,105 @@ $.ajax({
 //        console.log(data);
        console.log("연결성공", typeof(data));
        try {
-   	    //pie chart
-   	    var ctx = document.getElementById("genderChart");
-//    	    var male = document.getElementById("maleCount").value;
-//    	   	var female = document.getElementById("femaleCount").value;
-		var male= $('#maleCount').val();
-		var female= $('#femaleCount').val();
-   	   	console.log(genderChart + male + female);
-   	    if (ctx) {
-   	      ctx.height = 200;
-   	      var myChart = new Chart(ctx, {
-   	        type: 'pie',
-   	        data: {
-   	          datasets: [{
-   	            data: [male, female],
-   	            backgroundColor: [
-   	              "rgba(0, 123, 255,0.9)",
-   	              "rgba(255, 82, 122,0.7)"
-   	            ],
-   	            hoverBackgroundColor: [
-   	              "rgba(0, 123, 255,0.9)",
-   	              "rgba(255, 82, 122,0.7)"
-   	            ]
+    	   	var janMemCount = $('#janMemCount').val();
+    	   	var febMemCount = $('#febMemCount').val();
+    	   	var marMemCount = $('#marMemCount').val();
+    	   	var aprMemCount = $('#aprMemCount').val();
+    	   	var mayMemCount = $('#mayMemCount').val();
+    	   	var junMemCount = $('#junMemCount').val();
+    	   	var julMemCount = $('#julMemCount').val();
+    	   	
+    	   	var janAptCount = $('#janAptCount').val();
+    	   	var febAptCount = $('#febAptCount').val();
+    	   	var marAptCount = $('#marAptCount').val();
+    	   	var aprAptCount = $('#aprAptCount').val();
+    	   	var mayAptCount = $('#mayAptCount').val();
+    	   	var junAptCount = $('#junAptCount').val();
+    	   	var julAptCount = $('#julAptCount').val();
+    	    // Recent Report 2
+    	    const bd_brandProduct2 = 'rgba(0,181,233,0.9)'
+    	    const bd_brandService2 = 'rgba(0,173,95,0.9)'
+    	    const brandProduct2 = 'rgba(0,181,233,0.2)'
+    	    const brandService2 = 'rgba(0,173,95,0.2)'
 
-   	          }],
-   	          labels: [
-   	            "남",
-   	            "녀"
-   	          ]
-   	        },
-   	        options: {
-   	          legend: {
-   	            position: 'top',
-   	            labels: {
-   	              fontFamily: 'Poppins'
-   	            }
+    	    var data3 = [janMemCount, febMemCount, marMemCount, aprMemCount, mayMemCount, junMemCount, julMemCount, ""]
+    	    var data4 = [janAptCount, febAptCount, marAptCount, aprAptCount, mayAptCount, junAptCount, julAptCount, ""]
 
-   	          },
-   	          responsive: true
-   	        }
-   	      });
-   	    }
-   	  } catch (error) {
-   	    console.log(error);
-   	  }
+    	    var ctx = document.getElementById("recentChart");
+    	    if (ctx) {
+    	      ctx.height = 230;
+    	      var myChart = new Chart(ctx, {
+    	        type: 'line',
+    	        data: {
+    	          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', ''],
+    	          datasets: [
+    	            {
+    	              label: '예약 수',
+    	              backgroundColor: brandService2,
+    	              borderColor: bd_brandService2,
+    	              pointHoverBackgroundColor: '#fff',
+    	              borderWidth: 0,
+    	              data: data3
+    	            },
+    	            {
+    	              label: '회원 수',
+    	              backgroundColor: brandProduct2,
+    	              borderColor: bd_brandProduct2,
+    	              pointHoverBackgroundColor: '#fff',
+    	              borderWidth: 0,
+    	              data: data4
+    	            }
+    	          ]
+    	        },
+    	        options: {
+    	          maintainAspectRatio: true,
+    	          legend: {
+    	            display: false
+    	          },
+    	          responsive: true,
+    	          scales: {
+    	            xAxes: [{
+    	              gridLines: {
+    	                drawOnChartArea: true,
+    	                color: '#f2f2f2'
+    	              },
+    	              ticks: {
+    	                fontFamily: "Poppins",
+    	                fontSize: 12
+    	              }
+    	            }],
+    	            yAxes: [{
+    	              ticks: {
+    	                beginAtZero: true,
+    	                maxTicksLimit: 1,
+    	                stepSize: 10,
+    	                max: 50,
+    	                fontFamily: "Poppins",
+    	                fontSize: 12
+    	              },
+    	              gridLines: {
+    	                display: true,
+    	                color: '#f2f2f2'
+    	              }
+    	            }]
+    	          },
+    	          elements: {
+    	            point: {
+    	              radius: 0,
+    	              hitRadius: 10,
+    	              hoverRadius: 4,
+    	              hoverBorderWidth: 3
+    	            },
+    	            line: {
+    	              tension: 0
+    	            }
+    	          }
+    	        }
+    	      });
+    	    }
+    	  } catch (error) {
+    	    console.log(error);
+    	  }
     }
 });
 
@@ -109,7 +164,6 @@ $.ajax({
    	              "rgba(0, 123, 255,0.9)",
    	              "rgba(255, 82, 122,0.7)"
    	            ]
-
    	          }],
    	          labels: [
    	            "남",
@@ -122,7 +176,6 @@ $.ajax({
    	            labels: {
    	              fontFamily: 'Poppins'
    	            }
-
    	          },
    	          responsive: true
    	        }
@@ -184,7 +237,6 @@ $.ajax({
     	              "rgba(0, 123, 255,0.5)",
     	              "rgba(0,0,0,0.07)"
     	            ]
-
     	          }],
     	          labels: [
     	            "10세 이하",
@@ -202,7 +254,6 @@ $.ajax({
     	            labels: {
     	              fontFamily: 'Poppins'
     	            }
-
     	          },
     	          responsive: true
     	        }
@@ -237,19 +288,34 @@ $.ajax({
                                                 <span>Appointments</span>
                                             </div>
                                         </div>
-                                        <div class="chart-info-right">
-                                            <div class="rs-select2--dark rs-select2--md m-r-10">
-                                                <select class="js-select2" name="property">
-                                                    <option selected="selected">All Properties</option>
-                                                    <option value="">Members</option>
-                                                    <option value="">Appointments</option>
-                                                </select>
-                                                <div class="dropDownSelect2"></div>
-                                            </div>
-                                        </div>
+<!--                                         <div class="chart-info-right"> -->
+<!--                                             <div class="rs-select2--dark rs-select2--md m-r-10"> -->
+<!--                                                 <select class="js-select2" name="property"> -->
+<!--                                                     <option selected="selected">All Properties</option> -->
+<!--                                                     <option value="">Members</option> -->
+<!--                                                     <option value="">Appointments</option> -->
+<!--                                                 </select> -->
+<!--                                                 <div class="dropDownSelect2"></div> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
                                     </div>
                                     <div class="recent-report__chart">
-                                        <canvas id="recent-rep2-chart"></canvas>
+                                    <input type="hidden" value="${janMemCount }" id="janMemCount"/>
+                                    <input type="hidden" value="${febMemCount }" id="febMemCount"/>
+                                    <input type="hidden" value="${marMemCount }" id="marMemCount"/>
+                                    <input type="hidden" value="${aprMemCount }" id="aprMemCount"/>
+                                    <input type="hidden" value="${mayMemCount }" id="mayMemCount"/>
+                                    <input type="hidden" value="${junMemCount }" id="junMemCount"/>
+                                    <input type="hidden" value="${julMemCount }" id="julMemCount"/>
+                                    
+                                    <input type="hidden" value="${janAptCount }" id="janAptCount"/>
+                                    <input type="hidden" value="${febAptCount }" id="febAptCount"/>
+                                    <input type="hidden" value="${marAptCount }" id="marAptCount"/>
+                                    <input type="hidden" value="${aprAptCount }" id="aprAptCount"/>
+                                    <input type="hidden" value="${mayAptCount }" id="mayAptCount"/>
+                                    <input type="hidden" value="${junAptCount }" id="junAptCount"/>
+                                    <input type="hidden" value="${julAptCount }" id="julAptCount"/>
+                                        <canvas id="recentChart"></canvas>
                                     </div>
                                 </div>
                                 <!-- END RECENT REPORT 2             -->

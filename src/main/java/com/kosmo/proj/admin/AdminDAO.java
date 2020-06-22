@@ -238,5 +238,89 @@ public class AdminDAO implements AdminService {
 		// TODO Auto-generated method stub
 		return sqlMapper.delete("", map);
 	}
+
+	@Override
+	public int janMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("janMemCount");
+	}
+
+	@Override
+	public int febMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("febMemCount");
+	}
+
+	@Override
+	public int marMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("marMemCount");
+	}
+
+	@Override
+	public int aprMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("aprMemCount");
+	}
+
+	@Override
+	public int mayMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("mayMemCount");
+	}
+
+	@Override
+	public int junMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("junMemCount");
+	}
+
+	@Override
+	public int julMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("julMemCount");
+	}
+
+	@Override
+	public int janAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("janAptCount");
+	}
+
+	@Override
+	public int febAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("febAptCount");
+	}
+
+	@Override
+	public int marAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("marAptCount");
+	}
+
+	@Override
+	public int aprAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("aprAptCount");
+	}
+
+	@Override
+	public int mayAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("mayAptCount");
+	}
+
+	@Override
+	public int junAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("junAptCount");
+	}
+
+	@Override
+	public int julAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("julAptCount");
+	}
 	
 }

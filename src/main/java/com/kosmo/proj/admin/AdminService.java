@@ -19,6 +19,24 @@ public interface AdminService {
 		int hospCount();
 		int presCount();
 		int aptCount();
+		
+		//recent chart
+		int janMemCount();
+		int febMemCount();
+		int marMemCount();
+		int aprMemCount();
+		int mayMemCount();
+		int junMemCount();
+		int julMemCount();
+		
+		int janAptCount();
+		int febAptCount();
+		int marAptCount();
+		int aprAptCount();
+		int mayAptCount();
+		int junAptCount();
+		int julAptCount();
+		
 		//gender chart
 		int maleCount();
 		int femaleCount();
@@ -63,6 +81,5 @@ public interface AdminService {
 		int updateNotice(Map map);
 		//List<NoticeDTO> viewNotice(Map map);
 		int deleteNotice(Map map);
-	
-		
+
 }
