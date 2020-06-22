@@ -64,4 +64,9 @@ public class MemberDAO implements MemberService {
 			return sqlMapper.update("signUpdate", map);
 		}
 
+		public int diseaseupdate(Map map) {
+			
+			return sqlMapper.update("diseaseupdate",map);
+		}
+
 }
