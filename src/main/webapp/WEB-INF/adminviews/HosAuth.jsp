@@ -87,9 +87,9 @@ $(function() {
 				async: true, // true:비동기, false:동기 
 				success: function(data){
 					console.log('성공');
-					
-					window.location.href = "<c:url value='/Admin/HosAuth.hst?nowPage='/>";
-					
+					var newUrl = window.location.href;
+					console.log(newUrl);
+					window.location.href = newUrl;
 				},
 				error:function(request,status,error){
 					console.log('실패');
@@ -115,8 +115,9 @@ $(".table-data-feature .item:last-child").on('click', function(){
 			success: function(data){ 
 // 				console.log(data);
 					console.log('성공');
-					window.location.href = "<c:url value='/Admin/HosAuth.hst'/>";
-					console.log('실패ddwa');
+					var newUrl = window.location.href;
+					console.log(newUrl);
+					window.location.href = newUrl;
 			},
 			error:function(request,status,error){
 				console.log("에러");
@@ -139,11 +140,10 @@ $(".table-data-feature .item:last-child").on('click', function(){
 			async: true, // true:비동기, false:동기 
 			success: function(data){ 
 				console.log(data);
-					console.log('성공');
-					var renewURL = location.href;
-					history.pushState(null, null, renewURL);
-// 					window.location.href = "<c:url value='/Admin/HosAuthSearchNew.hst'/>";
-// 					location.reload(true);
+					console.log('성공', keyword);
+// 					window.location.href = newUrl;
+// 					var renewURL = location.href;
+					window.location.href = "<c:url value='/Admin/HosAuthSearch.hst?search_keyword="+keyword+"'/>";
 			},
 			error:function(request,status,error){
 				console.log("에러");
@@ -253,9 +253,6 @@ $(".table-data-feature .item:last-child").on('click', function(){
 									</table>
 								</div>
 								<!-- END DATA TABLE -->
-							</div>
-							<div class="row">
-								<div class="col-md-12 text-center">${pagingString}</div>
 							</div>
 						</div>
 					</div>

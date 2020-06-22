@@ -54,14 +54,30 @@ public class AdminController {
 	
 	//회원 관리
 	@RequestMapping("Accounts.hst")
-	public String toAccounts(@RequestParam Map map, Model model)
+	public String toAccounts(@RequestParam Map map, Paging vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
-		List<MemberDTO> list =adminService.selectList_All(map);
+		int total = adminService.getTotalRecordAppointment(map);
+		System.out.println(total);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		List<MemberDTO> list =adminService.selectList_All(vo);
 		for(MemberDTO val:list)
 		{
 			System.out.println(val.getMem_name());
 		}
+		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
+		
 		return "Accounts.ad_tiles";
 	}
 	
@@ -134,7 +150,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping("AccountsSearch.hst")
-	public String accountsSearch(@RequestParam Map map, Model model)
+	public String accountsSearch(@RequestParam Map map, Paging vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
 		List<MemberDTO> list =adminService.selectList_Account_Search(map);
 		for(MemberDTO val:list)
@@ -143,14 +161,29 @@ public class AdminController {
 			System.out.println(val.getMem_name());
 		}
 		model.addAttribute("list", list);
+		
 		return "Accounts.ad_tiles";
 	}
 	
 	//예약 관리
 	@RequestMapping("Appointment.hst")
-	public String toAppointment(@RequestParam Map map, Model model)
+	public String toAppointment(@RequestParam Map map, Paging vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
-		List<ReservationDTO> list =adminService.selectList_Apt_All(map);
+		int total = adminService.getTotalRecordAppointment(map);
+		System.out.println(total);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		List<ReservationDTO> list =adminService.selectList_Apt_All(vo);
 		for(ReservationDTO val:list)
 		{
 			System.out.println(val.getHOSP_NAME());
@@ -158,6 +191,7 @@ public class AdminController {
 			System.out.println(val.getMEM_EMAIL());
 			System.out.println(val.getAPPROVED());
 		}
+		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
 		
 		return "Appointment.ad_tiles";

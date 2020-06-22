@@ -26,9 +26,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<MemberDTO> selectList_All(Map map) {
+	public List<MemberDTO> selectList_All(Paging vo) {
 		// TODO Auto-generated method stub
-		return dao.selectList_All(map);
+		return dao.selectList_All(vo);
 	}
 	
 	@Override
@@ -62,9 +62,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<ReservationDTO> selectList_Apt_All(Map map) {
+	public List<ReservationDTO> selectList_Apt_All(Paging vo) {
 		// TODO Auto-generated method stub
-		return dao.selectList_Apt_All(map);
+		return dao.selectList_Apt_All(vo);
 	}
 
 	@Override

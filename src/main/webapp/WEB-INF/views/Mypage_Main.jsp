@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,13 +81,14 @@ padding-bottom: 150px}
                     <div class="table-responsive">
                         <table class="table table-top-campaign">
                             <tbody>
+                           
                                 <tr>
                                     <td>이름</td>
-                                    <td>윤성준</td>
+                                    <td>${list[0]['mem_name']}</td>
                                 </tr>
                                 <tr>
                                     <td>이메일</td>
-                                    <td>busu0423@gmail.com</td>
+                                    <td>${list[0]['mem_email']}</td>
                                 </tr>
                                 <tr>
                                     <td>핸드폰 번호</td>
@@ -108,6 +110,7 @@ padding-bottom: 150px}
                                     <td>몸무게</td>
                                     <td>74(kg)</td>
                                 </tr>
+                    
                             </tbody>
                         </table>
                     </div>
