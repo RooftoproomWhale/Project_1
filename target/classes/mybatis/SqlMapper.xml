@@ -263,7 +263,7 @@
 		FROM (
 			SELECT ROWNUM RN, A.* 
 				FROM (
-						SELECT H.*, R.* FROM RESERVATION R JOIN HOSPITAL H ON R.HOSP_CODE = H.HOSP_CODE
+						SELECT H.*, r.apply_time, r.approved, r.dept_code, r.mem_email, r.res_date, r.res_time, r.reserv_no, r.sel_symp FROM RESERVATION R JOIN HOSPITAL H ON R.HOSP_CODE = H.HOSP_CODE
 						) A
 				)
 		WHERE RN BETWEEN #{start} AND #{end}

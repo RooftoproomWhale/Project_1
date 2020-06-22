@@ -243,6 +243,7 @@ public class AdminController {
 			System.out.println(val.getRESERV_NO());
 			System.out.println(val.getMEM_EMAIL());
 			System.out.println(val.getAPPROVED());
+			System.out.println(val.getAPPLY_TIME());
 		}
 		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);

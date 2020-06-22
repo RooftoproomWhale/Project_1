@@ -81,7 +81,7 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href='<c:url value="/Homespital/Notice.hst"/>'>Notice</a></li>
+				<li><a href='<c:url value="/Admin/Notice.hst"/>'>Notice</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Services <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국 찾기</a></li>
