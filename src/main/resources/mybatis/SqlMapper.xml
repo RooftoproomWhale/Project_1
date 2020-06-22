@@ -91,6 +91,7 @@
 		FROM pharmacy p) disData
 		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
 	</select>
+	
 <!-- 페이징 -->
 	<select id="countRecordHosAuth" resultType="int">
 		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
@@ -145,6 +146,50 @@
 	</select>
 	<select id="over60" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ > ]]> 60
+	</select>
+	
+	<select id="janMemCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-01-01','YYYY-MM-DD') AND TO_DATE('2020-02-01','YYYY-MM-DD')
+	</select>
+	<select id="febMemCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-02-01','YYYY-MM-DD') AND TO_DATE('2020-03-01','YYYY-MM-DD')
+	</select>
+	<select id="marMemCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-03-01','YYYY-MM-DD') AND TO_DATE('2020-04-01','YYYY-MM-DD')
+	</select>
+	<select id="aprMemCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-04-01','YYYY-MM-DD') AND TO_DATE('2020-05-01','YYYY-MM-DD')
+	</select>
+	<select id="mayMemCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-05-01','YYYY-MM-DD') AND TO_DATE('2020-06-01','YYYY-MM-DD')
+	</select>
+	<select id="junMemCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-06-01','YYYY-MM-DD') AND TO_DATE('2020-07-01','YYYY-MM-DD')
+	</select>
+	<select id="julMemCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-07-01','YYYY-MM-DD') AND TO_DATE('2020-08-01','YYYY-MM-DD')
+	</select>
+	
+	<select id="janAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-01-01','YYYY-MM-DD') AND TO_DATE('2020-02-01','YYYY-MM-DD')
+	</select>
+	<select id="febAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-02-01','YYYY-MM-DD') AND TO_DATE('2020-03-01','YYYY-MM-DD')
+	</select>
+	<select id="marAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-03-01','YYYY-MM-DD') AND TO_DATE('2020-04-01','YYYY-MM-DD')
+	</select>
+	<select id="aprAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-04-01','YYYY-MM-DD') AND TO_DATE('2020-05-01','YYYY-MM-DD')
+	</select>
+	<select id="mayAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-05-01','YYYY-MM-DD') AND TO_DATE('2020-06-01','YYYY-MM-DD')
+	</select>
+	<select id="junAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-06-01','YYYY-MM-DD') AND TO_DATE('2020-07-01','YYYY-MM-DD')
+	</select>
+	<select id="julAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-07-01','YYYY-MM-DD') AND TO_DATE('2020-08-01','YYYY-MM-DD')
 	</select>
 
 	<!-- 사용자 관리 -->
@@ -234,16 +279,16 @@
 	</select>
 	
 	<!-- 공지사항 관리 -->
-	<insert id="">
+<!-- 	<insert id=""> -->
 	
-	</insert>
-	<update id="">
+<!-- 	</insert> -->
+<!-- 	<update id=""> -->
 	
-	</update>
-	<select id="">
+<!-- 	</update> -->
+<!-- 	<select id=""> -->
 	
-	</select>
-	<delete id="">
+<!-- 	</select> -->
+<!-- 	<delete id=""> -->
 	
-	</delete>
+<!-- 	</delete> -->
 </mapper>

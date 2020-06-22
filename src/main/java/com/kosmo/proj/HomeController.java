@@ -60,9 +60,6 @@ public class HomeController {
 		{
 			UserDetails userDetails = (UserDetails)auth.getPrincipal();
 			Collection authorities = userDetails.getAuthorities();
-			String id = userDetails.getUsername();
-			String pwd = userDetails.getPassword();
-			System.out.println(id + " " + pwd);
 //			for(Object authority:authorities)
 //			{
 //				System.out.println(((GrantedAuthority)authority).getAuthority());

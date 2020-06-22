@@ -240,7 +240,89 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.deleteNotice(map);
 	}
-	
-	
 
+	@Override
+	public int janMemCount() {
+		// TODO Auto-generated method stub
+		return dao.janMemCount();
+	}
+
+	@Override
+	public int febMemCount() {
+		// TODO Auto-generated method stub
+		return dao.febMemCount();
+	}
+
+	@Override
+	public int marMemCount() {
+		// TODO Auto-generated method stub
+		return dao.marMemCount();
+	}
+
+	@Override
+	public int aprMemCount() {
+		// TODO Auto-generated method stub
+		return dao.aprMemCount();
+	}
+
+	@Override
+	public int mayMemCount() {
+		// TODO Auto-generated method stub
+		return dao.mayMemCount();
+	}
+
+	@Override
+	public int junMemCount() {
+		// TODO Auto-generated method stub
+		return dao.junMemCount();
+	}
+
+	@Override
+	public int julMemCount() {
+		// TODO Auto-generated method stub
+		return dao.julMemCount();
+	}
+
+	@Override
+	public int janAptCount() {
+		// TODO Auto-generated method stub
+		return dao.janAptCount();
+	}
+
+	@Override
+	public int febAptCount() {
+		// TODO Auto-generated method stub
+		return dao.febAptCount();
+	}
+
+	@Override
+	public int marAptCount() {
+		// TODO Auto-generated method stub
+		return dao.marAptCount();
+	}
+
+	@Override
+	public int aprAptCount() {
+		// TODO Auto-generated method stub
+		return dao.aprAptCount();
+	}
+
+	@Override
+	public int mayAptCount() {
+		// TODO Auto-generated method stub
+		return dao.mayAptCount();
+	}
+
+	@Override
+	public int junAptCount() {
+		// TODO Auto-generated method stub
+		return dao.junAptCount();
+	}
+
+	@Override
+	public int julAptCount() {
+		// TODO Auto-generated method stub
+		return dao.julAptCount();
+	}
+	
 }
