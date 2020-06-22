@@ -20,11 +20,11 @@
 	 </select>
 	 
  	 <delete id="signDelete" parameterType="MemberDTO">
-		DELETE FROM MEMBER WHERE MEM_EMAIL = #{email}
+		DELETE FROM MEMBER WHERE MEM_EMAIL = #{userid}
 	 </delete>
 	 	
-	 <update id="signUpdate" parameterType="MemberDTO">
-		UPDATE MEMBER SET name = #{name}, age = #{age}, gender = #{gender}, phone = #{phone}, email = #{email}, height = #{height} weight = {weight} where email = #{email} 
+	 <update id="signUpdate" parameterType="java.util.Map" >
+		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel}, mem_email = #{email}, height = #{height},weight = #{weight} where mem_email = #{id} 
 	 </update>
 	 
 	 
