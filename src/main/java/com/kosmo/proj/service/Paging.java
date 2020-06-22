@@ -5,6 +5,7 @@ public class Paging {
 	// 현재페이지, 시작페이지, 끝페이지, 게시글 총 갯수, 페이지당 글 갯수, 마지막페이지, SQL쿼리에 쓸 start, end
 		private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
 		private int cntPage = 5;
+		private String id;
 		
 		public Paging() {
 		}
@@ -91,6 +92,19 @@ public class Paging {
 		public void getCntPage(int cntPage) {
 			this.cntPage = cntPage;
 		}
+		public int getCntPage() {
+			return cntPage;
+		}
+		public void setCntPage(int cntPage) {
+			this.cntPage = cntPage;
+		}
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+		
 		@Override
 		public String toString() {
 			return "Paging [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total

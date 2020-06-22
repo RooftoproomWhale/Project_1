@@ -165,6 +165,166 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.selectOne("countRecordHosAuth", map);
 	}
 
-	
+	@Override
+	public int maleCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("genderChartMale");
+	}
+
+	@Override
+	public int femaleCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("genderChartFemale");
+	}
+
+	@Override
+	public int under10Count() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("under10");
+	}
+
+	@Override
+	public int over10under20Count() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("over10under20");
+	}
+
+	@Override
+	public int over20under30Count() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("over20under30");
+	}
+
+	@Override
+	public int over30under40Count() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("over30under40");
+	}
+
+	@Override
+	public int over40under50Count() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("over40under50");
+	}
+
+	@Override
+	public int over50under60Count() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("over50under60");
+	}
+
+	@Override
+	public int over60Count() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("over60");
+	}
+
+	@Override
+	public int insertNotice(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.insert("", map);
+	}
+
+	@Override
+	public int updateNotice(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.update("", map);
+	}
+
+	@Override
+	public List<NoticeDTO> viewNotice(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("", map);
+	}
+
+	@Override
+	public int deleteNotice(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("", map);
+	}
+
+	@Override
+	public int janMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("janMemCount");
+	}
+
+	@Override
+	public int febMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("febMemCount");
+	}
+
+	@Override
+	public int marMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("marMemCount");
+	}
+
+	@Override
+	public int aprMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("aprMemCount");
+	}
+
+	@Override
+	public int mayMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("mayMemCount");
+	}
+
+	@Override
+	public int junMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("junMemCount");
+	}
+
+	@Override
+	public int julMemCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("julMemCount");
+	}
+
+	@Override
+	public int janAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("janAptCount");
+	}
+
+	@Override
+	public int febAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("febAptCount");
+	}
+
+	@Override
+	public int marAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("marAptCount");
+	}
+
+	@Override
+	public int aprAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("aprAptCount");
+	}
+
+	@Override
+	public int mayAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("mayAptCount");
+	}
+
+	@Override
+	public int junAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("junAptCount");
+	}
+
+	@Override
+	public int julAptCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("julAptCount");
+	}
 	
 }
