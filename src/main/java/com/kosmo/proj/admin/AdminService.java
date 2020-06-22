@@ -12,12 +12,25 @@ public interface AdminService {
 	
 		//로그인 용]
 		boolean isLogin(Map map);
+		
 		//통계
 		int memberCount();
 		int genderCount();
 		int hospCount();
 		int presCount();
 		int aptCount();
+		//gender chart
+		int maleCount();
+		int femaleCount();
+		//age chart
+		int under10Count();
+		int over10under20Count();
+		int over20under30Count();
+		int over30under40Count();
+		int over40under50Count();
+		int over50under60Count();
+		int over60Count();
+		
 		//회원 관리
 		//회원 상세보기용]
 		List<MemberDTO> selectOne(Map map);
@@ -44,7 +57,12 @@ public interface AdminService {
 		int denyAuth(Map map);
 		List<HospitalDTO> selectList_Auth_Search(Map map);	
 		int getTotalRecordHosAuth(Map map);
-		
-		
+	
+		//공지사항
+		int insertNotice(Map map);
+		int updateNotice(Map map);
+		List<NoticeDTO> viewNotice(Map map);
+		int deleteNotice(Map map);
+	
 		
 }

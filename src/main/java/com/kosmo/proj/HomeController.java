@@ -60,15 +60,17 @@ public class HomeController {
 		{
 			UserDetails userDetails = (UserDetails)auth.getPrincipal();
 			Collection authorities = userDetails.getAuthorities();
-			
-			for(Object authority:authorities)
-			{
-				System.out.println(((GrantedAuthority)authority).getAuthority());
-				if(((GrantedAuthority)authority).getAuthority().equals("ROLE_ADM"))
-				{
-					return "redirect:/Admin/Index.hst";
-				}
-			}
+			String id = userDetails.getUsername();
+			String pwd = userDetails.getPassword();
+			System.out.println(id + " " + pwd);
+//			for(Object authority:authorities)
+//			{
+//				System.out.println(((GrantedAuthority)authority).getAuthority());
+//				if(((GrantedAuthority)authority).getAuthority().equals("ROLE_ADM"))
+//				{
+//					return "redirect:/Admin/Index.hst";
+//				}
+//			}
 		}
 		
 		

@@ -162,6 +162,84 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.getTotalRecordHosAuth(map);
 	}
+
+	@Override
+	public int maleCount() {
+		// TODO Auto-generated method stub
+		return dao.maleCount();
+	}
+
+	@Override
+	public int femaleCount() {
+		// TODO Auto-generated method stub
+		return dao.femaleCount();
+	}
+
+	@Override
+	public int under10Count() {
+		// TODO Auto-generated method stub
+		return dao.under10Count();
+	}
+
+	@Override
+	public int over10under20Count() {
+		// TODO Auto-generated method stub
+		return dao.over10under20Count();
+	}
+
+	@Override
+	public int over20under30Count() {
+		// TODO Auto-generated method stub
+		return dao.over20under30Count();
+	}
+
+	@Override
+	public int over30under40Count() {
+		// TODO Auto-generated method stub
+		return dao.over30under40Count();
+	}
+
+	@Override
+	public int over40under50Count() {
+		// TODO Auto-generated method stub
+		return dao.over40under50Count();
+	}
+
+	@Override
+	public int over50under60Count() {
+		// TODO Auto-generated method stub
+		return dao.over50under60Count();
+	}
+
+	@Override
+	public int over60Count() {
+		// TODO Auto-generated method stub
+		return dao.over60Count();
+	}
+
+	@Override
+	public int insertNotice(Map map) {
+		// TODO Auto-generated method stub
+		return dao.insertNotice(map);
+	}
+
+	@Override
+	public int updateNotice(Map map) {
+		// TODO Auto-generated method stub
+		return dao.updateNotice(map);
+	}
+
+	@Override
+	public List<NoticeDTO> viewNotice(Map map) {
+		// TODO Auto-generated method stub
+		return dao.viewNotice(map);
+	}
+
+	@Override
+	public int deleteNotice(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deleteNotice(map);
+	}
 	
 	
 

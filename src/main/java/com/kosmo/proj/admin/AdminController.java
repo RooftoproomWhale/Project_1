@@ -314,7 +314,50 @@ public class AdminController {
 	}
 	
 	@RequestMapping("Chart.hst")
-	public String toChart()
+	public String toChart(Model model)
+	{
+		//age chart
+		int under10 = adminService.under10Count();
+		int over10under20 = adminService.over10under20Count();
+		int over20under30 = adminService.over20under30Count();
+		int over30under40 = adminService.over30under40Count();
+		int over40under50 = adminService.over40under50Count();
+		int over50under60 = adminService.over50under60Count();
+		int over60 = adminService.over60Count();
+		System.out.println("10세미만: " + under10 + " 10~19: " + over10under20 +" 20~29: " + over20under30 + " 30~39: " + over30under40 + " 40~49: " + over40under50 + " 50~59: " + over50under60 + " 60이상: " + over60);;
+		model.addAttribute("under10", under10);
+		model.addAttribute("over10under20", over10under20);
+		model.addAttribute("over20under30", over20under30);
+		model.addAttribute("over30under40", over30under40);
+		model.addAttribute("over40under50", over40under50);
+		model.addAttribute("over50under60", over50under60);
+		model.addAttribute("over60", over60);
+		//
+		//gender chart
+		int maleCount = adminService.maleCount();
+		int femaleCount = adminService.femaleCount();
+		System.out.println("male: " + maleCount);
+		System.out.println("female: " + femaleCount);
+		model.addAttribute("male", maleCount);
+		model.addAttribute("female", femaleCount);
+		//
+		return "Chart.ad_tiles";
+	}
+	
+	@RequestMapping("RecentChart.hst")
+	public String recentChart()
+	{
+		return "Chart.ad_tiles";
+	}
+	
+	@RequestMapping("GenderChart.hst")
+	public String genderChart()
+	{
+		return "Chart.ad_tiles";
+	}
+	
+	@RequestMapping("AgeChart.hst")
+	public String ageChart()
 	{
 		return "Chart.ad_tiles";
 	}

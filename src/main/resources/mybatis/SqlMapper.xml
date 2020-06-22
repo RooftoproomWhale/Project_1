@@ -118,16 +118,65 @@
 		SELECT COUNT(*) FROM RESERVATION
 	</select>
 	<!-- 차트 -->
+	<select id="genderChartMale" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE GENDER='남자'
+	</select>
+	<select id="genderChartFemale" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE GENDER='여자'
+	</select>
+	
+	<select id="under10" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ < ]]> 10
+	</select>
+	<select id="over10under20" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 10 AND AGE <![CDATA[ < ]]> 20
+	</select>
+	<select id="over20under30" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 20 AND AGE <![CDATA[ < ]]> 30
+	</select>
+	<select id="over30under40" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 30 AND AGE <![CDATA[ < ]]> 40
+	</select>
+	<select id="over40under50" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 40 AND AGE <![CDATA[ < ]]> 50
+	</select>
+	<select id="over50under60" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 50 AND AGE <![CDATA[ < ]]> 60
+	</select>
+	<select id="over60" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ > ]]> 60
+	</select>
 
 	<!-- 사용자 관리 -->
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * FROM MEMBER
+						) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<select id="selectMemberListUser" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM MEMBER WHERE ROLE='ROLE_MEM'
+<!-- 		SELECT *  -->
+<!-- 			FROM ( -->
+<!-- 				SELECT ROWNUM RN, A.*  -->
+<!-- 					FROM ( -->
+							SELECT * FROM MEMBER WHERE ROLE='ROLE_MEM'
+<!-- 							) A -->
+<!-- 					) -->
+<!-- 			WHERE RN BETWEEN #{start} AND #{end} -->
 	</select>
 	<select id="selectMemberListHosp" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM MEMBER WHERE ROLE='ROLE_HOS'
+<!-- 		SELECT *  -->
+<!-- 			FROM ( -->
+<!-- 				SELECT ROWNUM RN, A.*  -->
+<!-- 					FROM ( -->
+							SELECT * FROM MEMBER WHERE ROLE='ROLE_HOS' 
+<!-- 							) A -->
+<!-- 					) -->
+<!-- 			WHERE RN BETWEEN #{start} AND #{end} -->
 	</select>
 	<select id="selectOne" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{userEmail}
@@ -151,7 +200,7 @@
 						SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL 
 						) A
 				)
-	WHERE RN BETWEEN #{start} AND #{end}
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<update id="updateAuth_O" parameterType="java.util.Map">
 		UPDATE HOSPITAL SET AUTH = '제휴승인됨', APPROVED_DATE = SYSDATE WHERE HOSP_NAME = #{hosp_name}
@@ -165,7 +214,14 @@
 	
 	<!-- 예약 관리 -->
 	<select id="selectAptList" parameterType="java.util.Map" resultType="ReservationDTO">
-		select h.*, r.* from reservation r join hospital h on r.hosp_code = h.hosp_code
+	SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT H.*, R.* FROM RESERVATION R JOIN HOSPITAL H ON R.HOSP_CODE = H.HOSP_CODE
+						) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<select id="selectOneApt" parameterType="java.util.Map" resultType="ReservationDTO">
 		SELECT M.*, R.* FROM MEMBER M JOIN RESERVATION R ON M.MEM_EMAIL = R.MEM_EMAIL WHERE M.MEM_EMAIL = #{userEmail} 
@@ -176,4 +232,18 @@
 	<select id="selectApt_Search" parameterType="java.util.Map" resultType="ReservationDTO">
 		select h.*, r.* from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
+	
+	<!-- 공지사항 관리 -->
+	<insert id="">
+	
+	</insert>
+	<update id="">
+	
+	</update>
+	<select id="">
+	
+	</select>
+	<delete id="">
+	
+	</delete>
 </mapper>
