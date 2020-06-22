@@ -22,8 +22,9 @@
   }
 
   function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-	    FB.api('/me?fields=email', function(response) {
+	    FB.api('/me',{fields: 'email'}, function(response) {
 	      console.log(response);
+	      
 	      document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
 	    })
   }
