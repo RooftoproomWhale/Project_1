@@ -61,7 +61,7 @@ public interface AdminService {
 		//공지사항
 		int insertNotice(Map map);
 		int updateNotice(Map map);
-		List<NoticeDTO> viewNotice(Map map);
+		//List<NoticeDTO> viewNotice(Map map);
 		int deleteNotice(Map map);
 	
 		

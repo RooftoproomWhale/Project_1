@@ -365,23 +365,29 @@
                   <div class="col-sm-6">
                      <div class="form-group">
                         <span class="form-label">이름</span>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" value="${MemberDTO.mem_name}" disabled>
                      </div>
                   </div>
                   <div class="col-sm-6">
                      <div class="form-group">
                         <span class="form-label">이메일</span>
-                        <input class="form-control" type="email">
+                        <input class="form-control" type="email" value="${MemberDTO.mem_email}" disabled>
                      </div>
                   </div>
                </div>
-               <div class="form-group">
-                  <span class="form-label">전화번호</span>
-                  <input class="form-control" type="tel">
-               </div>
-               <div class="form-group">
-                  <span class="form-label">병원 이름</span>
-                  <input class="form-control" type="text">
+               <div class="row">
+                  <div class="col-sm-6">
+                     <div class="form-group">
+	                   <span class="form-label">전화번호</span>
+	                   <input class="form-control" type="tel" value="${MemberDTO.tel}" disabled>
+	                 </div>
+                  </div>
+                  <div class="col-sm-6">
+                     <div class="form-group">
+	                   <span class="form-label">병원 이름</span>
+	                   <input class="form-control" id="modal_hosp_name" type="text" disabled>
+	                 </div>
+                  </div>
                </div>
                <div class="form-group">
                   <span class="form-label">진료실</span>
@@ -405,7 +411,7 @@
                   <div class="col-sm-5">
                      <div class="form-group">
                         <span class="form-label">예약 날짜</span>
-                        <input class="form-control" id="reservation_date" type="text" required>
+                        <input class="form-control" id="reservation_date" type="text" placeholder="날짜를 선택해주세요" autocomplete="off" required>
                      </div>
                   </div>
                   <div class="col-sm-7">
@@ -413,7 +419,7 @@
                         <div class="col-sm-4">
                            <div class="form-group">
                               <span class="form-label">오전/오후</span>
-                              <select class="form-control">
+                              <select id="AM_PM" class="form-control">
                                  <option>오전</option>
                                  <option>오후</option>
                               </select>
@@ -639,6 +645,12 @@
       
       $('#reservation_date').datepicker({
          dateFormat: "yy년 mm월 dd일",
+         onSelect: function(dateText, inst) {
+             var date = new Date();
+             alert('선택하신 날짜는'+ date.getHours());
+             console.log(date.getDate());
+             changeAM_PM(date.getHours());
+         },
          showAnim: "slide",
          showMonthAfterYear: true ,
          minDate: 0,
@@ -654,6 +666,8 @@
 <script>
 
    var markers = [];
+
+   var currentLatLng;
    
    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
    lat, lon,
@@ -698,8 +712,15 @@
        console.log("지도레벨(드래그)",level);
        console.log("위치(드래그)",latlng);
        console.log("바운드(드래그)",bound);
+       console.log("거리차이",distance(currentLatLng.getLat(),currentLatLng.getLng(),latlng.getLat(),latlng.getLng(),"kilometer"))
+       console.log("거리차이(Boolean)",distance(currentLatLng.getLat(),currentLatLng.getLng(),latlng.getLat(),latlng.getLng(),"kilometer")>0.8)
        //storesByGeo(latlng.getLat(),latlng.getLng());
-       loadMapApi(latlng.getLat(),latlng.getLng(),apiStatus);
+       if(distance(currentLatLng.getLat(),currentLatLng.getLng(),latlng.getLat(),latlng.getLng(),"kilometer")>0.7)
+       {
+    	   loadMapApi(latlng.getLat(),latlng.getLng(),apiStatus);
+           currentLatLng = latlng;
+       }
+       
    });
    
    kakao.maps.event.addListener(map, 'zoom_changed', function() {
@@ -1320,6 +1341,8 @@
             
             var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
       
+            currentLatLng = locPosition;
+            
             // 마커와 인포윈도우를 표시합니다
             displayMarker(locPosition);
       
@@ -1478,7 +1501,9 @@
       }
       
       function reservation_show(){
-         console.log($('#reservation-modal'))
+         console.log($('#reservation-modal'));
+         console.log($(".inner_title").text());
+         $('#modal_hosp_name').attr('value',$(".inner_title").text());
          $('#reservation-modal').modal('show');
    
       }
@@ -1514,6 +1539,53 @@
          
          $('.load_wrap').hide();
          
+      }
+      
+      function changeAM_PM(date,day) {
+    	  var AMPM = ["오전","오후"];
+    	  $("#AM_PM").empty();
+
+    	  //console.log(day==new date());
+    	  
+    	  var option
+    	  
+    	  if(date < 13 && date >= 0)
+    	  {
+    		  option += "<option>"+AMPM[0]+"</option>"; 
+    		  option += "<option>"+AMPM[1]+"</option>";
+    	  }
+    	  else
+    	  {
+    		  option += "<option>"+AMPM[1]+"</option>";
+    	  }
+    	  $('#AM_PM').append(option);
+    	  /* for(var count = 0; count < AMPM.size(); count++){                
+              var option = $("<option>"+AMPM[count]+"</option>");
+              $('#AM_PM').append(option);
+          } */
+	  }
+      
+      function deg2rad(deg){
+    	  return (deg * Math.PI / 180.0);
+      }
+      function rad2deg(rad){
+    	  return (rad * 180 / Math.PI);
+      }
+      function distance(lat1, lon1, lat2, lon2, unit){
+    	  var theta = lon1 - lon2;
+    	  var dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+    	  
+    	  dist = Math.acos(dist);
+          dist = rad2deg(dist);
+          dist = dist * 60 * 1.1515;
+          
+          if (unit == "kilometer") {
+              dist = dist * 1.609344;
+          } else if(unit == "meter"){
+              dist = dist * 1609.344;
+          }
+
+          return dist;
       }
    }
 

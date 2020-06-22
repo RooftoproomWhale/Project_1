@@ -46,7 +46,7 @@ public class MemberDAO implements MemberService {
 		@Override
 		public MemberDTO selectOne(Map map) {
 			// TODO Auto-generated method stub
-			return sqlMapper.selectOne("memberSelectOne");
+			return sqlMapper.selectOne("selectOne",map);
 		}
 
 		@Override
