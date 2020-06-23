@@ -108,9 +108,16 @@ public class MyPageController {
 	// 진료예약 현황
 	@RequestMapping("/mypage/ReservationList.hst")
 	public String ReservationList() {
+		
 		return "ReservationList.my_tiles";
 	}
-
+	//예약리스트
+	@RequestMapping(value ="/mypage/ReservationList.hst",method = RequestMethod.POST)
+	public String ReservationLists() {
+		
+		
+		return "ReservationList.my_tiles";
+	}
 	// 복약관리
 	@RequestMapping("/mypage/administration.hst")
 	public String administration() {
