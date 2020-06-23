@@ -97,10 +97,20 @@
 		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
 	</select>
 	<select id="countRecordAccount" resultType="int">
-		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
+		SELECT COUNT(*) FROM MEMBER
 	</select>
 	<select id="countRecordAppointment" resultType="int">
-		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
+		SELECT COUNT(*) FROM RESERVATION
+	</select>
+	<!-- 검색 페이징 -->
+	<select id="countRecordHosSearch" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
+	</select>
+	<select id="countRecordAccSearch" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEM_NAME LIKE '%' || #{search_keyword} || '%'
+	</select>
+	<select id="countRecordAptSearch" parameterType="java.util.Map" resultType="int">
+		select COUNT(*) from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
 	
 	

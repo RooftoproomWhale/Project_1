@@ -324,5 +324,23 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.julAptCount();
 	}
+
+	@Override
+	public int getTotalRecordAccSearch(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordAccSearch(map);
+	}
+
+	@Override
+	public int getTotalRecordAptSearch(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordAptSearch(map);
+	}
+
+	@Override
+	public int getTotalRecordHosSearch(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordHosSearch(map);
+	}
 	
 }
