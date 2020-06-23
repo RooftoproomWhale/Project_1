@@ -671,6 +671,16 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 .col-md-offset-10 {
     margin-left: 89.33333333%;
 }}
+
+.img_wrap{
+	width: 300px;
+	margin-top: 50px;
+	margin-bottom:50px;
+	align-content: center;
+}
+.img_wrap img{
+	max-width: 100%;
+}
 </style>
 
 <head>
@@ -710,27 +720,17 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
     	<div class="modal-content">
-			<div class="form-modal">
-			    <div class="form-toggle">
-			        <button id="login-toggle" onclick="toggleLogin()">log in</button>
-			        <button id="signup-toggle" onclick="toggleSignup()">sign up</button>
-			    </div>
-
-			    <div id="login-form">
-			        <form action='<c:url value="/mapping/mapping.hst"/>' enctype="multipart/form-data" method="post">
-			            <input type="file" name="filename">
-			            <input type="submit" value="등록">
-			        </form>
-			    </div>
-
-			    <div id="signup-form">
-			        <form>
-			            <input type="email" placeholder="Enter your email"/>
-			            <input type="text" placeholder="Choose username"/>
-			            <input type="password" placeholder="Create password"/>
-			            <button type="button" class="btn signup">create account</button>
-			        </form>
-			    </div>
+    		<div>
+				<p class="title">이미지 업로드</p>
+				<input type="file" id="input_img"/>
+			</div>
+			<div>
+				<div class="img_wrap col-md-offset-4">
+					<img id="img" />
+				</div>
+			</div>
+			<div>
+				<button class="btn btn-primary">등 록</button>
 			</div>
 		</div>
 	</div>
@@ -819,22 +819,27 @@ signupBtn.addEventListener('click', (e) => {
 
 </script>
 <script>
-function toggleSignup(){
-	   document.getElementById("login-toggle").style.backgroundColor="#fff";
-	    document.getElementById("login-toggle").style.color="#222";
-	    document.getElementById("signup-toggle").style.backgroundColor="#57b846";
-	    document.getElementById("signup-toggle").style.color="#fff";
-	    document.getElementById("login-form").style.display="none";
-	    document.getElementById("signup-form").style.display="block";
-	}
-
-	function toggleLogin(){
-	    document.getElementById("login-toggle").style.backgroundColor="#57B846";
-	    document.getElementById("login-toggle").style.color="#fff";
-	    document.getElementById("signup-toggle").style.backgroundColor="#fff";
-	    document.getElementById("signup-toggle").style.color="#222";
-	    document.getElementById("signup-form").style.display="none";
-	    document.getElementById("login-form").style.display="block";
+	var sel_file;
+	$(function(){
+		$("#input_img").on("change",handleImgFileSelect);
+	});
+	
+	function handleImgFileSelect(e){
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")){
+				alert("이미지 파일만 업로드 가능합니다.");
+				return;
+			}
+			sel_file = f;
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$("#img").attr("src",e.target.result);
+			}
+			reader.readAsDataURL(f);
+		});
 	}
 </script>
 

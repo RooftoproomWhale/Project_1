@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
 <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
@@ -156,7 +156,9 @@ form{
 					<div class="row" style="padding-bottom: 15px;">
 						<div class="col-md-offset-2 col-md-8">
 							<div class="col-md-4 col-xs-6">
-								<div style="display: inline;" id="naver_id_login"></div>
+								<a id="naver" href="#"> <img width="60"
+									src='<c:url value="/images/snslogo/naver.png"/>' alt="네이버 로그인">
+								</a>
 							</div>
 							<div class="col-md-4 col-xs-6">
 								<a id="kakao" href="#"> <img width="60"
