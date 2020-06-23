@@ -229,11 +229,6 @@ public class AdminServiceImpl implements AdminService {
 		return dao.updateNotice(map);
 	}
 
-	@Override
-	public List<NoticeDTO> viewNotice(Map map) {
-		// TODO Auto-generated method stub
-		return dao.viewNotice(map);
-	}
 
 	@Override
 	public int deleteNotice(Map map) {

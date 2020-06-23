@@ -3,7 +3,6 @@
 <!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
 <mapper namespace="mybatis.SqlMapper">
-	
 	<select id="memberIsLogin" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
 	</select>
@@ -20,11 +19,11 @@
 	 </select>
 	 
  	 <delete id="signDelete" parameterType="MemberDTO">
-		DELETE FROM MEMBER WHERE MEM_EMAIL = #{email}
+		DELETE FROM MEMBER WHERE MEM_EMAIL = #{userid}
 	 </delete>
 	 	
-	 <update id="signUpdate" parameterType="MemberDTO">
-		UPDATE MEMBER SET name = #{name}, age = #{age}, gender = #{gender}, phone = #{phone}, email = #{email}, height = #{height} weight = {weight} where email = #{email} 
+	 <update id="signUpdate" parameterType="java.util.Map" >
+		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel}, mem_email = #{email}, height = #{height},weight = #{weight} where mem_email = #{id} 
 	 </update>
 	 
 	 
@@ -39,59 +38,59 @@
 		DELETE onememo WHERE no=#{no}
 	</delete>
 
-	<insert id="presInsert" parameterType="java.util.Map">
-		INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
-	</insert>
-	
-	<select id="covidMapSelect" resultType="java.util.Map">
-		SELECT * FROM corona_patient
-	</select>
-	<select id="hospitalSelect" resultType="java.util.Map">
-		SELECT * FROM hospital
-	</select>
-	<select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
-	</select>
-	<select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
-	</select>
-	<select id="presSelectList" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM prescription WHERE mem_email = #{mem_email}
-	</select>
-	
-	<select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT D.dept_name, HD.*
-		FROM
-		(SELECT H.*, D.dept_code FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_code = D.dept_code
-		WHERE HD.address = #{address}
-	</select>
+   <insert id="presInsert" parameterType="java.util.Map">
+      INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
+   </insert>
+   
+   <select id="covidMapSelect" resultType="java.util.Map">
+      SELECT * FROM corona_patient
+   </select>
+   <select id="hospitalSelect" resultType="java.util.Map">
+      SELECT * FROM hospital
+   </select>
+   <select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
+   </select>
+   <select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
+   </select>
+   <select id="presSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT * FROM prescription WHERE mem_email = #{mem_email}
+   </select>
+   
+   <select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT D.dept_name, HD.*
+      FROM
+      (SELECT H.*, D.dept_code FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_code = D.dept_code
+      WHERE HD.address = #{address}
+   </select>
 
-	<select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT *
-		FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
-		AS distanceByXY, h.*
-		FROM hospital h) disData
-		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
-	</select>
+   <select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
+      SELECT *
+      FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
+      AS distanceByXY, h.*
+      FROM hospital h) disData
+      WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
+   </select>
 
-	<select id="pharmacySelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
-	</select>
-	<select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT distinct phar_name FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
-	</select>
+   <select id="pharmacySelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
+   </select>
+   <select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT distinct phar_name FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
+   </select>
 
-	<select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM pharmacy WHERE address = #{address}
-	</select>
-	<select id="pharmacySelectByXY" parameterType="java.util.Map" resultType="pharmacyDTO">
-		SELECT *
-		FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
-		AS distanceByXY, p.*
-		FROM pharmacy p) disData
-		WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
-	</select>
-	
+   <select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT * FROM pharmacy WHERE address = #{address}
+   </select>
+   <select id="pharmacySelectByXY" parameterType="java.util.Map" resultType="pharmacyDTO">
+      SELECT *
+      FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
+      AS distanceByXY, p.*
+      FROM pharmacy p) disData
+      WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
+   </select>
+
 <!-- 페이징 -->
 	<select id="countRecordHosAuth" resultType="int">
 		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
@@ -112,7 +111,6 @@
 	<select id="countRecordAptSearch" parameterType="java.util.Map" resultType="int">
 		select COUNT(*) from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
-	
 	
 <!--관리자단 -->
 	<!-- 대쉬보드 -->
@@ -202,7 +200,7 @@
 		SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-07-01','YYYY-MM-DD') AND TO_DATE('2020-08-01','YYYY-MM-DD')
 	</select>
 
-	<!-- 사용자 관리 -->
+   <!-- 사용자 관리 -->
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT * 
 		FROM (

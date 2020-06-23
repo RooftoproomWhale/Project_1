@@ -231,11 +231,7 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.update("", map);
 	}
 
-	@Override
-	public List<NoticeDTO> viewNotice(Map map) {
-		// TODO Auto-generated method stub
-		return sqlMapper.selectList("", map);
-	}
+	
 
 	@Override
 	public int deleteNotice(Map map) {

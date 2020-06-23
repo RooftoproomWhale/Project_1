@@ -55,5 +55,10 @@ public class MemberServiceImpl implements MemberService{
 		return dao.update(map);
 	}
 
+	public int diseaseupdate(Map map) {
+		// TODO Auto-generated method stub
+		return dao.diseaseupdate(map);
+	}
+
 
 }

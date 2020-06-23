@@ -420,6 +420,14 @@ review {
 <script type="text/javascript">
 	
 		$(function() {
+			var data = "#{list[0]['']}".split(',');
+			for(i=0;i<=data.length;i++){
+				"<div class='task-box yellow'><div class='description-task'><div class='task-name'>"+data[i]+"</div><div class='time'>내용</div></div><div class='glyphicon glyphicon-remove more-button'></div></div>").appendTo('.right-content')
+			}
+			
+			
+			
+			
 			$(".task-item").change(function(){
 				 var txt = $(this).next().text();
 	             var disease=$('.task-name');
@@ -548,7 +556,7 @@ review {
 			}
 		}
 	}; */
-
+	
 	function save() {
 		var is = confirm("저장하시겠습니까?");
 		if (is) {
@@ -557,8 +565,17 @@ review {
 			for (i = 0; i < dis.length; i++) {
 				str += $.trim(dis.eq(i).text()) + ",";
 			}
+			   $.ajax({
+		            type: "get",
+		            url: "<c:url value='/mypage/disease.hst'/>",
+		            data: {
+		            	str.slice(0, -1)
+		            },
+		            success: function (response) {
 
-			return console.log(str.slice(0, -1));
+		            }
+		        });
+		
 		}
 	};
 
@@ -739,8 +756,8 @@ review {
 				<div class="task-box blue">
 					<div class="description-task">
 
-						<div class="task-name">도움말</div>
-						<div class="time">///// 도움말 들어갈자리 ////</div>
+						<div class="">도움말</div>
+						<div class="time">질병선택하면 도움말 아래로 리스트가 추가 됩니다</div>
 					</div>
 					<div class="glyphicon glyphicon-remove more-button"></div>
 				</div>

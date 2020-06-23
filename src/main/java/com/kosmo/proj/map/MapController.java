@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,13 +19,17 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONValue;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
+import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.MemberService;
 import com.kosmo.proj.service.PharmacyDTO;
 
@@ -34,10 +39,23 @@ public class MapController {
 	@Resource(name = "mapService")
 	private MapService mapService;
 	
+	@Resource(name = "memberService")
+	private MemberService memberService;
 	
 	@RequestMapping("/Homespital/Map.hst")
-	public String map()
+	public String map(Authentication auth,Model model)
 	{
+		if(auth != null)
+		{
+			UserDetails userDetails = (UserDetails)auth.getPrincipal();
+			Map map = new HashMap<String, String>();
+			map.put("userEmail", userDetails.getUsername());
+			System.out.println(userDetails.getUsername());
+			MemberDTO dto = memberService.selectOne(map);
+			System.out.println(dto.getMem_email());
+			model.addAttribute("MemberDTO", dto);
+		}
+		
 		return "map/Map.no_tiles";
 	}
 	
