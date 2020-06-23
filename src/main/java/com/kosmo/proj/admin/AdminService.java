@@ -61,6 +61,7 @@ public interface AdminService {
 		int update(Map map);
 		List<MemberDTO> selectList_Account_Search(Map map);	
 		int getTotalRecordAccount(Map map);
+		int getTotalRecordAccSearch(Map map);
 		
 		//예약 관리
 		List<ReservationDTO> selectList_Apt_All(Paging vo);
@@ -68,6 +69,7 @@ public interface AdminService {
 		int deleteApt(Map map);
 		List<ReservationDTO> selectList_Appointment_Search(Map map);	
 		int getTotalRecordAppointment(Map map);
+		int getTotalRecordAptSearch(Map map);
 		
 		//병원 제휴
 		List<HospitalDTO> selectList_Auth_All(Paging vo);	
@@ -75,6 +77,7 @@ public interface AdminService {
 		int denyAuth(Map map);
 		List<HospitalDTO> selectList_Auth_Search(Map map);	
 		int getTotalRecordHosAuth(Map map);
+		int getTotalRecordHosSearch(Map map);
 	
 		//공지사항
 		int insertNotice(Map map);

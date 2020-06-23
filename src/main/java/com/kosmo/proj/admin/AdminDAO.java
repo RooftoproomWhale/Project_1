@@ -322,5 +322,23 @@ public class AdminDAO implements AdminService {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("julAptCount");
 	}
+
+	@Override
+	public int getTotalRecordAccSearch(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("countRecordAccSearch", map);
+	}
+
+	@Override
+	public int getTotalRecordAptSearch(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("countRecordAptSearch", map);
+	}
+
+	@Override
+	public int getTotalRecordHosSearch(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("countRecordHosSearch", map);
+	}
 	
 }

@@ -75,7 +75,7 @@ public class HomeController {
 		
 		return "index.tiles";
 	}
-
+	
 	@RequestMapping(value = "/News",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String news(@RequestParam Map map)
