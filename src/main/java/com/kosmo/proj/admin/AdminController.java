@@ -111,7 +111,7 @@ public class AdminController {
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
-		int total = adminService.getTotalRecordAppointment(map);
+		int total = adminService.getTotalRecordAccount(map);
 		System.out.println(total);
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
@@ -207,12 +207,25 @@ public class AdminController {
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
+		int total = adminService.getTotalRecordAccSearch(map);
+		System.out.println(total);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		List<MemberDTO> list =adminService.selectList_Account_Search(map);
 		for(MemberDTO val:list)
 		{
 			System.out.println(val.getMem_email());
 			System.out.println(val.getMem_name());
 		}
+		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
 		
 		return "Accounts.ad_tiles";
@@ -279,15 +292,31 @@ public class AdminController {
 	}
 	
 	@RequestMapping("AppointmentSearch.hst")
-	public String appointmentSearch(@RequestParam Map map, Model model)
+	public String appointmentSearch(@RequestParam Map map, Paging vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
+		int total = adminService.getTotalRecordAptSearch(map);
+		System.out.println(total);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		List<ReservationDTO> list =adminService.selectList_Appointment_Search(map);
 		for(ReservationDTO val:list)
 		{
 			System.out.println(val.getHOSP_NAME());
 			System.out.println(val.getMEM_NAME());
 		}
+		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
+		
 		return "Appointment.ad_tiles";
 	}
 	//병원 제휴
@@ -319,6 +348,20 @@ public class AdminController {
 		return "HosAuth.ad_tiles"; 
 	}
 	
+//	@RequestMapping("HosAuth.hst")
+//	public String toHosAuth(@RequestParam Map map, Model model)
+//	{
+//		
+//		List<HospitalDTO> list =adminService.selectList_Auth_All(map);
+//		for(HospitalDTO val:list)
+//		{
+//			System.out.println(val.getHosp_name());
+//		}
+//		model.addAttribute("list", list);
+//		
+//		return "HosAuth.ad_tiles"; 
+//	}
+	
 	@RequestMapping("ApproveAuth.hst")
 	public String approve(@RequestParam Map map, Model model)
 	{
@@ -336,21 +379,31 @@ public class AdminController {
 	}
 	
 	@RequestMapping("HosAuthSearch.hst")
-	public String hosAuthSearch(@RequestParam Map map, Model model)
+	public String hosAuthSearch(@RequestParam Map map, Paging vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
+		int total = adminService.getTotalRecordHosSearch(map);
+		System.out.println(total);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		List<HospitalDTO> list =adminService.selectList_Auth_Search(map);
 		for(HospitalDTO val:list)
 		{
 			System.out.println(val.getHosp_name());
 			System.out.println(val.getHosp_code());
 		}
+		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
-		return "HosAuth.ad_tiles";
-	}
-	
-	@RequestMapping("HosAuthSearchNew.hst")
-	public String hosAuthSearchNew()
-	{
+		
 		return "HosAuth.ad_tiles";
 	}
 	

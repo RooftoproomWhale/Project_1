@@ -34,7 +34,7 @@ public class MemberDAO implements MemberService {
 		@Override
 		public List<MemberDTO> selectList(Map map) {
 			// TODO Auto-generated method stub
-			return sqlMapper.selectList("selectMemberList", map);
+			return sqlMapper.selectList("signView", map);
 		}
 
 		@Override
@@ -67,6 +67,15 @@ public class MemberDAO implements MemberService {
 		public int diseaseupdate(Map map) {
 			
 			return sqlMapper.update("diseaseupdate",map);
+		}
+
+		public List<MemberDTO> diseaseSelect(Map map) {
+	
+			return sqlMapper.selectList("diseaseupdate",map);
+		}
+		public List<Map<String, Integer>> selectCount(Map map) {
+			
+			return sqlMapper.selectList("selectCount", map);
 		}
 
 }

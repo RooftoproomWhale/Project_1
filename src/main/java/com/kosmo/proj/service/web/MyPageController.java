@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
+
+import org.apache.ibatis.annotations.Select;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -37,9 +39,11 @@ public class MyPageController {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id", id);
-				List<MemberDTO> list = memberDAO.selectList(map);
+		List<MemberDTO> list = memberDAO.selectList(map);
+		List<Map<String, Integer>> count = memberDAO.selectCount(map);
+
 		model.addAttribute("list", list);	
-	
+		model.addAttribute("count", count);
 		return "Mypage_Main.my_tiles";
 		
 	}/////myapge
@@ -104,9 +108,16 @@ public class MyPageController {
 	// 진료예약 현황
 	@RequestMapping("/mypage/ReservationList.hst")
 	public String ReservationList() {
+		
 		return "ReservationList.my_tiles";
 	}
-
+	//예약리스트
+	@RequestMapping(value ="/mypage/ReservationList.hst",method = RequestMethod.POST)
+	public String ReservationLists() {
+		
+		
+		return "ReservationList.my_tiles";
+	}
 	// 복약관리
 	@RequestMapping("/mypage/administration.hst")
 	public String administration() {
@@ -119,8 +130,8 @@ public class MyPageController {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id",id );
-		//List<MemberDTO> list = memberDAO.selectList(map);
-		model.addAttribute("list", model);
+//		List<MemberDTO> list = memberDAO.selectDiseaseList(map);
+//		model.addAttribute("list", model);
 		return "Disease.my_tiles";
 	}
 	@RequestMapping(value = "/mypage/disease.hst",method = RequestMethod.POST)
@@ -128,7 +139,7 @@ public class MyPageController {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id",id );
-		int update = memberDAO.diseaseupdate(map);
+//		int update = memberDAO.diseaseupdate(map);
 		
 		
 		return "redirect:../mypage/mypage.hst";

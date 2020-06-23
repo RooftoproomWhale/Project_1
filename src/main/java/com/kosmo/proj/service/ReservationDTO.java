@@ -7,12 +7,13 @@ public class ReservationDTO {
 	private String HOSP_NAME;
 	private int RESERV_NO;
 	private String HOSP_CODE;
-	private int DEPT_CODE;
+	private String DEPT_NAME;
 	private String MEM_EMAIL;
 	private String RES_DATE;
 	private String RES_TIME;
-	private Date APPLY_TIME;
+	private String APPLY_TIME;
 	private String SEL_SYMP;
+
 	private String TEL;
 	private String gender;
 	private int age;
@@ -23,6 +24,12 @@ public class ReservationDTO {
 	}
 	public void setMEM_NAME(String mEM_NAME) {
 		MEM_NAME = mEM_NAME;
+	}
+	public String getDEPT_NAME() {
+		return DEPT_NAME;
+	}
+	public void setDEPT_NAME(String dEPT_NAME) {
+		DEPT_NAME = dEPT_NAME;
 	}
 	public String getTEL() {
 		return TEL;
@@ -60,12 +67,6 @@ public class ReservationDTO {
 	public void setHOSP_CODE(String HOSP_CODE) {
 		this.HOSP_CODE = HOSP_CODE;
 	}
-	public int getDEPT_CODE() {
-		return DEPT_CODE;
-	}
-	public void setDEPT_CODE(int DEPT_CODE) {
-		this.DEPT_CODE = DEPT_CODE;
-	}
 	public String getMEM_EMAIL() {
 		return MEM_EMAIL;
 	}
@@ -84,10 +85,10 @@ public class ReservationDTO {
 	public void setRES_TIME(String RES_TIME) {
 		this.RES_TIME = RES_TIME;
 	}
-	public Date getAPPLY_TIME() {
+	public String getAPPLY_TIME() {
 		return APPLY_TIME;
 	}
-	public void setAPPLY_TIME(Date APPLY_TIME) {
+	public void setAPPLY_TIME(String APPLY_TIME) {
 		this.APPLY_TIME = APPLY_TIME;
 	}
 	public String getSEL_SYMP() {

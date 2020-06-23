@@ -60,5 +60,16 @@ public class MemberServiceImpl implements MemberService{
 		return dao.diseaseupdate(map);
 	}
 
+	public List<MemberDTO> selectDiseaseList(Map map) {
+		
+		return dao.diseaseSelect(map);
+	}
+
+	public List<Map<String, Integer>> selectCount(Map map) {
+		
+		return dao.selectCount(map);
+	}
+
+
 
 }

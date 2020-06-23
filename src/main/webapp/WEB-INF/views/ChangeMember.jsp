@@ -240,48 +240,7 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 								</td>
 
 							</tr>
-							<tr>
-								<th scope="row">이메일주소 <span class="required">*</span></th>
-								<td colspan="3" class="email">
-
-									<div class="input-inside-table">
-										<input type="text" name="email1" id="email1"
-											class="input-text input-width-small07" title="input text"
-											role="textbox" required="required" value="" /> <span
-											class="input-sign">@</span> 
-											<input type="hidden" name="email" id="email" value="${list[0]['mem_email']}" />
-											<select name="email2SL" id='mai' onchange="emails(this)" title="이메일 뒷부분">
-											<option value="이메일을 선택하세요.">이메일을 선택하세요.</option>
-											<option value="hanmail.net">hanmail.net</option>
-											<option value="naver.com">naver.com</option>
-											<option value="chol.com">chol.com</option>
-											<option value="dreamwiz.com">dreamwiz.com</option>
-											<option value="empal.com">empal.com</option>
-											<option value="freechal.com">freechal.com</option>
-											<option value="gmail.com">gmail.com</option>
-											<option value="hanafos.com">hanafos.com</option>
-											<option value="hanmir.com">hanmir.com</option>
-											<option value="hitel.net">hitel.net</option>
-											<option value="hotmail.com">hotmail.com</option>
-											<option value="korea.com">korea.com</option>
-											<option value="lycos.co.kr">lycos.co.kr</option>
-											<option value="nate.com">nate.com</option>
-											<option value="netian.com">netian.com</option>
-											<option value="paran.com">paran.com</option>
-											<option value="yahoo.com">yahoo.com</option>
-											<option value="yahoo.co.kr">yahoo.co.kr</option>
-											<option value="직접입력" selected>직접입력</option>
-										</select>&nbsp;&nbsp;<input type="text" name="email2Text"
-											onchange="this.form.email2.value = this.value"
-											class="input-text input-width-small07" title="이메일 뒷부분" />
-
-
-										<!-- 이메일 :  -->
-
-									</div>
-
-								</td>
-							</tr>
+						
 
 							<tr>
 								<th scope="row">비밀번호 확인 <span class="required">*</span></th>
@@ -374,25 +333,14 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 			$(this).addClass("active");
 		})
 		var strarry = $('#tel').val().split('-');
-		var emailarry = $('#email').val().split('@');
-		$("#email1").val(emailarry[0]);
-		$("input[name='email2Text']").val(emailarry[1]);
+
 	$("#hand_no1").val(strarry[0]);
 	$("#hand_no2").val(strarry[1]);
 	$("#hand_no3").val(strarry[2]);
 	
 	});
 	
-	function emails(data) {
-		console.log(data);
-		if ($(data).val()=='직접입력'){
-			$('input[name="email2Text"]').attr("readonly", false)
-	}else{
-		$('input[name="email2Text"]').attr("readonly", true)
-		$('input[name="email2Text"]').val("");
-	}
-		
-	}
+
 	function back() {
 		close = confirm("취소하시겠습니까?")
 		if (close) {
@@ -424,11 +372,7 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 		
 		
 		if (confirm('정말로 변경하시겠습니까?')) {
-			if($("input[name='email2Text']").val()!=""){
-			$('#email').val($("#email1").val()+"@"+$("input[name='email2Text']").val());
-			}else{
-				$('#email').val($("#email1").val()+"@"+$("select[name='email2SL']").val());
-			}
+
 			$("#tel").val ($("#hand_no1").val()+"-"+$("#hand_no2").val()+"-"+$("#hand_no3").val());
 			$('.memberchange').submit();
 		}
