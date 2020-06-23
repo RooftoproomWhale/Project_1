@@ -1,13 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+body {
+background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 68%, rgba(255, 206, 196, 0.5) 163%),linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%, rgba(239, 112, 138, 0.5) 40%),linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%, rgba(237, 106, 134, 0.5) 169%),linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%, rgba(247, 126, 132, 0.5) 43%); background-blend-mode: overlay,multiply,color,normal;}
 body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-child(4) > div > div > div > table > tbody > tr > td {
 	font-size: 1.2em;
+
+}
+.panel-container{
+height:200px;
+margin-top: 65px;
+margin-bottom: 30px;
+}
+#my-content{
+height:100%
+}
+.breadcrumb{
+display: none;}
+.top-campaign{
+padding-bottom: 150px}
+@media screen and (max-width: 520px) {
+.breadcrumb{display: ""}
 }
 </style>
 
@@ -23,14 +42,10 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
 			</ol>
 		</div><!--/.row-->
 		
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header"> MyPage</h1>
-			</div>
-		</div><!--/.row-->
+	
 		
 		<div class="panel panel-container">
-			<div class="row">
+			<div class="row" >
 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
 						<div class="row no-padding"><i class="far fa-file-alt color-teal"></i>
@@ -58,49 +73,51 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
 			</div><!--/.row-->
 		</div>
 		
-		<div class="row">
-            <div class="col-lg-6 ">
+		<div class="row" id="my-content">
+            <div class="col-lg-6">
                 <!-- TOP CAMPAIGN-->
                 <div class="top-campaign">
                     <h3 class="title-3 m-b-30"> 개인정보 </h3>
                     <div class="table-responsive">
                         <table class="table table-top-campaign">
                             <tbody>
+                           
                                 <tr>
                                     <td>이름</td>
-                                    <td>윤성준</td>
+                                    <td>${list[0]['mem_name']}</td>
                                 </tr>
                                 <tr>
                                     <td>이메일</td>
-                                    <td>busu0423@gmail.com</td>
+                                    <td>${list[0]['mem_email']}</td>
                                 </tr>
                                 <tr>
                                     <td>핸드폰 번호</td>
-                                    <td>010-1234-7586</td>
+                                    <td>${list[0]['tel']}</td>
                                 </tr>
                                 <tr>
                                     <td>성별</td>
-                                    <td>남성</td>
+                                    <td>${list[0]['gender'] }</td>
                                 </tr>
                                 <tr>
                                     <td>나이</td>
-                                    <td>27</td>
+                                    <td>${list[0]['age'] }</td>
                                 </tr>
                                 <tr>
                                     <td>키</td>
-                                    <td>177(cm)</td>
+                                    <td>${list[0]['height'] }cm</td>
                                 </tr>
                                 <tr>
                                     <td>몸무게</td>
-                                    <td>74(kg)</td>
+                                    <td>${list[0]['weight'] }kg</td>
                                 </tr>
+                    
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <!--  END TOP CAMPAIGN-->
             </div>	
-            <div class="col-lg-6 " style="">
+            <div class="col-lg-6" style="">
                 <!-- TOP CAMPAIGN-->
                 <div class="top-campaign">
                     <h3 class="title-3 m-b-30"> 질환 정보 </h3>

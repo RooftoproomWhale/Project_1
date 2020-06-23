@@ -60,20 +60,28 @@ table {
 	margin: 10px;
 	height: 220px
 }
-
+.board-util{
+}
 .board-util-right {
 	float: right;
-	height: 50px
+	height: 50px;
 }
-
+.page-header{
+padding-top: 60px}
 #regForm {
 	width: 1200px
 }
 
 #contents {
 	margin-top: 140px;
-	padding-left: 50px;
-	margin-bottom: 167px;
+    padding-left: 50px;
+    margin-bottom: 167px;
+    background: white;
+    border-radius: 4px;
+    width: 110%;
+    height: 700px;
+    bottom: 10px;
+    left: 75px;
 }
 
 caption {
@@ -106,7 +114,9 @@ body{background:#FFFFFF;}
  		background-color:#474747;
  		height: 150px
  		
- 	} 
+ 	} body {
+background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 68%, rgba(255, 206, 196, 0.5) 163%),linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%, rgba(239, 112, 138, 0.5) 40%),linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%, rgba(237, 106, 134, 0.5) 169%),linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%, rgba(247, 126, 132, 0.5) 43%); background-blend-mode: overlay,multiply,color,normal;}
+ 	
 </style>
 
 </head>
@@ -120,7 +130,7 @@ body{background:#FFFFFF;}
 				<h2 style="color: blue">회원 탈퇴</h2>
 			</div>
 			<p class="lead">홈스피탈 회원탈퇴</p>
-			<form id="regForm" name="regForm" method="post" action="">
+			<form id="regForm" name="regForm" method="post" action="<c:url value='/mypage/unmember.hst'/>">
 				<input type="hidden" name="mode" value="delete" />
 				<div class="box-default">회원 탈퇴를 위하여 본인 여부를 확인하고 있습니다. 정확한 정보를
 					입력해 주세요.</div>
@@ -135,20 +145,13 @@ body{background:#FFFFFF;}
 							<col />
 						</colgroup>
 						<tbody>
-							<!--<tr>
-									<th scope="row">아이디 <span class="required">*</span></th>
-									<td>
-										<div class="input-inside-table">
-											<input type="text" name="userId" id="userId" class="input-text" title="아이디" role="textbox" />
-										</div>
-									</td>
-						</tr>-->
+							
 							<tr>
-								<th scope="row">이름 <span class="color-red">*</span></th>
+								<th scope="row">아이디 <span class="color-red">*</span></th>
 								<td>
 									<div class="input-inside-table">
-										<input type="text" name="userName" id="userName"
-											class="input-text" title="이름" role="textbox" />
+										<input type="text" name="userid" id="userid"
+											class="input-text" title="아이디" role="textbox"/>
 									</div>
 								</td>
 							</tr>
@@ -195,23 +198,26 @@ body{background:#FFFFFF;}
   	function back(){
   			close=confirm("취소하시겠습니까?")
 		if(close){
-  		$(location).attr('href', '<c:url value='/mypage/mypage.hst'/>');
+  		$(location).attr('href', "<c:url value='/mypage/mypage.hst'/>");
   			}
   	}
 
   	function Form() {
-  		var userName = $('#userName');
-  		if($.trim(userName.val()).length < 1 || $.trim(userName.val()) == '') {
-  			alert('이름을 입력해 주세요.');
-  			userName.focus();
+  		var userid = $('#userid');
+  		if($.trim(userid.val()).length < 1 || $.trim(userid.val()) == '') {
+  			alert('아이디를 입력해 주세요.');
+  			userid.focus();
   			return;
   		}
+ 
+  		
   		var userPasswd = $('#userPasswd');
   		if($.trim(userPasswd.val()).length < 1 || $.trim(userPasswd.val()) == '') {
   			alert('비밀번호를 입력해 주세요.');
   			userPasswd.focus();
   			return;
-  		}		
+  		}
+ 
   		var outReason = $('#outReason');
   		if($.trim(outReason.val()).length >= 100) {
   			alert('탈퇴사유는 100자 미만으로 입력해 주세요.');

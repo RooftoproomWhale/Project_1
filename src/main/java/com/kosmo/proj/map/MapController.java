@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,13 +19,17 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONValue;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
+import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.MemberService;
 import com.kosmo.proj.service.PharmacyDTO;
 
@@ -34,10 +39,23 @@ public class MapController {
 	@Resource(name = "mapService")
 	private MapService mapService;
 	
+	@Resource(name = "memberService")
+	private MemberService memberService;
 	
 	@RequestMapping("/Homespital/Map.hst")
-	public String map()
+	public String map(Authentication auth,Model model)
 	{
+		if(auth != null)
+		{
+			UserDetails userDetails = (UserDetails)auth.getPrincipal();
+			Map map = new HashMap<String, String>();
+			map.put("userEmail", userDetails.getUsername());
+			System.out.println(userDetails.getUsername());
+			MemberDTO dto = memberService.selectOne(map);
+			System.out.println(dto.getMem_email());
+			model.addAttribute("MemberDTO", dto);
+		}
+		
 		return "map/Map.no_tiles";
 	}
 	
@@ -281,34 +299,5 @@ public class MapController {
         } catch (IOException e) {
             throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
         }
-    }
-	
-	private static double distance(double lat1, double lon1, double lat2, double lon2, String unit) {
-        
-        double theta = lon1 - lon2;
-        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
-         
-        dist = Math.acos(dist);
-        dist = rad2deg(dist);
-        dist = dist * 60 * 1.1515;
-         
-        if (unit == "kilometer") {
-            dist = dist * 1.609344;
-        } else if(unit == "meter"){
-            dist = dist * 1609.344;
-        }
- 
-        return (dist);
-    }
-     
- 
-    // This function converts decimal degrees to radians
-    private static double deg2rad(double deg) {
-        return (deg * Math.PI / 180.0);
-    }
-     
-    // This function converts radians to decimal degrees
-    private static double rad2deg(double rad) {
-        return (rad * 180 / Math.PI);
     }
 }

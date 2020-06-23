@@ -1,39 +1,106 @@
 package com.kosmo.proj.service.web;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Resource;
+import javax.swing.JOptionPane;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.kosmo.proj.service.MemberDTO;
+import com.kosmo.proj.service.impl.MemberServiceImpl;
+
+
+
+
 
 @Controller
 public class MyPageController {
+	@Resource(name="memberService")
+	private MemberServiceImpl memberDAO;
 
+	
 	// 유저 페이지
 	/// 내정보
 	@RequestMapping("/mypage/mypage.hst")
-	public String mypage() {
+	public String mypage(@RequestParam Map map,Authentication auth,Model model) {
+		if(auth == null) {
+			JOptionPane.showMessageDialog(null,"로그인후 이용해주세요.","홈스피탈",1);
+			return "member/Login.tiles";
+		}
 		
-		
-
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		map.put("id", id);
+				List<MemberDTO> list = memberDAO.selectList(map);
+		model.addAttribute("list", list);	
+	
 		return "Mypage_Main.my_tiles";
-	}
+		
+	}/////myapge
 
-	// 회원탈퇴
-	@RequestMapping("/mypage/unmember.hst")
+	// 회원탈퇴 이동
+	@RequestMapping(value="/mypage/unmember.hst",method=RequestMethod.GET)
 	public String unmember() {
+
 		return "unmember.my_tiles";
 	}
-
+	//회원탈퇴
+	@RequestMapping(value="/mypage/unmember.hst",method=RequestMethod.POST)
+	public String unmembers(@RequestParam Map map,Authentication auth) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		map.put("id",id );
+		List<MemberDTO> list = memberDAO.selectList(map);
+		
+		if(map.get("userid").equals(id) && list.get(0).getMem_pwd().equals(map.get("userPasswd"))) {
+			int unmember = memberDAO.delete(map);
+			JOptionPane.showMessageDialog(null,"회원 탈퇴가 완료되었습니다.","홈스피탈",1);
+			}else {
+			JOptionPane.showMessageDialog(null,"아이디또는 비밀번호가 일치하지 않습니다.","홈스피탈",1);
+			return "unmember.my_tiles";
+		}
+		return "redirect:../User/Logout.hst";
+	}
+	
 	// 비밀번호 변경
 	@RequestMapping("/mypage/ChangePassword.hst")
 	public String ChangePassword() {
 		return "ChangePassword.my_tiles";
 	}
 
-	// 회원정보 수정
+	// 회원정보 수정 이동
 	@RequestMapping("/mypage/ChangeMember.hst")
-	public String ChangeMember() {
+	public String ChangeMember(@RequestParam Map map,Authentication auth,Model model) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		map.put("id",id);
+				List<MemberDTO> list = memberDAO.selectList(map);
+				model.addAttribute("list",list);
 		return "ChangeMember.my_tiles";
 	}
-
+	//회원 정보 수정
+	@RequestMapping(value="/mypage/ChangeMember.hst",method=RequestMethod.POST)
+	public String updatemember(@RequestParam Map map,Authentication auth) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		map.put("id",id );
+		List<MemberDTO> list = memberDAO.selectList(map);
+		if(list.get(0).getMem_pwd().equals(map.get("pass"))) {
+		int update = memberDAO.update(map);
+		JOptionPane.showMessageDialog(null,"회원 수정이 완료되었습니다.","홈스피탈",1);
+		}else {
+			JOptionPane.showMessageDialog(null,"비밀번호가 일치하지 않습니다.","홈스피탈",1);
+			return "redirect:../mypage/ChangeMember.hst";
+		}
+		
+		return "redirect:../mypage/mypage.hst";
+	}
 	// 진료예약 현황
 	@RequestMapping("/mypage/ReservationList.hst")
 	public String ReservationList() {
@@ -46,10 +113,25 @@ public class MyPageController {
 		return "administration.my_tiles";
 	}
 
-	// 내 질병관리
+	// 내 질병관리 이동
 	@RequestMapping("/mypage/Disease.hst")
-	public String Disease() {
+	public String Disease(@RequestParam Map map,Authentication auth,Model model) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		map.put("id",id );
+		//List<MemberDTO> list = memberDAO.selectList(map);
+		model.addAttribute("list", model);
 		return "Disease.my_tiles";
+	}
+	@RequestMapping(value = "/mypage/disease.hst",method = RequestMethod.POST)
+	public String diseaseupdate(@RequestParam Map map,Authentication auth) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		map.put("id",id );
+		int update = memberDAO.diseaseupdate(map);
+		
+		
+		return "redirect:../mypage/mypage.hst";
 	}
 
 	// 병원 페이지

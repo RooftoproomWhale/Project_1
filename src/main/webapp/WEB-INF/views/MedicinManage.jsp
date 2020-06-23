@@ -30,15 +30,15 @@ td{
 							<td><h4>제조사</h4></td>
 							<td>${info["ENTP_NAME"]}</td>
 							<td rowspan="3"><img style="width: 300px; height: 200px;"
-								alt="약품 이미지" src="${shape['ITEM_IMAGE'] }" /></td>
+								alt="약품 이미지" src="${info['ITEM_IMAGE'] }" /></td>
 						</tr>
 						<tr>
 							<td><h4>성상</h4></td>
-							<td>${shape["CHART"]}</td>
+							<td>${info["CHART"]}</td>
 						</tr>
 						<tr>
 							<td><h4>모양</h4></td>
-							<td>${shape["DRUG_SHAPE"]}</td>
+							<td>${info["DRUG_SHAPE"]}</td>
 						</tr>
 						<tr>
 							<td colspan="3"><h4>원료약품 및 분량</h4></td>

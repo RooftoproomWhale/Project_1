@@ -2,11 +2,11 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&autoLogAppEvents=1&version=v7.0&appId=273273647151212"></script>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script type="text/javascript" src="js/jquery.test.js"></script>
+
 
 
 <style>
@@ -164,10 +164,13 @@ form{
 								</a>
 							</div>
 							<div class="col-md-4 col-xs-6">
-								<a id="facebook" href="javascript:FB.login()"> <img width="60"
+								<a id="facebook" href="javascript:checkLoginState()"> <img width="60"
 									src='<c:url value="/images/snslogo/facebook.png"/>' alt="페이스북 로그인">
 								</a>
 							</div>
+							
+						<div id="status">
+						</div>
 						</div>
 					</div>
 				</div>
@@ -195,23 +198,19 @@ form{
 	
 	
 <script>
-	$(function(){
-		Kakao.init('c0e6cc61e58211222f29b50be0f8c221');
-		Kakao.isInitialized();
-		
+	Kakao.init('c0e6cc61e58211222f29b50be0f8c221');
+	Kakao.isInitialized();
 
 	$('#kakao').click(function() {
-			Kakao.Auth.login({
-				scope : 'account_email,gender',
-				success : function(response) {
-					console.log(response);
-				},
-				fail : function(error) {
-					console.log(error);
-				},
-			});
-		})
-
+		Kakao.Auth.login({
+			scope : 'account_email,gender',
+			success : function(response) {
+				console.log(response);
+			},
+			fail : function(error) {
+				console.log(error);
+			},
+		});
 	})
 </script>
 <script type="text/javascript" src='<c:url value="/js/kakao.js"/>'></script>

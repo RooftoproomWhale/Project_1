@@ -23,6 +23,7 @@
 	text-align: center;
 	line-height: 70px;
 	width: 80%;
+	margin-left: 80px;
 }
 
 .table-wrapper .table-default thead .write {
@@ -61,17 +62,21 @@ table {
 .board-util-right {
 	float: right;
 	height: 50px
+	;left:-80px
 }
 
 .board-util {
 	height: 48px;
 	top: 9px;
-	width: 80%;
+	width: 85%;
 }
 
 .board-util button {
 	height: 48px;
-	width: 100px
+	width: 100px;
+}
+.board-util-text{
+margin-left: 80px
 }
 
 caption {
@@ -94,24 +99,30 @@ caption {
 }
 
 body {
-	background: #FFFFFF;
+background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 68%, rgba(255, 206, 196, 0.5) 163%),linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%, rgba(239, 112, 138, 0.5) 40%),linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%, rgba(237, 106, 134, 0.5) 169%),linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%, rgba(247, 126, 132, 0.5) 43%); background-blend-mode: overlay,multiply,color,normal;}
+.memberchange{background: white;  border-radius: 4px;margin-bottom:40px;
+padding-left: 20px;padding-top: 30px;width: 89%}
+.page-header{width:89%;top:5px;
+background: white;margin-bottom: 0px;padding-bottom:40px;  border-radius: 4px;
+padding-top: 50px;margin-right: 80px;margin-top:60px;
 }
+.page-header h2{padding-left: 20px}
 
 .content {
 	width: 260px;
 	margin: 100px auto;
 }
+
 </style>
 </head>
 <body>
 	<div id="page-wrapper" class="container-fluid">
-		<div class="row" style="padding-left: 370px">
-			<div class="page-header" style="padding-top: 88px; padding-left: 20px">
+		<div class="row" style="padding-left: 350px;margin-right: -15px;margin-left: 80px;margin-top: 67px;">
+			<div class="page-header">
 				<h2 style="color: blue">회원 정보 수정</h2>
 			</div>
-			<p class="lead" style="padding-left: 20px">회원 정보 수정</p>
-			<section class="memberchange">
-				<div class="box-default" style="padding-left: 80px">
+			<form class="memberchange" method="post" action="<c:url value='/mypage/ChangeMember.hst'/>">
+				<div class="box-default" style="padding-left: 100px">
 					<span class="board-util-text color-blue">
 						※ 고객님께서 입력해주신 정보를 통하여 추후 고객 맞춤 정보 등 유익한 서비스가 제공되오니, 정확한 입력 부탁 드립니다. 
 					</span>
@@ -123,7 +134,7 @@ body {
 				</div>
 
 				<div class="table-wrapper" role="form">
-					<table class="table-default board-form table-member-modify">
+					<table class="table-default board-form table-member-modify" style="margin-left: 100px">
 						<caption>개인정보 수정</caption>
 						<colgroup>
 							<col style="width: 140px;" />
@@ -137,13 +148,13 @@ body {
 								<th scope="row">이름</th>
 								<td style="padding-top: 10px; width: 30%">
 									<div class="input-inside-table">
-										<input type="text" id="name" class="input-text" title="이름" value="${userid}" role="textbox" />
+										<input type="text" id="name" name="name" class="input-text" title="이름" value="${list[0]['mem_name']}" role="textbox" />
 									</div>
 								</td>
 								<th scope="row" style="width: 15%; padding-left: 80px">키</th>
 								<td>
 									<div class="input-inside-table">
-										<input type="text" id="height" class="input-text" title="키" value="${height}" role="textbox" />
+										<input type="text" id="height"  name="height" class="input-text" title="키" value="${list[0]['height']}" role="textbox" />
 									</div>
 								</td>
 							</tr>
@@ -152,25 +163,26 @@ body {
 								<th scope="row">나이</th>
 								<td>
 									<div class="input-inside-table">
-										<select style="width: 176px; height: 24px;" title="나이" id="age" value="${age}" class="input-width-small07">
+										<select style="width: 176px; height: 24px;" title="나이" id="age" name="age" value="${list[0]['age']}" class="input-width-small07">
 											<option>나이</option>
-											<option value="">10세 이하</option>
-											<option value="">10대</option>
-											<option value="">20대</option>
-											<option value="">30대</option>
-											<option value="">40대</option>
-											<option value="">50대</option>
-											<option value="">60대</option>
-											<option value="">70대</option>
-											<option value="">80대</option>
-											<option value="">90대</option>
+											<option value="10세 이하">10세 이하</option>
+											<option value="10">10대</option>
+											<option value="20대">20대</option>
+											<option value="30대">30대</option>
+											<option value="40대">40대</option>
+											<option value="50대">50대</option>
+											<option value="60대">60대</option>
+											<option value="70대">70대</option>
+											<option value="80대">80대</option>
+											<option value="90대">90대</option>
 										</select>
+								
 									</div>
 								</td>
 								<th scope="row" style="padding-left: 80px">몸무게</th>
 								<td>
 									<div class="input-inside-table">
-										<input type="text" id="weight" class="input-text" title="몸무게" value="${weight}" role="textbox" />
+										<input type="text" id="weight" name="weight" class="input-text" title="몸무게" value="${list[0]['weight']}" role="textbox" />
 									</div>
 								</td>
 							</tr>
@@ -178,10 +190,10 @@ body {
 								<th scope="row" style="width: 15%; margin-top: 6px">성별</th>
 								<td>
 									<div class="input-inside-table">
-										<select id="gender" value="${gender}" style="width: 176px; height: 24px;" title="성별" class="input-width-small07">
+										<select id="gender" name="gender"  value="${list[0]['gender']}" style="width: 176px; height: 24px;" title="성별" class="input-width-small07">
 											<option>성별</option>
-											<option value="">남자</option>
-											<option value="">여자</option>
+											<option value="남자">남자</option>
+											<option value="여자">여자</option>
 										</select>
 									</div>
 								</td>
@@ -201,13 +213,13 @@ body {
 											name="hand_no2" id="hand_no2"
 											class="input-text input-width-small" title="휴대폰번호 중간자리"
 											role="textbox" required="required" onkeyup="number(this);"
-											maxlength="4" value="1234" /> <span class="input-sign">-</span>
+											maxlength="4" value="" /> <span class="input-sign">-</span>
 
 										<input type="text" name="hand_no3" id="hand_no3"
 											class="input-text input-width-small" title="휴대폰번호 끝자리"
 											role="textbox" required="required" onkeyup="number(this);"
-											maxlength="4" value="5678" />
-
+											maxlength="4" value="" />
+										<input type="hidden" id="tel" name='tel' value="${list[0]['tel']}"/>
 
 
 										<div class="option-check">
@@ -233,13 +245,12 @@ body {
 								<td colspan="3" class="email">
 
 									<div class="input-inside-table">
-										<input type="text" name="email1" id="email"
+										<input type="text" name="email1" id="email1"
 											class="input-text input-width-small07" title="input text"
-											role="textbox" required="required" value="${email}" /> <span
-											class="input-sign">@</span> <input type="hidden"
-											name="email2" value="daum.net" /><select name="email2SL"
-											onchange="if (this.form.email2SL.selectedIndex==19) { this.form.email2Text.disabled=false;this.form.email2Text.focus();this.form.email2Text.value='';} else { this.form.email2Text.disabled=true;this.form.email2.value=this.form.email2SL[this.form.email2SL.selectedIndex].value;this.form.email2Text.value=this.form.email2SL[this.form.email2SL.selectedIndex].value;}"
-											class="input-text input-width-small07" title="이메일 뒷부분">
+											role="textbox" required="required" value="" /> <span
+											class="input-sign">@</span> 
+											<input type="hidden" name="email" id="email" value="${list[0]['mem_email']}" />
+											<select name="email2SL" id='mai' onchange="emails(this)" title="이메일 뒷부분">
 											<option value="이메일을 선택하세요.">이메일을 선택하세요.</option>
 											<option value="hanmail.net">hanmail.net</option>
 											<option value="naver.com">naver.com</option>
@@ -261,7 +272,6 @@ body {
 											<option value="yahoo.co.kr">yahoo.co.kr</option>
 											<option value="직접입력" selected>직접입력</option>
 										</select>&nbsp;&nbsp;<input type="text" name="email2Text"
-											value="daum.net"
 											onchange="this.form.email2.value = this.value"
 											class="input-text input-width-small07" title="이메일 뒷부분" />
 
@@ -278,9 +288,9 @@ body {
 								<td colspan="3">
 
 									<div class="input-inside-table">
-										<input type="password" name="pass2" id="pass2"
+										<input type="password" name="pass" id="pass2"
 											class="input-text" title="비밀번호 확인" role="textbox"
-											maxlength="20" onkeyup="dupCheckUserPw(this.value);" /> <span
+											maxlength="20" /> <span
 											id="messagePw" class="input-description">비밀번호 확인을 위해
 											입력해 주세요</span>
 									</div>
@@ -291,7 +301,7 @@ body {
 						</tbody>
 					</table>
 				</div>
-				<div class="board-util">
+				<div class="board-util" style="width: 88%">
 					<span class="board-util-text color-blue">※ 정보를 수정하신 후 확인 버튼을
 						클릭하셔야 정보 수정이 완료됩니다.</span>
 					<div class="board-util-right">
@@ -307,7 +317,7 @@ body {
 				<div class="board-util board-util02">
 					<div class="board-util-left"></div>
 				</div>
-			</section>
+			</form>
 		</div>
 	</div>
 </body>
@@ -350,6 +360,7 @@ body {
 		});
 	})(jQuery);
 </script>
+
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
@@ -362,8 +373,26 @@ body {
 			$("#demo-list li.active").removeClass("active")
 			$(this).addClass("active");
 		})
-	})
-
+		var strarry = $('#tel').val().split('-');
+		var emailarry = $('#email').val().split('@');
+		$("#email1").val(emailarry[0]);
+		$("input[name='email2Text']").val(emailarry[1]);
+	$("#hand_no1").val(strarry[0]);
+	$("#hand_no2").val(strarry[1]);
+	$("#hand_no3").val(strarry[2]);
+	
+	});
+	
+	function emails(data) {
+		console.log(data);
+		if ($(data).val()=='직접입력'){
+			$('input[name="email2Text"]').attr("readonly", false)
+	}else{
+		$('input[name="email2Text"]').attr("readonly", true)
+		$('input[name="email2Text"]').val("");
+	}
+		
+	}
 	function back() {
 		close = confirm("취소하시겠습니까?")
 		if (close) {
@@ -373,43 +402,37 @@ body {
 	}
 
 	function Form() {
-
-		/* 	var userPasswd = $('#userPasswd');
-			if ($.trim(userPasswd.val()).length < 1
-					|| $.trim(userPasswd.val()) == '') {
-				alert('현재 비밀번호를 입력해 주세요.');
-				userPasswd.focus();
-				return;
-			}
-			var newuserPasswd = $('#newuserPasswd');
-			if ($.trim(newuserPasswd.val()).length < 1
-					|| $.trim(newuserPasswd.val()) == '') {
-				alert('새 비밀번호를 입력해 주세요.');
-				newuserPasswd.focus();
-				return;
-			}
-			var userPasswdOK = $('#userPasswdOK');
-			if ($.trim(userPasswdOK.val()).length < 1
-					|| $.trim(userPasswdOK.val()) == '') {
-				alert('새 비밀번호 확인을 입력해 주세요.');
-				userPasswdOK.focus();
-				return;
-			}
-			if ($.trim(newuserPasswd.val()) != $.trim(userPasswdOK.val())) {
-				alert('새비밀번호가 일치하지 않습니다');
-				userPasswdOK.focus();
-				return;
-			}
-		 */
 		var passok = $('#pass2');
 		if ($.trim(passok.val()).length < 1 || $.trim(passok.val()) == '') {
 			alert('비밀번호를 입력해주세요');
 			passok.focus();
 			return;
 		}
-		if (confirm('정말로 변경하시겠습니까?')) {
-			$('form[name=passForm]').submit();
+		if($('#name').val()==""){
+			alert('이름을 입력해주세요');
+			$('#name').focus();
+			return;
 		}
+		if($('#gender').val()=="성별"){
+			alert('성별을 선택해주세요');
+			return;
+		}
+		if($('#age').val()=="나이"){
+			alert('나이를 선택해주세요');
+			return;
+		}
+		
+		
+		if (confirm('정말로 변경하시겠습니까?')) {
+			if($("input[name='email2Text']").val()!=""){
+			$('#email').val($("#email1").val()+"@"+$("input[name='email2Text']").val());
+			}else{
+				$('#email').val($("#email1").val()+"@"+$("select[name='email2SL']").val());
+			}
+			$("#tel").val ($("#hand_no1").val()+"-"+$("#hand_no2").val()+"-"+$("#hand_no3").val());
+			$('.memberchange').submit();
+		}
+		
 	}
 </script>
 </html>
