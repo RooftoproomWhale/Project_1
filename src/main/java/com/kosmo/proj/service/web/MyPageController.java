@@ -119,8 +119,8 @@ public class MyPageController {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id",id );
-		//List<MemberDTO> list = memberDAO.selectList(map);
-		model.addAttribute("list", model);
+//		List<MemberDTO> list = memberDAO.selectDiseaseList(map);
+//		model.addAttribute("list", model);
 		return "Disease.my_tiles";
 	}
 	@RequestMapping(value = "/mypage/disease.hst",method = RequestMethod.POST)
@@ -128,7 +128,7 @@ public class MyPageController {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id",id );
-		int update = memberDAO.diseaseupdate(map);
+//		int update = memberDAO.diseaseupdate(map);
 		
 		
 		return "redirect:../mypage/mypage.hst";

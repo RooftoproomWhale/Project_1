@@ -14,8 +14,8 @@
 		INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
 	 </insert>
 	 
-	 <select id="signView" parameterType="MemberDTO">
-		 SELECT * FROM MEMBER WHERE MEM_EMAIL = #{email}
+	 <select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
+		 SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
 	 </select>
 	 
  	 <delete id="signDelete" parameterType="MemberDTO">
@@ -23,7 +23,7 @@
 	 </delete>
 	 	
 	 <update id="signUpdate" parameterType="java.util.Map" >
-		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel}, mem_email = #{email}, height = #{height},weight = #{weight} where mem_email = #{id} 
+		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel},  height = #{height},weight = #{weight} where mem_email = #{id} 
 	 </update>
 	 
 	 
@@ -193,13 +193,7 @@
 
    <!-- 사용자 관리 -->
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * 
-		FROM (
-			SELECT ROWNUM RN, A.* 
-				FROM (
-						SELECT * FROM MEMBER
-						) A
-				)
+		SELECT * FROM (ELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<select id="selectMemberListUser" parameterType="java.util.Map" resultType="MemberDTO">

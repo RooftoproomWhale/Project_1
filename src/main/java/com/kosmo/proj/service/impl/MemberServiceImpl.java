@@ -60,5 +60,10 @@ public class MemberServiceImpl implements MemberService{
 		return dao.diseaseupdate(map);
 	}
 
+	public List<MemberDTO> selectDiseaseList(Map map) {
+		
+		return dao.diseaseSelect(map);
+	}
+
 
 }

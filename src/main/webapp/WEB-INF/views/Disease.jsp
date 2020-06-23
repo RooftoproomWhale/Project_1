@@ -168,7 +168,7 @@ top:41px;
 	flex: 1;
 }
 
-.task-box {
+.task-box,.task-help {
 	position: relative;
 	border-radius: 12px;
 	width: 100%;
@@ -289,7 +289,7 @@ top:41px;
 	color: var(- -task-color);
 	font-size: 13px;
 	font-weight: 500;
-}.task :hover {
+}.description-task :hover {
     transform: translatex(2px);
  }.task label {
 	cursor: pointer;
@@ -312,14 +312,14 @@ label .label-text:before {
 }
 
 .task-item:checked+label .label-text:before {
-	background-color: var(- -checkbox-color);
+	background-color: var(--checkbox-color);
 	border: none;
 	background-image:
 		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
 	background-repeat: no-repeat;
 	background-size: 10px;
 	background-position: center;
-	border: 1px solid var(- -checkbox-color);
+	border: 1px solid var(--checkbox-color);
 }
 
 .tag {
@@ -327,24 +327,26 @@ label .label-text:before {
   padding: 4px 8px;
   border-radius: 20px;
   }
-  .tag .approved {
+  .approved {
     background-color: var(--tag-color-one);
     color: var(--tag-color-text-one);
   }
   
-  .tag .progress {
+  .progress {
     background-color: var(--tag-color-two);
     color: var(--tag-color-text-two);
+   height: 20px;
+   margin-bottom: 0px
   }
 
-review {
-	background-color: var(- -tag-color-three);
-	color: var(- -tag-color-text-three);
+.review {
+	background-color: var(--tag-color-three);
+	color: var(--tag-color-text-three);
 }
 
 .waiting {
-	background-color: var(- -tag-color-four);
-	color: var(- -tag-color-text-four);
+	background-color: var(--tag-color-four);
+	color: var(--tag-color-text-four);
 }
 
 .upcoming {
@@ -418,22 +420,35 @@ review {
 </style>
 
 <script type="text/javascript">
+jQuery(document).ready(function(){
+	if(jQuery('.task-item').prop('checked')){
+	 $(".task-item:checked").each(function(){ 
+		 var txt = $(this).next().text();
+	$(".task-item:checked").siblings('span').attr('class','tag approved').text("Selection");
+	  $("<div class='task-box yellow'><div class='description-task'><div class='task-name'>"+txt+"</div><div class='time'>내용</div></div><div class='glyphicon glyphicon-remove more-button'></div></div>").appendTo('.right-content');
+	 });
+	}
+	
+	else{
+		  $(this).siblings('span').attr('class','tag progress').text("UnSelection");
+	}
+});
+	
 	
 		$(function() {
-			var data = "#{list[0]['']}".split(',');
+	/* 		var data = "".split(',');
 			for(i=0;i<=data.length;i++){
-				"<div class='task-box yellow'><div class='description-task'><div class='task-name'>"+data[i]+"</div><div class='time'>내용</div></div><div class='glyphicon glyphicon-remove more-button'></div></div>").appendTo('.right-content')
-			}
-			
-			
-			
+		$("<div class='task-box yellow'><div class='description-task'><div class='task-name'>"+data[i]+"</div><div class='time'>내용</div></div><div class='glyphicon glyphicon-remove more-button'></div></div>").appendTo('.right-content')
+			} */
+		
 			
 			$(".task-item").change(function(){
 				 var txt = $(this).next().text();
 	             var disease=$('.task-name');
 	             var taskbox=$('.task-box');
 	             var size = disease.length;
-		
+	             $(this).siblings('span').attr('class','tag approved').text("Selection");
+	             
 		        if($(this).is(":checked")){
 
 		             var is =true;
@@ -455,6 +470,7 @@ review {
 		               }
 		        	}
 		        else{
+		        	  $(this).siblings('span').attr('class','tag progress').text("UnSelection");
 		        	for(i=0;i <size;i++){
 		        		if(txt == disease.eq(i).text()){
 		        			taskbox.eq(i).remove()
@@ -565,7 +581,7 @@ review {
 			for (i = 0; i < dis.length; i++) {
 				str += $.trim(dis.eq(i).text()) + ",";
 			}
-			   $.ajax({
+		/* 	   $.ajax({
 		            type: "get",
 		            url: "<c:url value='/mypage/disease.hst'/>",
 		            data: {
@@ -574,8 +590,8 @@ review {
 		            success: function (response) {
 
 		            }
-		        });
-		
+		        }); */
+		return console.log(str.slice(0, -1));
 		}
 	};
 
@@ -647,21 +663,21 @@ review {
 					<!-- 외과 -->
 					<div class="task">
 						<input class="task-item" name="task-gs" type="checkbox"
-							id="item-1"> <label for="item-1"> <span
+							id="item-1" checked> <label for="item-1"> <span
 							class="label-text">만성폐쇄성 폐질환</span>
-						</label> <span class="tag approved">Approved</span>
+						</label> <span class="tag progress" id="items-1">UnSelection</span>
 					</div>
 					<div class="task">
 						<input class="task-item" name="task-gs" type="checkbox"
 							id="item-2"> <label for="item-2"> <span
 							class="label-text">당뇨병</span>
-						</label> <span class="tag progress">In Progress</span>
+						</label> <span class="tag progress" >UnSelection</span>
 					</div>
 					<div class="task">
 						<input class="task-item" name="task-gs" type="checkbox"
-							id="item-3"> <label for="item-3"> <span
+							id="item-3" checked> <label for="item-3"> <span
 							class="label-text">고혈압</span>
-						</label> <span class="tag review">In Review</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 외과 끝-->
 					<!-- 신경외과 -->
@@ -669,7 +685,7 @@ review {
 						<input class="task-item" name="task-ns" type="checkbox"
 							id="item-4"> <label for="item-4"> <span
 							class="label-text">천식</span>
-						</label> <span class="tag progress">In Progress</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 신경외과 끝 -->
 					<!-- 정형외과 -->
@@ -677,13 +693,13 @@ review {
 						<input class="task-item" name="task-os" type="checkbox"
 							id="item-5"> <label for="item-5"> <span
 							class="label-text">치매</span>
-						</label> <span class="tag approved">Approved</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<div class="task">
 						<input class="task-item" name="task-os" type="checkbox"
 							id="item-6"> <label for="item-6"> <span
 							class="label-text">골관절염</span>
-						</label> <span class="tag review">In Review</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 정형외과 끝 -->
 					<!-- 비뇨 기과 -->
@@ -691,7 +707,7 @@ review {
 						<input class="task-item" name="task-uro" type="checkbox"
 							id="item-7"> <label for="item-7"> <span
 							class="label-text">심장</span>
-						</label> <span class="tag waiting">Waiting</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 비뇨 기과 끝 -->
 					<!-- 정신과 -->
@@ -699,7 +715,7 @@ review {
 						<input class="task-item" name="task-np" type="checkbox"
 							id="item-8"> <label for="item-8"> <span
 							class="label-text">암</span>
-						</label> <span class="tag waiting">Waiting</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 정신과 끝 -->
 					<!-- 이비인후과 -->
@@ -707,7 +723,7 @@ review {
 						<input class="task-item" name="task-ent" type="checkbox"
 							id="item-9"> <label for="item-9"> <span
 							class="label-text">질병</span>
-						</label> <span class="tag waiting">Waiting</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 이비인후과 끝 -->
 					<!-- 신경과 -->
@@ -715,7 +731,7 @@ review {
 						<input class="task-item" name="task-nr" type="checkbox"
 							id="item-9"> <label for="item-9"> <span
 							class="label-text">질병</span>
-						</label> <span class="tag waiting">Waiting</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 신경과 끝 -->
 					<!-- 소화기내과  -->
@@ -723,14 +739,14 @@ review {
 						<input class="task-item" name="task-gi" type="checkbox"
 							id="item-9"> <label for="item-9"> <span
 							class="label-text">질병</span>
-						</label> <span class="tag waiting">Waiting</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 소화기내과  끝 -->
 					<!-- 호흡기내과 -->
 					<div class="task">
 						<input class="task-item" name="task-p" type="checkbox" id="item-9">
 						<label for="item-9"> <span class="label-text">질병</span>
-						</label> <span class="tag waiting">Waiting</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 호흡기내과 끝 -->
 					<!-- 피부과  -->
@@ -738,7 +754,7 @@ review {
 						<input class="task-item" name="task-der" type="checkbox"
 							id="item-9"> <label for="item-9"> <span
 							class="label-text">질병</span>
-						</label> <span class="tag waiting">Waiting</span>
+						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 피부과  끝 -->
 
@@ -753,13 +769,14 @@ review {
 
 			<div class="header">질병 선택 목록</div>
 			<div class="right-content">
-				<div class="task-box blue">
+				<div class="task-help blue">
 					<div class="description-task">
 
-						<div class="">도움말</div>
-						<div class="time">질병선택하면 도움말 아래로 리스트가 추가 됩니다</div>
+						<div class=""></div>
+						<div class="time">질병선택후 아래 저장버튼을 눌러주세요<br> <span class="glyphicon glyphicon-ok" style="font-size: 1.6em;color: black;" onclick="save();">저장하기</span></div>
 					</div>
 					<div class="glyphicon glyphicon-remove more-button"></div>
+					
 				</div>
 			</div>
 		</div>
