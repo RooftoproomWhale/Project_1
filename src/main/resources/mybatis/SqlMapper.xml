@@ -91,7 +91,8 @@
       WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
    </select>
 
-<!-- 페이징 -->
+<!--관리자단 -->
+	<!-- 페이징 -->
 	<select id="countRecordHosAuth" resultType="int">
 		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
 	</select>
@@ -112,7 +113,6 @@
 		select COUNT(*) from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
 	
-<!--관리자단 -->
 	<!-- 대쉬보드 -->
 	<select id="memberCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
@@ -286,17 +286,4 @@
 		select h.*, r.* from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
 	
-	<!-- 공지사항 관리 -->
-<!-- 	<insert id=""> -->
-	
-<!-- 	</insert> -->
-<!-- 	<update id=""> -->
-	
-<!-- 	</update> -->
-<!-- 	<select id=""> -->
-	
-<!-- 	</select> -->
-<!-- 	<delete id=""> -->
-	
-<!-- 	</delete> -->
 </mapper>
