@@ -49,7 +49,7 @@ padding-bottom: 150px}
 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
 						<div class="row no-padding"><i class="far fa-file-alt color-teal"></i>
-							<div class="large">20</div>
+							<div class="large">${count[0]["PRECOUNT"]}</div>
 							<div class="text-muted">처방 등록 수</div>
 						</div>
 					</div>
@@ -57,7 +57,7 @@ padding-bottom: 150px}
 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding"><i class="fas fa-pills color-blue"></i>
-							<div class="large">4</div>
+							<div class="large">${count[0]["RESERCOUNT"]}</div>
 							<div class="text-muted">복용 중인 약품 수</div>
 						</div>
 					</div>

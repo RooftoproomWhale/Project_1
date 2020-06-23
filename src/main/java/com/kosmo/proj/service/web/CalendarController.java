@@ -33,16 +33,26 @@ public class CalendarController {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		 map.put("id",id); 
-	
+		 ObjectMapper mapper = new ObjectMapper(); 
+		 	String jsonStr = null; 
+			 String jsonStr2 = null; 
+			 try {
+		 if(map.get("retitles").equals("예약리스트")) {
+			
+			 List<ReservationDTO> list2 = calendarDAO.selectList2(map);
+			 jsonStr2 = mapper.writeValueAsString(list2); 
+			 jsonStr = "[]";
+			 
+		 	}
+		 else {
+			 System.out.println("캘린더 실행");
 		 List<CalendarDTO> list = calendarDAO.selectList(map);
-	List<ReservationDTO> list2 = calendarDAO.selectList2(map);
-	 ObjectMapper mapper = new ObjectMapper(); String jsonStr = null; 
-		 String jsonStr2 = null; 
-		 try {
-		  jsonStr = mapper.writeValueAsString(list); 
-		  jsonStr2 = mapper.writeValueAsString(list2); 
-		  }catch (JsonProcessingException
+		 List<ReservationDTO> list2 = calendarDAO.selectList2(map);
+	  jsonStr = mapper.writeValueAsString(list); 
+	  jsonStr2 = mapper.writeValueAsString(list2); 
+		 }}catch (JsonProcessingException
 		  e) { e.printStackTrace(); }
+
 		 String str="";
 		 if(jsonStr.equals("[]") || jsonStr2.equals("[]")) {
 			str = jsonStr;
@@ -55,6 +65,7 @@ public class CalendarController {
 		 jsonStr2 = jsonStr2.substring(1);
 		 str = jsonStr+","+jsonStr2;
 		 }
+
 		return str;
 	}/////selectEventList  
 	
