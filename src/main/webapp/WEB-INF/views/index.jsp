@@ -205,7 +205,7 @@
 		function showNews(){
 			
 			$.ajax({
-				url:"<c:url value='/News'/>",
+				/* url:"<c:url value='/News'/>",
 				data:{"clientId":"GVe_m816Ap0X5nw8XFXQ","clientSecret":"6JAsTo47hF"},
 				type:'get',
 				dataType: "json",
@@ -223,9 +223,25 @@
 					
 					$('#news').html(news);
 				},
-				error:function(e){console.log('에러:',e)}
+				error:function(e){console.log('에러:',e)} */
+					url:"http://192.168.0.248:5000/covid/",
+					type:'get',
+					dataType:"json",
+					success:function(data){
+						var news = "<table class='table' style='width:80%; border: 3px solid #0051ff'>";
+						if(data.length==0){
+							news+="<li>뉴스 데이터가 없습니다</li>";
+						} 
+						$.each(data, function(index, element) {
+							console.log(element)
+							news+="<tr><td><a href='"+element.href+"' target=_blank>"+element.title+"</a><td></tr>";
+						});
+						news+="</table>";
+						$('#news').html(news);
+					},
+					error:function(e){console.log('에러:',e)} 
 			});			
-		};
+		}
 	});
 </script>
 </html>

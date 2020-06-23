@@ -46,7 +46,7 @@ public class MemberDAO implements MemberService {
 		@Override
 		public MemberDTO selectOne(Map map) {
 			// TODO Auto-generated method stub
-			return sqlMapper.selectOne("memberSelectOne");
+			return sqlMapper.selectOne("selectOne",map);
 		}
 
 		@Override
@@ -62,6 +62,11 @@ public class MemberDAO implements MemberService {
 		@Override
 		public int update(Map map) {
 			return sqlMapper.update("signUpdate", map);
+		}
+
+		public int diseaseupdate(Map map) {
+			
+			return sqlMapper.update("diseaseupdate",map);
 		}
 
 }

@@ -76,10 +76,9 @@ $(function() {
 		var td = tr.children();
 		var hosp_name = td.eq(1).text().trim();
 		console.log("승인 클릭", hosp_name);
-		var request = 
 			$.ajax({ 
 				url: "<c:url value='/Admin/ApproveAuth.hst'/>",
-				type: "post", //get, post 방식 
+				type: "get", //get, post 방식 
 				dataType: 'html', //or xml or script or html or json or text
 				data: {
 						"hosp_name" : hosp_name
@@ -257,26 +256,26 @@ $(".table-data-feature .item:last-child").on('click', function(){
 						</div>
 					</div>
 					<div style="display: block; text-align: center;">
-						<c:if test="${paging.startPage != 1 }">
-							<a href="<c:url value='/Admin/HosAuth.hst?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}'/>">&lt;</a>
-						</c:if>
-						<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
-							var="p">
-							<c:choose>
-								<c:when test="${p == paging.nowPage }">
-									<b>${p }</b>
-								</c:when>
-								<c:when test="${p != paging.nowPage }">
-									<a
-										href="<c:url value='/Admin/HosAuth.hst?nowPage=${p }&cntPerPage=${paging.cntPerPage}'/>">${p }</a>
-								</c:when>
-							</c:choose>
-						</c:forEach>
-						<c:if test="${paging.endPage != paging.lastPage}">
-							<a
-								href="<c:url value='/Admin/HosAuth.hst?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}'/>">&gt;</a>
-						</c:if>
-					</div>
+ 						<c:if test="${paging.startPage != 1 }">
+							<a href="<c:url value='/Admin/HosAuth.hst?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}'/>">&lt;</a> 
+						</c:if> 
+ 						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" 
+							var="p"> 
+							<c:choose> 
+								<c:when test="${p == paging.nowPage }"> 
+ 									<b>${p }</b> 
+ 								</c:when>
+								<c:when test="${p != paging.nowPage }"> 
+ 									<a 
+ 										href="<c:url value='/Admin/HosAuth.hst?nowPage=${p }&cntPerPage=${paging.cntPerPage}'/>">${p }</a>
+ 								</c:when> 
+							</c:choose> 
+ 						</c:forEach>
+						<c:if test="${paging.endPage != paging.lastPage}"> 
+						<a 
+ 								href="<c:url value='/Admin/HosAuth.hst?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}'/>">&gt;</a>
+						</c:if> 
+ 					</div> 
 				</div>
 			</div>
 		</div>

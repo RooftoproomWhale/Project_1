@@ -36,6 +36,7 @@ public class AdminController {
 	@RequestMapping("Index.hst")
 	public String toIndex(Model model)
 	{
+		//overview
 		int memberCount = adminService.memberCount();
 		int hospCount = adminService.hospCount();
 		int presCount = adminService.presCount();
@@ -49,6 +50,58 @@ public class AdminController {
 		model.addAttribute("presCount", presCount);
 		model.addAttribute("aptCount", aptCount);
 		
+		//recent chart
+		int janMemCount = adminService.janMemCount();
+		int febMemCount = adminService.febMemCount();
+		int marMemCount = adminService.marMemCount();
+		int aprMemCount = adminService.aprMemCount();
+		int mayMemCount = adminService.mayMemCount();
+		int junMemCount = adminService.junMemCount();
+		int julMemCount = adminService.julMemCount();
+		
+		int janAptCount = adminService.janAptCount();
+		int febAptCount = adminService.febAptCount();
+		int marAptCount = adminService.marAptCount();
+		int aprAptCount = adminService.aprAptCount();
+		int mayAptCount = adminService.mayAptCount();
+		int junAptCount = adminService.junAptCount();
+		int julAptCount = adminService.julAptCount();
+		
+		System.out.println(junMemCount);
+		System.out.println(junAptCount);
+		model.addAttribute("janMemCount", janMemCount);
+		model.addAttribute("febMemCount", febMemCount);
+		model.addAttribute("marMemCount", marMemCount);
+		model.addAttribute("aprMemCount", aprMemCount);
+		model.addAttribute("mayMemCount", mayMemCount);
+		model.addAttribute("junMemCount", junMemCount);
+		model.addAttribute("julMemCount", julMemCount);
+		
+		model.addAttribute("janAptCount", janAptCount);
+		model.addAttribute("febAptCount", febAptCount);
+		model.addAttribute("marAptCount", marAptCount);
+		model.addAttribute("aprAptCount", aprAptCount);
+		model.addAttribute("mayAptCount", mayAptCount);
+		model.addAttribute("junAptCount", junAptCount);
+		model.addAttribute("julAptCount", julAptCount);
+		
+		//age chart
+		int under10 = adminService.under10Count();
+		int over10under20 = adminService.over10under20Count();
+		int over20under30 = adminService.over20under30Count();
+		int over30under40 = adminService.over30under40Count();
+		int over40under50 = adminService.over40under50Count();
+		int over50under60 = adminService.over50under60Count();
+		int over60 = adminService.over60Count();
+		System.out.println("10세미만: " + under10 + " 10~19: " + over10under20 +" 20~29: " + over20under30 + " 30~39: " + over30under40 + " 40~49: " + over40under50 + " 50~59: " + over50under60 + " 60이상: " + over60);;
+		model.addAttribute("under10", under10);
+		model.addAttribute("over10under20", over10under20);
+		model.addAttribute("over20under30", over20under30);
+		model.addAttribute("over30under40", over30under40);
+		model.addAttribute("over40under50", over40under50);
+		model.addAttribute("over50under60", over50under60);
+		model.addAttribute("over60", over60);
+		
 		return "Ad_Index.ad_tiles";
 	}
 	
@@ -58,7 +111,7 @@ public class AdminController {
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
-		int total = adminService.getTotalRecordAppointment(map);
+		int total = adminService.getTotalRecordAccount(map);
 		System.out.println(total);
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
@@ -154,12 +207,25 @@ public class AdminController {
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
+		int total = adminService.getTotalRecordAccSearch(map);
+		System.out.println(total);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		List<MemberDTO> list =adminService.selectList_Account_Search(map);
 		for(MemberDTO val:list)
 		{
 			System.out.println(val.getMem_email());
 			System.out.println(val.getMem_name());
 		}
+		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
 		
 		return "Accounts.ad_tiles";
@@ -190,6 +256,7 @@ public class AdminController {
 			System.out.println(val.getRESERV_NO());
 			System.out.println(val.getMEM_EMAIL());
 			System.out.println(val.getAPPROVED());
+			System.out.println(val.getAPPLY_TIME());
 		}
 		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
@@ -225,15 +292,31 @@ public class AdminController {
 	}
 	
 	@RequestMapping("AppointmentSearch.hst")
-	public String appointmentSearch(@RequestParam Map map, Model model)
+	public String appointmentSearch(@RequestParam Map map, Paging vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
+		int total = adminService.getTotalRecordAptSearch(map);
+		System.out.println(total);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		List<ReservationDTO> list =adminService.selectList_Appointment_Search(map);
 		for(ReservationDTO val:list)
 		{
 			System.out.println(val.getHOSP_NAME());
 			System.out.println(val.getMEM_NAME());
 		}
+		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
+		
 		return "Appointment.ad_tiles";
 	}
 	//병원 제휴
@@ -265,6 +348,20 @@ public class AdminController {
 		return "HosAuth.ad_tiles"; 
 	}
 	
+//	@RequestMapping("HosAuth.hst")
+//	public String toHosAuth(@RequestParam Map map, Model model)
+//	{
+//		
+//		List<HospitalDTO> list =adminService.selectList_Auth_All(map);
+//		for(HospitalDTO val:list)
+//		{
+//			System.out.println(val.getHosp_name());
+//		}
+//		model.addAttribute("list", list);
+//		
+//		return "HosAuth.ad_tiles"; 
+//	}
+	
 	@RequestMapping("ApproveAuth.hst")
 	public String approve(@RequestParam Map map, Model model)
 	{
@@ -282,21 +379,31 @@ public class AdminController {
 	}
 	
 	@RequestMapping("HosAuthSearch.hst")
-	public String hosAuthSearch(@RequestParam Map map, Model model)
+	public String hosAuthSearch(@RequestParam Map map, Paging vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
 	{
+		int total = adminService.getTotalRecordHosSearch(map);
+		System.out.println(total);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		List<HospitalDTO> list =adminService.selectList_Auth_Search(map);
 		for(HospitalDTO val:list)
 		{
 			System.out.println(val.getHosp_name());
 			System.out.println(val.getHosp_code());
 		}
+		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
-		return "HosAuth.ad_tiles";
-	}
-	
-	@RequestMapping("HosAuthSearchNew.hst")
-	public String hosAuthSearchNew()
-	{
+		
 		return "HosAuth.ad_tiles";
 	}
 	
@@ -314,7 +421,85 @@ public class AdminController {
 	}
 	
 	@RequestMapping("Chart.hst")
-	public String toChart()
+	public String toChart(Model model)
+	{
+		//recent chart
+		int janMemCount = adminService.janMemCount();
+		int febMemCount = adminService.febMemCount();
+		int marMemCount = adminService.marMemCount();
+		int aprMemCount = adminService.aprMemCount();
+		int mayMemCount = adminService.mayMemCount();
+		int junMemCount = adminService.junMemCount();
+		int julMemCount = adminService.julMemCount();
+		
+		int janAptCount = adminService.janAptCount();
+		int febAptCount = adminService.febAptCount();
+		int marAptCount = adminService.marAptCount();
+		int aprAptCount = adminService.aprAptCount();
+		int mayAptCount = adminService.mayAptCount();
+		int junAptCount = adminService.junAptCount();
+		int julAptCount = adminService.julAptCount();
+		
+		System.out.println(junMemCount);
+		System.out.println(junAptCount);
+		model.addAttribute("janMemCount", janMemCount);
+		model.addAttribute("febMemCount", febMemCount);
+		model.addAttribute("marMemCount", marMemCount);
+		model.addAttribute("aprMemCount", aprMemCount);
+		model.addAttribute("mayMemCount", mayMemCount);
+		model.addAttribute("junMemCount", junMemCount);
+		model.addAttribute("julMemCount", julMemCount);
+		
+		model.addAttribute("janAptCount", janAptCount);
+		model.addAttribute("febAptCount", febAptCount);
+		model.addAttribute("marAptCount", marAptCount);
+		model.addAttribute("aprAptCount", aprAptCount);
+		model.addAttribute("mayAptCount", mayAptCount);
+		model.addAttribute("junAptCount", junAptCount);
+		model.addAttribute("julAptCount", julAptCount);
+		
+		//age chart
+		int under10 = adminService.under10Count();
+		int over10under20 = adminService.over10under20Count();
+		int over20under30 = adminService.over20under30Count();
+		int over30under40 = adminService.over30under40Count();
+		int over40under50 = adminService.over40under50Count();
+		int over50under60 = adminService.over50under60Count();
+		int over60 = adminService.over60Count();
+		System.out.println("10세미만: " + under10 + " 10~19: " + over10under20 +" 20~29: " + over20under30 + " 30~39: " + over30under40 + " 40~49: " + over40under50 + " 50~59: " + over50under60 + " 60이상: " + over60);;
+		model.addAttribute("under10", under10);
+		model.addAttribute("over10under20", over10under20);
+		model.addAttribute("over20under30", over20under30);
+		model.addAttribute("over30under40", over30under40);
+		model.addAttribute("over40under50", over40under50);
+		model.addAttribute("over50under60", over50under60);
+		model.addAttribute("over60", over60);
+		//
+		//gender chart
+		int maleCount = adminService.maleCount();
+		int femaleCount = adminService.femaleCount();
+		System.out.println("male: " + maleCount);
+		System.out.println("female: " + femaleCount);
+		model.addAttribute("male", maleCount);
+		model.addAttribute("female", femaleCount);
+		//
+		return "Chart.ad_tiles";
+	}
+	
+	@RequestMapping("RecentChart.hst")
+	public String recentChart()
+	{
+		return "Chart.ad_tiles";
+	}
+	
+	@RequestMapping("GenderChart.hst")
+	public String genderChart()
+	{
+		return "Chart.ad_tiles";
+	}
+	
+	@RequestMapping("AgeChart.hst")
+	public String ageChart()
 	{
 		return "Chart.ad_tiles";
 	}
@@ -334,21 +519,33 @@ public class AdminController {
 	
 	//공지사항
 	@RequestMapping("Notice.hst")
+	public String noticeList()
+	{
+		return "Notice.tiles";
+	}
+	
+	@RequestMapping("NoticeWrite.hst")
 	public String noticeWrite()
 	{
 		return "NoticeWrite.ad_tiles";
 	}
 	
-	@RequestMapping("NoticeSubmit.hst")
+	@RequestMapping("NoticeDetail.hst")
 	public String noticeView()
 	{
-		return "HosAuth.ad_tiles";
+		return "NoticeDetail.tiles";
 	}
 	
-	@RequestMapping("NoticeEdit.hst")
-	public String noticeEdit()
+	@RequestMapping("NoticeUpdate.hst")
+	public String noticeUpdate()
 	{
 		return "NoticeEdit.ad_tiles";
+	}
+	
+	@RequestMapping("NoticeDelete.hst")
+	public String noticeEdit()
+	{
+		return "Notice.tiles";
 	}
 	
 }
