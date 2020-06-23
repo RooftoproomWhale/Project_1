@@ -27,15 +27,16 @@
 	      let param = {};
 	      param.mem_name = response.name;
 	      param.mem_email = response.email;
+	      param.userEmail = response.email;
 	      param.gender = response.gender;
 	      param.mem_pwd = response.id;
 	      param.tel = '010-1234-5678';
 	      param.role = 'MEM';
 	      param.enable = 1;
 	      param.age = null;
-	      param.height = null;
 	      param.weight = null;
-	      console.log(param.pwd);
+	      param.height = null;
+	      console.log(param.mem_pwd);
 	      
 	      $.ajax({
 				url:'./snsInsert.hst',
@@ -43,6 +44,7 @@
 				type:'post',
 				success:function(data){
 					console.log(data);
+					location.replace(".//");
 				},
 				error:function(e){console.log('에러:',e)}
 			});
