@@ -17,7 +17,11 @@
 	 <select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
 		 SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
 	 </select>
-	 
+
+	 <select id="selectCount" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT p.precount,r.resercount FROM(SELECT count(*) precount FROM prescription WHERE MEM_EMAIL = #{id})p,
+		(SELECT count(*) resercount FROM reservation WHERE MEM_EMAIL = #{id})r
+	 </select>
  	 <delete id="signDelete" parameterType="MemberDTO">
 		DELETE FROM MEMBER WHERE MEM_EMAIL = #{userid}
 	 </delete>
@@ -92,26 +96,17 @@
    </select>
 
 <!-- 페이징 -->
-	<select id="countRecordHosAuth" resultType="int">
-		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
-	</select>
-	<select id="countRecordAccount" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
-	</select>
-	<select id="countRecordAppointment" resultType="int">
-		SELECT COUNT(*) FROM RESERVATION
-	</select>
-	<!-- 검색 페이징 -->
-	<select id="countRecordHosSearch" parameterType="java.util.Map" resultType="int">
-		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
-	</select>
-	<select id="countRecordAccSearch" parameterType="java.util.Map" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE MEM_NAME LIKE '%' || #{search_keyword} || '%'
-	</select>
-	<select id="countRecordAptSearch" parameterType="java.util.Map" resultType="int">
-		select COUNT(*) from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
-	</select>
-	
+   <select id="countRecordHosAuth" resultType="int">
+      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
+   </select>
+   <select id="countRecordAccount" resultType="int">
+      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
+   </select>
+   <select id="countRecordAppointment" resultType="int">
+      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
+   </select>
+   
+   
 <!--관리자단 -->
 	<!-- 대쉬보드 -->
 	<select id="memberCount" parameterType="java.util.Map" resultType="int">
@@ -202,13 +197,7 @@
 
    <!-- 사용자 관리 -->
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * 
-		FROM (
-			SELECT ROWNUM RN, A.* 
-				FROM (
-						SELECT * FROM MEMBER
-						) A
-				)
+		SELECT * FROM (ELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<select id="selectMemberListUser" parameterType="java.util.Map" resultType="MemberDTO">

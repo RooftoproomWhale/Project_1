@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
+
+import org.apache.ibatis.annotations.Select;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -37,9 +39,11 @@ public class MyPageController {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id", id);
-				List<MemberDTO> list = memberDAO.selectList(map);
+		List<MemberDTO> list = memberDAO.selectList(map);
+		List<Map<String, Integer>> count = memberDAO.selectCount(map);
+
 		model.addAttribute("list", list);	
-	
+		model.addAttribute("count", count);
 		return "Mypage_Main.my_tiles";
 		
 	}/////myapge

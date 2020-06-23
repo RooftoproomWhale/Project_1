@@ -73,5 +73,9 @@ public class MemberDAO implements MemberService {
 	
 			return sqlMapper.selectList("diseaseupdate",map);
 		}
+		public List<Map<String, Integer>> selectCount(Map map) {
+			
+			return sqlMapper.selectList("selectCount", map);
+		}
 
 }
