@@ -4,6 +4,44 @@
 <!DOCTYPE html>
 <html>
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
+<script>
+$(function(){
+	var str ="예약리스트";
+	console.log('실행전');
+	showList();
+	function showList(){
+		$.ajax({
+			url:"<c:url value='/Calendar/View.hst'/>",
+			data:{'retitles':str},
+			type:'post',
+			success:showList_,
+			error:function(e){console.log('에러:',e)}
+		});			
+	};
+	
+	function showList_(data){		
+		console.log('예약 목록:',data);
+		var comments="";
+		if(data.length==0){
+			comments+="<h2 style='color:red'>예약된 병원이 없어요</h2>";
+		}
+		else{
+			$.each(JSON.parse(data),function(i,element){
+				comments+="<div class='panel panel-default'>";
+				comments+='<div class="panel-heading" role="tab" id="heading'+i+'">';
+				comments+='<h4 class="panel-title">';
+				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
+				comments+=element['res_DATE']+"</a></h4></div>";
+				comments+='<div id="collapse'+i+'" class="panel-collapse collapse in" role="tabpanel">';
+				comments+='<div class="panel-body">'+element['hosp_NAME'];
+				comments+="</div></div></div>";
+			});
+		}
+		$('#accordion').html(comments);
+		
+	};
+});
+</script>
 <style>
 a:hover, a:focus {
 	text-decoration: none;
@@ -132,90 +170,10 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 					</div>
 					<br />
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingOne">
-								<h4 class="panel-title">
-									<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										2020-06-02 서울 삼성병원
-									 </a>
-								</h4>
-							</div>
-							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-								<div class="panel-body">
-									윤성준 정형외과 접수
-							</div>
-							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-								<div class="panel-body">
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingTwo">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-										2020-06-04 서울 삼성병원
-									 </a>
-								</h4>
-							</div>
-							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-								<div class="panel-body">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-									윤성준 신경외과 접수
-									</a>
-								</h4>
-							</div>
-							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-								<div class="panel-body">
-									<a href='<c:url value="/Homespital/Management.hst?dname=티로파정"/>'>티로파정</a> - 평활근 경축을 완화시킴으로써 항경령 및 진통 효과를 나타냄
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingThree">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-										2020-06-08 서울 삼성병원
-									 </a>
-								</h4>
-							</div>
-							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-								<div class="panel-body">
-									윤성준 내과 접수
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingFour">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-										2020-06-12 서울 삼성병원
-									 </a>
-								</h4>
-							</div>
-							<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-								<div class="panel-body">
-									윤성준환자 물리치료 접수
-								</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingFive">
-								<h4 class="panel-title">
-									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-										2020-06-19 서울 삼성병원
-									 </a>
-								</h4>
-							</div>
-							<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-								<div class="panel-body">
-								향균작용을 통해 각종 세균감염증을 치료
-										2020-06-08 서울 삼성병원
-								</div>
-							</div>
-							</div>
-						</div>
-					</div>
+						
+						
+						
+					
 				</div>
 			</div>
 			</div>
