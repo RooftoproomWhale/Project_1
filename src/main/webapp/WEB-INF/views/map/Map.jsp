@@ -429,7 +429,7 @@
                         <div class="col-sm-4">
                            <div class="form-group">
                               <span class="form-label">시</span>
-                              <select class="form-control">
+                              <select id="Hour" class="form-control">
                                  <option>1</option>
                                  <option>2</option>
                                  <option>3</option>
@@ -449,7 +449,7 @@
                         <div class="col-sm-4">
                            <div class="form-group">
                               <span class="form-label">분</span>
-                              <select class="form-control">
+                              <select id="Minute" class="form-control">
                                  <option>05</option>
                                  <option>10</option>
                                  <option>15</option>
@@ -649,7 +649,8 @@
              var date = new Date();
              alert('선택하신 날짜는'+ date.getHours());
              console.log(date.getDate());
-             changeAM_PM(date.getHours());
+             console.log(parse(dateText));
+             changeAM_PM(date,parse(dateText));
          },
          showAnim: "slide",
          showMonthAfterYear: true ,
@@ -661,6 +662,8 @@
            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],   //한글 요일 표시 부분
            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],   // 한글 요일 표시 부분
       });
+      
+      $('#Hour');
    });
 </script>
 <script>
@@ -1545,11 +1548,11 @@
     	  var AMPM = ["오전","오후"];
     	  $("#AM_PM").empty();
 
-    	  //console.log(day==new date());
+    	  console.log(day.getDate());
     	  
     	  var option
     	  
-    	  if(date < 13 && date >= 0)
+    	  if((date.getHours() < 13 && date.getHours() >= 0) || (day.getDate() != date.getDate()))
     	  {
     		  option += "<option>"+AMPM[0]+"</option>"; 
     		  option += "<option>"+AMPM[1]+"</option>";
@@ -1559,11 +1562,15 @@
     		  option += "<option>"+AMPM[1]+"</option>";
     	  }
     	  $('#AM_PM').append(option);
-    	  /* for(var count = 0; count < AMPM.size(); count++){                
-              var option = $("<option>"+AMPM[count]+"</option>");
-              $('#AM_PM').append(option);
-          } */
 	  }
+      
+      function parse(str) {
+	   	  var y = str.substr(0, 4);
+	   	  var m = str.substr(6, 2);
+	   	  var d = str.substr(10, 2);
+	   	  return new Date(y,m-1,d);
+      }
+
       
       function deg2rad(deg){
     	  return (deg * Math.PI / 180.0);

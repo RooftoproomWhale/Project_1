@@ -224,7 +224,7 @@
 					$('#news').html(news);
 				},
 				error:function(e){console.log('에러:',e)} */
-					url:"http://192.168.0.248:5000/covid/",
+					url:"http://192.168.0.25:5001/covid/",
 					type:'get',
 					dataType:"json",
 					success:function(data){

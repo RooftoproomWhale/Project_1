@@ -337,5 +337,95 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.getTotalRecordHosSearch(map);
 	}
+
+	@Override
+	public int naeCount() {
+		// TODO Auto-generated method stub
+		return dao.naeCount();
+	}
+
+	@Override
+	public int biCount() {
+		// TODO Auto-generated method stub
+		return dao.biCount();
+	}
+
+	@Override
+	public int sanCount() {
+		// TODO Auto-generated method stub
+		return dao.sanCount();
+	}
+
+	@Override
+	public int seongCount() {
+		// TODO Auto-generated method stub
+		return dao.seongCount();
+	}
+
+	@Override
+	public int soCount() {
+		// TODO Auto-generated method stub
+		return dao.soCount();
+	}
+
+	@Override
+	public int sinCount() {
+		// TODO Auto-generated method stub
+		return dao.sinCount();
+	}
+
+	@Override
+	public int anCount() {
+		// TODO Auto-generated method stub
+		return dao.anCount();
+	}
+
+	@Override
+	public int leeCount() {
+		// TODO Auto-generated method stub
+		return dao.leeCount();
+	}
+
+	@Override
+	public int ilCount() {
+		// TODO Auto-generated method stub
+		return dao.ilCount();
+	}
+
+	@Override
+	public int jeongCount() {
+		// TODO Auto-generated method stub
+		return dao.jeongCount();
+	}
+
+	@Override
+	public int hyeongCount() {
+		// TODO Auto-generated method stub
+		return dao.hyeongCount();
+	}
+
+	@Override
+	public int chiCount() {
+		// TODO Auto-generated method stub
+		return dao.chiCount();
+	}
+
+	@Override
+	public int piCount() {
+		// TODO Auto-generated method stub
+		return dao.piCount();
+	}
+
+	@Override
+	public int hanCount() {
+		// TODO Auto-generated method stub
+		return dao.hanCount();
+	}
+
+	@Override
+	public int giCount() {
+		// TODO Auto-generated method stub
+		return dao.giCount();
+	}
 	
 }

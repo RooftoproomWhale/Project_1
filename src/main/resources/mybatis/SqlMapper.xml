@@ -26,6 +26,7 @@
 		SELECT p.precount,r.resercount FROM(SELECT count(*) precount FROM prescription WHERE MEM_EMAIL = #{id})p,
 		(SELECT count(*) resercount FROM reservation WHERE MEM_EMAIL = #{id})r
 	 </select>
+	 
  	 <delete id="signDelete" parameterType="MemberDTO">
 		DELETE FROM MEMBER WHERE MEM_EMAIL = #{userid}
 	 </delete>
@@ -98,20 +99,29 @@
       FROM pharmacy p) disData
       WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
    </select>
-
-<!-- 페이징 -->
-   <select id="countRecordHosAuth" resultType="int">
-      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
-   </select>
-   <select id="countRecordAccount" resultType="int">
-      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
-   </select>
-   <select id="countRecordAppointment" resultType="int">
-      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
-   </select>
-   
    
 <!--관리자단 -->
+	<!-- 페이징 -->
+	<select id="countRecordHosAuth" resultType="int">
+		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
+	</select>
+	<select id="countRecordAccount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	<select id="countRecordAppointment" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION
+	</select>
+	<!-- 검색 페이징 -->
+	<select id="countRecordHosSearch" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
+	</select>
+	<select id="countRecordAccSearch" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEM_NAME LIKE '%' || #{search_keyword} || '%'
+	</select>
+	<select id="countRecordAptSearch" parameterType="java.util.Map" resultType="int">
+		select COUNT(*) from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
+	</select>  
+	
 	<!-- 대쉬보드 -->
 	<select id="memberCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
@@ -125,6 +135,7 @@
 	<select id="aptCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM RESERVATION
 	</select>
+	
 	<!-- 차트 -->
 	<select id="genderChartMale" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE GENDER='남자'
@@ -198,10 +209,56 @@
 	<select id="julAptCount" resultType="int">
 		SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-07-01','YYYY-MM-DD') AND TO_DATE('2020-08-01','YYYY-MM-DD')
 	</select>
+	
+	<select id="naeAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '내과'
+	</select>
+	<select id="biAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '비뇨기과'
+	</select>
+	<select id="sanAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '산부인과'
+	</select>
+	<select id="seongAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '성형외과'
+	</select>
+	<select id="soAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '소아청소년과'
+	</select>
+	<select id="sinAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '신경과'
+	</select>
+	<select id="anAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '안과'
+	</select>
+	<select id="leeAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '이비인후과'
+	</select>
+	<select id="ilAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '일반외과'
+	</select>
+	<select id="jeongAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '정신건강의학과'
+	</select>
+	<select id="hyeongAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '정형외과'
+	</select>
+	<select id="chiAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '치과'
+	</select>
+	<select id="piAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '피부과'
+	</select>
+	<select id="hanAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '한방과'
+	</select>
+	<select id="giAptCount" resultType="int">
+		SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '기타'
+	</select>
 
    <!-- 사용자 관리 -->
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM (ELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)
+		SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<select id="selectMemberListUser" parameterType="java.util.Map" resultType="MemberDTO">
@@ -264,7 +321,7 @@
 		FROM (
 			SELECT ROWNUM RN, A.* 
 				FROM (
-						SELECT H.*, r.apply_time, r.approved, r.dept_code, r.mem_email, r.res_date, r.res_time, r.reserv_no, r.sel_symp FROM RESERVATION R JOIN HOSPITAL H ON R.HOSP_CODE = H.HOSP_CODE
+						SELECT H.*, r.apply_time, r.approved, r.dept_name, r.mem_email, r.res_date, r.res_time, r.reserv_no, r.sel_symp FROM RESERVATION R JOIN HOSPITAL H ON R.HOSP_CODE = H.HOSP_CODE
 						) A
 				)
 		WHERE RN BETWEEN #{start} AND #{end}
@@ -279,17 +336,4 @@
 		select h.*, r.* from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
 	
-	<!-- 공지사항 관리 -->
-<!-- 	<insert id=""> -->
-	
-<!-- 	</insert> -->
-<!-- 	<update id=""> -->
-	
-<!-- 	</update> -->
-<!-- 	<select id=""> -->
-	
-<!-- 	</select> -->
-<!-- 	<delete id=""> -->
-	
-<!-- 	</delete> -->
 </mapper>

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
+$(function() {
 //Recent Chart
 $.ajax({
     url:"<c:url value='/Admin/RecentChart.hst'/>",
@@ -55,7 +56,7 @@ $.ajax({
     	          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', ''],
     	          datasets: [
     	            {
-    	              label: '예약 수',
+    	              label: '회원 증가 수',
     	              backgroundColor: brandService2,
     	              borderColor: bd_brandService2,
     	              pointHoverBackgroundColor: '#fff',
@@ -63,7 +64,7 @@ $.ajax({
     	              data: data3
     	            },
     	            {
-    	              label: '회원 수',
+    	              label: '예약 수',
     	              backgroundColor: brandProduct2,
     	              borderColor: bd_brandProduct2,
     	              pointHoverBackgroundColor: '#fff',
@@ -121,6 +122,87 @@ $.ajax({
     	  } catch (error) {
     	    console.log(error);
     	  }
+    }
+});
+
+//departmentApt chart
+$.ajax({
+    url:"<c:url value='/Admin/RecentChart.hst'/>",
+    type:'get',
+    datatype:'html',
+    data:{},
+    beforeSend: function () {
+       console.log("beforeSend");
+//        FunLoadingBarStart();
+    },
+    complete: function () {
+       console.log("complete");
+//        FunLoadingBarEnd();
+    },
+    success:function(data){
+//        console.log(data);
+		  try {     
+		    var ctx = document.getElementById("deptAptChart");
+		    if (ctx) {
+		      ctx.height = 100;
+		      var naeCount = $('#naeCount').val();
+		      var biCount = $('#biCount').val();
+		      var sanCount = $('#sanCount').val();
+		      var seongCount = $('#seongCount').val();
+		      var soCount = $('#soCount').val();
+		      var sinCount = $('#sinCount').val();
+		      var anCount = $('#anCount').val();
+		      var leeCount = $('#leeCount').val();
+		      var ilCount = $('#ilCount').val();
+		      var jeongCount = $('#jeongCount').val();
+		      var hyeongCount = $('#hyeongCount').val();
+		      var chiCount = $('#chiCount').val();
+		      var piCount = $('#piCount').val();
+		      var hanCount = $('#hanCount').val();
+		      var giCount = $('#giCount').val();
+		      
+		      var myChart = new Chart(ctx, {
+		        type: 'bar',
+		        data: {
+		          labels: ["내과", "비뇨기과", "산부인과", "성형외과", "소아청소년과", "신경과", "안과", "이비인후과", "일반외과", "정신건강의학과", "정형외과", "치과", "피부과", "한방과", "기타"],
+		          datasets: [
+		            {
+		              label: "Counts",
+		              data: [naeCount, biCount, sanCount, seongCount, soCount, sinCount, anCount, leeCount, ilCount, jeongCount, hyeongCount, chiCount, piCount, hanCount, giCount],
+		              borderColor: "rgba(0, 123, 255, 0.9)",
+		              borderWidth: "0",
+		              backgroundColor: "rgba(0, 123, 255, 0.5)"
+		            }
+		          ]
+		        },
+		        options: {
+		          legend: {
+		            position: 'top',
+		            labels: {
+		              fontFamily: 'Poppins'
+		            }
+		
+		          },
+		          scales: {
+		            xAxes: [{
+		              ticks: {
+		                fontFamily: "Poppins"
+		
+		              }
+		            }],
+		            yAxes: [{
+		              ticks: {
+		                beginAtZero: true,
+		                fontFamily: "Poppins"
+		              }
+		            }]
+		          }
+		        }
+		      });
+		    }
+		  } catch (error) {
+		    console.log(error);
+		  }
     }
 });
 
@@ -264,6 +346,8 @@ $.ajax({
     	  }
     }
 });
+});
+
 </script>
 <body class="animsition">
     <div class="page-wrapper">
@@ -281,11 +365,11 @@ $.ajax({
                                         <div class="chart-info__left">
                                             <div class="chart-note">
                                                 <span class="dot dot--blue"></span>
-                                                <span>Members</span>
+                                                <span>Appointments</span>
                                             </div>
                                             <div class="chart-note">
                                                 <span class="dot dot--green"></span>
-                                                <span>Appointments</span>
+                                                <span>Member Increases</span>
                                             </div>
                                         </div>
 <!--                                         <div class="chart-info-right"> -->
@@ -339,11 +423,26 @@ $.ajax({
 <!--                                     </div> -->
 <!--                                 </div> -->
 <!--                             </div> -->
-							<div class="col-lg-6">
+							<div class="col-lg-12">
                                 <div class="au-card m-b-30">
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-40">Appointment Counts</h3>
-                                        <canvas id="singelBarChart"></canvas>
+                                        <input type="hidden" value="${naeCount }" id="naeCount"/>
+                                        <input type="hidden" value="${biCount }" id="biCount"/>
+                                        <input type="hidden" value="${sanCount }" id="sanCount"/>
+                                        <input type="hidden" value="${seongCount }" id="seongCount"/>
+                                        <input type="hidden" value="${soCount }" id="soCount"/>
+                                        <input type="hidden" value="${sinCount }" id="sinCount"/>
+                                        <input type="hidden" value="${anCount }" id="anCount"/>
+                                        <input type="hidden" value="${leeCount }" id="leeCount"/>
+                                        <input type="hidden" value="${ilCount }" id="ilCount"/>
+                                        <input type="hidden" value="${jeongCount }" id="jeongCount"/>
+                                        <input type="hidden" value="${hyeongCount }" id="hyeongCount"/>
+                                        <input type="hidden" value="${chiCount }" id="chiCount"/>
+                                        <input type="hidden" value="${piCount }" id="piCount"/>
+                                        <input type="hidden" value="${hanCount }" id="hanCount"/>
+                                        <input type="hidden" value="${giCount }" id="giCount"/>
+                                        <canvas id="deptAptChart"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -363,14 +462,14 @@ $.ajax({
 <!--                                     </div> -->
 <!--                                 </div> -->
 <!--                             </div> -->
-                            <div class="col-lg-6">
-                                <div class="au-card m-b-30">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2 m-b-40">Using Times</h3>
-                                        <canvas id="lineChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
+<!--                             <div class="col-lg-6"> -->
+<!--                                 <div class="au-card m-b-30"> -->
+<!--                                     <div class="au-card-inner"> -->
+<!--                                         <h3 class="title-2 m-b-40">Using Times</h3> -->
+<%--                                         <canvas id="lineChart"></canvas> --%>
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
 <!--                             <div class="col-lg-6"> -->
 <!--                                 <div class="au-card m-b-30"> -->
 <!--                                     <div class="au-card-inner"> -->

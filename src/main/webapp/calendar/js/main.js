@@ -134,14 +134,13 @@ var calendar = $('#calendar').fullCalendar({
    * ************** */
 
   events: function (start, end, timezone, callback) {
+	  var param={};
+	  param.retitles = '일정관리';
     $.ajax({
       type: "get",
       url: "View.hst",/*"/proj/calendar/data.json",*/
       dataType:"json",
-      data: {
-  
-        // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
-      },
+      data: param,
       success: function (response) {
     	  console.log(response);
     

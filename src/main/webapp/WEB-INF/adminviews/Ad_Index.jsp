@@ -80,7 +80,7 @@ $(function() {
 	    	          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', ''],
 	    	          datasets: [
 	    	            {
-	    	              label: '예약 수',
+	    	              label: '회원 증가 수',
 	    	              backgroundColor: brandService2,
 	    	              borderColor: bd_brandService2,
 	    	              pointHoverBackgroundColor: '#fff',
@@ -88,7 +88,7 @@ $(function() {
 	    	              data: data3
 	    	            },
 	    	            {
-	    	              label: '회원 수',
+	    	              label: '예약 수',
 	    	              backgroundColor: brandProduct2,
 	    	              borderColor: bd_brandProduct2,
 	    	              pointHoverBackgroundColor: '#fff',
@@ -357,18 +357,18 @@ $(function() {
                                 <!-- RECENT REPORT 2-->
                                 <div class="recent-report2">
                                     <h3 class="title-3">Recent Increase</h3>
-<!--                                     <div class="chart-info"> -->
-<!--                                         <div class="chart-info__left"> -->
-<!--                                             <div class="chart-note"> -->
-<!--                                                 <span class="dot dot--blue"></span> -->
-<!--                                                 <span>Members</span> -->
-<!--                                             </div> -->
-<!--                                             <div class="chart-note"> -->
-<!--                                                 <span class="dot dot--green"></span> -->
-<!--                                                 <span>Appointments</span> -->
-<!--                                             </div> -->
-<!--                                         </div> -->
-<!--                                     </div> -->
+                                    <div class="chart-info">
+                                        <div class="chart-info__left">
+                                            <div class="chart-note">
+                                                <span class="dot dot--blue"></span>
+                                                <span>Appointments</span>
+                                            </div>
+                                            <div class="chart-note">
+                                                <span class="dot dot--green"></span>
+                                                <span>Member Increases</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="recent-report__chart">
                                     <input type="hidden" value="${janMemCount }" id="janMemCount"/>
                                     <input type="hidden" value="${febMemCount }" id="febMemCount"/>
