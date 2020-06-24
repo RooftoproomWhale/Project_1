@@ -37,6 +37,24 @@ public interface AdminService {
 		int junAptCount();
 		int julAptCount();
 		
+		//deptApt chart
+		int naeCount();
+		int biCount();
+		int sanCount();
+		int seongCount();
+		int soCount();
+		int sinCount();
+		int anCount();
+		int leeCount();
+		int ilCount();
+		int jeongCount();
+		int hyeongCount();
+		int chiCount();
+		int piCount();
+		int hanCount();
+		int giCount();
+		
+		
 		//gender chart
 		int maleCount();
 		int femaleCount();

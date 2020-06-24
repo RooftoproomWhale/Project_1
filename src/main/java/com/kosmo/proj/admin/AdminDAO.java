@@ -340,5 +340,95 @@ public class AdminDAO implements AdminService {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("countRecordHosSearch", map);
 	}
+
+	@Override
+	public int naeCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("naeAptCount");
+	}
+
+	@Override
+	public int biCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("biAptCount");
+	}
+
+	@Override
+	public int sanCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("sanAptCount");
+	}
+
+	@Override
+	public int seongCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("seongAptCount");
+	}
+
+	@Override
+	public int soCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("soAptCount");
+	}
+
+	@Override
+	public int sinCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("sinAptCount");
+	}
+
+	@Override
+	public int anCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("anAptCount");
+	}
+
+	@Override
+	public int leeCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("leeAptCount");
+	}
+
+	@Override
+	public int ilCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("ilAptCount");
+	}
+
+	@Override
+	public int jeongCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("jeongAptCount");
+	}
+
+	@Override
+	public int hyeongCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("hyeongAptCount");
+	}
+
+	@Override
+	public int chiCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("chiAptCount");
+	}
+
+	@Override
+	public int piCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("piAptCount");
+	}
+
+	@Override
+	public int hanCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("hanAptCount");
+	}
+
+	@Override
+	public int giCount() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("giAptCount");
+	}
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.MemberService;
+import com.kosmo.proj.util.CustomUserDetails;
 
 @Repository
 public class MemberDAO implements MemberService {
@@ -76,6 +77,12 @@ public class MemberDAO implements MemberService {
 		public List<Map<String, Integer>> selectCount(Map map) {
 			
 			return sqlMapper.selectList("selectCount", map);
+		}
+
+		@Override
+		public CustomUserDetails getUserById(String username) {
+			System.out.println(username);
+			return sqlMapper.selectOne("getUserById",username);
 		}
 
 }

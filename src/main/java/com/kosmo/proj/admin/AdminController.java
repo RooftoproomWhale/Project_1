@@ -440,8 +440,6 @@ public class AdminController {
 		int junAptCount = adminService.junAptCount();
 		int julAptCount = adminService.julAptCount();
 		
-		System.out.println(junMemCount);
-		System.out.println(junAptCount);
 		model.addAttribute("janMemCount", janMemCount);
 		model.addAttribute("febMemCount", febMemCount);
 		model.addAttribute("marMemCount", marMemCount);
@@ -457,6 +455,39 @@ public class AdminController {
 		model.addAttribute("mayAptCount", mayAptCount);
 		model.addAttribute("junAptCount", junAptCount);
 		model.addAttribute("julAptCount", julAptCount);
+		
+		//deptApt chart
+		int naeCount = adminService.naeCount();
+		int biCount = adminService.biCount();
+		int sanCount = adminService.sanCount();
+		int seongCount = adminService.seongCount();
+		int soCount = adminService.soCount();
+		int sinCount = adminService.sinCount();
+		int anCount = adminService.anCount();
+		int leeCount = adminService.leeCount();
+		int ilCount = adminService.ilCount();
+		int jeongCount = adminService.jeongCount();
+		int hyeongCount = adminService.hyeongCount();
+		int chiCount = adminService.chiCount();
+		int piCount = adminService.piCount();
+		int hanCount = adminService.hanCount();
+		int giCount = adminService.giCount();
+
+		model.addAttribute("naeCount", naeCount);
+		model.addAttribute("biCount", biCount);
+		model.addAttribute("sanCount", sanCount);
+		model.addAttribute("seongCount", seongCount);
+		model.addAttribute("soCount", soCount);
+		model.addAttribute("sinCount", sinCount);
+		model.addAttribute("anCount", anCount);
+		model.addAttribute("leeCount", leeCount);
+		model.addAttribute("ilCount", ilCount);
+		model.addAttribute("jeongCount", jeongCount);
+		model.addAttribute("hyeongCount", hyeongCount);
+		model.addAttribute("chiCount", chiCount);
+		model.addAttribute("piCount", piCount);
+		model.addAttribute("hanCount", hanCount);
+		model.addAttribute("giCount", giCount);
 		
 		//age chart
 		int under10 = adminService.under10Count();
