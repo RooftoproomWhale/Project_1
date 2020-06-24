@@ -29,7 +29,7 @@ $(function(){
 				comments+='<h4 class="panel-title">';
 				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
 				comments+=element['PRES_DATE']+"</a></h4></div>";
-				comments+='<div id="collapse'+i+'" class="panel-collapse collapse in" role="tabpanel">';
+				comments+='<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
 				comments+='<div class="panel-body">';
 				$.each(element['MEDI_NAME'].split(','),function(k,val){
 					if(val!="")

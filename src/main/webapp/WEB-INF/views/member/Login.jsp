@@ -2,7 +2,6 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
-<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -161,7 +160,7 @@ form{
 								</a>
 							</div>
 							<div class="col-md-4 col-xs-6">
-								<a id="kakao" href="#"> <img width="60"
+								<a id="kakao" href="javascript:loginWithKakao()"> <img width="60"
 									src='<c:url value="/images/snslogo/kakao.png"/>' alt="카카오 로그인">
 								</a>
 							</div>
@@ -200,22 +199,56 @@ form{
 	
 	
 <script>
-	Kakao.init('c0e6cc61e58211222f29b50be0f8c221');
-	Kakao.isInitialized();
-
-	$('#kakao').click(function() {
-		Kakao.Auth.login({
-			scope : 'account_email,gender',
-			success : function(response) {
-				console.log(response);
-			},
-			fail : function(error) {
-				console.log(error);
-			},
+	Kakao.init('c0e6cc61e58211222f29b50be0f8c221')
+	console.log(Kakao.isInitialized());
+  function loginWithKakao() {
+    Kakao.Auth.login({
+      	success: function(authObj) {
+        kakaoTestApi();
+      },
+      fail: function(err) {
+        alert(JSON.stringify(err))
+      },
+    })
+  }
+  
+  function kakaoTestApi(){
+	  Kakao.API.request({
+		    url: '/v2/user/me',
+		    success: function(response) {
+		        console.log(response);
+		        console.log(response['kakao_account']['email']);
+		        let param = {};
+			      param.mem_name = response['properties']['nickname'];
+			      param.mem_email = response['kakao_account']['email'];
+			      param.userEmail = response['kakao_account']['email'];
+			      param.gender = response['kakao_account']['gender'];
+			      param.mem_pwd = response['id'];
+			      param.tel = '010-1234-5678';
+			      param.role = 'MEM';
+			      param.enable = 1;
+			      param.age = response['kakao_account']['age_range'].substring(0,2);
+			      console.log(param.age);
+			      param.weight = null;
+			      param.height = null;
+			      
+			      $.ajax({
+						url:'./snsInsert.hst',
+						data:param,
+						type:'post',
+						success:function(data){
+							console.log(data);
+							location.replace("/proj/Home/ToHomePage.hst");
+						},
+						error:function(e){console.log('에러:',e)}
+					});
+		    },
+		    fail: function(error) {
+		        console.log(error);
+		    }
 		});
-	})
+  }
 </script>
-<script type="text/javascript" src='<c:url value="/js/kakao.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/js/naver_login.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/js/facebook_login.js"/>'></script>
 

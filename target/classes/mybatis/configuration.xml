@@ -13,6 +13,7 @@
 		<typeAlias alias="HospitalDTO" type="com.kosmo.proj.service.HospitalDTO"/>
 		<typeAlias alias="PharmacyDTO" type="com.kosmo.proj.service.PharmacyDTO"/>	
 		<typeAlias alias="reservationDTO" type="com.kosmo.proj.service.ReservationDTO"/>
+		<typeAlias alias="CustomUserDetails" type="com.kosmo.proj.util.CustomUserDetails"/>
 <!-- 		<typeAlias alias="PrescriptionDTO" type="com.kosmo.proj.service.PrescriptionDTO"/>		 -->
 		<!--MemoCommentDTO는 별칭 불필요. SELECT결과를 Map에 저장하기때문에  -->
 	</typeAliases>

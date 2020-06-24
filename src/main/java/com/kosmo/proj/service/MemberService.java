@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kosmo.proj.service.MemberDTO;
+import com.kosmo.proj.util.CustomUserDetails;
 
 public interface MemberService {
 		
@@ -22,5 +23,6 @@ public interface MemberService {
 	int delete(Map map);
 	int insert(Map map);
 	int update(Map map);
+	CustomUserDetails getUserById(String username);
 
 }

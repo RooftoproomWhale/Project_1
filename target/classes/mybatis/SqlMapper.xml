@@ -11,11 +11,15 @@
 	</select>
 	
 	 <insert id="signInsert" parameterType="java.util.Map"> 
-		INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
+		INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable},SYSDATE )
 	 </insert>
 	 
 	 <select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
 		 SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
+	 </select>
+	 
+	 <select id="getUserById" parameterType="java.lang.String" resultType="CustomUserDetails">
+	 	SELECT * FROM MEMBER WHERE MEM_EMAIL = #{username}
 	 </select>
 
 	 <select id="selectCount" parameterType="java.util.Map" resultType="java.util.Map">

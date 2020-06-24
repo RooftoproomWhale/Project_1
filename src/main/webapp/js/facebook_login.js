@@ -44,7 +44,7 @@
 				type:'post',
 				success:function(data){
 					console.log(data);
-					location.replace(".//");
+					location.replace("/proj/Home/ToHomePage.hst");
 				},
 				error:function(e){console.log('에러:',e)}
 			});
