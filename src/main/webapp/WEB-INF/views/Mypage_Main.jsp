@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style>
 body {
 background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 68%, rgba(255, 206, 196, 0.5) 163%),linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%, rgba(239, 112, 138, 0.5) 40%),linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%, rgba(237, 106, 134, 0.5) 169%),linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%, rgba(247, 126, 132, 0.5) 43%); background-blend-mode: overlay,multiply,color,normal;}
@@ -138,11 +139,11 @@ padding-bottom: 150px}
                                 </tr>
                                 <tr>
                                     <td>최근 방문 증상</td>
-                                    <td>기침, 고열</td>
+                                    <td>${newres[0]['SEL_SYMP']}</td>
                                 </tr>
                                 <tr>
                                     <td>최근 방문 병원</td>
-                                    <td>기침, 고열</td>
+                                    <td>${newres[0]['HOSP_NAME'] }</td>
                                 </tr>
                                 <tr>
                                     <td>최근 처방 날짜</td>

@@ -17,7 +17,12 @@
 	 <select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
 		 SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
 	 </select>
-
+	 
+	<select id="seletnew" parameterType="java.util.Map" resultType="reservationDTO">
+	SELECT h.hosp_name,r.sel_symp FROM reservation r JOIN hospital h on r.hosp_code=h.hosp_code
+	WHERE r.mem_email = #{id} AND RES_DATE=(SELECT MAX(RES_DATE)FROM reservation)
+	
+	</select>
 	 <select id="selectCount" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT p.precount,r.resercount FROM(SELECT count(*) precount FROM prescription WHERE MEM_EMAIL = #{id})p,
 		(SELECT count(*) resercount FROM reservation WHERE MEM_EMAIL = #{id})r
