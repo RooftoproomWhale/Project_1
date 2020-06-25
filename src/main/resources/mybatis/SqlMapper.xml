@@ -28,7 +28,7 @@
 	 	SELECT * FROM MEMBER WHERE MEM_EMAIL = #{username}
 	 </select>
 	 <select id="selectCount" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT p.precount,r.resercount FROM(SELECT count(*) precount FROM prescription WHERE MEM_EMAIL = #{id})p,
+		SELECT p.precount,r.resercount,(SELECT MAX(PRES_DATE) FROM prescription  WHERE MEM_EMAIL = #{id})resdate FROM(SELECT count(*) precount FROM prescription WHERE MEM_EMAIL = #{id})p,
 		(SELECT count(*) resercount FROM reservation WHERE MEM_EMAIL = #{id})r
 	 </select>
 	 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.proj.service.CalendarDTO;
+import com.kosmo.proj.service.MedicineInfoDTO;
 import com.kosmo.proj.service.ReservationDTO;
 import com.kosmo.proj.service.impl.CalendarServiceImpl;
 
@@ -103,8 +104,8 @@ public class CalendarController {
 		}
 		return String.valueOf(result);
 	}///delete
-	
-	
+	//
+
 
 	@RequestMapping("/Calendar/calendar.hst")
 	public String calendar() {

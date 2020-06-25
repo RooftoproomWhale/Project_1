@@ -136,7 +136,7 @@ var calendar = $('#calendar').fullCalendar({
   events: function (start, end, timezone, callback) {
 	  var param={};
 	  param.retitles = '일정관리';
-    $.ajax({
+  $.ajax({
       type: "get",
       url: "View.hst",/*"/proj/calendar/data.json",*/
       dataType:"json",
@@ -200,62 +200,7 @@ var calendar = $('#calendar').fullCalendar({
   //일정 드래그앤드롭
 
 
-  select: function (startDate, endDate, jsEvent, view) {
-
-    $(".fc-body").unbind('click');
-    $(".fc-body:not(.fc-event-container)").on('click', 'td', function (e) {
-    $("#contextMenu")
-        .addClass("contextOpened")
-        .css({
-          display: "block",
-          left: e.pageX,
-          top: e.pageY
-        });
-    	
-      return false;
-    	
-    });
-
-    var today = moment();
-
-    if (view.name == "month") {
-      startDate.set({
-        hours: today.hours(),
-        minute: today.minutes()
-      });
-      startDate = moment(startDate).format('YYYY-MM-DD HH:mm');
-      endDate = moment(endDate).subtract(1, 'days');
-
-      endDate.set({
-        hours: today.hours() + 1,
-        minute: today.minutes()
-      });
-      endDate = moment(endDate).format('YYYY-MM-DD HH:mm');
-    } else {
-      startDate = moment(startDate).format('YYYY-MM-DD HH:mm');
-      endDate = moment(endDate).format('YYYY-MM-DD HH:mm');
-    }
-
-    //날짜 클릭시 카테고리 선택메뉴
-    var $contextMenu = $("#contextMenu");
-    $contextMenu.on("click", "a", function (e) {
-      e.preventDefault();
-
-      //닫기 버튼이 아닐때
-      if ($(this).data().role !== 'close') {
-        newEvent(startDate, endDate, $(this).html());
-      }
-
-      $contextMenu.removeClass("contextOpened");
-      $contextMenu.hide();
-    });
-
-    $('body').on('click', function () {
-      $contextMenu.removeClass("contextOpened");
-      $contextMenu.hide();
-    });
-
-  },
+  
 
   //이벤트 클릭시 수정이벤트
   eventClick: function (event, jsEvent, view) {

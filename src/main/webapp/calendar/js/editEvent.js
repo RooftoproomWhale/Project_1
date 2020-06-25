@@ -2,6 +2,30 @@
  *  일정 편집
  * ************** */
 var editEvent = function (event, element, view) {
+	if(event.type='복용약등록'){
+    $.ajax({
+        type: "get",
+        url: "/proj/Calendar/Management.hst",/*"/proj/calendar/data.json",*/
+        data: {'dname':event.title},
+        success: function (response) {
+      	  console.log(response);
+      
+      	  response.forEach(el=>{
+
+      		console.log(el);
+      	  })
+  
+          callback(fixedDate);
+        }
+        ,error:function(request,error){
+  			console.log('상태코드:',request.status);
+  			console.log('서버로 부터 받은 HTML 데이타:',request.responseText);
+  			console.log('에러:',error);
+  		
+  		}
+      });
+	}
+	
 	console.log(event);
 	var start ="";
 	var no ="";

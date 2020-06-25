@@ -4,7 +4,6 @@
 
 
 
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +19,21 @@
     <link rel="stylesheet" href="<c:url value='https://fonts.googleapis.com/css?family=Open+Sans:400,500,600'/>"/>
     <link rel="stylesheet" href="<c:url value='https://fonts.googleapis.com/icon?family=Material+Icons'/>"/>
 <link rel="stylesheet" href="<c:url value='/calendar/css/main.css'/>"/>
+   <script>
+   	$(function() {
+		$('#item-1').on("click",function(){
+			$('#items-1').css("display","");
+			$('#items-2').css("display","none ")
+		})
+		$('#item-2').on("click",function(){
+			$('#items-2').css("display","");
+			$('#items-1').css("display","none")
+		})
+	
+   		
+	})
    
+   </script>
 <style>  
 #calendar {
   padding-top: 95px;
@@ -50,16 +63,7 @@
 
     <div class="container">
 
-        <!-- 일자 클릭시 메뉴오픈 -->
-        <div id="contextMenu" class="dropdown clearfix">
-            <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
-                style="display:block;position:static;margin-bottom:5px;">
-                <li><a tabindex="-1" href="#">병원예약</a></li>
-                <li><a tabindex="-1" href="#">복용약등록</a></li>  
-                <li class="divider"></li>
-                <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
-            </ul>
-        </div>
+   
 
         <div id="wrapper">
             <div id="loading"></div>
@@ -145,11 +149,10 @@
       <td colspan="3" >1회 15mL 1일 2~3회 가글하여 사용한다.<br/>최대 5~7일간 사용하며, 그 이상 사용 시 의사와 상의한다.</td>
     </tr>
     <tr>
-      <th class="text-center" scope="row" colspan="5">주의사항</th>
+      <th class="text-center" scope="row" colspan="5"><input type="button" class="btn" id="item-1" value="주의사항"/><input type="button" class="btn" id="item-2" value="상세설명"/></th>
     </tr>
      <tr>
-      <td colspan="5">
-     
+      <td colspan="5" id="items-1">
 1. 다음과 같은 사람은 이 약을 사용하지 말 것
 이 약의 구성성분에 과민반응이 있는 환자
 <br/><br/>
@@ -170,9 +173,10 @@
 5. 저장상의 주의사항
 1) 어린이의 손이 닿지 않는 곳에 보관한다.
 2) 의약품을 원래 용기에서 꺼내어 다른 용기에 보관하는 것은 의약품 오용에 따른 사고 발생이나 의약품 품질 저하의 원인이 될 수 있으므로 원래의 용기에 넣고 꼭 닫아 보관한다.</td>
+<td id="itmes-2" style="display: none ;">dsa</td>
+ </tr>
 
-    </tr>
-  </tbody>
+  </tbody>	
 </table>
                     </div>
                     
