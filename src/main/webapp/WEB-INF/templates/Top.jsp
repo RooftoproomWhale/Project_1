@@ -51,8 +51,7 @@
 <%-- <script type="text/javascript" src="<c:url value='/js/main.js'/>"></script> --%>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 <%--<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>--%>
-<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script src='<c:url value="/js/kakao.js"/>'></script>
+
 
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.css'/>">
