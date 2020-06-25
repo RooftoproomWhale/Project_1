@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <style>
    .map_wrap {position: relative;height: 100%;}
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
@@ -144,7 +145,7 @@
    .left_toggle{left:0; }
 
    
-   .scroll_area{overflow:auto;height:85%;flex-direction: column;background: #fff;}
+   .scroll_area{overflow:auto;flex-direction: column;background: #fff;}
    .search_item{border-top:1px solid #e5e5e5;margin: 0 20px;padding: 19px 20px 18px;;display: block;cursor: pointer;}
 
    
@@ -179,7 +180,11 @@
       text-align: center;
    }
    .inner_final_area{
-      padding: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e5e5e5;
+      margin-left: 20px;
+      margin-right: 20px;
    }
    .inner_final_icon{
        overflow: hidden;
@@ -329,6 +334,9 @@
                </div>
             </div>-->
          </div>
+         <div class="reservation_info">
+         	
+         </div>
       </div>
    </div>
    <div class="info-toggle left_toggle">
@@ -353,7 +361,8 @@
 <div class="modal fade" id="reservation-modal">
    <div class="modal-dialog">
       <div class="modal-content">
-         <form>
+         <form method="post" action="<c:url value='/Homespital/Map/Reservation.hst'/>">
+         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="modal-header">
                <button class="close" data-dismiss="modal">
                   <span>&times;</span>
@@ -662,8 +671,38 @@
            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],   //한글 요일 표시 부분
            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],   // 한글 요일 표시 부분
       });
-      
-      $('#Hour');
+      $('#AM_PM').change(function(){
+    	  var selectedDate = parse($('#reservation_date').val());
+    	  var date = new Date();
+    	  alert(selectedDate);
+    	  console.log(this.value=="오전");
+    	  if(this.value=="오후" && (date.getHours() < 13 && date.getHours() >= 0) || (selectedDate.getDate() != date.getDate()))
+    	  {
+    		  $('#Hour').empty();
+    		  $("#Minute").empty();
+    		  
+    		  var option = "";
+    		  for(var i = 1; i <= 12; i++)
+    		  {
+    			  option += "<option>"+i+"</option>";
+    		  }
+    		  $('#Hour').append(option);
+    		  
+    		  option = "";
+    		  for(var i = 0; i <= 50; i=i+10)
+    		  {
+    			  option += "<option>"+i+"</option>";
+    		  }
+    		  
+    		  $('#Minute').append(option);
+    	  }
+      });
+      $('#Hour').change(function(){
+    	  alert(this.value);
+      });
+      $('#Minute').change(function(){
+    	  alert(this.value);
+      });
    });
 </script>
 <script>
@@ -685,7 +724,6 @@
    var map = new kakao.maps.Map(mapContainer, mapOption);
    
    var geocoder = new kakao.maps.services.Geocoder();
-   
    
    var apiStatus = 2; // 0:병원, 1: 약국, 2: 공적마스크, 3: 확진자 동선
    
@@ -717,7 +755,7 @@
        console.log("바운드(드래그)",bound);
        console.log("거리차이",distance(currentLatLng.getLat(),currentLatLng.getLng(),latlng.getLat(),latlng.getLng(),"kilometer"))
        console.log("거리차이(Boolean)",distance(currentLatLng.getLat(),currentLatLng.getLng(),latlng.getLat(),latlng.getLng(),"kilometer")>0.8)
-       //storesByGeo(latlng.getLat(),latlng.getLng());
+
        if(distance(currentLatLng.getLat(),currentLatLng.getLng(),latlng.getLat(),latlng.getLng(),"kilometer")>0.7)
        {
     	   loadMapApi(latlng.getLat(),latlng.getLng(),apiStatus);
@@ -733,15 +771,19 @@
       var latlng = map.getCenter(); 
       searchAddrFromCoords(latlng, displayCenterInfo);
        var bound = map.getBounds();
-       
-       removeMarker();
-       
-       
+
        console.log("지도레벨(드래그)",level);
        console.log("위치(드래그)",latlng);
        console.log("바운드(드래그)",bound);
-       //storesByGeo(latlng.getLat(),latlng.getLng());
-       loadMapApi(latlng.getLat(),latlng.getLng(),apiStatus);
+       console.log("거리차이",distance(currentLatLng.getLat(),currentLatLng.getLng(),latlng.getLat(),latlng.getLng(),"kilometer"))
+       console.log("거리차이(Boolean)",distance(currentLatLng.getLat(),currentLatLng.getLng(),latlng.getLat(),latlng.getLng(),"kilometer")>0.8)
+
+       if(distance(currentLatLng.getLat(),currentLatLng.getLng(),latlng.getLat(),latlng.getLng(),"kilometer")>0.7)
+       {
+    	   removeMarker();
+    	   loadMapApi(latlng.getLat(),latlng.getLng(),apiStatus);
+           currentLatLng = latlng;
+       }
    });
    
    // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
@@ -834,7 +876,7 @@
                   });
                   
                   kakao.maps.event.addListener(marker, 'mouseover', function() {
-                    // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
                       infowindow.open(map, marker);
                   });
 
@@ -1434,24 +1476,26 @@
                   '<div class="inner_btn_area">'+
                      '<div class="btn_direction">'+
                         '<button class="find_way_btn">길찾기</button>'+
-                        '<button class="reservation_btn" onclick="reservation_show();">예약</button>'+
+                        '<sec:authorize access="hasRole('ROLE_MEM')">'+
+                        	'<button class="reservation_btn" onclick="reservation_show();">예약</button>'+
+                        '</sec:authorize>'+
                      '</div>'+
                   '</div>'+
                   '<div class="inner_final_area">'+
                      '<div class="inner_detail_address">'+
-                        '<img class="inner_final_icon" >'+
+                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/address.png'/>">'+
                         '<div class="inner_end_box">'+address+'</div>'+
                      '</div>'+
                      '<div class="inner_detail_tel">'+
-                        '<img class="inner_final_icon" >'+
+                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/tel.png'/>">'+
                         '<div class="inner_end_box">'+tel+'</div>'+
                      '</div>'+
                      '<div class="inner_detail_time">'+
-                        '<img class="inner_final_icon" >'+
+                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/time.png'/>">'+
                         '<div class="inner_end_box">11:00~16:00</div>'+
                      '</div>'+
                      '<div class="inner_detail_time2">'+
-                        '<img class="inner_final_icon" >'+
+                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/detail_info.png'/>">'+
                         '<div class="inner_end_box">'+
                            '영업시간 11:00~ 14:40 16:00~ 20:30<br/>'+
                            '휴무: 매주 월요일'+
@@ -1459,6 +1503,7 @@
                      '</div>'+
                   '</div>'+
                '</div>';
+               
          return item;
       }
       
@@ -1480,19 +1525,19 @@
                   '</div>'+
                   '<div class="inner_final_area">'+
                      '<div class="inner_detail_address">'+
-                        '<img class="inner_final_icon" >'+
+                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/address.png'/>">'+
                         '<div class="inner_end_box">'+address+'</div>'+
                      '</div>'+
                      '<div class="inner_detail_tel">'+
-                        '<img class="inner_final_icon" >'+
+                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/tel.png'/>">'+
                         '<div class="inner_end_box">'+tel+'</div>'+
                      '</div>'+
                      '<div class="inner_detail_time">'+
-                        '<img class="inner_final_icon" >'+
+                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/time.png'/>">'+
                         '<div class="inner_end_box">11:00~16:00</div>'+
                      '</div>'+
                      '<div class="inner_detail_time2">'+
-                        '<img class="inner_final_icon" >'+
+                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/detail_info.png'/>">'+
                         '<div class="inner_end_box">'+
                            '영업시간 11:00~ 14:40 16:00~ 20:30<br/>'+
                            '휴무: 매주 월요일'+
@@ -1547,21 +1592,65 @@
       function changeAM_PM(date,day) {
     	  var AMPM = ["오전","오후"];
     	  $("#AM_PM").empty();
+    	  
 
     	  console.log(day.getDate());
+    	  console.log((date.getHours() + 24) % 12 || 12);
+    	  console.log(date.getMinutes());
     	  
     	  var option
     	  
     	  if((date.getHours() < 13 && date.getHours() >= 0) || (day.getDate() != date.getDate()))
     	  {
+    		  $("#Hour").empty();
+        	  $("#Minute").empty();
+    		  
     		  option += "<option>"+AMPM[0]+"</option>"; 
     		  option += "<option>"+AMPM[1]+"</option>";
+    		  $('#AM_PM').append(option);
+    		  
+    		  option = "";
+    		  for(var i = 8; i <= 10; i++)
+    		  {
+    			  option += "<option>"+i+"</option>";
+    		  }
+    		  $('#Hour').append(option);
+    		  
+    		  option = "";
+    		  for(var i = 0; i <= 50; i=i+10)
+    		  {
+    			  option += "<option>"+i+"</option>";
+    		  }
+    		  
+    		  $('#Minute').append(option);
     	  }
     	  else
     	  {
+    		  $("#Hour").empty();
+        	  $("#Minute").empty();
+        	  
     		  option += "<option>"+AMPM[1]+"</option>";
+    		  $('#AM_PM').append(option);
+    		  
+    		  option = "";
+    		  for(var i = (date.getHours() + 24) % 12 || 12; i <= 12; i++)
+    		  {
+    			  option += "<option>"+i+"</option>";
+    		  }
+    		  console.log(option)
+    		  $('#Hour').append(option);
+    		  
+    		  option = ""; console.log((Math.floor(date.getMinutes() / 10)+1)*10);
+    		  for(var i = ((Math.floor(date.getMinutes() / 10) + 1) * 10); i <= 50; i=i+10)
+    		  {
+    			  option += "<option>"+i+"</option>";
+    		  }
+
+    		  console.log(option)
+    		  $('#Minute').append(option);
     	  }
-    	  $('#AM_PM').append(option);
+    	 
+    	  
 	  }
       
       function parse(str) {

@@ -94,13 +94,13 @@
       <td id='timecall2' style='display: none;padding: 0px'><input class="inputModal" type="text" name="update-start" id="edit-start"  style="margin: 0px;margin-top: 6px;width: 162px;"/></td>
     </tr>
     <tr >
-      <td scope="row" >예약신청일<br/></td>
+      <td scope="row">예약신청일<br/></td>
       <td id="apply_time"></td>
     </tr>
    
- <tr><td>예약상태</td> <td>미승인</td></tr>
- <tr><td>진료과</td><td>정형외과</td></tr>
- <tr><td>의사명</td><td>홍길동</td></tr>
+ <tr><td>예약상태</td> <td id='approved'></td></tr>
+ <tr><td>진료과</td><td id='dept_NAME'></td></tr>
+ <tr><td>증상</td><td id='sel_SYMP'></td></tr>
   </tbody>
 </table>
                     </div>

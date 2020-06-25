@@ -1,12 +1,8 @@
 package com.kosmo.proj.service.web;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
-
-import org.apache.ibatis.annotations.Select;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -15,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.kosmo.proj.service.MemberDTO;
+import com.kosmo.proj.service.ReservationDTO;
+import com.kosmo.proj.service.impl.CalendarServiceImpl;
 import com.kosmo.proj.service.impl.MemberServiceImpl;
 
 
@@ -25,7 +23,8 @@ import com.kosmo.proj.service.impl.MemberServiceImpl;
 public class MyPageController {
 	@Resource(name="memberService")
 	private MemberServiceImpl memberDAO;
-
+	@Resource(name="CalendarService")
+	private CalendarServiceImpl calendarDAO;
 	
 	// 유저 페이지
 	/// 내정보
@@ -41,7 +40,9 @@ public class MyPageController {
 		map.put("id", id);
 		List<MemberDTO> list = memberDAO.selectList(map);
 		List<Map<String, Integer>> count = memberDAO.selectCount(map);
-
+		List<ReservationDTO> list2 = calendarDAO.selectnew(map);
+		model.addAttribute("newres",list2);
+	
 		model.addAttribute("list", list);	
 		model.addAttribute("count", count);
 		return "Mypage_Main.my_tiles";

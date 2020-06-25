@@ -51,4 +51,8 @@ public class CalendarServiceImpl implements CalendarService {
 	public int delete2(Map map) {
 		return dao.delete2(map);
 	}
+	public List<ReservationDTO> selectnew(Map map) {
+		
+		return dao.selectnew(map);
+	}
 }
