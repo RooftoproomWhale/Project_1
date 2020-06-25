@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.MemberService;
 import com.kosmo.proj.util.CustomUserDetails;
@@ -66,19 +67,24 @@ public class MemberDAO implements MemberService {
 		}
 
 		public int diseaseupdate(Map map) {
-			
+
 			return sqlMapper.update("diseaseupdate",map);
 		}
 
 		public List<MemberDTO> diseaseSelect(Map map) {
-	
+
 			return sqlMapper.selectList("diseaseupdate",map);
 		}
 		public List<Map<String, Integer>> selectCount(Map map) {
-			
+
 			return sqlMapper.selectList("selectCount", map);
 		}
 
+		@Override
+		public List<HospitalDTO> selectHosSearch(Map map) {
+			// TODO Auto-generated method stub
+			return sqlMapper.selectList("hosListSearch", map);
+		}
 		@Override
 		public CustomUserDetails getUserById(String username) {
 			System.out.println(username);
