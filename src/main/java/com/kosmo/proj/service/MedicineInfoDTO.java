@@ -1,11 +1,5 @@
 package com.kosmo.proj.service;
 
-import java.util.List;
-
-import org.json.JSONObject;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class MedicineInfoDTO {
 	private String ITEM_NAME;
 	private String ENTP_NAME;
@@ -16,6 +10,7 @@ public class MedicineInfoDTO {
 	private String COLOR_CLASS1;
 	private String DRUG_SHAPE;
 	private String ITEM_IMAGE;
+
 	public MedicineInfoDTO() {}
 	public String getCHART() {
 		return CHART;
@@ -73,8 +68,8 @@ public class MedicineInfoDTO {
 	public String getVALID_TERM() {
 		return VALID_TERM;
 	}
-	
-	
-	
-	
+
+
+
+
 }

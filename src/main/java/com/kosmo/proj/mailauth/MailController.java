@@ -1,5 +1,7 @@
 package com.kosmo.proj.mailauth;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,18 +10,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/mailauth")
 public class MailController {
 	@Autowired
 	private MailService service;
 
-
 	@Autowired
 	private MailHandler mailHandler;
-	@RequestMapping(value = "/mailauth/testMail.hst", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/testMail.hst", method = RequestMethod.GET)
 	public String testMailPost() throws Exception{
 		System.out.println("테스트 메일 컨트롤러");
-		mailHandler.setSubject("홈스피탈 인증번호 입니다");
-		mailHandler.setText("홈스피탈 인증 번호 : 745198");
+		Random key = new Random();
+		int authCode = key.nextInt(4589362) + 49311; //이메일로 받는 인증코드 부분 (난수)
+
+		mailHandler.setSubject("테스트 메일입니다.");
+		mailHandler.setText(Integer.toString(authCode));
 		mailHandler.setFrom("united0226@gmail.com", "윤승중");
 		mailHandler.setTo("united0226@naver.com");
 		mailHandler.send();
@@ -28,7 +34,7 @@ public class MailController {
 
 	}
 
-	@RequestMapping(value = "/mailauth/register.hst", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
     public String RegisterPost(MemberVO user,Model model,RedirectAttributes rttr) throws Exception{
 
         System.out.println("regesterPost 진입 ");
@@ -37,7 +43,8 @@ public class MailController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/mailauth/emailConfirm.hst", method = RequestMethod.GET)
+    //이메일 인증 코드 검증
+    @RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
     public String emailConfirm(MemberVO user	,Model model,RedirectAttributes rttr) throws Exception {
 
         System.out.println("cont get user"+user);

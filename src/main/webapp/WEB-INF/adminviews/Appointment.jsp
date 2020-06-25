@@ -116,8 +116,7 @@ $(function() {
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="">
-								<input class="au-input au-input--xl" type="text" id="search"
-									placeholder="병원명 검색" />
+								<input class="au-input au-input--xl" type="text" id="search" placeholder="병원명 검색" />
 								<button class="au-btn--submit" type="button" id="searchBtn">
 									<i class="zmdi zmdi-search"></i>
 								</button>
@@ -171,8 +170,8 @@ $(function() {
 											<c:if test="${not isEmpty}">
 												<c:forEach items="${list}" var="item" varStatus="loop">
 													<tr class="tr-shadow">
-														<td><label class="au-checkbox"> <input
-																type="checkbox"> <span class="au-checkmark"></span>
+														<td><label class="au-checkbox"> 
+														<input type="checkbox"> <span class="au-checkmark"></span>
 														</label></td>
 														<td><span class="block-email" id="idEmail${loop.index }">${item.MEM_EMAIL }</span>
 														</td>
