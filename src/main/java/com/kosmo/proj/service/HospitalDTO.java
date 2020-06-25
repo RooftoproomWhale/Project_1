@@ -18,7 +18,16 @@ public class HospitalDTO {
 	private String id;
 	private String auth;
 	private Date approved_date;
+	private String dept_name;
 	
+	
+	
+	public String getDept_name() {
+		return dept_name;
+	}
+	public void setDept_name(String dept_name) {
+		this.dept_name = dept_name;
+	}
 	public Date getApproved_date() {
 		return approved_date;
 	}

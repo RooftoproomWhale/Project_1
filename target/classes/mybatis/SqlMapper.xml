@@ -105,7 +105,9 @@
       SELECT * FROM hospital
    </select>
    <select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
+      <!-- SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%' -->
+      SELECT H.*, D.dept_name FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code
+	  WHERE H.hosp_name LIKE '%' || #{search_keyword} || '%'
    </select>
    <select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
       SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
@@ -115,17 +117,21 @@
    </select>
    
    <select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT D.dept_name, HD.*
+      <!-- SELECT D.dept_name, HD.*
       FROM
       (SELECT H.*, D.dept_code FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_code = D.dept_code
+      WHERE HD.address = #{address} -->
+      SELECT HD.*
+      FROM
+      (SELECT H.*, D.dept_name FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_name = D.dept_name
       WHERE HD.address = #{address}
    </select>
 
    <select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
       SELECT *
       FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
-      AS distanceByXY, h.*
-      FROM hospital h) disData
+      AS distanceByXY, h.*,D.dept_name
+      FROM hospital h JOIN hos_dept D ON h.hosp_code = d.hosp_code) disData
       WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
    </select>
 
