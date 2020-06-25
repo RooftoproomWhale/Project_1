@@ -19,16 +19,16 @@
 	</properties>
 	<!-- 구글 api 모음집 -->
 	<dependencyManagement>
-	<dependencies>
-		<dependency>
-			<groupId>com.google.cloud</groupId>
-			<artifactId>libraries-bom</artifactId>
-			<version>5.3.0</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
-	</dependencies>
-</dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.cloud</groupId>
+				<artifactId>libraries-bom</artifactId>
+				<version>5.3.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<!-- Spring -->
@@ -199,12 +199,12 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
 		<dependency>
-		    <groupId>net.sf.json-lib</groupId>
-		    <artifactId>json-lib</artifactId>
-		    <version>2.4</version>
-		    <classifier>jdk15</classifier>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
 		</dependency>
-		
+
 		<!-- Spring-Security관련 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -257,23 +257,25 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-			
-			
+
+
+
 		<!-- 메일메일 -->
-		  <!-- mail -->
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${org.springframework-version}</version>
-        </dependency>
-		
-		
-		
+		<!-- mail -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.3.0.RELEASE</version>
+		</dependency>
+
+
+
 
 		<!-- Test -->
 		<dependency>
@@ -282,12 +284,12 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-	<!-- https://mvnrepository.com/artifact/org.python/jython -->
-	<dependency>
-		<groupId>org.python</groupId>
-		<artifactId>jython</artifactId>
-		<version>2.7.0</version>
-	</dependency>
+		<!-- https://mvnrepository.com/artifact/org.python/jython -->
+		<dependency>
+			<groupId>org.python</groupId>
+			<artifactId>jython</artifactId>
+			<version>2.7.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

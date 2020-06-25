@@ -3,23 +3,24 @@ package com.kosmo.proj.admin;
 import java.util.List;
 import java.util.Map;
 
+import com.kosmo.proj.service.BoardDTO;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.Paging;
 import com.kosmo.proj.service.ReservationDTO;
 
 public interface AdminService {
-	
+
 		//로그인 용]
 		boolean isLogin(Map map);
-		
+
 		//통계
 		int memberCount();
 		int genderCount();
 		int hospCount();
 		int presCount();
 		int aptCount();
-		
+
 		//recent chart
 		int janMemCount();
 		int febMemCount();
@@ -28,7 +29,7 @@ public interface AdminService {
 		int mayMemCount();
 		int junMemCount();
 		int julMemCount();
-		
+
 		int janAptCount();
 		int febAptCount();
 		int marAptCount();
@@ -36,7 +37,7 @@ public interface AdminService {
 		int mayAptCount();
 		int junAptCount();
 		int julAptCount();
-		
+
 		//deptApt chart
 		int naeCount();
 		int biCount();
@@ -53,8 +54,8 @@ public interface AdminService {
 		int piCount();
 		int hanCount();
 		int giCount();
-		
-		
+
+
 		//gender chart
 		int maleCount();
 		int femaleCount();
@@ -66,7 +67,7 @@ public interface AdminService {
 		int over40under50Count();
 		int over50under60Count();
 		int over60Count();
-		
+
 		//회원 관리
 		//회원 상세보기용]
 		List<MemberDTO> selectOne(Map map);
@@ -77,30 +78,31 @@ public interface AdminService {
 		int delete(Map map);
 		//회원 수정
 		int update(Map map);
-		List<MemberDTO> selectList_Account_Search(Map map);	
+		List<MemberDTO> selectList_Account_Search(Map map);
 		int getTotalRecordAccount(Map map);
 		int getTotalRecordAccSearch(Map map);
-		
+
 		//예약 관리
 		List<ReservationDTO> selectList_Apt_All(Paging vo);
 		List<ReservationDTO> selectOneApt(Map map);
 		int deleteApt(Map map);
-		List<ReservationDTO> selectList_Appointment_Search(Map map);	
+		List<ReservationDTO> selectList_Appointment_Search(Map map);
 		int getTotalRecordAppointment(Map map);
 		int getTotalRecordAptSearch(Map map);
-		
+
 		//병원 제휴
-		List<HospitalDTO> selectList_Auth_All(Paging vo);	
+		List<HospitalDTO> selectList_Auth_All(Paging vo);
 		int approveAuth(Map map);
 		int denyAuth(Map map);
-		List<HospitalDTO> selectList_Auth_Search(Map map);	
+		List<HospitalDTO> selectList_Auth_Search(Map map);
 		int getTotalRecordHosAuth(Map map);
 		int getTotalRecordHosSearch(Map map);
-	
+
 		//공지사항
 		int insertNotice(Map map);
 		int updateNotice(Map map);
-		//List<NoticeDTO> viewNotice(Map map);
+		List<BoardDTO> viewNotice(Map map);
 		int deleteNotice(Map map);
+		List<BoardDTO> detailNotice(Map map);
 
 }

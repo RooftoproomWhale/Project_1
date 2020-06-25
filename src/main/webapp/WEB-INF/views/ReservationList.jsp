@@ -6,6 +6,8 @@
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
 <script>
 $(function(){
+
+	
 	var str ="예약리스트";
 	console.log('실행전');
 	showList();
@@ -19,7 +21,16 @@ $(function(){
 		});			
 	};
 	
-	function showList_(data){		
+	function showList_(data){
+		function colors(data) {
+			var str="";
+			switch (data) {
+			case '승인됨': str ='addblue';break;
+			case '거절됨': str ='addred';break;
+			default: str ='addDefault';break;
+			}
+			return str;
+		};
 		console.log('예약 목록:',data);
 		var comments="";
 		if(data.length==0){
@@ -27,22 +38,37 @@ $(function(){
 		}
 		else{
 			$.each(JSON.parse(data),function(i,element){
+				var approved=element['approved'];
+				var color = colors(approved);
 				comments+="<div class='panel panel-default'>";
 				comments+='<div class="panel-heading" role="tab" id="heading'+i+'">';
 				comments+='<h4 class="panel-title">';
 				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
-				comments+=element['res_DATE']+"</a></h4></div>";
-				comments+='<div id="collapse'+i+'" class="panel-collapse collapse in" role="tabpanel">';
-				comments+='<div class="panel-body">'+element['hosp_NAME'];
+				comments+=' 예약일시: '+element['res_DATE']+" "+element['res_TIME']+"</a></h4></div>";
+				comments+='<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
+				comments+='<div class="panel-body"> <span class="panelspan">병원</span>: '+element['hosp_NAME']+'&emsp;<span class="panelspan">환자</span>: '+element["mem_NAME"]+"<span class='panelspan'>&emsp;증상</span>: "+element['sel_SYMP']+"<span class='panelspan'>&emsp;증상</span>: 진료과:"+element['dept_NAME']+"<span class='panelspan'>&emsp;예약상태</span>:<span class='"+color+"'> "+element['approved']+"</span>";
 				comments+="</div></div></div>";
+		
 			});
 		}
 		$('#accordion').html(comments);
 		
 	};
+
 });
+
 </script>
 <style>
+.addblue{
+color:blue;}
+.addred{
+color:red}
+.addDefault{
+color:#5D5D5D;}
+.panelspan{
+font-weight: bold;
+color:#8C8C8C;
+}
 a:hover, a:focus {
 	text-decoration: none;
 	outline: none;

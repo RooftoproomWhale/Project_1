@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.MemberService;
+import com.kosmo.proj.util.CustomUserDetails;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
@@ -20,8 +22,9 @@ public class MemberServiceImpl implements MemberService{
 	public boolean isLogin(Map map) {
 		return dao.isLogin(map);
 	}
-	
-	public MemberDTO isLogin(MemberDTO member) {		
+
+	@Override
+	public MemberDTO isLogin(MemberDTO member) {
 		return dao.isLogin(member);
 	}
 
@@ -61,14 +64,26 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	public List<MemberDTO> selectDiseaseList(Map map) {
-		
+
 		return dao.diseaseSelect(map);
 	}
 
 	public List<Map<String, Integer>> selectCount(Map map) {
-		
+
 		return dao.selectCount(map);
 	}
+
+	@Override
+	public List<HospitalDTO> selectHosSearch(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectHosSearch(map);
+	}
+	@Override
+	public CustomUserDetails getUserById(String username) {
+		return dao.getUserById(username);
+	}
+
+
 
 
 

@@ -24,6 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -57,6 +58,13 @@ public class MapController {
 		}
 		
 		return "map/Map.no_tiles";
+	}
+	
+	@RequestMapping(value="/Homespital/Map/Reservation.hst",method=RequestMethod.POST)
+	@ResponseBody
+	public String reservation() {
+		
+		return "";
 	}
 	
 	@ResponseBody

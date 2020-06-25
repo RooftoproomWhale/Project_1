@@ -8,7 +8,7 @@
   		  else {
   			  console.log('로그인 에러'); 
   		  }
-  		},{scope: 'public_profile, email'});
+  		},{scope: 'public_profile, email,user_gender'});
     });
   }
 
@@ -22,8 +22,33 @@
   }
 
   function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-	    FB.api('/me?fields=email', function(response) {
+	    FB.api('/me',{fields: 'email,name,gender'}, function(response) {
 	      console.log(response);
+	      let param = {};
+	      param.mem_name = response.name;
+	      param.mem_email = response.email;
+	      param.userEmail = response.email;
+	      param.gender = response.gender;
+	      param.mem_pwd = response.id;
+	      param.tel = '010-1234-5678';
+	      param.role = 'MEM';
+	      param.enable = 1;
+	      param.age = null;
+	      param.weight = null;
+	      param.height = null;
+	      console.log(param.mem_pwd);
+	      
+	      $.ajax({
+				url:'./snsInsert.hst',
+				data:param,
+				type:'post',
+				success:function(data){
+					console.log(data);
+					location.replace("/proj/Home/ToHomePage.hst");
+				},
+				error:function(e){console.log('에러:',e)}
+			});
+
 	      document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
 	    })
   }

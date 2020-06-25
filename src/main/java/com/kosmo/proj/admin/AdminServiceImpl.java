@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.kosmo.proj.service.BoardDTO;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.Paging;
@@ -17,7 +18,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Resource(name = "adminDAO")
 	private AdminDAO dao;
-	
 	@Override
 	public boolean isLogin(Map map) {
 		// TODO Auto-generated method stub
@@ -29,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.selectList_All(vo);
 	}
-	
+
 	@Override
 	public List<MemberDTO> selectList_User(Map map) {
 		// TODO Auto-generated method stub
@@ -216,24 +216,35 @@ public class AdminServiceImpl implements AdminService {
 		return dao.over60Count();
 	}
 
-	@Override
-	public int insertNotice(Map map) {
-		// TODO Auto-generated method stub
-		return dao.insertNotice(map);
-	}
+	 @Override
+	 public int insertNotice(Map map) {
+		 // TODO Auto-generated method stub
+		 return dao.insertNotice(map);
+	 }
+	 @Override
+	 public int deleteNotice(Map map) {
+		 // TODO Auto-generated method stub
+		 return dao.deleteNotice(map);
+	 }
 
-	@Override
-	public int updateNotice(Map map) {
-		// TODO Auto-generated method stub
-		return dao.updateNotice(map);
-	}
+	 @Override
+	 public int updateNotice(Map map) {
+		 // TODO Auto-generated method stub
+		 return dao.updateNotice(map);
+	 }
+
+	 @Override
+	 public List<BoardDTO> viewNotice(Map map) {
+		 // TODO Auto-generated method stub
+		 return dao.viewNotice(map);
+	 }
 
 
-	@Override
-	public int deleteNotice(Map map) {
-		// TODO Auto-generated method stub
-		return dao.deleteNotice(map);
-	}
+	 @Override
+	 public List<BoardDTO> detailNotice(Map map) {
+		 // TODO Auto-generated method stub
+		 return dao.detailNotice(map);
+	 }
 
 	@Override
 	public int janMemCount() {
@@ -426,5 +437,5 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.giCount();
 	}
-	
+
 }

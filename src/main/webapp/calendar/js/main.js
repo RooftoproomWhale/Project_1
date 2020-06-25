@@ -146,7 +146,6 @@ var calendar = $('#calendar').fullCalendar({
     
     	  response.forEach(el=>{
     		if(el.count != null){
-    			
     			el.backgroundColor = '#9775fa';
     			el.title = el.medi_name;
     			el.type = "복용약등록";
@@ -159,8 +158,8 @@ var calendar = $('#calendar').fullCalendar({
     			el.title = el.hosp_NAME;
     			el.type="병원예약";
     			el.start =el.res_DATE+" "+el.res_TIME; 
-    			el.apply_TIME = moment(el.apply_TIME).format('YYYY-MM-DD HH:mm');
-    		
+  
+    			
     		}
     		console.log(el);
     	  })

@@ -1,14 +1,13 @@
 package com.kosmo.proj.admin;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import javax.annotation.Resource;
 
 import org.json.JSONObject;
-import org.json.XML;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -19,24 +18,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kosmo.proj.service.BoardDTO;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.Paging;
 import com.kosmo.proj.service.ReservationDTO;
 
-
 @RequestMapping(value = "/Admin/")
 @Controller
 public class AdminController {
-	
-	@Resource(name="adminService")
+
+	@Resource(name = "adminService")
 	private AdminService adminService;
-	
-	//관리자 홈페이지
+
+	// 관리자 홈페이지
 	@RequestMapping("Index.hst")
-	public String toIndex(Model model)
-	{
-		//overview
+	public String toIndex(Model model) {
+		// overview
 		int memberCount = adminService.memberCount();
 		int hospCount = adminService.hospCount();
 		int presCount = adminService.presCount();
@@ -49,8 +47,8 @@ public class AdminController {
 		model.addAttribute("hospCount", hospCount);
 		model.addAttribute("presCount", presCount);
 		model.addAttribute("aptCount", aptCount);
-		
-		//recent chart
+
+		// recent chart
 		int janMemCount = adminService.janMemCount();
 		int febMemCount = adminService.febMemCount();
 		int marMemCount = adminService.marMemCount();
@@ -58,7 +56,7 @@ public class AdminController {
 		int mayMemCount = adminService.mayMemCount();
 		int junMemCount = adminService.junMemCount();
 		int julMemCount = adminService.julMemCount();
-		
+
 		int janAptCount = adminService.janAptCount();
 		int febAptCount = adminService.febAptCount();
 		int marAptCount = adminService.marAptCount();
@@ -66,7 +64,7 @@ public class AdminController {
 		int mayAptCount = adminService.mayAptCount();
 		int junAptCount = adminService.junAptCount();
 		int julAptCount = adminService.julAptCount();
-		
+
 		System.out.println(junMemCount);
 		System.out.println(junAptCount);
 		model.addAttribute("janMemCount", janMemCount);
@@ -76,7 +74,7 @@ public class AdminController {
 		model.addAttribute("mayMemCount", mayMemCount);
 		model.addAttribute("junMemCount", junMemCount);
 		model.addAttribute("julMemCount", julMemCount);
-		
+
 		model.addAttribute("janAptCount", janAptCount);
 		model.addAttribute("febAptCount", febAptCount);
 		model.addAttribute("marAptCount", marAptCount);
@@ -84,8 +82,8 @@ public class AdminController {
 		model.addAttribute("mayAptCount", mayAptCount);
 		model.addAttribute("junAptCount", junAptCount);
 		model.addAttribute("julAptCount", julAptCount);
-		
-		//age chart
+
+		// age chart
 		int under10 = adminService.under10Count();
 		int over10under20 = adminService.over10under20Count();
 		int over20under30 = adminService.over20under30Count();
@@ -93,7 +91,9 @@ public class AdminController {
 		int over40under50 = adminService.over40under50Count();
 		int over50under60 = adminService.over50under60Count();
 		int over60 = adminService.over60Count();
-		System.out.println("10세미만: " + under10 + " 10~19: " + over10under20 +" 20~29: " + over20under30 + " 30~39: " + over30under40 + " 40~49: " + over40under50 + " 50~59: " + over50under60 + " 60이상: " + over60);;
+		System.out.println("10세미만: " + under10 + " 10~19: " + over10under20 + " 20~29: " + over20under30 + " 30~39: "
+				+ over30under40 + " 40~49: " + over40under50 + " 50~59: " + over50under60 + " 60이상: " + over60);
+		;
 		model.addAttribute("under10", under10);
 		model.addAttribute("over10under20", over10under20);
 		model.addAttribute("over20under30", over20under30);
@@ -101,16 +101,15 @@ public class AdminController {
 		model.addAttribute("over40under50", over40under50);
 		model.addAttribute("over50under60", over50under60);
 		model.addAttribute("over60", over60);
-		
+
 		return "Ad_Index.ad_tiles";
 	}
-	
-	//회원 관리
+
+	// 회원 관리
 	@RequestMapping("Accounts.hst")
-	public String toAccounts(@RequestParam Map map, Paging vo, Model model
-			, @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
-	{
+	public String toAccounts(@RequestParam Map map, Paging vo, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
 		int total = adminService.getTotalRecordAccount(map);
 		System.out.println(total);
 		if (nowPage == null && cntPerPage == null) {
@@ -118,40 +117,35 @@ public class AdminController {
 			cntPerPage = "5";
 		} else if (nowPage == null) {
 			nowPage = "1";
-		} else if (cntPerPage == null) { 
+		} else if (cntPerPage == null) {
 			cntPerPage = "5";
 		}
-		
+
 		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		List<MemberDTO> list =adminService.selectList_All(vo);
-		for(MemberDTO val:list)
-		{
+		List<MemberDTO> list = adminService.selectList_All(vo);
+		for (MemberDTO val : list) {
 			System.out.println(val.getMem_name());
 		}
 		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
-		
+
 		return "Accounts.ad_tiles";
 	}
-	
+
 	@RequestMapping("AccountsUser.hst")
-	public String accountsUser(@RequestParam Map map, Model model)
-	{
-		List<MemberDTO> list =adminService.selectList_User(map);
-		for(MemberDTO val:list)
-		{
+	public String accountsUser(@RequestParam Map map, Model model) {
+		List<MemberDTO> list = adminService.selectList_User(map);
+		for (MemberDTO val : list) {
 			System.out.println(val.getMem_name());
 		}
 		model.addAttribute("list", list);
 		return "AccountsU.ad_tiles";
 	}
-	
+
 	@RequestMapping("AccountsHosp.hst")
-	public String accountsHosp(@RequestParam Map map, Model model, ModelMap modelmap)
-	{
-		List<MemberDTO> list =adminService.selectList_Hosp(map);
-		for(MemberDTO val:list)
-		{
+	public String accountsHosp(@RequestParam Map map, Model model, ModelMap modelmap) {
+		List<MemberDTO> list = adminService.selectList_Hosp(map);
+		for (MemberDTO val : list) {
 			System.out.println(val.getMem_name());
 		}
 		String flag = "user";
@@ -159,54 +153,47 @@ public class AdminController {
 		modelmap.addAttribute("flag", flag);
 		return "AccountsH.ad_tiles";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "UserUpdateForm.hst", produces = "text/html; charset=UTF-8")
-	public String userUpdateForm(@RequestParam Map map, Model model)
-	{
-		ObjectMapper mapper = new ObjectMapper(); 
-		String jsonStr = null; 
+	public String userUpdateForm(@RequestParam Map map, Model model) {
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = null;
 		List<MemberDTO> list = adminService.selectOne(map);
 		System.out.println(list);
-	       try 
-	       {
-	           jsonStr = mapper.writeValueAsString(list); 
-	       }
-	       catch (JsonProcessingException e) 
-	       {
-	    	  e.printStackTrace(); 
-	       }
+		try {
+			jsonStr = mapper.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		return jsonStr.toString();
 	}
-	
-	@RequestMapping(value= "UserUpdate.hst", method=RequestMethod.POST)
-	public String userUpdate(@RequestParam Map map, Model model)
-	{
+
+	@RequestMapping(value = "UserUpdate.hst", method = RequestMethod.POST)
+	public String userUpdate(@RequestParam Map map, Model model) {
 //		MemberDTO record = adminService.selectOne(map);
 //		model.addAttribute("record", record);
 		int update = adminService.update(map);
 		System.out.println(update);
 		return "Accounts.ad_tiles";
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value= "UserDelete.hst")
-	public String userDelete(@RequestParam Map map)
-	{
+	@RequestMapping(value = "UserDelete.hst")
+	public String userDelete(@RequestParam Map map) {
 		int delete = adminService.delete(map);
 		System.out.println(delete);
 		String deletestr = Integer.toString(delete);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("del", deletestr);
-	    
-	    return jsonObject.toString();
+
+		return jsonObject.toString();
 	}
-	
+
 	@RequestMapping("AccountsSearch.hst")
-	public String accountsSearch(@RequestParam Map map, Paging vo, Model model
-			, @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
-	{
+	public String accountsSearch(@RequestParam Map map, Paging vo, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
 		int total = adminService.getTotalRecordAccSearch(map);
 		System.out.println(total);
 		if (nowPage == null && cntPerPage == null) {
@@ -214,29 +201,27 @@ public class AdminController {
 			cntPerPage = "5";
 		} else if (nowPage == null) {
 			nowPage = "1";
-		} else if (cntPerPage == null) { 
+		} else if (cntPerPage == null) {
 			cntPerPage = "5";
 		}
-		
+
 		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		List<MemberDTO> list =adminService.selectList_Account_Search(map);
-		for(MemberDTO val:list)
-		{
+		List<MemberDTO> list = adminService.selectList_Account_Search(map);
+		for (MemberDTO val : list) {
 			System.out.println(val.getMem_email());
 			System.out.println(val.getMem_name());
 		}
 		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
-		
+
 		return "Accounts.ad_tiles";
 	}
-	
-	//예약 관리
+
+	// 예약 관리
 	@RequestMapping("Appointment.hst")
-	public String toAppointment(@RequestParam Map map, Paging vo, Model model
-			, @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
-	{
+	public String toAppointment(@RequestParam Map map, Paging vo, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
 		int total = adminService.getTotalRecordAppointment(map);
 		System.out.println(total);
 		if (nowPage == null && cntPerPage == null) {
@@ -244,14 +229,13 @@ public class AdminController {
 			cntPerPage = "5";
 		} else if (nowPage == null) {
 			nowPage = "1";
-		} else if (cntPerPage == null) { 
+		} else if (cntPerPage == null) {
 			cntPerPage = "5";
 		}
-		
+
 		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		List<ReservationDTO> list =adminService.selectList_Apt_All(vo);
-		for(ReservationDTO val:list)
-		{
+		List<ReservationDTO> list = adminService.selectList_Apt_All(vo);
+		for (ReservationDTO val : list) {
 			System.out.println(val.getHOSP_NAME());
 			System.out.println(val.getRESERV_NO());
 			System.out.println(val.getMEM_EMAIL());
@@ -260,42 +244,36 @@ public class AdminController {
 		}
 		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
-		
+
 		return "Appointment.ad_tiles";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "AptViewForm.hst", produces = "text/html; charset=UTF-8")
-	public String appointmentView(@RequestParam Map map )
-	{
-		ObjectMapper mapper = new ObjectMapper(); 
-		String jsonStr = null; 
-	       List<ReservationDTO> list = adminService.selectOneApt(map);
-	       try 
-	       {
-	           jsonStr = mapper.writeValueAsString(list); 
-	       }
-	       catch (JsonProcessingException e) 
-	       {
-	    	  e.printStackTrace(); 
-	       }
-		
+	public String appointmentView(@RequestParam Map map) {
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = null;
+		List<ReservationDTO> list = adminService.selectOneApt(map);
+		try {
+			jsonStr = mapper.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
 		return jsonStr.toString();
 	}
-	
+
 	@RequestMapping(value = "AptDelete.hst", produces = "text/html; charset=UTF-8")
-	public String appointmentDelete(@RequestParam Map map )
-	{
-	    int check = adminService.deleteApt(map);
+	public String appointmentDelete(@RequestParam Map map) {
+		int check = adminService.deleteApt(map);
 		System.out.println(check);
 		return "Appointment.ad_tiles";
 	}
-	
+
 	@RequestMapping("AppointmentSearch.hst")
-	public String appointmentSearch(@RequestParam Map map, Paging vo, Model model
-			, @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
-	{
+	public String appointmentSearch(@RequestParam Map map, Paging vo, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
 		int total = adminService.getTotalRecordAptSearch(map);
 		System.out.println(total);
 		if (nowPage == null && cntPerPage == null) {
@@ -303,28 +281,27 @@ public class AdminController {
 			cntPerPage = "5";
 		} else if (nowPage == null) {
 			nowPage = "1";
-		} else if (cntPerPage == null) { 
+		} else if (cntPerPage == null) {
 			cntPerPage = "5";
 		}
-		
+
 		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		List<ReservationDTO> list =adminService.selectList_Appointment_Search(map);
-		for(ReservationDTO val:list)
-		{
+		List<ReservationDTO> list = adminService.selectList_Appointment_Search(map);
+		for (ReservationDTO val : list) {
 			System.out.println(val.getHOSP_NAME());
 			System.out.println(val.getMEM_NAME());
 		}
 		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
-		
+
 		return "Appointment.ad_tiles";
 	}
-	//병원 제휴
+
+	// 병원 제휴
 	@RequestMapping("HosAuth.hst")
-	public String toHosAuth(@RequestParam Map map, Paging vo, Model model
-			, @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
-	{
+	public String toHosAuth(@RequestParam Map map, Paging vo, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
 		int total = adminService.getTotalRecordHosAuth(map);
 		System.out.println(total);
 		if (nowPage == null && cntPerPage == null) {
@@ -332,57 +309,53 @@ public class AdminController {
 			cntPerPage = "5";
 		} else if (nowPage == null) {
 			nowPage = "1";
-		} else if (cntPerPage == null) { 
+		} else if (cntPerPage == null) {
 			cntPerPage = "5";
 		}
-		
+
 		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		List<HospitalDTO> list =adminService.selectList_Auth_All(vo);
-		for(HospitalDTO val:list)
-		{
+		List<HospitalDTO> list = adminService.selectList_Auth_All(vo);
+		for (HospitalDTO val : list) {
 			System.out.println(val.getHosp_name());
 		}
 		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
-		
-		return "HosAuth.ad_tiles"; 
+
+		return "HosAuth.ad_tiles";
 	}
-	
+
 //	@RequestMapping("HosAuth.hst")
 //	public String toHosAuth(@RequestParam Map map, Model model)
 //	{
-//		
+//
 //		List<HospitalDTO> list =adminService.selectList_Auth_All(map);
 //		for(HospitalDTO val:list)
 //		{
 //			System.out.println(val.getHosp_name());
 //		}
 //		model.addAttribute("list", list);
-//		
-//		return "HosAuth.ad_tiles"; 
+//
+//		return "HosAuth.ad_tiles";
 //	}
-	
+
 	@RequestMapping("ApproveAuth.hst")
-	public String approve(@RequestParam Map map, Model model)
-	{
+	public String approve(@RequestParam Map map, Model model) {
 		int check = adminService.approveAuth(map);
 		System.out.println(check);
 		return "HosAuth.ad_tiles";
 	}
-	
+
 	@RequestMapping("DenyAuth.hst")
-	public String deny(@RequestParam Map map, Model model)
-	{
+	public String deny(@RequestParam Map map, Model model) {
 		int check = adminService.denyAuth(map);
 		System.out.println(check);
 		return "HosAuth.ad_tiles";
 	}
-	
+
 	@RequestMapping("HosAuthSearch.hst")
-	public String hosAuthSearch(@RequestParam Map map, Paging vo, Model model
-			, @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage)
-	{
+	public String hosAuthSearch(@RequestParam Map map, Paging vo, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
 		int total = adminService.getTotalRecordHosSearch(map);
 		System.out.println(total);
 		if (nowPage == null && cntPerPage == null) {
@@ -390,40 +363,37 @@ public class AdminController {
 			cntPerPage = "5";
 		} else if (nowPage == null) {
 			nowPage = "1";
-		} else if (cntPerPage == null) { 
+		} else if (cntPerPage == null) {
 			cntPerPage = "5";
 		}
-		
+
 		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		List<HospitalDTO> list =adminService.selectList_Auth_Search(map);
-		for(HospitalDTO val:list)
-		{
+		List<HospitalDTO> list = adminService.selectList_Auth_Search(map);
+		for (HospitalDTO val : list) {
 			System.out.println(val.getHosp_name());
 			System.out.println(val.getHosp_code());
 		}
 		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
-		
+
 		return "HosAuth.ad_tiles";
 	}
-	
-	//통계
+
+	// 통계
 	@RequestMapping("Counts.hst")
 	@ResponseBody
-	public String count(Model model)
-	{
+	public String count(Model model) {
 //		String memberCountStr = Integer.toString(memberCount);
 //		JSONObject jsonObject = new JSONObject();
 //		jsonObject.put("count", memberCountStr);
-		
+
 //	    return jsonObject.toString();
 		return "";
 	}
-	
+
 	@RequestMapping("Chart.hst")
-	public String toChart(Model model)
-	{
-		//recent chart
+	public String toChart(Model model) {
+		// recent chart
 		int janMemCount = adminService.janMemCount();
 		int febMemCount = adminService.febMemCount();
 		int marMemCount = adminService.marMemCount();
@@ -431,7 +401,7 @@ public class AdminController {
 		int mayMemCount = adminService.mayMemCount();
 		int junMemCount = adminService.junMemCount();
 		int julMemCount = adminService.julMemCount();
-		
+
 		int janAptCount = adminService.janAptCount();
 		int febAptCount = adminService.febAptCount();
 		int marAptCount = adminService.marAptCount();
@@ -439,7 +409,7 @@ public class AdminController {
 		int mayAptCount = adminService.mayAptCount();
 		int junAptCount = adminService.junAptCount();
 		int julAptCount = adminService.julAptCount();
-		
+
 		model.addAttribute("janMemCount", janMemCount);
 		model.addAttribute("febMemCount", febMemCount);
 		model.addAttribute("marMemCount", marMemCount);
@@ -447,7 +417,7 @@ public class AdminController {
 		model.addAttribute("mayMemCount", mayMemCount);
 		model.addAttribute("junMemCount", junMemCount);
 		model.addAttribute("julMemCount", julMemCount);
-		
+
 		model.addAttribute("janAptCount", janAptCount);
 		model.addAttribute("febAptCount", febAptCount);
 		model.addAttribute("marAptCount", marAptCount);
@@ -455,8 +425,8 @@ public class AdminController {
 		model.addAttribute("mayAptCount", mayAptCount);
 		model.addAttribute("junAptCount", junAptCount);
 		model.addAttribute("julAptCount", julAptCount);
-		
-		//deptApt chart
+
+		// deptApt chart
 		int naeCount = adminService.naeCount();
 		int biCount = adminService.biCount();
 		int sanCount = adminService.sanCount();
@@ -488,8 +458,8 @@ public class AdminController {
 		model.addAttribute("piCount", piCount);
 		model.addAttribute("hanCount", hanCount);
 		model.addAttribute("giCount", giCount);
-		
-		//age chart
+
+		// age chart
 		int under10 = adminService.under10Count();
 		int over10under20 = adminService.over10under20Count();
 		int over20under30 = adminService.over20under30Count();
@@ -497,7 +467,9 @@ public class AdminController {
 		int over40under50 = adminService.over40under50Count();
 		int over50under60 = adminService.over50under60Count();
 		int over60 = adminService.over60Count();
-		System.out.println("10세미만: " + under10 + " 10~19: " + over10under20 +" 20~29: " + over20under30 + " 30~39: " + over30under40 + " 40~49: " + over40under50 + " 50~59: " + over50under60 + " 60이상: " + over60);;
+		System.out.println("10세미만: " + under10 + " 10~19: " + over10under20 + " 20~29: " + over20under30 + " 30~39: "
+				+ over30under40 + " 40~49: " + over40under50 + " 50~59: " + over50under60 + " 60이상: " + over60);
+		;
 		model.addAttribute("under10", under10);
 		model.addAttribute("over10under20", over10under20);
 		model.addAttribute("over20under30", over20under30);
@@ -506,7 +478,7 @@ public class AdminController {
 		model.addAttribute("over50under60", over50under60);
 		model.addAttribute("over60", over60);
 		//
-		//gender chart
+		// gender chart
 		int maleCount = adminService.maleCount();
 		int femaleCount = adminService.femaleCount();
 		System.out.println("male: " + maleCount);
@@ -516,67 +488,110 @@ public class AdminController {
 		//
 		return "Chart.ad_tiles";
 	}
-	
+
 	@RequestMapping("RecentChart.hst")
-	public String recentChart()
-	{
+	public String recentChart() {
 		return "Chart.ad_tiles";
 	}
-	
+
 	@RequestMapping("GenderChart.hst")
-	public String genderChart()
-	{
+	public String genderChart() {
 		return "Chart.ad_tiles";
 	}
-	
+
 	@RequestMapping("AgeChart.hst")
-	public String ageChart()
-	{
+	public String ageChart() {
 		return "Chart.ad_tiles";
 	}
-	
-	//확진자 동선
+
+	// 확진자 동선
 	@RequestMapping("Corona_Map.hst")
-	public String toMap()
-	{
+	public String toMap() {
 		return "CoronaMap.ad_tiles";
 	}
-	
+
 	@RequestMapping("Form.hst")
-	public String toForm()
-	{
+	public String toForm() {
 		return "Form.ad_tiles";
 	}
-	
-	//공지사항
+
+	// 공지사항
 	@RequestMapping("Notice.hst")
-	public String noticeList()
-	{
+	public String noticeList(@RequestParam Map map, Model model){
+
+		List<BoardDTO> list = adminService.viewNotice(map);
+		for(BoardDTO val : list)
+		{
+			System.out.println(val.getNoti_no());
+			System.out.println(val.getContent());
+			System.out.println(val.getPostdate());
+		}
+
+		model.addAttribute("list", list);
 		return "Notice.tiles";
 	}
-	
-	@RequestMapping("NoticeWrite.hst")
-	public String noticeWrite()
-	{
+
+	@RequestMapping("Noticeinsert.hst")
+	public String noticeinsert(@RequestParam Map map, Model model) {
+
+		int check = adminService.insertNotice(map);
+		System.out.println(check);
+
 		return "NoticeWrite.ad_tiles";
 	}
-	
+
+	@RequestMapping("NoticeWrite.hst")
+	public String noticeWrite(Authentication auth, Model model) {
+		UserDetails userDetails = (UserDetails)auth.getPrincipal();
+		String user = userDetails.getUsername();
+
+		model.addAttribute("user",user);
+		return "NoticeWrite.ad_tiles";
+	}
+
 	@RequestMapping("NoticeDetail.hst")
-	public String noticeView()
-	{
+	public String noticeView(@RequestParam Map map, Model model) {
+
+		List<BoardDTO> list = adminService.detailNotice(map);
+		for(BoardDTO val:list)
+		{
+			System.out.println(val.getNoti_no());
+			System.out.println(val.getContent());
+		}
+
+		model.addAttribute("list", list);
 		return "NoticeDetail.tiles";
 	}
-	
+
+	@RequestMapping("NoticeEdit.hst")
+	public String noticeEdit(@RequestParam Map map, Model model) {
+
+		Object no = map.get("no");
+		Object content = map.get("content");
+		Object title = map.get("title");
+
+		model.addAttribute("no", no);
+		model.addAttribute("content", content);
+		model.addAttribute("title", title);
+
+		return "NoticeUpdate.ad_tiles";
+	}
+
 	@RequestMapping("NoticeUpdate.hst")
-	public String noticeUpdate()
-	{
-		return "NoticeEdit.ad_tiles";
+	public String noticeUpdate(@RequestParam Map map, Model model) {
+
+		int check = adminService.updateNotice(map);
+		System.out.println(check);
+
+		return "NoticeDetail.tiles";
 	}
-	
+
 	@RequestMapping("NoticeDelete.hst")
-	public String noticeEdit()
-	{
-		return "Notice.tiles";
+	public String noticeEdit(@RequestParam Map map) {
+
+		adminService.deleteNotice(map);
+
+		return "forward:/Notice.tiles";
 	}
-	
+
 }
