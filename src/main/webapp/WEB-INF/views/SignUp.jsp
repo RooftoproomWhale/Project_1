@@ -257,10 +257,12 @@ width: 100%;
 		   });
 		   
    		});
-	  		
+	  	
+	   //병원찾기	
 		$("#searchBtn").on("click", function(){
+			
 			var keyword = $("#search").val();
-			console.log(keyword, "병원 검색");
+			
 			$.ajax({ 
 				url: "<c:url value='/Member/HospitalSearch.hst'/>",
 				type: "get", //get, post 방식 
@@ -272,11 +274,20 @@ width: 100%;
 				success: function(data){ 
 					console.log(data);
 					console.log('성공');
-					console.log(data[0].hosp_name);
-					document.getElementById("hospName").innerHTML = data[0].hosp_name;
-					document.getElementById("hospDept").innerHTML = "외과";
-					document.getElementById("hospAddr").innerHTML = data[0].address;
-					document.getElementById("hospTel").innerHTML = data[0].tel;
+					
+					var hospName = data[0].hosp_name;
+					var hospAddr = data[0].address;
+					var hospTel = data[0].tel;
+					
+					console.log(hospName+"hospName");
+					console.log(hospAddr+"hospAddr");
+					console.log(hospTel+"hospTel");
+					
+ 					document.getElementById("hospName1").innerHTML = hospName;
+					document.getElementById("hospDept1").innerHTML = "외과";
+					document.getElementById("hospAddr1").innerHTML = hospAddr;
+					document.getElementById("hospTel1").innerHTML = hospTel;
+					
 
 				},
 				error:function(request,status,error){
@@ -1270,21 +1281,21 @@ width: 100%;
 					<div class="col-md-11" style="font-size: 1.2em; padding-left:70px;">
 						<table class="table">
 							<tbody>
-							<c:if test="${empty list}" var="isEmpty">
-								<tr>
-									<td colspan="4">검색 된 병원이 없습니다.</td>
-								</tr>
-							</c:if>
-							<c:if test="${not isEmpty}">
-								<c:forEach items="${list }" var="item" varStatus="loof">
+<%-- 							<c:if test="${empty list}" var="isEmpty"> --%>
+<!-- 								<tr> -->
+<!-- 									<td colspan="4">검색 된 병원이 없습니다.</td> -->
+<!-- 								</tr> -->
+<%-- 							</c:if> --%>
+<%-- 							<c:if test="${not isEmpty}"> --%>
+								<c:forEach items="${list }" var="item" varStatus="loop">
 									<tr id="hosCheck">
-										<td id="hospName">${item.hosp_name }</td>
+										<td id="hospName ${loop.index }">${item.hosp_name }</td>
 										<td id="hospDept">신경외과</td>
-										<td id="hospAddr">${item.address }</td>
-										<td id="hospTel">${item.tel }</td>
+										<td id="hospAddr ${loop.index }">${item.address }</td>
+										<td id="hospTel ${loop.index }">${item.tel }</td>
 									</tr>
 								</c:forEach>
-							</c:if>
+<%-- 							</c:if> --%>
 							</tbody>
 						</table>	
 					</div>

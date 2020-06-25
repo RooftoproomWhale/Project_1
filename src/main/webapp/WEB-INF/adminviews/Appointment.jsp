@@ -170,8 +170,8 @@ $(function() {
 											<c:if test="${not isEmpty}">
 												<c:forEach items="${list}" var="item" varStatus="loop">
 													<tr class="tr-shadow">
-														<td><label class="au-checkbox"> <input
-																type="checkbox"> <span class="au-checkmark"></span>
+														<td><label class="au-checkbox"> 
+														<input type="checkbox"> <span class="au-checkmark"></span>
 														</label></td>
 														<td><span class="block-email" id="idEmail${loop.index }">${item.MEM_EMAIL }</span>
 														</td>

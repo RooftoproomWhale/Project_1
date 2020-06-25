@@ -71,9 +71,9 @@ $('#next').on('click', function(){
 										<div class="col col-md-2">
 											<label for="file-input" class=" form-control-label">파일첨부</label>
 										</div>
-<!-- 										<div class="col-12 col-md-9"> -->
-<!-- 											<input type="file" id="file-input" name="file-input" class="form-control-file"> -->
-<!-- 										</div> -->
+										<div class="col-12 col-md-9">
+											<input type="file" id="file-input" name="file-input" class="form-control-file">
+										</div>
 									</div>
 									<div class="">
 										<button type="button" id="next" class="btn btn-primary btn-sm" style="position: absolute; right: 20px; bottom: 20px;">
