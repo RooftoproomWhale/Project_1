@@ -65,7 +65,6 @@ public class CalendarController {
 		 jsonStr2 = jsonStr2.substring(1);
 		 str = jsonStr+","+jsonStr2;
 		 }
-
 		return str;
 	}/////selectEventList  
 	

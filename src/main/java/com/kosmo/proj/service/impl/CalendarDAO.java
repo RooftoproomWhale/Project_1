@@ -61,6 +61,11 @@ public class CalendarDAO implements CalendarService {
 		return sqlMapper.delete("calendarDelete2",map);
 	}
 
+	public List<ReservationDTO> selectnew(Map map) {
+		
+		return sqlMapper.selectList("seletnew", map);
+	}
+
 
 	
 

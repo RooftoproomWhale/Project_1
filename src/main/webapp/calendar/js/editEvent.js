@@ -2,6 +2,7 @@
  *  일정 편집
  * ************** */
 var editEvent = function (event, element, view) {
+	console.log(event);
 	var start ="";
 	var no ="";
 	if(event.type == "병원예약"){
@@ -35,7 +36,7 @@ var editEvent = function (event, element, view) {
     }
      else if(event.type=="병원예약"){
     	 start = moment(event.start).format('YYYY-MM-DD HH:mm');
-  
+    	 
     	 $('#apply_time').html(event.apply_TIME);
     	 $('input[name="update-start"]').val(start);
     	 change();
@@ -107,6 +108,9 @@ $('#updateEvents_no1,#updateEvents_no1').on('click',function(){
 //상세보기로 변경
 function change() {
 	 modalTitle.html('예약 상세페이지');
+	 $('#approved').html(event.approved);
+	 $('#dept_NAME').html(event.dept_NAME);
+	 $('#sel_SYMP').html(event.sel_SYMP);
 	 $('#apply_time').html(event.apply_Time);
 	 $('#titlecall').html(event.title);
 	 $('#namecall').html(event.mem_NAME);

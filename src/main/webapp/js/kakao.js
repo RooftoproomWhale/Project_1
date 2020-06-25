@@ -1,9 +1,9 @@
 /**
- * Kakao Javascript SDK for Kakao Open Platform Service - v1.39.0
+ * Kakao Javascript SDK for Kakao Open Platform Service - v1.39.1
  *
  * Copyright 2017 Kakao Corp.
  *
- *  
+ *  
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1663,7 +1663,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           channelPublicId: _.isString,
           serviceTerms: _.isString,
           redirectUri: _.isString,
-          state: _.isString
+          state: _.isString,
+          loginType: _.isOneOf(['qr'])
         };
 
         var rules = {
@@ -1695,7 +1696,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
               serviceTerms: _.isString,
               isPopup: _.isBoolean,
               state: _.isString,
-              autoLogin: _.isBoolean
+              autoLogin: _.isBoolean,
+              loginType: _.isOneOf(['qr'])
             },
             defaults: {
               throughTalk: true,
@@ -1838,6 +1840,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           if (settings.autoLogin !== undefined) {
             params['auto_login'] = settings.autoLogin;
           }
+          if (settings.loginType) {
+            params['login_type'] = settings.loginType;
+          }
           return params;
         }
 
@@ -1860,10 +1865,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           var stateToken = _.getRandomString() + _.getRandomString();
 
           if (!settings.redirectUri) {
-            var url = _k.URL.loginForm + '?continue=' + encodeURIComponent(_loginThroughWeb(settings, stateToken));
+            var url = _k.URL.loginForm + "?continue=" + encodeURIComponent(_loginThroughWeb(settings, stateToken)) + (settings.loginType ? '&login_type=' + settings.loginType : '');
             _k.windowOpen(url, LOGIN_POPUP_NAME, _getPopupFeatures());
           } else {
-            var url = _k.URL.loginForm + '?continue=' + encodeURIComponent(_redirectLoginThroughWeb(settings));
+            var url = _k.URL.loginForm + "?continue=" + encodeURIComponent(_redirectLoginThroughWeb(settings)) + (settings.loginType ? '&login_type=' + settings.loginType : '');
             location.href = url;
           }
         };
@@ -2363,7 +2368,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
         var origin = browserProxy.getOrigin();
 
-        _k.VERSION = '1.39.0';
+        _k.VERSION = '1.39.1';
 
         _k.KAKAO_AGENT = 'sdk/' + _k.VERSION + ' os/javascript' + ' lang/' + (browserProxy.getNavigator().userLanguage || browserProxy.getNavigator().language) + ' device/' + browserProxy.getNavigator().platform.replace(/ /g, '_') + ' origin/' + encodeURIComponent(origin);
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.MemberService;
+import com.kosmo.proj.util.CustomUserDetails;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
@@ -77,6 +78,12 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.selectHosSearch(map);
 	}
+	@Override
+	public CustomUserDetails getUserById(String username) {
+		return dao.getUserById(username);
+	}
+
+
 
 
 

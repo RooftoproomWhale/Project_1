@@ -3,6 +3,8 @@ package com.kosmo.proj.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kosmo.proj.util.CustomUserDetails;
+
 public interface MemberService {
 
 	//로그인 용]
@@ -11,6 +13,7 @@ public interface MemberService {
 
 	//목록용]
 	List<MemberDTO> selectList(Map map);
+
 	//병원 검색 목록
 	List<HospitalDTO> selectHosSearch(Map map);
 
@@ -22,5 +25,6 @@ public interface MemberService {
 	int delete(Map map);
 	int insert(Map map);
 	int update(Map map);
+	CustomUserDetails getUserById(String username);
 
 }
