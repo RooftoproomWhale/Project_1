@@ -19,13 +19,110 @@
         .jssora051:hover {opacity:.8;}
         .jssora051.jssora051dn {opacity:.5;}
         .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
-    
-    	#news li {
-    	
-    
-    	
-    	}
 </style>
+<script>
+	window.onload = function(){
+		var icon = '../img/logo.png';
+		var userRole = $('#userRole').val();
+		var userId = $('#userId').val();
+		console.log("id: " + userId +"type:"+ typeof(userId));
+		console.log("role: " + userRole +"type:"+ typeof(userRole));
+		if(userRole == "MEM")
+		{
+			
+			memNoti();
+		}
+		else if(userRole == "HOS")
+		{
+			
+			hosNoti();
+		}
+		else
+		{
+			
+		}
+	
+		Notification.requestPermission().then(function(result) {
+			  console.log(result);
+			});
+		
+		Notification.requestPermission();
+		
+		var text;
+		function memNoti() {
+			text = '30분뒤 복용 해야할 약이 있습니다';
+			var options = 
+				{
+				      body: text,
+				      icon: icon
+			  	}
+				var noti = new Notification('복약 알림이 있습니다', options)
+				
+				noti.onclick = function(event) {
+					console.log('noti click');
+					window.location.href = "<c:url value='/mypage/administration.hst'/>";
+				};
+			}
+		
+		function hosNoti() {
+			text = '승인 대기중인 예약이 있습니다';
+			var options = 
+				{
+				      body: text,
+				      icon: icon
+			  	}
+				var noti = new Notification('예약 알림이 있습니다', options)
+				
+				noti.onclick = function(event) {
+					console.log('noti click');
+					window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+				};
+			}
+		
+		function askNotificationPermission() {
+			  // 권한을 실제로 요구하는 함수
+			  function handlePermission(permission) {
+			    // 사용자의 응답에 관계 없이 크롬이 정보를 저장할 수 있도록 함
+			    if(!('permission' in Notification)) {
+			      Notification.permission = permission;
+			    }
+
+			    // 사용자 응답에 따라 단추를 보이거나 숨기도록 설정
+			    if(Notification.permission === 'denied' || Notification.permission === 'default') {
+			      notificationBtn.style.display = 'block';
+			    } else {
+			      notificationBtn.style.display = 'none';
+			    }
+			  }
+
+			  // 브라우저가 알림을 지원하는지 확인
+			  if (!('Notification' in window)) {
+			    console.log("이 브라우저는 알림을 지원하지 않습니다.");
+			  } else {
+			    if(checkNotificationPromise()) {
+			      Notification.requestPermission()
+			      .then((permission) => {
+			        handlePermission(permission);
+			      })
+			    } else {
+			      Notification.requestPermission(function(permission) {
+			        handlePermission(permission);
+			      });
+			    }
+			  }
+			}
+		
+		function checkNotificationPromise() {
+		    try {
+		      Notification.requestPermission().then();
+		    } catch(e) {
+		      return false;
+		    }
+
+		    return true;
+		  }
+	}
+</script>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,7 +135,8 @@
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-
+<input type="hidden" id="userId" value="${user }"/>
+<input type="hidden" id="userRole" value="${role }"/>
 	<!-- Header -->
 	<header id="header">
 		<div class="intro">
@@ -48,7 +146,7 @@
 						<div class="col-md-8 col-md-offset-2 intro-text">
 							<h1> We Are Interact</h1>
 							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
-							<a href="<c:url value='/mypage/mypage.hst'/>" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
+							<a href="#" id="notiTest" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
 						</div>
 					</div>
 				</div>
