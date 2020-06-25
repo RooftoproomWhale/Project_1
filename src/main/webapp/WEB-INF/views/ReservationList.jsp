@@ -33,8 +33,9 @@ $(function(){
 		};
 		console.log('예약 목록:',data);
 		var comments="";
-		if(data.length==0){
-			comments+="<h2 style='color:red'>예약된 병원이 없어요</h2>";
+		if(data=='[]'){
+			comments+="<div style='text-align:center'><img style='width:300px;height:auto' src='"+'<c:url value="/images/medicine/notPres.png"/>'+"'/>";
+			comments+="<h3>예약 내역이 없어요!</h3></div>";
 		}
 		else{
 			$.each(JSON.parse(data),function(i,element){

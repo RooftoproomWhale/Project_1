@@ -21,7 +21,8 @@ $(function(){
 		console.log(data.isnull);
 		var comments="";
 		if(data=='[]'){
-			comments+="<h2 style='color:red;text-align:center'>등록된 처방전이 없어요</h2>";
+			comments+="<img style='width:300px;height:auto' src='"+'<c:url value="/images/medicine/notPres.png"/>'+"'/>";
+			comments+="<h3>등록된 처방전이 없어요!</h3>";
 		}
 		else{
 			$.each(JSON.parse(data),function(i,element){
@@ -48,6 +49,59 @@ $(function(){
 	};
 });
 </script>
+<style>
+.upload-box {
+	  position: relative;
+	  width: 200px;
+	  height: 200px;
+	  margin: 50px auto;
+	  overflow: hidden;
+	  border: 1px dashed #ccc;
+	  text-align: center;
+	  &::after {
+	    display: inline-block;
+	    margin-top: -8px;
+	    content: "+";
+	    line-height: 200px;
+	    font-size: 90px;
+	    color: #ccc;
+	  }
+
+	  [type="file"] {
+	    display: none;
+	  }
+
+	  .upload-action {
+	    position: absolute;
+	    z-index: 1;
+	    top: 0;
+	    left: 0;
+	    box-sizing: border-box;
+	    width: 100%;
+	    height: 100%;
+	    cursor: pointer;
+	  }
+
+	  .preview-box {
+	    position: absolute;
+	    box-sizing: border-box;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+
+	    img {
+	      min-width: 100%;
+	      width: 100%;
+	      min-height: 100%;
+	    }
+	  }
+	}
+
+	.hide {
+	  display: none;
+	}
+</style>
 <style>
 a:hover, a:focus {
 	text-decoration: none;
@@ -105,6 +159,7 @@ color: red;
 
 ul{
 	list-style-image: url("./images/icon/pills.png");
+	text-align: left;
 }
 
 
@@ -452,7 +507,7 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 		<div class="col-md-2">
 		</div>
 		<div class="contents col-md-8">
-			<div class="row" style="padding-left: 70px;">
+			<div class="row" style="padding-left: 15px;">
 				<div class="page-header">
 					<h2 style="color: blue">복약관리</h2>
 				</div>
@@ -460,7 +515,7 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 			</div>
 			<br />
 			<div class="row">
-				<div class=" col-sm-12" style="padding-left: 70px;">
+				<div class=" col-sm-12" style="padding-left: 15px;">
 					<div class="alert alert-warning alert-dismissible mt-3" role="alert">
 						복약 순응도란 처방받은 약을 환자가 전문 의료인의 지시에 따라 정확하게 복용. 복약
 						순응도가 높을수록 치료효과가 높아진다.
@@ -470,34 +525,39 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 						 <div class='button -blue center' data-toggle="modal" data-target=".bs-example-modal-lg">
 						 	<i class="fas fa-plus"></i> 복용약 추가</div>
 					</div>
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<div style="text-align: center;" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
-<!-- 
+
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
     	<div class="modal-content">
     	<form action="<c:url value='/mapping/mapping.hst'/>" method="post" enctype="multipart/form-data">
-    		<div>
-				<p class="title">이미지 업로드</p>
-				<input class="input" type="file" name="filename" id="input_img"/>
+    		<div class="form-group">
+				<div class="upload-box">
+					<input type="file" accept="image/png,image/jpeg,image/jpg" class="upload-input" />
+					<div class="upload-action"></div>
+					<div class="preview-box"></div>
+				</div>
 			</div>
+			<!-- 
 			<div>
 				<div class="img_wrap col-md-offset-4">
 					<img id="img" />
 					<input id="submit" class="btn btn-lg btn-primary" type="submit" value="등록"/>
 				</div>
 			</div>
+			-->
 		</form>
 		</div>
 	</div>
 </div>
- -->
- 
+
+<!--  
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
     	<div class="modal-content">
@@ -545,7 +605,7 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 		</div>
 	</div>
 </div>
-
+-->
 
 <script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
 
@@ -656,5 +716,29 @@ signupBtn.addEventListener('click', (e) => {
 	
 	
 	
+</script>
+<script>
+$(".upload-action").click(function() {
+	  $(".upload-input").click();
+	  $(".upload-input").change(function() {
+	    preview(this, $('.preview-box'));
+	  });
+	});
+
+	function preview(file, previewBox) {
+	  if (file.files && file.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      previewBox.html('<img src="' + e.target.result + '" />');
+	    };
+	    reader.readAsDataURL(file.files[0]);
+	  } else {
+	    previewBox.html(
+	      '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' +
+	        file.value +
+	        "'\"></div>"
+	    );
+	  }
+	}
 </script>
 
