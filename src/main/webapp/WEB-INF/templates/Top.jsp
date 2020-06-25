@@ -109,7 +109,7 @@
 					<li><a href="<c:url value='/Admin/Index.hst'/>">Admin</a></li>
 				</sec:authorize>
 					<li><a href="<c:url value='/Notice/FAQ.hst'/>">FAQ</a></li>
-				<!-- 				<li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
+				<!-- <li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
 				<sec:authorize access="hasRole('ROLE_HOS')">
 					<li><a href="<c:url value='/Test/test.hst'/>">MyHospital</a></li>
 				</sec:authorize>
