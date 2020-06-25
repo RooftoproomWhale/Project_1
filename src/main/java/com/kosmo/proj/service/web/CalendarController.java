@@ -28,13 +28,13 @@ public class CalendarController {
 	private CalendarServiceImpl calendarDAO;
 
 
-	@RequestMapping(value="/Calendar/View.hst",produces = "text/html; charset=UTF-8")
+	@RequestMapping(value="/Calendar/View.hst",produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String ViewCalendar(@RequestParam Map map,Authentication auth) {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		 map.put("id",id); 
-		 ObjectMapper mapper = new ObjectMapper(); 
+		 ObjectMapper mapper = new ObjectMapper();
 		 	String jsonStr = null; 
 			 String jsonStr2 = null; 
 			 try {

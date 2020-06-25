@@ -10,48 +10,6 @@
 		SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
 	</select>
 	
-	<!-- 회원가입 -->
-	<insert id="signInsert" parameterType="java.util.Map"> 
-		INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{gender}, #{name}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable}, SYSDATE )
-	</insert>
-	<select id="signView" parameterType="java.util.Map">
-		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{email}
-	</select>
- 	<delete id="signDelete" parameterType="java.util.Map">
-		DELETE FROM MEMBER WHERE MEM_EMAIL = #{email}
-	</delete>
-	<update id="signUpdate" parameterType="java.util.Map">
-		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel}, 
-		height = #{height}, weight = {weight} where mem_email = #{email} 
-	</update>
-	<!-- 회원가입 검색 병원 -->
-	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
-	</select>
-
-  	<!-- 공지사항 추가하기 -->
-    <insert id="insertNotice">
-        insert into NOTIFICATION_BBS values(SEQ_NOTIFICATION.nextval, #{user}, #{title}, #{content}, SYSDATE, null)
-    </insert>
-    <!-- 공지사항 리스트보기 -->
-    <select id="listNotice" resultType="BoardDTO">
-    	select * from NOTIFICATION_BBS order by noti_no DESC
-    </select>
-	<!-- 공지사항 상세보기 -->
-    <select id="detailNotice" resultType="BoardDTO">
-        select * from NOTIFICATION_BBS where noti_no = #{no}
-    </select>
-	<!-- 공지사항 삭제하기 -->
-    <delete id="deleteNotice">
-        delete from NOTIFICATION_BBS where noti_no = #{no}
-    </delete>
-	<!-- 공지사항 수정하기 -->
-    <update id="updateNotice"> 
-        update NOTIFICATION_BBS set title=#{title} , content = #{content} where noti_no = #{no} 
-    </update> 
-	
-	 <!-- <insert id="signInsert" parameterType="java.util.Map"> 
-		INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
 	 <insert id="signInsert" parameterType="java.util.Map"> 
 		INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable},SYSDATE )
 	 </insert>
@@ -59,17 +17,7 @@
 	 <select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
 		 SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
 	 </select>
-	 
-	<select id="seletnew" parameterType="java.util.Map" resultType="reservationDTO">
-	SELECT h.hosp_name,r.sel_symp FROM reservation r JOIN hospital h on r.hosp_code=h.hosp_code
-	WHERE r.mem_email = #{id} AND RES_DATE=(SELECT MAX(RES_DATE)FROM reservation)
-	
-	</select>
-	 
-	 <select id="getUserById" parameterType="java.lang.String" resultType="CustomUserDetails">
-	 	SELECT * FROM MEMBER WHERE MEM_EMAIL = #{username}
-	 </select>
-	 <select id="selectCount" parameterType="java.util.Map" resultType="java.util.Map">
+	 	 <select id="selectCount" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT p.precount,r.resercount,(SELECT MAX(PRES_DATE) FROM prescription  WHERE MEM_EMAIL = #{id})resdate FROM(SELECT count(*) precount FROM prescription WHERE MEM_EMAIL = #{id})p,
 		(SELECT count(*) resercount FROM reservation WHERE MEM_EMAIL = #{id})r
 	 </select>
@@ -80,8 +28,18 @@
 	 	
 	 <update id="signUpdate" parameterType="java.util.Map" >
 		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel},  height = #{height},weight = #{weight} where mem_email = #{id} 
-	 </update> -->
+	 </update>
 	 
+	<select id="seletnew" parameterType="java.util.Map" resultType="reservationDTO">
+	SELECT h.hosp_name,r.sel_symp FROM reservation r JOIN hospital h on r.hosp_code=h.hosp_code
+	WHERE r.mem_email = #{id} AND RES_DATE=(SELECT MAX(RES_DATE)FROM reservation)
+	</select>
+	 
+	 
+	 <select id="getUserById" parameterType="java.lang.String" resultType="CustomUserDetails">
+	 	SELECT * FROM MEMBER WHERE MEM_EMAIL = #{username}
+	 </select>
+
 	 
 	<insert id="memoInsert" parameterType="java.util.Map">
 		INSERT INTO onememo(no,title,content,id)

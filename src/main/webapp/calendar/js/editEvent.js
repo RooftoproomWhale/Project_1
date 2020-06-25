@@ -2,20 +2,17 @@
  *  일정 편집
  * ************** */
 var editEvent = function (event, element, view) {
+	
 	if(event.type='복용약등록'){
     $.ajax({
-        type: "get",
+        type: "post",
+        dataType:"json",
         url: "/proj/Calendar/Management.hst",/*"/proj/calendar/data.json",*/
         data: {'dname':event.title},
         success: function (response) {
       	  console.log(response);
       
-      	  response.forEach(el=>{
 
-      		console.log(el);
-      	  })
-  
-          callback(fixedDate);
         }
         ,error:function(request,error){
   			console.log('상태코드:',request.status);

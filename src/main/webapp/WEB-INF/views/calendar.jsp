@@ -134,7 +134,7 @@
   <thead>
     <tr>
       <th scope="col">제품명</th>
-      <td scope="col">가그린목액</td>
+      <td scope="col" id="item_name-1"></td>
     </tr>
   </thead>
   <tbody>
