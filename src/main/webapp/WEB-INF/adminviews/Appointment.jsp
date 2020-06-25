@@ -116,8 +116,7 @@ $(function() {
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<form class="form-header" action="" method="">
-								<input class="au-input au-input--xl" type="text" id="search"
-									placeholder="병원명 검색" />
+								<input class="au-input au-input--xl" type="text" id="search" placeholder="병원명 검색" />
 								<button class="au-btn--submit" type="button" id="searchBtn">
 									<i class="zmdi zmdi-search"></i>
 								</button>

@@ -10,7 +10,47 @@
 		SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
 	</select>
 	
-	 <insert id="signInsert" parameterType="java.util.Map"> 
+	<!-- 회원가입 -->
+	<insert id="signInsert" parameterType="java.util.Map"> 
+		INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{gender}, #{name}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable}, SYSDATE )
+	</insert>
+	<select id="signView" parameterType="java.util.Map">
+		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{email}
+	</select>
+ 	<delete id="signDelete" parameterType="java.util.Map">
+		DELETE FROM MEMBER WHERE MEM_EMAIL = #{email}
+	</delete>
+	<update id="signUpdate" parameterType="java.util.Map">
+		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel}, 
+		height = #{height}, weight = {weight} where mem_email = #{email} 
+	</update>
+	<!-- 회원가입 검색 병원 -->
+	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
+	</select>
+
+  	<!-- 공지사항 추가하기 -->
+    <insert id="insertNotice">
+        insert into NOTIFICATION_BBS values(SEQ_NOTIFICATION.nextval, #{user}, #{title}, #{content}, SYSDATE, null)
+    </insert>
+    <!-- 공지사항 리스트보기 -->
+    <select id="listNotice" resultType="BoardDTO">
+    	select * from NOTIFICATION_BBS order by noti_no DESC
+    </select>
+	<!-- 공지사항 상세보기 -->
+    <select id="detailNotice" resultType="BoardDTO">
+        select * from NOTIFICATION_BBS where noti_no = #{no}
+    </select>
+	<!-- 공지사항 삭제하기 -->
+    <delete id="deleteNotice">
+        delete from NOTIFICATION_BBS where noti_no = #{no}
+    </delete>
+	<!-- 공지사항 수정하기 -->
+    <update id="updateNotice"> 
+        update NOTIFICATION_BBS set title=#{title} , content = #{content} where noti_no = #{no} 
+    </update> 
+	
+	 <!-- <insert id="signInsert" parameterType="java.util.Map"> 
 		INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
 	 </insert>
 	 
@@ -29,7 +69,7 @@
 	 	
 	 <update id="signUpdate" parameterType="java.util.Map" >
 		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel},  height = #{height},weight = #{weight} where mem_email = #{id} 
-	 </update>
+	 </update> -->
 	 
 	 
 	<insert id="memoInsert" parameterType="java.util.Map">

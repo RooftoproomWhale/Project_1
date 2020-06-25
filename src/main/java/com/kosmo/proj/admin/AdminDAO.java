@@ -8,19 +8,18 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.proj.service.BoardDTO;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
-import com.kosmo.proj.service.MemberService;
 import com.kosmo.proj.service.Paging;
 import com.kosmo.proj.service.ReservationDTO;
-import com.kosmo.proj.service.impl.MemberServiceImpl;
 
 @Repository
 public class AdminDAO implements AdminService {
 
 	@Resource(name="template")
 	private SqlSessionTemplate sqlMapper;
-	
+
 	@Override
 	public boolean isLogin(Map map) {
 		// TODO Auto-generated method stub
@@ -222,21 +221,31 @@ public class AdminDAO implements AdminService {
 	@Override
 	public int insertNotice(Map map) {
 		// TODO Auto-generated method stub
-		return sqlMapper.insert("", map);
+		return sqlMapper.insert("insertNotice", map);
 	}
 
 	@Override
 	public int updateNotice(Map map) {
 		// TODO Auto-generated method stub
-		return sqlMapper.update("", map);
+		return sqlMapper.update("updateNotice", map);
 	}
 
-	
+	@Override
+	public List<BoardDTO> viewNotice(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("listNotice", map);
+	}
 
 	@Override
 	public int deleteNotice(Map map) {
 		// TODO Auto-generated method stub
-		return sqlMapper.delete("", map);
+		return sqlMapper.delete("deleteNotice", map);
+	}
+
+	@Override
+	public List<BoardDTO> detailNotice(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("detailNotice", map);
 	}
 
 	@Override
@@ -430,5 +439,5 @@ public class AdminDAO implements AdminService {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("giAptCount");
 	}
-	
+
 }
