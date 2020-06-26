@@ -143,7 +143,6 @@ var calendar = $('#calendar').fullCalendar({
       data: param,
       success: function (response) {
     	  console.log(response);
-    
     	  response.forEach(el=>{
     		if(el.count != null){
     			el.backgroundColor = '#9775fa';

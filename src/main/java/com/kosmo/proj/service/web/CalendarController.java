@@ -48,12 +48,13 @@ public class CalendarController {
 		 else {
 			 System.out.println("캘린더 실행");
 		 List<CalendarDTO> list = calendarDAO.selectList(map);
+		 
 		 List<ReservationDTO> list2 = calendarDAO.selectList2(map);
 	  jsonStr = mapper.writeValueAsString(list); 
 	  jsonStr2 = mapper.writeValueAsString(list2); 
 		 }}catch (JsonProcessingException
 		  e) { e.printStackTrace(); }
-
+			
 		 String str="";
 		 if(jsonStr.equals("[]") || jsonStr2.equals("[]")) {
 			str = jsonStr;

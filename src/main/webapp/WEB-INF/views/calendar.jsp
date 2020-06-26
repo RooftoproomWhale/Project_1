@@ -57,6 +57,12 @@
   Viewdialogs{
   left:-50px;
   }
+  .items{
+  margin-bottom: 0px;
+  }
+.click{
+border: 2px solid black ;
+}
   </style>
 </head>
 
@@ -120,6 +126,7 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        
   <!-- 복용약 상세보기MODAL -->
         <div class="modal fade" tabindex="-1" role="dialog" id="eventdrugModal">
             <div class="modal-dialog Viewdialogs" role="document">
@@ -133,26 +140,27 @@
          	<table class="table table-bordered" style="text-align: center;">
   <thead>
     <tr>
-      <th scope="col">제품명</th>
-      <td scope="col" id="item_name-1"></td>
+      <th scope="col" style="text-align: center;padding-bottom: 0px;margin-bottom: 0px">제품명</th>
+      <td scope="col" colspan="5"  id="item_name" style="padding: 0px;margin-bottom: 0px;text-align: left;"></td>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row" style="line-height: 54px">복용기간</th>
-      <td  style="line-height: 44px">2020-06-10~2020-06-12</td>
-      <th scope="row" style="line-height: 54px">효능 · 효과</th>
-      <td  style="line-height: 44px">통증 및 염증 완화 및 살균:치은염, 구내염, 발치 전·후</td>
+    <tr id="edit-update_01">
+      <th scope="row" style="line-height: 54px;padding: 0px;text-align: center;">복용기간</th>
+      <td  style="line-height: 54px;padding: 0px" id="item-date"></td> 
+      <th scope="row" style="line-height: 54px;padding: 0px;text-align: center;">효능 · 효과</th>
+      <td  style="line-height: 54px;padding: 0px" id="er">ㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁ</td>
     </tr>
+    <!--  -->
     <tr >
-      <th scope="row" style="line-height: 54px">용법·용량<br/></th>
-      <td colspan="3" >1회 15mL 1일 2~3회 가글하여 사용한다.<br/>최대 5~7일간 사용하며, 그 이상 사용 시 의사와 상의한다.</td>
+      <th scope="row" style="line-height: 36px;text-align: center;">용법·용량<br/></th>
+      <td colspan="3" style="text-align: center;">1회 15mL 1일 2~3회 가글하여 사용한다.<br/>최대 5~7일간 사용하며, 그 이상 사용 시 의사와 상의한다.</td>
     </tr>
     <tr>
-      <th class="text-center" scope="row" colspan="5"><input type="button" class="btn" id="item-1" value="주의사항"/><input type="button" class="btn" id="item-2" value="상세설명"/></th>
+      <th class="text-center" scope="row" colspan="5"><input type="button" class="btn" id="item-2" value="상세설명"/><input type="button" class="btn" id="item-1" value="주의사항"/></th>
     </tr>
      <tr>
-      <td colspan="5" id="items-1">
+      <td colspan="5" id="items-1" style="display: none;">
 1. 다음과 같은 사람은 이 약을 사용하지 말 것
 이 약의 구성성분에 과민반응이 있는 환자
 <br/><br/>
@@ -173,7 +181,11 @@
 5. 저장상의 주의사항
 1) 어린이의 손이 닿지 않는 곳에 보관한다.
 2) 의약품을 원래 용기에서 꺼내어 다른 용기에 보관하는 것은 의약품 오용에 따른 사고 발생이나 의약품 품질 저하의 원인이 될 수 있으므로 원래의 용기에 넣고 꼭 닫아 보관한다.</td>
-<td id="itmes-2" style="display: none ;">dsa</td>
+<td id="items-2" colspan="5" style="text-align: left;padding: 20px">
+<span id="material_NAME"></span>
+<br>보관방법: <span id="storage_METHOD"></span>
+<br>유통기한: <span id="valid_TERM"></span>
+<br>제조사:<span id="entp_NAME"></span></td>
  </tr>
 
   </tbody>	
@@ -183,12 +195,12 @@
                     <div class="modal-footer modalBtnContainer-modifyEvent">
                         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                         <button type="button" class="btn btn-danger" id="deleteEvent_no2">삭제</button>
-                        <button type="button" class="btn btn-primary" id="updateEvent_no2">수정</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
         <!-- 복용약 추가 -->
+	<!-- 
 	<div class="modal fade" tabindex="-1" role="dialog" id="eventdrugModaladd">
             <div class="modal-dialog Viewsds" role="document">
                 <div class="modal-content Views">
@@ -240,12 +252,14 @@
                     </div>
                    
                       </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+                </div>
+            </div>
+        </div>
+        -->
         <!--복용약추가 끝 -->
         <!-- 일정 추가 MODAL -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
+        <!-- 
+                <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
             <div class="modal-dialog Viewsds" role="document">
                 <div class="modal-content Views">
                     <div class="modal-header">
@@ -305,9 +319,10 @@
                         <button type="button" class="btn btn-primary" id="save-event2">예약하기</button>
                     </div>
                     
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+                </div>
+            </div>
+ -->
+        </div>
 
 <script src='<c:url value="/calendar/vendor/js/moment.min.js"/>'></script>
 
