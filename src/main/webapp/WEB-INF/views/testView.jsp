@@ -13,13 +13,15 @@ body{
 <div class="container" id="container">
 	<div class="form-container sign-in-container">
 			<h1>의약품</h1>
-			<span>${MEDI_NAME}</span>
+			<span>${medi_name}</span>
 			<h1>기간</h1>
 			<span>${duration}일</span>
 			<h1>조제일</h1>
-			<span>${preDate}</span>
+			<span>${pres_date}</span>
 			<h1>병원</h1>
 			<span>${hospital}</span>
+			<h1>복용횟수</h1>
+			<span>${count}</span>
 	</div>
 </div>
 

@@ -144,39 +144,39 @@ public class GoogleVisionController {
 								}
 								if(min_x>=240 && max_x<=440 && min_y>=275 && max_y<=300) {
 									for (Symbol symbol: word.getSymbolsList()) {
-											medi2 = medi2 + symbol.getText();
+											medi3 = medi3 + symbol.getText();
 									}
 									
 								}
 								if(min_x>=240 && max_x<=440 && min_y>=405 && max_y<=430) {
 									for (Symbol symbol: word.getSymbolsList()) {
-											medi3 = medi3 + symbol.getText();
+											medi5 = medi5 + symbol.getText();
 									}
 									
 								}
 								if(min_x>=240 && max_x<=440 && min_y>=535 && max_y<=560) {
 									for (Symbol symbol: word.getSymbolsList()) {
-											medi4 = medi4 + symbol.getText();
+											medi7 = medi7 + symbol.getText();
 									}
 								}
 								/*의약품명2*/
 								if(min_x>=580 && max_x<=780 && min_y>=145 && max_y<=170) {
 									for (Symbol symbol: word.getSymbolsList()) {
-											medi5 = medi5 + symbol.getText();
+											medi2 = medi2 + symbol.getText();
 										
 									}
 									
 								}
 								if(min_x>=580 && max_x<=780 && min_y>=275 && max_y<=300) {
 									for (Symbol symbol: word.getSymbolsList()) {
-											medi6 = medi6 + symbol.getText();
+											medi4 = medi4 + symbol.getText();
 										
 									}
 									
 								}
 								if(min_x>=580 && max_x<=780 && min_y>=405 && max_y<=430) {
 									for (Symbol symbol: word.getSymbolsList()) {
-											medi7 = medi7 + symbol.getText();
+											medi6 = medi6 + symbol.getText();
 									}
 									
 								}
@@ -204,7 +204,7 @@ public class GoogleVisionController {
 		map.put("hospital",hospital);
 		map.put("count",count);
 		
-		service.insertPre(map);
+		//service.insertPre(map);
 		
 		return "testView.tiles";
 	}

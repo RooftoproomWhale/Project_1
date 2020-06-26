@@ -48,7 +48,5 @@
 				},
 				error:function(e){console.log('에러:',e)}
 			});
-
-	      document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
 	    })
   }
