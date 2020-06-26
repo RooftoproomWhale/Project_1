@@ -542,6 +542,7 @@ public class AdminController {
 
 	@RequestMapping("NoticeWrite.hst")
 	public String noticeWrite(Authentication auth, Model model) {
+
 		UserDetails userDetails = (UserDetails)auth.getPrincipal();
 		String user = userDetails.getUsername();
 

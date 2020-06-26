@@ -4,40 +4,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-$(function() {
-	
-var title;
-var content; 
-var user;
+	$(document).ready(function() {
+		$("a[name='file-delete']").on("click", function(e) {
+			e.preventDefault();
+			deleteFile($(this));
+		});
+	})
 
-$('#next').on('click', function(){
-	title = $('#text-input').val();
-	content = $('#textarea-input').val();
-	user = $('#user').val();
-	console.log(title);
-	console.log(content);
-	console.log("user:" + user);
-	$.ajax({
-		url: "<c:url value='/Admin/Noticeinsert.hst'/>",
-		data: {
-			"title":title,
-			"content":content,
-			"user" : user
+	function addFile() {
+		var str = "<div class='file-group'><input type='file' name='file'><a href='#this' name='file-delete'>삭제</a></div>";
+		$("#file-list").append(str);
+		$("a[name='file-delete']").on("click", function(e) {
+			e.preventDefault();
+			deleteFile($(this));
+		});
+	}
+
+	function deleteFile(obj) {
+		obj.parent().remove();
+	}
+
+	$(function() {
+
+		var title;
+		var content;
+		var user;
+
+		$('#next').on('click',function() {
+		title = $('#text-input').val();
+		content = $('#textarea-input').val();
+		user = $('#user').val();
+		console.log(title);
+		console.log(content);
+		console.log("user:" + user);
+		$.ajax({
+				url : "<c:url value='/Admin/Noticeinsert.hst'/>",
+				data : {
+					"title" : title,
+					"content" : content,
+					"user" : user
 				}, //넘길 파라미터 
-		dataType: 'html',
-		async: true, // true:비동기, false:동기 
-		success: function(data){ 
-			console.log('성공');
-			console.log(title + content + user);
-			window.location.href = "<c:url value='/Admin/Notice.hst'/>";
-		},
-		error:function(request,status,error){
-			console.log('실패');
-			alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-		} 
+				dataType : 'html',
+				async : true, // true:비동기, false:동기 
+				success : function(data) {
+					console.log('성공');
+					console.log(title + content + user);
+					window.location.href = "<c:url value='/Admin/Notice.hst'/>";
+				},
+				error : function(request, status, error) {
+					console.log('실패');
+					alert("code = " + request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+				}
+			});
+		});
 	});
-});
-});
 </script>
 <body>
 	<div class="page-container">
@@ -51,43 +71,49 @@ $('#next').on('click', function(){
 								<strong>공지사항 작성</strong>
 							</div>
 							<div class="card-body card-block">
-<!-- 								<form action="" method="post" enctype="multipart/form-data" -->
-<!-- 									class="form-horizontal"> -->
-									<div class="row form-group">
-										<div class="col-12 col-md-12">
-											<input type="text" id="text-input" name="text-input"
-												placeholder="제목" class="form-control"> <small
-												class="form-text text-muted"></small>
-												<input type="hidden" id="user" value="${user }"/>
-										</div>
+								<!-- 								<form action="" method="post" enctype="multipart/form-data" -->
+								<!-- 									class="form-horizontal"> -->
+								<div class="row form-group">
+									<div class="col-12 col-md-12">
+										<input type="text" id="text-input" name="text-input"
+											placeholder="제목" class="form-control"> <small
+											class="form-text text-muted"></small> <input type="hidden"
+											id="user" value="${user }" />
 									</div>
-									<div class="row form-group">
-										<div class="col-12 col-md-12">
-											<textarea name="textarea-input" id="textarea-input" rows="15"
-												placeholder="내용" class="form-control"></textarea>
-										</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-12 col-md-12">
+										<textarea name="textarea-input" id="textarea-input" rows="15"
+											placeholder="내용" class="form-control"></textarea>
 									</div>
+								</div>
+								<form action='<c:url value='NoticeWrite.hst'/>' method="post"
+									enctype="multipart/form-data">
 									<div class="row form-group">
-										<div class="col col-md-2">
-											<label for="file-input" class=" form-control-label">파일첨부</label>
+										<div class="form-group" id="file-list">
+											<a href="#this" onclick="addFile()">파일추가</a>
+											<div class="file-group">
+												<input type="file" name="file"><a href='#this'
+													name='file-delete'>삭제</a>
+											</div>
 										</div>
-										<div class="col-12 col-md-9">
-											<input type="file" id="file-input" name="file-input" class="form-control-file">
-										</div>
-									</div>
-									<div class="">
-										<button type="button" id="next" class="btn btn-primary btn-sm" style="position: absolute; right: 20px; bottom: 20px;">
+										<div class="">
+											<button type="button" id="next"
+												class="btn btn-primary btn-sm"
+												style="position: absolute; right: 20px; bottom: 20px;">
 												<i class="fa fa-dot-circle-o"></i> 작성
 											</button>
+										</div>
+										<!-- 								</form> -->
 									</div>
-<!-- 								</form> -->
+								</form>
 							</div>
-								</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 <script>
+	
 </script>
