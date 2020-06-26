@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <style>
@@ -55,14 +56,14 @@
 							<div class="col-md-offset-2 col-md-8">
 								<ul id="pillMenu" class="nav nav-pills center-block"
 									style="width: 205px; margin-bottom: 10px">
-									<c:if test="${!isEmpty}">
+									<sec:authorize access="hasRole('ROLE_ADM')">
 										<li>
 										<a href="<c:url value='/Admin/NoticeEdit.hst?no=${list[0].noti_no}&title=${list[0].title}&content=${list[0].content}'/>"
 											type="button" class="btn btn-warning">수정</a></li>
 										<li>
 										<a href="<c:url value='/Admin/NoticeDelete.hst?no=${list[0].noti_no}'/>"
 											type="button" class="btn btn-danger">삭제</a></li>
-									</c:if>
+									</sec:authorize>
 										<li>
 										<a href="<c:url value='/Admin/Notice.hst?no=${list[0].noti_no}'/>"
 											type="button" class="btn btn-primary">목록</a></li>
