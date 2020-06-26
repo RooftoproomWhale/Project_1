@@ -2,6 +2,8 @@ package com.kosmo.proj.service;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardDTO {
 
 	private String noti_no;
@@ -10,8 +12,14 @@ public class BoardDTO {
 	private String content;
 	private Date postdate;
 	private String file_addr;
+	private MultipartFile upload;
 
-
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
 	public Date getPostdate() {
 		return postdate;
 	}
