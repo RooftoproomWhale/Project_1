@@ -5,7 +5,6 @@
 	<script src="/js/summernote/summernote-bs4.min.js"></script>
     <script src="/js/summernote/lang/summernote-ko-KR.min.js"></script>
     <link rel="stylesheet" href="/css/summernote/summernote-bs4.min.css">
-
 <script>
 $(document).ready(function() {
 	  $('#summernote').summernote({
