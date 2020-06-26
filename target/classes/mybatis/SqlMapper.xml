@@ -388,5 +388,7 @@
 	<select id="selectApt_Search" parameterType="java.util.Map" resultType="ReservationDTO">
 		select h.*, r.* from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
-	
+	<select id="SelectReservationByAddr" parameterType="java.util.Map" resultType="int">
+		select count(*) from reservation where hosp_Code = (SELECT hosp_code FROM hospital WHERE address = #{address} AND AUTH = '제휴승인됨' AND approved = '승인됨')
+	</select>
 </mapper>

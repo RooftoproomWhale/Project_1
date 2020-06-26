@@ -66,37 +66,12 @@
 									</span>
 								</div>
 							</div>
-							<div class="au-chat__content au-chat__content2 js-scrollbar5">
-								<div class="recei-mess-wrap">
-									<span class="mess-time">12 Min ago</span>
-									<div class="recei-mess__inner">
-										<div class="avatar avatar--tiny">
-											<img src="<c:url value='/img/logo.png'/>">
-										</div>
-										<div class="recei-mess-list">
-											<div class="recei-mess">안녕하세요 홈스피탈 입니다.</div>
-											<div class="recei-mess">병원 예약이나 궁금하신점이 있으면 물어보세요!</div>
-										</div>
-									</div>
-								</div>
-								<div class="send-mess-wrap">
-									<span class="mess-time">30 Sec ago</span>
-									<div class="send-mess__inner">
-										<div class="send-mess-list">
-											<div class="send-mess">비밀번호를 잊어버렸어요</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="au-chat-textfield">
-								<form class="au-form-icon">
-									<input class="au-input au-input--full au-input--h65"
-										type="text" placeholder="질문을 입력하세요">
-									<button class="au-input-icon">
-										<i class="far fa-paper-plane"></i>
-									</button>
-								</form>
-							</div>
+							<iframe
+							    style="min-height: 60vh;"
+							    width="100%"
+							    height="100%"
+							    src="https://798e8eca8a96.ngrok.io/">
+							</iframe>
 						</div>
 					</div>
 				</div>
