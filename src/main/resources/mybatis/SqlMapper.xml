@@ -22,7 +22,7 @@
 	</delete>
 	<update id="signUpdate" parameterType="java.util.Map">
 		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel}, 
-		height = #{height}, weight = {weight} where mem_email = #{email} 
+		height = #{height}, weight = #{weight} where mem_email = #{email} 
 	</update>
 	<!-- 회원가입 검색 병원 -->
 	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
@@ -30,8 +30,8 @@
 	</select>
 
   	<!-- 공지사항 추가하기 -->
-    <insert id="insertNotice">
-        insert into NOTIFICATION_BBS values(SEQ_NOTIFICATION.nextval, #{user}, #{title}, #{content}, SYSDATE, null)
+    <insert id="insertNotice" parameterType="java.util.Map">
+        insert into NOTIFICATION_BBS values(SEQ_NOTIFICATION.nextval, #{mem_email}, #{title}, #{content}, SYSDATE, ${file_addr})
     </insert>
     <!-- 공지사항 리스트보기 -->
     <select id="listNotice" resultType="BoardDTO">
