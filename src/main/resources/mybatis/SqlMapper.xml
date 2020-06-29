@@ -14,16 +14,26 @@
 	<insert id="signInsert" parameterType="java.util.Map"> 
 		INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{gender}, #{name}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable}, SYSDATE )
 	</insert>
-	<select id="signView" parameterType="java.util.Map">
-		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{email}
+	 <select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
+		 SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
+	 </select>
+	 	 <select id="selectCount" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT p.precount,r.resercount,(SELECT MAX(PRES_DATE) FROM prescription  WHERE MEM_EMAIL = #{id})resdate FROM(SELECT count(*) precount FROM prescription WHERE MEM_EMAIL = #{id})p,
+		(SELECT count(*) resercount FROM reservation WHERE MEM_EMAIL = #{id})r
+	 </select>
+	 
+ 	 <delete id="signDelete" parameterType="MemberDTO">
+		DELETE FROM MEMBER WHERE MEM_EMAIL = #{userid}
+	 </delete>
+	 	
+	 <update id="signUpdate" parameterType="java.util.Map" >
+		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel},  height = #{height},weight = #{weight} where mem_email = #{id} 
+	 </update>
+	 
+	<select id="seletnew" parameterType="java.util.Map" resultType="reservationDTO">
+	SELECT h.hosp_name,r.sel_symp FROM reservation r JOIN hospital h on r.hosp_code=h.hosp_code
+	WHERE r.mem_email = #{id} AND RES_DATE=(SELECT MAX(RES_DATE)FROM reservation)
 	</select>
- 	<delete id="signDelete" parameterType="java.util.Map">
-		DELETE FROM MEMBER WHERE MEM_EMAIL = #{email}
-	</delete>
-	<update id="signUpdate" parameterType="java.util.Map">
-		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel}, 
-		height = #{height}, weight = #{weight} where mem_email = #{email} 
-	</update>
 	<!-- 회원가입 검색 병원 -->
 	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
 		SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
