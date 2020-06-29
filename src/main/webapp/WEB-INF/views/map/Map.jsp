@@ -145,7 +145,7 @@
    .left_toggle{left:0; }
 
    
-   .scroll_area{overflow:auto;flex-direction: column;background: #fff;}
+   .scroll_area{overflow:auto;height: 100%;flex-direction: column;background: #fff;}
    .search_item{border-top:1px solid #e5e5e5;margin: 0 20px;padding: 19px 20px 18px;;display: block;cursor: pointer;}
 
    
@@ -214,6 +214,22 @@
        font-size: 14px;
        line-height: 21px;
    }
+   .tableInfoInner{
+	    width: 30px;
+	    height: 30px;
+	    background-color: #D6D6D6;
+	    display: inline-block;
+	    border: 1px solide gray;
+	    border-radius: 3px;
+	    margin: 3px;
+	 }
+	.g{
+	    background-color: #7A7A7A;
+	  }
+	.b{
+	 
+	    background-color: #DF101C;
+	 }
     .ui-autocomplete {
        position: absolute;
        max-height: 200px;
@@ -334,9 +350,48 @@
                </div>
             </div>-->
          </div>
-         <div class="reservation_info">
-         	
+         <div style='text-align: center;'>
+	         <div  style="display: inline-block; padding: 30px; ">
+	         	<div  class="reservation_info">
+	         	</div>
+	         </div>
+	         	
          </div>
+         
+         <script>
+         	/* var count=6;
+            var emptyDiv = '<div class="tableInfoInner g" ><div>';
+         	var reservationDiv = '<div class="tableInfoInner b"><div>';
+         	$(".reservation_info").append('<h3>현재 예약인원은 '+count+'명 입니다</h3>');
+         	for(var i=1;i<=25;i++){
+         		if(i<=count)
+         		{
+         			$(".reservation_info").append(reservationDiv);
+         		}else{
+         			$(".reservation_info").append(emptyDiv);
+         		}
+         		if(i%5==0){
+         			$(".reservation_info").append("<div></div>");
+         		}
+         	} */
+         	function createReservationTable(count){
+         		$(".reservation_info").empty();
+         		var emptyDiv = '<div class="tableInfoInner g" ><div>';
+             	var reservationDiv = '<div class="tableInfoInner b"><div>';
+             	$(".reservation_info").append('<h3>현재 예약인원은 '+count+'명 입니다</h3>');
+             	for(var i=1;i<=25;i++){
+             		if(i<=count)
+             		{
+             			$(".reservation_info").append(reservationDiv);
+             		}else{
+             			$(".reservation_info").append(emptyDiv);
+             		}
+             		if(i%5==0){
+             			$(".reservation_info").append("<div></div>");
+             		}
+             	}
+         	};
+         </script>
       </div>
    </div>
    <div class="info-toggle left_toggle">
@@ -429,8 +484,8 @@
                            <div class="form-group">
                               <span class="form-label">오전/오후</span>
                               <select id="AM_PM" class="form-control">
-                                 <option>오전</option>
-                                 <option>오후</option>
+<!--                                  <option>오전</option>
+                                 <option>오후</option> -->
                               </select>
                               <span class="select-arrow"></span>
                            </div>
@@ -439,7 +494,7 @@
                            <div class="form-group">
                               <span class="form-label">시</span>
                               <select id="Hour" class="form-control">
-                                 <option>1</option>
+                                 <!-- <option>1</option>
                                  <option>2</option>
                                  <option>3</option>
                                  <option>4</option>
@@ -450,7 +505,7 @@
                                  <option>9</option>
                                  <option>10</option>
                                  <option>11</option>
-                                 <option>12</option>
+                                 <option>12</option> -->
                               </select>
                               <span class="select-arrow"></span>
                            </div>
@@ -459,7 +514,7 @@
                            <div class="form-group">
                               <span class="form-label">분</span>
                               <select id="Minute" class="form-control">
-                                 <option>05</option>
+                                 <!-- <option>05</option>
                                  <option>10</option>
                                  <option>15</option>
                                  <option>20</option>
@@ -469,7 +524,7 @@
                                  <option>40</option>
                                  <option>45</option>
                                  <option>50</option>
-                                 <option>55</option>
+                                 <option>55</option> -->
                               </select>
                               <span class="select-arrow"></span>
                            </div>
@@ -568,6 +623,7 @@
       $('.search_keyword_submit').click(function(){
 
          console.log('검색',$('.search_keyword_input').val().length);
+         $(".reservation_info").hide();
          var search_val = $('.search_keyword_input').val();
          if($('.search_keyword_input').val().length > 0)
          {
@@ -598,6 +654,7 @@
          console.log('병원 필터 클릭',apiStatus);
          $('.search_list').html('');
          $('.search_keyword_input').val('');
+         $(".reservation_info").hide();
          
          $('#filter_hospital').addClass('selected_filter');
          $('#filter_pharmacy').removeClass('selected_filter');
@@ -608,6 +665,7 @@
          console.log('약국 필터 클릭',apiStatus);
          $('.search_list').html('');
          $('.search_keyword_input').val('');
+         $(".reservation_info").hide();
          
          $('#filter_hospital').removeClass('selected_filter');
          $('#filter_pharmacy').addClass('selected_filter');
@@ -618,6 +676,7 @@
          console.log('마스크 필터 클릭',apiStatus);
          $('.search_list').html('');
          $('.search_keyword_input').val('');
+         $(".reservation_info").hide();
          
          $('#filter_hospital').removeClass('selected_filter');
          $('#filter_pharmacy').removeClass('selected_filter');
@@ -651,6 +710,8 @@
          $('.menu_wrap > .current_refresh:eq(2)').removeClass('selected_filter');
          $('.menu_wrap > .current_refresh:eq(3)').addClass('selected_filter');
       })
+      
+      $(".reservation_info").hide();
       
       $('#reservation_date').datepicker({
          dateFormat: "yy년 mm월 dd일",
@@ -865,6 +926,30 @@
                      console.log("modal",item,i)
                      console.log($('.info_wrap').hasClass('warp_invisible'));
                      console.log($('.info-toggle').hasClass('left_toggle'));
+                     console.log('auth',item.auth);
+                     if(item.auth == '제휴승인됨'){
+                    	 $.ajax({
+                        	 url:"<c:url value='/Homespital/Map/Hospital/countReservation.hst'/>",
+                        	 type:'get',
+                             datatype:'json',
+                             data:{"address":item.address},
+                             success:function(data){
+                            	console.log(data); 
+                            	$(".reservation_info").empty();
+                            	createReservationTable(data);
+                            	$(".reservation_info").show();
+                             },
+                             error:function(e){
+                            	console.log(e); 
+                             }
+                         });
+                     }
+                     else
+                   	 {
+                    	 $(".reservation_info").empty();
+                    	 $(".reservation_info").append('<h3>홈스피탈 제휴 병원만\n예약 정보 확인 가능합니다</h3>');
+                   	 }
+                     
                      if($('.info-toggle').hasClass('left_toggle')==true)
                      {
                         $('.info_wrap').removeClass('warp_invisible');
@@ -958,6 +1043,7 @@
                      console.log("modal",item,i)
                      console.log($('.info_wrap').hasClass('warp_invisible'));
                      console.log($('.info-toggle').hasClass('left_toggle'));
+                     $(".reservation_info").hide();
                      if($('.info-toggle').hasClass('left_toggle')==true)
                      {
                         $('.info_wrap').removeClass('warp_invisible');
@@ -1060,6 +1146,7 @@
                   //kakao.maps.event.addListener(marker, 'click', makeOverListener(map));
                   kakao.maps.event.addListener(marker, 'click', function(){
                      console.log("modal",item,i)
+                     $(".reservation_info").hide();
                      $('.body_title').html(item.name);
                      $('.content_addr').html(item.addr);
                      $('.content_stock').html(translateRemainStat(item.remain_stat));
@@ -1196,7 +1283,7 @@
                                  '</div>'+
                                  '<div class="content_body">'+
                                     //item['ADDRESS']+
-                                    '내과 '+ 
+                                    item['DEPT_NAME']+' '+ 
                                     item['TEL']+
                                  '</div>'+
                                  '<div class="content_body">'+
@@ -1450,7 +1537,7 @@
                         console.log(jsonData[0]['PHAR_NAME']);
                         item = getDetailHospItem(jsonData[0]['PHAR_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'])
                      }
-                     
+                     $(".reservation_info").show();
                      $('.search_list').html(item);
                   },
                   error:function(e){
@@ -1470,7 +1557,8 @@
                         '<strong>'+hospname+'</strong>'+
                      '</div>'+
                      '<div class="inner_summary_info">'+
-                        '<span>내과</span>'+
+                        '<span>'+deptname+'</span>'+
+                        '<span>제휴병원</span>'+
                      '</div>'+
                   '</div>'+
                   '<div class="inner_btn_area">'+
@@ -1610,7 +1698,7 @@
     		  $('#AM_PM').append(option);
     		  
     		  option = "";
-    		  for(var i = 8; i <= 10; i++)
+    		  for(var i = 8; i <= 12; i++)
     		  {
     			  option += "<option>"+i+"</option>";
     		  }
@@ -1640,10 +1728,23 @@
     		  console.log(option)
     		  $('#Hour').append(option);
     		  
-    		  option = ""; console.log((Math.floor(date.getMinutes() / 10)+1)*10);
-    		  for(var i = ((Math.floor(date.getMinutes() / 10) + 1) * 10); i <= 50; i=i+10)
+    		  option = ""; 
+    		  var min = ((Math.floor(date.getMinutes() / 10)) * 10) + 10;
+    		  console.log(min);
+    		  
+    		  if(min == 60)
     		  {
-    			  option += "<option>"+i+"</option>";
+    			  for(var i = 0; i <= 50; i=i+10)
+        		  {
+        			  option += "<option>"+i+"</option>";
+        		  }
+    		  }
+    		  else
+    		  {
+    			  for(var i = min; i <= 50; i=i+10)
+        		  {
+        			  option += "<option>"+i+"</option>";
+        		  }
     		  }
 
     		  console.log(option)

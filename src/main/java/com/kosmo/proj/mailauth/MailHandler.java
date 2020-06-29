@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailHandler {
 
-	private JavaMailSender mailSender;
+   private JavaMailSender mailSender;
     private MimeMessage message;
     private MimeMessageHelper messageHelper;
 
@@ -49,13 +49,13 @@ public class MailHandler {
            messageHelper.addInline(contentId, dataSource);
        }
        public void send() {
-	       try
-	       {
-	           mailSender.send(message);
-	       }
-	       catch (Exception e)
-	       {
-	           e.printStackTrace();
-	       }
-	   }
+          try
+          {
+              mailSender.send(message);
+          }
+          catch (Exception e)
+          {
+              e.printStackTrace();
+          }
+      }
 }

@@ -77,4 +77,10 @@ public class MapServiceImpl implements MapService{
 		return dao.selectHospitalList(map);
 	}
 
+	@Override
+	public int selectCntReservation(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectCntReservation(map);
+	}
+
 }

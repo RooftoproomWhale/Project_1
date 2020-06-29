@@ -1,28 +1,21 @@
 package com.kosmo.proj.mailauth;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kosmo.proj.service.HospitalDTO;
 
 @Controller
 @RequestMapping("/mailauth")
 public class MailController {
-   @Autowired
-   private MailService service;
 
    @Autowired
    private MailHandler mailHandler;
@@ -35,22 +28,22 @@ public class MailController {
       int authCode = key.nextInt(4589362) + 49311; //이메일로 받는 인증코드 부분 (난수)
       Object userEmail = map.get("userEmail");
       System.out.println(userEmail.toString());
-      
+
       mailHandler.setSubject("홈스피탈 인증번호입니다.");
       mailHandler.setText("인증번호를 입력해주세요 인증번호: " + Integer.toString(authCode));
       mailHandler.setFrom("united0226@gmail.com", "홈스피탈");
       mailHandler.setTo(userEmail.toString());
       mailHandler.send();
-      
-      ObjectMapper mapper = new ObjectMapper();
-		String jsonStr = null;
-		try {
-			jsonStr = mapper.writeValueAsString(authCode);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
 
-		System.out.println(jsonStr);
+      ObjectMapper mapper = new ObjectMapper();
+      String jsonStr = null;
+      try {
+         jsonStr = mapper.writeValueAsString(authCode);
+      } catch (JsonProcessingException e) {
+         e.printStackTrace();
+      }
+
+      System.out.println(jsonStr);
       return jsonStr.toString();
 
    }

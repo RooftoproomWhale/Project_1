@@ -1,10 +1,17 @@
 package com.kosmo.proj.admin;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,14 +22,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import com.kosmo.proj.service.BoardDTO;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.Paging;
 import com.kosmo.proj.service.ReservationDTO;
+import com.kosmo.proj.util.FileUpDownUtils;
+
 
 @RequestMapping(value = "/Admin/")
 @Controller
@@ -532,8 +544,21 @@ public class AdminController {
 	}
 
 	@RequestMapping("Noticeinsert.hst")
-	public String noticeinsert(@RequestParam Map map, Model model) {
-
+	public String noticeinsert(BoardDTO dto,HttpServletRequest req,Map map) throws IllegalStateException, IOException {
+		
+		String phisicalPath = req.getServletContext().getRealPath("/Upload");
+		MultipartFile upload = dto.getUpload();
+		String renameFile = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+		String file_addr = phisicalPath+File.separator+renameFile;
+		File file = new File(phisicalPath+File.separator+renameFile);
+		upload.transferTo(file);
+		
+		map.put("mem_email",dto.getMem_email());
+		map.put("title",dto.getTitle());
+		map.put("content",dto.getContent());
+		map.put("file_addr",file_addr);
+		
+	
 		int check = adminService.insertNotice(map);
 		System.out.println(check);
 
@@ -542,9 +567,9 @@ public class AdminController {
 
 	@RequestMapping("NoticeWrite.hst")
 	public String noticeWrite(Authentication auth, Model model) {
+
 		UserDetails userDetails = (UserDetails)auth.getPrincipal();
 		String user = userDetails.getUsername();
-
 		model.addAttribute("user",user);
 		return "NoticeWrite.ad_tiles";
 	}
@@ -593,5 +618,5 @@ public class AdminController {
 
 		return "forward:/Notice.tiles";
 	}
-
+	
 }

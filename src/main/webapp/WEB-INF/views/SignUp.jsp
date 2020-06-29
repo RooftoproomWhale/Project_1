@@ -372,7 +372,11 @@ width: 100%;
                else
                {
                   $('font[name=namecheck]').text('');
+<<<<<<< HEAD
                     $('font[name=namecheck]').html("");
+=======
+                  $('font[name=namecheck]').html("");
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
                   
                }
                  
@@ -569,6 +573,7 @@ width: 100%;
                //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
                $("#progressbar li").eq($("fieldset").index(next_fs))
                      .addClass("active");
+<<<<<<< HEAD
 
                //다음 필드셋 표시
                next_fs.show();
@@ -915,7 +920,10 @@ width: 100%;
 						alert("약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
 						return false;
 					}
+=======
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 
+<<<<<<< HEAD
 					else {
 						if (animating) {
 							return false;
@@ -923,7 +931,42 @@ width: 100%;
 						animating = true;
 						current_fs = $(this).parent();
 						next_fs = $(this).parent().next();
+=======
+               //다음 필드셋 표시
+               next_fs.show();
+               //현재 필드셋을 스타일로 숨긴다.
+               current_fs.animate({
+                  opacity : 0
+               }, {
+                  step : function(now, mx) {
+                     //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                     //1.current_fs 80%로 축소
+                     scale = 1 - (1 - now) * 0.2;
+                     //2.오른쪽에서 next_fs 50% 가져오기
+                     left = (now * 50) + "%";
+                     //3.next_fs의 불투명도 1로 증가시킨다
+                     opacity = 1 - now;
+                     current_fs.css({
+                        'transform' : 'scale(' + scale + ')',
+                        'position' : 'absolute'
+                     });
+                     next_fs.css({
+                        'left' : left,
+                        'opacity' : opacity
+                     });
+                  },
+                  duration : 800,
+                  complete : function() {
+                     current_fs.hide();
+                     animating = false;
+                  },
+                  //사용자가 정의 플러그인에서 나옴
+                  easing : 'easeInOutBack'
+               });
+            });
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 
+<<<<<<< HEAD
 						//next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
 						$("#progressbar li").eq($("fieldset").index(next_fs))
 								.addClass("active");
@@ -961,11 +1004,109 @@ width: 100%;
 						});
 					}
 				});
+=======
+      $(".previous").click(
+            function() {
+               if (animating)
+                  return false;
+               animating = true;
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 
+<<<<<<< HEAD
 		$('#hosAuthBtn')
 				.click(
 						function() {
+=======
+               current_fs = $(this).parent();
+               previous_fs = $(this).parent().prev();
 
+               //진행률 표시줄에서 현재 단계 비활성화
+               $("#progressbar li").eq($("fieldset").index(current_fs))
+                     .removeClass("active");
+
+               //이전 필드셋 표시
+               previous_fs.show();
+               //현재 필드셋을 스타일로 숨긴다.
+               current_fs.animate({
+                  opacity : 0
+               }, {
+                  step : function(now, mx) {
+                     scale = 0.8 + (1 - now) * 0.2;
+                     left = ((1 - now) * 100) + "%";
+                     opacity = 1 - now;
+                     current_fs.css({
+                        'left' : left
+                     });
+                     previous_fs.css({
+                        'transform' : 'scale(' + scale + ')',
+                        'opacity' : opacity
+                     });
+                  },
+                  duration : 800,
+                  complete : function() {
+                     current_fs.hide();
+                     animating = false;
+                  },
+                  //사용자 정의 플로그인에서 나옴
+                  easing : 'easeInOutBack'
+               });
+
+            });
+
+      $(".submit").click(function() {
+         return false;
+      })
+      $(".input-group-addon")
+            .click(
+                  function() {
+                     console.log($(".input-group-addon"), "검색")
+                     console
+                           .log('검색',
+                                 $('#input_hospital').val().length);
+                     var search_val = $('#input_hospital').val();
+                     if (search_val.length > 0) {
+                        $
+                              .ajax({
+                                 url : "<c:url value='/Homespital/Account/loadHospitalList.hst'/>",
+                                 type : 'get',
+                                 datatype : 'json',
+                                 data : {
+                                    "search_keyword" : search_val
+                                 },
+                                 beforeSend : function() {
+                                    console.log("beforeSend");
+                                 },
+                                 complete : function() {
+                                    console.log("complete");
+                                 },
+                                 success : function(data) {
+                                    var jsonData = JSON.parse(data);
+                                    console.log("연결성공", jsonData,
+                                          typeof (jsonData));
+                                    var items = '<tbody>';
+                                    $.each(jsonData, function(i,
+                                          item) {
+                                       console.log(item);
+
+                                       items += "<tr>";
+                                       items += "<td>"
+                                             + item['HOSP_NAME']
+                                             + "<td>";
+                                       items += "<td>"
+                                             + item['ADDRESS']
+                                             + "<td>";
+                                       items += "<td>"
+                                             + item['TEL']
+                                             + "<td>";
+                                       items += "</tr>";
+                                    });
+                                    items += "<tbody>";
+                                    $('.table').html(items);
+                                 },
+                                 error : function(e) {
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
+
+<<<<<<< HEAD
 							var hospName = $('#clickedHosName').val();
 							var hosId = $('#hosId').val();
 							var hosPwd = $("#hosPwd").val();
@@ -997,7 +1138,274 @@ width: 100%;
 									});
 						});
 	});
+=======
+                                 }
+                              });
+                     }
+                  });
 
+      $("#auth_prev").click(
+            function() {
+               if (animating) {
+                  return false;
+               }
+               animating = true;
+               current_fs = $(this).parent();
+               previous_fs = $(this).parent().prev().prev().prev().prev();
+
+               //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+               $("#progressbar li").show();
+               $("#progressbar li").eq($("fieldset").index(previous_fs))
+                     .addClass("active");
+
+               previous_fs.show();
+               //현재 필드셋을 스타일로 숨긴다.
+               current_fs.animate({
+                  opacity : 0
+               }, {
+                  step : function(now, mx) {
+                     //current_fs의 불투명도가 0이므로 줄어듦 - now에 저장 됨
+                     //1.previous_fs를 80%에서 100%로 확장
+                     scale = 0.8 + (1 - now) * 0.2;
+                     //2.current_fs를 오른쪽으로 가져감 (50%)-0%
+                     left = ((1 - now) * 100) + "%";
+                     //3.previous_fs의 불투명도를 1로 증가시킴.
+                     opacity = 1 - now;
+                     current_fs.css({
+                        'left' : left
+                     });
+                     previous_fs.css({
+                        'transform' : 'scale(' + scale + ')',
+                        'opacity' : opacity
+                     });
+                  },
+                  duration : 800,
+                  complete : function() {
+                     current_fs.hide();
+                     animating = false;
+                  },
+                  //사용자 정의 플로그인에서 나옴
+                  easing : 'easeInOutBack'
+               });
+            })
+
+      $("#authHos").click(function name() {
+         if ($("#check_1").is(":checked") == false) {
+            alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+            return;
+         } else if ($("#check_2").is(":checked") == false) {
+            alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+            return;
+         } else if ($("#check_3").is(":checked") == false) {
+            alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+            return;
+         } else {
+            if (animating) {
+               return false;
+            }
+            animating = true;
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next().next().next().next();
+
+            //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+            $("#progressbar li").hide();
+
+            //다음 필드셋 표시
+            next_fs.show();
+            //현재 필드셋을 스타일로 숨긴다.
+            current_fs.animate({
+               opacity : 0
+            }, {
+               step : function(now, mx) {
+                  //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                  //1.current_fs 80%로 축소
+                  scale = 1 - (1 - now) * 0.2;
+                  //2.오른쪽에서 next_fs 50% 가져오기
+                  left = (now * 50) + "%";
+                  //3.next_fs의 불투명도 1로 증가시킨다
+                  opacity = 1 - now;
+                  current_fs.css({
+                     'transform' : 'scale(' + scale + ')',
+                     'position' : 'absolute'
+                  });
+                  next_fs.css({
+                     'left' : left,
+                     'opacity' : opacity
+                  });
+               },
+               duration : 800,
+               complete : function() {
+                  current_fs.hide();
+                  animating = false;
+               },
+               //사용자가 정의 플러그인에서 나옴
+               easing : 'easeInOutBack'
+            });
+         }
+      });
+
+      $(".nextBtn").click(
+            function() {
+               if ($("#check_1").is(":checked") == false) {
+                  alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                  return;
+               } else if ($("#check_2").is(":checked") == false) {
+                  alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                  return;
+               } else if ($("#check_3").is(":checked") == false) {
+                  alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                  return;
+               } else {
+                  if ($("#check_authHos").is(":checked") == false) {
+                     if (animating) {
+                        return false;
+                     }
+                     animating = true;
+                     current_fs = $(this).parent();
+                     next_fs = $(this).parent().next();
+
+                     //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+
+                     $("#progressbar li").eq(
+                           $("fieldset").index(next_fs)).addClass(
+                           "active");
+
+                     //다음 필드셋 표시
+                     next_fs.show();
+                     //현재 필드셋을 스타일로 숨긴다.
+                     current_fs.animate({
+                        opacity : 0
+                     }, {
+                        step : function(now, mx) {
+                           //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                           //1.current_fs 80%로 축소
+                           scale = 1 - (1 - now) * 0.2;
+                           //2.오른쪽에서 next_fs 50% 가져오기
+                           left = (now * 50) + "%";
+                           //3.next_fs의 불투명도 1로 증가시킨다
+                           opacity = 1 - now;
+                           current_fs.css({
+                              'transform' : 'scale(' + scale + ')',
+                              'position' : 'absolute'
+                           });
+                           next_fs.css({
+                              'left' : left,
+                              'opacity' : opacity
+                           });
+                        },
+                        duration : 800,
+                        complete : function() {
+                           current_fs.hide();
+                           animating = false;
+                        },
+                        //사용자가 정의 플러그인에서 나옴
+                        easing : 'easeInOutBack'
+                     });
+                  } else {
+                     if (animating) {
+                        return false;
+                     }
+                     animating = true;
+                     current_fs = $(this).parent();
+                     next_fs = $(this).parent().next().next().next()
+                           .next();
+
+                     //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+                     $("#progressbar li").hide();
+
+                     //다음 필드셋 표시
+                     next_fs.show();
+                     //현재 필드셋을 스타일로 숨긴다.
+                     current_fs.animate({
+                        opacity : 0
+                     }, {
+                        step : function(now, mx) {
+                           //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                           //1.current_fs 80%로 축소
+                           scale = 1 - (1 - now) * 0.2;
+                           //2.오른쪽에서 next_fs 50% 가져오기
+                           left = (now * 50) + "%";
+                           //3.next_fs의 불투명도 1로 증가시킨다
+                           opacity = 1 - now;
+                           current_fs.css({
+                              'transform' : 'scale(' + scale + ')',
+                              'position' : 'absolute'
+                           });
+                           next_fs.css({
+                              'left' : left,
+                              'opacity' : opacity
+                           });
+                        },
+                        duration : 800,
+                        complete : function() {
+                           current_fs.hide();
+                           animating = false;
+                        },
+                        //사용자가 정의 플러그인에서 나옴
+                        easing : 'easeInOutBack'
+                     });
+                  }
+               }
+            });
+      
+      $("#nextBtn1").click(function() {
+               
+               if ($('#HosName').val() == "") {
+                  alert("검색 후 진행해 주세요");
+                  return false;
+               } else if ($("#check_5").is(":checked") == false) {
+                  alert("약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                  return false;
+               }
+
+               else {
+                  if (animating) {
+                     return false;
+                  }
+                  animating = true;
+                  current_fs = $(this).parent();
+                  next_fs = $(this).parent().next();
+
+                  //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+                  $("#progressbar li").eq($("fieldset").index(next_fs))
+                        .addClass("active");
+
+                  //다음 필드셋 표시
+                  next_fs.show();
+                  //현재 필드셋을 스타일로 숨긴다.
+                  current_fs.animate({
+                     opacity : 0
+                  }, {
+                     step : function(now, mx) {
+                        //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                        //1.current_fs 80%로 축소
+                        scale = 1 - (1 - now) * 0.2;
+                        //2.오른쪽에서 next_fs 50% 가져오기
+                        left = (now * 50) + "%";
+                        //3.next_fs의 불투명도 1로 증가시킨다
+                        opacity = 1 - now;
+                        current_fs.css({
+                           'transform' : 'scale(' + scale + ')',
+                           'position' : 'absolute'
+                        });
+                        next_fs.css({
+                           'left' : left,
+                           'opacity' : opacity
+                        });
+                     },
+                     duration : 800,
+                     complete : function() {
+                        current_fs.hide();
+                        animating = false;
+                     },
+                     //사용자가 정의 플러그인에서 나옴
+                     easing : 'easeInOutBack'
+                  });
+               }
+            });
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
+
+<<<<<<< HEAD
 	function searchHospClick(i) {
 		var hospName = $('#hospName' + i).html();
 		console.log('#hospName' + i);
@@ -1044,45 +1452,127 @@ width: 100%;
 				{
 					oncomplete : function(data) {
 						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+=======
+      $('#hosAuthBtn').click(function() {
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 
-						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
-						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-						var fullAddr = ''; // 최종 주소 변수
-						var extraAddr = ''; // 조합형 주소 변수
+           var hospName = $('#clickedHosName').val();
+           var hosId = $('#hosId').val();
+           var hosPwd = $("#hosPwd").val();
+           console.log(hospName + hosId + hosPwd);
+           $
+                 .ajax({
+                    url : "<c:url value='/Member/HospitalAuthSub.hst'/>",
+                    type : 'get',
+                    datatype : 'html',
+                    data : {
+                       "email" : hosId,
+                       "pwd" : hosPwd,
+                       "name" : hospName,
+                       "gender" : "병원",
+                       "tel" : "X",
+                       "age" : 0,
+                       "height" : 0,
+                       "weight" : 0,
+                       "role" : "ROLE_HOS",
+                       "enable" : "0"
+                    },
+                    success : function(data) {
+                       alert('제휴신청이 완료되었습니다');
+                       window.location.href = "<c:url value='/Home/ToHomePage.hst'/>";
+                    },
+                    error : function(request, status, error) {
+                       alert("아이디와 비밀번호를 확인하세요");
+                    }
+                 });
+        });
+   });
 
-						// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-							fullAddr = data.roadAddress;
+   function searchHospClick(i) {
+      var hospName = $('#hospName' + i).html();
+      console.log('#hospName' + i);
+      console.log(hospName);
+      $
+            .ajax({
+               url : "<c:url value='/Member/HosSearchList.hst'/>",
+               type : "get", //get, post 방식 
+               dataType : 'json', //or xml or script or html 
+               data : {
+                  "hosp_name" : hospName
+               }, //넘길 파라미터 
+               async : true, // true:비동기, false:동기 
+               success : function(data) {
+                  console.log(data);
 
-						} else { // 사용자가 지번 주소를 선택했을 경우(J)
-							fullAddr = data.jibunAddress;
-						}
+                  var items = '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>'
+                        + '<div class="col-md-10">'
+                        + '<input type="text" class="form-control" id="clickedHosName" placeholder="병원명" disabled="disabled" value="'+data[0].hosp_name+'">'
+                        + '</div>'
+                        + '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">주소 :</label>'
+                        + '<div class="col-md-10">'
+                        + '<input type="text" class="form-control" placeholder="주소" disabled="disabled" value="'+data[0].address+'">'
+                        + '</div>'
+                        + '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">번호 :</label>'
+                        + '<div class="col-md-10">'
+                        + '<input type="text" class="form-control" placeholder="번호" disabled="disabled" value="'+data[0].tel+'">'
+                        + '</div>';
 
-						// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-						if (data.userSelectedType === 'R') {
-							//법정동명이 있을 경우 추가한다.
-							if (data.bname !== '') {
-								extraAddr += data.bname;
-							}
-							// 건물명이 있을 경우 추가한다.
-							if (data.buildingName !== '') {
-								extraAddr += (extraAddr !== '' ? ', '
-										+ data.buildingName : data.buildingName);
-							}
-							// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-							fullAddr += (extraAddr !== '' ? ' (' + extraAddr
-									+ ')' : '');
-						}
+                  $('#selectedHosp').html(items);
+                  $('#close').click();
+                  //             $('#regi-modal').hide();
+               },
+               error : function(request, status, error) {
+                  console.log("에러");
+                  alert("code = " + request.status + " message = "
+                        + request.responseText + " error = " + error); // 실패 시 처리
+               }
+            });
+   }
 
-						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
-						document.getElementById('sample6_address').value = fullAddr;
+   function sample6_execDaumPostcode() {
+      new daum.Postcode(
+            {
+               oncomplete : function(data) {
+                  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-						// 커서를 상세주소 필드로 이동한다.
-						document.getElementById('sample6_address2').focus();
-					}
-				}).open();
-	}
+                  // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                  // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                  var fullAddr = ''; // 최종 주소 변수
+                  var extraAddr = ''; // 조합형 주소 변수
+
+                  // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                  if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                     fullAddr = data.roadAddress;
+
+                  } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                     fullAddr = data.jibunAddress;
+                  }
+
+                  // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                  if (data.userSelectedType === 'R') {
+                     //법정동명이 있을 경우 추가한다.
+                     if (data.bname !== '') {
+                        extraAddr += data.bname;
+                     }
+                     // 건물명이 있을 경우 추가한다.
+                     if (data.buildingName !== '') {
+                        extraAddr += (extraAddr !== '' ? ', '
+                              + data.buildingName : data.buildingName);
+                     }
+                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                     fullAddr += (extraAddr !== '' ? ' (' + extraAddr
+                           + ')' : '');
+                  }
+
+                  // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                  document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                  document.getElementById('sample6_address').value = fullAddr;
+
+                  // 커서를 상세주소 필드로 이동한다.
+                  document.getElementById('sample6_address2').focus();
+               }
+            }).open();
+   }
 </script>
 
 <!------------------------------------------- 우편번호 찾기 ------------------------------------------->
@@ -1385,6 +1875,10 @@ width: 100%;
          <input type="button" name="previous" class="previous action-button" value="이전" /> 
          <input type="button" id="signupBtn" class="action-button" value="회원가입" />
       </fieldset>
+<<<<<<< HEAD
+=======
+      
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
       <fieldset>
          <h1 class="fs-title">병원 제휴</h1>
          <h3 class="fs-subtitle">병원을 선택해주세요</h3>
@@ -1421,11 +1915,19 @@ width: 100%;
          <h3 class="fs-subtitle">사용할 아이디와 비밀번호를 입력하세요</h3>
             <div class="form-group">
                     <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">아이디 :</label>
+<<<<<<< HEAD
                     <div class="col-md-9" style="margin-left:45px">
                         <input type="text" id="hosId" class="form-control" placeholder="아이디" >
                     </div>
                     <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 :</label>
                     <div class="col-md-9" style="margin-left:30px">
+=======
+                    <div class="col-md-9" style="margin-left:46px">
+                        <input type="text" id="hosId" class="form-control" placeholder="아이디" >
+                    </div>
+                    <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 :</label>
+                    <div class="col-md-9" style="margin-left:32px">
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
                         <input type="password" id="hosPwd" class="form-control" placeholder="비밀번호" >
                     </div>
                     <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 확인 :</label>
