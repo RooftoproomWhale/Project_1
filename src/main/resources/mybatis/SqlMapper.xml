@@ -12,7 +12,7 @@
 	
 	<!-- 회원가입 -->
 	<insert id="signInsert" parameterType="java.util.Map"> 
-		INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{gender}, #{name}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable}, SYSDATE )
+		INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{name}, #{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable}, SYSDATE )
 	</insert>
 	<select id="signView" parameterType="java.util.Map">
 		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{email}
@@ -26,8 +26,14 @@
 	</update>
 	<!-- 회원가입 검색 병원 -->
 	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
+		SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 10
 	</select>
+	<select id="selectedHosp" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * FROM HOSPITAL WHERE HOSP_NAME = #{hosp_name}
+	</select>
+	<update id="hosAuthSub" parameterType="java.util.Map">
+		UPDATE HOSPITAL SET AUTH = '승인대기중' WHERE HOSP_NAME = #{name}
+	</update>
 
   	<!-- 공지사항 추가하기 -->
     <insert id="insertNotice">
@@ -145,6 +151,14 @@
       AS distanceByXY, p.*
       FROM pharmacy p) disData
       WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
+   </select>
+   
+   <!-- Web Notification -->
+   <select id="notiAptCount" parameterType="java.util.Map" resultType="int">
+   		SELECT COUNT(*) FROM RESERVATION
+   </select>
+   <select id="notiTakeTime" parameterType="java.util.Map" resultType="PrescriptionDTO">
+   		SELECT * FROM PRE_MEDI
    </select>
    
 <!--관리자단 -->
@@ -305,7 +319,7 @@
 
    <!-- 사용자 관리 -->
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM (ELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)
+		SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<select id="selectMemberListUser" parameterType="java.util.Map" resultType="MemberDTO">

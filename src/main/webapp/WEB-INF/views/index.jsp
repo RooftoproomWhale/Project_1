@@ -22,62 +22,11 @@
 </style>
 <script>
 	window.onload = function(){
-		var icon = '../img/logo.png';
-		var userRole = $('#userRole').val();
-		var userId = $('#userId').val();
-		console.log("id: " + userId +"type:"+ typeof(userId));
-		console.log("role: " + userRole +"type:"+ typeof(userRole));
-		if(userRole == "MEM")
-		{
-			
-			memNoti();
-		}
-		else if(userRole == "HOS")
-		{
-			
-			hosNoti();
-		}
-		else
-		{
-			
-		}
-	
 		Notification.requestPermission().then(function(result) {
 			  console.log(result);
 			});
 		
 		Notification.requestPermission();
-		
-		var text;
-		function memNoti() {
-			text = '30분뒤 복용 해야할 약이 있습니다';
-			var options = 
-				{
-				      body: text,
-				      icon: icon
-			  	}
-				var noti = new Notification('복약 알림이 있습니다', options)
-				
-				noti.onclick = function(event) {
-					console.log('noti click');
-					window.location.href = "<c:url value='/mypage/administration.hst'/>";
-				};
-			}
-		
-		function hosNoti() {
-			text = '승인 대기중인 예약이 있습니다';
-			var options = 
-				{
-				      body: text,
-				      icon: icon
-			  	}
-				var noti = new Notification('예약 알림이 있습니다', options)
-				
-				noti.onclick = function(event) {
-					console.log('noti click');
-					window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
-				};
-			}
 		
 		function askNotificationPermission() {
 			  // 권한을 실제로 요구하는 함수
@@ -121,6 +70,125 @@
 
 		    return true;
 		  }
+		
+		//web notification 설정
+		var icon = '../img/logo.png';
+		var userRole = $('#userRole').val();
+		var userId = $('#userId').val();
+		var preAptCount = 0;
+		var date = new Date();
+// 		console.log(currTime);
+
+		var currHour = date.getHours().toString();
+		var currMin = (date.getMinutes()<10?'0':'') + date.getMinutes();
+		var currTime = parseInt(currHour + currMin);
+		console.log(currTime);
+		
+		$.ajax({
+			url:'<c:url value="/Noti/preAptCount.hst"/>',
+			dataType:'html',
+			success:function(data){
+					console.log("성공");
+// 					console.log("로드 예약 수: " + data);
+					preAptCount = data;
+				},
+			error:function(request,error){
+				console.log('에러:',error);
+			}
+		});
+		
+	
+		console.log("id: " + userId +"type:"+ typeof(userId));
+		console.log("role: " + userRole +"type:"+ typeof(userRole));
+		
+		if(userRole == "MEM")
+		{
+// 			memNoti();
+			window.setInterval(function(){
+				$.ajax({
+					url:'<c:url value="/Noti/getMediTime.hst"/>',
+					dataType:'json',
+					success:function(data){
+						console.log("멤버 성공")
+						console.log(data);
+						console.log("현재시간: " + currTime);
+						$.each(data, function(i, item) {
+				             console.log(item.alarm);
+				             timeGap = item.alarm - currTime;
+				             console.log(timeGap);
+				             if(timeGap > 0 && timeGap < 30)
+				             {
+				            	 memNoti();
+				             }
+				         })
+						},
+					error:function(request,error){
+						console.log('에러:',error);
+					}
+				});
+			}, 20000);
+		}
+		else if(userRole == "HOS")
+		{
+			
+			window.setInterval(function(){
+				
+				$.ajax({
+					url:'<c:url value="/Noti/hosAptGap.hst"/>',
+					dataType:'html',
+					success:function(data){
+							console.log("병원 성공");
+							console.log("현재 예약 수: " + data);
+							if(data - preAptCount != 0 )
+							{
+								console.log(data - preAptCount);
+								gapCount = data - preAptCount;
+								hosNoti(gapCount);
+								preAptCount = data;
+							}
+						},
+					error:function(request,error){
+						console.log('에러:',error);
+					}
+				});
+			}, 20000);
+		}
+		else
+		{
+			
+		}
+	
+		var text;
+		function memNoti() {
+			text = '30분 안에 복용 해야할 약이 있습니다';
+			var options = 
+				{
+				      body: text,
+				      icon: icon
+			  	}
+				var noti = new Notification('복약 알림이 있습니다', options)
+				
+				noti.onclick = function(event) {
+					console.log('noti click');
+					window.location.href = "<c:url value='/mypage/administration.hst'/>";
+				};
+			}
+		
+		function hosNoti(count) {
+			text = count + '개의 새로운 예약이 있습니다';
+			console.log(text);
+			var options = 
+				{
+				      body: text,
+				      icon: icon
+			  	}
+				var noti = new Notification('예약 알림이 있습니다', options)
+				
+				noti.onclick = function(event) {
+					console.log('noti click');
+					window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+				};
+			}
 	}
 </script>
 <head>
@@ -137,6 +205,7 @@
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <input type="hidden" id="userId" value="${user }"/>
 <input type="hidden" id="userRole" value="${role }"/>
+<%-- <input type="hidden" id="preAptCount" value="${preAptCount }"/> --%>
 	<!-- Header -->
 	<header id="header">
 		<div class="intro">
@@ -144,7 +213,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 intro-text">
-							<h1> We Are Interact</h1>
+							<h1> We Are Interact ${currAptCount}</h1>
 							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
 							<a href="#" id="notiTest" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
 						</div>

@@ -83,6 +83,18 @@ public class MemberServiceImpl implements MemberService{
 		return dao.getUserById(username);
 	}
 
+	@Override
+	public List<HospitalDTO> selectedHosp(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectedHosp(map);
+	}
+
+	@Override
+	public int hosAuthSub(Map map) {
+		// TODO Auto-generated method stub
+		return dao.hosAuthSub(map);
+	}
+
 
 
 

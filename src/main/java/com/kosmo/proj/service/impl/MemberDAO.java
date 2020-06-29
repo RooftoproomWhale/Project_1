@@ -91,4 +91,16 @@ public class MemberDAO implements MemberService {
 			return sqlMapper.selectOne("getUserById",username);
 		}
 
+		@Override
+		public List<HospitalDTO> selectedHosp(Map map) {
+			// TODO Auto-generated method stub
+			return sqlMapper.selectList("selectedHosp", map);
+		}
+
+		@Override
+		public int hosAuthSub(Map map) {
+			// TODO Auto-generated method stub
+			return sqlMapper.update("hosAuthSub", map);
+		}
+
 }

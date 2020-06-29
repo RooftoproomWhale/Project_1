@@ -16,6 +16,8 @@ public interface MemberService {
 
 	//병원 검색 목록
 	List<HospitalDTO> selectHosSearch(Map map);
+	List<HospitalDTO> selectedHosp(Map map);
+	int hosAuthSub(Map map);
 
 	//전체 레코드 수]
 	int getTotalRecord(Map map);

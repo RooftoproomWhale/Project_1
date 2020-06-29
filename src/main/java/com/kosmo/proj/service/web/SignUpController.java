@@ -28,6 +28,15 @@ public class SignUpController {
 	{
 		return "SignUp.tiles";
 	}
+	
+	@RequestMapping("/Member/Insert.hst")
+	public String userSignup(@RequestParam Map map, Model model)
+	{
+		int check = memberService.insert(map);
+		System.out.println(check);
+		
+		return "SignUp.tiles";
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/Member/HospitalSearch.hst", produces = "text/html; charset=UTF-8")
@@ -53,45 +62,39 @@ public class SignUpController {
 		System.out.println(jsonStr);
 		return jsonStr.toString();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/Member/HosSearchList.hst", produces = "text/html; charset=UTF-8")
+	public String searchedHosp(@RequestParam Map map, Model model)
+	{
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = null;
+		List<HospitalDTO> list = memberService.selectedHosp(map);
+		for (HospitalDTO val : list) {
+			System.out.println(val.getHosp_name());
+			System.out.println(val.getAddress());
+		}
+		try {
+			jsonStr = mapper.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 
-
+		model.addAttribute("list", list);
+		System.out.println(jsonStr);
+		return jsonStr.toString();
+	}
+	
+	@RequestMapping("/Member/HospitalAuthSub.hst")
+	public String hosAuthSub(@RequestParam Map map, Model model)
+	{
+		int inCheck = memberService.insert(map);
+		System.out.println(inCheck);
+		int upCheck = memberService.hosAuthSub(map);
+		System.out.println(upCheck);
+		
+		return "SignUp.tiles";
+	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//	//입력
-//	@RequestMapping(value = "/Member/Insert.hst", method = RequestMethod.POST)
-//	public String insert(@RequestParam Map map, Model model)
-//	{
-//		memberService.insert(map);
-//		return "index.tiles";
-//	}
-//
-//	//삭제
-//	@RequestMapping("/Member/Delete.hst")
-//	public String delete(@RequestParam Map map, Model model)
-//	{
-//		memberService.delete(map);
-//		return "index.tiles";
-//	}
-//
-//	//수정
-//	@RequestMapping("/Member/Update.hst")
-//	public String update(@RequestParam Map map, Model model)
-//	{
-//		memberService.update(map);
-//		return "";
-//	}
-
-
 

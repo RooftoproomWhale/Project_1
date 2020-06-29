@@ -219,668 +219,825 @@ width: 100%;
 <script>
    $(function() {
 
-	   $("#signupBtn").on('click',function(){
-	  		
-	  		var email = $('#email').val();
-		  	var pwd = $('#pwd').val();
-		  	var name = $('#name').val();
-		  	var tel = parseInt($('#phone').val());
-		  	var gender = $('#gender').val();
-		  	var age = parseInt($('#age').val());
-		  	var height = parseInt($('#height').val());
-		  	var weight = parseInt($('#weight').val());
-		  	var role = "ROLE_MEM";
-		  	var enable = "1";
-		   
-		   $.ajax({
-				  url:'<c:url value="/Member/Insert.hst"/>',
-				  type:'post',
-				  datatype:'html',
-				  data:
-				  {
-					  "email" : email,
-					  "pwd" : pwd,
-				      "name" : name,
-				      "gender" : gender,
-				      "tel" : tel,
-				      "age" : age, 
-				      "height" : height,
-				      "weight" : weight,
-				      "role" : "ROLE_MEM",
-				      "enable" : "1"
-				  
-				  },
-				  success:function(data){
-					console.log("성공");
-				  },
-	  	
-		   });
-		   
-   		});
-	  	
-	   //병원찾기	
-		$("#searchBtn").on("click", function(){
-			
-			var keyword = $("#search").val();
-			
-			$.ajax({ 
-				url: "<c:url value='/Member/HospitalSearch.hst'/>",
-				type: "get", //get, post 방식 
-				dataType: 'json', //or xml or script or html 
-				data: {
-					"search_keyword" : keyword
-					}, //넘길 파라미터 
-				async: true, // true:비동기, false:동기 
-				success: function(data){ 
-					console.log(data);
-					console.log('성공');
-					
-					var hospName = data[0].hosp_name;
-					var hospAddr = data[0].address;
-					var hospTel = data[0].tel;
-					
-					console.log(hospName+"hospName");
-					console.log(hospAddr+"hospAddr");
-					console.log(hospTel+"hospTel");
-					
- 					document.getElementById("hospName1").innerHTML = hospName;
-					document.getElementById("hospDept1").innerHTML = "외과";
-					document.getElementById("hospAddr1").innerHTML = hospAddr;
-					document.getElementById("hospTel1").innerHTML = hospTel;
-					
+      $("#signupBtn").on('click',function(){
+           
+           var email = $('#email').val();
+           var pwd = $('#pwd').val();
+           var name = $('#name').val();
+           var tel = parseInt($('#phone').val());
+           var gender = $('#gender').val();
+           var age = parseInt($('#age').val());
+           var height = parseInt($('#height').val());
+           var weight = parseInt($('#weight').val());
+           var role = "ROLE_MEM";
+           var enable = "1";
+         
+         $.ajax({
+              url:'<c:url value="/Member/Insert.hst"/>',
+              type:'post',
+              datatype:'html',
+              data:
+              {
+                 "email" : email,
+                 "pwd" : pwd,
+                  "name" : name,
+                  "gender" : gender,
+                  "tel" : tel,
+                  "age" : age, 
+                  "height" : height,
+                  "weight" : weight,
+                  "role" : "ROLE_MEM",
+                  "enable" : "1"
+              
+              },
+              success:function(data){
+               console.log("성공");
+              },
+        
+         });
+         
+         });
+        
+      //병원찾기   
+      $("#searchBtn").on("click", function(){
+         
+         var keyword = $("#search").val();
+         
+         $.ajax({ 
+            url: "<c:url value='/Member/HospitalSearch.hst'/>",
+            type: "get", //get, post 방식 
+            dataType: 'json', //or xml or script or html 
+            data: {
+               "search_keyword" : keyword
+               }, //넘길 파라미터 
+            async: true, // true:비동기, false:동기 
+            success: function(data){ 
+                 var items = '';
+                     $.each(data, function(i, item) {
+                        console.log(item);
+                     
+                        items += '<table class="table">' +
+                              '<tbody style="font-size:12px">' +
+                                 '<tr id="hosCheck" onclick="searchHospClick('+i+')" style="cursor:hand">' +
+                                    '<td id="hospName'+i+'">'+item['hosp_name']+'</td>' +
+                                    '<td id="hospDept'+i+'">'+item['hosp_name']+'</td>' +
+                                    '<td id="hospAddr'+i+'">'+item['address']+'</td>' +
+                                    '<td id="hospTel'+i+'">'+item['tel']+'</td>' +
+                                 '</tr>' +
+                              '</tbody>' +
+                           '</table>';
+                      console.log(items);   
+                     });
+               
+               $('#searchTable').html(items);
+            },
+            error:function(request,status,error){
+               console.log("에러");
+               alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+            } 
+         });
+      });
+      
+      
+            //이메일 유효성
+          $('#email').keyup(function(){
+             var email = $("input[name='email']");
+            var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if(email.val()=="")
+            {
+               $('font[name=emailcheck]').text('');
+                 $('font[name=emailcheck]').html("");
+               $('#emailBtn').attr('disabled', true);
+            }
+            else if(!emailRegex.test(email.val()))
+            {
+               $('font[name=emailcheck]').text('');
+                 $('font[name=emailcheck]').html("이메일 주소가 유효하지 않습니다");
+                 $('#yun').css('background-color', '#bab6b6');
+                  $('#yun').attr('disabled', true);
+                  $('#emailBtn').attr('disabled', true);
+                  
+               email.focus();
+            }
+            else
+            {
+               $('font[name=emailcheck]').text('');
+                 $('font[name=emailcheck]').html("");
+               $('#emailBtn').attr('disabled', false);
+            }
+              
+             });
+          
+            //핸드폰 유효성
+          $('#phone').keyup(function(){
+                var phone = $("input[name='phone']");
+                var regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
 
-				},
-				error:function(request,status,error){
-					console.log("에러");
-					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-				} 
-			});
-		});
-		
-	   		//이메일 유효성
-		    $('#email').keyup(function(){
-		       var email = $("input[name='email']");
-			   var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-			   if(email.val()=="")
-			   {
-				   $('font[name=emailcheck]').text('');
-		  		   $('font[name=emailcheck]').html("");
-			   }
-			   else if(!emailRegex.test(email.val()))
-			   {
-				   $('font[name=emailcheck]').text('');
-		  		   $('font[name=emailcheck]').html("이메일 주소가 유효하지 않습니다");
-		  		   $('#yun').css('background-color', '#bab6b6');
-		 	  	   $('#yun').attr('disabled', true);
-		 	  	   
-		  		 email.focus();
-			   }
-			   else
-			   {
-				   $('font[name=emailcheck]').text('');
-		  		   $('font[name=emailcheck]').html("");
-			   }
-	  		   
-	  		  });
-		    
-	   		//핸드폰 유효성
-		    $('#phone').keyup(function(){
-			       var phone = $("input[name='phone']");
-			       var regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+               if(phone.val()=="")
+               {
+                  $('font[name=phonecheck]').text('');
+                    $('font[name=phonecheck]').html("");
+               }
+               else if(!regExp.test(phone.val()))
+               {
+                  $('font[name=phonecheck]').text('');
+                    $('font[name=phonecheck]').html("휴대폰 번호가 유효하지 않습니다");
+                  phone.focus();
+               }
+               else
+               {
+                  $('font[name=phonecheck]').text('');
+                    $('font[name=phonecheck]').html("");
+                  
+               }
+                 
+            });
+            
+        //이름 유효성
+          $('#name').keyup(function(){
+                var name = $("input[name='name']");
+                var regExp = /^[가-힣]{1,4}$/;
 
-				   if(phone.val()=="")
-				   {
-					   $('font[name=phonecheck]').text('');
-			  		   $('font[name=phonecheck]').html("");
-				   }
-				   else if(!regExp.test(phone.val()))
-				   {
-					   $('font[name=phonecheck]').text('');
-			  		   $('font[name=phonecheck]').html("휴대폰 번호가 유효하지 않습니다");
-			 	  	phone.focus();
-				   }
-				   else
-				   {
-					   $('font[name=phonecheck]').text('');
-			  		   $('font[name=phonecheck]').html("");
-			  		 
-				   }
-		  		   
-		  	 });
-	   		
-		  //이름 유효성
-		    $('#name').keyup(function(){
-			       var name = $("input[name='name']");
-			       var regExp = /^[가-힣]{1,4}$/;
+               if(name.val()=="")
+               {
+                  $('font[name=namecheck]').text('');
+                    $('font[name=namecheck]').html("");
+               }
+               else if(!regExp.test(name.val()))
+               {
+                  $('font[name=namecheck]').text('');
+                    $('font[name=namecheck]').html("한글 입력바랍니다");
+                  name.focus();
+               }
+               else
+               {
+                  $('font[name=namecheck]').text('');
+                    $('font[name=namecheck]').html("");
+                  
+               }
+                 
+            });
+        
+          //키 유효성
+          $('#height').keyup(function(){
+                var height = $("input[name='height']");
+                var regExp = /^[0-9]+$/;
 
-				   if(name.val()=="")
-				   {
-					   $('font[name=namecheck]').text('');
-			  		   $('font[name=namecheck]').html("");
-				   }
-				   else if(!regExp.test(name.val()))
-				   {
-					   $('font[name=namecheck]').text('');
-			  		   $('font[name=namecheck]').html("한글 입력바랍니다");
-			  		 name.focus();
-				   }
-				   else
-				   {
-					   $('font[name=namecheck]').text('');
-			  		   $('font[name=namecheck]').html("");
-			  		 
-				   }
-		  		   
-		  	 });
-		  
-		    //키 유효성
-		    $('#height').keyup(function(){
-			       var height = $("input[name='height']");
-			       var regExp = /^[0-9]+$/;
+               if(height.val()=="")
+               {
+                  $('font[name=heightcheck]').text('');
+                    $('font[name=heightcheck]').html("");
+               }
+               else if(!regExp.test(height.val()))
+               {
+                  $('font[name=heightcheck]').text('');
+                    $('font[name=heightcheck]').html("숫자만 입력바랍니다");
+                  height.focus();
+               }
+               else
+               {
+                  $('font[name=heightcheck]').text('');
+                    $('font[name=heightcheck]').html("");
+                  
+               }
+                 
+            });
+          
+          //몸무게 유효성
+          $('#weight').keyup(function(){
+                var weight = $("input[name='weight']");
+                var regExp = /^[0-9]+$/;
 
-				   if(height.val()=="")
-				   {
-					   $('font[name=heightcheck]').text('');
-			  		   $('font[name=heightcheck]').html("");
-				   }
-				   else if(!regExp.test(height.val()))
-				   {
-					   $('font[name=heightcheck]').text('');
-			  		   $('font[name=heightcheck]').html("숫자만 입력바랍니다");
-			  		 height.focus();
-				   }
-				   else
-				   {
-					   $('font[name=heightcheck]').text('');
-			  		   $('font[name=heightcheck]').html("");
-			  		 
-				   }
-		  		   
-		  	 });
-		    
-		    //몸무게 유효성
-		    $('#weight').keyup(function(){
-			       var weight = $("input[name='weight']");
-			       var regExp = /^[0-9]+$/;
+               if(weight.val()=="")
+               {
+                  $('font[name=weightcheck]').text('');
+                    $('font[name=weightcheck]').html("");
+               }
+               else if(!regExp.test(weight.val()))
+               {
+                  $('font[name=weightcheck]').text('');
+                    $('font[name=weightcheck]').html("숫자만 입력바랍니다");
+                  weight.focus();
+               }
+               else
+               {
+                  $('font[name=weightcheck]').text('');
+                    $('font[name=weightcheck]').html("");
+                  
+               }
+                 
+            });
+      
+       //비밀번호 유효성
+         $(function(){
+           $('#yun').css('background-color', '#bab6b6');
+             $('#pwd').keyup(function(){
+             $('font[name=check]').text('');
+             }); 
 
-				   if(weight.val()=="")
-				   {
-					   $('font[name=weightcheck]').text('');
-			  		   $('font[name=weightcheck]').html("");
-				   }
-				   else if(!regExp.test(weight.val()))
-				   {
-					   $('font[name=weightcheck]').text('');
-			  		   $('font[name=weightcheck]').html("숫자만 입력바랍니다");
-			  		 weight.focus();
-				   }
-				   else
-				   {
-					   $('font[name=weightcheck]').text('');
-			  		   $('font[name=weightcheck]').html("");
-			  		 
-				   }
-		  		   
-		  	 });
-		
-		 //비밀번호 유효성
-	  	 $(function(){
-	  		$('#yun').css('background-color', '#bab6b6');
-	  		  $('#pwd').keyup(function(){
-	  		  $('font[name=check]').text('');
-	  		  }); 
-
-	  		  $('.form-control').keyup(function(){
-	  			if($('#pwd').val() =="" || $('#spwd').val()=="")
-	  			{
-		  		    $('font[name=check]').text('');
-		 	  		$('font[name=check]').html("");
-		 	  	 	$('#yun').css('background-color', '#bab6b6');
-		 	  		$('#yun').attr('disabled', true);
-	  			}
-	  			else if($('#pwd').val()!=$('#spwd').val())
-	  			{
-		  		    $('font[name=check]').text('');
-		  		    $('font[name=check]').html("비밀번호가 일치하지 않습니다");
-		  		    $('#yun').css('background-color', '#bab6b6');
-		  		    $('#yun').attr('disabled', true);
-	  		   }
-	  		   else
-	  		   {
-		  		    $('font[name=check]').text('');
-		  		    $('font[name=check]').html("비밀번호가 일치합니다");
-		  		    $('#yun').attr('disabled', false);
-		  		    $('#yun').css('background-color', '#f0eded');
-	  		   }
-	  	
-	  		  });
-	  	 });
-		 
-	  	 $(function(){
-	  		 
-	  		$('#yun1').css('background-color', '#bab6b6');
-	  		  $('#sample4_detailAddress').keyup(function(){
-	  		  $('font[name=sample4]').text('');
-	  		  });
-	  			
-	  		  $('.form-control1').keyup(function(){
-	  	      var sample4_detailAddress = $("input[name='sample4_detailAddress']");
-			  var regExp = /^[0-9]+$/;
-	  		  if(sample4_detailAddress.val()=="")
-		      {
-	  		  		console.log(sample4_detailAddress.val(), 1);
-			        $('font[name=sample4]').text('');
-			  	    $('font[name=sample4]').html("");
-			  		$('#yun1').css('background-color', '#bab6b6');
-			 	  	$('#yun1').attr('disabled', true);
+             $('.form-control').keyup(function(){
+              if($('#pwd').val() =="" || $('#spwd').val()=="")
+              {
+                  $('font[name=check]').text('');
+                  $('font[name=check]').html("");
+                   $('#yun').css('background-color', '#bab6b6');
+                  $('#yun').attr('disabled', true);
               }
-			  else if(!regExp.test(sample4_detailAddress.val()))
-			  {
-				   $('font[name=sample4]').text('');
-				   $('font[name=sample4]').html("모든 항목을 추가하시오");
-				   $('#yun1').css('background-color', '#bab6b6');
-				   $('#yun1').attr('disabled', true);
-			     
-				   sample4_detailAddress.focus();
-			  }
-			  else
-			  {
-				   $('font[name=sample4]').text('');
-		  		   $('font[name=sample4]').html("");
-		  		   $('#yun1').attr('disabled', false);
-		  		   $('#yun1').css('background-color', '#f0eded');
-			  }
-	  		  
-	  		});
-	  		  
-	  	 });  
+              else if($('#pwd').val()!=$('#spwd').val())
+              {
+                  $('font[name=check]').text('');
+                  $('font[name=check]').html("비밀번호가 일치하지 않습니다");
+                  $('#yun').css('background-color', '#bab6b6');
+                  $('#yun').attr('disabled', true);
+              }
+              else
+              {
+                  $('font[name=check]').text('');
+                  $('font[name=check]').html("비밀번호가 일치합니다");
+                  $('#yun').attr('disabled', false);
+                  $('#yun').css('background-color', '#f0eded');
+              }
+        
+             });
+         });
+       
+         $(function(){
+            
+           $('#yun1').css('background-color', '#bab6b6');
+             $('#sample4_detailAddress').keyup(function(){
+             $('font[name=sample4]').text('');
+             });
+              
+             $('.form-control1').keyup(function(){
+              var sample4_detailAddress = $("input[name='sample4_detailAddress']");
+           var regExp = /^[0-9]+$/;
+             if(sample4_detailAddress.val()=="")
+            {
+                   console.log(sample4_detailAddress.val(), 1);
+                 $('font[name=sample4]').text('');
+                  $('font[name=sample4]').html("");
+                 $('#yun1').css('background-color', '#bab6b6');
+                  $('#yun1').attr('disabled', true);
+              }
+           else if(!regExp.test(sample4_detailAddress.val()))
+           {
+               $('font[name=sample4]').text('');
+               $('font[name=sample4]').html("모든 항목을 추가하시오");
+               $('#yun1').css('background-color', '#bab6b6');
+               $('#yun1').attr('disabled', true);
+              
+               sample4_detailAddress.focus();
+           }
+           else
+           {
+               $('font[name=sample4]').text('');
+                 $('font[name=sample4]').html("");
+                 $('#yun1').attr('disabled', false);
+                 $('#yun1').css('background-color', '#f0eded');
+           }
+             
+           });
+             
+         });  
 
-		//jQuery time
-		var current_fs, next_fs, previous_fs; //필드
-		var left, opacity, scale; //애니매이션 필드 셋 속성
-		var animating; //빠른 멀티 클릭시 방지를 위한 플래그
+      //jQuery time
+      var current_fs, next_fs, previous_fs; //필드
+      var left, opacity, scale; //애니매이션 필드 셋 속성
+      var animating; //빠른 멀티 클릭시 방지를 위한 플래그
+      var code;
 
-		$("#emailBtn").on('click', function() {
-			alert("홈스피탈 서비스 인증 번호 해당 메일로 발송하였습니다")
-			$.ajax({
-				type : 'GET',
-				url : '<c:url value="/mailauth/testMail.hst"/>',
-				data : '',
-				success : function(result) {
-					console.log("성공");
-				}
-			})
-		})
+       $("#emailBtn").on('click', function() {
+          var userEmail = $('#email').val();
+            alert("홈스피탈 서비스 인증 번호 해당 메일로 발송하였습니다")
+            $.ajax({
+               type : 'GET',
+               url : '<c:url value="/mailauth/testMail.hst"/>',
+               data : {
+               "userEmail" : userEmail                  
+               },
+               success : function(result) {
+                  console.log("성공");
+                  console.log(result);
+                  code=result;
+               }
+            })
+         })
 
-		$("#checkButton").on('click', function() {
-			alert("인증이 완료 되었습니다")
-			$.ajax({
-				type : 'post',
-				url : '/mailauth/emailConfirm.hst',
-				data : '',
-				success : function(result) {
+         $("#emailAuthBtn").on('click', function() {
+         console.log(code);
+         var text=$('#authCode').val();
+         console.log(text);
+         if(code == text)
+         {
+            alert("인증이 완료 되었습니다");
+            $('#pwd').focus();
+         }
+         else
+         {
+            alert("인증번호를 확인해 주세요");
+            $('#authCode').focus();
+         }
+//             $.ajax({
+//                type : 'get',
+//                url : '<c:url value="/mailauth/emailConfirm.hst"/>',
+//                data : {'code':code,"text":text},
+//                success : function(result) {
+//                      alert("인증이 완료 되었습니다")
+//                },
+//                error:function(request,status,error){
+//                console.log("에러");
+//                alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+//             } 
+//             })
+         })
+      
+      $(document).ready(function() {
+         $('.check-all').click(function() {
+            $('.ab').prop('checked', this.checked);
+         });
+      });
 
-				}
-			})
-		})
-		
-		$(document).ready(function() {
-			$('.check-all').click(function() {
-				$('.ab').prop('checked', this.checked);
-			});
-		});
+      $(".next").click(
+            function() {
+               if (animating) {
+                  return false;
+               }
+               animating = true;
+               current_fs = $(this).parent();
+               next_fs = $(this).parent().next();
 
-		$(".next").click(
-				function() {
-					if (animating) {
+               //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+               $("#progressbar li").eq($("fieldset").index(next_fs))
+                     .addClass("active");
+
+               //다음 필드셋 표시
+               next_fs.show();
+               //현재 필드셋을 스타일로 숨긴다.
+               current_fs.animate({
+                  opacity : 0
+               }, {
+                  step : function(now, mx) {
+                     //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                     //1.current_fs 80%로 축소
+                     scale = 1 - (1 - now) * 0.2;
+                     //2.오른쪽에서 next_fs 50% 가져오기
+                     left = (now * 50) + "%";
+                     //3.next_fs의 불투명도 1로 증가시킨다
+                     opacity = 1 - now;
+                     current_fs.css({
+                        'transform' : 'scale(' + scale + ')',
+                        'position' : 'absolute'
+                     });
+                     next_fs.css({
+                        'left' : left,
+                        'opacity' : opacity
+                     });
+                  },
+                  duration : 800,
+                  complete : function() {
+                     current_fs.hide();
+                     animating = false;
+                  },
+                  //사용자가 정의 플러그인에서 나옴
+                  easing : 'easeInOutBack'
+               });
+            });
+
+      $(".previous").click(
+            function() {
+               if (animating)
+                  return false;
+               animating = true;
+
+               current_fs = $(this).parent();
+               previous_fs = $(this).parent().prev();
+
+               //진행률 표시줄에서 현재 단계 비활성화
+               $("#progressbar li").eq($("fieldset").index(current_fs))
+                     .removeClass("active");
+
+               //이전 필드셋 표시
+               previous_fs.show();
+               //현재 필드셋을 스타일로 숨긴다.
+               current_fs.animate({
+                  opacity : 0
+               }, {
+                  step : function(now, mx) {
+                     scale = 0.8 + (1 - now) * 0.2;
+                     left = ((1 - now) * 100) + "%";
+                     opacity = 1 - now;
+                     current_fs.css({
+                        'left' : left
+                     });
+                     previous_fs.css({
+                        'transform' : 'scale(' + scale + ')',
+                        'opacity' : opacity
+                     });
+                  },
+                  duration : 800,
+                  complete : function() {
+                     current_fs.hide();
+                     animating = false;
+                  },
+                  //사용자 정의 플로그인에서 나옴
+                  easing : 'easeInOutBack'
+               });
+
+            });
+
+      $(".submit").click(function() {
+         return false;
+      })
+      $(".input-group-addon")
+            .click(
+                  function() {
+                     console.log($(".input-group-addon"), "검색")
+                     console
+                           .log('검색',
+                                 $('#input_hospital').val().length);
+                     var search_val = $('#input_hospital').val();
+                     if (search_val.length > 0) {
+                        $
+                              .ajax({
+                                 url : "<c:url value='/Homespital/Account/loadHospitalList.hst'/>",
+                                 type : 'get',
+                                 datatype : 'json',
+                                 data : {
+                                    "search_keyword" : search_val
+                                 },
+                                 beforeSend : function() {
+                                    console.log("beforeSend");
+                                 },
+                                 complete : function() {
+                                    console.log("complete");
+                                 },
+                                 success : function(data) {
+                                    var jsonData = JSON.parse(data);
+                                    console.log("연결성공", jsonData,
+                                          typeof (jsonData));
+                                    var items = '<tbody>';
+                                    $.each(jsonData, function(i,
+                                          item) {
+                                       console.log(item);
+
+                                       items += "<tr>";
+                                       items += "<td>"
+                                             + item['HOSP_NAME']
+                                             + "<td>";
+                                       items += "<td>"
+                                             + item['ADDRESS']
+                                             + "<td>";
+                                       items += "<td>"
+                                             + item['TEL']
+                                             + "<td>";
+                                       items += "</tr>";
+                                    });
+                                    items += "<tbody>";
+                                    $('.table').html(items);
+                                 },
+                                 error : function(e) {
+
+                                 }
+                              });
+                     }
+                  });
+
+      $("#auth_prev").click(
+            function() {
+               if (animating) {
+                  return false;
+               }
+               animating = true;
+               current_fs = $(this).parent();
+               previous_fs = $(this).parent().prev().prev().prev().prev();
+
+               //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+               $("#progressbar li").show();
+               $("#progressbar li").eq($("fieldset").index(previous_fs))
+                     .addClass("active");
+
+               previous_fs.show();
+               //현재 필드셋을 스타일로 숨긴다.
+               current_fs.animate({
+                  opacity : 0
+               }, {
+                  step : function(now, mx) {
+                     //current_fs의 불투명도가 0이므로 줄어듦 - now에 저장 됨
+                     //1.previous_fs를 80%에서 100%로 확장
+                     scale = 0.8 + (1 - now) * 0.2;
+                     //2.current_fs를 오른쪽으로 가져감 (50%)-0%
+                     left = ((1 - now) * 100) + "%";
+                     //3.previous_fs의 불투명도를 1로 증가시킴.
+                     opacity = 1 - now;
+                     current_fs.css({
+                        'left' : left
+                     });
+                     previous_fs.css({
+                        'transform' : 'scale(' + scale + ')',
+                        'opacity' : opacity
+                     });
+                  },
+                  duration : 800,
+                  complete : function() {
+                     current_fs.hide();
+                     animating = false;
+                  },
+                  //사용자 정의 플로그인에서 나옴
+                  easing : 'easeInOutBack'
+               });
+            })
+
+      $("#authHos").click(function name() {
+         if ($("#check_1").is(":checked") == false) {
+            alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+            return;
+         } else if ($("#check_2").is(":checked") == false) {
+            alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+            return;
+         } else if ($("#check_3").is(":checked") == false) {
+            alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+            return;
+         } else {
+            if (animating) {
+               return false;
+            }
+            animating = true;
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next().next().next().next();
+
+            //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+            $("#progressbar li").hide();
+
+            //다음 필드셋 표시
+            next_fs.show();
+            //현재 필드셋을 스타일로 숨긴다.
+            current_fs.animate({
+               opacity : 0
+            }, {
+               step : function(now, mx) {
+                  //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                  //1.current_fs 80%로 축소
+                  scale = 1 - (1 - now) * 0.2;
+                  //2.오른쪽에서 next_fs 50% 가져오기
+                  left = (now * 50) + "%";
+                  //3.next_fs의 불투명도 1로 증가시킨다
+                  opacity = 1 - now;
+                  current_fs.css({
+                     'transform' : 'scale(' + scale + ')',
+                     'position' : 'absolute'
+                  });
+                  next_fs.css({
+                     'left' : left,
+                     'opacity' : opacity
+                  });
+               },
+               duration : 800,
+               complete : function() {
+                  current_fs.hide();
+                  animating = false;
+               },
+               //사용자가 정의 플러그인에서 나옴
+               easing : 'easeInOutBack'
+            });
+         }
+      });
+
+      $(".nextBtn").click(
+            function() {
+               if ($("#check_1").is(":checked") == false) {
+                  alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                  return;
+               } else if ($("#check_2").is(":checked") == false) {
+                  alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                  return;
+               } else if ($("#check_3").is(":checked") == false) {
+                  alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                  return;
+               } else {
+                  if ($("#check_authHos").is(":checked") == false) {
+                     if (animating) {
+                        return false;
+                     }
+                     animating = true;
+                     current_fs = $(this).parent();
+                     next_fs = $(this).parent().next();
+
+                     //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+
+                     $("#progressbar li").eq(
+                           $("fieldset").index(next_fs)).addClass(
+                           "active");
+
+                     //다음 필드셋 표시
+                     next_fs.show();
+                     //현재 필드셋을 스타일로 숨긴다.
+                     current_fs.animate({
+                        opacity : 0
+                     }, {
+                        step : function(now, mx) {
+                           //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                           //1.current_fs 80%로 축소
+                           scale = 1 - (1 - now) * 0.2;
+                           //2.오른쪽에서 next_fs 50% 가져오기
+                           left = (now * 50) + "%";
+                           //3.next_fs의 불투명도 1로 증가시킨다
+                           opacity = 1 - now;
+                           current_fs.css({
+                              'transform' : 'scale(' + scale + ')',
+                              'position' : 'absolute'
+                           });
+                           next_fs.css({
+                              'left' : left,
+                              'opacity' : opacity
+                           });
+                        },
+                        duration : 800,
+                        complete : function() {
+                           current_fs.hide();
+                           animating = false;
+                        },
+                        //사용자가 정의 플러그인에서 나옴
+                        easing : 'easeInOutBack'
+                     });
+                  } else {
+                     if (animating) {
+                        return false;
+                     }
+                     animating = true;
+                     current_fs = $(this).parent();
+                     next_fs = $(this).parent().next().next().next()
+                           .next();
+
+                     //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+                     $("#progressbar li").hide();
+
+                     //다음 필드셋 표시
+                     next_fs.show();
+                     //현재 필드셋을 스타일로 숨긴다.
+                     current_fs.animate({
+                        opacity : 0
+                     }, {
+                        step : function(now, mx) {
+                           //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                           //1.current_fs 80%로 축소
+                           scale = 1 - (1 - now) * 0.2;
+                           //2.오른쪽에서 next_fs 50% 가져오기
+                           left = (now * 50) + "%";
+                           //3.next_fs의 불투명도 1로 증가시킨다
+                           opacity = 1 - now;
+                           current_fs.css({
+                              'transform' : 'scale(' + scale + ')',
+                              'position' : 'absolute'
+                           });
+                           next_fs.css({
+                              'left' : left,
+                              'opacity' : opacity
+                           });
+                        },
+                        duration : 800,
+                        complete : function() {
+                           current_fs.hide();
+                           animating = false;
+                        },
+                        //사용자가 정의 플러그인에서 나옴
+                        easing : 'easeInOutBack'
+                     });
+                  }
+               }
+            });
+      
+      $("#nextBtn1").click(function() {
+		    	  
+					if ($('#HosName').val() == "") {
+						alert("검색 후 진행해 주세요");
+						return false;
+					} else if ($("#check_5").is(":checked") == false) {
+						alert("약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
 						return false;
 					}
-					animating = true;
-					current_fs = $(this).parent();
-					next_fs = $(this).parent().next();
 
-					//next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
-					$("#progressbar li").eq($("fieldset").index(next_fs))
-							.addClass("active");
+					else {
+						if (animating) {
+							return false;
+						}
+						animating = true;
+						current_fs = $(this).parent();
+						next_fs = $(this).parent().next();
 
-					//다음 필드셋 표시
-					next_fs.show();
-					//현재 필드셋을 스타일로 숨긴다.
-					current_fs.animate({
-						opacity : 0
-					}, {
-						step : function(now, mx) {
-							//current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
-							//1.current_fs 80%로 축소
-							scale = 1 - (1 - now) * 0.2;
-							//2.오른쪽에서 next_fs 50% 가져오기
-							left = (now * 50) + "%";
-							//3.next_fs의 불투명도 1로 증가시킨다
-							opacity = 1 - now;
-							current_fs.css({
-								'transform' : 'scale(' + scale + ')',
-								'position' : 'absolute'
-							});
-							next_fs.css({
-								'left' : left,
-								'opacity' : opacity
-							});
-						},
-						duration : 800,
-						complete : function() {
-							current_fs.hide();
-							animating = false;
-						},
-						//사용자가 정의 플러그인에서 나옴
-						easing : 'easeInOutBack'
-					});
+						//next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+						$("#progressbar li").eq($("fieldset").index(next_fs))
+								.addClass("active");
+
+						//다음 필드셋 표시
+						next_fs.show();
+						//현재 필드셋을 스타일로 숨긴다.
+						current_fs.animate({
+							opacity : 0
+						}, {
+							step : function(now, mx) {
+								//current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+								//1.current_fs 80%로 축소
+								scale = 1 - (1 - now) * 0.2;
+								//2.오른쪽에서 next_fs 50% 가져오기
+								left = (now * 50) + "%";
+								//3.next_fs의 불투명도 1로 증가시킨다
+								opacity = 1 - now;
+								current_fs.css({
+									'transform' : 'scale(' + scale + ')',
+									'position' : 'absolute'
+								});
+								next_fs.css({
+									'left' : left,
+									'opacity' : opacity
+								});
+							},
+							duration : 800,
+							complete : function() {
+								current_fs.hide();
+								animating = false;
+							},
+							//사용자가 정의 플러그인에서 나옴
+							easing : 'easeInOutBack'
+						});
+					}
 				});
 
-		$(".previous").click(
-				function() {
-					if (animating)
-						return false;
-					animating = true;
-
-					current_fs = $(this).parent();
-					previous_fs = $(this).parent().prev();
-
-					//진행률 표시줄에서 현재 단계 비활성화
-					$("#progressbar li").eq($("fieldset").index(current_fs))
-							.removeClass("active");
-
-					//이전 필드셋 표시
-					previous_fs.show();
-					//현재 필드셋을 스타일로 숨긴다.
-					current_fs.animate({
-						opacity : 0
-					}, {
-						step : function(now, mx) {
-							scale = 0.8 + (1 - now) * 0.2;
-							left = ((1 - now) * 100) + "%";
-							opacity = 1 - now;
-							current_fs.css({
-								'left' : left
-							});
-							previous_fs.css({
-								'transform' : 'scale(' + scale + ')',
-								'opacity' : opacity
-							});
-						},
-						duration : 800,
-						complete : function() {
-							current_fs.hide();
-							animating = false;
-						},
-						//사용자 정의 플로그인에서 나옴
-						easing : 'easeInOutBack'
-					});
-
-				});
-
-		$(".submit").click(function() {
-			return false;
-		})
-		$(".input-group-addon")
+		$('#hosAuthBtn')
 				.click(
 						function() {
-							console.log($(".input-group-addon"), "검색")
-							console
-									.log('검색',
-											$('#input_hospital').val().length);
-							var search_val = $('#input_hospital').val();
-							if (search_val.length > 0) {
-								$
-										.ajax({
-											url : "<c:url value='/Homespital/Account/loadHospitalList.hst'/>",
-											type : 'get',
-											datatype : 'json',
-											data : {
-												"search_keyword" : search_val
-											},
-											beforeSend : function() {
-												console.log("beforeSend");
-											},
-											complete : function() {
-												console.log("complete");
-											},
-											success : function(data) {
-												var jsonData = JSON.parse(data);
-												console.log("연결성공", jsonData,
-														typeof (jsonData));
-												var items = '<tbody>';
-												$.each(jsonData, function(i,
-														item) {
-													console.log(item);
 
-													items += "<tr>";
-													items += "<td>"
-															+ item['HOSP_NAME']
-															+ "<td>";
-													items += "<td>"
-															+ item['ADDRESS']
-															+ "<td>";
-													items += "<td>"
-															+ item['TEL']
-															+ "<td>";
-													items += "</tr>";
-												});
-												items += "<tbody>";
-												$('.table').html(items);
-											},
-											error : function(e) {
-
-											}
-										});
-							}
+							var hospName = $('#clickedHosName').val();
+							var hosId = $('#hosId').val();
+							var hosPwd = $("#hosPwd").val();
+							console.log(hospName + hosId + hosPwd);
+							$
+									.ajax({
+										url : "<c:url value='/Member/HospitalAuthSub.hst'/>",
+										type : 'get',
+										datatype : 'html',
+										data : {
+											"email" : hosId,
+											"pwd" : hosPwd,
+											"name" : hospName,
+											"gender" : "병원",
+											"tel" : "X",
+											"age" : 0,
+											"height" : 0,
+											"weight" : 0,
+											"role" : "ROLE_HOS",
+											"enable" : "0"
+										},
+										success : function(data) {
+											alert('제휴신청이 완료되었습니다');
+											window.location.href = "<c:url value='/Home/ToHomePage.hst'/>";
+										},
+										error : function(request, status, error) {
+											alert("아이디와 비밀번호를 확인하세요");
+										}
+									});
 						});
-
-		$("#auth_prev").click(
-				function() {
-					if (animating) {
-						return false;
-					}
-					animating = true;
-					current_fs = $(this).parent();
-					previous_fs = $(this).parent().prev().prev().prev().prev();
-
-					//next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
-					$("#progressbar li").show();
-					$("#progressbar li").eq($("fieldset").index(previous_fs))
-							.addClass("active");
-
-					previous_fs.show();
-					//현재 필드셋을 스타일로 숨긴다.
-					current_fs.animate({
-						opacity : 0
-					}, {
-						step : function(now, mx) {
-							//current_fs의 불투명도가 0이므로 줄어듦 - now에 저장 됨
-							//1.previous_fs를 80%에서 100%로 확장
-							scale = 0.8 + (1 - now) * 0.2;
-							//2.current_fs를 오른쪽으로 가져감 (50%)-0%
-							left = ((1 - now) * 100) + "%";
-							//3.previous_fs의 불투명도를 1로 증가시킴.
-							opacity = 1 - now;
-							current_fs.css({
-								'left' : left
-							});
-							previous_fs.css({
-								'transform' : 'scale(' + scale + ')',
-								'opacity' : opacity
-							});
-						},
-						duration : 800,
-						complete : function() {
-							current_fs.hide();
-							animating = false;
-						},
-						//사용자 정의 플로그인에서 나옴
-						easing : 'easeInOutBack'
-					});
-				})
-
-		$("#authHos").click(function name() {
-			if ($("#check_1").is(":checked") == false) {
-				alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
-				return;
-			} else if ($("#check_2").is(":checked") == false) {
-				alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
-				return;
-			} else if ($("#check_3").is(":checked") == false) {
-				alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
-				return;
-			} else {
-				if (animating) {
-					return false;
-				}
-				animating = true;
-				current_fs = $(this).parent();
-				next_fs = $(this).parent().next().next().next().next();
-
-				//next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
-				$("#progressbar li").hide();
-
-				//다음 필드셋 표시
-				next_fs.show();
-				//현재 필드셋을 스타일로 숨긴다.
-				current_fs.animate({
-					opacity : 0
-				}, {
-					step : function(now, mx) {
-						//current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
-						//1.current_fs 80%로 축소
-						scale = 1 - (1 - now) * 0.2;
-						//2.오른쪽에서 next_fs 50% 가져오기
-						left = (now * 50) + "%";
-						//3.next_fs의 불투명도 1로 증가시킨다
-						opacity = 1 - now;
-						current_fs.css({
-							'transform' : 'scale(' + scale + ')',
-							'position' : 'absolute'
-						});
-						next_fs.css({
-							'left' : left,
-							'opacity' : opacity
-						});
-					},
-					duration : 800,
-					complete : function() {
-						current_fs.hide();
-						animating = false;
-					},
-					//사용자가 정의 플러그인에서 나옴
-					easing : 'easeInOutBack'
-				});
-			}
-		});
-
-		$(".nextBtn").click(
-				function() {
-					if ($("#check_1").is(":checked") == false) {
-						alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
-						return;
-					} else if ($("#check_2").is(":checked") == false) {
-						alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
-						return;
-					} else if ($("#check_3").is(":checked") == false) {
-						alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
-						return;
-					} else {
-						if ($("#check_authHos").is(":checked") == false) {
-							if (animating) {
-								return false;
-							}
-							animating = true;
-							current_fs = $(this).parent();
-							next_fs = $(this).parent().next();
-
-							//next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
-
-							$("#progressbar li").eq(
-									$("fieldset").index(next_fs)).addClass(
-									"active");
-
-							//다음 필드셋 표시
-							next_fs.show();
-							//현재 필드셋을 스타일로 숨긴다.
-							current_fs.animate({
-								opacity : 0
-							}, {
-								step : function(now, mx) {
-									//current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
-									//1.current_fs 80%로 축소
-									scale = 1 - (1 - now) * 0.2;
-									//2.오른쪽에서 next_fs 50% 가져오기
-									left = (now * 50) + "%";
-									//3.next_fs의 불투명도 1로 증가시킨다
-									opacity = 1 - now;
-									current_fs.css({
-										'transform' : 'scale(' + scale + ')',
-										'position' : 'absolute'
-									});
-									next_fs.css({
-										'left' : left,
-										'opacity' : opacity
-									});
-								},
-								duration : 800,
-								complete : function() {
-									current_fs.hide();
-									animating = false;
-								},
-								//사용자가 정의 플러그인에서 나옴
-								easing : 'easeInOutBack'
-							});
-						} else {
-							if (animating) {
-								return false;
-							}
-							animating = true;
-							current_fs = $(this).parent();
-							next_fs = $(this).parent().next().next().next()
-									.next();
-
-							//next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
-							$("#progressbar li").hide();
-
-							//다음 필드셋 표시
-							next_fs.show();
-							//현재 필드셋을 스타일로 숨긴다.
-							current_fs.animate({
-								opacity : 0
-							}, {
-								step : function(now, mx) {
-									//current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
-									//1.current_fs 80%로 축소
-									scale = 1 - (1 - now) * 0.2;
-									//2.오른쪽에서 next_fs 50% 가져오기
-									left = (now * 50) + "%";
-									//3.next_fs의 불투명도 1로 증가시킨다
-									opacity = 1 - now;
-									current_fs.css({
-										'transform' : 'scale(' + scale + ')',
-										'position' : 'absolute'
-									});
-									next_fs.css({
-										'left' : left,
-										'opacity' : opacity
-									});
-								},
-								duration : 800,
-								complete : function() {
-									current_fs.hide();
-									animating = false;
-								},
-								//사용자가 정의 플러그인에서 나옴
-								easing : 'easeInOutBack'
-							});
-						}
-					}
-
-				});
-
 	});
+
+	function searchHospClick(i) {
+		var hospName = $('#hospName' + i).html();
+		console.log('#hospName' + i);
+		console.log(hospName);
+		$
+				.ajax({
+					url : "<c:url value='/Member/HosSearchList.hst'/>",
+					type : "get", //get, post 방식 
+					dataType : 'json', //or xml or script or html 
+					data : {
+						"hosp_name" : hospName
+					}, //넘길 파라미터 
+					async : true, // true:비동기, false:동기 
+					success : function(data) {
+						console.log(data);
+
+						var items = '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>'
+								+ '<div class="col-md-10">'
+								+ '<input type="text" class="form-control" id="clickedHosName" placeholder="병원명" disabled="disabled" value="'+data[0].hosp_name+'">'
+								+ '</div>'
+								+ '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">주소 :</label>'
+								+ '<div class="col-md-10">'
+								+ '<input type="text" class="form-control" placeholder="주소" disabled="disabled" value="'+data[0].address+'">'
+								+ '</div>'
+								+ '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">번호 :</label>'
+								+ '<div class="col-md-10">'
+								+ '<input type="text" class="form-control" placeholder="번호" disabled="disabled" value="'+data[0].tel+'">'
+								+ '</div>';
+
+						$('#selectedHosp').html(items);
+						$('#close').click();
+						//             $('#regi-modal').hide();
+					},
+					error : function(request, status, error) {
+						console.log("에러");
+						alert("code = " + request.status + " message = "
+								+ request.responseText + " error = " + error); // 실패 시 처리
+					}
+				});
+	}
 
 	function sample6_execDaumPostcode() {
 		new daum.Postcode(
@@ -989,9 +1146,9 @@ width: 100%;
     
 </script>
 <script>
-	$(function() {
-		
-	});
+   $(function() {
+      
+   });
 </script>
   <!-- progressbar -->
   <%
@@ -1051,259 +1208,274 @@ width: 100%;
      }
   %>
 <form id="msform">
-	<div class="col-md-offset-2 col-xs-offset-3 col-md-8 col-xs-6" align="center">
-		<ul id="progressbar">
-			<li class="active">Agreement</li>
-			<li>Account Setup</li>
-			<li>Individual Setup</li>
-			<li>History</li>
-		</ul>
-		<!-- fieldsets -->
-		<fieldset>
-			<h1 class="fs-title" style= font-size:1em>약관 동의</h1>
-			<h3 class="fs-subtitle">이용 약관에 동의 하셔야 이용이 가능합니다.</h3>
-			<h4 class="scheme-g">서비스 이용 약관</h4>
-			<textarea name="chart" style="font-size: 1em;" disabled="disabled"><%=buff1 %></textarea>
-			<p>
-				<input class="ab" type="checkbox" id="check_1" name="" /> 위의 약관에 동의 합니다.
-			</p><br/>
-			<h4 class="scheme-g">개인정보 이용 약관</h4>
-			<textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff2 %></textarea>
-			<p>
-				<input class="ab" type="checkbox" id="check_2" name="" /> 위의 약관에 동의 합니다.<br />
-			</p><br/>
-			<h4 class="scheme-g">위치기반서비스 이용 약관</h4>
-			<textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff3 %></textarea>
-			<p>
-				<input class="ab" type="checkbox" id="check_3" name="" /> 위의 약관에 동의 합니다.<br />
-			</p>
-			<p style="padding-top:5px; color: red">
-			 	<input class="check-all" type="checkbox" id="check_3" name="all" /> 전체 동의 시 체크<br /> 
-			</p>
-	
-<!-- 			<input type="checkbox" id="check_authHos" name="" /> 병원 제휴 시 체크<br /> -->
-			<input type="button" id="authHos" class="action-button" value="병원 제휴" />
-			<input type="button" name="nextBtn" class="nextBtn action-button" value="일반회원" />
-		</fieldset>
-		<fieldset>
-			<h1 class="fs-title" style="font-size: 1em">계정 정보</h1>
-			<h3 class="fs-subtitle">아이디로 사용할 e-mail과 비밀번호를 입력하세요.</h3>
-			<div class="form-group">
-				<div class="row">
-					<div class="col-md-8">
-						<input type="text" id="email" name="email" placeholder="이메일을 입력하세요" />
-						<font name="emailcheck" size="2.5" color="red"></font>
-					</div>
-					<div class="col-md-2">
-						<input type="button" class="btn btn-info" id="emailBtn" value="이메일 발송"/>
-					</div>
-					<div class="col-md-8">
-						<input type="text" name="auth"  placeholder="인증번호 입력" /> 
-					</div>
-					<div class="col-md-2">
-						<input type="button" class="btn btn-info" id="emailAuthBtn" value="이메일 인증"/>
-					</div>
-					<div class="col-md-12">
-						<input type="password" id="pwd" class="form-control"  placeholder="비밀번호" /> 
-						<input type="password" id="spwd" class="form-control" placeholder="비밀번호 확인" />
-						<font name="check" size="2.5" color="red"></font>
-					</div>
-				</div>
-					<!-- <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
-					<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div> -->
-			</div>
-			
-			<input type="button" name="previous" class="previous action-button" value="이전" /> 
-			<input type="button" name="next" id="yun" disabled="disabled" class="next action-button"value="다음" />
-			
-		</fieldset>
-		<fieldset>
-			<h1 class="fs-title">개인 정보</h1>
-			<h3 class="fs-subtitle">개인 정보를 입력해주세요.</h3>
-			<div class="form-group">
-			<div class="row">
-				<div class="col-md-12">
-					<input type="text" id="name" name="name" placeholder="이름" />
-					<font name="namecheck" size="2.5" color="red"></font> 
-					<input type="text" id="phone" name="phone" placeholder="핸드폰 번호 "/> 
-					<font name="phonecheck" size="2.5" color="red"></font>
-				</div>
-				<div class="col-md-5">
-					<select class="form-control" id="gender">
-						<option value="X">성별</option>
-						<option value="M">남자</option>
-						<option value="F">여자</option>
-					</select>
-				</div>
-				<div class="col-md-5 col-md-offset-1">
-					<select class="form-control" id="age">
-						<option>나이</option>
-						<option value="10세이하">10세 이하</option>
-						<option value="10대">10대</option>
-						<option value="10대">20대</option>
-						<option value="10대">30대</option>
-						<option value="10대">40대</option>
-						<option value="50대">50대</option>
-						<option value="60대">60대</option>
-						<option value="70대">70대</option>
-						<option value="80대">80대</option>
-						<option value="90대">90대</option>
-					</select>
-				</div>
-				<div class="col-md-6" style="padding-top: 10px">
-					<input type="text" id="height" name="height" placeholder="키(cm)">
-					<font name="heightcheck" size="2.5" color="red"></font>
-				</div>
-				<div class="col-md-6" style="padding-top: 10px">
-					<input type="text" id="weight" name="weight" placeholder="몸무게(kg)">
-					<font name="weightcheck" size="2.5" color="red"></font>
-				</div>
-				
-					<div class="form-group">
-						<div class="col-md-8">
-							<input type="text" id="sample4_postcode" placeholder="우편번호">
-						</div>
-						<div class="col-md-2">
-							<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-primary">
-						</div>
-					</div>
+   <div class="col-md-offset-2 col-xs-offset-3 col-md-8 col-xs-6" align="center">
+      <ul id="progressbar">
+         <li class="active">Agreement</li>
+         <li>Account Setup</li>
+         <li>Individual Setup</li>
+         <li>History</li>
+      </ul>
+      <!-- fieldsets -->
+      <fieldset>
+         <h1 class="fs-title" style= font-size:1em>약관 동의</h1>
+         <h3 class="fs-subtitle">이용 약관에 동의 하셔야 이용이 가능합니다.</h3>
+         <h4 class="scheme-g">서비스 이용 약관</h4>
+         <textarea name="chart" style="font-size: 1em;" disabled="disabled"><%=buff1 %></textarea>
+         <p>
+            <input class="ab" type="checkbox" id="check_1" name="" /> 위의 약관에 동의 합니다.
+         </p><br/>
+         <h4 class="scheme-g">개인정보 이용 약관</h4>
+         <textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff2 %></textarea>
+         <p>
+            <input class="ab" type="checkbox" id="check_2" name="" /> 위의 약관에 동의 합니다.<br />
+         </p><br/>
+         <h4 class="scheme-g">위치기반서비스 이용 약관</h4>
+         <textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff3 %></textarea>
+         <p>
+            <input class="ab" type="checkbox" id="check_3" name="" /> 위의 약관에 동의 합니다.<br />
+         </p>
+         <p style="padding-top:5px; color: red">
+             <input class="check-all" type="checkbox" id="check_3" name="all" /> 전체 동의 시 체크<br /> 
+         </p>
+   
+<!--          <input type="checkbox" id="check_authHos" name="" /> 병원 제휴 시 체크<br /> -->
+         <input type="button" id="authHos" class="action-button" value="병원 제휴" />
+         <input type="button" name="nextBtn" class="nextBtn action-button" value="일반회원" />
+      </fieldset>
+      <fieldset>
+         <h1 class="fs-title" style="font-size: 1em">계정 정보</h1>
+         <h3 class="fs-subtitle">아이디로 사용할 e-mail과 비밀번호를 입력하세요.</h3>
+         <div class="form-group">
+            <div class="row">
+               <div class="col-md-8">
+                  <input type="text" id="email" name="email" placeholder="이메일을 입력하세요" />
+                  <font name="emailcheck" size="2.5" color="red"></font>
+               </div>
+               <div class="col-md-2">
+                  <input type="button" class="btn btn-info" id="emailBtn" disabled="disabled" value="이메일 발송"/>
+               </div>
+               <div class="col-md-8">
+                  <input type="text" id="authCode"  placeholder="인증번호 입력" /> 
+               </div>
+               <div class="col-md-2">
+                  <input type="button" class="btn btn-info" id="emailAuthBtn" value="이메일 인증"/>
+               </div>
+               <div class="col-md-12">
+                  <input type="password" id="pwd" class="form-control"  placeholder="비밀번호" /> 
+                  <input type="password" id="spwd" class="form-control" placeholder="비밀번호 확인" />
+                  <font name="check" size="2.5" color="red"></font>
+               </div>
+            </div>
+               <!-- <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+               <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div> -->
+         </div>
+         
+         <input type="button" name="previous" class="previous action-button" value="이전" /> 
+         <input type="button" name="next" id="yun" disabled="disabled" class="next action-button"value="다음" />
+         
+      </fieldset>
+      <fieldset>
+         <h1 class="fs-title">개인 정보</h1>
+         <h3 class="fs-subtitle">개인 정보를 입력해주세요.</h3>
+         <div class="form-group">
+         <div class="row">
+            <div class="col-md-12">
+               <input type="text" id="name" name="name" placeholder="이름" />
+               <font name="namecheck" size="2.5" color="red"></font> 
+               <input type="text" id="phone" name="phone" placeholder="핸드폰 번호 "/> 
+               <font name="phonecheck" size="2.5" color="red"></font>
+            </div>
+            <div class="col-md-5">
+               <select class="form-control" id="gender">
+                  <option value="X">성별</option>
+                  <option value="남자">남자</option>
+                  <option value="여자">여자</option>
+               </select>
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+               <select class="form-control" id="age">
+                  <option>나이</option>
+                  <option value="10세이하">10세 이하</option>
+                  <option value="10대">10대</option>
+                  <option value="10대">20대</option>
+                  <option value="10대">30대</option>
+                  <option value="10대">40대</option>
+                  <option value="50대">50대</option>
+                  <option value="60대">60대</option>
+                  <option value="70대">70대</option>
+                  <option value="80대">80대</option>
+                  <option value="90대">90대</option>
+               </select>
+            </div>
+            <div class="col-md-6" style="padding-top: 10px">
+               <input type="text" id="height" name="height" placeholder="키(cm)">
+               <font name="heightcheck" size="2.5" color="red"></font>
+            </div>
+            <div class="col-md-6" style="padding-top: 10px">
+               <input type="text" id="weight" name="weight" placeholder="몸무게(kg)">
+               <font name="weightcheck" size="2.5" color="red"></font>
+            </div>
+            
+               <div class="form-group">
+                  <div class="col-md-8">
+                     <input type="text" id="sample4_postcode" placeholder="우편번호">
+                  </div>
+                  <div class="col-md-2">
+                     <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-primary">
+                  </div>
+               </div>
 
-					<div class="col-md-12">
-						<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-						<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-						<span id="guide" style="color: #999; display: none"></span> 
-						<input type="text" id="sample4_extraAddress" placeholder="참고항목">
-						<input type="text" id="sample4_detailAddress" name="sample4_detailAddress" class="form-control1" placeholder="상세주소">
-						<font name="sample4" size="2.5" color="red"></font>
-					</div>
-			</div>
-			</div>
-			<input type="button" name="previous" class="previous action-button" value="이전" /> 
-			<input type="button" name="next" id="yun1" disabled="disabled" class="next action-button" value="다음" />
+               <div class="col-md-12">
+                  <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+                  <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+                  <span id="guide" style="color: #999; display: none"></span> 
+                  <input type="text" id="sample4_extraAddress" placeholder="참고항목">
+                  <input type="text" id="sample4_detailAddress" name="sample4_detailAddress" class="form-control1" placeholder="상세주소">
+                  <font name="sample4" size="2.5" color="red"></font>
+               </div>
+         </div>
+         </div>
+         <input type="button" name="previous" class="previous action-button" value="이전" /> 
+         <input type="button" name="next" id="yun1" disabled="disabled" class="next action-button" value="다음" />
 
-		</fieldset>
-		<fieldset>
-			<h1 class="fs-title">증상 및 질환</h1>
-			<h3 class="fs-subtitle">증상을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
-			<div class="row">
-				<div class="col-md-4">
-					<select class="form-control">
-						<option value="">외과</option>
-						<option value="">신경외과</option>
-						<option value="">정형외과</option>
-						<option value="">비뇨기과</option>
-						<option value="">정신과</option>
-						<option value="">이비인후과</option>
-						<option value="">피부과</option>
-						<option value="">호흡기내과</option>
-						<option value="">소화기내과</option>
-						<option value="">신경과</option>
-					</select>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3" style="padding:10px">
-					<input type="checkbox" id="symptom" name="symptom" /> 증상1
-				</div>
-				<div class="col-md-3" style="padding:10px">
-					<input type="checkbox" id="symptom" name="symptom" /> 증상2
-				</div>
-				<div class="col-md-3" style="padding:10px">
-					<input type="checkbox" id="symptom" name="symptom" /> 증상3
-				</div>
-			</div>
-			<h5 align="left">겪은 적이 있는 질환을 선택하세요</h5>
-			<div class="row">
-				<div class="col-md-3" style="padding:10px">
-					<input type="checkbox" id="symptom" name="symptom" /> 질환1
-				</div>
-				<div class="col-md-3" style="padding:10px">
-					<input type="checkbox" id="symptom" name="symptom" /> 질환2
-				</div>
-				<div class="col-md-3" style="padding:10px">
-					<input type="checkbox" id="symptom" name="symptom" /> 질환3
-				</div>
-			</div>
-			<textarea name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
-			<input type="button" name="previous" class="previous action-button" value="이전" /> 
-			<input type="button" id="signupBtn" class="action-button" value="회원가입" />
-		</fieldset>
-		<fieldset>
-			<h1 class="fs-title">병원 제휴</h1>
-			<h3 class="fs-subtitle">병원을 선택해주세요</h3>
-			<div class="row" style="padding-left:168px; padding-bottom:20px;">
-			
-				<div class="col-md-6">
-					<input id="search" type="text" class="form-control" />
-					<input type="button" data-toggle="modal" data-target="#regi-modal" id="searchBtn" value="해당 병원 찾기" class="btn btn-primary">
-				</div>
-			</div>
-			   <div class="form-group">
+      </fieldset>
+      <fieldset>
+         <h1 class="fs-title">증상 및 질환</h1>
+         <h3 class="fs-subtitle">증상을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
+         <div class="row">
+            <div class="col-md-4">
+               <select class="form-control">
+                  <option value="">외과</option>
+                  <option value="">신경외과</option>
+                  <option value="">정형외과</option>
+                  <option value="">비뇨기과</option>
+                  <option value="">정신과</option>
+                  <option value="">이비인후과</option>
+                  <option value="">피부과</option>
+                  <option value="">호흡기내과</option>
+                  <option value="">소화기내과</option>
+                  <option value="">신경과</option>
+               </select>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="symptom" name="symptom" /> 증상1
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="symptom" name="symptom" /> 증상2
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="symptom" name="symptom" /> 증상3
+            </div>
+         </div>
+         <h5 align="left">겪은 적이 있는 질환을 선택하세요</h5>
+         <div class="row">
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="symptom" name="symptom" /> 질환1
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="symptom" name="symptom" /> 질환2
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="symptom" name="symptom" /> 질환3
+            </div>
+         </div>
+         <textarea name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
+         <input type="button" name="previous" class="previous action-button" value="이전" /> 
+         <input type="button" id="signupBtn" class="action-button" value="회원가입" />
+      </fieldset>
+      <fieldset>
+         <h1 class="fs-title">병원 제휴</h1>
+         <h3 class="fs-subtitle">병원을 선택해주세요</h3>
+         <div class="row">
+            <div class="col-md-8" style="padding-left:85px">
+               <input id="search" type="text" class="form-control" placeholder="병원명을 검색하세요"/>
+            </div>
+            <input type="button" data-toggle="modal" data-target="#regi-modal" id="searchBtn" value="병원 검색" class="btn btn-primary" style= "font-size:0.9em; marign-right:100px">
+         </div>
+            <div class="form-group" id="selectedHosp">
                     <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" placeholder="병원" disabled="disabled">
-                    </div>
-                    <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">부서 :</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" placeholder="부서" disabled="disabled">
+                        <input type="text" class="form-control" id="HosName" placeholder="병원" disabled="disabled">
                     </div>
                     <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">주소 :</label>
                     <div class="col-md-10">
-                    	 <input type="text" class="form-control" placeholder="주소" disabled="disabled">
+                        <input type="text" class="form-control" placeholder="주소" disabled="disabled">
                     </div>
                     <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">번호 :</label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" placeholder="번호" disabled="disabled">
                     </div>
                 </div>
-			<div class="row">
-				<div class="col-md-12">
-					<input type="checkbox" id="symptom" name="symptom" /> 위의 병원이 맞으시면 체크 후 가입 버튼을 눌러주세요
-				</div>
-			</div>
-			<input type="button" id="auth_prev" class="action-button" value="이전" />
-			<input type="button" name="signupBtn" class="action-button" value="회원가입" />
-		</fieldset>
-		<div class="modal fade" id="regi-modal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h2>제휴회원 병원 찾기</h2>
-					</div>
-<!-- 					<div class="modal-body"> -->
-<!-- 						<div class="input-group">  -->
-							
-<!-- 							<div class="input-group-addon" id="searchBtn"> -->
-<!-- 								<span class="glyphicon glyphicon-search"></span> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-					<div class="col-md-11" style="font-size: 1.2em; padding-left:70px;">
-						<table class="table">
-							<tbody>
-<%-- 							<c:if test="${empty list}" var="isEmpty"> --%>
-<!-- 								<tr> -->
-<!-- 									<td colspan="4">검색 된 병원이 없습니다.</td> -->
-<!-- 								</tr> -->
-<%-- 							</c:if> --%>
-<%-- 							<c:if test="${not isEmpty}"> --%>
-								<c:forEach items="${list }" var="item" varStatus="loop">
-									<tr id="hosCheck">
-										<td id="hospName ${loop.index }">${item.hosp_name }</td>
-										<td id="hospDept">신경외과</td>
-										<td id="hospAddr ${loop.index }">${item.address }</td>
-										<td id="hospTel ${loop.index }">${item.tel }</td>
-									</tr>
-								</c:forEach>
-<%-- 							</c:if> --%>
-							</tbody>
-						</table>	
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-info" data-dismiss="modal">닫기</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+         <div class="row">
+            <div class="col-md-12">
+               <input type="checkbox" id="check_5" name="symptom" /> 위의 병원이 맞으시면 체크 후 다음 버튼을 눌러주세요
+            </div>
+         </div>
+         <input type="button" id="auth_prev" class="action-button" value="이전" />
+         <input type="button" id="nextBtn1" class="action-button" value="다음" />
+      </fieldset>
+      <fieldset>
+         <h1 class="fs-title">병원 제휴</h1>
+         <h3 class="fs-subtitle">사용할 아이디와 비밀번호를 입력하세요</h3>
+            <div class="form-group">
+                    <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">아이디 :</label>
+                    <div class="col-md-9" style="margin-left:45px">
+                        <input type="text" id="hosId" class="form-control" placeholder="아이디" >
+                    </div>
+                    <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 :</label>
+                    <div class="col-md-9" style="margin-left:30px">
+                        <input type="password" id="hosPwd" class="form-control" placeholder="비밀번호" >
+                    </div>
+                    <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 확인 :</label>
+                    <div class="col-md-9">
+                        <input type="password" class="form-control" placeholder="비밀번호 확인">
+                    </div>
+                </div>
+         <input type="button" name="previous" class="previous action-button" value="이전" /> 
+         <input type="button" id="hosAuthBtn" class="action-button" value="제휴신청" />
+      </fieldset>
+      <div class="modal fade" id="regi-modal">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h2>제휴회원 병원 찾기</h2>
+               </div>
+<!--                <div class="modal-body"> -->
+<!--                   <div class="input-group">  -->
+                     
+<!--                      <div class="input-group-addon" id="searchBtn"> -->
+<!--                         <span class="glyphicon glyphicon-search"></span> -->
+<!--                      </div> -->
+<!--                   </div> -->
+<!--                </div> -->
+               <div class="col-md-11" style="font-size: 1.2em; padding-left:70px;" id="searchTable">
+<!--                   <table class="table"> -->
+<!--                      <tbody> -->
+<%--                      <c:if test="${empty list}" var="isEmpty"> --%>
+<!--                         <tr> -->
+<!--                            <td colspan="4">검색 된 병원이 없습니다.</td> -->
+<!--                         </tr> -->
+<%--                      </c:if> --%>
+<%--                      <c:if test="${not isEmpty}"> --%>
+<%--                         <c:forEach items="${list }" var="item" varStatus="loop"> --%>
+<!--                            <tr id="hosCheck"> -->
+<%--                               <td id="hospName ${loop.index }">${item.hosp_name }</td> --%>
+<!--                               <td id="hospDept">신경외과</td> -->
+<%--                               <td id="hospAddr ${loop.index }">${item.address }</td> --%>
+<%--                               <td id="hospTel ${loop.index }">${item.tel }</td> --%>
+<!--                            </tr> -->
+<%--                         </c:forEach> --%>
+<%--                      </c:if> --%>
+<!--                      </tbody> -->
+<!--                   </table>    -->
+               </div>
+               <div class="modal-footer">
+                  <button class="btn btn-info" id="close" data-dismiss="modal">닫기</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </form>
