@@ -547,16 +547,25 @@ public class AdminController {
 	public String noticeinsert(BoardDTO dto,HttpServletRequest req,Map map) throws IllegalStateException, IOException {
 		
 		String phisicalPath = req.getServletContext().getRealPath("/Upload");
+		System.out.println(dto.getUpload());
 		MultipartFile upload = dto.getUpload();
-		String renameFile = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-		String file_addr = phisicalPath+File.separator+renameFile;
-		File file = new File(phisicalPath+File.separator+renameFile);
-		upload.transferTo(file);
+		System.out.println(upload);
+		String file_addr=null;
+		String renameFile = null;
+		if(upload.getOriginalFilename()!="") {
+			System.out.println("null이 아니야");
+			renameFile = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+			file_addr = phisicalPath+File.separator+renameFile;
+			System.out.println(file_addr);
+			File file = new File(phisicalPath+File.separator+renameFile);
+			upload.transferTo(file);
+		}
 		
-		map.put("mem_email",dto.getMem_email());
-		map.put("title",dto.getTitle());
-		map.put("content",dto.getContent());
-		map.put("file_addr",file_addr);
+		
+		map.put("mem_email",dto.getMem_email().toString());
+		map.put("title",dto.getTitle().toString());
+		map.put("content",dto.getContent().toString());
+		map.put("file_addr",renameFile);
 		
 	
 		int check = adminService.insertNotice(map);
@@ -573,12 +582,46 @@ public class AdminController {
 		return "NoticeWrite.ad_tiles";
 	}
 
+	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json")
+	@ResponseBody
+	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+		
+		JsonObject jsonObject = new JsonObject();
+		
+		String fileRoot = "C:\\summernote_image\\";	//저장될 외부 파일 경로
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+				
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		
+		File targetFile = new File(fileRoot + savedFileName);	
+		
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
+			jsonObject.addProperty("responseCode", "success");
+				
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		
+		return jsonObject;
+	}
+	
+	
+	
 	@RequestMapping("NoticeDetail.hst")
-	public String noticeView(@RequestParam Map map, Model model) {
-
+	public String noticeView(@RequestParam Map map,HttpServletRequest req, Model model) throws IOException {
+		
 		List<BoardDTO> list = adminService.detailNotice(map);
+		String phisicalPath = req.getServletContext().getRealPath("/Upload");
+		
 		for(BoardDTO val:list)
 		{
+			System.out.println(val.getFile_addr());
 			System.out.println(val.getNoti_no());
 			System.out.println(val.getContent());
 		}
