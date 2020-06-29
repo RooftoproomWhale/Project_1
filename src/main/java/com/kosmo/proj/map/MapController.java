@@ -198,6 +198,17 @@ public class MapController {
 		
 		return net.sf.json.JSONArray.fromObject(list).toString();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/Hospital/countReservation.hst",produces = "text/html; charset=UTF-8")
+	public String countReservation(@RequestParam Map map)
+	{
+		int count = mapService.selectCntReservation(map);
+		
+		System.out.println(JSONObject.numberToString(count));
+		return JSONObject.numberToString(count);
+	}
+	
 	/*
 	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/Pharmacy.hst",produces = "text/html; charset=UTF-8")

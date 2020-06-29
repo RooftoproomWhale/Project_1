@@ -359,7 +359,7 @@
          </div>
          
          <script>
-         	var count=6;
+         	/* var count=6;
             var emptyDiv = '<div class="tableInfoInner g" ><div>';
          	var reservationDiv = '<div class="tableInfoInner b"><div>';
          	$(".reservation_info").append('<h3>현재 예약인원은 '+count+'명 입니다</h3>');
@@ -373,7 +373,24 @@
          		if(i%5==0){
          			$(".reservation_info").append("<div></div>");
          		}
-         	}
+         	} */
+         	function createReservationTable(count){
+         		$(".reservation_info").empty();
+         		var emptyDiv = '<div class="tableInfoInner g" ><div>';
+             	var reservationDiv = '<div class="tableInfoInner b"><div>';
+             	$(".reservation_info").append('<h3>현재 예약인원은 '+count+'명 입니다</h3>');
+             	for(var i=1;i<=25;i++){
+             		if(i<=count)
+             		{
+             			$(".reservation_info").append(reservationDiv);
+             		}else{
+             			$(".reservation_info").append(emptyDiv);
+             		}
+             		if(i%5==0){
+             			$(".reservation_info").append("<div></div>");
+             		}
+             	}
+         	};
          </script>
       </div>
    </div>
@@ -909,7 +926,30 @@
                      console.log("modal",item,i)
                      console.log($('.info_wrap').hasClass('warp_invisible'));
                      console.log($('.info-toggle').hasClass('left_toggle'));
-                     $(".reservation_info").show();
+                     console.log('auth',item.auth);
+                     if(item.auth == '제휴승인됨'){
+                    	 $.ajax({
+                        	 url:"<c:url value='/Homespital/Map/Hospital/countReservation.hst'/>",
+                        	 type:'get',
+                             datatype:'json',
+                             data:{"address":item.address},
+                             success:function(data){
+                            	console.log(data); 
+                            	$(".reservation_info").empty();
+                            	createReservationTable(data);
+                            	$(".reservation_info").show();
+                             },
+                             error:function(e){
+                            	console.log(e); 
+                             }
+                         });
+                     }
+                     else
+                   	 {
+                    	 $(".reservation_info").empty();
+                    	 $(".reservation_info").append('<h3>홈스피탈 제휴 병원만\n예약 정보 확인 가능합니다</h3>');
+                   	 }
+                     
                      if($('.info-toggle').hasClass('left_toggle')==true)
                      {
                         $('.info_wrap').removeClass('warp_invisible');
@@ -1518,6 +1558,7 @@
                      '</div>'+
                      '<div class="inner_summary_info">'+
                         '<span>'+deptname+'</span>'+
+                        '<span>제휴병원</span>'+
                      '</div>'+
                   '</div>'+
                   '<div class="inner_btn_area">'+
