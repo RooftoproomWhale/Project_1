@@ -372,7 +372,7 @@ width: 100%;
                else
                {
                   $('font[name=namecheck]').text('');
-                    $('font[name=namecheck]').html("");
+                  $('font[name=namecheck]').html("");
                   
                }
                  
@@ -906,72 +906,136 @@ width: 100%;
                }
             });
       
-      $('#hosAuthBtn').click(function(){
-         
-         var hospName = $('#clickedHosName').val();
-         console.log(hospName);
-         $.ajax({
-            url : "<c:url value='/Member/HospitalAuthSub.hst'/>",
-            type : 'get',
-            datatype : 'html',
-            data : {
-               "hosp_name" : hospName
-            },
-            beforeSend : function() {
-               console.log("beforeSend");
-            },
-            complete : function() {
-               console.log("complete");
-            },
-            success : function(data) {
-               window.location.href = "<c:url value='/Home/ToHomePage.hst'/>";
-            },
-            error : function(e) {
-               alert('검색 후 진행해주세요');
-            }
-         });
-      });
+      $("#nextBtn1").click(function() {
+               
+               if ($('#HosName').val() == "") {
+                  alert("검색 후 진행해 주세요");
+                  return false;
+               } else if ($("#check_5").is(":checked") == false) {
+                  alert("약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+                  return false;
+               }
+
+               else {
+                  if (animating) {
+                     return false;
+                  }
+                  animating = true;
+                  current_fs = $(this).parent();
+                  next_fs = $(this).parent().next();
+
+                  //next_fs의 색인을 사용하여 진행률 표시 줄에서 다음 단계를 활성화합니다.
+                  $("#progressbar li").eq($("fieldset").index(next_fs))
+                        .addClass("active");
+
+                  //다음 필드셋 표시
+                  next_fs.show();
+                  //현재 필드셋을 스타일로 숨긴다.
+                  current_fs.animate({
+                     opacity : 0
+                  }, {
+                     step : function(now, mx) {
+                        //current_fs의 불투명도가 0으로 줄어듦 - "now"에 저장됨
+                        //1.current_fs 80%로 축소
+                        scale = 1 - (1 - now) * 0.2;
+                        //2.오른쪽에서 next_fs 50% 가져오기
+                        left = (now * 50) + "%";
+                        //3.next_fs의 불투명도 1로 증가시킨다
+                        opacity = 1 - now;
+                        current_fs.css({
+                           'transform' : 'scale(' + scale + ')',
+                           'position' : 'absolute'
+                        });
+                        next_fs.css({
+                           'left' : left,
+                           'opacity' : opacity
+                        });
+                     },
+                     duration : 800,
+                     complete : function() {
+                        current_fs.hide();
+                        animating = false;
+                     },
+                     //사용자가 정의 플러그인에서 나옴
+                     easing : 'easeInOutBack'
+                  });
+               }
+            });
+
+      $('#hosAuthBtn').click(function() {
+
+           var hospName = $('#clickedHosName').val();
+           var hosId = $('#hosId').val();
+           var hosPwd = $("#hosPwd").val();
+           console.log(hospName + hosId + hosPwd);
+           $
+                 .ajax({
+                    url : "<c:url value='/Member/HospitalAuthSub.hst'/>",
+                    type : 'get',
+                    datatype : 'html',
+                    data : {
+                       "email" : hosId,
+                       "pwd" : hosPwd,
+                       "name" : hospName,
+                       "gender" : "병원",
+                       "tel" : "X",
+                       "age" : 0,
+                       "height" : 0,
+                       "weight" : 0,
+                       "role" : "ROLE_HOS",
+                       "enable" : "0"
+                    },
+                    success : function(data) {
+                       alert('제휴신청이 완료되었습니다');
+                       window.location.href = "<c:url value='/Home/ToHomePage.hst'/>";
+                    },
+                    error : function(request, status, error) {
+                       alert("아이디와 비밀번호를 확인하세요");
+                    }
+                 });
+        });
    });
-   
-   function searchHospClick(i){
-      var hospName = $('#hospName'+i).html();
-      console.log('#hospName'+i);
+
+   function searchHospClick(i) {
+      var hospName = $('#hospName' + i).html();
+      console.log('#hospName' + i);
       console.log(hospName);
-      $.ajax({ 
-         url: "<c:url value='/Member/HosSearchList.hst'/>",
-         type: "get", //get, post 방식 
-         dataType: 'json', //or xml or script or html 
-         data: {
-            "hosp_name" : hospName
-            }, //넘길 파라미터 
-         async: true, // true:비동기, false:동기 
-         success: function(data){ 
+      $
+            .ajax({
+               url : "<c:url value='/Member/HosSearchList.hst'/>",
+               type : "get", //get, post 방식 
+               dataType : 'json', //or xml or script or html 
+               data : {
+                  "hosp_name" : hospName
+               }, //넘길 파라미터 
+               async : true, // true:비동기, false:동기 
+               success : function(data) {
                   console.log(data);
-                  
-                  var items = 
-                           '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>' +
-                            '<div class="col-md-10">' +
-                          '<input type="text" class="form-control" id="clickedHosName" placeholder="병원명" disabled="disabled" value="'+data[0].hosp_name+'">' +
-                           '</div>' +
-                         '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">주소 :</label>' +
-                           '<div class="col-md-10">' +
-                         '<input type="text" class="form-control" placeholder="주소" disabled="disabled" value="'+data[0].address+'">' +
-                         '</div>' +
-                           '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">번호 :</label>' +
-                         '<div class="col-md-10">' +
-                          '<input type="text" class="form-control" placeholder="번호" disabled="disabled" value="'+data[0].tel+'">' +
-                           '</div>';
-            
-            $('#selectedHosp').html(items);
-            $('#close').click();
-//             $('#regi-modal').hide();
-         },
-         error:function(request,status,error){
-            console.log("에러");
-            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-         } 
-      });
-      }
+
+                  var items = '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>'
+                        + '<div class="col-md-10">'
+                        + '<input type="text" class="form-control" id="clickedHosName" placeholder="병원명" disabled="disabled" value="'+data[0].hosp_name+'">'
+                        + '</div>'
+                        + '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">주소 :</label>'
+                        + '<div class="col-md-10">'
+                        + '<input type="text" class="form-control" placeholder="주소" disabled="disabled" value="'+data[0].address+'">'
+                        + '</div>'
+                        + '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">번호 :</label>'
+                        + '<div class="col-md-10">'
+                        + '<input type="text" class="form-control" placeholder="번호" disabled="disabled" value="'+data[0].tel+'">'
+                        + '</div>';
+
+                  $('#selectedHosp').html(items);
+                  $('#close').click();
+                  //             $('#regi-modal').hide();
+               },
+               error : function(request, status, error) {
+                  console.log("에러");
+                  alert("code = " + request.status + " message = "
+                        + request.responseText + " error = " + error); // 실패 시 처리
+               }
+            });
+   }
 
    function sample6_execDaumPostcode() {
       new daum.Postcode(
@@ -1319,20 +1383,20 @@ width: 100%;
          <input type="button" name="previous" class="previous action-button" value="이전" /> 
          <input type="button" id="signupBtn" class="action-button" value="회원가입" />
       </fieldset>
+      
       <fieldset>
          <h1 class="fs-title">병원 제휴</h1>
          <h3 class="fs-subtitle">병원을 선택해주세요</h3>
-         <div class="row" style="padding-left:168px; padding-bottom:20px;">
-         
-            <div class="col-md-6">
+         <div class="row">
+            <div class="col-md-8" style="padding-left:85px">
                <input id="search" type="text" class="form-control" placeholder="병원명을 검색하세요"/>
-               <input type="button" data-toggle="modal" data-target="#regi-modal" id="searchBtn" value="해당 병원 찾기" class="btn btn-primary">
             </div>
+            <input type="button" data-toggle="modal" data-target="#regi-modal" id="searchBtn" value="병원 검색" class="btn btn-primary" style= "font-size:0.9em; marign-right:100px">
          </div>
             <div class="form-group" id="selectedHosp">
                     <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" placeholder="병원" disabled="disabled">
+                        <input type="text" class="form-control" id="HosName" placeholder="병원" disabled="disabled">
                     </div>
                     <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">주소 :</label>
                     <div class="col-md-10">
@@ -1345,10 +1409,30 @@ width: 100%;
                 </div>
          <div class="row">
             <div class="col-md-12">
-               <input type="checkbox" id="symptom" name="symptom" /> 위의 병원이 맞으시면 체크 후 제휴신청 버튼을 눌러주세요
+               <input type="checkbox" id="check_5" name="symptom" /> 위의 병원이 맞으시면 체크 후 다음 버튼을 눌러주세요
             </div>
          </div>
          <input type="button" id="auth_prev" class="action-button" value="이전" />
+         <input type="button" id="nextBtn1" class="action-button" value="다음" />
+      </fieldset>
+      <fieldset>
+         <h1 class="fs-title">병원 제휴</h1>
+         <h3 class="fs-subtitle">사용할 아이디와 비밀번호를 입력하세요</h3>
+            <div class="form-group">
+                    <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">아이디 :</label>
+                    <div class="col-md-9" style="margin-left:46px">
+                        <input type="text" id="hosId" class="form-control" placeholder="아이디" >
+                    </div>
+                    <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 :</label>
+                    <div class="col-md-9" style="margin-left:32px">
+                        <input type="password" id="hosPwd" class="form-control" placeholder="비밀번호" >
+                    </div>
+                    <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 확인 :</label>
+                    <div class="col-md-9">
+                        <input type="password" class="form-control" placeholder="비밀번호 확인">
+                    </div>
+                </div>
+         <input type="button" name="previous" class="previous action-button" value="이전" /> 
          <input type="button" id="hosAuthBtn" class="action-button" value="제휴신청" />
       </fieldset>
       <div class="modal fade" id="regi-modal">

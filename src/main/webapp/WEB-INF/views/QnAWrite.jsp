@@ -1,13 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- SummerNote -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src='<c:url value="/js/summernote/lang/summernote-ko-KR.js"/>'></script>
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<head>
+<meta charset="UTF-8">
 <style>
-#footer{
-position:absolute;
-top: 1300px;
-width: 100%;
+#footer {
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	margin-top: 1000px;
+	background-color: #474747;
+	height: 150px
 }
 </style>
 <script>
@@ -20,7 +29,7 @@ $('#next').on('click', function(){
 	var title;
 
 	title = $('#text-input').val();
-	content = $('#textarea-input').val();
+	content = $('#summernote').val();
 	user = $('#userId').val();
 	
 	console.log("user"+user)
@@ -48,49 +57,45 @@ $('#next').on('click', function(){
 });
 });
 </script>
+</head>
+</html>
 <body>
-	<div class="page-container">
-		<div class="section__content section__content--p30"
-			style="padding-top: 150px;">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-10 col-md-push-2">
-						<div class="card">
-							<div class="card-header">
-								<strong>QNA 작성</strong>
-							</div>
-							<input type="hidden" id="userId" value="${userId }"/>
-							<div class="card-body card-block" style="padding-top:100px">
-<!-- 								<form action="" method="post" enctype="multipart/form-data" -->
-<!-- 									class="form-horizontal"> -->
-									<div class="row form-group">
-										<div class="col-12 col-md-12">
-											<input type="text" id="text-input" name="text-input"
-												placeholder="제목" class="form-control"> <small
-												class="form-text text-muted"></small>
-												<input type="hidden" id="user" value=""/>
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col-12 col-md-12">
-											<textarea name="textarea-input" id="textarea-input" rows="15"
-												placeholder="내용" class="form-control"></textarea>
-										</div>
-									</div>
-			
-									<div class="">
-										<button type="button" id="next" class="btn btn-primary btn-sm" style="position: absolute; right: 20px; bottom: 20px;">
-												<i class="fa fa-dot-circle-o"></i> 작성
-											</button>
-									</div>
-<!-- 								</form> -->
-							</div>
-								</div>
+	<div class="container" style="padding-top: 88px;">
+		<div class="row">
+			<main id="main">
+				<div class="page-header">
+					<h2 style="color: blue">Q&A</h2>
+				</div>
+				<p>회원님의 궁금증을 풀어드립니다.</p>
+				<br />
+				<div class="container">
+					<div class="jumbotron">
+						<h1>
+							Homespital &nbsp;<small>Write page</small>
+						</h1>
+					</div>
+					<div style="width: 60%; margin: auto;">
+						<form method="post" action="/write">
+							<input type="hidden" id="userId" value="${userId }" /> 
+							<input type="text" id="text-input" name="title" style="width: 40%;" placeholder="제목" />
+							<br> <br>
+							<textarea id="summernote" name="content"></textarea>
+							<input id="next" type="button" value="글 작성" style="float: right;" />
+						</form>
 					</div>
 				</div>
-			</div>
+			</main>
 		</div>
 	</div>
 </body>
 <script>
+$(document).ready(function() {
+	  $('#summernote').summernote({
+ 	    	placeholder: 'content',
+	        minHeight: 370,
+	        maxHeight: null,
+	        focus: true, 
+	        lang : 'ko-KR'
+	  });
+	});
 </script>

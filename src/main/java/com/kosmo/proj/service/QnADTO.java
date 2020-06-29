@@ -9,8 +9,22 @@ public class QnADTO {
     private String title;
     private String content;
     private Date q_date;
+    private String answer_title;
+    private String answer_content;
 
-    public int getQna_no() {
+    public String getAnswer_title() {
+		return answer_title;
+	}
+	public void setAnswer_title(String answer_title) {
+		this.answer_title = answer_title;
+	}
+	public String getAnswer_content() {
+		return answer_content;
+	}
+	public void setAnswer_content(String answer_content) {
+		this.answer_content = answer_content;
+	}
+	public int getQna_no() {
 		return qna_no;
 	}
 	public void setQna_no(int qna_no) {

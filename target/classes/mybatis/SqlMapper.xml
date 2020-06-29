@@ -9,45 +9,56 @@
    <select id="memberIsLoginJson" parameterType="MemberDTO" resultType="MemberDTO">
       SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
    </select>
-   
-   <!-- 회원가입 -->
-   <insert id="signInsert" parameterType="java.util.Map"> 
-      INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{name}, #{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable}, SYSDATE )
-   </insert>
-   <!-- 회원가입 검색 병원 -->
-   <select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
-      SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 10
-   </select>
-   <select id="selectedHosp" parameterType="java.util.Map" resultType="HospitalDTO">
-      SELECT * FROM HOSPITAL WHERE HOSP_NAME = #{hosp_name}
-   </select>
-   <update id="hosAuthSub" parameterType="java.util.Map">
-      UPDATE HOSPITAL SET AUTH = '승인대기중' WHERE HOSP_NAME = #{name}
-   </update>
+
+	<!-- 회원가입 -->
+	<insert id="signInsert" parameterType="java.util.Map">
+		INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{name}, #{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable}, SYSDATE )
+	</insert>
+	
+	<!-- 회원가입 검색 병원 -->
+	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 10
+	</select>
+	<select id="selectedHosp" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * FROM HOSPITAL WHERE HOSP_NAME = #{hosp_name}
+	</select>
+	<update id="hosAuthSub" parameterType="java.util.Map">
+		UPDATE HOSPITAL SET AUTH = '승인대기중' WHERE HOSP_NAME = #{name}
+	</update>
 
 	<!-- QnA -->
-   	<select id="listQnA" parameterType="java.util.Map" resultType="QnADTO">
+	<select id="listQnA" parameterType="java.util.Map" resultType="QnADTO">
 		select * from qna
 	</select>
-	<!-- 추가 -->
-   	<insert id="insertQnA" parameterType="java.util.Map">
+	<insert id="insertQnA" parameterType="java.util.Map">
 		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,#{user}, #{title}, #{content}, SYSDATE, NULL, NULL)
 	</insert>
-	<!-- 상세 -->
-	<select id="detailQnA" parameterType="java.util.Map"  resultType="QnADTO">
+	<select id="detailQnA" parameterType="java.util.Map" resultType="QnADTO">
 		select * from QNA order by qna_no DESC
 	</select>
-	<!-- 수정 -->
 	<update id="updateQnA" parameterType="java.util.Map">
-		UPDATE QNA SET title=#{title},content=#{content} WHERE qna_no=#{no}	
+		UPDATE QNA SET title=#{title},content=#{content} WHERE qna_no=#{no}
 	</update>
-	<!-- 삭제 -->
 	<delete id="deleteQnA" parameterType="java.util.Map">
 		DELETE QNA WHERE qna_no=#{no}
- 	</delete>  
- 	<select id="viewQnA" parameterType="java.util.Map" resultType="QnADTO">
- 		select * from qna where qna_no=#{no} 
- 	</select>
+	</delete>
+	<select id="viewQnA" parameterType="java.util.Map" resultType="QnADTO">
+		select * from qna where qna_no=#{no}
+	</select>
+ 	
+ 	<!-- QnA 답글 -->
+	<update id="commentInsert" parameterType="java.util.Map">
+      UPDATE QNA SET ANSWER_TITLE = #{answerTitle}, ANSWER_CONTENT = #{answerContent} WHERE no = #{no}
+   </update>
+   <update id="commentUpdate" parameterType="java.util.Map">
+      UPDATE QNA SET ANSWER_TITLE = #{answerTitle}, ANSWER_CONTENT = #{answerContent} WHERE cno = #{cno}
+   </update>
+   <delete id="commentDelete" parameterType="java.util.Map">
+      DELETE QNA WHERE cno = #{cno}
+   </delete>
+   <delete id="commentDeleteByNo" parameterType="java.util.Map">
+      DELETE QNA WHERE no = #{no}
+   </delete>
 
     <!-- 공지사항 추가하기 -->
     <insert id="insertNotice">

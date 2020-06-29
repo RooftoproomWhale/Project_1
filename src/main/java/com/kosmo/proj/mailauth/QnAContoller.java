@@ -76,7 +76,7 @@ public class QnAContoller {
 	{
 		UserDetails userDetails = (UserDetails)auth.getPrincipal();
 		String user = userDetails.getUsername();
-
+		System.out.println(user);
 		model.addAttribute("userId", user);
 		return "QnAWrite.tiles";
 	}

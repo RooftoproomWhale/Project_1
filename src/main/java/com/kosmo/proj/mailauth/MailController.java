@@ -16,8 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping("/mailauth")
 public class MailController {
-   @Autowired
-   private MailService service;
 
    @Autowired
    private MailHandler mailHandler;

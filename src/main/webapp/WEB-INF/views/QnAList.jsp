@@ -14,6 +14,8 @@
 	background-color: #474747;
 	height: 150px
 }
+.jumbotron {
+}
 </style>
 <title>Q&A</title>
 </head>
@@ -27,13 +29,11 @@
 				<p class="lead">회원님의 궁금증을 풀어드립니다.</p>
 				<br />
 				<div class="container">
-					<!-- 점보트론(Jumbotron) -->
 					<div class="jumbotron">
 						<h1>
-							한줄 메모 게시판<small>목록 페이지</small>
+							Homespital &nbsp;<small>List page</small>
 						</h1>
 					</div>
-					<!-- 작성하기 버튼 -->
 					<div class="row" style="margin-bottom: 10px">
 						<div class="col-md-12 text-right">
 							<a href="<c:url value='/QnA/ToInsertForm.hst'/>" class="btn btn-success">등록</a>
