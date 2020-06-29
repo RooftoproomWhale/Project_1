@@ -57,18 +57,30 @@
     </update> 
     
     <!-- QnA -->
-   	<insert id="insertQnA">
-		INSERT INTO QNA VALUES(SEQ_ONEMEMO.NEXTVAL,#{user}, #{title}, #{content}, SYSDATE)
+    <!-- 전체 -->
+   	<select id="listQnA" parameterType="java.util.Map" resultType="QnADTO">
+		select * from qna
+	</select>
+	<!-- 추가 -->
+   	<insert id="insertQnA" parameterType="java.util.Map">
+		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,#{user}, #{title}, #{content}, SYSDATE, NULL, NULL)
 	</insert>
-	<select id="listQnA"  resultType="QnADTO">
+	<!-- 상세 -->
+	<select id="detailQnA" parameterType="java.util.Map"  resultType="QnADTO">
 		select * from QNA order by qna_no DESC
 	</select>
-<!-- 	<update id="updateQnA">
+	<!-- 수정 -->
+	<update id="updateQnA" parameterType="java.util.Map">
 		UPDATE QNA SET title=#{title},content=#{content} WHERE qna_no=#{no}	
 	</update>
-	<delete id="deleteQnA">
+	<!-- 삭제 -->
+	<delete id="deleteQnA" parameterType="java.util.Map">
 		DELETE QNA WHERE qna_no=#{no}
-	</delete>  -->
+ 	</delete>  
+ 	<select id="viewQnA" parameterType="java.util.Map" resultType="QnADTO">
+ 		select * from qna where qna_no=#{no} 
+ 	</select>
+ 	
    
     <!-- <insert id="signInsert" parameterType="java.util.Map"> 
       INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )

@@ -3,6 +3,8 @@ package com.kosmo.proj.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.kosmo.proj.service.QnADTO;
@@ -10,6 +12,9 @@ import com.kosmo.proj.service.QnAService;
 
 @Service("qnaService")
 public class QnAServiceImpl implements QnAService {
+
+	@Resource(name="qnADAO")
+	private QnADAO dao;
 
 	@Override
 	public boolean isLogin(Map map) {
@@ -20,37 +25,43 @@ public class QnAServiceImpl implements QnAService {
 	@Override
 	public List<QnADTO> listQnA(Map map) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.listQnA(map);
 	}
 
 	@Override
 	public int getTotalRecord(Map map) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public QnADTO selectOne(Map map) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getTotalRecord(map);
 	}
 
 	@Override
 	public int deleteQnA(Map map) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.deleteQnA(map);
 	}
 
 	@Override
 	public int insertQnA(Map map) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.insertQnA(map);
 	}
 
 	@Override
 	public int updateQnA(Map map) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.updateQnA(map);
+	}
+
+	@Override
+	public List<QnADTO> detailQnA(Map map) {
+		// TODO Auto-generated method stub
+		return dao.detailQnA(map);
+	}
+
+	@Override
+	public List<QnADTO> viewQnA(Map map) {
+		// TODO Auto-generated method stub
+		return dao.viewQnA(map);
 	}
 
 

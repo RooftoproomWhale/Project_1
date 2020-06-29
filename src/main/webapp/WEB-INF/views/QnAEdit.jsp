@@ -1,6 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script>
+	$(function() {
+		
+		var no;
+		var title;
+		var content;
+		
+		$('#qnaEditBtn').on('click', function(){
+			no = $('#no').val();
+			title = $('#title').val();
+	 		content = $('#content').val();
+			console.log("content" + content);
+			$.ajax({
+				url: "<c:url value='/QnA/QnAEdit.hst'/>",
+				data: {
+					"no" : no,
+					"title" : title,
+					"content" : content
+						}, 
+				dataType: 'html',
+				async: true,
+				success: function(data){ 
+					console.log('성공');
+					window.location.href = "<c:url value='/QnA/QnAView.hst?no="+no+"'/>"; 
+				},
+				error:function(request,status,error){
+					console.log('실패');
+					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); 
+				} 
+			});
+		});
+	});
+</script>
 <!-- 실제 내용 시작 -->
 <div class="container">
 	<!-- 점보트론(Jumbotron) -->
@@ -11,19 +44,15 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<form class="form-horizontal" method="post"
-				action="<c:url value='/OneMemo/BBS/Edit.bbs'/>">
-				<!-- 씨큐리티 적용:csrf취약점 방어용 -->
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				<input type="hidden" name="no" value="${record.no}" />
+			<form class="form-horizontal" method="">
+				<input type="hidden" id="no" value="${no}" />
 				<div class="form-group">
 					<label class="col-sm-2 control-label">제목</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" name="title"
-							placeholder="제목을 입력하세요?" value="${record.title }">
+						<input type="text" class="form-control" id="title"
+							placeholder="제목을 입력하세요?" value="${title}">
 					</div>
 				</div>
-
 
 				<div class="form-group">
 					<label class="col-sm-2 control-label">내용</label>
@@ -31,8 +60,8 @@
 					<div class="col-sm-10">
 						<div class="row">
 							<div class="col-sm-8">
-								<textarea class="form-control" name="content" rows="5"
-									placeholder="내용 입력하세요">${record.content}</textarea>
+								<textarea class="form-control" id="content" rows="5"
+									placeholder="내용 입력하세요">${content}</textarea>
 							</div>
 						</div>
 					</div>
@@ -40,7 +69,7 @@
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">수정</button>
+						<button type="button" id="qnaEditBtn" class="btn btn-primary">수정</button>
 					</div>
 				</div>
 			</form>

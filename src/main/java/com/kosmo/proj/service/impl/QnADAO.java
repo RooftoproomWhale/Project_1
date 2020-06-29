@@ -28,7 +28,7 @@ public class QnADAO implements QnAService {
 	@Override
 	public List<QnADTO> listQnA(Map map) {
 
-		return sqlMapper.selectList("memoSelectList",map);
+		return sqlMapper.selectList("listQnA", map);
 	}
 
 	@Override
@@ -38,8 +38,8 @@ public class QnADAO implements QnAService {
 	}
 	//상세보기]
 	@Override
-	public QnADTO selectOne(Map map) {
-		return sqlMapper.selectOne("memoSelectOne", map);
+	public List<QnADTO> detailQnA(Map map) {
+		return sqlMapper.selectOne("detailQnA", map);
 	}
 
 	@Override
@@ -48,10 +48,8 @@ public class QnADAO implements QnAService {
 		   부모 삭제시 자동으로 해당 자식도 삭제되도록 FK설정
 		  REFERENCES 부모테이블(PK컬럼) ON  DELETE CASCADE
 		*/
-		//자식삭제]
-		sqlMapper.delete("commentDeleteByNo",map);
 		//부모삭제]
-		return sqlMapper.delete("memoDelete",map);
+		return sqlMapper.delete("deleteQnA",map);
 	}
 	//입력용]
 	@Override
@@ -59,14 +57,22 @@ public class QnADAO implements QnAService {
 		System.out.println(map.get("id"));
 		System.out.println(map.get("title"));
 		System.out.println(map.get("content"));
-		return sqlMapper.insert("memoInsert",map);
+		return sqlMapper.insert("insertQnA",map);
 	}
 	//수정]
 	@Override
 	public int updateQnA(Map map) {
 
-		return sqlMapper.update("memoUpdate",map);
+		return sqlMapper.update("updateQnA",map);
 	}
+
+	@Override
+	public List<QnADTO> viewQnA(Map map) {
+
+		return sqlMapper.selectList("viewQnA", map);
+	}
+
+
 
 }
 

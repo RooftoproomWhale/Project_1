@@ -3,9 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<!--  아이디 얻어서 var에 지정한 변수 id에 저장:세군데에서 사용하니까 -->
-<sec:authentication property="principal.username" var="username" />
-<sec:authentication property="principal.authorities" var="authorities" />
+
 
 
 <style>
@@ -15,124 +13,124 @@
 }
 </style>
 <script>
-	$(function() {
-		//현재 글번호에 대한 코멘트 목록을 가져오는 함수-Ajax로 처리 
+// 	$(function() {
+// 		//현재 글번호에 대한 코멘트 목록을 가져오는 함수-Ajax로 처리 
 
-		//페이지 로드시 코멘트 목록 뿌려주기]		
-		showComments();
+// 		//페이지 로드시 코멘트 목록 뿌려주기]		
+// 		showComments();
 
-		//코멘트 입력 및 수정처리]
-		$('#submit').click(function() {
-			if ($(this).val() == '등록')
-				var action = "<c:url value='/MemoComment/BBS/Write.bbs'/>";
-			else
-				var action = "<c:url value='/MemoComment/BBS/Edit.bbs'/>";
-			//ajax로 요청]
-			$.ajax({
-				url : action,
-				data : $('#frm').serialize(),
-				dataType : 'text',
-				type : 'post',
-				success : function(data) {
-					console.log(data);
-					//글 등록후 코멘트 목록 뿌져주는 함수 다시 호출
-					showComments();
-					//입력댓글 클리어 및 포커스 주기
-					$('#title').val('');
-					$('#title').focus();
-					//글 수정후 등록버튼으로 다시 교체하기
-					if ($('#submit').val() == '수정')
-						$('#submit').val('등록')
-				}
-			});
-		});
+// 		//코멘트 입력 및 수정처리]
+// 		$('#submit').click(function() {
+// 			if ($(this).val() == '등록')
+// 				var action = "<c:url value='/MemoComment/BBS/Write.bbs'/>";
+// 			else
+// 				var action = "<c:url value='/MemoComment/BBS/Edit.bbs'/>";
+// 			//ajax로 요청]
+// 			$.ajax({
+// 				url : action,
+// 				data : $('#frm').serialize(),
+// 				dataType : 'text',
+// 				type : 'post',
+// 				success : function(data) {
+// 					console.log(data);
+// 					//글 등록후 코멘트 목록 뿌져주는 함수 다시 호출
+// 					showComments();
+// 					//입력댓글 클리어 및 포커스 주기
+// 					$('#title').val('');
+// 					$('#title').focus();
+// 					//글 수정후 등록버튼으로 다시 교체하기
+// 					if ($('#submit').val() == '수정')
+// 						$('#submit').val('등록')
+// 				}
+// 			});
+// 		});
 
-		function showComments() {
+// 		function showComments() {
 
-			$.ajax({
-				url : "<c:url value='/MemoComment/BBS/List.bbs'/>",
-				data : {
-					"no" : "${record.no}",
-					"_csrf" : "${_csrf.token}"
-				},
-				dataType : 'json',
-				type : 'post',
-				success : showComments_,
-				error : function(e) {
-					console.log('에러:', e)
-				}
-			});
-		}
-		;////////showComments
+// 			$.ajax({
+// 				url : "<c:url value='/MemoComment/BBS/List.bbs'/>",
+// 				data : {
+// 					"no" : "${record.no}",
+// 					"_csrf" : "${_csrf.token}"
+// 				},
+// 				dataType : 'json',
+// 				type : 'post',
+// 				success : showComments_,
+// 				error : function(e) {
+// 					console.log('에러:', e)
+// 				}
+// 			});
+// 		}
+// 		;////////showComments
 
-		function showComments_(data) {
-			console.log('코맨트 목록:', data);
-			var comments = "<h2>한줄 댓글 목록</h2>";
-			comments += "<table class='table table-bordered'>";
-			comments += "<tr ><th width='15%' class='text-center'>작성자</th><th width='50%' class='text-center'>코멘트</th><th class='text-center'>작성일</th><th class='text-center'>삭제</th></tr>";
-			if (data.length == 0) {
-				comments += "<tr><td colspan='4'>등록된 한줄 댓글이 없어요</td></tr>";
-			}
-			$
-					.each(
-							data,
-							function(index, element) {
-								comments += "<tr><td>" + element['NAME']
-										+ '</td>';
-								//if('${sessionScope.id}' == element['ID'])//씨큐리티 미 사용시
-								if ('${username}' == element['ID'])//씨큐리티 사용시
-									comments += "<td style='text-align:left'><span class='commentEdit' title='"+element['CNO']+"' style='cursor:pointer' >"
-											+ element['LINECOMMENT']
-											+ '</span></td>';
-								else
-									comments += "<td style='text-align:left'>"
-											+ element['LINECOMMENT'] + '</td>';
+// 		function showComments_(data) {
+// 			console.log('코맨트 목록:', data);
+// 			var comments = "<h2>한줄 댓글 목록</h2>";
+// 			comments += "<table class='table table-bordered'>";
+// 			comments += "<tr ><th width='15%' class='text-center'>작성자</th><th width='50%' class='text-center'>코멘트</th><th class='text-center'>작성일</th><th class='text-center'>삭제</th></tr>";
+// 			if (data.length == 0) {
+// 				comments += "<tr><td colspan='4'>등록된 한줄 댓글이 없어요</td></tr>";
+// 			}
+// 			$
+// 					.each(
+// 							data,
+// 							function(index, element) {
+// 								comments += "<tr><td>" + element['NAME']
+// 										+ '</td>';
+// 								//if('${sessionScope.id}' == element['ID'])//씨큐리티 미 사용시
+// 								if ('${username}' == element['ID'])//씨큐리티 사용시
+// 									comments += "<td style='text-align:left'><span class='commentEdit' title='"+element['CNO']+"' style='cursor:pointer' >"
+// 											+ element['LINECOMMENT']
+// 											+ '</span></td>';
+// 								else
+// 									comments += "<td style='text-align:left'>"
+// 											+ element['LINECOMMENT'] + '</td>';
 
-								comments += "<td>" + element['CPOSTDATE']
-										+ '</td>';
-								comments += "<td>";
-								//if('${sessionScope.id}' == element['ID'])
-								if ('${username}' == element['ID'])//씨큐리티 사용시
-									comments += "<span class='commentDelete' title='"+element['CNO']+"' style='cursor:pointer;color:green;font-size:1.4em'>삭제</span>";
-								else
-									comments += "<span style='color:gray;font-size:.7em'>삭제불가</span>";
-								comments += "</td></tr>";
-							});
+// 								comments += "<td>" + element['CPOSTDATE']
+// 										+ '</td>';
+// 								comments += "<td>";
+// 								//if('${sessionScope.id}' == element['ID'])
+// 								if ('${username}' == element['ID'])//씨큐리티 사용시
+// 									comments += "<span class='commentDelete' title='"+element['CNO']+"' style='cursor:pointer;color:green;font-size:1.4em'>삭제</span>";
+// 								else
+// 									comments += "<span style='color:gray;font-size:.7em'>삭제불가</span>";
+// 								comments += "</td></tr>";
+// 							});
 
-			comments += "</table>";
-			$('#comments').html(comments);
+// 			comments += "</table>";
+// 			$('#comments').html(comments);
 
-			//반드시 showComments_() 함수 안에
-			//코멘트 제목 클릭시 코멘트 수정처리를 위한 UI변경부분]		
-			$('.commentEdit').click(function() {
-				console.log('클릭한 댓글의 키값(CNO):', $(this).attr('title'));
-				//클릭한 제목으로 텍스트박스 값 설정
-				$('#title').val($(this).html());
-				//버튼은 등록에서 수정으로
-				$('#submit').val('수정');
-				//form의 hidden속성중 name="cno"값 설정
-				$('input[name=cno]').val($(this).attr('title'));
+// 			//반드시 showComments_() 함수 안에
+// 			//코멘트 제목 클릭시 코멘트 수정처리를 위한 UI변경부분]		
+// 			$('.commentEdit').click(function() {
+// 				console.log('클릭한 댓글의 키값(CNO):', $(this).attr('title'));
+// 				//클릭한 제목으로 텍스트박스 값 설정
+// 				$('#title').val($(this).html());
+// 				//버튼은 등록에서 수정으로
+// 				$('#submit').val('수정');
+// 				//form의 hidden속성중 name="cno"값 설정
+// 				$('input[name=cno]').val($(this).attr('title'));
 
-			});
-			//코멘트 삭제 처리]
-			$(".commentDelete").click(function() {
-				$.ajax({
-					url : "<c:url value='/MemoComment/BBS/Delete.bbs'/>",
-					data : {
-						cno : $(this).attr('title'),
-						'_csrf' : '${_csrf.token}'
-					},
-					type : 'post',
-					success : function() {
-						showComments();
-					}
-				});
-			});
+// 			});
+// 			//코멘트 삭제 처리]
+// 			$(".commentDelete").click(function() {
+// 				$.ajax({
+// 					url : "<c:url value='/MemoComment/BBS/Delete.bbs'/>",
+// 					data : {
+// 						cno : $(this).attr('title'),
+// 						'_csrf' : '${_csrf.token}'
+// 					},
+// 					type : 'post',
+// 					success : function() {
+// 						showComments();
+// 					}
+// 				});
+// 			});
 
-		}
-		;
+// 		}
+// 		;
 
-	});///$(function(){})
+// 	});///$(function(){})
 </script>
 
 <!-- 실제 내용 시작 -->
@@ -143,40 +141,31 @@
 			한줄 메모 게시판<small>상세보기 페이지</small>
 		</h1>
 	</div>
-	<!-- 씨큐리티 사용시:사용자 권한 출력 div -->
-	<div class="row">
-		<div class="col-md-offset-2 col-md-8">
-			<ul>
-				<c:forEach items="${authorities}" var="authority">
-					<li>${authority}</li>
-				</c:forEach>
-			</ul>
-		</div>
-	</div>
+
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8">
 			<table class="table table-bordered table-striped">
 				<tr>
 					<th class="col-md-2 text-center">번호</th>
-					<td>${record.no}</td>
+					<td>${list[0].qna_no}</td>
 				</tr>
 				<tr>
 					<th class="text-center">제목</th>
-					<td>${record.title}</td>
+					<td>${list[0].title}</td>
 				</tr>
 				<tr>
 					<th class="text-center">작성자</th>
-					<td>${record.name}</td>
+					<td>${list[0].mem_email}</td>
 				</tr>
 				<tr>
 					<th class="text-center">등록일</th>
-					<td>${record.postDate}</td>
+					<td>${list[0].q_date}</td>
 				</tr>
 				<tr>
 					<th class="text-center" colspan="2">내용</th>
 				</tr>
 				<tr>
-					<td colspan="2">${record.content}</td>
+					<td colspan="2">${list[0].content}</td>
 				</tr>
 			</table>
 		</div>
@@ -187,49 +176,18 @@
 			<!-- .center-block 사용시 해당 블락의 크기를 지정하자 -->
 			<ul id="pillMenu" class="nav nav-pills center-block"
 				style="width: 205px; margin-bottom: 10px">
-				<%--
-				<c:if test="${sessionScope.id == record.id }">
-				--%>
-				<c:if test="${username == record.id }">
+				<c:if test="${username == list[0].mem_email}">
 					<li><a
-						href="<c:url value='/OneMemo/BBS/Edit.bbs?no=${record.no}'/>"
+						href="<c:url value='/QnA/QnAToEditForm.hst?no=${list[0].qna_no}&title=${list[0].title}&content=${list[0].content}&q_date=${list[0].q_date}&mem_email=${list[0].mem_email}'/>"
 						class="btn btn-success">수정</a></li>
-					<li><a href="javascript:isDelete();" class="btn btn-success">삭제</a></li>
+					<li><a href="<c:url value='/QnA/QnADelete.hst?no=${list[0].qna_no}'/>" class="btn btn-success">삭제</a></li>
 				</c:if>
 
 				<li><a
-					href="<c:url value='/OneMemo/BBS/List.bbs?nowPage=${param.nowPage}'/>"
+					href="<c:url value='/QnA/QnA.hst?nowPage=${param.nowPage}'/>"
 					class="btn btn-success">목록</a></li>
 
 			</ul>
-		</div>
-	</div>
-
-	<!-- row -->
-	<div class="row">
-		<div class="col-md-offset-3 col-md-6">
-			<div class="text-center">
-				<!-- 한줄 코멘트 입력 폼-->
-				<h2>한줄 댓글 입력 폼</h2>
-				<form class="form-inline" id="frm" method="post">
-					<!-- 씨큐리티 적용:csrf취약점 방어용 -->
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" /> <input type="hidden" name="no"
-						value="${record.no}" />
-
-					<!-- 수정 및 삭제용 파라미터 -->
-					<input type="hidden" name="cno" /> <input placeholder="댓글을 입력하세요"
-						id="title" class="form-control" type="text" size="50"
-						name="linecomment" /> <input class="btn btn-success" id="submit"
-						type="button" value="등록" />
-
-				</form>
-				<div class="row" id="comments">
-					<!-- 한줄 코멘트 목록-->
-					<!-- ajax로 아래에 코멘트 목록 뿌리기 -->
-
-				</div>
-			</div>
 		</div>
 	</div>
 

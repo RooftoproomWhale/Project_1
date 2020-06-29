@@ -10,7 +10,7 @@
 	position: absolute;
 	width: 100%;
 	left: 0px;
-	bottom: 0px;
+	margin-top:1000px;
 	background-color: #474747;
 	height: 150px
 }
@@ -36,7 +36,7 @@
 					<!-- 작성하기 버튼 -->
 					<div class="row" style="margin-bottom: 10px">
 						<div class="col-md-12 text-right">
-							<a href="<c:url value='/QnAWrite.hst'/>" class="btn btn-success">등록</a>
+							<a href="<c:url value='/QnA/ToInsertForm.hst'/>" class="btn btn-success">등록</a>
 						</div>
 					</div>
 					<div class="row">
@@ -60,8 +60,8 @@
 											<!-- 각 컬럼의 폭은 <td>계열에 class="col-*-*"추가 -->
 											<td>${item.qna_no}</td>
 											<td class="text-left"><a
-												href='<c:url value="/Notice/QnAView?no=${item.qna_no}"/>'>${item.title}</a>
-												<span class="badge">${item.commentCount}</span></td>
+												href='<c:url value="/QnA/QnAView.hst?no=${item.qna_no}"/>'>${item.title}</a>
+												</td>
 											<td>${item.mem_email}</td>
 											<td>${item.q_date}</td>
 										</tr>

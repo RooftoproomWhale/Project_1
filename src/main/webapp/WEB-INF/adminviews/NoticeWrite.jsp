@@ -26,17 +26,21 @@
 
 	$(function() {
 
+		var user;
 		var title;
 		var content;
-		var user;
+		
 
 		$('#next').on('click',function() {
+		
+		user = $('#user').val();
 		title = $('#text-input').val();
 		content = $('#textarea-input').val();
-		user = $('#user').val();
+
+		console.log("user:" + user);
 		console.log(title);
 		console.log(content);
-		console.log("user:" + user);
+		
 		$.ajax({
 				url : "<c:url value='/Admin/Noticeinsert.hst'/>",
 				data : {
@@ -61,8 +65,7 @@
 </script>
 <body>
 	<div class="page-container">
-		<div class="section__content section__content--p30"
-			style="padding-top: 50px">
+		<div class="section__content section__content--p30" style="padding-top: 50px">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-10 col-md-push-2">

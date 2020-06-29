@@ -1,107 +1,96 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!-- 실제 내용 시작 -->
-<div class="container">
-	<!-- 점보트론(Jumbotron) -->
-	<div class="jumbotron">
-		<h1>
-			한줄 메모 게시판<small>등록페이지</small>
-		</h1>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<form class="form-horizontal" method="post" action="<c:url value='/OneMemo/BBS/Write.bbs'/>">
-				<!-- 씨큐리티 적용:csrf취약점 방어용 -->
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">제목</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" name="title" placeholder="제목을 입력하세요?">
-					</div>
-				</div>
-
-
-				<div class="form-group">
-					<label class="col-sm-2 control-label">내용</label>
-					<!-- 중첩 컬럼 사용 -->
-					<div class="col-sm-10">
-						<div class="row">
-							<div class="col-sm-8">
-								<textarea class="form-control" name="content" rows="5"
-									placeholder="내용 입력하세요"></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">등록</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-
-</div>
-<!-- container -->
-
-<!-- 경고창 모달 시작 -->
-<div class="modal fade" id="small-modal" data-backdrop="static">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-body">
-				<button class="close" data-dismiss="modal">
-					<span>&times;
-				</button>
-				</button>
-				<h4 class="modal-title">
-					<span class="glyphicon glyphicon-bullhorn">경고 메시지</span>
-				</h4>
-				<h5 id="warningMessage"></h5>
-			</div>
-
-		</div>
-	</div>
-</div>
-
-<!-- 경고창 모달 끝 -->
-<!-- 실제 내용 끝 -->
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="en">
+<style>
+#footer{
+position:absolute;
+top: 1300px;
+width: 100%;
+}
+</style>
 <script>
-	    
-    	$(function(){
-    		
-    		var focusObject;
-    		
-    		
-    		//모달창이 닫혔을때 발생하는 이벤트 처리 - 해당 객체에 포커스 주기
-    		$('#small-modal').on('hidden.bs.modal', function (e) {
-    			focusObject.focus();    			
-    		});
-    		
-    		$('form').on('submit',function(){
-    			
-    			
-    			if($(this).get(0).title.value==""){
-    				$('#warningMessage').html('제목을 입력하세요');
-    				$('#small-modal').modal('show');
-    				focusObject=$(this).get(0).title; 				
-    				return false;
-    			}
-    			
-    			if($(this).get(0).content.value==""){
-    				$('#warningMessage').html('내용을 입력하세요');
-    				$('#small-modal').modal('show');
-    				focusObject=$(this).get(0).content; 				
-    				return false;
-    			}
-    				
-    			
-    		});   		
-    		
-    	});
-    
-    </script>
+$(function() {
+
+$('#next').on('click', function(){
+
+	var user;
+	var content;
+	var title;
+
+	title = $('#text-input').val();
+	content = $('#textarea-input').val();
+	user = $('#userId').val();
+	
+	console.log("user"+user)
+	console.log("content"+content)
+	console.log("title"+title)
+	
+	$.ajax({
+		url: "<c:url value='/QnA/QnaInsert.hst'/>",
+		data: {
+			"title" : title,
+			"content" : content,
+			"user" : user
+				}, //넘길 파라미터 
+		dataType: 'html',
+		async: true, // true:비동기, false:동기 
+		success: function(data){ 
+			console.log('성공');
+			window.location.href = "<c:url value='/QnA/QnA.hst'/>";
+		},
+		error:function(request,status,error){
+			console.log('실패');
+			alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+		} 
+	});
+});
+});
+</script>
+<body>
+	<div class="page-container">
+		<div class="section__content section__content--p30"
+			style="padding-top: 150px;">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-10 col-md-push-2">
+						<div class="card">
+							<div class="card-header">
+								<strong>QNA 작성</strong>
+							</div>
+							<input type="hidden" id="userId" value="${userId }"/>
+							<div class="card-body card-block" style="padding-top:100px">
+<!-- 								<form action="" method="post" enctype="multipart/form-data" -->
+<!-- 									class="form-horizontal"> -->
+									<div class="row form-group">
+										<div class="col-12 col-md-12">
+											<input type="text" id="text-input" name="text-input"
+												placeholder="제목" class="form-control"> <small
+												class="form-text text-muted"></small>
+												<input type="hidden" id="user" value=""/>
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col-12 col-md-12">
+											<textarea name="textarea-input" id="textarea-input" rows="15"
+												placeholder="내용" class="form-control"></textarea>
+										</div>
+									</div>
+			
+									<div class="">
+										<button type="button" id="next" class="btn btn-primary btn-sm" style="position: absolute; right: 20px; bottom: 20px;">
+												<i class="fa fa-dot-circle-o"></i> 작성
+											</button>
+									</div>
+<!-- 								</form> -->
+							</div>
+								</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+</script>
