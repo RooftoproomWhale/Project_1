@@ -15,73 +15,85 @@ import com.kosmo.proj.util.CustomUserDetails;
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
 
-	@Resource(name="memberDAO")
-	private MemberDAO dao;
+   @Resource(name="memberDAO")
+   private MemberDAO dao;
 
-	@Override
-	public boolean isLogin(Map map) {
-		return dao.isLogin(map);
-	}
+   @Override
+   public boolean isLogin(Map map) {
+      return dao.isLogin(map);
+   }
 
-	@Override
-	public MemberDTO isLogin(MemberDTO member) {
-		return dao.isLogin(member);
-	}
+   @Override
+   public MemberDTO isLogin(MemberDTO member) {
+      return dao.isLogin(member);
+   }
 
-	@Override
-	public List<MemberDTO> selectList(Map map) {
-		return dao.selectList(map);
-	}
+   @Override
+   public List<MemberDTO> selectList(Map map) {
+      return dao.selectList(map);
+   }
 
-	@Override
-	public int getTotalRecord(Map map) {
-		return dao.getTotalRecord(map);
-	}
+   @Override
+   public int getTotalRecord(Map map) {
+      return dao.getTotalRecord(map);
+   }
 
-	@Override
-	public MemberDTO selectOne(Map map) {
-		return dao.selectOne(map);
-	}
+   @Override
+   public MemberDTO selectOne(Map map) {
+      return dao.selectOne(map);
+   }
 
-	@Override
-	public int delete(Map map) {
-		return dao.delete(map);
-	}
+   @Override
+   public int delete(Map map) {
+      return dao.delete(map);
+   }
 
-	@Override
-	public int insert(Map map) {
-		return dao.insert(map);
-	}
+   @Override
+   public int insert(Map map) {
+      return dao.insert(map);
+   }
 
-	@Override
-	public int update(Map map) {
-		return dao.update(map);
-	}
+   @Override
+   public int update(Map map) {
+      return dao.update(map);
+   }
 
-	public int diseaseupdate(Map map) {
-		// TODO Auto-generated method stub
-		return dao.diseaseupdate(map);
-	}
+   public int diseaseupdate(Map map) {
+      // TODO Auto-generated method stub
+      return dao.diseaseupdate(map);
+   }
 
-	public List<MemberDTO> selectDiseaseList(Map map) {
+   public List<MemberDTO> selectDiseaseList(Map map) {
 
-		return dao.diseaseSelect(map);
-	}
+      return dao.diseaseSelect(map);
+   }
 
-	public List<Map<String, Integer>> selectCount(Map map) {
+   public List<Map<String, Integer>> selectCount(Map map) {
 
-		return dao.selectCount(map);
-	}
+      return dao.selectCount(map);
+   }
 
-	@Override
-	public List<HospitalDTO> selectHosSearch(Map map) {
-		// TODO Auto-generated method stub
-		return dao.selectHosSearch(map);
-	}
-	@Override
-	public CustomUserDetails getUserById(String username) {
-		return dao.getUserById(username);
-	}
+   @Override
+   public List<HospitalDTO> selectHosSearch(Map map) {
+      // TODO Auto-generated method stub
+      return dao.selectHosSearch(map);
+   }
+   @Override
+   public CustomUserDetails getUserById(String username) {
+      return dao.getUserById(username);
+   }
+
+   @Override
+   public List<HospitalDTO> selectedHosp(Map map) {
+      // TODO Auto-generated method stub
+      return dao.selectedHosp(map);
+   }
+
+   @Override
+   public int hosAuthSub(Map map) {
+      // TODO Auto-generated method stub
+      return dao.hosAuthSub(map);
+   }
 
 
 
