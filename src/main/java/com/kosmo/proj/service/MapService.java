@@ -21,4 +21,6 @@ public interface MapService {
 	//현재 위치 기준 병원,약국 불러오기
 	List<HospitalDTO> selectHospitalByXY(Map map);
 	List<PharmacyDTO> selectPharmacyByXY(Map map);
+	
+	int selectCntReservation(Map map);
 }

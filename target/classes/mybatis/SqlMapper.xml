@@ -14,16 +14,6 @@
    <insert id="signInsert" parameterType="java.util.Map"> 
       INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{name}, #{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable}, SYSDATE )
    </insert>
-   <select id="signView" parameterType="java.util.Map">
-      SELECT * FROM MEMBER WHERE MEM_EMAIL = #{email}
-   </select>
-    <delete id="signDelete" parameterType="java.util.Map">
-      DELETE FROM MEMBER WHERE MEM_EMAIL = #{email}
-   </delete>
-   <update id="signUpdate" parameterType="java.util.Map">
-      UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel}, 
-      height = #{height}, weight = {weight} where mem_email = #{email} 
-   </update>
    <!-- 회원가입 검색 병원 -->
    <select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
       SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 10
@@ -32,32 +22,10 @@
       SELECT * FROM HOSPITAL WHERE HOSP_NAME = #{hosp_name}
    </select>
    <update id="hosAuthSub" parameterType="java.util.Map">
-      UPDATE HOSPITAL SET AUTH = '승인대기중' WHERE HOSP_NAME = #{hosp_name}
+      UPDATE HOSPITAL SET AUTH = '승인대기중' WHERE HOSP_NAME = #{name}
    </update>
 
-     <!-- 공지사항 추가하기 -->
-    <insert id="insertNotice">
-        insert into NOTIFICATION_BBS values(SEQ_NOTIFICATION.nextval, #{user}, #{title}, #{content}, SYSDATE, null)
-    </insert>
-    <!-- 공지사항 리스트보기 -->
-    <select id="listNotice" resultType="BoardDTO">
-       select * from NOTIFICATION_BBS order by noti_no DESC
-    </select>
-   <!-- 공지사항 상세보기 -->
-    <select id="detailNotice" resultType="BoardDTO">
-        select * from NOTIFICATION_BBS where noti_no = #{no}
-    </select>
-   <!-- 공지사항 삭제하기 -->
-    <delete id="deleteNotice">
-        delete from NOTIFICATION_BBS where noti_no = #{no}
-    </delete>
-   <!-- 공지사항 수정하기 -->
-    <update id="updateNotice"> 
-        update NOTIFICATION_BBS set title=#{title} , content = #{content} where noti_no = #{no} 
-    </update> 
-    
-    <!-- QnA -->
-    <!-- 전체 -->
+	<!-- QnA -->
    	<select id="listQnA" parameterType="java.util.Map" resultType="QnADTO">
 		select * from qna
 	</select>
@@ -80,22 +48,36 @@
  	<select id="viewQnA" parameterType="java.util.Map" resultType="QnADTO">
  		select * from qna where qna_no=#{no} 
  	</select>
- 	
-   
-    <!-- <insert id="signInsert" parameterType="java.util.Map"> 
-      INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable} )
-    <insert id="signInsert" parameterType="java.util.Map"> 
-      INSERT INTO MEMBER VALUES(#{mem_email}, #{mem_pwd}, #{mem_name} ,#{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable},SYSDATE )
+
+    <!-- 공지사항 추가하기 -->
+    <insert id="insertNotice">
+        insert into NOTIFICATION_BBS values(SEQ_NOTIFICATION.nextval, #{user}, #{title}, #{content}, SYSDATE, null)
     </insert>
-    
+    <!-- 공지사항 리스트보기 -->
+    <select id="listNotice" resultType="BoardDTO">
+       select * from NOTIFICATION_BBS order by noti_no DESC
+    </select>
+    <!-- 공지사항 상세보기 -->
+    <select id="detailNotice" resultType="BoardDTO">
+        select * from NOTIFICATION_BBS where noti_no = #{no}
+    </select>
+    <!-- 공지사항 삭제하기 -->
+    <delete id="deleteNotice">
+        delete from NOTIFICATION_BBS where noti_no = #{no}
+    </delete>
+    <!-- 공지사항 수정하기 -->
+    <update id="updateNotice"> 
+        update NOTIFICATION_BBS set title=#{title} , content = #{content} where noti_no = #{no} 
+    </update> 
+
+  
     <select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
        SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
     </select>
     
    <select id="seletnew" parameterType="java.util.Map" resultType="reservationDTO">
-   SELECT h.hosp_name,r.sel_symp FROM reservation r JOIN hospital h on r.hosp_code=h.hosp_code
-   WHERE r.mem_email = #{id} AND RES_DATE=(SELECT MAX(RES_DATE)FROM reservation)
-   
+  	 SELECT h.hosp_name,r.sel_symp FROM reservation r JOIN hospital h on r.hosp_code=h.hosp_code
+   		WHERE r.mem_email = #{id} AND RES_DATE=(SELECT MAX(RES_DATE)FROM reservation)
    </select>
     
     <select id="getUserById" parameterType="java.lang.String" resultType="CustomUserDetails">
@@ -112,8 +94,7 @@
        
     <update id="signUpdate" parameterType="java.util.Map" >
       UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel},  height = #{height},weight = #{weight} where mem_email = #{id} 
-    </update> -->
-    
+    </update> 
     
    <insert id="memoInsert" parameterType="java.util.Map">
       INSERT INTO onememo(no,title,content,id)
@@ -137,9 +118,7 @@
       SELECT * FROM hospital
    </select>
    <select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-      <!-- SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%' -->
-      SELECT H.*, D.dept_name FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code
-	  WHERE H.hosp_name LIKE '%' || #{search_keyword} || '%'
+      SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
    </select>
    <select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
       SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
@@ -149,21 +128,17 @@
    </select>
    
    <select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
-      <!-- SELECT D.dept_name, HD.*
+      SELECT D.dept_name, HD.*
       FROM
       (SELECT H.*, D.dept_code FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_code = D.dept_code
-      WHERE HD.address = #{address} -->
-      SELECT HD.*
-      FROM
-      (SELECT H.*, D.dept_name FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_name = D.dept_name
       WHERE HD.address = #{address}
    </select>
 
    <select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
       SELECT *
       FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
-      AS distanceByXY, h.*,D.dept_name
-      FROM hospital h JOIN hos_dept D ON h.hosp_code = d.hosp_code) disData
+      AS distanceByXY, h.*
+      FROM hospital h) disData
       WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
    </select>
 
