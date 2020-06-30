@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.proj.service.CalendarDTO;
+import com.kosmo.proj.service.MedicineInfoDTO;
 import com.kosmo.proj.service.ReservationDTO;
 import com.kosmo.proj.service.impl.CalendarServiceImpl;
 
@@ -27,13 +28,13 @@ public class CalendarController {
 	private CalendarServiceImpl calendarDAO;
 
 
-	@RequestMapping(value="/Calendar/View.hst",produces = "text/html; charset=UTF-8")
+	@RequestMapping(value="/Calendar/View.hst",produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String ViewCalendar(@RequestParam Map map,Authentication auth) {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		 map.put("id",id); 
-		 ObjectMapper mapper = new ObjectMapper(); 
+		 ObjectMapper mapper = new ObjectMapper();
 		 	String jsonStr = null; 
 			 String jsonStr2 = null; 
 			 try {
@@ -47,12 +48,13 @@ public class CalendarController {
 		 else {
 			 System.out.println("캘린더 실행");
 		 List<CalendarDTO> list = calendarDAO.selectList(map);
+		 
 		 List<ReservationDTO> list2 = calendarDAO.selectList2(map);
 	  jsonStr = mapper.writeValueAsString(list); 
 	  jsonStr2 = mapper.writeValueAsString(list2); 
 		 }}catch (JsonProcessingException
 		  e) { e.printStackTrace(); }
-
+			
 		 String str="";
 		 if(jsonStr.equals("[]") || jsonStr2.equals("[]")) {
 			str = jsonStr;
@@ -103,8 +105,8 @@ public class CalendarController {
 		}
 		return String.valueOf(result);
 	}///delete
-	
-	
+	//
+
 
 	@RequestMapping("/Calendar/calendar.hst")
 	public String calendar() {

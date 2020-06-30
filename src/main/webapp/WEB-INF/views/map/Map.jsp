@@ -418,6 +418,8 @@
       <div class="modal-content">
          <form method="post" action="<c:url value='/Homespital/Map/Reservation.hst'/>">
          	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+         	<input type="hidden" id="address" name="address" value=""/>
+         	<input type="hidden" id="department" name="department" value=""/>
             <div class="modal-header">
                <button class="close" data-dismiss="modal">
                   <span>&times;</span>
@@ -429,13 +431,13 @@
                   <div class="col-sm-6">
                      <div class="form-group">
                         <span class="form-label">이름</span>
-                        <input class="form-control" type="text" value="${MemberDTO.mem_name}" disabled>
+                        <input class="form-control" type="text" name="name" value="${MemberDTO.mem_name}" disabled>
                      </div>
                   </div>
                   <div class="col-sm-6">
                      <div class="form-group">
                         <span class="form-label">이메일</span>
-                        <input class="form-control" type="email" value="${MemberDTO.mem_email}" disabled>
+                        <input class="form-control" type="email" name="email" value="${MemberDTO.mem_email}" disabled>
                      </div>
                   </div>
                </div>
@@ -443,17 +445,17 @@
                   <div class="col-sm-6">
                      <div class="form-group">
 	                   <span class="form-label">전화번호</span>
-	                   <input class="form-control" type="tel" value="${MemberDTO.tel}" disabled>
+	                   <input class="form-control" type="tel" name="tel" value="${MemberDTO.tel}" disabled>
 	                 </div>
                   </div>
                   <div class="col-sm-6">
                      <div class="form-group">
 	                   <span class="form-label">병원 이름</span>
-	                   <input class="form-control" id="modal_hosp_name" type="text" disabled>
+	                   <input class="form-control" id="modal_hosp_name" name="hosp_name" type="text" disabled>
 	                 </div>
                   </div>
                </div>
-               <div class="form-group">
+               <!-- <div class="form-group">
                   <span class="form-label">진료실</span>
                   <div class="btn-group">
                      <label class="radio-inline form-label"><input type="radio" name="optradio" checked>내과</label>
@@ -470,12 +472,12 @@
                      <label class="radio-inline form-label"><input type="radio" name="optradio">일반진료</label>
                      <label class="radio-inline form-label"><input type="radio" name="optradio">기타</label>
                   </div>
-               </div>
+               </div> -->
                <div class="row">
                   <div class="col-sm-5">
                      <div class="form-group">
                         <span class="form-label">예약 날짜</span>
-                        <input class="form-control" id="reservation_date" type="text" placeholder="날짜를 선택해주세요" autocomplete="off" required>
+                        <input class="form-control" id="reservation_date" type="text" name="datepick" placeholder="날짜를 선택해주세요" autocomplete="off" required>
                      </div>
                   </div>
                   <div class="col-sm-7">
@@ -483,7 +485,7 @@
                         <div class="col-sm-4">
                            <div class="form-group">
                               <span class="form-label">오전/오후</span>
-                              <select id="AM_PM" class="form-control">
+                              <select id="AM_PM" name="am_pm" class="form-control">
 <!--                                  <option>오전</option>
                                  <option>오후</option> -->
                               </select>
@@ -493,7 +495,7 @@
                         <div class="col-sm-4">
                            <div class="form-group">
                               <span class="form-label">시</span>
-                              <select id="Hour" class="form-control">
+                              <select id="Hour" name="hour" class="form-control">
                                  <!-- <option>1</option>
                                  <option>2</option>
                                  <option>3</option>
@@ -513,7 +515,7 @@
                         <div class="col-sm-4">
                            <div class="form-group">
                               <span class="form-label">분</span>
-                              <select id="Minute" class="form-control">
+                              <select id="Minute" name="minute" class="form-control">
                                  <!-- <option>05</option>
                                  <option>10</option>
                                  <option>15</option>
@@ -535,7 +537,7 @@
                </div>
             </div>
             <div class="modal-footer">
-               <button class="btn btn-success">예약</button>
+               <button class="btn btn-success" onclick="reservationClick()">예약</button>
                <button class="btn btn-info" data-dismiss="modal">닫기</button>
             </div>
          </form>
@@ -764,12 +766,15 @@
       $('#Minute').change(function(){
     	  alert(this.value);
       });
+      
    });
 </script>
 <script>
 
    var markers = [];
 
+   var intervalReservation;
+   
    var currentLatLng;
    
    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -923,26 +928,16 @@
                   });
                   
                   kakao.maps.event.addListener(marker, 'click', function(){
+                	 clearInterval(intervalReservation)
                      console.log("modal",item,i)
                      console.log($('.info_wrap').hasClass('warp_invisible'));
                      console.log($('.info-toggle').hasClass('left_toggle'));
                      console.log('auth',item.auth);
                      if(item.auth == '제휴승인됨'){
-                    	 $.ajax({
-                        	 url:"<c:url value='/Homespital/Map/Hospital/countReservation.hst'/>",
-                        	 type:'get',
-                             datatype:'json',
-                             data:{"address":item.address},
-                             success:function(data){
-                            	console.log(data); 
-                            	$(".reservation_info").empty();
-                            	createReservationTable(data);
-                            	$(".reservation_info").show();
-                             },
-                             error:function(e){
-                            	console.log(e); 
-                             }
-                         });
+                    	 refreshReservation(item);	
+                    	 intervalReservation = setInterval(() => {
+                    		refreshReservation(item);	
+                 		 }, 500);
                      }
                      else
                    	 {
@@ -1558,7 +1553,6 @@
                      '</div>'+
                      '<div class="inner_summary_info">'+
                         '<span>'+deptname+'</span>'+
-                        '<span>제휴병원</span>'+
                      '</div>'+
                   '</div>'+
                   '<div class="inner_btn_area">'+
@@ -1639,11 +1633,17 @@
       function reservation_show(){
          console.log($('#reservation-modal'));
          console.log($(".inner_title").text());
+         console.log($(".inner_end_box:eq(0)").text());
+         console.log($(".inner_summary_info").text());
          $('#modal_hosp_name').attr('value',$(".inner_title").text());
+         $('#address').attr('value',$(".inner_end_box:eq(0)").text());
+         $('#department').attr('value',$(".inner_summary_info").text());
          $('#reservation-modal').modal('show');
    
       }
-
+      function reservationClick(){
+    	  return true;
+      }
       function changeApi(status)
       {
          apiStatus = status;
@@ -1675,6 +1675,25 @@
          
          $('.load_wrap').hide();
          
+      }
+      
+      function refreshReservation(item){
+    	  console.log('item',item)
+    	  $.ajax({
+         	 url:"<c:url value='/Homespital/Map/Hospital/countReservation.hst'/>",
+         	 type:'get',
+              datatype:'json',
+              data:{"address":item.address},
+              success:function(data){
+             	console.log(data); 
+             	$(".reservation_info").empty();
+             	createReservationTable(data);
+             	$(".reservation_info").show();
+              },
+              error:function(e){
+             	console.log(e); 
+              }
+          });
       }
       
       function changeAM_PM(date,day) {

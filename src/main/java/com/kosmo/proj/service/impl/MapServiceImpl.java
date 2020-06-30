@@ -83,4 +83,10 @@ public class MapServiceImpl implements MapService{
 		return dao.selectCntReservation(map);
 	}
 
+	@Override
+	public int insertReservation(Map map) {
+		// TODO Auto-generated method stub
+		return dao.insertReservation(map);
+	}
+
 }
