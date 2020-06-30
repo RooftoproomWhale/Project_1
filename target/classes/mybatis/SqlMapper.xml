@@ -48,10 +48,10 @@
  	
  	<!-- QnA 답글 -->
 	<update id="commentInsert" parameterType="java.util.Map">
-      UPDATE QNA SET ANSWER_TITLE = #{answerTitle}, ANSWER_CONTENT = #{answerContent} WHERE no = #{no}
+      UPDATE QNA SET ANSWER_CONTENT = #{answer} WHERE no = #{no}
    </update>
    <update id="commentUpdate" parameterType="java.util.Map">
-      UPDATE QNA SET ANSWER_TITLE = #{answerTitle}, ANSWER_CONTENT = #{answerContent} WHERE cno = #{cno}
+      UPDATE QNA SET ANSWER_CONTENT = #{answer} WHERE cno = #{cno}
    </update>
    <delete id="commentDelete" parameterType="java.util.Map">
       DELETE QNA WHERE cno = #{cno}

@@ -45,6 +45,7 @@ body {
    /*stacking fieldsets above each other*/
    position: relative;
 }
+
 /*Hide all except first fieldset*/
 #msform fieldset:not(:first-of-type) {
    display: none;
@@ -995,7 +996,7 @@ width: 100%;
                  });
         });
    });
-
+   
    function searchHospClick(i) {
       var hospName = $('#hospName' + i).html();
       console.log('#hospName' + i);
@@ -1383,7 +1384,6 @@ width: 100%;
          <input type="button" name="previous" class="previous action-button" value="이전" /> 
          <input type="button" id="signupBtn" class="action-button" value="회원가입" />
       </fieldset>
-      
       <fieldset>
          <h1 class="fs-title">병원 제휴</h1>
          <h3 class="fs-subtitle">병원을 선택해주세요</h3>

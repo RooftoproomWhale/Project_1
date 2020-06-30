@@ -22,19 +22,19 @@ public class MemoCommentServiceImpl implements MemoCommentService {
 	}
 
 	@Override
-	public void insert(Map map) {
-		dao.insert(map);
+	public int insert(Map map) {
+		return dao.insert(map);
 	}
 
 	@Override
-	public void delete(Map map) {
-		dao.delete(map);
+	public int delete(Map map) {
+		return dao.delete(map);
 
 	}
 
 	@Override
-	public void update(Map map) {
-		dao.update(map);
+	public int update(Map map) {
+		return dao.update(map);
 
 	}
 

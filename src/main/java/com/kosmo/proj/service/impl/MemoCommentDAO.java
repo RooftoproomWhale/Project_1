@@ -24,19 +24,19 @@ public class MemoCommentDAO implements MemoCommentService {
 	}
 
 	@Override
-	public void insert(Map map) {
-		sqlMapper.insert("commentInsert",map);
+	public int insert(Map map) {
+		return sqlMapper.insert("commentInsert",map);
 	}
 
 	@Override
-	public void delete(Map map) {
-		sqlMapper.update("commentDelete", map);
+	public int delete(Map map) {
+		return sqlMapper.update("commentDelete", map);
 
 	}
 
 	@Override
-	public void update(Map map) {
-		sqlMapper.update("commentUpdate", map);
+	public int update(Map map) {
+		return sqlMapper.update("commentUpdate", map);
 	}
 
 }

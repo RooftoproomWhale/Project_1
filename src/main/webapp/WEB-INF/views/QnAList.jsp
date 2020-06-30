@@ -30,8 +30,8 @@
 				<br />
 				<div class="container">
 					<div class="jumbotron">
-						<h1>
-							Homespital &nbsp;<small>List page</small>
+						<h1 style="color: #00a5c2;">
+							Homespital &nbsp;<small style="color: black">List page</small>
 						</h1>
 					</div>
 					<div class="row" style="margin-bottom: 10px">
@@ -80,7 +80,7 @@
 					<div class="row">
 						<div class="text-center">
 							<form class="form-inline" method="post"
-								action="<c:url value='/OneMemo/BBS/List.bbs'/>">
+								action="<c:url value=''/>">
 								<div class="form-group">
 									<select name="searchColumn" class="form-control">
 										<option value="title">제목</option>

@@ -70,8 +70,8 @@ $('#next').on('click', function(){
 				<br />
 				<div class="container">
 					<div class="jumbotron">
-						<h1>
-							Homespital &nbsp;<small>Write page</small>
+						<h1 style="color: #00a5c2">
+							Homespital &nbsp;<small style="color: black">Write page</small>
 						</h1>
 					</div>
 					<div style="width: 60%; margin: auto;">
