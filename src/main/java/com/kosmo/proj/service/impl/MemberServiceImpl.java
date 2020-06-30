@@ -95,6 +95,12 @@ public class MemberServiceImpl implements MemberService{
       return dao.hosAuthSub(map);
    }
 
+@Override
+public int hosIdUpdate(Map map) {
+	// TODO Auto-generated method stub
+	return dao.hosIdUpdate(map);
+}
+
 
 
 

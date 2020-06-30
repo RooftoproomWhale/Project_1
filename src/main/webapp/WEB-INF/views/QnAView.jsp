@@ -31,16 +31,25 @@
 
 		//코멘트 입력 및 수정처리]
 		$('#submit').click(function() {
+			var answer = $('#answer').val();
+			var no = $('#no').val();
+			console.log(answer);
+			console.log(no);
 			if ($(this).val() == '등록')
-				var action = "<c:url value='/QnA/QnAView.hst'/>";
+				var action = "<c:url value='/QnA/InsertAnswer.hst'/>";
 			else
 				var action = "<c:url value='/QnA/QnAEdit.hst'/>";
 			//ajax로 요청]
 			$.ajax({
 				url : action,
-				data : $('#frm').serialize(),
+				data : 
+					{
+						"answer" : answer,
+						"no" : no
+					}
+					,
 				dataType : 'text',
-				type : 'post',
+				type : 'get',
 				success : function(data) {
 					console.log(data);
 					//글 등록후 코멘트 목록 뿌져주는 함수 다시 호출
@@ -154,8 +163,8 @@
 				<br />
 				<div class="container">
 					<div class="jumbotron">
-						<h1>
-							Homespital &nbsp;<small>Detailed view</small>
+						<h1 style="color: #00a5c2">
+							Homespital &nbsp;<small style="color: black">Detailed view</small>
 						</h1>
 					</div>
 
@@ -215,15 +224,16 @@
 		<div class="col-md-offset-3 col-md-6">
 			<div class="text-center">
 				<!-- 한줄 코멘트 입력 폼-->
-				<h2>한줄 댓글 입력 폼</h2>
-				<form class="form-inline" id="frm" method="post">
+				<h2>QnA 답변</h2>
+				<form class="form-inline" id="frm" method="">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+					<input type="hidden" id="no" value="${record.no}" />
 					<!-- 수정 및 삭제용 파라미터 -->
-					<input type="hidden" name="cno" /> 
-					<input placeholder="댓글을 입력하세요" id="title" class="form-control" type="text" size="50" name="linecomment" /> 
+					<input type="hidden" id="cno" /> 
+					<input placeholder="답글을 입력하세요" id="answer" class="form-control" type="text" size="50" name="linecomment" />
 					<input class="btn btn-success" id="submit" type="button" value="등록" />
 				</form>
 				<div class="row" id="comments">
-
 				</div>
 			</div>
 		</div>

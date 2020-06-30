@@ -18,8 +18,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Resource(name = "adminDAO")
 	private AdminDAO dao;
-
-
 	@Override
 	public boolean isLogin(Map map) {
 		// TODO Auto-generated method stub

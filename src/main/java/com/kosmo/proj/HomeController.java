@@ -47,32 +47,80 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-
-		return "index.tiles";
-	}
-
-	@RequestMapping("/Home/ToHomePage.hst")
-	public String toHome(Authentication auth)
+	public String home(Locale locale, Model model, Authentication auth) 
 	{
 		System.out.println(auth);
 		if(auth != null)
 		{
 			UserDetails userDetails = (UserDetails)auth.getPrincipal();
 			Collection authorities = userDetails.getAuthorities();
-			
+			String user = userDetails.getUsername();
+			System.out.println(user);
 			for(Object authority:authorities)
 			{
 				System.out.println(((GrantedAuthority)authority).getAuthority());
 				if(((GrantedAuthority)authority).getAuthority().equals("ROLE_ADM"))
 				{
+					model.addAttribute("user", user);
+					model.addAttribute("role", "ADM");
 					return "redirect:/Admin/Index.hst";
 				}
+				else if(((GrantedAuthority)authority).getAuthority().equals("ROLE_MEM"))
+				{
+					model.addAttribute("user", user);
+					model.addAttribute("role", "MEM");
+					return "index.tiles";
+				}
+				else
+				{
+					model.addAttribute("user", user);
+					model.addAttribute("role", "HOS");
+					return "index.tiles";
+				}
 			}
-
 		}
-		
-		
+		System.out.println("권한 없");
+		model.addAttribute("user", null);
+		model.addAttribute("role", "NO");
+		return "index.tiles";
+	}
+
+	@RequestMapping("/Home/ToHomePage.hst")
+	public String toHome(Authentication auth, Model model)
+	{
+		System.out.println(auth);
+		if(auth != null)
+		{
+			UserDetails userDetails = (UserDetails)auth.getPrincipal();
+			Collection authorities = userDetails.getAuthorities();
+			String user = userDetails.getUsername();
+			System.out.println(user);
+			for(Object authority:authorities)
+			{
+				System.out.println(((GrantedAuthority)authority).getAuthority());
+				if(((GrantedAuthority)authority).getAuthority().equals("ROLE_ADM"))
+				{
+					model.addAttribute("user", user);
+					model.addAttribute("role", "ADM");
+					return "redirect:/Admin/Index.hst";
+				}
+				else if(((GrantedAuthority)authority).getAuthority().equals("ROLE_MEM"))
+				{
+					model.addAttribute("user", user);
+					model.addAttribute("role", "MEM");
+					return "index.tiles";
+				}
+				else
+				{
+					model.addAttribute("user", user);
+					model.addAttribute("role", "HOS");
+					return "index.tiles";
+				}
+			}
+		}
+		System.out.println("권한 없");
+		model.addAttribute("user", null);
+		model.addAttribute("role", "NO");
 		return "index.tiles";
 	}
 	
