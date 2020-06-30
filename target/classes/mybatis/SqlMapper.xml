@@ -172,6 +172,9 @@
    <select id="notiAuthCount" resultType="int">
    		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH = '승인대기중'
    </select>
+   <select id="userAuthCount" resultType="int">
+   		SELECT COUNT(*) FROM RESERVATION WHERE APPROVED = '승인됨' AND  MEM_EMAIL = #{user}
+   </select>
    
 <!--관리자단 -->
    <!-- 페이징 -->
@@ -331,7 +334,7 @@
 
    <!-- 사용자 관리 -->
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM (ELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)
+		SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<select id="selectMemberListUser" parameterType="java.util.Map" resultType="MemberDTO">
@@ -394,7 +397,7 @@
 		FROM (
 			SELECT ROWNUM RN, A.* 
 				FROM (
-						SELECT H.*, r.apply_time, r.approved, r.dept_name, r.mem_email, r.res_date, r.res_time, r.reserv_no, r.sel_symp FROM RESERVATION R JOIN HOSPITAL H ON R.HOSP_CODE = H.HOSP_CODE
+						SELECT H.HOSP_CODE, H.HOSP_NAME, R.MEM_EMAIL, r.apply_time, r.approved, r.dept_name, r.res_date, r.res_time, r.reserv_no, r.sel_symp FROM RESERVATION R JOIN HOSPITAL H ON R.HOSP_CODE = H.HOSP_CODE
 						) A
 				)
 		WHERE RN BETWEEN #{start} AND #{end}

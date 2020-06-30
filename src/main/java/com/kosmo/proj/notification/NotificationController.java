@@ -126,4 +126,30 @@ public class NotificationController {
 		System.out.println("currAuth: " + currAuthCount);
 		return currAuthCount;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/Noti/preAptCountUser.hst")
+	public int preAptCountUser(@RequestParam Map map, Model model, Authentication auth)
+	{
+		UserDetails userDetails = (UserDetails)auth.getPrincipal();
+		Collection authorities = userDetails.getAuthorities();
+		String user = userDetails.getUsername();
+		map.put("user", user);
+		int preAptCountUser = notificationService.preAptCountUser(map);
+		System.out.println("preAptCountUser: " + preAptCountUser);
+		return preAptCountUser;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/Noti/currAptCountUser.hst")
+	public int currAptCountUser(@RequestParam Map map, Model model, Authentication auth)
+	{
+		UserDetails userDetails = (UserDetails)auth.getPrincipal();
+		Collection authorities = userDetails.getAuthorities();
+		String user = userDetails.getUsername();
+		map.put("user", user);
+		int currAptCountUser = notificationService.currAptCountUser(map);
+		System.out.println("currAptCountUser: " + currAptCountUser);
+		return currAptCountUser;
+	}
 }

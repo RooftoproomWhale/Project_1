@@ -266,6 +266,14 @@ public class AdminController {
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = null;
 		List<ReservationDTO> list = adminService.selectOneApt(map);
+		System.out.println(list);
+		for (ReservationDTO val : list) {
+			System.out.println(val.getHOSP_NAME());
+			System.out.println(val.getRESERV_NO());
+			System.out.println(val.getMEM_EMAIL());
+			System.out.println(val.getAPPROVED());
+			System.out.println(val.getAPPLY_TIME());
+		}
 		try {
 			jsonStr = mapper.writeValueAsString(list);
 		} catch (JsonProcessingException e) {

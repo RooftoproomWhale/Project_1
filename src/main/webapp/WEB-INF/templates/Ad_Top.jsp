@@ -35,5 +35,88 @@
     
     <!-- Jquery JS-->
     <script src="<c:url value='/vendor/jquery-3.2.1.min.js'/>"></script>
+    <script>
+    var icon = '../img/logo.png';
+    
+//     $.ajax({
+// 		url:'<c:url value="/Noti/authCount.hst"/>',
+// 		dataType:'html',
+// 		success:function(data){
+// 				console.log("관리자 성공");
+// 				console.log("제휴 승인 대기 수: " + data);
+// 				admNotiTotal(data);
+// 				},
+// 		error:function(request,error){
+// 			console.log('에러:',error);
+// 		}
+// 	});
+	
+	$.ajax({
+		url:'<c:url value="/Noti/preAuthCount.hst"/>',
+		dataType:'html',
+		success:function(data){
+				console.log("성공");
+				console.log("로드 제휴 승인 대기 수: " + data);
+				preAuthCount = data;
+			},
+		error:function(request,error){
+			console.log('에러:',error);
+		}
+	});
+	
+	window.setInterval(function(){
+		
+		$.ajax({
+			url:'<c:url value="/Noti/currAuthCount.hst"/>',
+			dataType:'html',
+			success:function(data){
+					console.log("병원 성공");
+					console.log("현재 제휴 승인 대기 수: " + data);
+					if(data - preAuthCount != 0 )
+					{
+						console.log(data - preAuthCount);
+						gapCount = data - preAuthCount;
+						admNotiUpdate(gapCount);
+						preAuthCount = data;
+					}
+				},
+			error:function(request,error){
+				console.log('에러:',error);
+			}
+		});
+	}, 3000);
+	
+	function admNotiUpdate(count) {
+		text = count + '개의 새로운 제휴 신청이 있습니다';
+		console.log(text);
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('예약 알림이 있습니다', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+			};
+		}
+	
+// 	function admNotiTotal(count) {
+// 		text = count + '개의 제휴 신청이 대기중입니다';
+// 		console.log(text);
+// 		var options = 
+// 			{
+// 			      body: text,
+// 			      icon: icon
+// 		  	}
+// 			var noti = new Notification('예약 알림이 있습니다', options)
+			
+// 			noti.onclick = function(event) {
+// 				console.log('noti click');
+// 				window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+// 			};
+// 		}
+    </script>
     
 

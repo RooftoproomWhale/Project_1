@@ -991,7 +991,7 @@ width: 100%;
                     },
                     success : function(data) {
                        alert('제휴신청이 완료되었습니다');
-//                        window.location.href = "<c:url value='/Home/ToHomePage.hst'/>";
+                       window.location.href = "<c:url value='/Home/ToHomePage.hst'/>";
                     },
                     error : function(request, status, error) {
                        alert("아이디와 비밀번호를 확인하세요");
