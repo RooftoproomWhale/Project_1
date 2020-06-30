@@ -60,11 +60,15 @@ public class MapController {
 		return "map/Map.no_tiles";
 	}
 	
-	@RequestMapping(value="/Homespital/Map/Reservation.hst",method=RequestMethod.POST)
 	@ResponseBody
-	public String reservation() {
+	@RequestMapping(value="/Homespital/Map/Reservation.hst",method=RequestMethod.POST)
+	public String reservation(@RequestParam Map map) {
 		
-		return "";
+		int affected = mapService.insertReservation(map);
+		
+		System.out.println(affected);
+		
+		return String.valueOf(affected);
 	}
 	
 	@ResponseBody
