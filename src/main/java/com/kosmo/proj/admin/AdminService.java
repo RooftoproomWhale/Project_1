@@ -104,5 +104,7 @@ public interface AdminService {
 		List<BoardDTO> viewNotice(Map map);
 		int deleteNotice(Map map);
 		List<BoardDTO> detailNotice(Map map);
+		
+		List<Map> selectImage();
 
 }

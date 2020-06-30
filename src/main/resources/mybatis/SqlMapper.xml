@@ -86,6 +86,12 @@
     <update id="updateNotice"> 
         update NOTIFICATION_BBS set title=#{title} , content = #{content} where noti_no = #{no} 
     </update> 
+    <!-- 공지사항 카루셀 -->
+    <select id="selectImg" resultType="java.util.Map">
+    	SELECT file_addr,noti_no,ROWNUM FROM 
+		(SELECT * FROM notification_bbs WHERE file_addr is not NULL ORDER BY noti_no DESC) n
+		WHERE ROWNUM BETWEEN 1 AND 4
+    </select>
 
    <insert id="presInsert" parameterType="java.util.Map">
       INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
@@ -356,6 +362,11 @@
 	<select id="selectAuth_Search" parameterType="java.util.Map" resultType="HospitalDTO">
 		SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
+	<!-- snslogin user 정보 받기 -->
+	<select id="getUserById" resultType="CustomUserDetails">
+		SELECT * FROM member WHERE mem_email = #{username}
+	</select>
+	
 	
 	<!-- 예약 관리 -->
 	<select id="selectAptList" parameterType="java.util.Map" resultType="ReservationDTO">
