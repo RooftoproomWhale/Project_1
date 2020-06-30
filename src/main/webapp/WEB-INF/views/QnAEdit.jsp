@@ -61,8 +61,8 @@
 				<br />
 				<div class="container">
 					<div class="jumbotron">
-						<h1>
-							Homespital &nbsp;<small>Edit Page</small>
+						<h1 style="color: #00a5c2">
+							Homespital &nbsp;<small style="color: black">Edit Page</small>
 						</h1>
 					</div>
 					<div class="row">

@@ -22,7 +22,7 @@ public class MemoCommentController {
 	@Resource(name="commentService")
 	private MemoCommentService commentService;
 	//코멘트 입력처리]
-	@RequestMapping(value="/QnA/QnAView.hst",produces = "text/html; charset=UTF-8")
+	@RequestMapping(value="/QnA/InsertAnswer.hst",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String write(
 			@RequestParam Map map,
@@ -37,6 +37,7 @@ public class MemoCommentController {
 		//원본글의 번호 반환
 		return map.get("no").toString();
 	}////////
+
 	//특정 글번호에 대한 코멘트 목록 가져오기
 	@ResponseBody
 	@RequestMapping(value="/QnA/QnAList.hst",produces = "text/html; charset=UTF-8")
@@ -58,6 +59,7 @@ public class MemoCommentController {
 		//단,List에 저장된 객체는 반드시 Map이어야 한다
 		return JSONArray.toJSONString(list);
 	}
+
 	//코멘트 수정처리]
 	@RequestMapping(value="/QnA/QnAEdit.hst",produces = "text/html; charset=UTF-8")
 	@ResponseBody
@@ -68,6 +70,7 @@ public class MemoCommentController {
 		return String.format("%s:%s",
 				map.get("no").toString(),map.get("cno").toString());
 	}
+
 	//코멘트 삭제처리]
 	@RequestMapping(value="/QnA/QnADelete.hst",produces = "text/html; charset=UTF-8")
 	@ResponseBody

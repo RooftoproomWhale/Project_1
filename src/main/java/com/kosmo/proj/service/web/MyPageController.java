@@ -1,4 +1,7 @@
 package com.kosmo.proj.service.web;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -41,8 +44,12 @@ public class MyPageController {
 		List<MemberDTO> list = memberDAO.selectList(map);
 		List<Map<String, Integer>> count = memberDAO.selectCount(map);
 		List<ReservationDTO> list2 = calendarDAO.selectnew(map);
+		if(count.get(0).get("RESDATE")!=null) {
+		SimpleDateFormat day= new SimpleDateFormat("yyyy-MM-dd");
+		String newdate=day.format(count.get(0).get("RESDATE"));
+		model.addAttribute("resdate",newdate);
+		}
 		model.addAttribute("newres",list2);
-	
 		model.addAttribute("list", list);	
 		model.addAttribute("count", count);
 		return "Mypage_Main.my_tiles";

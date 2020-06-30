@@ -23,4 +23,5 @@ public interface MapService {
 	List<PharmacyDTO> selectPharmacyByXY(Map map);
 	
 	int selectCntReservation(Map map);
+	int insertReservation(Map map);
 }

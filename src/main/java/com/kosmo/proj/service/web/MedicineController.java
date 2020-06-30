@@ -12,6 +12,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.kosmo.proj.service.MedicineInfoDTO;
@@ -65,6 +67,33 @@ public class MedicineController {
 		return "MedicinManage.tiles";
 	}
 	
+	@RequestMapping(value="/Calendar/Management.hst",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String calendarmanagement(@RequestParam String dname,Map map) {
+		System.out.println(dname);
+		MedicineInfoDTO info = new MedicineInfoDTO();
+		String encodeSearch="";
+		 ObjectMapper mapper = new ObjectMapper();
+		List<MedicineInfoDTO> infos = new ArrayList<MedicineInfoDTO>();
+		String[] data=dname.split(",");
+		for(String data1 : data) {
+				System.out.println("데이타 : "+data1);
+		info = mediInfo(data1, info);
+        infos.add(info);
+		}
+		for(MedicineInfoDTO dats : infos) {
+			System.out.println("출력1: "+dats.getITEM_NAME());
+			System.out.println("출력2: "+dats.getENTP_NAME());
+		}
+		String jsonStr = null;
+		try {
+			 jsonStr = mapper.writeValueAsString(infos);
+		} catch (JsonProcessingException e) {e.printStackTrace();} 
+        map.put("info", info);
+		System.out.println(jsonStr);
+		return jsonStr;
+	}
+
 	@RequestMapping("/Homespital/MedicineForm.hst")
 	public String medicineForm(Map map) {
 		JSONObject jsonMedi = null;
@@ -101,7 +130,7 @@ public class MedicineController {
                 "&pageNo=1" +
                 "&item_name="+encodeSearch;
 		String responseBody = get(apiUrl);   
-        System.out.println(responseBody);
+  
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
@@ -113,7 +142,7 @@ public class MedicineController {
         }
         else
         	selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
-        System.out.println(selecOne.get("ITEM_IMAGE"));
+      
         dto.setITEM_IMAGE(selecOne.getString("ITEM_IMAGE"));
         dto.setCHART(selecOne.getString("CHART"));
         dto.setCOLOR_CLASS1(selecOne.getString("COLOR_CLASS1"));
@@ -137,7 +166,6 @@ public class MedicineController {
         
         String responseBody = get(apiUrl);
       
-        System.out.println(responseBody);
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
@@ -145,7 +173,7 @@ public class MedicineController {
         	return new MedicineInfoDTO();
         }
         else if((long)jsonMedi.getJSONObject("response").getJSONObject("body").get("totalCount")>1) {
-        	System.out.println((JSONObject)jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").get(0));
+        
         	selecOne = (JSONObject)jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").get(0);
         }
         else 
@@ -226,9 +254,9 @@ public class MedicineController {
                 result.append(returnLine+"\r");
             }
             urlconnection.disconnect();
-            System.out.println(result);
+           
             jsonMedi = XML.toJSONObject(result.toString());
-            System.out.println(jsonMedi);
+
         }catch(Exception e){
             e.printStackTrace();
         }
