@@ -24,6 +24,7 @@ body {
    font-family: montserrat, arial, verdana;
    background-color: #ffffff;
 }
+
 /*form styles*/
 #msform {
    width: 1000px;
@@ -1216,25 +1217,25 @@ width: 100%;
       </ul>
       <!-- fieldsets -->
       <fieldset>
-         <h1 class="fs-title" style= font-size:1em>약관 동의</h1>
+         <h1 class="fs-title" style= font-size:1.4em>약관 동의</h1>
          <h3 class="fs-subtitle">이용 약관에 동의 하셔야 이용이 가능합니다.</h3>
          <h4 class="scheme-g">서비스 이용 약관</h4>
-         <textarea name="chart" style="font-size: 1em;" disabled="disabled"><%=buff1 %></textarea>
+         <textarea name="chart" style="font-size: 0.9em;" disabled="disabled"><%=buff1 %></textarea>
          <p>
             <input class="ab" type="checkbox" id="check_1" name="" /> 위의 약관에 동의 합니다.
          </p><br/>
          <h4 class="scheme-g">개인정보 이용 약관</h4>
-         <textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff2 %></textarea>
+         <textarea name="chart2" style="font-size: 0.9em;" disabled="disabled"><%=buff2 %></textarea>
          <p>
             <input class="ab" type="checkbox" id="check_2" name="" /> 위의 약관에 동의 합니다.<br />
          </p><br/>
          <h4 class="scheme-g">위치기반서비스 이용 약관</h4>
-         <textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff3 %></textarea>
+         <textarea name="chart2" style="font-size: 0.9em;" disabled="disabled"><%=buff3 %></textarea>
          <p>
             <input class="ab" type="checkbox" id="check_3" name="" /> 위의 약관에 동의 합니다.<br />
          </p>
-         <p style="padding-top:5px; color: red">
-             <input class="check-all" type="checkbox" id="check_3" name="all" /> 전체 동의 시 체크<br /> 
+         <p style="padding-top:5px; color: red; font-size: 1.0em">
+             <input class="check-all" type="checkbox" id="check_3" name="all" /> <strong> 전체 동의 시 체크 </strong><br /> 
          </p>
    
 <!--          <input type="checkbox" id="check_authHos" name="" /> 병원 제휴 시 체크<br /> -->
@@ -1242,7 +1243,7 @@ width: 100%;
          <input type="button" name="nextBtn" class="nextBtn action-button" value="일반회원" />
       </fieldset>
       <fieldset>
-         <h1 class="fs-title" style="font-size: 1em">계정 정보</h1>
+         <h1 class="fs-title" style="font-size: 1.4em">계정 정보</h1>
          <h3 class="fs-subtitle">아이디로 사용할 e-mail과 비밀번호를 입력하세요.</h3>
          <div class="form-group">
             <div class="row">
@@ -1274,7 +1275,7 @@ width: 100%;
          
       </fieldset>
       <fieldset>
-         <h1 class="fs-title">개인 정보</h1>
+         <h1 class="fs-title" style="font-size: 1.4em">개인 정보</h1>
          <h3 class="fs-subtitle">개인 정보를 입력해주세요.</h3>
          <div class="form-group">
          <div class="row">
@@ -1339,7 +1340,7 @@ width: 100%;
 
       </fieldset>
       <fieldset>
-         <h1 class="fs-title">증상 및 질환</h1>
+         <h1 class="fs-title" style="font-size: 1.4em">증상 및 질환</h1>
          <h3 class="fs-subtitle">증상을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
          <div class="row">
             <div class="col-md-4">
@@ -1385,7 +1386,7 @@ width: 100%;
          <input type="button" id="signupBtn" class="action-button" value="회원가입" />
       </fieldset>
       <fieldset>
-         <h1 class="fs-title">병원 제휴</h1>
+         <h1 class="fs-title" style="font-size: 1.4em">병원 제휴</h1>
          <h3 class="fs-subtitle">병원을 선택해주세요</h3>
          <div class="row">
             <div class="col-md-8" style="padding-left:85px">
@@ -1416,7 +1417,7 @@ width: 100%;
          <input type="button" id="nextBtn1" class="action-button" value="다음" />
       </fieldset>
       <fieldset>
-         <h1 class="fs-title">병원 제휴</h1>
+         <h1 class="fs-title" style="font-size: 1.4em">병원 제휴</h1>
          <h3 class="fs-subtitle">사용할 아이디와 비밀번호를 입력하세요</h3>
             <div class="form-group">
                     <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">아이디 :</label>

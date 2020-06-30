@@ -14,7 +14,17 @@
 	background-color: #474747;
 	height: 150px
 }
-.jumbotron {
+.jumbotron{
+  	background-image: url('/img/intro-bg.jpg');
+  	background-size: cover;
+  	text-shadow: black 0.2em 0.2em 0.2em;
+  	color:white;
+}
+#table{
+	border-right:none;
+	border-left:none;
+	border-top:none;
+	border-bottom:none;
 }
 </style>
 <title>Q&A</title>
@@ -29,7 +39,7 @@
 				<p class="lead">회원님의 궁금증을 풀어드립니다.</p>
 				<br />
 				<div class="container">
-					<div class="jumbotron">
+					<div class="jumbotron" style="background-color: white">
 						<h1 style="color: #00a5c2;">
 							Homespital &nbsp;<small style="color: black">List page</small>
 						</h1>
@@ -41,13 +51,13 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<table class="table table-bordered table-hover text-center">
+							<table id="table"class="table table-bordered table-hover text-center">
 								<tr>
 									<!-- 각 컬럼의 폭은 <td>계열에 class="col-*-*"추가 -->
-									<th class="col-md-1 text-center">번호</th>
-									<th class="text-center">제목</th>
-									<th class="col-md-1 text-center">작성자</th>
-									<th class="col-md-2 text-center">등록일</th>
+									<th style="border: hidden;" class="col-md-1 text-center">번호</th>
+									<th style="border: hidden;" class="text-center">제목</th>
+									<th style="border: hidden;" class="col-md-1 text-center">작성자</th>
+									<th style="border: hidden;" class="col-md-2 text-center">등록일</th>
 								</tr>
 								<c:if test="${empty list}" var="isEmpty">
 									<tr>
@@ -56,14 +66,12 @@
 								</c:if>
 								<c:if test="${not isEmpty}">
 									<c:forEach items="${list}" var="item" varStatus="loop">
-										<tr>
+										<tr class="line">
 											<!-- 각 컬럼의 폭은 <td>계열에 class="col-*-*"추가 -->
-											<td>${item.qna_no}</td>
-											<td class="text-left"><a
-												href='<c:url value="/QnA/QnAView.hst?no=${item.qna_no}"/>'>${item.title}</a>
-												</td>
-											<td>${item.mem_email}</td>
-											<td>${item.q_date}</td>
+											<td style="border: hidden;">${item.qna_no}</td>
+											<td style="border: hidden;" class="text-left"><a href='<c:url value="/QnA/QnAView.hst?no=${item.qna_no}"/>'>${item.title}</a></td>
+											<td style="border: hidden;">${item.mem_email}</td>
+											<td style="border: hidden;">${item.q_date}</td>
 										</tr>
 									</c:forEach>
 								</c:if>

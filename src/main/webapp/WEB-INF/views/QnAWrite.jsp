@@ -18,6 +18,12 @@
 	background-color: #474747;
 	height: 150px
 }
+.jumbotron{
+  background-size: cover;
+  text-shadow: black 0.2em 0.2em 0.2em;
+  color:white;
+}
+
 </style>
 <script>
 $(function() {
@@ -63,13 +69,13 @@ $('#next').on('click', function(){
 	<div class="container" style="padding-top: 88px;">
 		<div class="row">
 			<main id="main">
-				<div class="page-header">
+				<div class="page-header" >
 					<h2 style="color: blue">Q&A</h2>
 				</div>
 				<p>회원님의 궁금증을 풀어드립니다.</p>
 				<br />
 				<div class="container">
-					<div class="jumbotron">
+					<div class="jumbotron" style="background-color: white">
 						<h1 style="color: #00a5c2">
 							Homespital &nbsp;<small style="color: black">Write page</small>
 						</h1>

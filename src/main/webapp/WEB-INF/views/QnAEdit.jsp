@@ -14,6 +14,12 @@
 	background-color: #474747;
 	height: 150px
 }
+.jumbotron{
+  background-size: cover;
+  text-shadow: black 0.2em 0.2em 0.2em;
+  color:white;
+}
+
 </style>
 <script>
 	$(function() {
@@ -60,7 +66,7 @@
 				<p class="lead">회원님의 궁금증을 풀어드립니다.</p>
 				<br />
 				<div class="container">
-					<div class="jumbotron">
+					<div class="jumbotron" style="background-color: white">
 						<h1 style="color: #00a5c2">
 							Homespital &nbsp;<small style="color: black">Edit Page</small>
 						</h1>

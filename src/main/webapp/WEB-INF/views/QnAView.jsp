@@ -21,6 +21,13 @@
 	background-color: #474747;
 	height: 150px
 }
+
+.jumbotron{
+  background-size: cover;
+  text-shadow: black 0.2em 0.2em 0.2em;
+  color:white;
+}
+
 </style>
 <script>
 	$(function() {
@@ -156,13 +163,13 @@
 	<div class="container" style="padding-top: 88px">
 		<div class="row">
 			<main id="main">
-				<div class="page-header">
+				<div class="page-header" >
 					<h2 style="color: blue">Q&A</h2>
 				</div>
 				<p class="lead">회원님의 궁금증을 풀어드립니다.</p>
 				<br />
 				<div class="container">
-					<div class="jumbotron">
+					<div class="jumbotron" style="background-color: white">
 						<h1 style="color: #00a5c2">
 							Homespital &nbsp;<small style="color: black">Detailed view</small>
 						</h1>
@@ -172,26 +179,26 @@
 						<div class="col-md-offset-2 col-md-8">
 							<table class="table table-bordered table-striped">
 								<tr>
-									<th class="col-md-2 text-center">번호</th>
-									<td>${list[0].qna_no}</td>
+									<th class="col-md-2 text-center" style="border: hidden;">번호</th>
+									<td style="border: hidden;"> ${list[0].qna_no}</td>
 								</tr>
 								<tr>
-									<th class="text-center">제목</th>
-									<td>${list[0].title}</td>
+									<th class="text-center" style="border: hidden;">제목</th>
+									<td style="border: hidden;">${list[0].title}</td>
 								</tr>
 								<tr>
-									<th class="text-center">작성자</th>
-									<td>${list[0].mem_email}</td>
+									<th class="text-center" style="border: hidden;">작성자</th>
+									<td style="border: hidden;">${list[0].mem_email}</td>
 								</tr>
 								<tr>
-									<th class="text-center">등록일</th>
-									<td>${list[0].q_date}</td>
+									<th class="text-center" style="border: hidden;">등록일</th>
+									<td style="border: hidden;">${list[0].q_date}</td>
 								</tr>
 								<tr>
-									<th class="text-center" colspan="2">내용</th>
+									<th class="text-center" colspan="2" style="border: hidden;">내용</th>
 								</tr>
 								<tr>
-									<td colspan="2">${list[0].content}</td>
+									<td style="border: hidden;" colspan="2">${list[0].content}</td>
 								</tr>
 							</table>
 						</div>
