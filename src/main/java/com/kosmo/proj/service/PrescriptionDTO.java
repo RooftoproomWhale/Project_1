@@ -2,6 +2,8 @@ package com.kosmo.proj.service;
 
 import java.sql.Date;
 
+import org.apache.ibatis.type.SqlTimestampTypeHandler;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PrescriptionDTO {
@@ -14,7 +16,7 @@ public class PrescriptionDTO {
 	private String alarm;
 	
 	public PrescriptionDTO() {}
-
+	
 	public String getAlarm() {
 		return alarm;
 	}

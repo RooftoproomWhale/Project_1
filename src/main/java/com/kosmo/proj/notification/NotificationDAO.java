@@ -29,8 +29,14 @@ public class NotificationDAO implements NotificationService {
 	}
 
 	@Override
-	public int preAptCount() {
+	public int dayAptCount(Map map) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectOne("notiAptCount");
+		return sqlMapper.selectOne("dayAptCount", map);
+	}
+
+	@Override
+	public int preAptCount(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("notiAptCount", map);
 	}
 }

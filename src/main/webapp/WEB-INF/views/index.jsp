@@ -76,26 +76,6 @@
 		var userRole = $('#userRole').val();
 		var userId = $('#userId').val();
 		var preAptCount = 0;
-		var date = new Date();
-// 		console.log(currTime);
-
-		var currHour = date.getHours().toString();
-		var currMin = (date.getMinutes()<10?'0':'') + date.getMinutes();
-		var currTime = parseInt(currHour + currMin);
-		console.log(currTime);
-		
-		$.ajax({
-			url:'<c:url value="/Noti/preAptCount.hst"/>',
-			dataType:'html',
-			success:function(data){
-					console.log("성공");
-// 					console.log("로드 예약 수: " + data);
-					preAptCount = data;
-				},
-			error:function(request,error){
-				console.log('에러:',error);
-			}
-		});
 		
 	
 		console.log("id: " + userId +"type:"+ typeof(userId));
@@ -103,8 +83,46 @@
 		
 		if(userRole == "MEM")
 		{
-// 			memNoti();
+			var date = new Date();
+			var currHour = date.getHours().toString();
+			var currMin = (date.getMinutes()<10?'0':'') + date.getMinutes();
+			var currTime = parseInt(currHour) * 60 + parseInt(currMin);
+			
+			$.ajax({
+				url:'<c:url value="/Noti/getMediTime.hst"/>',
+				dataType:'json',
+				success:function(data){
+					console.log("멤버 성공")
+					console.log(data);
+					console.log("현재시간: " + currTime);
+					$.each(data, function(i, item) {
+			             console.log(item.alarm);
+			             var takeTime = item.alarm;
+			             console.log("takeTime: " + takeTime);
+			             var hour = takeTime.substring(0, 2);
+			             var min = takeTime.substring(2, 4);
+			             var time = parseInt(hour) * 60 + parseInt(min);
+			             console.log("time: " + time);
+			             timeGap = time - currTime;
+			             console.log("gap: " + timeGap);
+			             if(timeGap > 0 && timeGap <= 30)
+			             {
+			            	 memNoti();
+								return false;
+			             }
+			         })
+					},
+				error:function(request,error){
+					console.log('에러:',error);
+				}
+			});
+			
 			window.setInterval(function(){
+				date = new Date();
+				currHour = date.getHours().toString();
+				currMin = (date.getMinutes()<10?'0':'') + date.getMinutes();
+				currTime = parseInt(currHour) * 60 + parseInt(currMin);
+				
 				$.ajax({
 					url:'<c:url value="/Noti/getMediTime.hst"/>',
 					dataType:'json',
@@ -114,11 +132,18 @@
 						console.log("현재시간: " + currTime);
 						$.each(data, function(i, item) {
 				             console.log(item.alarm);
-				             timeGap = item.alarm - currTime;
-				             console.log(timeGap);
-				             if(timeGap > 0 && timeGap < 30)
+				             var takeTime = item.alarm;
+				             console.log("takeTime: " + takeTime);
+				             var hour = takeTime.substring(0, 2);
+				             var min = takeTime.substring(2, 4);
+				             var time = parseInt(hour) * 60 + parseInt(min);
+				             console.log("time: " + time);
+				             timeGap = time - currTime;
+				             console.log("gap: " + timeGap);
+				             if(timeGap == 30)
 				             {
 				            	 memNoti();
+									return false;
 				             }
 				         })
 						},
@@ -126,10 +151,35 @@
 						console.log('에러:',error);
 					}
 				});
-			}, 20000);
+			}, 60000);
 		}
 		else if(userRole == "HOS")
 		{
+			$.ajax({
+				url:'<c:url value="/Noti/dayAptCount.hst"/>',
+				dataType:'html',
+				success:function(data){
+						console.log("병원 성공");
+						console.log("오늘 예약 수: " + data);
+							hosNotiDay(data);
+						},
+				error:function(request,error){
+					console.log('에러:',error);
+				}
+			});
+			
+			$.ajax({
+				url:'<c:url value="/Noti/preAptCount.hst"/>',
+				dataType:'html',
+				success:function(data){
+						console.log("성공");
+//	 					console.log("로드 예약 수: " + data);
+						preAptCount = data;
+					},
+				error:function(request,error){
+					console.log('에러:',error);
+				}
+			});
 			
 			window.setInterval(function(){
 				
@@ -151,7 +201,7 @@
 						console.log('에러:',error);
 					}
 				});
-			}, 20000);
+			}, 5000);
 		}
 		else
 		{
@@ -189,6 +239,23 @@
 					window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
 				};
 			}
+		
+		function hosNotiDay(count) {
+			text = '오늘 ' + count + '개의 예약이 있습니다';
+			console.log(text);
+			var options = 
+				{
+				      body: text,
+				      icon: icon
+			  	}
+				var noti = new Notification('예약 알림이 있습니다', options)
+				
+				noti.onclick = function(event) {
+					console.log('noti click');
+					window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+				};
+			}
+		
 	}
 </script>
 <head>

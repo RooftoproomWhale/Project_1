@@ -103,4 +103,10 @@ public class MemberDAO implements MemberService {
          return sqlMapper.update("hosAuthSub", map);
       }
 
+	@Override
+	public int hosIdUpdate(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.update("hosIdUpdate", map);
+	}
+
 }

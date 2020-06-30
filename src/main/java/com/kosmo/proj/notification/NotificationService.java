@@ -9,6 +9,7 @@ public interface NotificationService {
 
 	List<PrescriptionDTO> takeTime(Map map);
 	
-	int preAptCount();
+	int dayAptCount(Map map);
+	int preAptCount(Map map);
 	int aptGapCount(Map map);
 }

@@ -29,8 +29,14 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public int preAptCount() {
+	public int dayAptCount(Map map) {
 		// TODO Auto-generated method stub
-		return dao.preAptCount();
+		return dao.dayAptCount(map);
+	}
+
+	@Override
+	public int preAptCount(Map map) {
+		// TODO Auto-generated method stub
+		return dao.preAptCount(map);
 	}
 }
