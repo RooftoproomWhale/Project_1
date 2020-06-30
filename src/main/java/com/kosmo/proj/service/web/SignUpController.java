@@ -88,10 +88,13 @@ public class SignUpController {
    @RequestMapping("/Member/HospitalAuthSub.hst")
    public String hosAuthSub(@RequestParam Map map, Model model)
    {
+	   System.out.println("AUTHSUBCONT");
       int inCheck = memberService.insert(map);
-      System.out.println(inCheck);
+      System.out.println("MEM IN:" + inCheck);
       int upCheck = memberService.hosAuthSub(map);
-      System.out.println(upCheck);
+      System.out.println("HOSAUTH UP: " + upCheck);
+      int upCheck2 = memberService.hosIdUpdate(map);
+      System.out.println("HOSID UP: " + upCheck2);
       
       return "SignUp.tiles";
    }

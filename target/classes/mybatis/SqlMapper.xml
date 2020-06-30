@@ -69,10 +69,10 @@
 	</select>
 	<update id="hosAuthSub" parameterType="java.util.Map">
       UPDATE HOSPITAL SET AUTH = '승인대기중' WHERE HOSP_NAME = #{name}
-   </update>
-   <update id="hosIdUpdate" parameterType="java.util.Map">
+  	</update>
+  	<update id="hosIdUpdate" parameterType="java.util.Map">
       UPDATE HOSPITAL SET MEM_EMAIL = #{email} WHERE HOSP_CODE = #{hospCode}
-   </update>
+   	</update>
 
 	<!-- QnA -->
 	<select id="listQnA" parameterType="java.util.Map" resultType="QnADTO">
@@ -157,6 +157,20 @@
       AS distanceByXY, p.*
       FROM pharmacy p) disData
       WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
+   </select>
+   
+   <!-- Web Notification -->
+   <select id="notiAptCount" parameterType="java.util.Map" resultType="int">
+   		SELECT COUNT(*) FROM RESERVATION WHERE HOSP_CODE = (SELECT HOSP_CODE FROM HOSPITAL WHERE MEM_EMAIL = #{user})
+   </select>
+   <select id="dayAptCount" parameterType="java.util.Map" resultType="int">
+   		SELECT COUNT(*) FROM RESERVATION WHERE HOSP_CODE = (SELECT HOSP_CODE FROM HOSPITAL WHERE MEM_EMAIL = #{user}) AND RES_DATE = #{today}
+   </select>
+   <select id="takeTime" parameterType="java.util.Map" resultType="PrescriptionDTO">
+   		SELECT * FROM PRE_MEDI WHERE PRE_NO IN (SELECT PRE_NO FROM PRESCRIPTION WHERE MEM_EMAIL = #{user})
+   </select>
+   <select id="notiAuthCount" resultType="int">
+   		SELECT COUNT(*) FROM HOSPITAL WHERE AUTH = '승인대기중'
    </select>
    
 <!--관리자단 -->
