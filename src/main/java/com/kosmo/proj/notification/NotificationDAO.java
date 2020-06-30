@@ -19,11 +19,11 @@ public class NotificationDAO implements NotificationService {
 	@Override
 	public List<PrescriptionDTO> takeTime(Map map) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectList("notiTakeTime", map);
+		return sqlMapper.selectList("takeTime", map);
 	}
 
 	@Override
-	public int aptGapCount(Map map) {
+	public int currAptCount(Map map) {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("notiAptCount", map);
 	}
@@ -38,5 +38,23 @@ public class NotificationDAO implements NotificationService {
 	public int preAptCount(Map map) {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("notiAptCount", map);
+	}
+
+	@Override
+	public int authCount(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("notiAuthCount", map);
+	}
+
+	@Override
+	public int preAuthCount(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("notiAuthCount", map);
+	}
+
+	@Override
+	public int currAuthCount(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("notiAuthCount", map);
 	}
 }

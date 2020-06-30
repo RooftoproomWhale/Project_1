@@ -11,5 +11,9 @@ public interface NotificationService {
 	
 	int dayAptCount(Map map);
 	int preAptCount(Map map);
-	int aptGapCount(Map map);
+	int currAptCount(Map map);
+	
+	int authCount(Map map);
+	int preAuthCount(Map map);
+	int currAuthCount(Map map);
 }

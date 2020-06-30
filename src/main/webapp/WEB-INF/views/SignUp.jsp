@@ -963,14 +963,14 @@ width: 100%;
                }
             });
 
+      
       $('#hosAuthBtn').click(function() {
-
+    	  var hospCode = $('#hosCode').val();
            var hospName = $('#clickedHosName').val();
            var hosId = $('#hosId').val();
            var hosPwd = $("#hosPwd").val();
-           var hospCodeSub = hospCode
            console.log(hospName + hosId + hosPwd);
-           console.log("hospCodeSub: " + hospCodeSub);
+           console.log("hospCode: " + hospCode);
            
                  $.ajax({
                     url : "<c:url value='/Member/HospitalAuthSub.hst'/>",
@@ -991,7 +991,7 @@ width: 100%;
                     },
                     success : function(data) {
                        alert('제휴신청이 완료되었습니다');
-                       window.location.href = "<c:url value='/Home/ToHomePage.hst'/>";
+//                        window.location.href = "<c:url value='/Home/ToHomePage.hst'/>";
                     },
                     error : function(request, status, error) {
                        alert("아이디와 비밀번호를 확인하세요");
@@ -1015,7 +1015,7 @@ width: 100%;
                async : true, // true:비동기, false:동기 
                success : function(data) {
                   console.log(data);
-					var hospCode = data[0].hosp_code;
+				
                   var items = '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>'
                         + '<div class="col-md-10">'
                         + '<input type="text" class="form-control" id="clickedHosName" placeholder="병원명" disabled="disabled" value="'+data[0].hosp_name+'">'
@@ -1031,8 +1031,9 @@ width: 100%;
 
                   $('#selectedHosp').html(items);
                   $('#close').click();
-                  console.log("click: " + hospCode);
-                  //             $('#regi-modal').hide();
+              		var hospCode = data[0].hosp_code;
+                 	console.log("click: " + hospCode);
+                 	$("#hosCodeDiv").html('<input type="text" type="hidden" id="hosCode" value="'+hospCode+'">');
                },
                error : function(request, status, error) {
                   console.log("에러");
@@ -1434,6 +1435,9 @@ width: 100%;
                     <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 확인 :</label>
                     <div class="col-md-9">
                         <input type="password" class="form-control" placeholder="비밀번호 확인">
+                    </div>
+                    <div id="hosCodeDiv" style="visibility: hidden" >
+                    
                     </div>
                 </div>
          <input type="button" name="previous" class="previous action-button" value="이전" /> 

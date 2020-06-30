@@ -203,6 +203,10 @@
 				});
 			}, 3000);
 		}
+// 		else if(userRole == "ADM")
+// 		{
+			
+// 		}
 		else
 		{
 			
@@ -272,7 +276,6 @@
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <input type="hidden" id="userId" value="${user }"/>
 <input type="hidden" id="userRole" value="${role }"/>
-<%-- <input type="hidden" id="preAptCount" value="${preAptCount }"/> --%>
 	<!-- Header -->
 	<header id="header">
 		<div class="intro">

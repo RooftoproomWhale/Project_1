@@ -43,7 +43,7 @@ public class NotificationController {
 		map.put("user", user);
 		map.put("today", today);
 		int dayAptCount = notificationService.dayAptCount(map);
-		System.out.println("day: " + dayAptCount);
+		System.out.println("dayApt: " + dayAptCount);
 		
 		return dayAptCount;
 	}
@@ -57,21 +57,21 @@ public class NotificationController {
 		String user = userDetails.getUsername();
 		map.put("user", user);
 		int preAptCount = notificationService.preAptCount(map);
-		System.out.println("pre: " + preAptCount);
+		System.out.println("preApt: " + preAptCount);
 		
 		return preAptCount;
 	}
 
 	@ResponseBody
-	@RequestMapping("/Noti/hosAptGap.hst")
-	public int hosAptGap(@RequestParam Map map, Model model, Authentication auth)
+	@RequestMapping("/Noti/currAptCount.hst")
+	public int currAptCount(@RequestParam Map map, Model model, Authentication auth)
 	{
 		UserDetails userDetails = (UserDetails)auth.getPrincipal();
 		Collection authorities = userDetails.getAuthorities();
 		String user = userDetails.getUsername();
 		map.put("user", user);
-		int currAptCount = notificationService.aptGapCount(map);
-		System.out.println("curr: " + currAptCount);
+		int currAptCount = notificationService.currAptCount(map);
+		System.out.println("currApt: " + currAptCount);
 		return currAptCount;
 	}
 	
@@ -98,5 +98,32 @@ public class NotificationController {
 			e.printStackTrace();
 		}
 		return jsonStr.toString();
+	}
+	
+	@ResponseBody
+	@RequestMapping("/Noti/authCount.hst")
+	public int authCount(@RequestParam Map map, Model model)
+	{
+		int authCount = notificationService.authCount(map);
+		System.out.println("auth: " + authCount);
+		return authCount;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/Noti/preAuthCount.hst")
+	public int preAuthCount(@RequestParam Map map, Model model)
+	{
+		int preAuthCount = notificationService.preAuthCount(map);
+		System.out.println("preAuth: " + preAuthCount);
+		return preAuthCount;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/Noti/currAuthCount.hst")
+	public int currAuthCount(@RequestParam Map map, Model model)
+	{
+		int currAuthCount = notificationService.currAuthCount(map);
+		System.out.println("currAuth: " + currAuthCount);
+		return currAuthCount;
 	}
 }

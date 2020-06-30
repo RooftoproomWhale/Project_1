@@ -23,9 +23,9 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public int aptGapCount(Map map) {
+	public int currAptCount(Map map) {
 		// TODO Auto-generated method stub
-		return dao.aptGapCount(map);
+		return dao.currAptCount(map);
 	}
 
 	@Override
@@ -38,5 +38,23 @@ public class NotificationServiceImpl implements NotificationService {
 	public int preAptCount(Map map) {
 		// TODO Auto-generated method stub
 		return dao.preAptCount(map);
+	}
+
+	@Override
+	public int authCount(Map map) {
+		// TODO Auto-generated method stub
+		return dao.authCount(map);
+	}
+
+	@Override
+	public int preAuthCount(Map map) {
+		// TODO Auto-generated method stub
+		return dao.preAuthCount(map);
+	}
+
+	@Override
+	public int currAuthCount(Map map) {
+		// TODO Auto-generated method stub
+		return dao.currAuthCount(map);
 	}
 }
