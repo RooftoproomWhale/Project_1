@@ -38,7 +38,7 @@ $(function() {
 	$('#notice').on('click', function(){
 		no = $('#no').val();
 		title = $('#title').val();
- 		content = $('#summernote').html();
+ 		content = $('#summernote').val();
 		console.log(content);
 		$.ajax({
 			url: "<c:url value='/Admin/NoticeUpdate.hst'/>",

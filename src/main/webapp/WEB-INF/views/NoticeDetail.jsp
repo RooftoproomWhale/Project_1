@@ -21,58 +21,44 @@
 </head>
 <body>
 	<div class="container" style="padding-top: 88px">
-		<div class="row ">
-			<main id="main">
-				<div class="page-header board-util-text color-red">
-					<h2 style="color: blue">상세보기</h2>
+		<div class="top-button" style="padding-bottom: 5px;">
+			<div class="left-area">
+			</div>
+			<div class="right-area" style="float:right;">
+				<a class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span> 이전글</a>
+				<a class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span> 다음글</a>
+				<a class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> 목 록</a>
+			</div>
+			<p style="clear: both;"></p>
+		</div>
+		<div class="row" style="border:1px solid gray; padding: 10px 10px; border-radius: 1%;min-height: 600px;'">
+			<div class="page-header" style="margin-top: 20px">
+				<div>
+					<p style="color: blue">[공지사항]</p>
+					<h3>${list[0].title}</h3>
 				</div>
-				<p class="lead">홈스피탈 상세보기 페이지 입니다.</p>
-				<div class="table table-responsive">
-					<table class="table">
-						<tr>
-							<th class="info" style="text-align: center;">글번호</th>
-							<td>${list[0].noti_no}</td>
-						</tr>
-						<tr>
-							<th class="info" style="text-align: center;">작성자</th>
-							<td>${list[0].mem_email}</td>
-
-						</tr>
-						<tr>
-							<th class="info" style="text-align: center;">작성일</th>
-							<td>${list[0].postdate}</td>
-						</tr>
-						<tr>
-							<th class="info" style="text-align: center;">제목</th>
-							<td colspan="3">${list[0].title}</td>
-						</tr>
-
-						<tr>
-							<th class="info" style="width: 200px; height: 200px; text-align: center;">글 내용</th>
-							<td colspan="3">${list[0].content}</td>
-						</tr>
-
-						<div class="row">
-							<div class="col-md-offset-2 col-md-8">
-								<ul id="pillMenu" class="nav nav-pills center-block"
-									style="width: 205px; margin-bottom: 10px">
-									<sec:authorize access="hasRole('ROLE_ADM')">
-										<li>
-										<a href="<c:url value='/Admin/NoticeEdit.hst?no=${list[0].noti_no}&title=${list[0].title}&content=${list[0].content}'/>"
-											type="button" class="btn btn-warning">수정</a></li>
-										<li>
-										<a href="<c:url value='/Admin/NoticeDelete.hst?no=${list[0].noti_no}'/>"
-											type="button" class="btn btn-danger">삭제</a></li>
-									</sec:authorize>
-										<li>
-										<a href="<c:url value='/Admin/Notice.hst?no=${list[0].noti_no}'/>"
-											type="button" class="btn btn-primary">목록</a></li>
-								</ul>
-							</div>
-						</div>
-					</table>
+				<div>
+					<p>${list[0].mem_email}</p>
+					<span>${list[0].postdate}</span>
+					<span> 조회 100</span>
 				</div>
-			</main>
+			</div>
+			<div class="page-body">
+				<div>
+					<c:if test="${not empty list[0]['file_addr']}">
+					<p><img src='<c:url value="/Upload/${list[0]['file_addr']}"/>' alt="이미지"></p>
+					</c:if>
+					${list[0].content}
+				</div>
+			</div>
+		</div>
+		<div class="bottom-button" style="padding-top: 5px;">
+			<div class="left-area" style="float:left;">
+				<a class="btn btn-default"><span class="glyphicon glyphicon-pencil"> 글쓰기</a>
+			</div>
+			<div class="right-area" style="float:right;">
+				<a class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> 목 록</a>
+			</div>
 		</div>
 	</div>
 </body>
