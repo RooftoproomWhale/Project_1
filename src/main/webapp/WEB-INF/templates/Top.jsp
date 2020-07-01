@@ -411,8 +411,7 @@ window.onload = function(){
 				<sec:authorize access="hasRole('ROLE_ADM')">
 					<li><a href="<c:url value='/Admin/Index.hst'/>">Admin</a></li>
 				</sec:authorize>
-				<li><a href="<c:url value='/QnA/QnA.hst'/>">QnA</a></li>
-				<!-- <li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
+					<li><a href="<c:url value='/QnA/QnA.hst'/>">Q&A</a></li>
 				<sec:authorize access="hasRole('ROLE_HOS')">
 					<li><a href="<c:url value='/Hospage/main.hst'/>">MyHospital</a></li>
 				</sec:authorize>

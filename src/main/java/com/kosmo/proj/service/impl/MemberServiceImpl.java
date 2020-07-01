@@ -96,32 +96,29 @@ public class MemberServiceImpl implements MemberService{
       return dao.hosAuthSub(map);
    }
 
-@Override
-public int hosIdUpdate(Map map) {
-	// TODO Auto-generated method stub
-	return dao.hosIdUpdate(map);
-}
+	@Override
+	public int hosIdUpdate(Map map) {
+	   // TODO Auto-generated method stub
+	   return dao.hosIdUpdate(map);
+	}
 
-@Override
-public HistoryDTO getNo(Map map) {
-	// TODO Auto-generated method stub
-	return dao.getNo(map);
-}
+	@Override
+	public HistoryDTO getNo(Map map) {
+	   // TODO Auto-generated method stub
+	   return dao.getNo(map);
+	}
 
-@Override
-public int hisInsert(Map map) {
-	// TODO Auto-generated method stub
-	return dao.hisInsert(map);
-}
+	@Override
+	public int hisInsert(Map map) {
+	   // TODO Auto-generated method stub
+	   return dao.hisInsert(map);
+	}
 
-@Override
-public int illInsert(Map map) {
-	// TODO Auto-generated method stub
-	return dao.illInsert(map);
-}
-
-
-
+	@Override
+	public int illInsert(Map map) {
+	   // TODO Auto-generated method stub
+	   return dao.illInsert(map);
+	}
 
 
 }

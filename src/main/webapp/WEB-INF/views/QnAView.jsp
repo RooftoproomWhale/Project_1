@@ -19,7 +19,18 @@
 	left: 0px;
 	margin-top: 1000px;
 	background-color: #474747;
-	height: 150px
+	height: 150px 
+}
+
+.jumbotron {
+	background-size: cover;
+	text-shadow: black 0.2em 0.2em 0.2em;
+	color:white;
+}
+img{
+	width:200px;
+	height:200px;
+	float:right;
 }
 </style>
 <script>
@@ -27,127 +38,42 @@
 		//현재 글번호에 대한 코멘트 목록을 가져오는 함수-Ajax로 처리 
 
 		//페이지 로드시 코멘트 목록 뿌려주기]		
-		showComments();
+		/* showComments(); */
 
 		//코멘트 입력 및 수정처리]
 		$('#submit').click(function() {
-			var answer = $('#answer').val();
-			var no = $('#no').val();
-			console.log(answer);
-			console.log(no);
-			if ($(this).val() == '등록')
+			if ($(this).val() == '등록') {
 				var action = "<c:url value='/QnA/InsertAnswer.hst'/>";
-			else
-				var action = "<c:url value='/QnA/QnAEdit.hst'/>";
+				var answer = $('#answer').val();
+				var no = $('#no').html();
+			} else {
+				var action = "<c:url value='/QnA/comEdit.hst'/>";
+				var answer = $('#answer').val();
+				var no = $('#no').html();
+			}
+
 			//ajax로 요청]
+			console.log("answer: " + answer);
+			console.log("no: " + no);
 			$.ajax({
 				url : action,
-				data : 
-					{
-						"answer" : answer,
-						"no" : no
-					}
-					,
+				data : {
+					"answer" : answer,
+					"no" : no
+				},
 				dataType : 'text',
 				type : 'get',
 				success : function(data) {
+					console.log("성공");
 					console.log(data);
-					//글 등록후 코멘트 목록 뿌져주는 함수 다시 호출
-					showComments();
-					//입력댓글 클리어 및 포커스 주기
-					$('#title').val('');
-					$('#title').focus();
-					//글 수정후 등록버튼으로 다시 교체하기
-					if ($('#submit').val() == '수정')
-						$('#submit').val('등록')
+					window.location.href = "<c:url value='/QnA/QnAView.hst?no=" + no + "'/>";
+				},
+				error : function(request, status, error) {
+					console.log('실패');
+					alert("code = " + request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 				}
 			});
 		});
-
-		function showComments() {
-
-			$.ajax({
-				url : "<c:url value='/QnA/QnAList.hst'/>",
-				data : {
-					"no" : "${record.no}",
-					"_csrf" : "${_csrf.token}"
-				},
-				dataType : 'json',
-				type : 'post',
-				success : showComments_,
-				error : function(e) {
-					console.log('에러:', e)
-				}
-			});
-		}
-		;////////showComments
-
-		function showComments_(data) {
-			console.log('코맨트 목록:', data);
-			var comments = "<h2>한줄 댓글 목록</h2>";
-			comments += "<table class='table table-bordered'>";
-			comments += "<tr ><th width='15%' class='text-center'>작성자</th><th width='50%' class='text-center'>코멘트</th><th class='text-center'>작성일</th><th class='text-center'>삭제</th></tr>";
-			if (data.length == 0) {
-				comments += "<tr><td colspan='4'>등록된 한줄 댓글이 없어요</td></tr>";
-			}
-			$
-					.each(
-							data,
-							function(index, element) {
-								comments += "<tr><td>" + element['NAME']
-										+ '</td>';
-								//if('${sessionScope.id}' == element['ID'])//씨큐리티 미 사용시
-								if ('${username}' == element['ID'])//씨큐리티 사용시
-									comments += "<td style='text-align:left'><span class='commentEdit' title='"+element['CNO']+"' style='cursor:pointer' >"
-											+ element['LINECOMMENT']
-											+ '</span></td>';
-								else
-									comments += "<td style='text-align:left'>"
-											+ element['LINECOMMENT'] + '</td>';
-
-								comments += "<td>" + element['CPOSTDATE']
-										+ '</td>';
-								comments += "<td>";
-								//if('${sessionScope.id}' == element['ID'])
-								if ('${username}' == element['ID'])//씨큐리티 사용시
-									comments += "<span class='commentDelete' title='"+element['CNO']+"' style='cursor:pointer;color:green;font-size:1.4em'>삭제</span>";
-								else
-									comments += "<span style='color:gray;font-size:.7em'>삭제불가</span>";
-								comments += "</td></tr>";
-							});
-
-			comments += "</table>";
-			$('#comments').html(comments);
-
-			//반드시 showComments_() 함수 안에
-			//코멘트 제목 클릭시 코멘트 수정처리를 위한 UI변경부분]		
-			$('.commentEdit').click(function() {
-				console.log('클릭한 댓글의 키값(CNO):', $(this).attr('title'));
-				//클릭한 제목으로 텍스트박스 값 설정
-				$('#title').val($(this).html());
-				//버튼은 등록에서 수정으로
-				$('#submit').val('수정');
-				//form의 hidden속성중 name="cno"값 설정
-				$('input[name=cno]').val($(this).attr('title'));
-
-			});
-			//코멘트 삭제 처리]
-			$(".commentDelete").click(function() {
-				$.ajax({
-					url : "<c:url value='/QnA/QnADelete.hst'/>",
-					data : {
-						cno : $(this).attr('title'),
-						'_csrf' : '${_csrf.token}'
-					},
-					type : 'post',
-					success : function() {
-						showComments();
-					}
-				});
-			});
-
-		};
-
 	});///$(function(){})
 </script>
 <title>Q&A</title>
@@ -157,44 +83,43 @@
 		<div class="row">
 			<main id="main">
 				<div class="page-header">
-					<h2 style="color: blue">Q&A</h2>
+					<h2 style="color: black">Q&A</h2>
 				</div>
-				<p class="lead">회원님의 궁금증을 풀어드립니다.</p>
+				<p class="lead">[ 궁금하신 점이 있으신가요? ]</p>
 				<br />
-				<div class="container">
-					<div class="jumbotron">
-						<h1 style="color: #00a5c2">
-							Homespital &nbsp;<small style="color: black">Detailed view</small>
-						</h1>
+				<div class="container" >
+				<img src="../img/111.jpg" align="right">
+					<div class="jumbotron" style="background-color: white">
+						<h1 style="color: #e0dada"> Homespital </h1>
 					</div>
 
 					<div class="row">
 						<div class="col-md-offset-2 col-md-8">
 							<table class="table table-bordered table-striped">
 								<tr>
-									<th class="col-md-2 text-center">번호</th>
-									<td>${list[0].qna_no}</td>
+									<th class="col-md-2 text-center" style="border: hidden;">번호</th>
+									<td style="border: hidden;" id="no">${list[0].qna_no}</td>
 								</tr>
 								<tr>
-									<th class="text-center">제목</th>
-									<td>${list[0].title}</td>
+									<th class="text-center" style="border: hidden;">제목</th>
+									<td style="border: hidden;">${list[0].title}</td>
 								</tr>
 								<tr>
-									<th class="text-center">작성자</th>
-									<td>${list[0].mem_email}</td>
+									<th class="text-center" style="border: hidden;">작성자</th>
+									<td style="border: hidden;">${list[0].mem_email}</td>
 								</tr>
 								<tr>
-									<th class="text-center">등록일</th>
-									<td>${list[0].q_date}</td>
+									<th class="text-center" style="border: hidden;">등록일</th>
+									<td style="border: hidden;">${list[0].q_date}</td>
 								</tr>
 								<tr>
-									<th class="text-center" colspan="2">내용</th>
+									<th class="text-center" colspan="2" style="border: hidden;">내용</th>
 								</tr>
 								<tr>
-									<td colspan="2">${list[0].content}</td>
+									<td style="border: hidden;" colspan="2">${list[0].content}</td>
 								</tr>
 							</table>
-						</div>
+						</div>	
 					</div>
 					<!-- row -->
 					<div class="row">
@@ -211,9 +136,7 @@
 										class="btn btn-success">삭제</a></li>
 								</c:if>
 
-								<li><a
-									href="<c:url value='/QnA/QnA.hst?nowPage=${param.nowPage}'/>"
-									class="btn btn-success">목록</a></li>
+								<li><a href="<c:url value='/QnA/QnA.hst?nowPage=${param.nowPage}'/>" class="btn btn-success">목록</a></br></li>
 							</ul>
 						</div>
 					</div>
@@ -221,22 +144,39 @@
 			</main>
 		</div>
 		<div class="row">
-		<div class="col-md-offset-3 col-md-6">
-			<div class="text-center">
-				<!-- 한줄 코멘트 입력 폼-->
-				<h2>QnA 답변</h2>
-				<form class="form-inline" id="frm" method="">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-					<input type="hidden" id="no" value="${record.no}" />
-					<!-- 수정 및 삭제용 파라미터 -->
-					<input type="hidden" id="cno" /> 
-					<input placeholder="답글을 입력하세요" id="answer" class="form-control" type="text" size="50" name="linecomment" />
-					<input class="btn btn-success" id="submit" type="button" value="등록" />
-				</form>
-				<div class="row" id="comments">
+			<div class="col-md-offset-4 col-md-4">
+				<div class="text-center">
+					<!-- 한줄 코멘트 입력 폼-->
+					<h2>Q&A 답변</h2>
+					<form name="replyForm" method="post">
+						<input type="hidden" name="cno" />
+					</form>
+					<div class="row" id="comments">
+						<sec:authorize access="hasRole('ROLE_ADM')">
+							<input type="text" class="form-control" id="answer" name="answer" placeholder="내용을 입력하세요." value="${listA[0].answer_content}" />
+						</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_MEM')">
+							<input type="text" class="form-control" id="answer" name="answer" placeholder="내용을 입력하세요." value="${listA[0].answer_content}" />
+						</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_HOS')">
+							<input type="text" class="form-control" id="answer" name="answer" placeholder="내용을 입력하세요." value="${listA[0].answer_content}" />
+						</sec:authorize>
+						<sec:authorize access="isAnonymous()">
+							<input type="text" class="form-control" id="answer" name="answer" placeholder="내용을 입력하세요." value="${listA[0].answer_content}" />
+						</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_ADM')">
+							<c:if test="${listA[0].answer_content == null}" var="item">
+								<input class="btn btn-success" id="submit" type="button" value="등록" />
+							</c:if>
+							<c:if test="${!item }">
+								<input class="btn btn-success" id="submit" type="button" value="수정" />
+							</c:if>
+						</sec:authorize>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
 </html>
+

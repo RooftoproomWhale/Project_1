@@ -14,6 +14,17 @@
 	background-color: #474747;
 	height: 150px
 }
+.jumbotron{
+	background-size: cover;
+	text-shadow: black 0.2em 0.2em 0.2em;
+	color:white;
+}
+img{
+	width:200px;
+	height:200px;
+	float:right;
+}
+
 </style>
 <script>
 	$(function() {
@@ -55,48 +66,43 @@
 		<div class="row">
 			<main id="main">
 				<div class="page-header">
-					<h2 style="color: blue">Q&A</h2>
+					<h2 style="color: black">Q&A</h2>
 				</div>
-				<p class="lead">회원님의 궁금증을 풀어드립니다.</p>
+				<p class="lead">[ 궁금하신 점이 있으신가요? ]</p>
 				<br />
 				<div class="container">
-					<div class="jumbotron">
-						<h1 style="color: #00a5c2">
-							Homespital &nbsp;<small style="color: black">Edit Page</small>
-						</h1>
+					<img src="../img/111.jpg" align="right">
+					<div class="jumbotron" style="background-color: white">
+						<h1 style="color: #e0dada">Homespital</h1>
 					</div>
 					<div class="row">
-						<div class="col-md-12">
-							<form class="form-horizontal" method="">
-								<input type="hidden" id="no" value="${no}" />
-								<div class="form-group">
-									<label class="col-sm-2 control-label">제목</label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control" id="title"
-											placeholder="제목을 입력하세요?" value="${title}">
-									</div>
+						<form class="form-horizontal" method="">
+							<input type="hidden" id="no" value="${no}" />
+							<div class="form-group">
+								<label class="col-sm-2 control-label">제목</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="title" placeholder="제목을 입력하세요?" value="${title}">
 								</div>
+							</div>
 
-								<div class="form-group">
-									<label class="col-sm-2 control-label">내용</label>
-									<!-- 중첩 컬럼 사용 -->
-									<div class="col-sm-10">
-										<div class="row">
-											<div class="col-sm-8">
-												<textarea class="form-control" id="content" rows="5"
-													placeholder="내용 입력하세요">${content}</textarea>
-											</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">내용</label>
+								<!-- 중첩 컬럼 사용 -->
+								<div class="col-sm-10">
+									<div class="row">
+										<div class="col-sm-8">
+											<textarea class="form-control" id="content" rows="5" placeholder="내용 입력하세요">${content}</textarea>
 										</div>
 									</div>
 								</div>
+							</div>
 
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10">
-										<button type="button" id="qnaEditBtn" class="btn btn-primary">수정</button>
-									</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="button" id="qnaEditBtn" class="btn btn-primary">수정</button>
 								</div>
-							</form>
-						</div>
+							</div>
+						</form>
 					</div>
 
 				</div>
@@ -124,8 +130,6 @@
 		</div>
 	</div>
 </body>
-
-
 
 <script>
 	$(function() {

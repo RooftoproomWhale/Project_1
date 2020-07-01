@@ -83,16 +83,27 @@
 						</c:if>
 					</tbody>
 				</table>
-				<div style="text-align: center;">
-					<ul class="pagination">
-						<li class="page-item"><span class="page-link">&laquo;</span></li>
-						<li class="page-item"><a class="page-link mobile" href="#">1</a></li>
-						<li class="page-item"><a class="page-link mobile" href="#">2</a></li>
-						<li class="page-item"><a class="page-link mobile" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">&raquo;</a>
-						</li>
-					</ul>
-				</div>
+				<div style="display: block; text-align: center;">
+						<c:if test="${paging.startPage != 1 }">
+							<a href="<c:url value='/Admin/Notice.hst?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}'/>">&lt;</a>
+						</c:if>
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+							var="p">
+							<c:choose>
+								<c:when test="${p == paging.nowPage }">
+									<b>${p }</b>
+								</c:when>
+								<c:when test="${p != paging.nowPage }">
+									<a
+										href="<c:url value='/Admin/Notice.hst?nowPage=${p }&cntPerPage=${paging.cntPerPage}'/>">${p }</a>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${paging.endPage != paging.lastPage}">
+							<a
+								href="<c:url value='/Admin/Notice.hst?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}'/>">&gt;</a>
+						</c:if>
+					</div>
 				<!-- 검색용 UI -->
 				<div style="max-width: 1300px; text-align: right;"></div>
 				<!-- 검색용 UI -->

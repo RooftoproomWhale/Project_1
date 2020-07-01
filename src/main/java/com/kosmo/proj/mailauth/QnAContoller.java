@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kosmo.proj.service.Paging;
 import com.kosmo.proj.service.QnADTO;
 import com.kosmo.proj.service.QnAService;
 
@@ -24,9 +25,23 @@ public class QnAContoller {
 
 	//QnA
 	@RequestMapping("/QnA/QnA.hst")
-	public String notice(@RequestParam Map map, Model model) {
+	public String notice(@RequestParam Map map, Paging vo, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage){
 
-		List<QnADTO> list = qnaService.listQnA(map);
+		int total = qnaService.getTotalRecord(map);
+		System.out.println(total);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) {
+			cntPerPage = "5";
+		}
+
+		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		List<QnADTO> list = qnaService.listQnA(vo);
 		for(QnADTO val : list)
 		{
 			System.out.println(val.getQna_no());
@@ -34,7 +49,9 @@ public class QnAContoller {
 			System.out.println(val.getQ_date());
 		}
 
+		model.addAttribute("paging", vo);
 		model.addAttribute("list",list);
+
 		return "QnAList.tiles";
 	}
 	@RequestMapping("/QnA/QnAView.hst")
@@ -50,9 +67,16 @@ public class QnAContoller {
 				System.out.println(val.getQna_no());
 				System.out.println(val.getContent());
 			}
+			List<QnADTO> listA =  qnaService.selectComment(map);
+			for(QnADTO val : listA)
+			{
+				System.out.println(val.getQna_no());
+				System.out.println(val.getContent());
+			}
 
 			model.addAttribute("list", list);
 			model.addAttribute("username", user);
+			model.addAttribute("listA", listA);
 			System.out.println("user : " + user);
 		}
 		else

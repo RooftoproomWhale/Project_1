@@ -101,10 +101,10 @@ public interface AdminService {
 		//공지사항
 		int insertNotice(Map map);
 		int updateNotice(Map map);
-		List<BoardDTO> viewNotice(Map map);
+		List<BoardDTO> viewNotice(Paging vo);
 		int deleteNotice(Map map);
 		List<BoardDTO> detailNotice(Map map);
-		
+		int getTotalRecordNotice(Map map);
 		List<Map> selectImage();
 
 }

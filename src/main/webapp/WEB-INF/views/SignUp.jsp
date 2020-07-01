@@ -235,10 +235,10 @@ width: 100%;
            var illStr = "";
            var chronic = $('#chronic').val();
            $("input[name=illness]:checked").each(function() {
-        	   var test = $(this).val();
-        	   console.log(test);
-        	   illStr += test + "-";
-        	   console.log(illStr);
+              var test = $(this).val();
+              console.log(test);
+              illStr += test + "-";
+              console.log(illStr);
            });
          
          $.ajax({
@@ -263,6 +263,7 @@ width: 100%;
               },
               success:function(data){
                console.log("회원가입 성공");
+               alert("회원가입 완료 되었습니다.")
                window.location.href = "<c:url value='/User/Login.hst'/>";
               },
         
@@ -976,7 +977,7 @@ width: 100%;
 
       
       $('#hosAuthBtn').click(function() {
-    	  var hospCode = $('#hosCode').val();
+         var hospCode = $('#hosCode').val();
            var hospName = $('#clickedHosName').val();
            var hosId = $('#hosId').val();
            var hosPwd = $("#hosPwd").val();
@@ -989,7 +990,7 @@ width: 100%;
                     type : 'get',
                     datatype : 'html',
                     data : {
-                    	"hospCode" : hospCode,
+                       "hospCode" : hospCode,
                        "email" : hosId,
                        "pwd" : hosPwd,
                        "name" : hospName,
@@ -1027,7 +1028,7 @@ width: 100%;
                async : true, // true:비동기, false:동기 
                success : function(data) {
                   console.log(data);
-				
+            
                   var items = '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>'
                         + '<div class="col-md-10">'
                         + '<input type="text" class="form-control" id="clickedHosName" placeholder="병원명" disabled="disabled" value="'+data[0].hosp_name+'">'
@@ -1043,9 +1044,9 @@ width: 100%;
 
                   $('#selectedHosp').html(items);
                   $('#close').click();
-              		var hospCode = data[0].hosp_code;
-                 	console.log("click: " + hospCode);
-                 	$("#hosCodeDiv").html('<input type="text" type="hidden" id="hosCode" value="'+hospCode+'">');
+                    var hospCode = data[0].hosp_code;
+                    console.log("click: " + hospCode);
+                    $("#hosCodeDiv").html('<input type="text" type="hidden" id="hosCode" value="'+hospCode+'">');
                },
                error : function(request, status, error) {
                   console.log("에러");

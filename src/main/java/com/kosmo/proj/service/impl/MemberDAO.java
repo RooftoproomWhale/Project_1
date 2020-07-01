@@ -104,28 +104,29 @@ public class MemberDAO implements MemberService {
          return sqlMapper.update("hosAuthSub", map);
       }
 
-	@Override
-	public int hosIdUpdate(Map map) {
-		// TODO Auto-generated method stub
-		return sqlMapper.update("hosIdUpdate", map);
-	}
+   @Override
+   public int hosIdUpdate(Map map) {
+      // TODO Auto-generated method stub
+      return sqlMapper.update("hosIdUpdate", map);
+   }
 
-	@Override
-	public HistoryDTO getNo(Map map) {
-		// TODO Auto-generated method stub
-		return sqlMapper.selectOne("signGetNo", map);
-	}
+   @Override
+   public HistoryDTO getNo(Map map) {
+      // TODO Auto-generated method stub
+      return sqlMapper.selectOne("signGetNo", map);
+   }
 
-	@Override
-	public int hisInsert(Map map) {
-		// TODO Auto-generated method stub
-		return sqlMapper.insert("hisInsert", map);
-	}
+   @Override
+   public int hisInsert(Map map) {
+      // TODO Auto-generated method stub
+      return sqlMapper.insert("hisInsert", map);
+   }
 
-	@Override
-	public int illInsert(Map map) {
-		// TODO Auto-generated method stub
-		return sqlMapper.insert("illInsert", map);
-	}
+   @Override
+   public int illInsert(Map map) {
+      // TODO Auto-generated method stub
+      return sqlMapper.insert("illInsert", map);
+   }
+
 
 }

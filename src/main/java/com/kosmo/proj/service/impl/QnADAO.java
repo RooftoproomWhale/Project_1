@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.proj.service.Paging;
 import com.kosmo.proj.service.QnADTO;
 import com.kosmo.proj.service.QnAService;
 
@@ -26,15 +27,15 @@ public class QnADAO implements QnAService {
 	}
 	//전체 목록용]
 	@Override
-	public List<QnADTO> listQnA(Map map) {
+	public List<QnADTO> listQnA(Paging vo) {
 
-		return sqlMapper.selectList("listQnA", map);
+		return sqlMapper.selectList("listQnA", vo);
 	}
 
 	@Override
 	public int getTotalRecord(Map map) {
 
-		return sqlMapper.selectOne("memoGetTotalRecord",map);
+		return sqlMapper.selectOne("getTotalRecord",map);
 	}
 	//상세보기]
 	@Override
@@ -72,7 +73,10 @@ public class QnADAO implements QnAService {
 		return sqlMapper.selectList("viewQnA", map);
 	}
 
-
+	@Override
+	public List<QnADTO> selectComment(Map map) {
+		return sqlMapper.selectList("commentSelect", map);
+	}
 
 }
 
