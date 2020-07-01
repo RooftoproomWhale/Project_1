@@ -24,7 +24,10 @@
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑) 정보 설정 -->	
 	<mappers>
+		<mapper resource="mybatis/admin.xml" />
 		<mapper resource="mybatis/calendar.xml" />
+		<mapper resource="mybatis/map.xml" />
+		<mapper resource="mybatis/reservation.xml" />
 		<mapper resource="mybatis/SqlMapper.xml" />
 	</mappers>
 </configuration>
