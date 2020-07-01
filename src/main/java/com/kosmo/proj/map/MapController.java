@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kosmo.proj.GetUser;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
 import com.kosmo.proj.service.MemberDTO;
@@ -51,6 +52,8 @@ public class MapController {
 			UserDetails userDetails = (UserDetails)auth.getPrincipal();
 			Map map = new HashMap<String, String>();
 			map.put("userEmail", userDetails.getUsername());
+			GetUser getUser = new GetUser();
+			getUser.getUser(model, auth);
 			System.out.println(userDetails.getUsername());
 			MemberDTO dto = memberService.selectOne(map);
 			System.out.println(dto.getMem_email());

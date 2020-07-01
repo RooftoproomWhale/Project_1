@@ -9,7 +9,6 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -538,9 +536,23 @@ public class AdminController {
 
 	// 공지사항
 	@RequestMapping("Notice.hst")
-	public String noticeList(@RequestParam Map map, Model model){
+	public String noticeList(@RequestParam Map map, Paging vo, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage){
 
-		List<BoardDTO> list = adminService.viewNotice(map);
+		int total = adminService.getTotalRecordNotice(map);
+		System.out.println(total);
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) {
+			cntPerPage = "5";
+		}
+
+		vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		List<BoardDTO> list = adminService.viewNotice(vo);
 		for(BoardDTO val : list)
 		{
 			System.out.println(val.getNoti_no());
@@ -548,13 +560,14 @@ public class AdminController {
 			System.out.println(val.getPostdate());
 		}
 
+		model.addAttribute("paging", vo);
 		model.addAttribute("list", list);
 		return "Notice.tiles";
 	}
 
 	@RequestMapping("Noticeinsert.hst")
 	public String noticeinsert(BoardDTO dto,HttpServletRequest req,Map map) throws IllegalStateException, IOException {
-		
+
 		String phisicalPath = req.getServletContext().getRealPath("/Upload");
 		System.out.println(dto.getUpload());
 		MultipartFile upload = dto.getUpload();
@@ -569,14 +582,14 @@ public class AdminController {
 			File file = new File(phisicalPath+File.separator+renameFile);
 			upload.transferTo(file);
 		}
-		
-		
+
+
 		map.put("mem_email",dto.getMem_email().toString());
 		map.put("title",dto.getTitle().toString());
 		map.put("content",dto.getContent().toString());
 		map.put("file_addr",renameFile);
-		
-	
+
+
 		int check = adminService.insertNotice(map);
 		System.out.println(check);
 
@@ -595,40 +608,40 @@ public class AdminController {
 	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json")
 	@ResponseBody
 	public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
-		
+
 		JsonObject jsonObject = new JsonObject();
-		
+
 		String fileRoot = "C:\\summernote_image\\";	//저장될 외부 파일 경로
 		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-				
+
 		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-		
-		File targetFile = new File(fileRoot + savedFileName);	
-		
+
+		File targetFile = new File(fileRoot + savedFileName);
+
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
 			jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
 			jsonObject.addProperty("responseCode", "success");
-				
+
 		} catch (IOException e) {
 			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
 			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 		}
-		
+
 		return jsonObject;
 	}
-	
-	
-	
+
+
+
 	@RequestMapping("NoticeDetail.hst")
 	public String noticeView(@RequestParam Map map,HttpServletRequest req, Model model) throws IOException {
-		
+
 		List<BoardDTO> list = adminService.detailNotice(map);
 		String phisicalPath = req.getServletContext().getRealPath("/Upload");
-		
+
 		for(BoardDTO val:list)
 		{
 			System.out.println(val.getFile_addr());
@@ -659,7 +672,7 @@ public class AdminController {
 
 		int check = adminService.updateNotice(map);
 		System.out.println(check);
-		
+
 		return "NoticeDetail.tiles";
 	}
 
@@ -668,7 +681,7 @@ public class AdminController {
 		adminService.deleteNotice(map);
 		return "forward:/Notice.tiles";
 	}
-	
+
 	@RequestMapping(value="NoticeImages.hst",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String noticeImg() {
@@ -677,5 +690,5 @@ public class AdminController {
 		System.out.println(JSONArray.toJSONString(list));
 		return JSONArray.toJSONString(list);
 	}
-	
+
 }

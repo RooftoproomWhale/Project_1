@@ -1,6 +1,5 @@
 package com.kosmo.proj.service.impl;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -15,11 +14,6 @@ public class MemoCommentServiceImpl implements MemoCommentService {
 	@Resource(name="commentDao")
 	private MemoCommentDAO dao;
 
-	@Override
-	public List<Map> selectList(Map map) {
-
-		return dao.selectList(map);
-	}
 
 	@Override
 	public int insert(Map map) {
@@ -37,5 +31,6 @@ public class MemoCommentServiceImpl implements MemoCommentService {
 		return dao.update(map);
 
 	}
+
 
 }

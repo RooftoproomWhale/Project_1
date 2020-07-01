@@ -22,7 +22,7 @@
 </style>
 <script>
 window.onload = function(){
-	
+
 	//web notification 설정
 	var icon = '../img/logo.png';
 	var userRole = $('#userRole').val();
@@ -147,9 +147,18 @@ window.onload = function(){
 			url:'<c:url value="/Noti/dayAptCount.hst"/>',
 			dataType:'html',
 			success:function(data){
-					console.log("병원 성공");
-					console.log("오늘 예약 수: " + data);
-						hosNotiDay(data);
+						console.log("병원 성공");
+						if(data != 0)
+						{
+							console.log("오늘 예약 수: " + data);
+							hosNotiDay(data);
+						}
+						else
+						{
+							console.log("오늘 예약 수: " + data);
+							hosNotiDayNo();
+						}
+						
 					},
 			error:function(request,error){
 				console.log('에러:',error);
@@ -244,6 +253,22 @@ window.onload = function(){
 			};
 		}
 	
+	function hosNotiDayNo() {
+		text = '오늘은 예약이 없습니다';
+		console.log(text);
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('예약 알림', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+			};
+		}
+	
 	function userAptNoti() {
 		text = '승인 대기중이던 예약이 승인되었습니다';
 		console.log(text);
@@ -274,8 +299,6 @@ window.onload = function(){
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-<input type="hidden" id="userId" value="${user }"/>
-<input type="hidden" id="userRole" value="${role }"/>
 	<!-- Header -->
 	<header id="header">
 		<div class="intro">

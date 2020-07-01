@@ -231,9 +231,9 @@ public class AdminDAO implements AdminService {
 	}
 
 	@Override
-	public List<BoardDTO> viewNotice(Map map) {
+	public List<BoardDTO> viewNotice(Paging vo) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectList("listNotice", map);
+		return sqlMapper.selectList("listNotice", vo);
 	}
 
 	@Override
@@ -438,6 +438,12 @@ public class AdminDAO implements AdminService {
 	public int giCount() {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("giAptCount");
+	}
+
+	@Override
+	public int getTotalRecordNotice(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("getTotalRecordNotice");
 	}
 
 	@Override

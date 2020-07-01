@@ -49,80 +49,21 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, Authentication auth) 
 	{
-		System.out.println(auth);
-		if(auth != null)
-		{
-			UserDetails userDetails = (UserDetails)auth.getPrincipal();
-			Collection authorities = userDetails.getAuthorities();
-			String user = userDetails.getUsername();
-			System.out.println(user);
-			for(Object authority:authorities)
-			{
-				System.out.println(((GrantedAuthority)authority).getAuthority());
-				if(((GrantedAuthority)authority).getAuthority().equals("ROLE_ADM"))
-				{
-					model.addAttribute("user", user);
-					model.addAttribute("role", "ADM");
-					return "redirect:/Admin/Index.hst";
-				}
-				else if(((GrantedAuthority)authority).getAuthority().equals("ROLE_MEM"))
-				{
-					model.addAttribute("user", user);
-					model.addAttribute("role", "MEM");
-					return "index.tiles";
-				}
-				else
-				{
-					model.addAttribute("user", user);
-					model.addAttribute("role", "HOS");
-					return "index.tiles";
-				}
-			}
-		}
-		System.out.println("권한 없");
-		model.addAttribute("user", null);
-		model.addAttribute("role", "NO");
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
+		
 		return "index.tiles";
 	}
 
 	@RequestMapping("/Home/ToHomePage.hst")
 	public String toHome(Authentication auth, Model model)
 	{
-		System.out.println(auth);
-		if(auth != null)
-		{
-			UserDetails userDetails = (UserDetails)auth.getPrincipal();
-			Collection authorities = userDetails.getAuthorities();
-			String user = userDetails.getUsername();
-			System.out.println(user);
-			for(Object authority:authorities)
-			{
-				System.out.println(((GrantedAuthority)authority).getAuthority());
-				if(((GrantedAuthority)authority).getAuthority().equals("ROLE_ADM"))
-				{
-					model.addAttribute("user", user);
-					model.addAttribute("role", "ADM");
-					return "redirect:/Admin/Index.hst";
-				}
-				else if(((GrantedAuthority)authority).getAuthority().equals("ROLE_MEM"))
-				{
-					model.addAttribute("user", user);
-					model.addAttribute("role", "MEM");
-					return "index.tiles";
-				}
-				else
-				{
-					model.addAttribute("user", user);
-					model.addAttribute("role", "HOS");
-					return "index.tiles";
-				}
-			}
-		}
-		System.out.println("권한 없");
-		model.addAttribute("user", null);
-		model.addAttribute("role", "NO");
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
+		
 		return "index.tiles";
 	}
+	
 	
 	@RequestMapping(value = "/News",produces = "text/html; charset=UTF-8")
 	@ResponseBody
@@ -213,43 +154,4 @@ public class HomeController {
 	{
 		return "health_info/Health_detail.tiles";
 	}
-//	@RequestMapping("/Admin/NoticeSubmit.hst")
-//	public String noticesubmit()
-//	{
-//		return "NoticeDetail.tiles";
-//	}
-	@RequestMapping("/Homespital/NoticeSubmit.hst")
-	public String noticesubmit()
-	{
-		return "NoticeDetail.tiles";
-	}
-
-	//test
-	@RequestMapping("/Test/test.hst")
-	public String test()
-	{
-		return "Hospage_Main.hos_tiles";
-	}
-
-//	마이바티스test
-	@RequestMapping("/Member/select.hst")
-	public String memberSelect(Map map, Model model)
-	{
-		MemberDTO dto = memberService.selectOne(map);
-		System.out.println(dto);
-		String name = dto.getMem_name();
-		String email = dto.getMem_email();
-		String pwd = dto.getMem_pwd();
-		String gender = dto.getGender();
-		int age = dto.getAge();
-		//int tel = dto.getTel();
-		int height = dto.getHeight();
-		int weight = dto.getWeight();
-		model.addAttribute("name", name);
-		model.addAttribute("age", age);
-		//System.out.println("이메일: "+email + " 비밀번호:"+pwd + " 이름: "+ name + " 성별: "+ gender +" 나이: "+ age +" 번호: "+ tel +" 키: "+ height +" 몸무게: "+ weight);
-		return "SignUp.tiles";
-	}
-
-
 }

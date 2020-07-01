@@ -360,9 +360,10 @@ window.onload = function(){
 	
 }
 </script>	
-	
 <nav id="menu" class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
+		<input type="hidden" id="userId" value="${user }"/>
+		<input type="hidden" id="userRole" value="${role }"/>
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -380,20 +381,25 @@ window.onload = function(){
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href='<c:url value="/Admin/Notice.hst"/>'>Notice</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Services <span class="caret"></span></a>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" aria-expanded="false"> Services <span
+						class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국 찾기</a></li>
+						<li><a href="<c:url value='/Homespital/Map.hst'/>">병원/약국
+								찾기</a></li>
 						<li class="divider"></li>
 						<li><a href='<c:url value="/Homespital/MedicineForm.hst"/>'>안전상비의약품</a></li>
 						<li class="divider"></li>
-						<li><a href="<c:url value='/Calendar/calendar.hst'/>">일정 관리</a></li>
+						<li><a href="<c:url value='/Calendar/calendar.hst'/>">일정
+								관리</a></li>
 						<li class="divider"></li>
-						<li><a href="<c:url value='/Homespital/Health_info.hst'/>">예방 정보</a></li>
-					</ul>
-				</li>
+						<li><a href="<c:url value='/Homespital/Health_info.hst'/>">예방
+								정보</a></li>
+					</ul></li>
 
 				<sec:authorize access="isAnonymous()">
-					<li><a href="<c:url value='/User/Login.hst'/>" class="page-scroll">Login</a></li>
+					<li><a href="<c:url value='/User/Login.hst'/>"
+						class="page-scroll">Login</a></li>
 					<li><a href="<c:url value='/Account/SignForm.hst'/>">SignUp</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
@@ -405,10 +411,9 @@ window.onload = function(){
 				<sec:authorize access="hasRole('ROLE_ADM')">
 					<li><a href="<c:url value='/Admin/Index.hst'/>">Admin</a></li>
 				</sec:authorize>
-					<li><a href="<c:url value='/QnA/QnA.hst'/>">QnA</a></li>
-				<!-- <li><a href="#FAQ" class="page-scroll">FAQ</a></li> -->
+					<li><a href="<c:url value='/QnA/QnA.hst'/>">Q&A</a></li>
 				<sec:authorize access="hasRole('ROLE_HOS')">
-					<li><a href="<c:url value='/Test/test.hst'/>">MyHospital</a></li>
+					<li><a href="<c:url value='/Hospage/main.hst'/>">MyHospital</a></li>
 				</sec:authorize>
 			</ul>
 		</div>
