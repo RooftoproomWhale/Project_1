@@ -438,4 +438,10 @@ public class AdminServiceImpl implements AdminService {
 		return dao.giCount();
 	}
 
+	@Override
+	public List<Map> selectImage() {
+		// TODO Auto-generated method stub
+		return dao.selectImage();
+	}
+
 }

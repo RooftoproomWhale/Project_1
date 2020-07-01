@@ -22,8 +22,6 @@
 </style>
 <script>
 window.onload = function(){
-	console.log("rr: " + ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal});
-	console.log("ii: " + ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.authorities});
 
 	//web notification 설정
 	var icon = '../img/logo.png';
@@ -276,8 +274,8 @@ window.onload = function(){
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-<input type="hidden" id="userId" value="${user }"/>
-<input type="hidden" id="userRole" value="${role }"/>
+<%-- <input type="hidden" id="userId" value="${user }"/> --%>
+<%-- <input type="hidden" id="userRole" value="${role }"/> --%>
 	<!-- Header -->
 	<header id="header">
 		<div class="intro">
@@ -306,20 +304,24 @@ window.onload = function(){
 					<div class="img-thumbnail" data-u="slides"
 						style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 						<div data-p="680">
-							<a href="/Covid/status.hst"><img data-u="image"
-								src="<c:url value="/img/1.jpg"/>" /></a>
+							<a id="noti1" href="/Covid/status.hst">
+								<img id="img1" data-u="image" src="#" />
+							</a>
 						</div>
 						<div data-p="680">
-							<a href="/corona/Corona_Mask.hst"><img data-u="image"
-								src='<c:url value="/img/2.jpg"/>' /></a>
+							<a id="noti2" href="/corona/Corona_Mask.hst">
+								<img id="img2" data-u="image" src="#" />
+							</a>
 						</div>
 						<div data-p="680">
-							<a href="/corona/Corona_Patient.hst"><img data-u="image"
-								src="<c:url value="/img/3.jpg"/>" /></a>
+							<a id="noti3" href="/corona/Corona_Patient.hst">
+								<img id="img3" data-u="image" src="#" />
+							</a>
 						</div>
 						<div data-p="680">
-							<a href="/prev/Season.hst"><img data-u="image"
-								src="<c:url value="/img/about.jpg"/>" /></a>
+							<a id="noti4" href="/prev/Season.hst">
+								<img id="img4" data-u="image" src="#" />
+							</a>
 						</div>
 					</div>
 					<!-- Bullet Navigator -->
@@ -436,6 +438,7 @@ window.onload = function(){
 <script>
 	$(function(){
 		showNews();	
+		showNotice();
 		
 		setInterval(() => {
 			showNews();	
@@ -481,6 +484,30 @@ window.onload = function(){
 					error:function(e){console.log('에러:',e)} 
 			});			
 		}
+		
+		function showNotice(){
+			
+			$.ajax({
+				url:"<c:url value='/Admin/NoticeImages.hst'/>",
+				type:'post',
+				success:function(data){
+					console.log(data);
+					var noti = JSON.parse(data);
+					console.log(noti[0]['FILE_ADDR']);
+					$('#noti1').attr('href');
+					$('#img1').attr('src','<c:url value="/Upload/'+noti[0]['FILE_ADDR']+'"/>');
+					console.log($('#img1').attr('src'));
+					$('#img2').attr('src','<c:url value="/Upload/'+noti[1]['FILE_ADDR']+'"/>');
+					$('#img3').attr('src','<c:url value="/Upload/'+noti[2]['FILE_ADDR']+'"/>');
+					$('#img4').attr('src','<c:url value="/Upload/'+noti[3]['FILE_ADDR']+'"/>');
+					//$('.img-thumbnail').html(comments);
+				},
+				error:function(e){console.log('에러:',e)}
+			})
+			
+		}
+		
 	});
+	
 </script>
 </html>

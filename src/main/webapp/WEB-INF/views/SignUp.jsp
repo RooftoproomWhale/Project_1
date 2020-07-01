@@ -232,11 +232,20 @@ width: 100%;
            var weight = parseInt($('#weight').val());
            var role = "ROLE_MEM";
            var enable = "1";
+           var illStr = "";
+           var chronic = $('#chronic').val();
+           $("input[name=illness]:checked").each(function() {
+        	   var test = $(this).val();
+        	   console.log(test);
+        	   illStr += test + "-";
+        	   console.log(illStr);
+           });
          
          $.ajax({
               url:'<c:url value="/Member/Insert.hst"/>',
               type:'post',
               datatype:'html',
+              traditional : true,
               data:
               {
                  "email" : email,
@@ -248,11 +257,13 @@ width: 100%;
                   "height" : height,
                   "weight" : weight,
                   "role" : "ROLE_MEM",
-                  "enable" : "1"
-              
+                  "enable" : "1",
+                  "illStr" : illStr,
+                  "chronic" : chronic
               },
               success:function(data){
-               console.log("성공");
+               console.log("회원가입 성공");
+               window.location.href = "<c:url value='/User/Login.hst'/>";
               },
         
          });
@@ -969,6 +980,7 @@ width: 100%;
            var hospName = $('#clickedHosName').val();
            var hosId = $('#hosId').val();
            var hosPwd = $("#hosPwd").val();
+           
            console.log(hospName + hosId + hosPwd);
            console.log("hospCode: " + hospCode);
            
@@ -1381,40 +1393,40 @@ width: 100%;
          <h5 align="left">겪은 적이 있는 질환을 선택하세요</h5>
          <div class="row" style="padding-top: 15px; padding-bottom: 15px">
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="aGan" name="symptom" value="1"/> A형 간염
+               <input type="checkbox" id="aGan" name="illness" value="1"/> A형 간염
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="bGan" name="symptom" value="2"/> B형 간염
+               <input type="checkbox" id="bGan" name="illness" value="2"/> B형 간염
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="goHyeol" name="symptom" value="3"/> 고혈압
+               <input type="checkbox" id="goHyeol" name="illness" value="3"/> 고혈압
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="gyeol" name="symptom" value="4"/> 결핵
+               <input type="checkbox" id="gyeol" name="illness" value="4"/> 결핵
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="giHyung" name="symptom" value="5"/> 기흉
+               <input type="checkbox" id="giHyung" name="illness" value="5"/> 기흉
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="brian" name="symptom" value="6"/> 뇌질환
+               <input type="checkbox" id="brian" name="illness" value="6"/> 뇌질환
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="dang" name="symptom" value="7"/> 당뇨
+               <input type="checkbox" id="dang" name="illness" value="7"/> 당뇨
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="heart" name="symptom" value="8"/> 심장질환
+               <input type="checkbox" id="heart" name="illness" value="8"/> 심장질환
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="cancer" name="symptom" value="9"/> 암
+               <input type="checkbox" id="cancer" name="illness" value="9"/> 암
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="cheon" name="symptom" value="10"/> 천식
+               <input type="checkbox" id="cheon" name="illness" value="10"/> 천식
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="lung" name="symptom" value="11"/> 폐렴
+               <input type="checkbox" id="lung" name="illness" value="11"/> 폐렴
             </div>
          </div>
-         <textarea name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
+         <textarea id="chronic" name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
          <input type="button" name="previous" class="previous action-button" value="이전" /> 
          <input type="button" id="signupBtn" class="action-button" value="회원가입" />
       </fieldset>

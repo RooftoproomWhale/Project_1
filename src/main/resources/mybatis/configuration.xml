@@ -17,6 +17,7 @@
 		<typeAlias alias="CustomUserDetails" type="com.kosmo.proj.util.CustomUserDetails"/>
 		<typeAlias alias="PrescriptionDTO" type="com.kosmo.proj.service.PrescriptionDTO"/>
 		<typeAlias alias="QnADTO" type="com.kosmo.proj.service.QnADTO"/>
+		<typeAlias alias="HistoryDTO" type="com.kosmo.proj.service.HistoryDTO"/>
 		
 <!-- 		<typeAlias alias="PrescriptionDTO" type="com.kosmo.proj.service.PrescriptionDTO"/>		 -->
 		<!--MemoCommentDTO는 별칭 불필요. SELECT결과를 Map에 저장하기때문에  -->
@@ -24,7 +25,10 @@
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑) 정보 설정 -->	
 	<mappers>
+		<mapper resource="mybatis/admin.xml" />
 		<mapper resource="mybatis/calendar.xml" />
+		<mapper resource="mybatis/map.xml" />
+		<mapper resource="mybatis/reservation.xml" />
 		<mapper resource="mybatis/SqlMapper.xml" />
 	</mappers>
 </configuration>

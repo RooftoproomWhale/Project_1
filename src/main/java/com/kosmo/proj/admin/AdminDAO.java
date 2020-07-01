@@ -440,4 +440,10 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.selectOne("giAptCount");
 	}
 
+	@Override
+	public List<Map> selectImage() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectImg");
+	}
+
 }

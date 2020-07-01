@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kosmo.proj.GetUser;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.ReservationDTO;
 import com.kosmo.proj.service.impl.CalendarServiceImpl;
@@ -37,7 +39,8 @@ public class MyPageController {
 			JOptionPane.showMessageDialog(null,"로그인후 이용해주세요.","홈스피탈",1);
 			return "member/Login.tiles";
 		}
-		
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id", id);
@@ -115,20 +118,26 @@ public class MyPageController {
 	}
 	// 진료예약 현황
 	@RequestMapping("/mypage/ReservationList.hst")
-	public String ReservationList() {
+	public String ReservationList(Authentication auth,Model model) {
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
 		
 		return "ReservationList.my_tiles";
 	}
 	//예약리스트
 	@RequestMapping(value ="/mypage/ReservationList.hst",method = RequestMethod.POST)
-	public String ReservationLists() {
-		
+	public String ReservationLists(Authentication auth,Model model) {
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
 		
 		return "ReservationList.my_tiles";
 	}
 	// 복약관리
 	@RequestMapping("/mypage/administration.hst")
-	public String administration() {
+	public String administration(Authentication auth,Model model) {
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
+		
 		return "administration.my_tiles";
 	}
 
@@ -138,6 +147,8 @@ public class MyPageController {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id",id );
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
 //		List<MemberDTO> list = memberDAO.selectDiseaseList(map);
 //		model.addAttribute("list", model);
 		return "Disease.my_tiles";
@@ -149,28 +160,39 @@ public class MyPageController {
 		map.put("id",id );
 //		int update = memberDAO.diseaseupdate(map);
 		
-		
 		return "redirect:../mypage/mypage.hst";
 	}
 
 	// 병원 페이지
 	@RequestMapping("/Hospage/main.hst")
-	public String toMain() {
+	public String toMain(Authentication auth,Model model) {
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
+		
 		return "Hospage_Main.hos_tiles";
 	}
 
 	@RequestMapping("/Hospage/Update.hst")
-	public String update() {
+	public String update(Authentication auth,Model model) {
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
+		
 		return "Hospage_Update.hos_tiles";
 	}
 
 	@RequestMapping("/Hospage/Cancel.hst")
-	public String cancel() {
+	public String cancel(Authentication auth,Model model) {
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
+		
 		return "Hospage_Cancel.hos_tiles";
 	}
 
 	@RequestMapping("/Hospage/Appointment.hst")
-	public String appointment() {
+	public String appointment(Authentication auth,Model model) {
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
+		
 		return "Hospage_Appointment.hos_tiles";
 	}
 

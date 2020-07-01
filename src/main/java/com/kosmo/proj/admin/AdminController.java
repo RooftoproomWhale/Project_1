@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
+import org.json.simple.JSONArray;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -658,16 +659,23 @@ public class AdminController {
 
 		int check = adminService.updateNotice(map);
 		System.out.println(check);
-
+		
 		return "NoticeDetail.tiles";
 	}
 
 	@RequestMapping("NoticeDelete.hst")
 	public String noticeEdit(@RequestParam Map map) {
-
 		adminService.deleteNotice(map);
-
 		return "forward:/Notice.tiles";
+	}
+	
+	@RequestMapping(value="NoticeImages.hst",produces = "text/html; charset=UTF-8")
+	@ResponseBody
+	public String noticeImg() {
+		List<Map> list = adminService.selectImage();
+		System.out.println(list);
+		System.out.println(JSONArray.toJSONString(list));
+		return JSONArray.toJSONString(list);
 	}
 	
 }
