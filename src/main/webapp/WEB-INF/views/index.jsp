@@ -22,7 +22,9 @@
 </style>
 <script>
 window.onload = function(){
-	
+	console.log("rr: " + ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal});
+	console.log("ii: " + ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.authorities});
+
 	//web notification 설정
 	var icon = '../img/logo.png';
 	var userRole = $('#userRole').val();

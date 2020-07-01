@@ -1344,45 +1344,74 @@ width: 100%;
 
       </fieldset>
       <fieldset>
-         <h1 class="fs-title">증상 및 질환</h1>
-         <h3 class="fs-subtitle">증상을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
-         <div class="row">
-            <div class="col-md-4">
-               <select class="form-control">
-                  <option value="">외과</option>
-                  <option value="">신경외과</option>
-                  <option value="">정형외과</option>
-                  <option value="">비뇨기과</option>
-                  <option value="">정신과</option>
-                  <option value="">이비인후과</option>
-                  <option value="">피부과</option>
-                  <option value="">호흡기내과</option>
-                  <option value="">소화기내과</option>
-                  <option value="">신경과</option>
-               </select>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 증상1
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 증상2
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 증상3
-            </div>
-         </div>
+         <h1 class="fs-title">병력 및 만성질환</h1>
+         <h3 class="fs-subtitle">겪었던 병력을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
+<!--          <div class="row"> -->
+<!--             <div class="col-md-4"> -->
+<!--                <select class="form-control"> -->
+<!--                   <option value="">내과</option> -->
+<!--                   <option value="">비뇨기과</option> -->
+<!--                   <option value="">산부인과</option> -->
+<!--                   <option value="">성형외과</option> -->
+<!--                   <option value="">소아청소년과</option> -->
+<!--                   <option value="">신경과</option> -->
+<!--                   <option value="">안과</option> -->
+<!--                   <option value="">이비인후과</option> -->
+<!--                   <option value="">일반외과</option> -->
+<!--                   <option value="">정신건강의학과</option> -->
+<!--                   <option value="">정형외과</option> -->
+<!--                   <option value="">치과</option> -->
+<!--                   <option value="">피부과</option> -->
+<!--                   <option value="">한방과</option> -->
+<!--                   <option value="">기타</option> -->
+<!--                </select> -->
+<!--             </div> -->
+<!--          </div> -->
+<!--          <div class="row"> -->
+<!--             <div class="col-md-3" style="padding:10px"> -->
+<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상1 -->
+<!--             </div> -->
+<!--             <div class="col-md-3" style="padding:10px"> -->
+<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상2 -->
+<!--             </div> -->
+<!--             <div class="col-md-3" style="padding:10px"> -->
+<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상3 -->
+<!--             </div> -->
+<!--          </div> -->
          <h5 align="left">겪은 적이 있는 질환을 선택하세요</h5>
-         <div class="row">
+         <div class="row" style="padding-top: 15px; padding-bottom: 15px">
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 질환1
+               <input type="checkbox" id="aGan" name="symptom" value="1"/> A형 간염
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 질환2
+               <input type="checkbox" id="bGan" name="symptom" value="2"/> B형 간염
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 질환3
+               <input type="checkbox" id="goHyeol" name="symptom" value="3"/> 고혈압
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="gyeol" name="symptom" value="4"/> 결핵
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="giHyung" name="symptom" value="5"/> 기흉
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="brian" name="symptom" value="6"/> 뇌질환
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="dang" name="symptom" value="7"/> 당뇨
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="heart" name="symptom" value="8"/> 심장질환
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="cancer" name="symptom" value="9"/> 암
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="cheon" name="symptom" value="10"/> 천식
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="lung" name="symptom" value="11"/> 폐렴
             </div>
          </div>
          <textarea name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
