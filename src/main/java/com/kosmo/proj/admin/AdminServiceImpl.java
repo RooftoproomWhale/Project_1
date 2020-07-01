@@ -443,5 +443,10 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.getTotalRecordNotice(map);
 	}
+	@Override
+	public List<Map> selectImage() {
+		// TODO Auto-generated method stub
+		return dao.selectImage();
+	}
 
 }

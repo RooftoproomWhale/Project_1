@@ -57,4 +57,16 @@ public class NotificationDAO implements NotificationService {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("notiAuthCount", map);
 	}
+
+	@Override
+	public int preAptCountUser(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("userAuthCount", map);
+	}
+
+	@Override
+	public int currAptCountUser(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("userAuthCount", map);
+	}
 }

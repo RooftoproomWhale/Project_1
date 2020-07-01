@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
+import org.json.simple.JSONArray;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -264,6 +265,14 @@ public class AdminController {
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = null;
 		List<ReservationDTO> list = adminService.selectOneApt(map);
+		System.out.println(list);
+		for (ReservationDTO val : list) {
+			System.out.println(val.getHOSP_NAME());
+			System.out.println(val.getRESERV_NO());
+			System.out.println(val.getMEM_EMAIL());
+			System.out.println(val.getAPPROVED());
+			System.out.println(val.getAPPLY_TIME());
+		}
 		try {
 			jsonStr = mapper.writeValueAsString(list);
 		} catch (JsonProcessingException e) {
@@ -669,10 +678,17 @@ public class AdminController {
 
 	@RequestMapping("NoticeDelete.hst")
 	public String noticeEdit(@RequestParam Map map) {
-
 		adminService.deleteNotice(map);
-
 		return "forward:/Notice.tiles";
+	}
+
+	@RequestMapping(value="NoticeImages.hst",produces = "text/html; charset=UTF-8")
+	@ResponseBody
+	public String noticeImg() {
+		List<Map> list = adminService.selectImage();
+		System.out.println(list);
+		System.out.println(JSONArray.toJSONString(list));
+		return JSONArray.toJSONString(list);
 	}
 
 }

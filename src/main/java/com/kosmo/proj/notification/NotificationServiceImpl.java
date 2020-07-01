@@ -57,4 +57,16 @@ public class NotificationServiceImpl implements NotificationService {
 		// TODO Auto-generated method stub
 		return dao.currAuthCount(map);
 	}
+
+	@Override
+	public int preAptCountUser(Map map) {
+		// TODO Auto-generated method stub
+		return dao.preAptCountUser(map);
+	}
+
+	@Override
+	public int currAptCountUser(Map map) {
+		// TODO Auto-generated method stub
+		return dao.currAptCountUser(map);
+	}
 }
