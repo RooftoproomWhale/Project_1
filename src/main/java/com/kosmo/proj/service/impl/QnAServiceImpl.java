@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.kosmo.proj.service.Paging;
 import com.kosmo.proj.service.QnADTO;
 import com.kosmo.proj.service.QnAService;
 
@@ -23,9 +24,9 @@ public class QnAServiceImpl implements QnAService {
 	}
 
 	@Override
-	public List<QnADTO> listQnA(Map map) {
+	public List<QnADTO> listQnA(Paging vo) {
 		// TODO Auto-generated method stub
-		return dao.listQnA(map);
+		return dao.listQnA(vo);
 	}
 
 	@Override
@@ -62,6 +63,12 @@ public class QnAServiceImpl implements QnAService {
 	public List<QnADTO> viewQnA(Map map) {
 		// TODO Auto-generated method stub
 		return dao.viewQnA(map);
+	}
+
+	@Override
+	public List<QnADTO> selectComment(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectComment(map);
 	}
 
 

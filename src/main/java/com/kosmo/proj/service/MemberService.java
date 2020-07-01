@@ -29,5 +29,8 @@ public interface MemberService {
    int insert(Map map);
    int update(Map map);
    CustomUserDetails getUserById(String username);
+   int hisInsert(Map map);
+   HistoryDTO getNo(Map map);
+   int illInsert(Map map);
 
 }

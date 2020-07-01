@@ -23,7 +23,11 @@
   text-shadow: black 0.2em 0.2em 0.2em;
   color:white;
 }
-
+img{
+	width:200px;
+	height:200px;
+	float:right;
+}
 </style>
 <script>
 $(function() {
@@ -43,24 +47,24 @@ $('#next').on('click', function(){
 	console.log("title"+title)
 	
 	$.ajax({
-		url: "<c:url value='/QnA/QnaInsert.hst'/>",
-		data: {
-			"title" : title,
-			"content" : content,
-			"user" : user
-				}, //넘길 파라미터 
-		dataType: 'html',
-		async: true, // true:비동기, false:동기 
-		success: function(data){ 
-			console.log('성공');
-			window.location.href = "<c:url value='/QnA/QnA.hst'/>";
-		},
-		error:function(request,status,error){
-			console.log('실패');
-			alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-		} 
+			url: "<c:url value='/QnA/QnaInsert.hst'/>",
+			data: {
+				"title" : title,
+				"content" : content,
+				"user" : user
+					}, //넘길 파라미터 
+			dataType: 'html',
+			async: true, // true:비동기, false:동기 
+			success: function(data){ 
+				console.log('성공');
+				window.location.href = "<c:url value='/QnA/QnA.hst'/>";
+			},
+			error:function(request,status,error){
+				console.log('실패');
+				alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			} 
+		});
 	});
-});
 });
 </script>
 </head>
@@ -70,15 +74,14 @@ $('#next').on('click', function(){
 		<div class="row">
 			<main id="main">
 				<div class="page-header" >
-					<h2 style="color: blue">Q&A</h2>
+					<h2 style="color: black">Q&A</h2>
 				</div>
-				<p>회원님의 궁금증을 풀어드립니다.</p>
+				<p>[ 궁금하신 점이 있으신가요? ]</p>
 				<br />
 				<div class="container">
+				<img src="../img/111.jpg" align="right">
 					<div class="jumbotron" style="background-color: white">
-						<h1 style="color: #00a5c2">
-							Homespital &nbsp;<small style="color: black">Write page</small>
-						</h1>
+						<h1 style="color: #e0dada"> Homespital </h1>
 					</div>
 					<div style="width: 60%; margin: auto;">
 						<form method="post" action="/write">
