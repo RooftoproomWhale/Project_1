@@ -35,7 +35,7 @@ $(function() {
 
 $('#next').on('click', function(){
 
-	var user;
+	var user; 
 	var content;
 	var title;
 
