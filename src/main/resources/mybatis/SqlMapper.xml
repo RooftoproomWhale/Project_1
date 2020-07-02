@@ -3,6 +3,11 @@
 <!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
 <mapper namespace="mybatis.SqlMapper">
+	<!-- 안드로이드 로그인 -->
+	<select id="memberIsLoginJson" parameterType="MemberDTO" resultType="MemberDTO">
+      SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
+   </select>
+   
 	<select id="memberIsLogin" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
 	</select>
