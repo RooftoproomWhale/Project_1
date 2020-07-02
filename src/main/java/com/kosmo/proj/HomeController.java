@@ -154,4 +154,10 @@ public class HomeController {
 	{
 		return "health_info/Health_detail.tiles";
 	}
+	
+	@RequestMapping("/Android/WebTest.hst")
+	public String andWeb()
+	{
+		return "AndroidChat";
+	}
 }

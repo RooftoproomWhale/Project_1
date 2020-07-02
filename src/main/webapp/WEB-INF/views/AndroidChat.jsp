@@ -1,48 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+	
+<!-- Stylesheet
+    ================================================== -->
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/style.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/nivo-lightbox/nivo-lightbox.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/nivo-lightbox/default.css'/>">
+<link href="<c:url value='/vendor/font-awesome-4.7/css/font-awesome.min.css'/>" rel="stylesheet" media="all">
+<link href="<c:url value='/vendor/font-awesome-5/css/fontawesome-all.min.css'/>" rel="stylesheet" media="all">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.24/themes/base/jquery-ui.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
+<%-- <script type="text/javascript" src="<c:url value='/js/jquery.1.11.1.js'/>"></script> --%>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+
+
+<script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
+<%-- <script type="text/javascript" src="<c:url value="/js/bootstrap.min.js"/>"></script> --%>
+<script type="text/javascript" src="<c:url value='/js/SmoothScroll.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/nivo-lightbox.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/jqBootstrapValidation.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/js/contact_me.js'/>"></script>
+<%-- <script type="text/javascript" src="<c:url value='/js/main.js'/>"></script> --%>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+<%--<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>--%>
+
+
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/bootstrap.css'/>">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!-- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
+<%-- <link rel="stylesheet" type="text/css" href="<c:url value='/fonts/font-awesome/css/font-awesome.css'/>"> --%>
 </head>
-
-<!-- Main CSS-->
-<link href="<c:url value='/css/theme.css'/>" rel="stylesheet" media="all">
-
-<style>
-.sticky-btn {
-   position: fixed;
-   bottom: 30px;
-   right: 50px;
-   z-index: 1231234;
-   color: #ff0000
-}
-
-#fa1:hover {
-   color: #ffffff
-}
-
-#fa2:hover {
-   color: #ff9900
-}
-</style>
 <body>
-   <div class="sticky-btn">
-      <span class="fa-stack fa-3x" data-toggle="modal"
-         data-target="#chat-modal"> <%--          <i class="fa fa-circle fa-stack-2x" style=" color: #ff9900; cursor:pointer" onclick="location.href='<c:url value="/Home/ToHomePage.hst"/>'"></i>  --%>
-         <%--         <i class="fa fa-user-md fa-stack-1x fa-inverse" style=" color: #ffffff; cursor:pointer" onclick="location.href='<c:url value="/Home/ToHomePage.hst"/>'"></i>  --%>
-         <i id="fa1" class="fa fa-circle fa-stack-2x" style="color: #ff9900;"></i>
-         <i id="fa2" class="fa fa-user-md fa-stack-1x fa-inverse"
-         style="color: #ffffff;"></i>
-      </span>
-   </div>
-   <div class="modal fade" id="chat-modal">
-      <div class="modal-dialog">
-         <div class="col-lg-12">
+<div class="col-lg-12">
             <div class="au-card au-card--no-shadow au-card--no-pad m-b-40 au-card--border">
                <div class="au-card-title"
                   style="background-image: url('images/bg-title-02.jpg');">
@@ -104,7 +109,5 @@
                </div>
             </div>
          </div>
-      </div>
-   </div>
 </body>
 </html>
