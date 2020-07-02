@@ -73,9 +73,18 @@
 	    ) 
 	    AND approved='승인됨'
 	</select>
+	<select	id="isDuplicateReservation" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM reservation 
+		WHERE hosp_Code = (SELECT hosp_code FROM hospital WHERE address = #{address}) 
+		AND mem_email = #{mem_email}
+		AND TO_CHAR(SYSDATE,'YYYY-MM-DD') = res_date 
+	</select>
 	<insert id="InsertReservation" parameterType="java.util.Map">
 		INSERT INTO reservation VALUES(SEQ_RESERVATION.NEXTVAL,
 		(SELECT hosp_code FROM hospital WHERE address = #{address}),
-		#{department},#{name},#{datepick},#{hourMinute},SYSDATE,'복통','승인 대기중')
+		#{department},#{email},#{datepick},#{hourMinute},SYSDATE,'복통','승인 대기중')
 	</insert>
+	<select id="getSymptomByHospital" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM symptom WHERE dept_name = #{dept_name}
+	</select>
 </mapper>
