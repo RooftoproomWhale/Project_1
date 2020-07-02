@@ -29,7 +29,7 @@ public class SignUpController {
    {
       return "SignUp.tiles";
    }
-
+   
    @RequestMapping("/Member/Insert.hst")
    public String userSignup(@RequestParam Map map, Model model)
    {
@@ -51,7 +51,7 @@ public class SignUpController {
          int illCheck = memberService.illInsert(map);
          System.out.println(i + "번째 illCheck: " + illCheck);
       }
-
+      
       return "SignUp.tiles";
    }
 
@@ -79,7 +79,7 @@ public class SignUpController {
       System.out.println(jsonStr);
       return jsonStr.toString();
    }
-
+   
    @ResponseBody
    @RequestMapping(value = "/Member/HosSearchList.hst", produces = "text/html; charset=UTF-8")
    public String searchedHosp(@RequestParam Map map, Model model)
@@ -101,7 +101,7 @@ public class SignUpController {
       System.out.println(jsonStr);
       return jsonStr.toString();
    }
-
+   
    @RequestMapping("/Member/HospitalAuthSub.hst")
    public String hosAuthSub(@RequestParam Map map, Model model)
    {
@@ -112,7 +112,7 @@ public class SignUpController {
       System.out.println("HOSAUTH UP: " + upCheck);
       int upCheck2 = memberService.hosIdUpdate(map);
       System.out.println("HOSID UP: " + upCheck2);
-
+      
       return "SignUp.tiles";
    }
 

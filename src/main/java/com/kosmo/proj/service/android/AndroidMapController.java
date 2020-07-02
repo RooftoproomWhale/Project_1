@@ -48,10 +48,10 @@ public class AndroidMapController {
 		
 		String apiUrl = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D"
 				+ "&pageNo=1"
-				+ "&numOfRows=50"
+				+ "&numOfRows=100"
 				+ "&xPos="+longitude
 				+ "&yPos="+latitude
-				+ "&radius=3000";
+				+ "&radius=2000";
 		
 		String responseBody = get(apiUrl);
         System.out.println(responseBody);
