@@ -70,7 +70,7 @@ img{
 				</div>
 				<p class="lead">[ 궁금하신 점이 있으신가요? ]</p>
 				<br />
-				<div class="container">
+				<div class="container" style="box-shadow:5px 5px 5px 5px rgba(227, 225, 225); ">
 					<img src="../img/111.jpg" align="right">
 					<div class="jumbotron" style="background-color: white">
 						<h1 style="color: #e0dada">Homespital</h1>
@@ -101,7 +101,7 @@ img{
 								<div class="col-sm-offset-2 col-sm-10">
 									<button type="button" id="qnaEditBtn" class="btn btn-primary">수정</button>
 								</div>
-							</div>
+							</div></br></br>
 						</form>
 					</div>
 
