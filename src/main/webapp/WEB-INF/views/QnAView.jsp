@@ -19,18 +19,19 @@
 	left: 0px;
 	margin-top: 1000px;
 	background-color: #474747;
-	height: 150px 
+	height: 150px
 }
 
 .jumbotron {
 	background-size: cover;
 	text-shadow: black 0.2em 0.2em 0.2em;
-	color:white;
+	color: white;
 }
-img{
-	width:200px;
-	height:200px;
-	float:right;
+
+img {
+	width: 200px;
+	height: 200px;
+	float: right;
 }
 </style>
 <script>
@@ -41,39 +42,47 @@ img{
 		/* showComments(); */
 
 		//코멘트 입력 및 수정처리]
-		$('#submit').click(function() {
-			if ($(this).val() == '등록') {
-				var action = "<c:url value='/QnA/InsertAnswer.hst'/>";
-				var answer = $('#answer').val();
-				var no = $('#no').html();
-			} else {
-				var action = "<c:url value='/QnA/comEdit.hst'/>";
-				var answer = $('#answer').val();
-				var no = $('#no').html();
-			}
+		$('#submit')
+				.click(
+						function() {
+							if ($(this).val() == '등록') {
+								var action = "<c:url value='/QnA/InsertAnswer.hst'/>";
+								var answer = $('#answer').val();
+								var no = $('#no').html();
+							} else {
+								var action = "<c:url value='/QnA/comEdit.hst'/>";
+								var answer = $('#answer').val();
+								var no = $('#no').html();
+							}
 
-			//ajax로 요청]
-			console.log("answer: " + answer);
-			console.log("no: " + no);
-			$.ajax({
-				url : action,
-				data : {
-					"answer" : answer,
-					"no" : no
-				},
-				dataType : 'text',
-				type : 'get',
-				success : function(data) {
-					console.log("성공");
-					console.log(data);
-					window.location.href = "<c:url value='/QnA/QnAView.hst?no=" + no + "'/>";
-				},
-				error : function(request, status, error) {
-					console.log('실패');
-					alert("code = " + request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-				}
-			});
-		});
+							//ajax로 요청]
+							console.log("answer: " + answer);
+							console.log("no: " + no);
+							$
+									.ajax({
+										url : action,
+										data : {
+											"answer" : answer,
+											"no" : no
+										},
+										dataType : 'text',
+										type : 'get',
+										success : function(data) {
+											console.log("성공");
+											console.log(data);
+
+											window.location.href = "<c:url value='/QnA/QnAView.hst?no="
+													+ no + "'/>";
+										},
+										error : function(request, status, error) {
+											console.log('실패');
+											alert("code = " + request.status
+													+ " message = "
+													+ request.responseText
+													+ " error = " + error); // 실패 시 처리
+										}
+									});
+						});
 	});///$(function(){})
 </script>
 <title>Q&A</title>
@@ -87,39 +96,41 @@ img{
 				</div>
 				<p class="lead">[ 궁금하신 점이 있으신가요? ]</p>
 				<br />
-				<div class="container" >
-				<img src="../img/111.jpg" align="right">
+				<div class="container"
+					style="box-shadow: 3px 3px 3px 5px rgba(227, 225, 225);">
+					<img src="../img/111.jpg" align="right">
 					<div class="jumbotron" style="background-color: white">
-						<h1 style="color: #e0dada"> Homespital </h1>
+						<h1 style="color: #e0dada">Homespital</h1>
 					</div>
 
 					<div class="row">
 						<div class="col-md-offset-2 col-md-8">
 							<table class="table table-bordered table-striped">
 								<tr>
-									<th class="col-md-2 text-center" style="border: hidden;">번호</th>
-									<td style="border: hidden;" id="no">${list[0].qna_no}</td>
+									<th class="col-md-2 text-center">번호</th>
+									<td id="no">${list[0].qna_no}</td>
+								</tr>
+								<tr class="info">
+									<th class="text-center">제목</th>
+									<td>${list[0].title}</td>
 								</tr>
 								<tr>
-									<th class="text-center" style="border: hidden;">제목</th>
-									<td style="border: hidden;">${list[0].title}</td>
+									<th class="text-center">작성자</th>
+									<td>${list[0].mem_email}</td>
+								</tr>
+								<tr class="info">
+									<th class="text-center">등록일</th>
+									<td>${list[0].q_date}</td>
 								</tr>
 								<tr>
-									<th class="text-center" style="border: hidden;">작성자</th>
-									<td style="border: hidden;">${list[0].mem_email}</td>
+									<th class="text-center" colspan="2">내용</th>
 								</tr>
-								<tr>
-									<th class="text-center" style="border: hidden;">등록일</th>
-									<td style="border: hidden;">${list[0].q_date}</td>
-								</tr>
-								<tr>
-									<th class="text-center" colspan="2" style="border: hidden;">내용</th>
-								</tr>
-								<tr>
-									<td style="border: hidden;" colspan="2">${list[0].content}</td>
+								<tr class="info">
+									<td colspan="2">${list[0].content}</td>
 								</tr>
 							</table>
-						</div>	
+							</br>
+						</div>
 					</div>
 					<!-- row -->
 					<div class="row">
@@ -135,46 +146,50 @@ img{
 										href="<c:url value='/QnA/QnADelete.hst?no=${list[0].qna_no}'/>"
 										class="btn btn-success">삭제</a></li>
 								</c:if>
-
-								<li><a href="<c:url value='/QnA/QnA.hst?nowPage=${param.nowPage}'/>" class="btn btn-success">목록</a></br></li>
+								<li><a href="<c:url value='/QnA/QnA.hst'/>"
+									class="btn btn-success">목록</a></br></li>
 							</ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-offset-4 col-md-4">
+							<div class="text-center">
+								<!-- 한줄 코멘트 입력 폼-->
+								<h2>Q&A 답변</h2>
+								<form name="replyForm" method="post">
+									<input type="hidden" name="cno" />
+								</form>
+								<div class="row" id="comments">
+									<div class="col-md-10">
+										<sec:authorize access="hasRole('ROLE_ADM')">
+											<input type="text" class="form-control" id="answer"
+												name="answer" placeholder="내용을 입력하세요." value="" />
+										</sec:authorize>
+									</div>
+									<div class="col-md-2">
+										<sec:authorize access="hasRole('ROLE_ADM')">
+											<c:if test="${listA[0].answer_content == null}" var="item">
+												<input class="btn btn-success" id="submit" type="button"
+													value="등록" />
+											</c:if>
+											<c:if test="${!item }">
+												<input class="btn btn-success" id="submit" type="button"
+													value="수정" />
+											</c:if>
+										</sec:authorize>
+										</br>
+										</br>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<textarea cols="55px" rows="10px" id="answerText"
+									disabled="disabled">${listA[0].answer_content}</textarea>
+							</div></br></br>
 						</div>
 					</div>
 				</div>
 			</main>
-		</div>
-		<div class="row">
-			<div class="col-md-offset-4 col-md-4">
-				<div class="text-center">
-					<!-- 한줄 코멘트 입력 폼-->
-					<h2>Q&A 답변</h2>
-					<form name="replyForm" method="post">
-						<input type="hidden" name="cno" />
-					</form>
-					<div class="row" id="comments">
-						<sec:authorize access="hasRole('ROLE_ADM')">
-							<input type="text" class="form-control" id="answer" name="answer" placeholder="내용을 입력하세요." value="${listA[0].answer_content}" />
-						</sec:authorize>
-						<sec:authorize access="hasRole('ROLE_MEM')">
-							<input type="text" class="form-control" id="answer" name="answer" placeholder="내용을 입력하세요." value="${listA[0].answer_content}" />
-						</sec:authorize>
-						<sec:authorize access="hasRole('ROLE_HOS')">
-							<input type="text" class="form-control" id="answer" name="answer" placeholder="내용을 입력하세요." value="${listA[0].answer_content}" />
-						</sec:authorize>
-						<sec:authorize access="isAnonymous()">
-							<input type="text" class="form-control" id="answer" name="answer" placeholder="내용을 입력하세요." value="${listA[0].answer_content}" />
-						</sec:authorize>
-						<sec:authorize access="hasRole('ROLE_ADM')">
-							<c:if test="${listA[0].answer_content == null}" var="item">
-								<input class="btn btn-success" id="submit" type="button" value="등록" />
-							</c:if>
-							<c:if test="${!item }">
-								<input class="btn btn-success" id="submit" type="button" value="수정" />
-							</c:if>
-						</sec:authorize>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </body>

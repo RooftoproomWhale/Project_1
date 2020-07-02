@@ -14,16 +14,14 @@
 	background-color: #474747;
 	height: 150px
 }
-.jumbotron{
+.jumbotron{ 
   	background-size: cover;
   	text-shadow: black 0.2em 0.2em 0.2em;
   	color:white;
 }
-#table{
-	border-right:none;
-	border-left:none;
-	border-top:none;
-	border-bottom:none;
+table {
+    width: 100%;
+    border: 1px solid #444444;
 }
 img{
 	width:200px;
@@ -34,19 +32,18 @@ img{
 <title>Q&A</title>
 </head>
 <body>
-	<div class="container" style="padding-top: 88px;">
-		<div class="row">
+	<div class="container" style="padding-top: 88px; box-shadow: 20em;">
+		<div class="row" >
 			<main id="main">
 				<div class="page-header">
 					<h2 style="color: black">Q&A</h2>
 				</div>
 				<p class="lead">[ 궁금하신 점이 있으신가요? ]</p>
 				<br />
-				<div class="container">
+				<div class="container" style="box-shadow:3px 3px 3px 5px rgba(227, 225, 225); ">
 				<img src="../img/111.jpg" align="right">
 					<div class="jumbotron" style="background-color: white">
-						<h1 style="color: #e0dada"> Homespital
-						</h1>
+						<h1 style="color: #e0dada"> Homespital </h1>
 					</div>
 					<div class="row" style="margin-bottom: 10px">
 						<div class="col-md-12 text-right">
@@ -58,10 +55,10 @@ img{
 							<table id="table"class="table table-bordered table-hover text-center">
 								<tr>
 									<!-- 각 컬럼의 폭은 <td>계열에 class="col-*-*"추가 -->
-									<th style="border: hidden;" class="col-md-1 text-center">번호</th>
-									<th style="border: hidden;" class="text-center">제목</th>
-									<th style="border: hidden;" class="col-md-1 text-center">작성자</th>
-									<th style="border: hidden;" class="col-md-2 text-center">등록일</th>
+									<th class="col-md-1 text-center">번호</th>
+									<th class="text-center">제목</th>
+									<th class="col-md-1 text-center">작성자</th>
+									<th class="col-md-2 text-center">등록일</th>
 								</tr>
 								<c:if test="${empty list}" var="isEmpty">
 									<tr>
@@ -72,14 +69,14 @@ img{
 									<c:forEach items="${list}" var="item" varStatus="loop">
 										<tr class="line">
 											<!-- 각 컬럼의 폭은 <td>계열에 class="col-*-*"추가 -->
-											<td style="border: hidden;">${item.qna_no}</td>
-											<td style="border: hidden;" class="text-left"><a href='<c:url value="/QnA/QnAView.hst?no=${item.qna_no}"/>'>${item.title}</a></td>
-											<td style="border: hidden;">${item.mem_email}</td>
-											<td style="border: hidden;">${item.q_date}</td>
+											<td>${item.qna_no}</td>
+											<td class="text-left"><a href='<c:url value="/QnA/QnAView.hst?no=${item.qna_no}"/>'>${item.title}</a></td>
+											<td>${item.mem_email}</td>
+											<td>${item.q_date}</td>
 										</tr>
 									</c:forEach>
 								</c:if>
-							</table>
+							</table></br></br></br>
 						</div>
 						<!-- column -->
 					</div>
@@ -105,27 +102,8 @@ img{
 							<a
 								href="<c:url value='/QnA/QnA.hst?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}'/>">&gt;</a>
 						</c:if>
-					</div>
+					</div></br></br>
 					<!-- 검색용 UI -->
-					<div class="row">
-						<div class="text-center">
-							<form class="form-inline" method="post"
-								action="<c:url value=''/>">
-								<div class="form-group">
-									<select name="searchColumn" class="form-control">
-										<option value="title">제목</option>
-										<option value="name">작성자</option>
-										<option value="content">내용</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<input type="text" name="searchWord" class="form-control" />
-								</div>
-								<button type="submit" class="btn btn-primary">검색</button>
-
-							</form>
-						</div>
-					</div>
 				</div>
 			</main>
 		</div>

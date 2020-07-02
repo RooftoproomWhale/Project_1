@@ -108,21 +108,20 @@ public class QnAContoller {
 	@RequestMapping("/QnA/QnaInsert.hst")
 	public String qnainsert(@RequestParam Map map, Model model)
 	{
+		System.out.println("user:"+map.get("user").toString());
 		int check = qnaService.insertQnA(map);
-		System.out.println(check);
+
 
 		return "QnAWrite.tiles";
 	}
 
-	@RequestMapping("/QnA/QnAWrite.hst")
-	public String qnaWrite(Authentication auth, Model model)
-	{
-		UserDetails userDetails = (UserDetails)auth.getPrincipal();
-		String user = userDetails.getUsername();
-
-		model.addAttribute("user",user);
-		return "QnAWrite_tiles";
-	}
+	/*
+	 * @RequestMapping("/QnA/QnAWrite.hst") public String qnaWrite(Authentication
+	 * auth, Model model) { UserDetails userDetails =
+	 * (UserDetails)auth.getPrincipal(); String user = userDetails.getUsername();
+	 *
+	 * model.addAttribute("user",user); return "QnAWrite.tiles"; }
+	 */
 
 	@RequestMapping("/QnA/QnADelete.hst")
 	public String qnaDelete(@RequestParam Map map)
