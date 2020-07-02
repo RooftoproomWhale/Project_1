@@ -413,7 +413,7 @@ window.onload = function(){
 				</sec:authorize>
 					<li><a href="<c:url value='/QnA/QnA.hst'/>">Q&A</a></li>
 				<sec:authorize access="hasRole('ROLE_HOS')">
-					<li><a href="<c:url value='/Test/test.hst'/>">MyHospital</a></li>
+					<li><a href="<c:url value='/Hospage/main.hst'/>">MyHospital</a></li>
 				</sec:authorize>
 			</ul>
 		</div>
