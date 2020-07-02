@@ -6,6 +6,9 @@
 	<select id="memberIsLogin" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
 	</select>
+	<select id="memberIsLoginJson" parameterType="MemberDTO" resultType="MemberDTO">
+      	SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
+    </select>
 
 	<select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
