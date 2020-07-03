@@ -51,6 +51,7 @@
       width: 90%;
        border: 0 !important;
        background: white;
+       font-size: small;
    }
    .map_button{position: absolute;bottom: 32px;right: 8px;z-index: 2;flex-direction: column;}
    .current_refresh
@@ -177,7 +178,10 @@
       margin-right: 20px;
    }
    .btn_direction{
-      text-align: center;
+      text-align: right;
+   }
+   .find_way_btn{
+   	  margin-right: 10px;
    }
    .inner_final_area{
       padding-top: 20px;
@@ -455,24 +459,29 @@
 	                 </div>
                   </div>
                </div>
-               <!-- <div class="form-group">
-                  <span class="form-label">진료실</span>
-                  <div class="btn-group">
-                     <label class= keyboard disable"radio-inline form-label"><input type="radio" name="optradio" checked>내과</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">정형외과</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">산부인과</label>
+               <div class="row">
+                  <div class="col-sm-6">
+                     <div class="form-group">
+		                  <span class="form-label">진료실</span>
+		                  <div class="btn-group" id="dept_radio" style="display: flex;">
+		                     <label class="keyboard disable radio-inline form-label"><input type="radio" name="optradio" checked>내과</label>
+		                     <label class="keyboard disable radio-inline form-label"><input type="radio" name="optradio">정형외과</label>
+		                     <label class="keyboard disable radio-inline form-label"><input type="radio" name="optradio">산부인과</label>
+		                  </div>
+		               </div>
+                  </div>
+                  <div class="col-sm-6">
+                     <div class="form-group">
+	                   <span class="form-label">진료 증상</span>
+	                   <select id="symptom" name="symptom" class="form-control">
+	                   		
+	                   </select>
+                       <span class="select-arrow"></span>
+	                 </div>
                   </div>
                </div>
-               <div class="form-group">
-                  <span class="form-label">진료 항목</span>
-                  <div class="btn-group">
-                     <label class="radio-inline form-label"><input type="radio" name="optradio" checked>결과상담</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">공단검진</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">예방접종</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">일반진료</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">기타</label>
-                  </div>
-               </div> -->
+               
+              
                <div class="row">
                   <div class="col-sm-5">
                      <div class="form-group">
@@ -915,6 +924,7 @@
                            "<c:url value='/images/map/hospital_image/hospital.png'/>",
                              new kakao.maps.Size(35, 35))
                   });
+                  var dept_item = '';
                   
                   var iwContent = '<div style="padding:5px;">'+item.hosp_name+'</div>';
                      
@@ -944,8 +954,9 @@
                      {
                         $('.info_wrap').removeClass('warp_invisible');
                         $('.info-toggle').removeClass('left_toggle');
-                        
                      }
+                    
+                     
                      listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel);
                      $('.search_list').html(listitem);
                   });
@@ -1200,7 +1211,7 @@
                console.log("코로나 데이터",jsonData);
                $.each(jsonData, function(i, item) {
                   console.log("코로나 데이터",item);
-                  geocoder.addressSearch(item.ADDRESS, function(result, status) {
+                  geocoder.addressSearch(item.CONTENT, function(result, status) {
                       if (status === kakao.maps.services.Status.OK) {
                          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
                          
@@ -1235,6 +1246,10 @@
                            }
                          
                       }
+                      else
+                   	  {
+                    	  console.log("없는 주소 입니다");
+                   	  }
                   });
                });
             },
@@ -1633,9 +1648,75 @@
          $('#modal_hosp_name').attr('value',$(".inner_title").text());
          $('#address').attr('value',$(".inner_end_box:eq(0)").text());
          $('#department').attr('value',$(".inner_summary_info").text());
+         
+         $.ajax({
+             url:"<c:url value='/Homespital/Map/getDept.hst'/>",
+             type:'get',
+             datatype:'json',
+             data:{"address":$('#address').val()},
+             success:function(data){
+                var jsonData = JSON.parse(data);
+                console.log("연결성공", jsonData,typeof(jsonData));
+                console.log(jsonData[0].DEPT_NAME);
+                
+                $('#dept_radio').empty();
+                var option="";
+                for(var i = 0; i < jsonData.length; i++)
+	       		{
+                	option += "<label class='keyboard disable radio-inline form-label'><input type='radio' name='optradio' value='"+jsonData[i].DEPT_NAME+"'>"+jsonData[i].DEPT_NAME+"</label>";
+	       		}
+                $('#dept_radio').append(option);
+                $('#symptom').empty();
+                
+                $('input[type=radio][name=optradio]').change(function() {
+                    console.log($('input[type=radio][name=optradio]:checked').val());
+                    if($('input[type=radio][name=optradio]:checked').val()=='기타')
+                    {
+                    	$('#symptom').empty();
+                    	$('#symptom').append("<option>기타</option>");
+                    }
+                    else if($('input[type=radio][name=optradio]:checked').val()=='성형외과')
+                    {
+                    	$('#symptom').empty();
+                    	$('#symptom').append("<option>성형</option>");
+                    }
+                    else
+                    {
+                    	$.ajax({
+                            url:"<c:url value='/Homespital/Map/getSymptom.hst'/>",
+                            type:'get',
+                            datatype:'json',
+                            data:{"dept_name":$('input[type=radio][name=optradio]:checked').val()},
+                            success:function(data){
+                            	var jsonData = JSON.parse(data);
+                                console.log("연결성공", jsonData,typeof(jsonData));
+                                console.log(jsonData[0].SYMPTOM);
+                                
+                                $('#symptom').empty();
+                                var option="";
+                                for(var i = 0; i < jsonData.length; i++)
+                	       		{
+                                	option += "<option>"+jsonData[i].SYMPTOM+"</option>";
+                	       		}
+                                $('#symptom').append(option);
+                            },
+                            error:function(e){
+                                
+                            }
+                        });
+                    }
+                });
+             },
+             error:function(e){
+                
+             }
+          });
+         
          $('#reservation-modal').modal('show');
    
       }
+      
+      
 
       function changeApi(status)
       {
