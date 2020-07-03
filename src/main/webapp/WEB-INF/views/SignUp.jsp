@@ -45,6 +45,7 @@ body {
    /*stacking fieldsets above each other*/
    position: relative;
 }
+
 /*Hide all except first fieldset*/
 #msform fieldset:not(:first-of-type) {
    display: none;
@@ -231,11 +232,20 @@ width: 100%;
            var weight = parseInt($('#weight').val());
            var role = "ROLE_MEM";
            var enable = "1";
+           var illStr = "";
+           var chronic = $('#chronic').val();
+           $("input[name=illness]:checked").each(function() {
+              var test = $(this).val();
+              console.log(test);
+              illStr += test + "-";
+              console.log(illStr);
+           });
          
          $.ajax({
               url:'<c:url value="/Member/Insert.hst"/>',
               type:'post',
               datatype:'html',
+              traditional : true,
               data:
               {
                  "email" : email,
@@ -247,11 +257,14 @@ width: 100%;
                   "height" : height,
                   "weight" : weight,
                   "role" : "ROLE_MEM",
-                  "enable" : "1"
-              
+                  "enable" : "1",
+                  "illStr" : illStr,
+                  "chronic" : chronic
               },
               success:function(data){
-               console.log("성공");
+               console.log("회원가입 성공");
+               alert("회원가입 완료 되었습니다.")
+               window.location.href = "<c:url value='/User/Login.hst'/>";
               },
         
          });
@@ -962,18 +975,22 @@ width: 100%;
                }
             });
 
+      
       $('#hosAuthBtn').click(function() {
-
+         var hospCode = $('#hosCode').val();
            var hospName = $('#clickedHosName').val();
            var hosId = $('#hosId').val();
            var hosPwd = $("#hosPwd").val();
+           
            console.log(hospName + hosId + hosPwd);
-           $
-                 .ajax({
+           console.log("hospCode: " + hospCode);
+           
+                 $.ajax({
                     url : "<c:url value='/Member/HospitalAuthSub.hst'/>",
                     type : 'get',
                     datatype : 'html',
                     data : {
+                       "hospCode" : hospCode,
                        "email" : hosId,
                        "pwd" : hosPwd,
                        "name" : hospName,
@@ -983,7 +1000,7 @@ width: 100%;
                        "height" : 0,
                        "weight" : 0,
                        "role" : "ROLE_HOS",
-                       "enable" : "0"
+                       "enable" : "1"
                     },
                     success : function(data) {
                        alert('제휴신청이 완료되었습니다');
@@ -995,13 +1012,13 @@ width: 100%;
                  });
         });
    });
-
+   
    function searchHospClick(i) {
       var hospName = $('#hospName' + i).html();
       console.log('#hospName' + i);
       console.log(hospName);
-      $
-            .ajax({
+      
+            $.ajax({
                url : "<c:url value='/Member/HosSearchList.hst'/>",
                type : "get", //get, post 방식 
                dataType : 'json', //or xml or script or html 
@@ -1011,7 +1028,7 @@ width: 100%;
                async : true, // true:비동기, false:동기 
                success : function(data) {
                   console.log(data);
-
+            
                   var items = '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>'
                         + '<div class="col-md-10">'
                         + '<input type="text" class="form-control" id="clickedHosName" placeholder="병원명" disabled="disabled" value="'+data[0].hosp_name+'">'
@@ -1027,7 +1044,9 @@ width: 100%;
 
                   $('#selectedHosp').html(items);
                   $('#close').click();
-                  //             $('#regi-modal').hide();
+                    var hospCode = data[0].hosp_code;
+                    console.log("click: " + hospCode);
+                    $("#hosCodeDiv").html('<input type="text" type="hidden" id="hosCode" value="'+hospCode+'">');
                },
                error : function(request, status, error) {
                   console.log("에러");
@@ -1338,52 +1357,80 @@ width: 100%;
 
       </fieldset>
       <fieldset>
-         <h1 class="fs-title">증상 및 질환</h1>
-         <h3 class="fs-subtitle">증상을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
-         <div class="row">
-            <div class="col-md-4">
-               <select class="form-control">
-                  <option value="">외과</option>
-                  <option value="">신경외과</option>
-                  <option value="">정형외과</option>
-                  <option value="">비뇨기과</option>
-                  <option value="">정신과</option>
-                  <option value="">이비인후과</option>
-                  <option value="">피부과</option>
-                  <option value="">호흡기내과</option>
-                  <option value="">소화기내과</option>
-                  <option value="">신경과</option>
-               </select>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 증상1
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 증상2
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 증상3
-            </div>
-         </div>
+         <h1 class="fs-title">병력 및 만성질환</h1>
+         <h3 class="fs-subtitle">겪었던 병력을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
+<!--          <div class="row"> -->
+<!--             <div class="col-md-4"> -->
+<!--                <select class="form-control"> -->
+<!--                   <option value="">내과</option> -->
+<!--                   <option value="">비뇨기과</option> -->
+<!--                   <option value="">산부인과</option> -->
+<!--                   <option value="">성형외과</option> -->
+<!--                   <option value="">소아청소년과</option> -->
+<!--                   <option value="">신경과</option> -->
+<!--                   <option value="">안과</option> -->
+<!--                   <option value="">이비인후과</option> -->
+<!--                   <option value="">일반외과</option> -->
+<!--                   <option value="">정신건강의학과</option> -->
+<!--                   <option value="">정형외과</option> -->
+<!--                   <option value="">치과</option> -->
+<!--                   <option value="">피부과</option> -->
+<!--                   <option value="">한방과</option> -->
+<!--                   <option value="">기타</option> -->
+<!--                </select> -->
+<!--             </div> -->
+<!--          </div> -->
+<!--          <div class="row"> -->
+<!--             <div class="col-md-3" style="padding:10px"> -->
+<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상1 -->
+<!--             </div> -->
+<!--             <div class="col-md-3" style="padding:10px"> -->
+<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상2 -->
+<!--             </div> -->
+<!--             <div class="col-md-3" style="padding:10px"> -->
+<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상3 -->
+<!--             </div> -->
+<!--          </div> -->
          <h5 align="left">겪은 적이 있는 질환을 선택하세요</h5>
-         <div class="row">
+         <div class="row" style="padding-top: 15px; padding-bottom: 15px">
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 질환1
+               <input type="checkbox" id="aGan" name="illness" value="1"/> A형 간염
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 질환2
+               <input type="checkbox" id="bGan" name="illness" value="2"/> B형 간염
             </div>
             <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="symptom" name="symptom" /> 질환3
+               <input type="checkbox" id="goHyeol" name="illness" value="3"/> 고혈압
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="gyeol" name="illness" value="4"/> 결핵
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="giHyung" name="illness" value="5"/> 기흉
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="brian" name="illness" value="6"/> 뇌질환
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="dang" name="illness" value="7"/> 당뇨
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="heart" name="illness" value="8"/> 심장질환
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="cancer" name="illness" value="9"/> 암
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="cheon" name="illness" value="10"/> 천식
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="lung" name="illness" value="11"/> 폐렴
             </div>
          </div>
-         <textarea name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
+         <textarea id="chronic" name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
          <input type="button" name="previous" class="previous action-button" value="이전" /> 
          <input type="button" id="signupBtn" class="action-button" value="회원가입" />
       </fieldset>
-      
       <fieldset>
          <h1 class="fs-title">병원 제휴</h1>
          <h3 class="fs-subtitle">병원을 선택해주세요</h3>
@@ -1430,6 +1477,9 @@ width: 100%;
                     <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 확인 :</label>
                     <div class="col-md-9">
                         <input type="password" class="form-control" placeholder="비밀번호 확인">
+                    </div>
+                    <div id="hosCodeDiv" style="visibility: hidden" >
+                    
                     </div>
                 </div>
          <input type="button" name="previous" class="previous action-button" value="이전" /> 

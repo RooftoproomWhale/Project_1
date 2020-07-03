@@ -14,10 +14,11 @@ public interface MemberService {
    //목록용]
    List<MemberDTO> selectList(Map map);
 
-   //병원 검색 목록
+   //병원 제휴
    List<HospitalDTO> selectHosSearch(Map map);
    List<HospitalDTO> selectedHosp(Map map);
    int hosAuthSub(Map map);
+   int hosIdUpdate(Map map);
 
    //전체 레코드 수]
    int getTotalRecord(Map map);
@@ -28,5 +29,8 @@ public interface MemberService {
    int insert(Map map);
    int update(Map map);
    CustomUserDetails getUserById(String username);
+   int hisInsert(Map map);
+   HistoryDTO getNo(Map map);
+   int illInsert(Map map);
 
 }

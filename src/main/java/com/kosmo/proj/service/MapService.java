@@ -22,5 +22,8 @@ public interface MapService {
 	List<HospitalDTO> selectHospitalByXY(Map map);
 	List<PharmacyDTO> selectPharmacyByXY(Map map);
 	
+	List<Map> getSymptom(Map map);
+	
 	int selectCntReservation(Map map);
+	int insertReservation(Map map);
 }

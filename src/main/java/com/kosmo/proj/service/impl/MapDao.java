@@ -87,6 +87,16 @@ public class MapDao implements MapService{
 		return sqlMapper.selectOne("SelectReservationByAddr", map);
 	}
 
+	@Override
+	public int insertReservation(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.insert("InsertReservation", map);
+	}
 
+	@Override
+	public List<Map> getSymptom(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("getSymptomByHospital", map);
+	}
 
 }

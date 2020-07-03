@@ -19,13 +19,274 @@
         .jssora051:hover {opacity:.8;}
         .jssora051.jssora051dn {opacity:.5;}
         .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
-    
-    	#news li {
-    	
-    
-    	
-    	}
 </style>
+<script>
+window.onload = function(){
+
+	//web notification 설정
+	var icon = '../img/logo.png';
+	var userRole = $('#userRole').val();
+	var userId = $('#userId').val();
+	var preAptCount = 0;
+	
+	console.log("id: " + userId +"type:"+ typeof(userId));
+	console.log("role: " + userRole +"type:"+ typeof(userRole));
+	
+	if(userRole == "MEM")
+	{
+		var date = new Date();
+		var currHour = date.getHours().toString();
+		var currMin = (date.getMinutes()<10?'0':'') + date.getMinutes();
+		var currTime = parseInt(currHour) * 60 + parseInt(currMin);
+		
+		$.ajax({
+			url:'<c:url value="/Noti/getMediTime.hst"/>',
+			dataType:'json',
+			success:function(data){
+				console.log("멤버 성공")
+				console.log(data);
+				console.log("현재시간: " + currTime);
+				$.each(data, function(i, item) {
+		             console.log(item.alarm);
+		             var takeTime = item.alarm;
+		             console.log("takeTime: " + takeTime);
+		             var hour = takeTime.substring(0, 2);
+		             var min = takeTime.substring(2, 4);
+		             var time = parseInt(hour) * 60 + parseInt(min);
+		             console.log("time: " + time);
+		             timeGap = time - currTime;
+		             console.log("gap: " + timeGap);
+		             if(timeGap > 0 && timeGap <= 30)
+		             {
+		            	 memNoti();
+							return false;
+		             }
+		         })
+				},
+			error:function(request,error){
+				console.log('에러:',error);
+			}
+		});
+		
+		window.setInterval(function(){
+			date = new Date();
+			currHour = date.getHours().toString();
+			currMin = (date.getMinutes()<10?'0':'') + date.getMinutes();
+			currTime = parseInt(currHour) * 60 + parseInt(currMin);
+			
+			$.ajax({
+				url:'<c:url value="/Noti/getMediTime.hst"/>',
+				dataType:'json',
+				success:function(data){
+					console.log("멤버 성공")
+					console.log(data);
+					console.log("현재시간: " + currTime);
+					$.each(data, function(i, item) {
+			             console.log(item.alarm);
+			             var takeTime = item.alarm;
+			             console.log("takeTime: " + takeTime);
+			             var hour = takeTime.substring(0, 2);
+			             var min = takeTime.substring(2, 4);
+			             var time = parseInt(hour) * 60 + parseInt(min);
+			             console.log("time: " + time);
+			             timeGap = time - currTime;
+			             console.log("gap: " + timeGap);
+			             if(timeGap == 30)
+			             {
+			            	 memNoti();
+								return false;
+			             }
+			         })
+					},
+				error:function(request,error){
+					console.log('에러:',error);
+				}
+			});
+		}, 60000);
+		
+		//예약 승인
+		var preAptCountUser = 0;
+		$.ajax({
+			url:'<c:url value="/Noti/preAptCountUser.hst"/>',
+			dataType:'html',
+			success:function(data){
+					console.log("성공");
+ 					console.log("user 로드 예약 수: " + data);
+ 					preAptCountUser = data;
+				},
+			error:function(request,error){
+				console.log('에러:',error);
+			}
+		});
+		
+		window.setInterval(function(){
+			
+			$.ajax({
+				url:'<c:url value="/Noti/currAptCountUser.hst"/>',
+				dataType:'json',
+				success:function(data){
+					console.log("user 예약 성공");
+					console.log("user 현재 예약 수: " + data);
+					if(data - preAptCountUser != 0 )
+					{
+						console.log(data - preAptCountUser);
+						gapCount = data - preAptCountUser;
+						userAptNoti(gapCount);
+						preAptCountUser = data;
+					}
+					},
+				error:function(request,error){
+					console.log('에러:',error);
+				}
+			});
+		}, 3000);
+	}
+	else if(userRole == "HOS")
+	{
+		$.ajax({
+			url:'<c:url value="/Noti/dayAptCount.hst"/>',
+			dataType:'html',
+			success:function(data){
+						console.log("병원 성공");
+						if(data != 0)
+						{
+							console.log("오늘 예약 수: " + data);
+							hosNotiDay(data);
+						}
+						else
+						{
+							console.log("오늘 예약 수: " + data);
+							hosNotiDayNo();
+						}
+						
+					},
+			error:function(request,error){
+				console.log('에러:',error);
+			}
+		});
+		
+		$.ajax({
+			url:'<c:url value="/Noti/preAptCount.hst"/>',
+			dataType:'html',
+			success:function(data){
+					console.log("성공");
+// 					console.log("로드 예약 수: " + data);
+					preAptCount = data;
+				},
+			error:function(request,error){
+				console.log('에러:',error);
+			}
+		});
+		
+		window.setInterval(function(){
+			
+			$.ajax({
+				url:'<c:url value="/Noti/currAptCount.hst"/>',
+				dataType:'html',
+				success:function(data){
+						console.log("병원 성공");
+						console.log("현재 예약 수: " + data);
+						if(data - preAptCount != 0 )
+						{
+							console.log(data - preAptCount);
+							gapCount = data - preAptCount;
+							hosNoti(gapCount);
+							preAptCount = data;
+						}
+					},
+				error:function(request,error){
+					console.log('에러:',error);
+				}
+			});
+		}, 3000);
+	}
+	else
+	{
+		
+	}
+
+	var text;
+	function memNoti() {
+		text = '30분 안에 복용 해야할 약이 있습니다';
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('복약 알림이 있습니다', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/mypage/administration.hst'/>";
+			};
+		}
+	
+	function hosNoti(count) {
+		text = count + '개의 새로운 예약이 있습니다';
+		console.log(text);
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('예약 알림이 있습니다', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+			};
+		}
+	
+	function hosNotiDay(count) {
+		text = '오늘 ' + count + '개의 예약이 있습니다';
+		console.log(text);
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('예약 알림이 있습니다', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+			};
+		}
+	
+	function hosNotiDayNo() {
+		text = '오늘은 예약이 없습니다';
+		console.log(text);
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('예약 알림', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+			};
+		}
+	
+	function userAptNoti() {
+		text = '승인 대기중이던 예약이 승인되었습니다';
+		console.log(text);
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('예약이 승인되었습니다', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/mypage/ReservationList.hst'/>";
+			};
+		}
+	
+}
+</script>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,7 +299,6 @@
 
 </head>
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-
 	<!-- Header -->
 	<header id="header">
 		<div class="intro">
@@ -46,9 +306,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 intro-text">
-							<h1> We Are Interact</h1>
+							<h1> We Are Interact ${currAptCount}</h1>
 							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
-							<a href="<c:url value='/mypage/mypage.hst'/>" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
+							<a href="<c:url value='/Android/WebTest.hst'/>" id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
 						</div>
 					</div>
 				</div>
@@ -67,20 +327,24 @@
 					<div class="img-thumbnail" data-u="slides"
 						style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 						<div data-p="680">
-							<a href="/Covid/status.hst"><img data-u="image"
-								src="<c:url value="/img/1.jpg"/>" /></a>
+							<a id="noti1" href="/Covid/status.hst">
+								<img id="img1" data-u="image" src="#" />
+							</a>
 						</div>
 						<div data-p="680">
-							<a href="/corona/Corona_Mask.hst"><img data-u="image"
-								src='<c:url value="/img/2.jpg"/>' /></a>
+							<a id="noti2" href="/corona/Corona_Mask.hst">
+								<img id="img2" data-u="image" src="#" />
+							</a>
 						</div>
 						<div data-p="680">
-							<a href="/corona/Corona_Patient.hst"><img data-u="image"
-								src="<c:url value="/img/3.jpg"/>" /></a>
+							<a id="noti3" href="/corona/Corona_Patient.hst">
+								<img id="img3" data-u="image" src="#" />
+							</a>
 						</div>
 						<div data-p="680">
-							<a href="/prev/Season.hst"><img data-u="image"
-								src="<c:url value="/img/about.jpg"/>" /></a>
+							<a id="noti4" href="/prev/Season.hst">
+								<img id="img4" data-u="image" src="#" />
+							</a>
 						</div>
 					</div>
 					<!-- Bullet Navigator -->
@@ -197,6 +461,7 @@
 <script>
 	$(function(){
 		showNews();	
+		showNotice();
 		
 		setInterval(() => {
 			showNews();	
@@ -242,6 +507,30 @@
 					error:function(e){console.log('에러:',e)} 
 			});			
 		}
+		
+		function showNotice(){
+			
+			$.ajax({
+				url:"<c:url value='/Admin/NoticeImages.hst'/>",
+				type:'post',
+				success:function(data){
+					console.log(data);
+					var noti = JSON.parse(data);
+					console.log(noti[0]['FILE_ADDR']);
+					$('#noti1').attr('href');
+					$('#img1').attr('src','<c:url value="/Upload/'+noti[0]['FILE_ADDR']+'"/>');
+					console.log($('#img1').attr('src'));
+					$('#img2').attr('src','<c:url value="/Upload/'+noti[1]['FILE_ADDR']+'"/>');
+					$('#img3').attr('src','<c:url value="/Upload/'+noti[2]['FILE_ADDR']+'"/>');
+					$('#img4').attr('src','<c:url value="/Upload/'+noti[3]['FILE_ADDR']+'"/>');
+					//$('.img-thumbnail').html(comments);
+				},
+				error:function(e){console.log('에러:',e)}
+			})
+			
+		}
+		
 	});
+	
 </script>
 </html>

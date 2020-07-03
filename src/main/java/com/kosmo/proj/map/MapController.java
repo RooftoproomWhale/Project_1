@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kosmo.proj.GetUser;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MapService;
 import com.kosmo.proj.service.MemberDTO;
@@ -51,20 +52,26 @@ public class MapController {
 			UserDetails userDetails = (UserDetails)auth.getPrincipal();
 			Map map = new HashMap<String, String>();
 			map.put("userEmail", userDetails.getUsername());
+			GetUser getUser = new GetUser();
+			getUser.getUser(model, auth);
 			System.out.println(userDetails.getUsername());
 			MemberDTO dto = memberService.selectOne(map);
 			System.out.println(dto.getMem_email());
 			model.addAttribute("MemberDTO", dto);
 		}
 		
-		return "map/Map.no_tiles";
+		return "map/Map.tiles";
 	}
 	
-	@RequestMapping(value="/Homespital/Map/Reservation.hst",method=RequestMethod.POST)
 	@ResponseBody
-	public String reservation() {
+	@RequestMapping(value="/Homespital/Map/Reservation.hst",method=RequestMethod.POST)
+	public String reservation(@RequestParam Map map) {
 		
-		return "";
+		int affected = mapService.insertReservation(map);
+		
+		System.out.println(affected);
+		
+		return String.valueOf(affected);
 	}
 	
 	@ResponseBody
@@ -96,6 +103,42 @@ public class MapController {
 		}
 		
 		return ja.toJSONString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/getDept.hst",produces = "text/html; charset=UTF-8")
+	public String getDept(@RequestParam Map map) {
+		
+		List<Map> list = null;
+		JSONArray ja = new JSONArray();
+		
+		list = mapService.selectHospitalOne(map);
+//		String depart = "";
+//		for (int i = 0; i < list.size(); i++) {
+//			if(i==list.size()-1)
+//			{
+//				depart += list.get(i).get("DEPT_NAME").toString();
+//			}
+//			else
+//			{
+//				depart += list.get(i).get("DEPT_NAME").toString() + ',';
+//			}
+//		}
+//		list.get(0).replace("DEPT_NAME", depart);
+		
+//		return JSONArray.toJSONString(list);
+		return JSONArray.toJSONString(list);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/getSymptom.hst",produces = "text/html; charset=UTF-8")
+	public String getSymptom(@RequestParam Map map) {
+		
+		List<Map> list = null;
+		
+		list = mapService.getSymptom(map);
+
+		return JSONArray.toJSONString(list);
 	}
 	
 	@ResponseBody
@@ -253,9 +296,9 @@ public class MapController {
 		System.out.println(JSONArray.toJSONString(list));
 		
 		for(Map comment:list)
-			comment.put("CORONA_DATE",comment.get("CORONA_DATE").toString());
+			comment.put("DATE_",comment.get("DATE_").toString());
 		
-		//단,List에 저장된 객체는 반드시 Map이어야 한다
+
 		return JSONArray.toJSONString(list);
 	}
 

@@ -6,80 +6,146 @@
 	<select id="memberIsLogin" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
 	</select>
-	<update id="hosAuthSub" parameterType="java.util.Map">
-		UPDATE HOSPITAL SET AUTH = '승인대기중' WHERE HOSP_NAME = #{name}
+	<select id="memberIsLoginJson" parameterType="MemberDTO" resultType="MemberDTO">
+      	SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
+    </select>
+
+	<select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
+		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
+	</select>
+	<select id="selectCount" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT p.precount,r.resercount,(SELECT MAX(PRES_DATE) FROM
+		prescription WHERE MEM_EMAIL = #{id})resdate FROM(SELECT count(*)
+		precount FROM prescription WHERE MEM_EMAIL = #{id})p,
+		(SELECT count(*)
+		resercount FROM reservation WHERE MEM_EMAIL = #{id})r
+	</select>
+
+	<delete id="signDelete" parameterType="MemberDTO">
+		DELETE FROM MEMBER WHERE MEM_EMAIL = #{userid}
+	</delete>
+
+	<update id="signUpdate" parameterType="java.util.Map">
+		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel}, height = #{height},weight = #{weight} where mem_email = #{id}
 	</update>
 
-	<!-- QnA -->
-	<select id="listQnA" parameterType="java.util.Map" resultType="QnADTO">
-		select * from qna
-	</select>
-	<insert id="insertQnA" parameterType="java.util.Map">
-		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,#{user}, #{title}, #{content}, SYSDATE, NULL, NULL)
-	</insert>
-	 <select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
-		 SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
-	 </select>
-	 	 <select id="selectCount" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT p.precount,r.resercount,(SELECT MAX(PRES_DATE) FROM prescription  WHERE MEM_EMAIL = #{id})resdate FROM(SELECT count(*) precount FROM prescription WHERE MEM_EMAIL = #{id})p,
-		(SELECT count(*) resercount FROM reservation WHERE MEM_EMAIL = #{id})r
-	 </select>
-	 
- 	 <delete id="signDelete" parameterType="MemberDTO">
-		DELETE FROM MEMBER WHERE MEM_EMAIL = #{userid}
-	 </delete>
-	 	
-	 <update id="signUpdate" parameterType="java.util.Map" >
-		UPDATE MEMBER SET mem_name = #{name}, age = #{age}, gender = #{gender}, tel = #{tel},  height = #{height},weight = #{weight} where mem_email = #{id} 
-	 </update>
-	 
 	<select id="seletnew" parameterType="java.util.Map" resultType="reservationDTO">
-	SELECT h.hosp_name,r.sel_symp FROM reservation r JOIN hospital h on r.hosp_code=h.hosp_code
-	WHERE r.mem_email = #{id} AND RES_DATE=(SELECT MAX(RES_DATE)FROM reservation)
+		SELECT h.hosp_name,r.sel_symp FROM reservation r JOIN hospital h on r.hosp_code=h.hosp_code WHERE r.mem_email = #{id} AND RES_DATE=(SELECT MAX(RES_DATE)FROM reservation)
 	</select>
-	<!-- 회원가입 검색 병원 -->
-	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
-	</select>
- 	
- 	<!-- QnA 답글 -->
-	<update id="commentInsert" parameterType="java.util.Map">
-      UPDATE QNA SET ANSWER_TITLE = #{answerTitle}, ANSWER_CONTENT = #{answerContent} WHERE no = #{no}
-   </update>
-   <update id="commentUpdate" parameterType="java.util.Map">
-      UPDATE QNA SET ANSWER_TITLE = #{answerTitle}, ANSWER_CONTENT = #{answerContent} WHERE cno = #{cno}
-   </update>
-   <delete id="commentDelete" parameterType="java.util.Map">
-      DELETE QNA WHERE cno = #{cno}
-   </delete>
-   <delete id="commentDeleteByNo" parameterType="java.util.Map">
-      DELETE QNA WHERE no = #{no}
-   </delete>
-
+	
     <!-- 공지사항 추가하기 -->
-    <insert id="insertNotice">
-        insert into NOTIFICATION_BBS values(SEQ_NOTIFICATION.nextval, #{user}, #{title}, #{content}, SYSDATE, null)
+    <insert id="insertNotice" parameterType="java.util.Map">
+        INSERT INTO notification_bbs VALUES(SEQ_NOTIFICATION.NEXTVAL,#{mem_email},#{title},#{content},SYSDATE,#{file_addr})
     </insert>
+    <select id="getTotalRecordNotice" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM NOTIFICATION_BBS
+	</select>
     <!-- 공지사항 리스트보기 -->
     <select id="listNotice" resultType="BoardDTO">
-       select * from NOTIFICATION_BBS order by noti_no DESC
+    	SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						select * from NOTIFICATION_BBS order by noti_no DESC 
+						) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end} 
+    	
     </select>
-    <!-- 공지사항 상세보기 -->
+	<!-- 공지사항 상세보기 -->
     <select id="detailNotice" resultType="BoardDTO">
         select * from NOTIFICATION_BBS where noti_no = #{no}
     </select>
-    <!-- 공지사항 삭제하기 -->
+	<!-- 공지사항 삭제하기 -->
     <delete id="deleteNotice">
         delete from NOTIFICATION_BBS where noti_no = #{no}
     </delete>
-    <!-- 공지사항 수정하기 -->
+	<!-- 공지사항 수정하기 -->
     <update id="updateNotice"> 
         update NOTIFICATION_BBS set title=#{title} , content = #{content} where noti_no = #{no} 
     </update> 
+    <!-- 공지사항 카루셀 -->
+    <select id="selectImg" resultType="java.util.Map">
+    	SELECT file_addr,noti_no,ROWNUM FROM 
+		(SELECT * FROM notification_bbs WHERE file_addr is not NULL ORDER BY noti_no DESC) n
+		WHERE ROWNUM BETWEEN 1 AND 4
+    </select>
 
    <insert id="presInsert" parameterType="java.util.Map">
-      INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
+      	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
    </insert>
+
+	<!-- 회원가입 -->
+	<insert id="signInsert" parameterType="java.util.Map">
+		INSERT INTO MEMBER VALUES(#{email}, #{pwd}, #{name}, #{gender}, #{tel}, #{age}, #{height}, #{weight}, #{role}, #{enable}, SYSDATE )
+	</insert>
+	<insert id="hisInsert" parameterType="java.util.Map">
+		INSERT INTO HISTORY VALUES(SEQ_HISTORY.NEXTVAL, #{email}, #{chronic})
+	</insert>
+	<select id="signGetNo" parameterType="java.util.Map" resultType="HistoryDTO">
+		SELECT HIST_NO FROM HISTORY WHERE MEM_EMAIL=#{email}
+	</select>
+	<insert id="illInsert" parameterType="java.util.Map">
+		INSERT INTO HIS_ILL VALUES(#{histNo}, #{illCode})
+	</insert>
+
+	<!-- 회원가입 검색 병원 -->
+	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 10
+	</select>
+	<select id="selectedHosp" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * FROM HOSPITAL WHERE HOSP_NAME = #{hosp_name}
+	</select>
+	<update id="hosAuthSub" parameterType="java.util.Map">
+      UPDATE HOSPITAL SET AUTH = '승인대기중' WHERE HOSP_NAME = #{name}
+  	</update>
+  	<update id="hosIdUpdate" parameterType="java.util.Map">
+      UPDATE HOSPITAL SET MEM_EMAIL = #{email} WHERE HOSP_CODE = #{hospCode}
+   	</update>
+
+	<!-- QnA -->
+	<select id="getTotalRecord" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM QNA
+	</select>
+	<select id="listQnA" parameterType="java.util.Map" resultType="QnADTO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						select * from qna ORDER BY QNA_NO DESC 
+						) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end} 
+	</select>
+	<insert id="insertQnA" parameterType="java.util.Map">
+		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,#{user}, #{title}, #{content}, SYSDATE, NULL)
+	</insert>
+	<update id="updateQnA" parameterType="java.util.Map">
+		UPDATE QNA SET title=#{title},content=#{content} WHERE qna_no=#{no}
+	</update>
+	<delete id="deleteQnA" parameterType="java.util.Map">
+		DELETE QNA WHERE qna_no=#{no}
+	</delete>
+	<select id="viewQnA" parameterType="java.util.Map" resultType="QnADTO">
+		select * from qna where qna_no=#{no}
+	</select>
+
+	<!-- QnA 답글 -->
+	<select id="commentSelect" parameterType="java.util.Map" resultType="QnADTO">
+		SELECT * FROM QNA WHERE qna_no = #{no} 
+	</select>
+	<update id="commentInsert" parameterType="java.util.Map">
+		UPDATE QNA SET ANSWER_CONTENT = #{answer} WHERE qna_no = #{no}
+	</update>
+	<update id="commentUpdate" parameterType="java.util.Map">
+		UPDATE QNA SET ANSWER_CONTENT = #{answer} WHERE qna_no = #{no}
+	</update>
+	<delete id="commentDelete" parameterType="java.util.Map">
+		DELETE QNA WHERE cno = #{cno}
+	</delete>
+	<delete id="commentDeleteByNo" parameterType="java.util.Map">
+		DELETE QNA WHERE no = #{no}
+	</delete>
    
    <select id="covidMapSelect" resultType="java.util.Map">
       SELECT * FROM corona_patient
@@ -131,241 +197,13 @@
       FROM pharmacy p) disData
       WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
    </select>
-   
-<!--관리자단 -->
-   <!-- 페이징 -->
-   <select id="countRecordHosAuth" resultType="int">
-      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
-   </select>
-   <select id="countRecordAccount" resultType="int">
-      SELECT COUNT(*) FROM MEMBER
-   </select>
-   <select id="countRecordAppointment" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION
-   </select>
-   <!-- 검색 페이징 -->
-   <select id="countRecordHosSearch" parameterType="java.util.Map" resultType="int">
-      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
-   </select>
-   <select id="countRecordAccSearch" parameterType="java.util.Map" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE MEM_NAME LIKE '%' || #{search_keyword} || '%'
-   </select>
-   <select id="countRecordAptSearch" parameterType="java.util.Map" resultType="int">
-      select COUNT(*) from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
-   </select>  
-   
-   <!-- 대쉬보드 -->
-   <select id="memberCount" parameterType="java.util.Map" resultType="int">
-      SELECT COUNT(*) FROM MEMBER
-   </select>
-   <select id="hospCount" parameterType="java.util.Map" resultType="int">
-      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH = '제휴승인됨'
-   </select>
-   <select id="presCount" parameterType="java.util.Map" resultType="int">
-      SELECT COUNT(*) FROM PRESCRIPTION
-   </select>
-   <select id="aptCount" parameterType="java.util.Map" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION
-   </select>
-   
-   <!-- 차트 -->
-   <select id="genderChartMale" parameterType="java.util.Map" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE GENDER='남자'
-   </select>
-   <select id="genderChartFemale" parameterType="java.util.Map" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE GENDER='여자'
-   </select>
-   
-   <select id="under10" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ < ]]> 10
-   </select>
-   <select id="over10under20" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 10 AND AGE <![CDATA[ < ]]> 20
-   </select>
-   <select id="over20under30" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 20 AND AGE <![CDATA[ < ]]> 30
-   </select>
-   <select id="over30under40" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 30 AND AGE <![CDATA[ < ]]> 40
-   </select>
-   <select id="over40under50" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 40 AND AGE <![CDATA[ < ]]> 50
-   </select>
-   <select id="over50under60" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 50 AND AGE <![CDATA[ < ]]> 60
-   </select>
-   <select id="over60" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ > ]]> 60
-   </select>
-   
-   <select id="janMemCount" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-01-01','YYYY-MM-DD') AND TO_DATE('2020-02-01','YYYY-MM-DD')
-   </select>
-   <select id="febMemCount" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-02-01','YYYY-MM-DD') AND TO_DATE('2020-03-01','YYYY-MM-DD')
-   </select>
-   <select id="marMemCount" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-03-01','YYYY-MM-DD') AND TO_DATE('2020-04-01','YYYY-MM-DD')
-   </select>
-   <select id="aprMemCount" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-04-01','YYYY-MM-DD') AND TO_DATE('2020-05-01','YYYY-MM-DD')
-   </select>
-   <select id="mayMemCount" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-05-01','YYYY-MM-DD') AND TO_DATE('2020-06-01','YYYY-MM-DD')
-   </select>
-   <select id="junMemCount" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-06-01','YYYY-MM-DD') AND TO_DATE('2020-07-01','YYYY-MM-DD')
-   </select>
-   <select id="julMemCount" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE SIGNUP_DATE BETWEEN TO_DATE('2020-07-01','YYYY-MM-DD') AND TO_DATE('2020-08-01','YYYY-MM-DD')
-   </select>
-   
-   <select id="janAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-01-01','YYYY-MM-DD') AND TO_DATE('2020-02-01','YYYY-MM-DD')
-   </select>
-   <select id="febAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-02-01','YYYY-MM-DD') AND TO_DATE('2020-03-01','YYYY-MM-DD')
-   </select>
-   <select id="marAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-03-01','YYYY-MM-DD') AND TO_DATE('2020-04-01','YYYY-MM-DD')
-   </select>
-   <select id="aprAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-04-01','YYYY-MM-DD') AND TO_DATE('2020-05-01','YYYY-MM-DD')
-   </select>
-   <select id="mayAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-05-01','YYYY-MM-DD') AND TO_DATE('2020-06-01','YYYY-MM-DD')
-   </select>
-   <select id="junAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-06-01','YYYY-MM-DD') AND TO_DATE('2020-07-01','YYYY-MM-DD')
-   </select>
-   <select id="julAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE APPLY_TIME BETWEEN TO_DATE('2020-07-01','YYYY-MM-DD') AND TO_DATE('2020-08-01','YYYY-MM-DD')
-   </select>
-   
-   <select id="naeAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '내과'
-   </select>
-   <select id="biAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '비뇨기과'
-   </select>
-   <select id="sanAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '산부인과'
-   </select>
-   <select id="seongAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '성형외과'
-   </select>
-   <select id="soAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '소아청소년과'
-   </select>
-   <select id="sinAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '신경과'
-   </select>
-   <select id="anAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '안과'
-   </select>
-   <select id="leeAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '이비인후과'
-   </select>
-   <select id="ilAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '일반외과'
-   </select>
-   <select id="jeongAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '정신건강의학과'
-   </select>
-   <select id="hyeongAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '정형외과'
-   </select>
-   <select id="chiAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '치과'
-   </select>
-   <select id="piAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '피부과'
-   </select>
-   <select id="hanAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '한방과'
-   </select>
-   <select id="giAptCount" resultType="int">
-      SELECT COUNT(*) FROM RESERVATION WHERE DEPT_NAME = '기타'
-   </select>
-
-   <!-- 사용자 관리 -->
-   <select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
-      SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)
-      WHERE RN BETWEEN #{start} AND #{end}
-   </select>
-   <select id="selectMemberListUser" parameterType="java.util.Map" resultType="MemberDTO">
-<!--       SELECT *  -->
-<!--          FROM ( -->
-<!--             SELECT ROWNUM RN, A.*  -->
-<!--                FROM ( -->
-                     SELECT * FROM MEMBER WHERE ROLE='ROLE_MEM'
-<!--                      ) A -->
-<!--                ) -->
-<!--          WHERE RN BETWEEN #{start} AND #{end} -->
-   </select>
-   <select id="selectMemberListHosp" parameterType="java.util.Map" resultType="MemberDTO">
-<!--       SELECT *  -->
-<!--          FROM ( -->
-<!--             SELECT ROWNUM RN, A.*  -->
-<!--                FROM ( -->
-                     SELECT * FROM MEMBER WHERE ROLE='ROLE_HOS' 
-<!--                      ) A -->
-<!--                ) -->
-<!--          WHERE RN BETWEEN #{start} AND #{end} -->
-   </select>
-   <select id="selectOne" parameterType="java.util.Map" resultType="MemberDTO">
-      SELECT * FROM MEMBER WHERE MEM_EMAIL = #{userEmail}
-   </select>
-   <update id="adminUserUpdate" parameterType="java.util.Map">
-      UPDATE MEMBER SET MEM_EMAIL =#{upEmail}, MEM_NAME = #{upName}, MEM_PWD = #{upPwd}, TEL = #{upTel} WHERE MEM_EMAIL = #{userEmail}
-   </update>
-   <delete id="adminUserDelete" parameterType="java.util.Map">
-      DELETE FROM MEMBER WHERE MEM_EMAIL = #{userEmail}
-   </delete>
-   <select id="selectAccount_Search" parameterType="java.util.Map" resultType="MemberDTO">
-      SELECT * FROM MEMBER WHERE MEM_NAME LIKE '%' || #{search_keyword} || '%'
-   </select>
-   
-   <!-- 병원 제휴 -->
-   <select id="selectAuthList" parameterType="java.util.Map" resultType="HospitalDTO">
-      SELECT * 
-      FROM (
-         SELECT ROWNUM RN, A.* 
-            FROM (
-                  SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL 
-                  ) A
-            )
-      WHERE RN BETWEEN #{start} AND #{end}
-   </select>
-   <update id="updateAuth_O" parameterType="java.util.Map">
-      UPDATE HOSPITAL SET AUTH = '제휴승인됨', APPROVED_DATE = SYSDATE WHERE HOSP_NAME = #{hosp_name}
-   </update>
-   <update id="updateAuth_X" parameterType="java.util.Map">
-      UPDATE HOSPITAL SET AUTH = '제휴거절됨' WHERE HOSP_NAME = #{hosp_name}
-   </update>
-   <select id="selectAuth_Search" parameterType="java.util.Map" resultType="HospitalDTO">
-      SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
-   </select>
-   
-   <!-- 예약 관리 -->
-   <select id="selectAptList" parameterType="java.util.Map" resultType="ReservationDTO">
-   SELECT * 
-      FROM (
-         SELECT ROWNUM RN, A.* 
-            FROM (
-                  SELECT H.*, r.apply_time, r.approved, r.dept_name, r.mem_email, r.res_date, r.res_time, r.reserv_no, r.sel_symp FROM RESERVATION R JOIN HOSPITAL H ON R.HOSP_CODE = H.HOSP_CODE
-                  ) A
-            )
-      WHERE RN BETWEEN #{start} AND #{end}
-   </select>
-   <select id="selectOneApt" parameterType="java.util.Map" resultType="ReservationDTO">
-      SELECT M.*, R.* FROM MEMBER M JOIN RESERVATION R ON M.MEM_EMAIL = R.MEM_EMAIL WHERE M.MEM_EMAIL = #{userEmail} 
-   </select>
-   <delete id="deleteApt" parameterType="java.util.Map">
-      DELETE FROM RESERVATION WHERE MEM_EMAIL = #{userEmail}
-   </delete>
-   <select id="selectApt_Search" parameterType="java.util.Map" resultType="ReservationDTO">
-      select h.*, r.* from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
-   </select>
-   
+  
+	<select id="SelectReservationByAddr" parameterType="java.util.Map" resultType="int">
+		select count(*) from reservation where hosp_Code = (SELECT hosp_code FROM hospital WHERE address = #{address} AND AUTH = '제휴승인됨' AND approved = '승인됨') AND TO_CHAR(SYSDATE,'YYYY-MM-DD') <![CDATA[ < ]]> RES_DATE
+	</select>
+	<insert id="InsertReservation" parameterType="java.util.Map">
+		INSERT INTO reservation VALUES(SEQ_RESERVATION.NEXTVAL,
+		(SELECT hosp_code FROM hospital WHERE address = #{address}),
+		#{department},#{name},#{datepick},#{am_pm},#{hour},null,'복통','승인 대기중')
+	</insert>
 </mapper>

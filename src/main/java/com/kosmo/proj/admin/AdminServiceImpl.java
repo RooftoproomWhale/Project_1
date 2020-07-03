@@ -18,8 +18,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Resource(name = "adminDAO")
 	private AdminDAO dao;
-
-
 	@Override
 	public boolean isLogin(Map map) {
 		// TODO Auto-generated method stub
@@ -236,9 +234,9 @@ public class AdminServiceImpl implements AdminService {
 	 }
 
 	 @Override
-	 public List<BoardDTO> viewNotice(Map map) {
+	 public List<BoardDTO> viewNotice(Paging vo) {
 		 // TODO Auto-generated method stub
-		 return dao.viewNotice(map);
+		 return dao.viewNotice(vo);
 	 }
 
 
@@ -438,6 +436,17 @@ public class AdminServiceImpl implements AdminService {
 	public int giCount() {
 		// TODO Auto-generated method stub
 		return dao.giCount();
+	}
+
+	@Override
+	public int getTotalRecordNotice(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordNotice(map);
+	}
+	@Override
+	public List<Map> selectImage() {
+		// TODO Auto-generated method stub
+		return dao.selectImage();
 	}
 
 }

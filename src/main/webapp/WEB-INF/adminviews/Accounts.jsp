@@ -351,7 +351,7 @@ $(".table-data-feature .item:last-child").on('click', function(){
 							<a
 								href="<c:url value='/Admin/Accounts.hst?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}'/>">&gt;</a>
 						</c:if>
-					</div>
+						</div>
 					</div>
 				</div>
 			</div>

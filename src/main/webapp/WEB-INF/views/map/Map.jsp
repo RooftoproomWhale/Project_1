@@ -51,6 +51,7 @@
       width: 90%;
        border: 0 !important;
        background: white;
+       font-size: small;
    }
    .map_button{position: absolute;bottom: 32px;right: 8px;z-index: 2;flex-direction: column;}
    .current_refresh
@@ -177,7 +178,10 @@
       margin-right: 20px;
    }
    .btn_direction{
-      text-align: center;
+      text-align: right;
+   }
+   .find_way_btn{
+   	  margin-right: 10px;
    }
    .inner_final_area{
       padding-top: 20px;
@@ -416,8 +420,10 @@
 <div class="modal fade" id="reservation-modal">
    <div class="modal-dialog">
       <div class="modal-content">
-         <form method="post" action="<c:url value='/Homespital/Map/Reservation.hst'/>">
-         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+         <form id="reservation_form" method="post">
+         	<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+         	<input type="hidden" id="address" name="address" value=""/>
+         	<input type="hidden" id="department" name="department" value=""/>
             <div class="modal-header">
                <button class="close" data-dismiss="modal">
                   <span>&times;</span>
@@ -429,13 +435,13 @@
                   <div class="col-sm-6">
                      <div class="form-group">
                         <span class="form-label">이름</span>
-                        <input class="form-control" type="text" value="${MemberDTO.mem_name}" disabled>
+                        <input class="form-control" type="text" id="name" name="name" value="${MemberDTO.mem_name}" disabled>
                      </div>
                   </div>
                   <div class="col-sm-6">
                      <div class="form-group">
                         <span class="form-label">이메일</span>
-                        <input class="form-control" type="email" value="${MemberDTO.mem_email}" disabled>
+                        <input class="form-control" type="email" id="email" name="email" value="${MemberDTO.mem_email}" disabled>
                      </div>
                   </div>
                </div>
@@ -443,57 +449,52 @@
                   <div class="col-sm-6">
                      <div class="form-group">
 	                   <span class="form-label">전화번호</span>
-	                   <input class="form-control" type="tel" value="${MemberDTO.tel}" disabled>
+	                   <input class="form-control" type="tel" id="tel" name="tel" value="${MemberDTO.tel}" disabled>
 	                 </div>
                   </div>
                   <div class="col-sm-6">
                      <div class="form-group">
 	                   <span class="form-label">병원 이름</span>
-	                   <input class="form-control" id="modal_hosp_name" type="text" disabled>
+	                   <input class="form-control" id="modal_hosp_name" name="hosp_name" type="text" disabled>
 	                 </div>
                   </div>
                </div>
-               <div class="form-group">
-                  <span class="form-label">진료실</span>
-                  <div class="btn-group">
-                     <label class="radio-inline form-label"><input type="radio" name="optradio" checked>내과</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">정형외과</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">산부인과</label>
+               <div class="row">
+                  <div class="col-sm-6">
+                     <div class="form-group">
+		                  <span class="form-label">진료실</span>
+		                  <div class="btn-group" id="dept_radio" style="display: flex;">
+		                     <label class="keyboard disable radio-inline form-label"><input type="radio" name="optradio" checked>내과</label>
+		                     <label class="keyboard disable radio-inline form-label"><input type="radio" name="optradio">정형외과</label>
+		                     <label class="keyboard disable radio-inline form-label"><input type="radio" name="optradio">산부인과</label>
+		                  </div>
+		               </div>
+                  </div>
+                  <div class="col-sm-6">
+                     <div class="form-group">
+	                   <span class="form-label">진료 증상</span>
+	                   <select id="symptom" name="symptom" class="form-control">
+	                   		
+	                   </select>
+                       <span class="select-arrow"></span>
+	                 </div>
                   </div>
                </div>
-               <div class="form-group">
-                  <span class="form-label">진료 항목</span>
-                  <div class="btn-group">
-                     <label class="radio-inline form-label"><input type="radio" name="optradio" checked>결과상담</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">공단검진</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">예방접종</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">일반진료</label>
-                     <label class="radio-inline form-label"><input type="radio" name="optradio">기타</label>
-                  </div>
-               </div>
+               
+              
                <div class="row">
                   <div class="col-sm-5">
                      <div class="form-group">
                         <span class="form-label">예약 날짜</span>
-                        <input class="form-control" id="reservation_date" type="text" placeholder="날짜를 선택해주세요" autocomplete="off" required>
+                        <input class="form-control" id="reservation_date" type="text" name="datepick" placeholder="날짜를 선택해주세요" autocomplete="off" onkeydown="return false" required>
                      </div>
                   </div>
                   <div class="col-sm-7">
                      <div class="row">
-                        <div class="col-sm-4">
-                           <div class="form-group">
-                              <span class="form-label">오전/오후</span>
-                              <select id="AM_PM" class="form-control">
-<!--                                  <option>오전</option>
-                                 <option>오후</option> -->
-                              </select>
-                              <span class="select-arrow"></span>
-                           </div>
-                        </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                            <div class="form-group">
                               <span class="form-label">시</span>
-                              <select id="Hour" class="form-control">
+                              <select id="Hour" name="hour" class="form-control">
                                  <!-- <option>1</option>
                                  <option>2</option>
                                  <option>3</option>
@@ -510,10 +511,10 @@
                               <span class="select-arrow"></span>
                            </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                            <div class="form-group">
                               <span class="form-label">분</span>
-                              <select id="Minute" class="form-control">
+                              <select id="Minute" name="minute" class="form-control">
                                  <!-- <option>05</option>
                                  <option>10</option>
                                  <option>15</option>
@@ -535,7 +536,7 @@
                </div>
             </div>
             <div class="modal-footer">
-               <button class="btn btn-success">예약</button>
+               <button class="btn btn-success" id="resBtn_confirm">예약</button>
                <button class="btn btn-info" data-dismiss="modal">닫기</button>
             </div>
          </form>
@@ -713,14 +714,45 @@
       
       $(".reservation_info").hide();
       
+      $("#resBtn_confirm").click(function(){	
+    	  
+    	  $(':disabled').each(function(e) {
+    	      $(this).removeAttr('disabled');
+    	  })
+    	  
+    	  console.log($('#reservation_form').serialize()+"&hourMinute="+$('#Hour').val()+":"+$('#Minute').val());
+    	  
+    	  $.ajax({
+				url:"<c:url value='/Homespital/Map/Reservation.hst'/>",
+				data:$('#reservation_form').serialize()+"&hourMinute="+$('#Hour').val()+":"+$('#Minute').val(),
+				dataType:'text',
+				type:'post',
+				success:function(data){
+					console.log(data);
+					if(data == 1)
+					{
+						alert("예약이 완료되었습니다");
+					}
+				},
+				error:function(e){
+		            console.log(e);   
+	            }
+		  });
+
+    	  $('#name').attr('disabled', true);
+    	  $('#email').attr('disabled', true);
+    	  $('#tel').attr('disabled', true);
+    	  $('#modal_hosp_name').attr('disabled', true);
+      });
+      
       $('#reservation_date').datepicker({
-         dateFormat: "yy년 mm월 dd일",
+         dateFormat: "yy-mm-dd",
          onSelect: function(dateText, inst) {
              var date = new Date();
              alert('선택하신 날짜는'+ date.getHours());
              console.log(date.getDate());
              console.log(parse(dateText));
-             changeAM_PM(date,parse(dateText));
+             changeSelector(date,parse(dateText));
          },
          showAnim: "slide",
          showMonthAfterYear: true ,
@@ -732,37 +764,12 @@
            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],   //한글 요일 표시 부분
            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],   // 한글 요일 표시 부분
       });
-      $('#AM_PM').change(function(){
-    	  var selectedDate = parse($('#reservation_date').val());
-    	  var date = new Date();
-    	  alert(selectedDate);
-    	  console.log(this.value=="오전");
-    	  if(this.value=="오후" && (date.getHours() < 13 && date.getHours() >= 0) || (selectedDate.getDate() != date.getDate()))
-    	  {
-    		  $('#Hour').empty();
-    		  $("#Minute").empty();
-    		  
-    		  var option = "";
-    		  for(var i = 1; i <= 12; i++)
-    		  {
-    			  option += "<option>"+i+"</option>";
-    		  }
-    		  $('#Hour').append(option);
-    		  
-    		  option = "";
-    		  for(var i = 0; i <= 50; i=i+10)
-    		  {
-    			  option += "<option>"+i+"</option>";
-    		  }
-    		  
-    		  $('#Minute').append(option);
-    	  }
-      });
+
       $('#Hour').change(function(){
-    	  alert(this.value);
+    	  
       });
       $('#Minute').change(function(){
-    	  alert(this.value);
+    	  
       });
    });
 </script>
@@ -770,6 +777,8 @@
 
    var markers = [];
 
+   var intervalReservation;
+   
    var currentLatLng;
    
    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -915,6 +924,7 @@
                            "<c:url value='/images/map/hospital_image/hospital.png'/>",
                              new kakao.maps.Size(35, 35))
                   });
+                  var dept_item = '';
                   
                   var iwContent = '<div style="padding:5px;">'+item.hosp_name+'</div>';
                      
@@ -923,26 +933,16 @@
                   });
                   
                   kakao.maps.event.addListener(marker, 'click', function(){
+                	 clearInterval(intervalReservation)
                      console.log("modal",item,i)
                      console.log($('.info_wrap').hasClass('warp_invisible'));
                      console.log($('.info-toggle').hasClass('left_toggle'));
                      console.log('auth',item.auth);
                      if(item.auth == '제휴승인됨'){
-                    	 $.ajax({
-                        	 url:"<c:url value='/Homespital/Map/Hospital/countReservation.hst'/>",
-                        	 type:'get',
-                             datatype:'json',
-                             data:{"address":item.address},
-                             success:function(data){
-                            	console.log(data); 
-                            	$(".reservation_info").empty();
-                            	createReservationTable(data);
-                            	$(".reservation_info").show();
-                             },
-                             error:function(e){
-                            	console.log(e); 
-                             }
-                         });
+                    	 refreshReservation(item);	
+                    	 intervalReservation = setInterval(() => {
+                    		refreshReservation(item);	
+                 		 }, 500);
                      }
                      else
                    	 {
@@ -954,8 +954,9 @@
                      {
                         $('.info_wrap').removeClass('warp_invisible');
                         $('.info-toggle').removeClass('left_toggle');
-                        
                      }
+                    
+                     
                      listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel);
                      $('.search_list').html(listitem);
                   });
@@ -1210,7 +1211,7 @@
                console.log("코로나 데이터",jsonData);
                $.each(jsonData, function(i, item) {
                   console.log("코로나 데이터",item);
-                  geocoder.addressSearch(item.ADDRESS, function(result, status) {
+                  geocoder.addressSearch(item.CONTENT, function(result, status) {
                       if (status === kakao.maps.services.Status.OK) {
                          var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
                          
@@ -1245,6 +1246,10 @@
                            }
                          
                       }
+                      else
+                   	  {
+                    	  console.log("없는 주소 입니다");
+                   	  }
                   });
                });
             },
@@ -1558,7 +1563,6 @@
                      '</div>'+
                      '<div class="inner_summary_info">'+
                         '<span>'+deptname+'</span>'+
-                        '<span>제휴병원</span>'+
                      '</div>'+
                   '</div>'+
                   '<div class="inner_btn_area">'+
@@ -1639,10 +1643,80 @@
       function reservation_show(){
          console.log($('#reservation-modal'));
          console.log($(".inner_title").text());
+         console.log($(".inner_end_box:eq(0)").text());
+         console.log($(".inner_summary_info").text());
          $('#modal_hosp_name').attr('value',$(".inner_title").text());
+         $('#address').attr('value',$(".inner_end_box:eq(0)").text());
+         $('#department').attr('value',$(".inner_summary_info").text());
+         
+         $.ajax({
+             url:"<c:url value='/Homespital/Map/getDept.hst'/>",
+             type:'get',
+             datatype:'json',
+             data:{"address":$('#address').val()},
+             success:function(data){
+                var jsonData = JSON.parse(data);
+                console.log("연결성공", jsonData,typeof(jsonData));
+                console.log(jsonData[0].DEPT_NAME);
+                
+                $('#dept_radio').empty();
+                var option="";
+                for(var i = 0; i < jsonData.length; i++)
+	       		{
+                	option += "<label class='keyboard disable radio-inline form-label'><input type='radio' name='optradio' value='"+jsonData[i].DEPT_NAME+"'>"+jsonData[i].DEPT_NAME+"</label>";
+	       		}
+                $('#dept_radio').append(option);
+                $('#symptom').empty();
+                
+                $('input[type=radio][name=optradio]').change(function() {
+                    console.log($('input[type=radio][name=optradio]:checked').val());
+                    if($('input[type=radio][name=optradio]:checked').val()=='기타')
+                    {
+                    	$('#symptom').empty();
+                    	$('#symptom').append("<option>기타</option>");
+                    }
+                    else if($('input[type=radio][name=optradio]:checked').val()=='성형외과')
+                    {
+                    	$('#symptom').empty();
+                    	$('#symptom').append("<option>성형</option>");
+                    }
+                    else
+                    {
+                    	$.ajax({
+                            url:"<c:url value='/Homespital/Map/getSymptom.hst'/>",
+                            type:'get',
+                            datatype:'json',
+                            data:{"dept_name":$('input[type=radio][name=optradio]:checked').val()},
+                            success:function(data){
+                            	var jsonData = JSON.parse(data);
+                                console.log("연결성공", jsonData,typeof(jsonData));
+                                console.log(jsonData[0].SYMPTOM);
+                                
+                                $('#symptom').empty();
+                                var option="";
+                                for(var i = 0; i < jsonData.length; i++)
+                	       		{
+                                	option += "<option>"+jsonData[i].SYMPTOM+"</option>";
+                	       		}
+                                $('#symptom').append(option);
+                            },
+                            error:function(e){
+                                
+                            }
+                        });
+                    }
+                });
+             },
+             error:function(e){
+                
+             }
+          });
+         
          $('#reservation-modal').modal('show');
    
       }
+      
+      
 
       function changeApi(status)
       {
@@ -1677,9 +1751,27 @@
          
       }
       
-      function changeAM_PM(date,day) {
-    	  var AMPM = ["오전","오후"];
-    	  $("#AM_PM").empty();
+      function refreshReservation(item){
+    	  console.log('item',item)
+    	  $.ajax({
+         	 url:"<c:url value='/Homespital/Map/Hospital/countReservation.hst'/>",
+         	 type:'get',
+              datatype:'json',
+              data:{"address":item.address},
+              success:function(data){
+             	console.log(data); 
+             	$(".reservation_info").empty();
+             	createReservationTable(data);
+             	$(".reservation_info").show();
+              },
+              error:function(e){
+             	console.log(e); 
+              }
+          });
+      }
+      
+      function changeSelector(date,day) {
+    	  $("#Hour").empty();
     	  
 
     	  console.log(day.getDate());
@@ -1690,74 +1782,117 @@
     	  
     	  if((date.getHours() < 13 && date.getHours() >= 0) || (day.getDate() != date.getDate()))
     	  {
-    		  $("#Hour").empty();
         	  $("#Minute").empty();
     		  
-    		  option += "<option>"+AMPM[0]+"</option>"; 
-    		  option += "<option>"+AMPM[1]+"</option>";
-    		  $('#AM_PM').append(option);
-    		  
     		  option = "";
-    		  for(var i = 8; i <= 12; i++)
+    		  for(var i = 8; i <= 22; i++)
     		  {
-    			  option += "<option>"+i+"</option>";
+    			  if(i<10)
+    			  {
+    				  option += "<option>0"+i+"</option>";
+    			  }
+    			  else
+    			  {
+    				  option += "<option>"+i+"</option>";
+    			  }
     		  }
     		  $('#Hour').append(option);
     		  
     		  option = "";
     		  for(var i = 0; i <= 50; i=i+10)
     		  {
-    			  option += "<option>"+i+"</option>";
+    			  if(i==0)
+    			  {
+    				  option += "<option>0"+i+"</option>";
+    			  }
+    			  else
+    			  {
+    				  option += "<option>"+i+"</option>";
+    			  }
     		  }
     		  
     		  $('#Minute').append(option);
     	  }
     	  else
     	  {
-    		  $("#Hour").empty();
-        	  $("#Minute").empty();
-        	  
-    		  option += "<option>"+AMPM[1]+"</option>";
-    		  $('#AM_PM').append(option);
-    		  
-    		  option = "";
-    		  for(var i = (date.getHours() + 24) % 12 || 12; i <= 12; i++)
-    		  {
-    			  option += "<option>"+i+"</option>";
-    		  }
-    		  console.log(option)
-    		  $('#Hour').append(option);
-    		  
-    		  option = ""; 
-    		  var min = ((Math.floor(date.getMinutes() / 10)) * 10) + 10;
-    		  console.log(min);
-    		  
-    		  if(min == 60)
-    		  {
-    			  for(var i = 0; i <= 50; i=i+10)
-        		  {
-        			  option += "<option>"+i+"</option>";
-        		  }
-    		  }
-    		  else
-    		  {
-    			  for(var i = min; i <= 50; i=i+10)
-        		  {
-        			  option += "<option>"+i+"</option>";
-        		  }
-    		  }
+	    	  $("#Minute").empty();
 
-    		  console.log(option)
-    		  $('#Minute').append(option);
+			  option = ""; 
+			  var min = ((Math.floor(date.getMinutes() / 10)) * 10) + 10;
+			  console.log(min);
+			  
+			  if(min == 60)
+			  {
+				  for(var i = 0; i <= 50; i=i+10)
+	    		  {
+					  if(i==0)
+	    			  {
+	    				  option += "<option>0"+i+"</option>";
+	    			  }
+	    			  else
+	    			  {
+	    				  option += "<option>"+i+"</option>";
+	    			  }
+	    		  }
+				  console.log(option)
+				  $('#Minute').append(option);
+				  
+				  option = "";
+				  for(var i = date.getHours()+1; i <= 22; i++)
+				  {
+					  if(i<10)
+	    			  {
+	    				  option += "<option>0"+i+"</option>";
+	    			  }
+	    			  else
+	    			  {
+	    				  option += "<option>"+i+"</option>";
+	    			  }
+				  }
+				  console.log(option)
+				  $('#Hour').append(option);
+			  }
+			  else
+			  {
+				  for(var i = min; i <= 50; i=i+10)
+	    		  {
+					  if(i==0)
+	    			  {
+	    				  option += "<option>0"+i+"</option>";
+	    			  }
+	    			  else
+	    			  {
+	    				  option += "<option>"+i+"</option>";
+	    			  }
+	    		  }
+				  console.log(option)
+				  $('#Minute').append(option);
+				  
+				  option = "";
+				  for(var i = date.getHours(); i <= 22; i++)
+				  {
+					  if(i<10)
+	    			  {
+	    				  option += "<option>0"+i+"</option>";
+	    			  }
+	    			  else
+	    			  {
+	    				  option += "<option>"+i+"</option>";
+	    			  }
+				  }
+				  console.log(option)
+				  $('#Hour').append(option);
+			  } 
     	  }
-    	 
-    	  
 	  }
-      
+      //yy-mm-dd
       function parse(str) {
-	   	  var y = str.substr(0, 4);
-	   	  var m = str.substr(6, 2);
-	   	  var d = str.substr(10, 2);
+	   	  var y = str.substr(0, 2);
+	   	  console.log(y);
+	   	  var m = str.substr(5, 2);
+	   	  console.log(m);
+	   	  var d = str.substr(8, 2);
+	   	  console.log(d);
 	   	  return new Date(y,m-1,d);
       }
 
