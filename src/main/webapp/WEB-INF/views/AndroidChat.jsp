@@ -12,7 +12,6 @@
 <link href="<c:url value='/vendor/font-awesome-5/css/fontawesome-all.min.css'/>" rel="stylesheet" media="all">
 <link href="<c:url value='/css/theme.css'/>" rel="stylesheet" media="all">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
-
 <script type="text/javascript" src="<c:url value='/js/bootstrap.js'/>"></script>
 
 <!-- Bootstrap -->
