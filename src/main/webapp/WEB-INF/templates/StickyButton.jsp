@@ -17,8 +17,8 @@
 
 .sticky-btn {
    position: fixed;
-   bottom: 30px;
-   right: 50px;
+   bottom: 19px;
+   right: 100px;
    z-index: 1231234;
    color: #ff0000
 }

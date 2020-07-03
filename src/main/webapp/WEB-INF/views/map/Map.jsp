@@ -53,7 +53,7 @@
        background: white;
        font-size: small;
    }
-   .map_button{position: absolute;bottom: 32px;right: 8px;z-index: 2;flex-direction: column;}
+   .map_button{position: absolute;bottom: 19px;right: 8px;z-index: 2;flex-direction: column;}
    .current_refresh
    {
       width: 44px;
@@ -276,7 +276,7 @@
       <div class="top_area">
          <div class="top_absfilter_area">
             <button class="filter_button" id="filter_hospital" type="button">
-               <img src="<c:url value='/images/map/hospital_image/hospital_button.png'/>" style="width: 34px;height: 34px;">
+               <img src="<c:url value='/images/map/hospital_image/hospital.png'/>" style="width: 34px;height: 34px;">
             </button>
             <button class="filter_button" id="filter_pharmacy" type="button">
                <img src="<c:url value='/images/map/pharmacy_image/pharmacy_button.png'/>" style="width: 34px;height: 34px;">
@@ -403,7 +403,7 @@
    </div>
    <div class="menu_wrap">
       <button class="current_refresh"  type="button" onclick="changeApi(0)">
-         <img src="<c:url value='/images/map/hospital_image/hospital_button.png'/>" style="width: 34px;height: 34px;">
+         <img src="<c:url value='/images/map/hospital_image/hospital.png'/>" style="width: 34px;height: 34px;">
       </button>
       <button class="current_refresh"  type="button" onclick="changeApi(1)">
          <img src="<c:url value='/images/map/pharmacy_image/pharmacy_button.png'/>" style="width: 34px;height: 34px;">
@@ -916,14 +916,27 @@
                var jsonData = JSON.parse(data);
                console.log("연결성공", jsonData,typeof(jsonData));
                $.each(jsonData, function(i, item) {
+                  if(item.auth=='제휴승인됨')
+                  {
+                	  var marker = new kakao.maps.Marker({
+                          //map : map,
+                          position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
+                          image :  new kakao.maps.MarkerImage(
+                                "<c:url value='/images/map/hospital_image/hospital.png'/>",
+                                  new kakao.maps.Size(35, 35))
+                       });
+                  }
+                  else
+                  {
+                	  var marker = new kakao.maps.Marker({
+                          //map : map,
+                          position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
+                          image :  new kakao.maps.MarkerImage(
+                                "<c:url value='/images/map/hospital_image/hospital_normal.png'/>",
+                                  new kakao.maps.Size(35, 35))
+                       });
+                  }
                   
-                  var marker = new kakao.maps.Marker({
-                     //map : map,
-                     position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
-                     image :  new kakao.maps.MarkerImage(
-                           "<c:url value='/images/map/hospital_image/hospital.png'/>",
-                             new kakao.maps.Size(35, 35))
-                  });
                   var dept_item = '';
                   
                   var iwContent = '<div style="padding:5px;">'+item.hosp_name+'</div>';
@@ -1031,7 +1044,7 @@
                      //map : map,
                      position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
                      image :  new kakao.maps.MarkerImage(
-                           "<c:url value='/images/map/pharmacy_image/pharmacy.png'/>",
+                           "<c:url value='/images/map/pharmacy_image/pharmacy_button.png'/>",
                              new kakao.maps.Size(35, 35))
                   });
                   
@@ -1211,46 +1224,34 @@
                console.log("코로나 데이터",jsonData);
                $.each(jsonData, function(i, item) {
                   console.log("코로나 데이터",item);
-                  geocoder.addressSearch(item.CONTENT, function(result, status) {
-                      if (status === kakao.maps.services.Status.OK) {
-                         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                  console.log("코로나 데이터",item.LAT, item.LNG);
+                  var coords = new kakao.maps.LatLng(item.LAT, item.LNG);
                          
-                         var marker = new kakao.maps.Marker({
-                            image :  new kakao.maps.MarkerImage(
-                                    "<c:url value='/images/map/corona_image/corona_patient.png'/>",
-                                      new kakao.maps.Size(65, 65)),
-                              position: coords
-                          });
-                         
-                         var isSame = false;
-                           for (var j = 0; j < markers.length; j++)
-                           {
-                              console.log(marker.getPosition().equals(markers[j].getPosition()));
-                              if(marker.getPosition().equals(markers[j].getPosition()))
-                              {
-                                 isSame = true;
-                              }
-                              
-                           }
-                           
-                           if(!isSame)
-                           {
-                              marker.setMap(map);
-                              console.log("중복이 아닌 마커",marker.getPosition());
-                              markers.push(marker);
-                              
-                           }
-                           else
-                           {
-                              console.log("중복 마커",marker.getPosition());
-                           }
-                         
-                      }
-                      else
-                   	  {
-                    	  console.log("없는 주소 입니다");
-                   	  }
+                  var marker = new kakao.maps.Marker({
+                      image :  new kakao.maps.MarkerImage(
+                      "<c:url value='/images/map/corona_image/corona_button.png'/>",
+                      new kakao.maps.Size(45, 45)),
+                      position: coords
                   });
+                  var isSame = false;
+                  for (var j = 0; j < markers.length; j++)
+                  {
+                      console.log(marker.getPosition().equals(markers[j].getPosition()));
+                      if(marker.getPosition().equals(markers[j].getPosition()))
+                      {
+                          isSame = true;
+                      } 
+                  }
+                  if(!isSame)
+                  {
+                      marker.setMap(map);
+                      console.log("중복이 아닌 마커",marker.getPosition());
+                      markers.push(marker);
+                  }
+                  else
+                  {
+                      console.log("중복 마커",marker.getPosition());
+                  }   
                });
             },
             error:function(e){
@@ -1780,7 +1781,7 @@
     	  
     	  var option
     	  
-    	  if((date.getHours() < 13 && date.getHours() >= 0) || (day.getDate() != date.getDate()))
+    	  if(day.getDate() != date.getDate())
     	  {
         	  $("#Minute").empty();
     		  
