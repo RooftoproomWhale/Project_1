@@ -67,6 +67,19 @@ public class MapController {
 	@RequestMapping(value="/Homespital/Map/Reservation.hst",method=RequestMethod.POST)
 	public String reservation(@RequestParam Map map) {
 		
+		boolean isPreviousRes = mapService.isPreviousReservation(map);
+		
+		boolean isDuplicateRes = mapService.isDuplicateReservation(map);
+		
+		if(isPreviousRes)
+		{
+			return "2";
+		}
+		else if(isDuplicateRes)
+		{
+			return "3";
+		}
+		
 		int affected = mapService.insertReservation(map);
 		
 		System.out.println(affected);

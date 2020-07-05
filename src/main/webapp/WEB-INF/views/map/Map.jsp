@@ -232,7 +232,7 @@
 	  }
 	.b{
 	 
-	    background-color: #DF101C;
+	    background-color: #03A9F4;
 	 }
     .ui-autocomplete {
        position: absolute;
@@ -358,6 +358,9 @@
 	         <div  style="display: inline-block; padding: 30px; ">
 	         	<div  class="reservation_info">
 	         	</div>
+	         	<div class="currentResByAddr">
+	         		<h3></h3>
+	         	</div>
 	         </div>
 	         	
          </div>
@@ -383,7 +386,7 @@
          		var emptyDiv = '<div class="tableInfoInner g" ><div>';
              	var reservationDiv = '<div class="tableInfoInner b"><div>';
              	$(".reservation_info").append('<h3>현재 예약인원은 '+count+'명 입니다</h3>');
-             	for(var i=1;i<=25;i++){
+             	for(var i=1;i<=	15;i++){
              		if(i<=count)
              		{
              			$(".reservation_info").append(reservationDiv);
@@ -473,7 +476,7 @@
                   <div class="col-sm-6">
                      <div class="form-group">
 	                   <span class="form-label">진료 증상</span>
-	                   <select id="symptom" name="symptom" class="form-control">
+	                   <select id="symptom" name="symptom" class="form-control" data-validation-required-message="증상을 선택해주세요" required>
 	                   		
 	                   </select>
                        <span class="select-arrow"></span>
@@ -494,7 +497,7 @@
                         <div class="col-sm-6">
                            <div class="form-group">
                               <span class="form-label">시</span>
-                              <select id="Hour" name="hour" class="form-control">
+                              <select id="Hour" name="hour" class="form-control" required>
                                  <!-- <option>1</option>
                                  <option>2</option>
                                  <option>3</option>
@@ -514,7 +517,7 @@
                         <div class="col-sm-6">
                            <div class="form-group">
                               <span class="form-label">분</span>
-                              <select id="Minute" name="minute" class="form-control">
+                              <select id="Minute" name="minute" class="form-control" required>
                                  <!-- <option>05</option>
                                  <option>10</option>
                                  <option>15</option>
@@ -536,7 +539,7 @@
                </div>
             </div>
             <div class="modal-footer">
-               <button class="btn btn-success" id="resBtn_confirm">예약</button>
+               <button type="submit" class="btn btn-success" id="resBtn_confirm">예약</button>
                <button class="btn btn-info" data-dismiss="modal">닫기</button>
             </div>
          </form>
@@ -714,7 +717,46 @@
       
       $(".reservation_info").hide();
       
-      $("#resBtn_confirm").click(function(){	
+	  $("#reservation_form").submit(function(){	
+    	  
+    	  $(':disabled').each(function(e) {
+    	      $(this).removeAttr('disabled');
+    	  })
+    	  
+    	  console.log($('#reservation_form').serialize()+"&hourMinute="+$('#Hour').val()+":"+$('#Minute').val());
+    	  
+    	  $.ajax({
+				url:"<c:url value='/Homespital/Map/Reservation.hst'/>",
+				data:$('#reservation_form').serialize()+"&hourMinute="+$('#Hour').val()+":"+$('#Minute').val(),
+				dataType:'text',
+				type:'post',
+				success:function(data){
+					console.log(data);
+					if(data == 1)
+					{
+						alert("예약이 완료되었습니다");
+					}
+					else if(data == 2)
+					{
+						alert("현재시간 이전의 시간으로는 예약할 수 없습니다");
+					}
+					else if(data == 3)
+					{
+						alert("이미 오늘 이 병원에 예약을 하셨습니다");
+					}
+				},
+				error:function(e){
+		            console.log(e);   
+	            }
+		  });
+
+    	  $('#name').attr('disabled', true);
+    	  $('#email').attr('disabled', true);
+    	  $('#tel').attr('disabled', true);
+    	  $('#modal_hosp_name').attr('disabled', true);
+      });
+      
+      /* $("#resBtn_confirm").click(function(){	
     	  
     	  $(':disabled').each(function(e) {
     	      $(this).removeAttr('disabled');
@@ -743,7 +785,7 @@
     	  $('#email').attr('disabled', true);
     	  $('#tel').attr('disabled', true);
     	  $('#modal_hosp_name').attr('disabled', true);
-      });
+      }); */
       
       $('#reservation_date').datepicker({
          dateFormat: "yy-mm-dd",
@@ -969,8 +1011,10 @@
                         $('.info-toggle').removeClass('left_toggle');
                      }
                     
+                     var time = "평일 : " + item.weekday_open + ":00~" + item.weekday_close + ":00<br/>" 
+                     + "주말 : " + item.weekend_open + ":00~" + item.weekend_close + ":00" 
                      
-                     listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel);
+                     listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel,time,item.lunchtime);
                      $('.search_list').html(listitem);
                   });
                   
@@ -1536,12 +1580,12 @@
                      if(apiStatus == 0)
                      {
                         console.log(jsonData[0]['HOSP_NAME']);
-                        item = getDetailHospItem(jsonData[0]['HOSP_NAME'],jsonData[0]['DEPT_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'])
+                        item = getDetailHospItem(jsonData[0]['HOSP_NAME'],jsonData[0]['DEPT_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'],jsonData[0]['WEEKDAY_OPEN'],jsonData[0]['LUNCHTIME'])
                      }
                      else if (apiStatus == 1)
                      {
                         console.log(jsonData[0]['PHAR_NAME']);
-                        item = getDetailHospItem(jsonData[0]['PHAR_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'])
+                        item = getDetailPharItem(jsonData[0]['PHAR_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'])
                      }
                      $(".reservation_info").show();
                      $('.search_list').html(item);
@@ -1555,7 +1599,7 @@
          });
       }
 
-      function getDetailHospItem(hospname,deptname,address,tel)
+      function getDetailHospItem(hospname,deptname,address,tel,time,detail)
       {
          item = '<div class="inner_top">'+
                   '<div class="inner_title_area">'+
@@ -1575,26 +1619,25 @@
                      '</div>'+
                   '</div>'+
                   '<div class="inner_final_area">'+
-                     '<div class="inner_detail_address">'+
-                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/address.png'/>">'+
-                        '<div class="inner_end_box">'+address+'</div>'+
-                     '</div>'+
-                     '<div class="inner_detail_tel">'+
-                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/tel.png'/>">'+
-                        '<div class="inner_end_box">'+tel+'</div>'+
-                     '</div>'+
-                     '<div class="inner_detail_time">'+
-                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/time.png'/>">'+
-                        '<div class="inner_end_box">11:00~16:00</div>'+
-                     '</div>'+
-                     '<div class="inner_detail_time2">'+
-                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/detail_info.png'/>">'+
-                        '<div class="inner_end_box">'+
-                           '영업시간 11:00~ 14:40 16:00~ 20:30<br/>'+
-                           '휴무: 매주 월요일'+
-                        '</div>'+
-                     '</div>'+
-                  '</div>'+
+	                  '<div class="inner_detail_address">'+
+	                     '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/address.png'/>">'+
+	                     '<div class="inner_end_box">'+address+'</div>'+
+	                  '</div>'+
+	                  '<div class="inner_detail_tel">'+
+	                     '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/tel.png'/>">'+
+	                     '<div class="inner_end_box">'+tel+'</div>'+
+	                  '</div>'+
+	                  '<div class="inner_detail_time">'+
+	                     '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/time.png'/>">'+
+	                     '<div class="inner_end_box">'+time+'</div>'+
+	                  '</div>'+
+	                  '<div class="inner_detail_time2">'+
+	                     '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/detail_info.png'/>">'+
+	                     '<div class="inner_end_box">'+
+	                        '점심시간 '+detail+'<br/>'+
+	                     '</div>'+
+	                  '</div>'+
+	               '</div>'+
                '</div>';
                
          return item;
@@ -1664,7 +1707,7 @@
                 var option="";
                 for(var i = 0; i < jsonData.length; i++)
 	       		{
-                	option += "<label class='keyboard disable radio-inline form-label'><input type='radio' name='optradio' value='"+jsonData[i].DEPT_NAME+"'>"+jsonData[i].DEPT_NAME+"</label>";
+                	option += "<label class='keyboard disable radio-inline form-label'><input type='radio' name='optradio' value='"+jsonData[i].DEPT_NAME+"' required>"+jsonData[i].DEPT_NAME+"</label>";
 	       		}
                 $('#dept_radio').append(option);
                 $('#symptom').empty();

@@ -26,4 +26,6 @@ public interface MapService {
 	
 	int selectCntReservation(Map map);
 	int insertReservation(Map map);
+	boolean isPreviousReservation(Map map); 
+	boolean isDuplicateReservation(Map map);
 }
