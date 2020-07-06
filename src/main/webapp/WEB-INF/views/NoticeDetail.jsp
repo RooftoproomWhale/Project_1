@@ -29,7 +29,7 @@
 				<a class="btn btn-default" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[0].noti_no +1}'/>"><span class="glyphicon glyphicon-chevron-down"></span> 다음글</a>
 				<a class="btn btn-default" href="<c:url value='/Admin/Notice.hst'/>"><span class="glyphicon glyphicon-th-list"></span> 목 록</a>
 			</div>
-			<p style="clear: both;"></p>
+			<p style="clear: both;"></p> 
 		</div>
 		<div class="row" style="border:1px solid gray; padding: 10px 10px; border-radius: 1%;min-height: 600px;'">
 			<div class="page-header" style="margin-top: 20px"> 
