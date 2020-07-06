@@ -87,7 +87,7 @@
 
 	<!-- 회원가입 검색 병원 -->
 	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 10
+		SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 30
 	</select>
 	<select id="selectedHosp" parameterType="java.util.Map" resultType="HospitalDTO">
 		SELECT * FROM HOSPITAL WHERE HOSP_NAME = #{hosp_name}
