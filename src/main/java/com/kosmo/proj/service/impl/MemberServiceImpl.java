@@ -120,5 +120,16 @@ public class MemberServiceImpl implements MemberService{
 	   return dao.illInsert(map);
 	}
 
+	public List<Map<String, String>> selectill(Map map) {
+		
+		return dao.selectill(map);
+	}
+
+	public int ILLdelete(Map map) {
+		
+		return dao.illdelete(map);
+	}
+
+
 
 }

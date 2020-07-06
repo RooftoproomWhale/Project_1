@@ -128,5 +128,16 @@ public class MemberDAO implements MemberService {
       return sqlMapper.insert("illInsert", map);
    }
 
+public List<Map<String, String>> selectill(Map map) {
+	
+	return sqlMapper.selectList("selectill",map);
+}
+
+public int illdelete(Map map) {
+	
+	return sqlMapper.delete("illdelete",map);
+}
+
+
 
 }
