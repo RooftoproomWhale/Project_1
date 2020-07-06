@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,5 +46,23 @@ public class ChatBotController {
 		List<Map> preList  = service.selectPreList(map);
 		
 		return JSONArray.toJSONString(preList);
+	}
+	
+	@CrossOrigin
+	@GetMapping(value = "/DeleteReservation", produces = "text/plain;charset=UTF-8")
+	public int deleteReservation(@RequestParam Map map)
+	{
+		int affected = service.deleteReservation(map);
+		
+		return affected;
+	}
+	
+	@CrossOrigin
+	@PostMapping(value = "/InsertReservation", produces = "text/plain;charset=UTF-8")
+	public int InsertReservation(@RequestParam Map map)
+	{
+		int affected = service.insertReservation(map);
+		
+		return affected;
 	}
 }

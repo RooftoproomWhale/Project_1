@@ -81,6 +81,11 @@
       background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/shadow/img_navi.png) no-repeat 0 0;
       cursor: pointer;
    }
+   .infoWindowDiv{
+   	  display:inline-block;
+   	  padding:5px;
+   	  white-space: nowrap;
+   }
    .top_area{
       position: relative;
        
@@ -359,7 +364,7 @@
 	         	<div  class="reservation_info">
 	         	</div>
 	         	<div class="currentResByAddr">
-	         		<h3></h3>
+	         		<h3>회원님은 현재 이 병원에 14:00에 예약하셨습니다</h3>
 	         	</div>
 	         </div>
 	         	
@@ -981,7 +986,7 @@
                   
                   var dept_item = '';
                   
-                  var iwContent = '<div style="padding:5px;">'+item.hosp_name+'</div>';
+                  var iwContent = '<div class="infoWindowDiv">'+item.hosp_name+'</div>';
                      
                   var infowindow = new kakao.maps.InfoWindow({
                       content : iwContent
@@ -1014,7 +1019,7 @@
                      var time = "평일 : " + item.weekday_open + ":00~" + item.weekday_close + ":00<br/>" 
                      + "주말 : " + item.weekend_open + ":00~" + item.weekend_close + ":00" 
                      
-                     listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel,time,item.lunchtime);
+                     listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel,time,item.lunchtime,item.cor_y, item.cor_x);
                      $('.search_list').html(listitem);
                   });
                   
@@ -1092,7 +1097,7 @@
                              new kakao.maps.Size(35, 35))
                   });
                   
-                  var iwContent = '<div style="padding:5px;">'+item.phar_name+'</div>';
+                  var iwContent = '<div class="infoWindowDiv">'+item.phar_name+'</div>';
                      
                   var infowindow = new kakao.maps.InfoWindow({
                       content : iwContent
@@ -1108,7 +1113,7 @@
                         $('.info-toggle').removeClass('left_toggle');
                         
                      }
-                     listitem = getDetailPharItem(item.phar_name,item.address,item.tel);
+                     listitem = getDetailPharItem(item.phar_name,item.address,item.tel,item.cor_y, item.cor_x);
                      $('.search_list').html(listitem);
                   });
                   
@@ -1184,7 +1189,7 @@
                              new kakao.maps.Size(35, 35))
                   });
                   
-                  var iwContent = '<div style="padding:5px;">'+item.name+'</div>';
+                  var iwContent = '<div class="infoWindowDiv">'+item.name+'</div>';
                      
                   var infowindow = new kakao.maps.InfoWindow({
                       content : iwContent
@@ -1277,6 +1282,25 @@
                       new kakao.maps.Size(45, 45)),
                       position: coords
                   });
+                  
+                  
+                  var iwContent = '<div class="infoWindowDiv">'+item.DATE_+" "+item.CONTENT+'</div>';
+                  
+                  var infowindow = new kakao.maps.InfoWindow({
+                      content : iwContent
+                  });
+                  
+                  kakao.maps.event.addListener(marker, 'mouseover', function() {
+                    // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                      infowindow.open(map, marker);
+                  });
+
+                  // 마커에 마우스아웃 이벤트를 등록합니다
+                  kakao.maps.event.addListener(marker, 'mouseout', function() {
+                      // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                      infowindow.close();
+                  });
+                  
                   var isSame = false;
                   for (var j = 0; j < markers.length; j++)
                   {
@@ -1580,12 +1604,12 @@
                      if(apiStatus == 0)
                      {
                         console.log(jsonData[0]['HOSP_NAME']);
-                        item = getDetailHospItem(jsonData[0]['HOSP_NAME'],jsonData[0]['DEPT_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'],jsonData[0]['WEEKDAY_OPEN'],jsonData[0]['LUNCHTIME'])
+                        item = getDetailHospItem(jsonData[0]['HOSP_NAME'],jsonData[0]['DEPT_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'],jsonData[0]['WEEKDAY_OPEN'],jsonData[0]['LUNCHTIME'],coords.getLat(),coords.getLng())
                      }
                      else if (apiStatus == 1)
                      {
                         console.log(jsonData[0]['PHAR_NAME']);
-                        item = getDetailPharItem(jsonData[0]['PHAR_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'])
+                        item = getDetailPharItem(jsonData[0]['PHAR_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'],coords.getLat(),coords.getLng())
                      }
                      $(".reservation_info").show();
                      $('.search_list').html(item);
@@ -1599,7 +1623,7 @@
          });
       }
 
-      function getDetailHospItem(hospname,deptname,address,tel,time,detail)
+      function getDetailHospItem(hospname,deptname,address,tel,time,detail,lat,lng)
       {
          item = '<div class="inner_top">'+
                   '<div class="inner_title_area">'+
@@ -1612,7 +1636,7 @@
                   '</div>'+
                   '<div class="inner_btn_area">'+
                      '<div class="btn_direction">'+
-                        '<button class="find_way_btn">길찾기</button>'+
+                     '<a class="find_way_btn" href="https://map.kakao.com/link/to/'+hospname+','+lat+','+lng+'" style="color:blue" target="_blank">길찾기</a>'+
                         '<sec:authorize access="hasRole('ROLE_MEM')">'+
                         	'<button class="reservation_btn" onclick="reservation_show();">예약</button>'+
                         '</sec:authorize>'+
@@ -1643,7 +1667,7 @@
          return item;
       }
       
-      function getDetailPharItem(pharname,address,tel)
+      function getDetailPharItem(pharname,address,tel,lat,lng)
       {
          item = '<div class="inner_top">'+
                   '<div class="inner_title_area">'+
@@ -1656,7 +1680,7 @@
                   '</div>'+
                   '<div class="inner_btn_area">'+
                      '<div class="btn_direction">'+
-                        '<button class="find_way_btn">길찾기</button>'+
+                        '<a class="find_way_btn" href="https://map.kakao.com/link/to/'+pharname+','+lat+','+lng+'" style="color:blue" target="_blank">길찾기</a>'+
                      '</div>'+
                   '</div>'+
                   '<div class="inner_final_area">'+

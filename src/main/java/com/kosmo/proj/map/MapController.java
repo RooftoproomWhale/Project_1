@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -308,8 +309,11 @@ public class MapController {
 	
 		System.out.println(JSONArray.toJSONString(list));
 		
+		SimpleDateFormat format = new SimpleDateFormat("MM월 dd일");
+		
+		
 		for(Map comment:list)
-			comment.put("DATE_",comment.get("DATE_").toString());
+			comment.put("DATE_",format.format(comment.get("DATE_")));
 		
 
 		return JSONArray.toJSONString(list);

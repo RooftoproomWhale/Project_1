@@ -7,4 +7,7 @@ public interface ChatBotService {
 	List<Map> selectList(Map map);
 	
 	List<Map> selectPreList(Map map);
+	
+	int deleteReservation(Map map);
+	int insertReservation(Map map);
 }
