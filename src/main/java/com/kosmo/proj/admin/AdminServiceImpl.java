@@ -449,4 +449,10 @@ public class AdminServiceImpl implements AdminService {
 		return dao.selectImage();
 	}
 
+	@Override
+	public int hitNotice(Map map) {
+		// TODO Auto-generated method stub
+		return dao.hitNotice(map);
+	}
+
 }

@@ -1000,7 +1000,7 @@
                      console.log('auth',item.auth);
                      if(item.auth == '제휴승인됨'){
                     	 refreshReservation(item);	
-                    	 intervalReservation = setInterval(() => {
+                    	 intervalReservation = setInterval() => {
                     		refreshReservation(item);	
                  		 }, 500);
                      }
