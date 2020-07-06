@@ -46,6 +46,8 @@ body {
    position: relative;
 }
 
+
+
 /*Hide all except first fieldset*/
 #msform fieldset:not(:first-of-type) {
    display: none;
@@ -62,6 +64,9 @@ body {
    color: #2C3E50;
    font-size: 13px;
    height: 40px;
+   box-sizing: border-box;
+   border: 1px solid #919294;
+   border-radius: 4px;
 }
 
 #msform textarea[name="chart"], #msform textarea[name="chart2"]
@@ -76,15 +81,13 @@ body {
    color: #2C3E50;
    font-size: 13px;
    height: 150px;
+   border: 1px solid #919294;
 }
-
 
 /*buttons*/
 button{
    width: 300px;
-   background: #white;
    font-weight: bold;
-   color: #white;
    border: 0 none;
    border-radius: 1px;
    cursor: pointer;
@@ -96,7 +99,6 @@ button{
    width: 100px;
    background: #f0eded;
    font-weight: bold;
-   color: #white;
    border: 0 none;
    border-radius: 1px;
    cursor: pointer;
@@ -104,7 +106,26 @@ button{
    margin: 10px 5px;
    border-radius : 7px 7px 7px 7px;
 }
+.btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 10px 15px;
+  font-size: 13px;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid #4f87f7;
+  border-radius: 4px;
+}
+.info {
+  border-color: #2196F3;
+  color: dodgerblue;
+}
 
+.info:hover {
+  background: #2196F3;
+  color: white;
+}
 #msform .action-button:hover, #msform .action-button:focus {
    
    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
@@ -158,7 +179,7 @@ button{
    content: '';
    width: 100%;
    height: 2px;
-   background: #00ff00;
+   background: #00ddff;
    position: absolute;
    left: -50%;
    top: 9px;
@@ -171,7 +192,7 @@ button{
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-   background: #00ff00;
+   background: #00ddff;
    
 }
 
@@ -238,7 +259,7 @@ width: 100%;
               console.log($("input:checkbox[name=illness]:checked").length);
            if($("input:checkbox[name=illness]:checked").length == 0)
            {
-              alert('하나 이상 선택하세요');
+              alert('해당사항 없을 시 해당없음 선택하세요');
            }
            else
              {
@@ -1271,309 +1292,327 @@ width: 100%;
      }
   %>
 <form id="msform">
-   <div class="col-md-offset-2 col-xs-offset-3 col-md-8 col-xs-6" align="center">
-      <ul id="progressbar">
-         <li class="active">Agreement</li>
-         <li>Account Setup</li>
-         <li>Individual Setup</li>
-         <li>History</li>
-      </ul>
-      <!-- fieldsets -->
-      <fieldset>
-         <h1 class="fs-title" style= font-size:1em>약관 동의</h1>
-         <h3 class="fs-subtitle">이용 약관에 동의 하셔야 이용이 가능합니다.</h3>
-         <h4 class="scheme-g">서비스 이용 약관</h4>
-         <textarea name="chart" style="font-size: 1em;" disabled="disabled"><%=buff1 %></textarea>
-         <p>
-            <input class="ab" type="checkbox" id="check_1" name="" /> 위의 약관에 동의 합니다.
-         </p><br/>
-         <h4 class="scheme-g">개인정보 이용 약관</h4>
-         <textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff2 %></textarea>
-         <p>
-            <input class="ab" type="checkbox" id="check_2" name="" /> 위의 약관에 동의 합니다.<br />
-         </p><br/>
-         <h4 class="scheme-g">위치기반서비스 이용 약관</h4>
-         <textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff3 %></textarea>
-         <p>
-            <input class="ab" type="checkbox" id="check_3" name="" /> 위의 약관에 동의 합니다.<br />
-         </p>
-         <p style="padding-top:5px; color: red">
-             <input class="check-all" type="checkbox" id="check_3" name="all" /> 전체 동의 시 체크<br /> 
-         </p>
-   
-<!--          <input type="checkbox" id="check_authHos" name="" /> 병원 제휴 시 체크<br /> -->
-         <input type="button" id="authHos" class="action-button" value="병원 제휴" />
-         <input type="button" name="nextBtn" class="nextBtn action-button" value="일반회원" />
-      </fieldset>
-      <fieldset>
-         <h1 class="fs-title" style="font-size: 1em">계정 정보</h1>
-         <h3 class="fs-subtitle">아이디로 사용할 e-mail과 비밀번호를 입력하세요.</h3>
-         <div class="form-group">
-            <div class="row">
-               <div class="col-md-8">
-                  <input type="text" id="email" name="email" placeholder="이메일을 입력하세요" />
-                  <font name="emailcheck" size="2.5" color="red"></font>
-               </div>
-               <div class="col-md-2">
-                  <input type="button" class="btn btn-info" id="emailBtn" disabled="disabled" value="이메일 발송"/>
-               </div>
-               <div class="col-md-8">
-                  <input type="text" id="authCode"  placeholder="인증번호 입력" /> 
-               </div>
-               <div class="col-md-2">
-                  <input type="button" class="btn btn-info" id="emailAuthBtn" value="이메일 인증"/>
-               </div>
-               <div class="col-md-12">
-                  <input type="password" id="pwd" class="form-control"  placeholder="비밀번호" /> 
-                  <input type="password" id="spwd" class="form-control" placeholder="비밀번호 확인" />
-                  <font name="check" size="2.5" color="red"></font>
-               </div>
-            </div>
-               <!-- <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+	<div id="hosCodeDiv" style="visibility: hidden"></div>
+	<div class="col-md-offset-2 col-xs-offset-3 col-md-8 col-xs-6" align="center">
+		<ul id="progressbar">
+			<li class="active">Agreement</li>
+			<li>Account Setup</li>
+			<li>Individual Setup</li>
+			<li>History</li>
+		</ul>
+		<!-- fieldsets -->
+		<fieldset>
+
+			<h1 class="fs-title" style="font-size: 1.3em">
+				<strong>약관 동의</strong>
+			</h1>
+			<h3 class="fs-subtitle">이용 약관에 동의 하셔야 이용이 가능합니다.</h3>
+			</br>
+			<h4 class="scheme-g"><strong>서비스</strong> 이용 약관</h4>
+			<textarea name="chart" style="font-size: 1em;" disabled="disabled"><%=buff1 %></textarea>
+			<p>
+				<input class="ab" type="checkbox" id="check_1" name="" /> 위의 약관에 동의합니다.
+			</p><br />
+			<h4 class="scheme-g"><strong>개인정보</strong> 이용 약관</h4>
+			<textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff2 %></textarea>
+			<p>
+				<input class="ab" type="checkbox" id="check_2" name="" /> 위의 약관에 동의합니다.
+			</p><br />
+			<h4 class="scheme-g"><strong>위치기반서비스</strong> 이용 약관</h4>
+			<textarea name="chart2" style="font-size: 1em;" disabled="disabled"><%=buff3 %></textarea>
+			<p>
+				<input class="ab" type="checkbox" id="check_3" name="" /> 위의 약관에 동의합니다.
+			</p>
+			<p style="padding-top: 5px; color: red">
+				<input class="check-all" type="checkbox" id="check_3" name="all" />
+				<strong>전체 동의 시 체크</strong><br />
+			</p>
+
+			<!--          <input type="checkbox" id="check_authHos" name="" /> 병원 제휴 시 체크<br /> -->
+			<input type="button" id="authHos" class="action-button" value="병원 제휴" />
+			<input type="button" name="nextBtn" class="nextBtn action-button" value="일반회원" />
+		</fieldset>
+		<fieldset>
+			<h1 class="fs-title" style="font-size: 1.3em">
+				<strong> 계정 정보</strong>
+			</h1>
+			<h3 class="fs-subtitle">아이디로 사용할 e-mail과 비밀번호를 입력하세요.</h3>
+			</br>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-md-8">
+						<input class="input_text" type="text" id="email" name="email" placeholder="이메일을 입력하세요" /> 
+						<font name="emailcheck" size="2.5" color="red"></font>
+					</div>
+					<div class="col-md-4" style="padding-left: 40px">
+						<input type="button" class="btn btn-info" id="emailBtn" disabled="disabled" value="이메일 발송" />
+					</div>
+					<div class="col-md-8">
+						<input type="text" id="authCode" placeholder="인증번호 입력" />
+					</div>
+					<div class="col-md-4" style="padding-left: 40px">
+						<input type="button" class="btn btn-info" id="emailAuthBtn" value="이메일 인증" />
+					</div>
+					<div class="col-md-12">
+						<input type="password" id="pwd" class="form-control" placeholder="비밀번호" /> 
+						<input type="password" id="spwd" class="form-control" placeholder="비밀번호 확인" /> 
+							<font name="check" size="2.5" color="red"></font>
+					</div>
+				</div>
+				<!-- <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
                <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div> -->
-         </div>
-         
-         <input type="button" name="previous" class="previous action-button" value="이전" /> 
-         <input type="button" name="next" id="yun" disabled="disabled" class="next action-button"value="다음" />
-         
-      </fieldset>
-      <fieldset>
-         <h1 class="fs-title">개인 정보</h1>
-         <h3 class="fs-subtitle">개인 정보를 입력해주세요.</h3>
-         <div class="form-group">
-         <div class="row">
-            <div class="col-md-12">
-               <input type="text" id="name" name="name" placeholder="이름" />
-               <font name="namecheck" size="2.5" color="red"></font> 
-               <input type="text" id="phone" name="phone" placeholder="핸드폰 번호 "/> 
-               <font name="phonecheck" size="2.5" color="red"></font>
-            </div>
-            <div class="col-md-5">
-               <select class="form-control" id="gender">
-                  <option value="X">성별</option>
-                  <option value="남자">남자</option>
-                  <option value="여자">여자</option>
-               </select>
-            </div>
-            <div class="col-md-5 col-md-offset-1">
-               <select class="form-control" id="age">
-                  <option>나이</option>
-                  <option value="10세이하">10세 이하</option>
-                  <option value="10대">10대</option>
-                  <option value="10대">20대</option>
-                  <option value="10대">30대</option>
-                  <option value="10대">40대</option>
-                  <option value="50대">50대</option>
-                  <option value="60대">60대</option>
-                  <option value="70대">70대</option>
-                  <option value="80대">80대</option>
-                  <option value="90대">90대</option>
-               </select>
-            </div>
-            <div class="col-md-6" style="padding-top: 10px">
-               <input type="text" id="height" name="height" placeholder="키(cm)">
-               <font name="heightcheck" size="2.5" color="red"></font>
-            </div>
-            <div class="col-md-6" style="padding-top: 10px">
-               <input type="text" id="weight" name="weight" placeholder="몸무게(kg)">
-               <font name="weightcheck" size="2.5" color="red"></font>
-            </div>
-            
-               <div class="form-group">
-                  <div class="col-md-8">
-                     <input type="text" id="sample4_postcode" placeholder="우편번호">
-                  </div>
-                  <div class="col-md-2">
-                     <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-primary">
-                  </div>
-               </div>
+			</div>
 
-               <div class="col-md-12">
-                  <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-                  <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-                  <span id="guide" style="color: #999; display: none"></span> 
-                  <input type="text" id="sample4_extraAddress" placeholder="참고항목">
-                  <input type="text" id="sample4_detailAddress" name="sample4_detailAddress" class="form-control1" placeholder="상세주소">
-                  <font name="sample4" size="2.5" color="red"></font>
-               </div>
-         </div>
-         </div>
-         <input type="button" name="previous" class="previous action-button" value="이전" /> 
-         <input type="button" name="next" id="yun1" disabled="disabled" class="next action-button" value="다음" />
+			<input type="button" name="previous" class="previous action-button" value="이전" /> 
+			<input type="button" name="next" id="yun" disabled="disabled" class="next action-button" value="다음" />
 
-      </fieldset>
-      <fieldset>
-         <h1 class="fs-title">병력 및 만성질환</h1>
-         <h3 class="fs-subtitle">겪었던 병력을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
-<!--          <div class="row"> -->
-<!--             <div class="col-md-4"> -->
-<!--                <select class="form-control"> -->
-<!--                   <option value="">내과</option> -->
-<!--                   <option value="">비뇨기과</option> -->
-<!--                   <option value="">산부인과</option> -->
-<!--                   <option value="">성형외과</option> -->
-<!--                   <option value="">소아청소년과</option> -->
-<!--                   <option value="">신경과</option> -->
-<!--                   <option value="">안과</option> -->
-<!--                   <option value="">이비인후과</option> -->
-<!--                   <option value="">일반외과</option> -->
-<!--                   <option value="">정신건강의학과</option> -->
-<!--                   <option value="">정형외과</option> -->
-<!--                   <option value="">치과</option> -->
-<!--                   <option value="">피부과</option> -->
-<!--                   <option value="">한방과</option> -->
-<!--                   <option value="">기타</option> -->
-<!--                </select> -->
-<!--             </div> -->
-<!--          </div> -->
-<!--          <div class="row"> -->
-<!--             <div class="col-md-3" style="padding:10px"> -->
-<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상1 -->
-<!--             </div> -->
-<!--             <div class="col-md-3" style="padding:10px"> -->
-<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상2 -->
-<!--             </div> -->
-<!--             <div class="col-md-3" style="padding:10px"> -->
-<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상3 -->
-<!--             </div> -->
-<!--          </div> -->
-         <h5 align="left">겪은 적이 있는 질환을 선택하세요</h5>
-         <div class="row" style="padding-top: 15px; padding-bottom: 15px">
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="aGan" name="illness" value="1"/> A형 간염
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="bGan" name="illness" value="2"/> B형 간염
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="goHyeol" name="illness" value="3"/> 고혈압
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="gyeol" name="illness" value="4"/> 결핵
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="giHyung" name="illness" value="5"/> 기흉
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="brian" name="illness" value="6"/> 뇌질환
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="dang" name="illness" value="7"/> 당뇨
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="heart" name="illness" value="8"/> 심장질환
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="cancer" name="illness" value="9"/> 암
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="cheon" name="illness" value="10"/> 천식
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="lung" name="illness" value="11"/> 폐렴
-            </div>
-            <div class="col-md-3" style="padding:10px">
-               <input type="checkbox" id="nothing" name="illness" value="12"/> 해당 없음
-            </div>
-         </div>
-         <textarea id="chronic" name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
-         <input type="button" name="previous" class="previous action-button" value="이전" /> 
-         <input type="button" id="signupBtn" class="action-button" value="회원가입" />
-      </fieldset>
-      <fieldset>
-         <h1 class="fs-title">병원 제휴</h1>
-         <h3 class="fs-subtitle">병원을 선택해주세요</h3>
-         <div class="row">
-            <div class="col-md-8" style="padding-left:85px">
-               <input id="search" type="text" class="form-control" placeholder="병원명을 검색하세요"/>
-            </div>
-            <input type="button" data-toggle="modal" data-target="#regi-modal" id="searchBtn" value="병원 검색" class="btn btn-primary" style= "font-size:0.9em; marign-right:100px">
-         </div>
-            <div class="form-group" id="selectedHosp">
-                    <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="HosName" placeholder="병원" disabled="disabled">
-                    </div>
-                    <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">주소 :</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" placeholder="주소" disabled="disabled">
-                    </div>
-                    <label style="font-size: 1.1em; padding-top:10px; padding-left:10px">번호 :</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" placeholder="번호" disabled="disabled">
-                    </div>
-                </div>
-         <div class="row">
-            <div class="col-md-12">
-               <input type="checkbox" id="check_5" name="symptom" /> 위의 병원이 맞으시면 체크 후 다음 버튼을 눌러주세요
-            </div>
-         </div>
-         <input type="button" id="auth_prev" class="action-button" value="이전" />
-         <input type="button" id="nextBtn1" class="action-button" value="다음" />
-      </fieldset>
-      <fieldset>
-         <h1 class="fs-title">병원 제휴</h1>
-         <h3 class="fs-subtitle">사용할 아이디와 비밀번호를 입력하세요</h3>
-            <div class="form-group">
-                    <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">아이디 :</label>
-                    <div class="col-md-9" style="margin-left:46px">
-                        <input type="text" id="hosId" class="form-control" placeholder="아이디" >
-                    </div>
-                    <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 :</label>
-                    <div class="col-md-9" style="margin-left:32px">
-                        <input type="password" id="hosPwd" class="form-control" placeholder="비밀번호" >
-                    </div>
-                    <label style="font-size: 0.9em; padding-top:10px; padding-left:10px">비밀번호 확인 :</label>
-                    <div class="col-md-9">
-                        <input type="password" class="form-control" placeholder="비밀번호 확인">
-                    </div>
-                    <div id="hosCodeDiv" style="visibility: hidden" >
-                    
-                    </div>
-                </div>
-         <input type="button" name="previous" class="previous action-button" value="이전" /> 
-         <input type="button" id="hosAuthBtn" class="action-button" value="제휴신청" />
-      </fieldset>
-      <div class="modal fade" id="regi-modal">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h2>제휴회원 병원 찾기</h2>
-               </div>
-<!--                <div class="modal-body"> -->
-<!--                   <div class="input-group">  -->
-                     
-<!--                      <div class="input-group-addon" id="searchBtn"> -->
-<!--                         <span class="glyphicon glyphicon-search"></span> -->
-<!--                      </div> -->
-<!--                   </div> -->
-<!--                </div> -->
-               <div class="col-md-11" style="font-size: 1.2em; padding-left:70px;" id="searchTable">
-<!--                   <table class="table"> -->
-<!--                      <tbody> -->
-<%--                      <c:if test="${empty list}" var="isEmpty"> --%>
-<!--                         <tr> -->
-<!--                            <td colspan="4">검색 된 병원이 없습니다.</td> -->
-<!--                         </tr> -->
-<%--                      </c:if> --%>
-<%--                      <c:if test="${not isEmpty}"> --%>
-<%--                         <c:forEach items="${list }" var="item" varStatus="loop"> --%>
-<!--                            <tr id="hosCheck"> -->
-<%--                               <td id="hospName ${loop.index }">${item.hosp_name }</td> --%>
-<!--                               <td id="hospDept">신경외과</td> -->
-<%--                               <td id="hospAddr ${loop.index }">${item.address }</td> --%>
-<%--                               <td id="hospTel ${loop.index }">${item.tel }</td> --%>
-<!--                            </tr> -->
-<%--                         </c:forEach> --%>
-<%--                      </c:if> --%>
-<!--                      </tbody> -->
-<!--                   </table>    -->
-               </div>
-               <div class="modal-footer">
-                  <button class="btn btn-info" id="close" data-dismiss="modal">닫기</button>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
+		</fieldset>
+		<fieldset>
+			<h1 class="fs-title" style="font-size: 1.3em">
+				<strong>개인 정보</strong>
+			</h1>
+			<h3 class="fs-subtitle">개인 정보를 입력해주세요.</h3>
+			</br>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-md-12">
+						<input type="text" id="name" name="name" placeholder="이름" /> 
+							<font name="namecheck" size="2.5" color="red"></font> 
+						<input type="text" id="phone" name="phone" placeholder="핸드폰 번호 " /> 
+							<font name="phonecheck" size="2.5" color="red"></font>
+					</div>
+					<div class="col-md-6">
+						<select class="form-control" id="gender" style="border-color: #919294">
+							<option value="X">성별</option>
+							<option value="남자">남자</option>
+							<option value="여자">여자</option>
+						</select>
+					</div>
+					<div class="col-md-6"> 
+						<select class="form-control" id="age" style="border-color: #919294">
+							<option>나이</option>
+							<option value="10세이하">10세 이하</option>
+							<option value="10대">10대</option>
+							<option value="10대">20대</option>
+							<option value="10대">30대</option>
+							<option value="10대">40대</option>
+							<option value="50대">50대</option>
+							<option value="60대">60대</option>
+							<option value="70대">70대</option>
+							<option value="80대">80대</option>
+							<option value="90대">90대</option>
+						</select>
+					</div>
+					<div class="col-md-6" style="padding-top: 10px">
+						<input type="text" id="height" name="height" placeholder="키(cm)">
+						<font name="heightcheck" size="2.5" color="red"></font>
+					</div>
+					<div class="col-md-6" style="padding-top: 10px">
+						<input type="text" id="weight" name="weight" placeholder="몸무게(kg)">
+						<font name="weightcheck" size="2.5" color="red"></font>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-8">
+							<input type="text" id="sample4_postcode" placeholder="우편번호">
+						</div>
+						<div class="col-md-4" style="padding-left: 30px">
+							<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-info">
+						</div>
+					</div>
+
+					<div class="col-md-12">
+						<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+						<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+							<span id="guide" style="color: #999; display: none"></span> 
+						<input type="text" id="sample4_extraAddress" placeholder="참고항목">
+						<input type="text" id="sample4_detailAddress" name="sample4_detailAddress" class="form-control1" placeholder="상세주소"> 
+							<font name="sample4" size="2.5" color="red"></font>
+					</div>
+				</div>
+			</div>
+			<input type="button" name="previous" class="previous action-button" value="이전" /> 
+			<input type="button" name="next" id="yun1" disabled="disabled" class="next action-button" value="다음" />
+
+		</fieldset>
+		<fieldset>
+			<h1 class="fs-title" style="font-size: 1.3em">
+				<strong>병력 및 만성질환</strong>
+			</h1>
+			<h3 class="fs-subtitle">겪었던 병력을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
+			<!--          <div class="row"> -->
+			<!--             <div class="col-md-4"> -->
+			<!--                <select class="form-control"> -->
+			<!--                   <option value="">내과</option> -->
+			<!--                   <option value="">비뇨기과</option> -->
+			<!--                   <option value="">산부인과</option> -->
+			<!--                   <option value="">성형외과</option> -->
+			<!--                   <option value="">소아청소년과</option> -->
+			<!--                   <option value="">신경과</option> -->
+			<!--                   <option value="">안과</option> -->
+			<!--                   <option value="">이비인후과</option> -->
+			<!--                   <option value="">일반외과</option> -->
+			<!--                   <option value="">정신건강의학과</option> -->
+			<!--                   <option value="">정형외과</option> -->
+			<!--                   <option value="">치과</option> -->
+			<!--                   <option value="">피부과</option> -->
+			<!--                   <option value="">한방과</option> -->
+			<!--                   <option value="">기타</option> -->
+			<!--                </select> -->
+			<!--             </div> -->
+			<!--          </div> -->
+			<!--          <div class="row"> -->
+			<!--             <div class="col-md-3" style="padding:10px"> -->
+			<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상1 -->
+			<!--             </div> -->
+			<!--             <div class="col-md-3" style="padding:10px"> -->
+			<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상2 -->
+			<!--             </div> -->
+			<!--             <div class="col-md-3" style="padding:10px"> -->
+			<!--                <input type="checkbox" id="symptom" name="symptom" /> 증상3 -->
+			<!--             </div> -->
+			<!--          </div> -->
+			<h5 class="page-header" align="left">겪은 적이 있는 질환을 선택하세요</h5>
+			<div class="row" style="padding-top: 15px; padding-bottom: 15px">
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="aGan" name="illness" value="1" /> A형 간염
+				</div>
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="bGan" name="illness" value="2" /> B형 간염
+				</div>
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="goHyeol" name="illness" value="3" /> 고혈압
+				</div>
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="gyeol" name="illness" value="4" /> 결핵
+				</div>
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="giHyung" name="illness" value="5" /> 기흉
+				</div>
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="brian" name="illness" value="6" /> 뇌질환
+				</div>
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="dang" name="illness" value="7" /> 당뇨
+				</div>
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="heart" name="illness" value="8" /> 심장질환
+				</div>
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="cancer" name="illness" value="9" /> 암
+				</div>
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="cheon" name="illness" value="10" /> 천식
+				</div>
+				<div class="col-md-3" style="padding: 10px">
+					<input type="checkbox" id="lung" name="illness" value="11" /> 폐렴
+				</div>
+				<div class="col-md-3" style="padding: 10px; color:  red">
+					<input type="checkbox" id="nothing" name="illness" value="12" /> <strong>해당없음</strong>
+				</div>
+			</div>
+			</br>
+			<textarea id="chronic" name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
+			<input type="button" name="previous" class="previous action-button" value="이전" /> 
+			<input type="button" id="signupBtn"  class="action-button" value="회원가입" />
+		</fieldset>
+		<fieldset>
+			<h1 class="fs-title" style="font-size: 1.3em" >
+				<strong>병원 제휴</strong>
+			</h1>
+			<h3 class="fs-subtitle">병원을 선택해주세요</h3></br>
+			<div class="row">
+				<div class="col-md-8" style="padding-left:80px">
+					<input id="search" type="text" class="form-control" placeholder="병원명을 검색하세요" />
+				</div>
+				<div class="col-md-2">
+					<input type="button" data-toggle="modal" data-target="#regi-modal" id="searchBtn" value="병원 검색" class="btn btn-info">
+				</div>
+			</div>
+			<div class="form-group" id="selectedHosp">
+				<label style="font-size: 1.1em; padding-top: 10px; padding-left: 10px; color: black">병원:</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" id="HosName" placeholder="병원명" disabled="disabled">
+				</div>
+				<label style="font-size: 1.1em; padding-top: 10px; padding-left: 10px; color: black" >주소:</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" placeholder="병원 주소" disabled="disabled">
+				</div>
+				<label style="font-size: 1.1em; padding-top: 10px; padding-left: 10px; color: black">번호:</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" placeholder="병원 번호" disabled="disabled">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<input type="checkbox" id="check_5" name="symptom" /> 위의 병원이 맞으시면 체크 후 다음 버튼을 눌러주세요
+				</div>
+			</div></br>
+			<input type="button" id="auth_prev" class="action-button" value="이전" />
+			<input type="button" id="nextBtn1" class="action-button" value="다음" />
+		</fieldset>
+		<fieldset>
+			<h1 class="fs-title" style="font-size: 1.3em">
+				<strong>병원 제휴</strong>
+			</h1>
+			<h3 class="fs-subtitle">사용할 아이디와 비밀번호를 입력하세요</h3></br>
+			<div>
+				<label style="font-size: 0.9em; padding-top: 10px; padding-left: 14px; color: black">아이디:</label>
+				<div class="col-md-9" style="margin-left: 46px">
+					<input type="text" id="hosId" class="form-control" placeholder="아이디">
+				</div>
+				<label style="font-size: 0.9em; padding-top: 10px; padding-left: 14px; color: black">비밀번호:</label>
+				<div class="col-md-9" style="margin-left: 32px">
+					<input type="password" id="hosPwd" class="form-control" placeholder="비밀번호">
+				</div>
+				<label style="font-size: 0.9em; padding-top: 10px; padding-left: 10px; color: black">비밀번호 확인 :</label>
+				<div class="col-md-9">
+					<input type="password" class="form-control" placeholder="비밀번호 확인"></br>
+				</div>
+			</div>
+			<input type="button" name="previous" class="previous action-button" value="이전" /> 
+			<input type="button" id="hosAuthBtn" class="action-button" value="제휴신청" />
+		</fieldset>
+		<div class="modal fade" id="regi-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2>제휴회원 병원 찾기</h2>
+					</div>
+					<!--                <div class="modal-body"> -->
+					<!--                   <div class="input-group">  -->
+
+					<!--                      <div class="input-group-addon" id="searchBtn"> -->
+					<!--                         <span class="glyphicon glyphicon-search"></span> -->
+					<!--                      </div> -->
+					<!--                   </div> -->
+					<!--                </div> -->
+					<div class="col-md-11" style="font-size: 1.2em; padding-left: 70px;" id="searchTable">
+						<!--                   <table class="table"> -->
+						<!--                      <tbody> -->
+						<%--                      <c:if test="${empty list}" var="isEmpty"> --%>
+						<!--                         <tr> -->
+						<!--                            <td colspan="4">검색 된 병원이 없습니다.</td> -->
+						<!--                         </tr> -->
+						<%--                      </c:if> --%>
+						<%--                      <c:if test="${not isEmpty}"> --%>
+						<%--                         <c:forEach items="${list }" var="item" varStatus="loop"> --%>
+						<!--                            <tr id="hosCheck"> -->
+						<%--                               <td id="hospName ${loop.index }">${item.hosp_name }</td> --%>
+						<!--                               <td id="hospDept">신경외과</td> -->
+						<%--                               <td id="hospAddr ${loop.index }">${item.address }</td> --%>
+						<%--                               <td id="hospTel ${loop.index }">${item.tel }</td> --%>
+						<!--                            </tr> -->
+						<%--                         </c:forEach> --%>
+						<%--                      </c:if> --%>
+						<!--                      </tbody> -->
+						<!--                   </table>    -->
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-info" id="close" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </form>

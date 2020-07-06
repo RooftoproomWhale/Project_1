@@ -134,23 +134,23 @@ img {
 						<div class="col-md-offset-2 col-md-8">
 							<table class="table table-bordered table-striped">
 								<tr>
-									<th class="col-md-2 text-center">번호</th>
+									<th class="col-md-2 text-center" style="color: black">번호</th>
 									<td id="no">${list[0].qna_no}</td>
 								</tr>
 								<tr class="info">
-									<th class="text-center">제목</th>
+									<th class="text-center" style="color: black">제목</th>
 									<td>${list[0].title}</td>
 								</tr>
 								<tr>
-									<th class="text-center">작성자</th>
+									<th class="text-center" style="color: black">작성자</th>
 									<td>${list[0].mem_email}</td>
 								</tr>
 								<tr class="info">
-									<th class="text-center">등록일</th>
+									<th class="text-center" style="color: black">등록일</th>
 									<td>${list[0].q_date}</td>
 								</tr>
 								<tr>
-									<th class="text-center" colspan="2">내용</th>
+									<th class="text-center" colspan="2" style="color: black">내용</th>
 								</tr>
 								<tr class="info">
 									<td colspan="2">${list[0].content}</td>
@@ -164,7 +164,7 @@ img {
 						<div class="col-md-offset-2 col-md-8">
 							<div class="text-center">
 								<!-- 한줄 코멘트 입력 폼-->
-								<h3>Q&A 답변</h3>
+								<h3 style="color: black">Q&A 답변</h3>
 								<form name="replyForm" method="post">
 									<input type="hidden" name="cno" />
 								</form>

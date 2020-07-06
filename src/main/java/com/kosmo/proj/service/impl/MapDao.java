@@ -93,6 +93,22 @@ public class MapDao implements MapService{
 		return sqlMapper.insert("InsertReservation", map);
 	}
 
+	@Override
+	public List<Map> getSymptom(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("getSymptomByHospital", map);
+	}
 
+	@Override
+	public boolean isPreviousReservation(Map map) {
+		
+		return (Integer)sqlMapper.selectOne("isPreviousReservation", map)==0 ? false : true;
+	}
+
+	@Override
+	public boolean isDuplicateReservation(Map map) {
+		// TODO Auto-generated method stub
+		return (Integer)sqlMapper.selectOne("isDuplicateReservation", map)==0 ? false : true;
+	}
 
 }

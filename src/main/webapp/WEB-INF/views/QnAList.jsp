@@ -60,10 +60,10 @@ img{
 							<table id="table"class="table table-bordered table-hover text-center">
 								<tr class="info">
 									<!-- 각 컬럼의 폭은 <td>계열에 class="col-*-*"추가 -->
-									<th class="col-md-1 text-center">번호</th>
-									<th class="text-center">제목</th>
-									<th class="col-md-1 text-center">작성자</th>
-									<th class="col-md-2 text-center">등록일</th>
+									<th class="col-md-1 text-center" style="color: black">번호</th>
+									<th class="text-center" style="color: black">제목</th>
+									<th class="col-md-1 text-center" style="color: black">작성자</th>
+									<th class="col-md-2 text-center" style="color: black">등록일</th>
 								</tr>
 								<c:if test="${empty list}" var="isEmpty">
 									<tr>

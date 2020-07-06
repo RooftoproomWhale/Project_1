@@ -6,6 +6,10 @@
 	<select id="memberIsLogin" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
 	</select>
+	<select id="memberIsLoginJson" parameterType="MemberDTO" resultType="MemberDTO">
+      	SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
+    </select>
+
 	<select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
 	</select>
@@ -66,7 +70,12 @@
 		(SELECT * FROM notification_bbs WHERE file_addr is not NULL ORDER BY noti_no DESC) n
 		WHERE ROWNUM BETWEEN 1 AND 4
     </select>
+    <!-- 공지사항 조회수 -->
+    <update id="hitNotice">
+    	UPDATE notification_bbs SET hit = hit+1 WHERE noti_no = #{no}
+    </update>
 
+	
    <insert id="presInsert" parameterType="java.util.Map">
       	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
    </insert>
@@ -142,65 +151,4 @@
 	<delete id="commentDeleteByNo" parameterType="java.util.Map">
 		DELETE QNA WHERE no = #{no}
 	</delete>
-   
-   <select id="covidMapSelect" resultType="java.util.Map">
-      SELECT * FROM corona_patient
-   </select>
-   <select id="hospitalSelect" resultType="java.util.Map">
-      SELECT * FROM hospital
-   </select>
-   <select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-      <!-- SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%' -->
-      SELECT H.*, D.dept_name FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code
-	  WHERE H.hosp_name LIKE '%' || #{search_keyword} || '%'
-   </select>
-   <select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
-   </select>
-   <select id="presSelectList" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT * FROM prescription WHERE mem_email = #{mem_email}
-   </select>
-   
-   <select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT D.dept_name, HD.*
-      FROM
-      (SELECT H.*, D.dept_code FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code) HD JOIN department D ON HD.dept_code = D.dept_code
-      WHERE HD.address = #{address}
-   </select>
-
-   <select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
-      SELECT *
-      FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
-      AS distanceByXY, h.*
-      FROM hospital h) disData
-      WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
-   </select>
-
-   <select id="pharmacySelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT * FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
-   </select>
-   <select id="pharmacyNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT distinct phar_name FROM pharmacy WHERE phar_name LIKE '%' || #{search_keyword} || '%'
-   </select>
-
-   <select id="pharmacyDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT * FROM pharmacy WHERE address = #{address}
-   </select>
-   <select id="pharmacySelectByXY" parameterType="java.util.Map" resultType="pharmacyDTO">
-      SELECT *
-      FROM(SELECT (6371*ACOS(COS(RADIANS(#{lng}))*COS(RADIANS(cor_x))*COS(RADIANS(cor_y)-RADIANS(#{lat}))+SIN(RADIANS(#{lng}))*SIN(RADIANS(cor_x)))) 
-      AS distanceByXY, p.*
-      FROM pharmacy p) disData
-      WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
-   </select>
-   
-  
-	<select id="SelectReservationByAddr" parameterType="java.util.Map" resultType="int">
-		select count(*) from reservation where hosp_Code = (SELECT hosp_code FROM hospital WHERE address = #{address} AND AUTH = '제휴승인됨' AND approved = '승인됨') AND TO_CHAR(SYSDATE,'YYYY-MM-DD') <![CDATA[ < ]]> RES_DATE
-	</select>
-	<insert id="InsertReservation" parameterType="java.util.Map">
-		INSERT INTO reservation VALUES(SEQ_RESERVATION.NEXTVAL,
-		(SELECT hosp_code FROM hospital WHERE address = #{address}),
-		#{department},#{name},#{datepick},#{am_pm},#{hour},null,'복통','승인 대기중')
-	</insert>
 </mapper>
