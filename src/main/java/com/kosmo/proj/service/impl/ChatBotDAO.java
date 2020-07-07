@@ -28,4 +28,16 @@ public class ChatBotDAO implements ChatBotService{
 		return sqlMapper.selectList("getPresByUser", map);
 	}
 
+	@Override
+	public int deleteReservation(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deleteReservation", map);
+	}
+
+	@Override
+	public int insertReservation(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.insert("InsertReservation", map);
+	}
+
 }
