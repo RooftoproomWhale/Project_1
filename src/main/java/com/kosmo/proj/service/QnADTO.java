@@ -11,8 +11,17 @@ public class QnADTO {
     private Date q_date;
     private String answer_title;
     private String answer_content;
+    private int hit;
 
-    public String getAnswer_title() {
+
+
+    public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public String getAnswer_title() {
 		return answer_title;
 	}
 	public void setAnswer_title(String answer_title) {

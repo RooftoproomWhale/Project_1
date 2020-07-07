@@ -1,18 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <style>
-#footer {
-	position: absolute;
-	width: 100%;
-	left: 0px;
-	bottom: 0px;
-	background-color: #474747;
-	height: 150px
+#footer{
+position:absolute;
+top: 1300px;
+width: 100%;
+}
 }
 </style>
 <head>
@@ -20,7 +17,7 @@
 <title>상세보기</title>
 </head>
 <body>
-	<div class="container" style="padding-top: 88px">
+	<div class="container" style="padding-top: 150px">
 		<div class="top-button" style="padding-bottom: 5px;">
 			<div class="left-area">
 			</div>
@@ -52,6 +49,10 @@
 				</div>
 			</div>
 		</div>
+		<sec:authorize access="hasRole('ROLE_ADM')">
+			<a class="btn btn-default" style="float:right;" href="<c:url value='/Admin/NoticeDelete.hst?no=${list[0].noti_no}'/>">
+			<span class="glyphicon glyphicon-trash" ></span> 삭제 </a>
+		</sec:authorize>
 	</div>
 </body>
 </html>

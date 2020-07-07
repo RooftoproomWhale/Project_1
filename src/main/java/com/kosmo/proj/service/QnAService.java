@@ -19,6 +19,6 @@ public interface QnAService {
 	int updateQnA(Map map);
 	List<QnADTO> viewQnA(Map map);
 	List<QnADTO> selectComment(Map map);
-
+	int hitQnA(Map map);
 
 }

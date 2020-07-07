@@ -44,17 +44,17 @@ img{
 				<img src="../img/111.jpg" align="right">
 					<div class="jumbotron" style="background-color: white">
 						<h1 style="color: #e0dada"> Homespital </h1>
-					</div>
+					</div></br></br>
 					<div class="row" style="margin-bottom: 10px">
 						<div class="col-md-12 text-right">
 						<sec:authorize access="hasRole('ROLE_MEM')">
-							<a href="<c:url value='/QnA/ToInsertForm.hst'/>" class="btn btn-primary">작성하기</a>
+							<a href="<c:url value='/QnA/ToInsertForm.hst'/>" class="glyphicon glyphicon-pencil">작성하기</a>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_HOS')">
-							<a href="<c:url value='/QnA/ToInsertForm.hst'/>" class="btn btn-primary">작성하기</a>
+							<a href="<c:url value='/QnA/ToInsertForm.hst'/>" class="glyphicon glyphicon-pencil">작성하기</a>
 						</sec:authorize>
 						</div>
-					</div>
+					</div></br>
 					<div class="row">
 						<div class="col-md-12">
 							<table id="table"class="table table-bordered table-hover text-center">
@@ -64,6 +64,7 @@ img{
 									<th class="text-center" style="color: black">제목</th>
 									<th class="col-md-1 text-center" style="color: black">작성자</th>
 									<th class="col-md-2 text-center" style="color: black">등록일</th>
+									<th class="col-md-1 text-center" style="color: black">조회수</th>
 								</tr>
 								<c:if test="${empty list}" var="isEmpty">
 									<tr>
@@ -78,6 +79,7 @@ img{
 											<td class="text-left"><a href='<c:url value="/QnA/QnAView.hst?no=${item.qna_no}"/>'>${item.title}</a></td>
 											<td>${item.mem_email}</td>
 											<td>${item.q_date}</td>
+											<td>${item.hit}</td>
 										</tr>
 									</c:forEach>
 								</c:if>

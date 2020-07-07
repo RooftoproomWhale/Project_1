@@ -77,6 +77,11 @@ public class QnADAO implements QnAService {
 	public List<QnADTO> selectComment(Map map) {
 		return sqlMapper.selectList("commentSelect", map);
 	}
+	@Override
+	public int hitQnA(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.update("hitQnA", map);
+	}
 
 }
 

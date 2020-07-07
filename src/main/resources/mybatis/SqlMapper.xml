@@ -35,7 +35,7 @@
 	
     <!-- 공지사항 추가하기 -->
     <insert id="insertNotice" parameterType="java.util.Map">
-        INSERT INTO notification_bbs VALUES(SEQ_NOTIFICATION.NEXTVAL,#{mem_email},#{title},#{content},SYSDATE,#{file_addr})
+        INSERT INTO notification_bbs VALUES(SEQ_NOTIFICATION.NEXTVAL,#{mem_email},#{title},#{content},SYSDATE,#{file_addr}, 0)
     </insert>
     <select id="getTotalRecordNotice" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM NOTIFICATION_BBS
@@ -123,7 +123,7 @@
 		WHERE RN BETWEEN #{start} AND #{end} 
 	</select>
 	<insert id="insertQnA" parameterType="java.util.Map">
-		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,#{user}, #{title}, #{content}, SYSDATE, NULL)
+		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,#{user}, #{title}, #{content}, SYSDATE, NULL, 0)
 	</insert>
 	<update id="updateQnA" parameterType="java.util.Map">
 		UPDATE QNA SET title=#{title},content=#{content} WHERE qna_no=#{no}
@@ -134,6 +134,9 @@
 	<select id="viewQnA" parameterType="java.util.Map" resultType="QnADTO">
 		select * from qna where qna_no=#{no}
 	</select>
+    <update id="hitQnA">
+    	UPDATE QNA SET hit = hit+1 WHERE qna_no = #{no}
+    </update>
 
 	<!-- QnA 답글 -->
 	<select id="commentSelect" parameterType="java.util.Map" resultType="QnADTO">

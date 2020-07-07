@@ -71,5 +71,11 @@ public class QnAServiceImpl implements QnAService {
 		return dao.selectComment(map);
 	}
 
+	@Override
+	public int hitQnA(Map map) {
+		// TODO Auto-generated method stub
+		return dao.hitQnA(map);
+	}
+
 
 }

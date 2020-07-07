@@ -87,24 +87,25 @@ body {
 /*buttons*/
 button{
    width: 300px;
+   background: #white;
    font-weight: bold;
+   color: #white;
    border: 0 none;
    border-radius: 1px;
    cursor: pointer;
    padding: 10px 5px;
    margin: 10px 5px;
-   border-radius : 7px 7px 7px 7px;
 }
 #msform .action-button{
    width: 100px;
    background: #f0eded;
    font-weight: bold;
+   color: #white;
    border: 0 none;
    border-radius: 1px;
    cursor: pointer;
    padding: 10px 5px;
    margin: 10px 5px;
-   border-radius : 7px 7px 7px 7px;
 }
 .btn {
   border: 2px solid black;
@@ -1302,12 +1303,10 @@ width: 100%;
 		</ul>
 		<!-- fieldsets -->
 		<fieldset>
-
-			<h1 class="fs-title" style="font-size: 1.3em">
-				<strong>약관 동의</strong>
-			</h1>
-			<h3 class="fs-subtitle">이용 약관에 동의 하셔야 이용이 가능합니다.</h3>
-			</br>
+			<div class="alert alert-info">
+				<h1 class="fs-title" style="font-size: 1.3em"><strong>약관 동의</strong></h1>
+				<h3 style="font-size: 0.8em">이용 약관에 동의 하셔야 이용이 가능합니다.</h3>
+			</div>
 			<h4 class="scheme-g"><strong>서비스</strong> 이용 약관</h4>
 			<textarea name="chart" style="font-size: 1em;" disabled="disabled"><%=buff1 %></textarea>
 			<p>
@@ -1333,11 +1332,10 @@ width: 100%;
 			<input type="button" name="nextBtn" class="nextBtn action-button" value="일반회원" />
 		</fieldset>
 		<fieldset>
-			<h1 class="fs-title" style="font-size: 1.3em">
-				<strong> 계정 정보</strong>
-			</h1>
-			<h3 class="fs-subtitle">아이디로 사용할 e-mail과 비밀번호를 입력하세요.</h3>
-			</br>
+			<div class="alert alert-info">
+				<h1 class="fs-title" style="font-size: 1.3em"><strong> 계정 정보</strong></h1>
+				<h3 style="font-size: 0.8em">아이디로 사용할 e-mail과 비밀번호를 입력하세요.</h3>
+			</div>
 			<div class="form-group">
 				<div class="row">
 					<div class="col-md-8">
@@ -1368,11 +1366,10 @@ width: 100%;
 
 		</fieldset>
 		<fieldset>
-			<h1 class="fs-title" style="font-size: 1.3em">
-				<strong>개인 정보</strong>
-			</h1>
-			<h3 class="fs-subtitle">개인 정보를 입력해주세요.</h3>
-			</br>
+			<div class="alert alert-info">
+				<h1 class="fs-title" style="font-size: 1.3em"><strong>개인 정보</strong></h1>
+				<h3 style="font-size: 0.8em">개인 정보를 입력해주세요.</h3>
+			</div>
 			<div class="form-group">
 				<div class="row">
 					<div class="col-md-12">
@@ -1436,10 +1433,10 @@ width: 100%;
 
 		</fieldset>
 		<fieldset>
-			<h1 class="fs-title" style="font-size: 1.3em">
-				<strong>병력 및 만성질환</strong>
-			</h1>
-			<h3 class="fs-subtitle">겪었던 병력을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
+			<div class="alert alert-info">
+				<h1 class="fs-title" style="font-size: 1.3em"><strong>병력 및 만성질환</strong></h1>
+				<h3 style="font-size: 0.8em">겪었던 병력을 선택하시고 만성적으로 가지고 있는 질환을 입력해주세요.</h3>
+			</div>
 			<!--          <div class="row"> -->
 			<!--             <div class="col-md-4"> -->
 			<!--                <select class="form-control"> -->
@@ -1512,15 +1509,15 @@ width: 100%;
 				</div>
 			</div>
 			</br>
-			<textarea id="chronic" name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
+			<textarea style="border-color: #03b6fc" id="chronic" name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
 			<input type="button" name="previous" class="previous action-button" value="이전" /> 
 			<input type="button" id="signupBtn"  class="action-button" value="회원가입" />
 		</fieldset>
 		<fieldset>
-			<h1 class="fs-title" style="font-size: 1.3em" >
-				<strong>병원 제휴</strong>
-			</h1>
-			<h3 class="fs-subtitle">병원을 선택해주세요</h3></br>
+			<div class="alert alert-info">
+				<h1 class="fs-title" style="font-size: 1.3em" ><strong>병원 제휴</strong></h1>
+				<h3 style="font-size: 0.8em">병원을 선택해주세요</h3>
+			</div>
 			<div class="row">
 				<div class="col-md-8" style="padding-left:80px">
 					<input id="search" type="text" class="form-control" placeholder="병원명을 검색하세요" />
@@ -1552,10 +1549,10 @@ width: 100%;
 			<input type="button" id="nextBtn1" class="action-button" value="다음" />
 		</fieldset>
 		<fieldset>
-			<h1 class="fs-title" style="font-size: 1.3em">
-				<strong>병원 제휴</strong>
-			</h1>
-			<h3 class="fs-subtitle">사용할 아이디와 비밀번호를 입력하세요</h3></br>
+			<div class="alert alert-info">
+				<h1 class="fs-title" style="font-size: 1.3em"><strong>병원 제휴</strong></h1>
+				<h3 style="font-size: 0.8em">사용할 아이디와 비밀번호를 입력하세요</h3>
+			</div>
 			<div>
 				<label style="font-size: 0.9em; padding-top: 10px; padding-left: 14px; color: black">아이디:</label>
 				<div class="col-md-9" style="margin-left: 46px">

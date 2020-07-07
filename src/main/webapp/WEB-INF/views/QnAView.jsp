@@ -104,16 +104,14 @@ img {
 						<div class="col-md-offset-2 col-md-8">
 							<!-- .center-block 사용시 해당 블락의 크기를 지정하자 -->
 							<c:if test="${username == list[0].mem_email}" var="flag">
-								<ul id="pillMenu" class="nav nav-pills"
-									style="width: 205px; margin-bottom: 10px">
-										<li><a
-											href="<c:url value='/QnA/QnAToEditForm.hst?no=${list[0].qna_no}&title=${list[0].title}&content=${list[0].content}&q_date=${list[0].q_date}&mem_email=${list[0].mem_email}'/>"
-											class="btn btn-primary">수정</a></li>
-										<li><a
-											href="<c:url value='/QnA/QnADelete.hst?no=${list[0].qna_no}'/>"
-											class="btn btn-danger">삭제</a></li>
-										<li><a href="<c:url value='/QnA/QnA.hst'/>"
-											class="btn btn-primary">목록</a></br></li>
+								<ul id="pillMenu" class="nav nav-pills" style="width: 205px; margin-bottom: 10px">
+									<li><a
+										href="<c:url value='/QnA/QnAToEditForm.hst?no=${list[0].qna_no}&title=${list[0].title}&content=${list[0].content}&q_date=${list[0].q_date}&mem_email=${list[0].mem_email}'/>"
+										class="btn btn-primary">수정</a></li>
+									<li><a
+										href="<c:url value='/QnA/QnADelete.hst?no=${list[0].qna_no}'/>" class="btn btn-danger">삭제</a></li>
+									<li><a href="<c:url value='/QnA/QnA.hst'/>"
+										class="btn btn-primary">목록</a></br></li>
 								</ul>
 							</c:if>
 					
@@ -150,9 +148,13 @@ img {
 									<td>${list[0].q_date}</td>
 								</tr>
 								<tr>
-									<th class="text-center" colspan="2" style="color: black">내용</th>
+									<th class="text-center" style="color: black">조회수</th>
+									<td>${list[0].hit}</td>
 								</tr>
 								<tr class="info">
+									<th class="text-center" colspan="2" style="color: black">내용</th>
+								</tr>
+								<tr>
 									<td colspan="2">${list[0].content}</td>
 								</tr>
 							</table>
@@ -164,7 +166,7 @@ img {
 						<div class="col-md-offset-2 col-md-8">
 							<div class="text-center">
 								<!-- 한줄 코멘트 입력 폼-->
-								<h3 style="color: black">Q&A 답변</h3>
+								<h3 style="color: black">Q&A 답변</h3><br>
 								<form name="replyForm" method="post">
 									<input type="hidden" name="cno" />
 								</form>
@@ -192,8 +194,8 @@ img {
 									</div>
 									<div class="row">
 										<div class="page-header">
-											<textarea class="info" cols="90px" rows="10px" id="answerText"
-												disabled="disabled" style="background-color: white; font-size: 18px">${listA[0].answer_content}</textarea>
+											<textarea class="info" cols="90px" rows="5px" id="answerText"
+												disabled="disabled" style="background-color: white; border-color:black; font-size: 18px">${listA[0].answer_content}</textarea>
 										</div>
 									</div>
 									</br>

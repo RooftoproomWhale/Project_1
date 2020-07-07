@@ -570,15 +570,20 @@ public class AdminController {
 
 		String phisicalPath = req.getServletContext().getRealPath("/Upload");
 		System.out.println(dto.getUpload());
+
 		MultipartFile upload = dto.getUpload();
 		System.out.println(upload);
+
 		String file_addr=null;
 		String renameFile = null;
+
 		if(upload.getOriginalFilename()!="") {
 			System.out.println("null이 아니야");
+
 			renameFile = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
 			file_addr = phisicalPath+File.separator+renameFile;
 			System.out.println(file_addr);
+
 			File file = new File(phisicalPath+File.separator+renameFile);
 			upload.transferTo(file);
 		}
@@ -593,7 +598,7 @@ public class AdminController {
 		int check = adminService.insertNotice(map);
 		System.out.println(check);
 
-		return "NoticeWrite.ad_tiles";
+		return "redirect:/Admin/Notice.hst";
 	}
 
 	@RequestMapping("NoticeWrite.hst")
@@ -601,7 +606,9 @@ public class AdminController {
 
 		UserDetails userDetails = (UserDetails)auth.getPrincipal();
 		String user = userDetails.getUsername();
+
 		model.addAttribute("user",user);
+
 		return "NoticeWrite.ad_tiles";
 	}
 
@@ -651,7 +658,6 @@ public class AdminController {
 			System.out.println(val.getNoti_no());
 			System.out.println(val.getContent());
 			System.out.println(val.getHit());
-			System.out.println(val.getNoti_no());
 		}
 
 		model.addAttribute("list", list);
@@ -683,8 +689,11 @@ public class AdminController {
 
 	@RequestMapping("NoticeDelete.hst")
 	public String noticeEdit(@RequestParam Map map) {
-		adminService.deleteNotice(map);
-		return "forward:/Notice.tiles";
+
+		int check = adminService.deleteNotice(map);
+		System.out.println(check);
+
+		return "forward:Notice.hst";
 	}
 
 	@RequestMapping(value="NoticeImages.hst",produces = "text/html; charset=UTF-8")
