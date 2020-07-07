@@ -32,5 +32,7 @@ public interface MemberService {
    int hisInsert(Map map);
    HistoryDTO getNo(Map map);
    int illInsert(Map map);
+   
+   ReservationDTO recentApt(Map map);
 
 }

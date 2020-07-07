@@ -234,82 +234,128 @@ width: 100%;
            var enable = "1";
            var illStr = "";
            var chronic = $('#chronic').val();
-           $("input[name=illness]:checked").each(function() {
-              var test = $(this).val();
-              console.log(test);
-              illStr += test + "-";
-              console.log(illStr);
-           });
-         
-         $.ajax({
-              url:'<c:url value="/Member/Insert.hst"/>',
-              type:'post',
-              datatype:'html',
-              traditional : true,
-              data:
-              {
-                 "email" : email,
-                 "pwd" : pwd,
-                  "name" : name,
-                  "gender" : gender,
-                  "tel" : tel,
-                  "age" : age, 
-                  "height" : height,
-                  "weight" : weight,
-                  "role" : "ROLE_MEM",
-                  "enable" : "1",
-                  "illStr" : illStr,
-                  "chronic" : chronic
-              },
-              success:function(data){
-               console.log("회원가입 성공");
-               alert("회원가입 완료 되었습니다.")
-               window.location.href = "<c:url value='/User/Login.hst'/>";
-              },
-        
+           
+           	console.log($("input:checkbox[name=illness]:checked").length);
+           if($("input:checkbox[name=illness]:checked").length == 0)
+           {
+        	   alert('하나 이상 선택하세요');
+           }
+           else
+       	   {
+        	   $("input[name=illness]:checked").each(function() {
+                   var test = $(this).val();
+                   console.log(test);
+                   illStr += test + "-";
+                   console.log(illStr);
+                });
+              
+              $.ajax({
+                   url:'<c:url value="/Member/Insert.hst"/>',
+                   type:'post',
+                   datatype:'html',
+                   traditional : true,
+                   data:
+                   {
+                      "email" : email,
+                      "pwd" : pwd,
+                       "name" : name,
+                       "gender" : gender,
+                       "tel" : tel,
+                       "age" : age, 
+                       "height" : height,
+                       "weight" : weight,
+                       "role" : "ROLE_MEM",
+                       "enable" : "1",
+                       "illStr" : illStr,
+                       "chronic" : chronic
+                   },
+                   success:function(data){
+                    console.log("회원가입 성공");
+                    alert("회원가입 완료 되었습니다.")
+                    window.location.href = "<c:url value='/User/Login.hst'/>";
+                   },
+             
+              });
+       	   }
          });
-         
-         });
         
-      //병원찾기   
-      $("#searchBtn").on("click", function(){
-         
+    //병원찾기   
+      $("#searchBtn").on("click",function() {
+         console.log($('#search').val().length);
+      if($('#search').val().length >= 2)
+      {
          var keyword = $("#search").val();
-         
-         $.ajax({ 
-            url: "<c:url value='/Member/HospitalSearch.hst'/>",
-            type: "get", //get, post 방식 
-            dataType: 'json', //or xml or script or html 
-            data: {
+         $.ajax({
+            url : "<c:url value='/Member/HospitalSearch.hst'/>",
+            type : "get", //get, post 방식 
+            dataType : 'json', //or xml or script or html 
+            data : {
                "search_keyword" : keyword
-               }, //넘길 파라미터 
-            async: true, // true:비동기, false:동기 
-            success: function(data){ 
-                 var items = '';
-                     $.each(data, function(i, item) {
-                        console.log(item);
-                     
-                        items += '<table class="table">' +
-                              '<tbody style="font-size:12px">' +
-                                 '<tr id="hosCheck" onclick="searchHospClick('+i+')" style="cursor:hand">' +
-                                    '<td id="hospName'+i+'">'+item['hosp_name']+'</td>' +
-                                    '<td id="hospDept'+i+'">'+item['hosp_name']+'</td>' +
-                                    '<td id="hospAddr'+i+'">'+item['address']+'</td>' +
-                                    '<td id="hospTel'+i+'">'+item['tel']+'</td>' +
-                                 '</tr>' +
-                              '</tbody>' +
-                           '</table>';
-                      console.log(items);   
-                     });
-               
-               $('#searchTable').html(items);
-            },
-            error:function(request,status,error){
-               console.log("에러");
-               alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-            } 
+            }, //넘길 파라미터  
+            async : true, // true:비동기, false:
+            success : function(data) {
+               var items = '';
+               console.log(data);
+               if(data == "")
+               {
+                  console.log("data null");
+                  items = '<table class="table">' +
+                                 '<tbody>' +
+                                      ' <tr> ' +
+                                          '<td colspan="4">검색 된 병원이 없습니다.</td>' +
+                                     '</tr>' +
+                                  '</tbody>'+
+                              '</table> ';
+               }
+               else
+               {
+               items += 
+                  '<table class="table">' + 
+                     '<tbody style="font-size:14px">' + 
+                        '<tr>' +
+                           '<th class="col-md-4 text-left">병원명</th>' +
+                           '<th class="col-md-4 text-left">주소</th>' +
+                           '<th class="col-md-2 text-left">번호</th>' +
+                        '</tr>'
+                     '</tbody>' + 
+                  '</table>';
+               $.each(data,function(i, item) {
+                  console.log(item);
+                     items += 
+                        '<table class="table">' + 
+                           '<tbody style="font-size:13px">' + 
+                     /*          '<tr>' +
+                                 '<th class="col-md-4 text-left">병원명</th>' +
+                                 '<th class="col-md-4 text-left">주소</th>' +
+                                 '<th class="col-md-2 text-left">번호</th>' +
+                              '</tr>'+  */
+                              '<tr id="hosCheck" onclick="searchHospClick('+ i + ')" style="cursor:hand">' + 
+                                 '<td class="col-md-4 text-left" id="hospName'+i+'">' + item['hosp_name'] + '</td>' + 
+                                 '<td class="col-md-4 text-left" id="hospAddr'+i+'">' + item['address'] + '</td>' + 
+                                 '<td class="col-md-2 text-left" id="hospTel'+i+'">' + item['tel'] + '</td>' + 
+                              '</tr>' + 
+                           '</tbody>' + 
+                        '</table>';
+                  });
+               }
+
+            $('#searchTable').html(items);
+         },
+         error : function(request, status, error) {
+            console.log("에러");
+            alert("code = " + request.status
+                  + " message = "
+                  + request.responseText
+                  + " error = " + error); // 실패 시 처리
+                  }
+               });
+      }
+      else
+      {
+         alert('2자 이상 입력해주세요');
+         return false;
+      }
          });
-      });
       
       
             //이메일 유효성
@@ -1425,6 +1471,9 @@ width: 100%;
             </div>
             <div class="col-md-3" style="padding:10px">
                <input type="checkbox" id="lung" name="illness" value="11"/> 폐렴
+            </div>
+            <div class="col-md-3" style="padding:10px">
+               <input type="checkbox" id="nothing" name="illness" value="12"/> 해당 없음
             </div>
          </div>
          <textarea id="chronic" name="chart2" placeholder="주의해야할 만성적으로 가지고 있는 질환을 입력하세요"></textarea>
