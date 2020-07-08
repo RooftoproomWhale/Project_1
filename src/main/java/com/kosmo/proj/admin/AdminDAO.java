@@ -231,7 +231,8 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.update("updateNotice", map);
 	}
 
-	public List<BoardDTO> viewNotice(Map map) {
+	@Override
+	public List<BoardDTO> viewNotice(Paging vo) {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectList("listNotice", map);
 	}
@@ -466,11 +467,13 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.selectList("selectImg");
 	}
 
+	
+	
+	
 	@Override
-	public List<BoardDTO> viewNotice(Paging vo) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+	public int hitNotice(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.update("hitNotice",map);
 	}
-	
-	
+
 }

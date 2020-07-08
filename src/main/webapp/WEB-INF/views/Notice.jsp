@@ -9,9 +9,26 @@
 	position: absolute;
 	width: 100%;
 	left: 0px;
-	bottom: 0px;
+	margin-top: 1000px;
 	background-color: #474747;
 	height: 150px
+}
+
+.jumbotron {
+	background-size: cover;
+	text-shadow: black 0.2em 0.2em 0.2em;
+	color: white;
+}
+
+table {
+	width: 100%;
+	border: 1px solid #444444;
+}
+
+img {
+	width: 200px;
+	height: 200px;
+	float: right;
 }
 </style>
 <script type="text/javascript">
@@ -55,75 +72,59 @@
 				<div class="page-header board-util-text color-red">
 					<h2 style="color: blue">공지사항</h2>
 				</div>
-				<p class="lead">홈스피탈 공지사항</p>
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col" class="" style="width: 55px; text-align: center;">번호</th>
-							<th scope="col" class="" style="text-align: center;">제목</th>
-							<th scope="col" class="" style="width: 120px; text-align: center;">작성자</th>
-							<th scope="col" class="" style="width: 120px; text-align: center;">작성일</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:if test="${empty list}" var="isEmpty">
-							<tr>
-								<td colspan="4">등록된 공지사항이 없습니다.</td>
+				<p class="lead">[ 홈스피탈 공지사항 ]</p>
+				</br>
+				<div class="container" style="box-shadow: 3px 3px 3px 5px rgba(227, 225, 225);">
+					<img src="../img/111.jpg" align="right">
+					<div class="jumbotron" style="background-color: white">
+						<h1 style="color: #e0dada">Homespital</h1>
+					</div>
+					<table class="table" style="border: none;">
+						<thead>
+							<tr class="info">
+								<th scope="col" class="" style="width: 55px; text-align: center;">번호</th>
+								<th scope="col" class="" style="text-align: center;">제목</th>
+								<th scope="col" class="" style="width: 120px; text-align: center;">작성자</th>
+								<th scope="col" class="" style="width: 120px; text-align: center;">작성일</th>
 							</tr>
-						</c:if>
-						<c:if test="${!isEmpty }">
-							<c:forEach items="${list}" var="item">
-								<tr id="notice" style="text-align: center">
-									<td>${item.noti_no }</td>
-									<td style="text-align: left;"><a href='<c:url value="/Admin/NoticeDetail.hst?no=${item.noti_no}"/>'>${item.title }</td>
-									<td>${item.mem_email }</td>
-									<td>${item.postdate }</td>
+						</thead>
+						<tbody>
+							<c:if test="${empty list}" var="isEmpty">
+								<tr>
+									<td colspan="4">등록된 공지사항이 없습니다.</td>
 								</tr>
-							</c:forEach>
-						</c:if>
-					</tbody>
-				</table>
-				<div style="display: block; text-align: center;">
+							</c:if>
+							<c:if test="${!isEmpty }">
+								<c:forEach items="${list}" var="item">
+									<tr id="notice" style="text-align: center">
+										<td>${item.noti_no }</td>
+										<td style="text-align: left;">
+										<a href='<c:url value="/Admin/NoticeDetail.hst?no=${item.noti_no}"/>'>${item.title }</td>
+										<td>${item.mem_email }</td>
+										<td>${item.postdate }</td>
+									</tr>
+								</c:forEach>
+							</c:if>
+						</tbody>
+					</table></br></br></br>
+					<div style="display: block; text-align: center;">
 						<c:if test="${paging.startPage != 1 }">
 							<a href="<c:url value='/Admin/Notice.hst?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}'/>">&lt;</a>
 						</c:if>
-						<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
-							var="p">
+						<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 							<c:choose>
 								<c:when test="${p == paging.nowPage }">
 									<b>${p }</b>
 								</c:when>
 								<c:when test="${p != paging.nowPage }">
-									<a
-										href="<c:url value='/Admin/Notice.hst?nowPage=${p }&cntPerPage=${paging.cntPerPage}'/>">${p }</a>
+									<a href="<c:url value='/Admin/Notice.hst?nowPage=${p }&cntPerPage=${paging.cntPerPage}'/>">${p }</a>
 								</c:when>
 							</c:choose>
 						</c:forEach>
 						<c:if test="${paging.endPage != paging.lastPage}">
-							<a
-								href="<c:url value='/Admin/Notice.hst?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}'/>">&gt;</a>
+							<a href="<c:url value='/Admin/Notice.hst?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}'/>">&gt;</a>
 						</c:if>
-					</div>
-				<!-- 검색용 UI -->
-				<div style="max-width: 1300px; text-align: right;"></div>
-				<!-- 검색용 UI -->
-				<div class="row">
-					<div class="text-center">
-						<form class="form-inline" method="post" action=""
-							style="margin-bottom: 20px;">
-							<div class="form-group">
-								<select name="searchColumn" class="form-control">
-									<option value="title">제목</option>
-									<option value="name">작성자</option>
-									<option value="content">내용</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<input type="text" name="searchWord" class="form-control" />
-							</div>
-							<button type="submit" class="btn btn-primary">검색</button>
-						</form>
-					</div>
+					</div></br></br>
 				</div>
 			</main>
 		</div>

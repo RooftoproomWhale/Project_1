@@ -19,6 +19,7 @@ import com.google.protobuf.ByteString;
 import com.kosmo.proj.service.PrescriptionDTO;
 import com.kosmo.proj.service.PrescriptionService;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.mail.Session;
 
 import org.json.simple.JSONArray;
@@ -74,7 +76,10 @@ public class GoogleVisionController {
 	public String vision(MultipartHttpServletRequest req,Authentication auth,Map map) throws IOException {
 		//MultipartFile로 직접 받기MultipartHttpServletRequest req
 		MultipartFile file = req.getFile("filename");
-		//fileName = "C://Users//kosmo_12//Desktop//about.jpg";
+		//fileName = "C://Users//kosmo_12//Desktop//about.jpg"; 
+		BufferedImage bi = ImageIO.read(file.getInputStream());
+		int height = bi.getHeight();
+		int width = bi.getWidth();
 		List<AnnotateImageRequest> requests = new ArrayList<>();
 		String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
 		String presDate = "";
@@ -108,14 +113,14 @@ public class GoogleVisionController {
 								int min_y = word.getBoundingBox().getVertices(0).getY();
 								int max_y = word.getBoundingBox().getVertices(2).getY();
 								/*약 제조일 */
-								if(min_x>=770 && max_x<=885 && min_y>=105 && max_y<=130) {
+								if(min_x>=(width*0.8) && max_x<=(width*0.92) && min_y>=(height*0.145) && max_y<=(height*0.18)) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										presDate = presDate + symbol.getText();
 									}
 								}
 								/*복용횟수*/
-								if(min_x>=540 && max_x<=582 && min_y>=252 && max_y<=281) {
+								if(min_x>=(width*0.56) && max_x<=(width*0.6) && min_y>=(height*0.35) && max_y<=(height*0.39)) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										count = count + symbol.getText();

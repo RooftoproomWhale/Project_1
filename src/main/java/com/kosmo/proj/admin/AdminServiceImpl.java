@@ -235,9 +235,9 @@ public class AdminServiceImpl implements AdminService {
 	 }
 
 	 @Override
-	 public List<BoardDTO> viewNotice(Map map) {
+	 public List<BoardDTO> viewNotice(Paging vo) {
 		 // TODO Auto-generated method stub
-		 return dao.viewNotice(map);
+		 return dao.viewNotice(vo);
 	 }
 
 
@@ -462,13 +462,13 @@ public class AdminServiceImpl implements AdminService {
 		return dao.selectImage();
 	}
 
-	@Override
-	public List<BoardDTO> viewNotice(Paging vo) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
-	}
-
-
 	
+	
+
+	@Override
+	public int hitNotice(Map map) {
+		// TODO Auto-generated method stub
+		return dao.hitNotice(map);
+	}
 
 }

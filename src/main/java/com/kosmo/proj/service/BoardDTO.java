@@ -13,7 +13,16 @@ public class BoardDTO {
 	private Date postdate;
 	private String file_addr;
 	private MultipartFile upload;
+	private int hit;
 
+
+
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 	public MultipartFile getUpload() {
 		return upload;
 	}

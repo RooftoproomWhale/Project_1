@@ -61,7 +61,8 @@ $(function() {
          var decideArr = new Array(); //확진자 저장 배열
          var dailyPatient = new Array();
          $.each(jsonData.response.body.items.item, function(i, item) {
-//             console.log("확진 카운트: ", item.decideCnt);
+        	 console.log(item);
+            console.log("확진 카운트: ", item.decideCnt);
             decideArr[i] = item.decideCnt;
          })
          for(var i=0; i<decideArr.length; i++) {
@@ -164,7 +165,7 @@ $(function() {
             careCnt = item.careCnt;//격리중 수
             decideCnt = item.decideCnt;//확진환자수
             var totalCnt = clearCnt + deathCnt + careCnt + decideCnt;
-            console.log("total: ", totalCnt);
+//             console.log("total: ", totalCnt);
             
             clearPer = clearCnt / totalCnt * 100;
             deathPer = deathCnt / totalCnt * 100;
@@ -224,10 +225,10 @@ $(function() {
       success:function(data){
 //          console.log(data);
          var jsonData = JSON.parse(data);
-         console.log("연결성공", jsonData, typeof(jsonData));
+//          console.log("연결성공", jsonData, typeof(jsonData));
          var locArr = new Array();
          $.each(jsonData.response.body.items.item, function(i, item) {
-            console.log(item.gubun +":"+item.defCnt);
+//             console.log(item.gubun +":"+item.defCnt);
             locArr[i] = item.defCnt;
          })
 //          for(var i=0; i<locArr.length; i++) {
@@ -296,11 +297,11 @@ $(function() {
       success:function(data){
 //           console.log(data);
          var jsonData = JSON.parse(data);
-         console.log("연결성공", jsonData, typeof(jsonData));
+//          console.log("연결성공", jsonData, typeof(jsonData));
          var nationArr = new Array();
          var nationCnt;
          $.each(jsonData.response.body.items.item, function(i, item) {
-            console.log(item.nationNm, " : ", item.natDefCnt, "index: " ,i);
+//             console.log(item.nationNm, " : ", item.natDefCnt, "index: " ,i);
             nationArr[i] = {"nationNm" : item.nationNm, "nationDefCnt" : item.natDefCnt};
          })
          nationArr.sort(customSort);

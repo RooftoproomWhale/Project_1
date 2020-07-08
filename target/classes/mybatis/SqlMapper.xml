@@ -10,7 +10,6 @@
       	SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
     </select>
 
-
 	<select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
 	</select>
@@ -71,7 +70,12 @@
 		(SELECT * FROM notification_bbs WHERE file_addr is not NULL ORDER BY noti_no DESC) n
 		WHERE ROWNUM BETWEEN 1 AND 4
     </select>
+    <!-- 공지사항 조회수 -->
+    <update id="hitNotice">
+    	UPDATE notification_bbs SET hit = hit+1 WHERE noti_no = #{no}
+    </update>
 
+	
    <insert id="presInsert" parameterType="java.util.Map">
       	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
    </insert>
@@ -92,7 +96,7 @@
 
 	<!-- 회원가입 검색 병원 -->
 	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 10
+		SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 30
 	</select>
 	<select id="selectedHosp" parameterType="java.util.Map" resultType="HospitalDTO">
 		SELECT * FROM HOSPITAL WHERE HOSP_NAME = #{hosp_name}

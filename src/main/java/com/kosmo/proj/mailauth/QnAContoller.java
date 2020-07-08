@@ -66,12 +66,14 @@ public class QnAContoller {
 			{
 				System.out.println(val.getQna_no());
 				System.out.println(val.getContent());
+				System.out.println(list);
 			}
 			List<QnADTO> listA =  qnaService.selectComment(map);
 			for(QnADTO val : listA)
 			{
 				System.out.println(val.getQna_no());
 				System.out.println(val.getContent());
+				System.out.println(listA);
 			}
 
 			model.addAttribute("list", list);
@@ -90,6 +92,13 @@ public class QnAContoller {
 				model.addAttribute("list", list);
 
 			}
+			List<QnADTO> listA =  qnaService.selectComment(map);
+			for(QnADTO val : listA)
+			{
+				System.out.println(val.getQna_no());
+				System.out.println(val.getContent());
+			}
+			model.addAttribute("listA", listA);
 		}
 		return "QnAView.tiles";
 
@@ -110,6 +119,7 @@ public class QnAContoller {
 	{
 		System.out.println("user:"+map.get("user").toString());
 		int check = qnaService.insertQnA(map);
+		System.out.println(check);
 
 
 		return "QnAWrite.tiles";

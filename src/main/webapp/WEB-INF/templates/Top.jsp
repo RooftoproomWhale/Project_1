@@ -8,6 +8,7 @@
 <title>Interact</title>
 <meta name="description" content="">
 <meta name="author" content="">
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 
 <!-- Favicons
     ================================================== -->
@@ -64,12 +65,7 @@
 .dropdown-menu:hover .dropdown-toggle {background-color: #3e8e41;}
 </style>
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-  chat-title="홈스피탈"
-  agent-id="6e5b251f-1e6b-4faf-bd34-619af38b4190"
-  language-code="ko"
-  chat-icon="<c:url value='/img/logo.png'/>"
-></df-messenger>
+
 <script>
 window.onload = function(){
 	Notification.requestPermission().then(function(result) {

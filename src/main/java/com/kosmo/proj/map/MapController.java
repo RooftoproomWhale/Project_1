@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,12 +61,25 @@ public class MapController {
 			model.addAttribute("MemberDTO", dto);
 		}
 		
-		return "map/Map.no_tiles";
+		return "map/Map.tiles";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/Reservation.hst",method=RequestMethod.POST)
 	public String reservation(@RequestParam Map map) {
+		
+		boolean isPreviousRes = mapService.isPreviousReservation(map);
+		
+		boolean isDuplicateRes = mapService.isDuplicateReservation(map);
+		
+		if(isPreviousRes)
+		{
+			return "2";
+		}
+		else if(isDuplicateRes)
+		{
+			return "3";
+		}
 		
 		int affected = mapService.insertReservation(map);
 		
@@ -103,6 +117,42 @@ public class MapController {
 		}
 		
 		return ja.toJSONString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/getDept.hst",produces = "text/html; charset=UTF-8")
+	public String getDept(@RequestParam Map map) {
+		
+		List<Map> list = null;
+		JSONArray ja = new JSONArray();
+		
+		list = mapService.selectHospitalOne(map);
+//		String depart = "";
+//		for (int i = 0; i < list.size(); i++) {
+//			if(i==list.size()-1)
+//			{
+//				depart += list.get(i).get("DEPT_NAME").toString();
+//			}
+//			else
+//			{
+//				depart += list.get(i).get("DEPT_NAME").toString() + ',';
+//			}
+//		}
+//		list.get(0).replace("DEPT_NAME", depart);
+		
+//		return JSONArray.toJSONString(list);
+		return JSONArray.toJSONString(list);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/getSymptom.hst",produces = "text/html; charset=UTF-8")
+	public String getSymptom(@RequestParam Map map) {
+		
+		List<Map> list = null;
+		
+		list = mapService.getSymptom(map);
+
+		return JSONArray.toJSONString(list);
 	}
 	
 	@ResponseBody
@@ -259,10 +309,13 @@ public class MapController {
 	
 		System.out.println(JSONArray.toJSONString(list));
 		
-		for(Map comment:list)
-			comment.put("CORONA_DATE",comment.get("CORONA_DATE").toString());
+		SimpleDateFormat format = new SimpleDateFormat("MM월 dd일");
 		
-		//단,List에 저장된 객체는 반드시 Map이어야 한다
+		
+		for(Map comment:list)
+			comment.put("DATE_",format.format(comment.get("DATE_")));
+		
+
 		return JSONArray.toJSONString(list);
 	}
 
