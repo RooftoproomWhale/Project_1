@@ -13,12 +13,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Map;
 
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,15 +29,10 @@ public class AndroidCoronaController {
 	
 	@CrossOrigin
 	@GetMapping(value = "/Api", produces = "text/plain;charset=UTF-8")
-	public String apiLoad() {
+	public String apiLoad(@RequestParam Map map) {
 		
-		Date date = new Date();
-		Calendar cal = new GregorianCalendar(Locale.KOREA);
-		cal.setTime(date);
-		cal.add(Calendar.DAY_OF_YEAR, -1);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-		String yesterDate = dateFormat.format(cal.getTime());
-		String strDate = dateFormat.format(date);
+		String yesterDate = map.get("startDate").toString();
+		String strDate = map.get("endDate").toString();
 		
 		String apiUrl = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D"
 				+ "&startCreateDt=" + yesterDate
@@ -54,16 +51,10 @@ public class AndroidCoronaController {
 	
 	@CrossOrigin
 	@GetMapping(value = "/Global", produces = "text/plain;charset=UTF-8")
-	public String apiGlobalLoad() {
+	public String apiGlobalLoad(@RequestParam Map map) {
 		
-		Date date = new Date();
-		Calendar cal = new GregorianCalendar(Locale.KOREA);
-		cal.setTime(date);
-		cal.add(Calendar.DAY_OF_YEAR, -1);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-		String yesterDate = dateFormat.format(cal.getTime());
-		String strDate = dateFormat.format(date);
-		
+		String yesterDate = map.get("startDate").toString();
+		String strDate = map.get("endDate").toString();
 		
 		String apiUrl = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson?serviceKey=MW8v8XOcW8%2FPqi2QbnzB%2BFmMup0JvuDcWhhs7YFdz%2B%2BXvicvnz4U%2BJgebG3oltd8qkLrAYIV%2FQ3g12PCTYxCUA%3D%3D"
 				+ "&startCreateDt=" + yesterDate
