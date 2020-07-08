@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kosmo.proj.service.BoardDTO;
+import com.kosmo.proj.service.CovidEditDTO;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.Paging;
@@ -107,4 +108,7 @@ public interface AdminService {
 		int getTotalRecordNotice(Map map);
 		List<Map> selectImage();
 
+		List<CovidEditDTO> selectCovidList(Map map);
+		int updateCovidList(Map map);
+		List<BoardDTO> viewNotice(Map map);
 }

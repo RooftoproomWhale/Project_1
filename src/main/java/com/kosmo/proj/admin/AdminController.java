@@ -28,6 +28,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.kosmo.proj.service.BoardDTO;
+import com.kosmo.proj.service.CovidEditDTO;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.Paging;
@@ -523,10 +524,31 @@ public class AdminController {
 		return "Chart.ad_tiles";
 	}
 
-	// 확진자 동선
 	@RequestMapping("Corona_Map.hst")
-	public String toMap() {
+	public String toMap(@RequestParam Map map,Model model) {
+		List<CovidEditDTO> list = adminService.selectCovidList(map);
+		model.addAttribute("list",list);
 		return "CoronaMap.ad_tiles";
+	}
+
+	@RequestMapping("Corona_Map_Edit.hst")
+	public String covidEdit(@RequestParam Map map,Model model) {
+		List<CovidEditDTO> list = adminService.selectCovidList(map);
+		int upsuc=0;	
+		for(int k=0;k<list.size();k++) {
+			Object person= map.get("person"+Integer.toString(k));
+			Object date_=map.get("date_"+Integer.toString(k));
+			Object content=map.get("content"+Integer.toString(k));
+			map.put("person", person);
+			map.put("date_", date_);
+			map.put("content", content);
+			upsuc=adminService.updateCovidList(map);
+			}
+			list = adminService.selectCovidList(map);
+		
+				model.addAttribute("msg","수정성공");
+				model.addAttribute("list",list);
+				return "CoronaMap.ad_tiles";
 	}
 
 	@RequestMapping("Form.hst")

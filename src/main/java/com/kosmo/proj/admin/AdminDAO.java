@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kosmo.proj.service.BoardDTO;
+import com.kosmo.proj.service.CovidEditDTO;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.Paging;
@@ -230,10 +231,9 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.update("updateNotice", map);
 	}
 
-	@Override
-	public List<BoardDTO> viewNotice(Paging vo) {
+	public List<BoardDTO> viewNotice(Map map) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectList("listNotice", vo);
+		return sqlMapper.selectList("listNotice", map);
 	}
 
 	@Override
@@ -441,6 +441,20 @@ public class AdminDAO implements AdminService {
 	}
 
 	@Override
+	public List<CovidEditDTO> selectCovidList(Map map) {
+		// TODO 자동 생성된 메소드 스텁
+		return sqlMapper.selectList("selectCovidList");
+	}
+
+	@Override
+	public int updateCovidList(Map map) {
+		
+		return sqlMapper.update("updateCovidList",map);
+	}
+
+	
+
+	@Override
 	public int getTotalRecordNotice(Map map) {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("getTotalRecordNotice");
@@ -452,4 +466,11 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.selectList("selectImg");
 	}
 
+	@Override
+	public List<BoardDTO> viewNotice(Paging vo) {
+		// TODO 자동 생성된 메소드 스텁
+		return null;
+	}
+	
+	
 }

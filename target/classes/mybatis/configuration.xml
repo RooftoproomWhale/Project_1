@@ -18,7 +18,7 @@
 		<typeAlias alias="PrescriptionDTO" type="com.kosmo.proj.service.PrescriptionDTO"/>
 		<typeAlias alias="QnADTO" type="com.kosmo.proj.service.QnADTO"/>
 		<typeAlias alias="HistoryDTO" type="com.kosmo.proj.service.HistoryDTO"/>
-		
+		<typeAlias alias="CovidEditDTO" type="com.kosmo.proj.service.CovidEditDTO"/>
 <!-- 		<typeAlias alias="PrescriptionDTO" type="com.kosmo.proj.service.PrescriptionDTO"/>		 -->
 		<!--MemoCommentDTO는 별칭 불필요. SELECT결과를 Map에 저장하기때문에  -->
 	</typeAliases>
@@ -30,5 +30,6 @@
 		<mapper resource="mybatis/map.xml" />
 		<mapper resource="mybatis/reservation.xml" />
 		<mapper resource="mybatis/SqlMapper.xml" />
+		<mapper resource="mybatis/hosp.xml" />
 	</mappers>
 </configuration>

@@ -1,7 +1,6 @@
 package com.kosmo.proj.service.web;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -39,8 +38,7 @@ public class MyPageController {
 			JOptionPane.showMessageDialog(null,"로그인후 이용해주세요.","홈스피탈",1);
 			return "member/Login.tiles";
 		}
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
+		
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id", id);
@@ -118,26 +116,20 @@ public class MyPageController {
 	}
 	// 진료예약 현황
 	@RequestMapping("/mypage/ReservationList.hst")
-	public String ReservationList(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
+	public String ReservationList() {
 		
 		return "ReservationList.my_tiles";
 	}
 	//예약리스트
 	@RequestMapping(value ="/mypage/ReservationList.hst",method = RequestMethod.POST)
-	public String ReservationLists(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
+	public String ReservationLists() {
+		
 		
 		return "ReservationList.my_tiles";
 	}
 	// 복약관리
 	@RequestMapping("/mypage/administration.hst")
-	public String administration(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-		
+	public String administration() {
 		return "administration.my_tiles";
 	}
 
@@ -163,42 +155,7 @@ public class MyPageController {
 		return "redirect:../mypage/mypage.hst";
 	}
 
-	// 병원 페이지
-	@RequestMapping("/Hospage/main.hst")
-	public String toMain(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-		
-		return "Hospage_Main.hos_tiles";
-	}
+	
 
-	@RequestMapping("/Hospage/Update.hst")
-	public String update(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-		
-		return "Hospage_Update.hos_tiles";
-	}
-
-	@RequestMapping("/Hospage/Cancel.hst")
-	public String cancel(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-		
-		return "Hospage_Cancel.hos_tiles";
-	}
-
-	@RequestMapping("/Hospage/Appointment.hst")
-	public String appointment(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-		
-		return "Hospage_Appointment.hos_tiles";
-	}
-
-//	   @RequestMapping("/Hospage/Chart.hst")
-//	   public String chart() {
-//	      return "Hospage_Chart.hos_tiles";
-//	   }
 
 }

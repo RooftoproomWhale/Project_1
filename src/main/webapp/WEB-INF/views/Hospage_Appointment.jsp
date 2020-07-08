@@ -3,7 +3,91 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
+<script type="text/javascript">
+$(function() {
+$(".table-data-feature .item:first-child").on('click', function(){
+		
+		var tr = $(this).parent().parent().parent();
+		var td = tr.children();
+		var hosp_name = td.eq(1).text().trim();
+		console.log("승인 클릭", hosp_name);
+			$.ajax({ 
+				//url: "<c:url value='/Admin/ApproveAuth.hst'/>",
+				type: "get", //get, post 방식 
+				dataType: 'html', //or xml or script or html or json or text
+				data: {
+						"hosp_name" : hosp_name
+						}, //넘길 파라미터 
+				async: true, // true:비동기, false:동기 
+				success: function(data){
+					console.log('성공');
+					var newUrl = window.location.href;
+					console.log(newUrl);
+					window.location.href = newUrl;
+				},
+				error:function(request,status,error){
+					console.log('실패');
+					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+				} 
+			});
+	});
+	
+$(".table-data-feature .item:last-child").on('click', function(){
+		
+		var tr = $(this).parent().parent().parent();
+		var td = tr.children();
+		var hosp_name = td.eq(1).text().trim();
+		console.log("거절 클릭", hosp_name);
+		$.ajax({ 
+			//url: "<c:url value='/Admin/DenyAuth.hst'/>",
+			type: "get", //get, post 방식 
+		s	dataType: 'html', //or xml or script or html 
+			data: {
+				"hosp_name" : hosp_name
+				}, //넘길 파라미터 
+			async: true, // true:비동기, false:동기 
+			success: function(data){ 
+// 				console.log(data);
+					console.log('성공');
+					var newUrl = window.location.href;
+					console.log(newUrl);
+					window.location.href = newUrl;
+			},
+			error:function(request,status,error){
+				console.log("에러");
+				alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			} 
+		});
+			
+	});
+	
+	$("#searchBtn").on("click", function(){
+		var keyword = $("#search").val();
+		console.log(keyword, "제휴 검색");
+		$.ajax({ 
+			//url: "<c:url value='/Admin/HosAuthSearch.hst'/>",
+			type: "get", //get, post 방식 
+			dataType: 'html', //or xml or script or html 
+			data: {
+				"search_keyword" : keyword
+				}, //넘길 파라미터 
+			async: true, // true:비동기, false:동기 
+			success: function(data){ 
+				console.log(data);
+					console.log('성공', keyword);
+// 					window.location.href = newUrl;
+// 					var renewURL = location.href;
+					window.location.href = "<c:url value='/Admin/HosAuthSearch.hst?search_keyword="+keyword+"'/>";
+			},
+			error:function(request,status,error){
+				console.log("에러");
+				alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			} 
+		});
+	});
+});
+}
+</script>
 <head>
 <style>
 a:hover, a:focus {
@@ -112,9 +196,9 @@ a:hover, a:focus {
 		<div class="col-md-9">
 			<div class="row" style="padding-top: 100px; padding-left: 70px;">
 				<div class="page-header">
-					<h2 style="color: blue">예약 대기 현황</h2>
+					<h2 style="color: #2671d4">예약 대기 현황</h2>
 				</div>
-				<p style="color: red;">현재 승인을 기다리는 예약 목록입니다. 서둘러 승인해 주세요!</p>
+				<p style="color: red;"></p>
 			</div>
 			<br />
 			<div class=" col-sm-12" style="padding-left: 70px;">
@@ -126,11 +210,7 @@ a:hover, a:focus {
 							<div class="table-data__tool">
 								<div class="table-data__tool-left">
 									<div class="rs-select2--light rs-select2--sm">
-										<select class="js-select2" name="time">
-											<option selected="selected">All</option>
-											<option value="">Accepted</option>
-											<option value="">Denied</option>
-										</select>
+										
 										<div class="dropDownSelect2"></div>
 									</div>
 								</div>
@@ -139,27 +219,32 @@ a:hover, a:focus {
 								<table class="table table-data2">
 									<thead>
 										<tr>
-											<th><label class="au-checkbox"> <input
-													type="checkbox"> <span class="au-checkmark"></span>
-											</label></th>
-											<th>Name</th>
-											<th>Id</th>
-											<th>Tel</th>
-											<th>ApplyDate</th>
-											<th>Status</th>
+											<th>예약코드</th>
+											<th>이름</th>
+											<th>이메일</th>
+											<th>전화번호</th>
+											<th>신청한 시간</th>
+											<th>승인 여부</th>
 											<th></th>
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach var="item" items="${mem }" varStatus="loop">
+										<form action="<c:url value="/Hospage/Approved.hst"/>" method="post">
 										<tr class="tr-shadow">
-											<td><label class="au-checkbox"> <input
-													type="checkbox"> <span class="au-checkmark"></span>
-											</label></td>
-											<td>UserName1</td>
-											<td><span class="block-email">UserId1</span></td>
-											<td class="desc">010-1234-7586</td>
-											<td>2018-09-27 02:12</td>
-											<td><span class="status--process">Accepted</span></td>
+											<td>${res[loop.index].RESERV_NO }</td>
+											<input type="hidden" name="res${loop.index }" value="${res[loop.index].RESERV_NO }"/>
+											<td>${item.mem_name}</td>
+											<td><span class="block-email" >${item.mem_email}</span></td>
+											<td class="desc">${item.tel}</td>
+											<td>${res[loop.index].RES_DATE} ${res[loop.index].RES_TIME}</td>
+											<c:if test="${res[loop.index].APPROVED == '승인됨'}">  
+											<td><span class="status--process">승인</span></td>
+											</c:if>
+											<c:if test="${res[loop.index].APPROVED == '승인대기중'}">  
+											<td><span class="status--denied">대기중</span></td>
+											</c:if>
+											
 											<td>
 												<div class="table-data-feature">
 													<button class="item" data-toggle="tooltip"
@@ -171,93 +256,17 @@ a:hover, a:focus {
 														<i class="zmdi zmdi-delete"></i>
 													</button>
 													<button class="item" data-toggle="modal"
-														data-placement="top" data-target="#AptModal" title="상세보기">
+														data-placement="top" data-target="#AptModal${loop.index}" title="상세보기">
 														<i class="zmdi zmdi-more"></i>
 													</button>
 												</div>
 											</td>
 										</tr>
 										<tr class="spacer"></tr>
-										<tr class="tr-shadow">
-											<td><label class="au-checkbox"> <input
-													type="checkbox"> <span class="au-checkmark"></span>
-											</label></td>
-											<td>UserName2</td>
-											<td><span class="block-email">UserId2</span></td>
-											<td class="desc">010-1234-7586</td>
-											<td>2018-09-29 05:57</td>
-											<td><span class="status--process">Accepted</span></td>
-											<td>
-												<div class="table-data-feature">
-													<button class="item" data-toggle="tooltip"
-														data-placement="top" title="승인">
-														<i class="zmdi zmdi-mail-send"></i>
-													</button>
-													<button class="item" data-toggle="tooltip"
-														data-placement="top" title="거절">
-														<i class="zmdi zmdi-delete"></i>
-													</button>
-													<button class="item" data-toggle="modal"
-														data-placement="top" data-target="#AptModal" title="상세보기">
-														<i class="zmdi zmdi-more"></i>
-													</button>
-												</div>
-											</td>
-										</tr>
-										<tr class="spacer"></tr>
-										<tr class="tr-shadow">
-											<td><label class="au-checkbox"> <input
-													type="checkbox"> <span class="au-checkmark"></span>
-											</label></td>
-											<td>UserName3</td>
-											<td><span class="block-email">UserId3</span></td>
-											<td class="desc">010-1234-7586</td>
-											<td>2018-09-25 19:03</td>
-											<td><span class="status--denied">Denied</span></td>
-											<td>
-												<div class="table-data-feature">
-													<button class="item" data-toggle="tooltip"
-														data-placement="top" title="승인">
-														<i class="zmdi zmdi-mail-send"></i>
-													</button>
-													<button class="item" data-toggle="tooltip"
-														data-placement="top" title="거절">
-														<i class="zmdi zmdi-delete"></i>
-													</button>
-													<button class="item" data-toggle="modal"
-														data-placement="top" data-target="#AptModal" title="상세보기">
-														<i class="zmdi zmdi-more"></i>
-													</button>
-												</div>
-											</td>
-										</tr>
-										<tr class="spacer"></tr>
-										<tr class="tr-shadow">
-											<td><label class="au-checkbox"> <input
-													type="checkbox"> <span class="au-checkmark"></span>
-											</label></td>
-											<td>UserName4</td>
-											<td><span class="block-email">UserId4</span></td>
-											<td class="desc">010-1234-7586</td>
-											<td>2018-09-24 19:10</td>
-											<td><span class="status--process">Accepted</span></td>
-											<td>
-												<div class="table-data-feature">
-													<button class="item" data-toggle="tooltip"
-														data-placement="top" title="승인">
-														<i class="zmdi zmdi-mail-send"></i>
-													</button>
-													<button class="item" data-toggle="tooltip"
-														data-placement="top" title="거절">
-														<i class="zmdi zmdi-delete"></i>
-													</button>
-													<button class="item" data-toggle="modal"
-														data-placement="top" data-target="#AptModal" title="상세보기">
-														<i class="zmdi zmdi-more"></i>
-													</button>
-												</div>
-											</td>
-										</tr>
+										</form>
+										</c:forEach>
+									
+										
 									</tbody>
 								</table>
 							</div>
@@ -270,7 +279,8 @@ a:hover, a:focus {
 	</div>
 
 	<!-- 상세 보기 모달 -->
-	<div class="modal fade" id="AptModal" tabindex="-1" role="dialog">
+<c:forEach var="item" items="${mem }" varStatus="loop">	
+	<div class="modal fade" id="AptModal${loop.index}" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-notify modal-warning" role="document">
 			<div class="col-lg-12 ">
 				<div class="top-campaign">
@@ -281,35 +291,35 @@ a:hover, a:focus {
 							<tbody>
 								<tr>
 									<td>예약자 이름</td>
-									<td>윤성준</td>
+									<td>${item.mem_name }</td>
 								</tr>
 								<tr>
 									<td>요청 과</td>
-									<td>이비인후과</td>
+									<td>${list[loop.index].dept_name }</td>
 								</tr>
 								<tr>
 									<td>email</td>
-									<td>busu0423@gmail.com</td>
+									<td>${item.mem_email }</td>
 								</tr>
 								<tr>
 									<td>핸드폰 번호</td>
-									<td>010-1234-7586</td>
+									<td>${item.tel }</td>
 								</tr>
 								<tr>
 									<td>성별</td>
-									<td>남성</td>
+									<td>${item.gender }</td>
 								</tr>
 								<tr>
 									<td>나이</td>
-									<td>27</td>
+									<td>${item.age }</td>
 								</tr>
 								<tr>
 									<td>예약 시간</td>
-									<td>2018-09-30 10:00</td>
+									<td>${res[loop.index].RES_DATE} ${res[loop.index].RES_TIME}</td>
 								</tr>
 								<tr>
-									<td>예약 신청 시간</td>
-									<td>2018-09-27 02:12</td>
+									<td>신청 시간</td>
+									<td>${res[loop.index].APPLY_TIME}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -318,5 +328,6 @@ a:hover, a:focus {
 			</div>
 		</div>
 	</div>
+	</c:forEach>
 </body>
 </html>

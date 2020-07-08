@@ -259,4 +259,11 @@
 		select h.*, r.* from reservation r join hospital h on r.hosp_code = h.hosp_code WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
 	
+	<!-- 코로나맵 관련 -->
+	<select id="selectCovidList" parameterType="java.util.Map" resultType="CovidEditDTO">
+	select * from CORONA_PATIENT order by PERSON DESC
+	</select>
+	<update id="updateCovidList" parameterType="java.util.Map"> 
+     	update CORONA_PATIENT set content=#{content},date_=#{date_} where person = #{person}
+    	</update> 
 </mapper>

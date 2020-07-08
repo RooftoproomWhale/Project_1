@@ -131,97 +131,106 @@ body {
 							<col style="width: 140px;" />
 							<col />
 						</colgroup>
+						<form action='<c:url value="/Hospage/Update.hst"/>' method="post" >
 						<tbody>
 							<tr>
 								<th scope="row">병원명</th>
 								<td style="padding-top: 10px; width: 30%">
 									<div class="input-inside-table">
-										<input type="text" name="" class="input-text" title="이름"
-											value="삼성병원" role="textbox" />
+										<input type="text"  class="input-text" name="hosp_name"
+											value="${list[0].hosp_name }" role="textbox" />
 									</div>
 								</td>
 								<th scope="row" style="width: 15%; padding-left: 80px">평일
 									영업 시간</th>
 								<td>
 									<div class="input-inside-table" style="padding-top: 15px">
-										<input type="text" name="" class="input-text" title="평일 영업 시간"
-											value="08:00 ~ 18:00" role="textbox" />
+										<input type="text"  class="input-text" name="weekday_open"
+											value="${list[0].weekday_open }" role="textbox" tabindex="1"/>
+											~
+										<input type="text"  class="input-text" name="weekday_close"
+											value="${list[0].weekday_close }" role="textbox" tabindex="2"/>
+								
 									</div>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">과 종류</th>
 								<td>
-									<div class="input-inside-table">
-										<select style="width: 176px; height: 24px;" title="나이" class="input-width-small07">
-											<option>담당 과 종류</option>
-											<option value="">외과</option>
-											<option value="">소화기내과</option>
-											<option value="">신경외과</option>
-											<option value="">정형외과</option>
-											<option value="">비뇨기과</option>
-											<option value="">정신과</option>
-											<option value="">이비인후과</option>
-											<option value="">피부과</option>
-											<option value="">호흡기내과</option>
-											<option value="">신경과</option>
-										</select>
+								<div>	
+									
+											<label class=""><input type="checkbox" name="d1" value="내과" <c:if test="${not empty d1}"> checked="checked" </c:if>/>내과</label>
+											<label class=""><input type="checkbox" name="d2" value="비뇨기과" <c:if test="${not empty d2 }"> checked="checked" </c:if>/>비뇨기과</label>
+											<label class=""><input type="checkbox" name="d3" value="산부인과" <c:if test="${not empty d3 }"> checked="checked" </c:if>/>산부인과</label>
+											<label class=""><input type="checkbox" name="d4" value="성형외과" <c:if test="${not empty d4}"> checked="checked" </c:if>/>성형외과</label>
+											<label class=""><input type="checkbox" name="d5" value="소아청소년과" <c:if test="${not empty d5 }"> checked="checked" </c:if>/>소아청소년과</label>
+											<label class=""><input type="checkbox" name="d6" value="신경과" <c:if test="${not empty d6 }"> checked="checked" </c:if>/>신경과</label>
+											<label class=""><input type="checkbox" name="d7" value="안과" <c:if test="${not empty d7}"> checked="checked" </c:if>/>안과</label>
+											<label class=""><input type="checkbox" name="d8" value="이비인후과" <c:if test="${not empty d8 }"> checked="checked" </c:if>/>이비인후과</label>
+											<label class=""><input type="checkbox" name="d9" value="일반외과" <c:if test="${not empty d9}"> checked="checked" </c:if>/>일반외과</label>
+											<label class=""><input type="checkbox" name="d10" value="정신건강의학과" <c:if test="${not empty d10}"> checked="checked" </c:if>/>정신건강의학과</label>
+											<label class=""><input type="checkbox" name="d11" value="정형외과" <c:if test="${not empty d11}"> checked="checked" </c:if>/>정형외과</label>
+											<label class=""><input type="checkbox" name="d12" value="치과" <c:if test="${not empty d12}"> checked="checked" </c:if>/>치과</label>
+											<label class=""><input type="checkbox" name="d13" value="피부과" <c:if test="${not empty d13}"> checked="checked" </c:if>/>피부과</label>
+											<label class=""><input type="checkbox" name="d14" value="한방과" <c:if test="${not empty d14}"> checked="checked" </c:if>/>한방과</label>
+											<label class=""><input type="checkbox" name="d15" value="기타" <c:if test="${not empty d15}"> checked="checked" </c:if>/>기타</label>
+										
+									
 									</div>
 								</td>
 								<th scope="row" style="padding-left: 80px">휴일 영업 시간</th>
 								<td>
 									<div class="input-inside-table" style="padding-top: 15px">
-										<input type="text" name="" class="input-text" title="휴일 영업 시간"
-											value="09:00 ~ 14:00" role="textbox" />
+										<input type="text"  class="input-text" name="weekend_open"
+											value="${list[0].weekend_open }" role="textbox" tabindex="3"/>
+										~
+										<input type="text"  class="input-text" name="weekend_close"
+											value="${list[0].weekend_close }" role="textbox" tabindex="4"/>
+											
 									</div>
 								</td>
 							</tr>
 							<tr>
 
-								<th scope="row" style="width: 15%; margin-top: 6px">성별</th>
+								<th scope="row" style="width: 15%; margin-top: 6px">주소</th>
 								<td>
 									<div class="input-inside-table">
-										<select style="width: 176px; height: 24px;" title="성별"
-											class="input-width-small07">
-											<option>성별</option>
-											<option value="">남자</option>
-											<option value="">여자</option>
-										</select>
+										<input type="text"  class="input-text" name="address"
+											value="${list[0].address }" role="textbox" />
 									</div>
 								</td>
 								<th scope="row" style="padding-left: 80px">점심시간</th>
 								<td>
 									<div class="input-inside-table" style="padding-top: 15px">
-										<input type="text" name="" class="input-text" title="점심시간"
-											value="12:00 ~ 13:00" role="textbox" />
+										<input type="text"  class="input-text" name="lunchtime"
+											value="${list[0].lunchtime }" role="textbox" />
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<th scope="row">주소</th>
+								<th scope="row">이메일(아이디)</th>
 								<td colspan="3">
 									<div class="input-inside-table" style="padding-top: 5px">
-										<input type="text" name="" class="input-text" title="이름" value="해당 병원 주소" role="textbox" />
+										<input type="text"  class="input-text" name="email" value="${list[0].mem_email }" role="textbox" />
 									</div>
 								</td>
+								
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div class="input-inside-table" style="padding-left:20px">
-					<input type="password" name="pass2" id="pass2" class="input-text" title="비밀번호 확인" placeholder="비밀번호를 입력하시오" role="textbox" maxlength="20" onkeyup="dupCheckUserPw(this.value);" /> 
-					<span id="messagePw" class="input-description">비밀번호 확인을 위해 입력해 주세요</span>
+					<input type="password" name="hospwd" id="pass2" class="input-text" title="비밀번호 확인" placeholder="현재 비밀번호" role="textbox" maxlength="20" onkeyup="dupCheckUserPw(this.value);" /> 
+					<span id="hospwd" class="input-description">비밀번호 확인을 위해 입력해 주세요</span>
 				</div>
 				<div class="board-util">
 					<span class="board-util-text color-blue">※ 정보를 수정하신 후 확인 버튼을 클릭하셔야 정보 수정이 완료됩니다.</span>
 					<div class="board-util-right">
-						<button type="button" class="btn btn-primary" role="button"
-							onclick="Form();">
-							<span class="button-text">확인</span>
+						<button type="submit" class="btn btn-primary" role="button"
+							value="수정">
+						수정
 						</button>
-						<button type="button" class="btn" role="button" onclick="back();">
-							<span class="button-text">취소</span>
-						</button>
+						</form>
 					</div>
 				</div>
 				<div class="board-util board-util02">
@@ -331,5 +340,6 @@ body {
 			$('form[name=passForm]').submit();
 		}
 	}
+	
 </script>
 </html>

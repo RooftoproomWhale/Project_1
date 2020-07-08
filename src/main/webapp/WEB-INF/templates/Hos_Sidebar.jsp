@@ -321,7 +321,7 @@ window.onload = function(){
 					<li><a class="" href="<c:url value='/Hospage/main.hst'/>">
 						<span class="fa fa-arrow-right">&nbsp;</span> 병원 정보 보기
 					</a></li>
-					<li><a class="" href="<c:url value='/Hospage/Update.hst'/>">
+					<li><a class="" href="<c:url value='/Hospage/Edit.hst'/>">
 						<span class="fa fa-arrow-right">&nbsp;</span> 정보 수정
 					</a></li>
 					<li><a class="" href="<c:url value='/Hospage/Cancel.hst'/>">
@@ -331,6 +331,6 @@ window.onload = function(){
 			</li>
 			<li><a href="<c:url value='/Hospage/Appointment.hst'/>"><i class="fas fa-pills">&nbsp;</i> 예약 관리</a></li>
 <%-- 			<li><a href="<c:url value='/Hospage/Chart.hst'/>"><i class="fas fa-chart-bar"></i> 통계 </a></li> --%>
-			<li><a href="<c:url value='/User/Login.hst'/>"><em class="fa fa-power-off">&nbsp;</em> 로그아웃 </a></li>
+		<!--  	<li><a href="<c:url value='/User/Login.hst'/>"><em class="fa fa-power-off">&nbsp;</em> 로그아웃 </a></li>-->
 		</ul>
 	</div><!-- /.sidebar -->

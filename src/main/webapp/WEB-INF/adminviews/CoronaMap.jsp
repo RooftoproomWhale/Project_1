@@ -2,6 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
+<script>
+$(function() {
+		console.log(${msg});
+		if (${msg != null} ){
+			alert(${msg});
+		}
+	}
+
+
+</script>
 <html lang="en">
 <body class="animsition">
     <div class="page-wrapper">
@@ -24,29 +34,32 @@
                 </div>
             </header>
             <!-- END HEADER DESKTOP-->
-
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!-- MAP DATA-->
-                                <div class="map-data m-b-40">
-                                    <h3 class="title-3 m-b-30">
-                                        <i class="zmdi zmdi-map"></i>map data</h3>
-                                    <div class="filters">
-                                    <div class="map-wrap m-t-45 m-b-20">
-                                        
-                                    </div>
-                                </div>
-                                <!-- END MAP DATA-->
-                            </div>
-                        </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<form action='<c:url value="/Admin/Corona_Map_Edit.hst"/>' method="post" class="form-horizontal" style="margin-left: 20px; margin-top: 150px;">
+			<c:forEach var="item" items="${list }" varStatus="loop">
+			<div class="row form-group">
+				일련번호
+				<div class="col col-md-3">
+					<input type="text"  class="form-control" name="person${loop.index }" value="${item.person}" readonly="readonly" style="background-color: #d6d6d6;">
+				</div>
+				날짜
+				<div class="col col-md-3">
+					<input type="text" class="form-control" name="date_${loop.index }" value="${item.date_}" readonly="readonly" style="background-color: #d6d6d6;">
+				</div>
+				주소
+				<div class="col col-md-3">
+					<input type="text" class="form-control" name="content${loop.index }" value="${item.content}" tabindex="${loop.index+1 }">
+				</div>
+			</div>
+			</c:forEach>
+				<div class="col col-md-10">
+					<button id="payment-button" type="submit"
+						class="btn btn-lg btn-info btn-block">
+						<span id="payment-button-amount">수정</span> <span
+							id="payment-button-sending" style="display: none;">Sending…</span>
+					</button>
+				</div>
+			</form>
+		</div>
 </div>
 </body>
 

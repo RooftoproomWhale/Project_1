@@ -34,15 +34,15 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-users color-blue"></em>
-							<div class="large">42</div>
-							<div class="text-muted">평균 예약 수</div>
+							<div class="large">${total}</div>
+							<div class="text-muted">총 예약 수</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
-							<div class="large">40</div>
+							<div class="large">${today}</div>
 							<div class="text-muted">오늘 예약 수</div>
 						</div>
 					</div>
@@ -50,7 +50,7 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-red panel-widget ">
 						<div class="row no-padding"><em class="fa fa-xl fa-users color-red"></em>
-							<div class="large">52</div>
+							<div class="large">${prev }</div>
 							<div class="text-muted">어제 예약 수 </div>
 						</div>
 					</div>
@@ -62,37 +62,37 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
                             <div class="col-lg-6 ">
                                 <!-- TOP CAMPAIGN-->
                                 <div class="top-campaign">
-                                    <h3 class="title-3 m-b-30"> 최근 예약자 정보 </h3>
+                                    <h3 class="title-3 m-b-30"> 가장 최근 예약자 정보 </h3>
                                     <div class="table-responsive">
                                         <table class="table table-top-campaign">
                                             <tbody>
                                                 <tr>
                                                     <td>이름</td>
-                                                    <td>윤성준</td>
+                                                    <td>${mem[0].mem_name}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>email</td>
-                                                    <td>busu0423@gmail.com</td>
+                                                    <td>${mem[0].mem_email}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>핸드폰 번호</td>
-                                                    <td>010-1234-7586</td>
+                                                    <td>${mem[0].tel}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>성별</td>
-                                                    <td>남성</td>
+                                                    <td>${mem[0].gender}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>나이</td>
-                                                    <td>27</td>
+                                                    <td>${mem[0].age}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>키</td>
-                                                    <td>177(cm)</td>
+                                                    <td>${mem[0].weight }(cm)</td>
                                                 </tr>
                                                 <tr>
                                                     <td>몸무게</td>
-                                                    <td>74(kg)</td>
+                                                    <td>${mem[0].height }(kg)</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -109,28 +109,37 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
                                             <tbody>
                                                 <tr>
                                                     <td>병원명</td>
-                                                    <td>삼성병원</td>
+                                                    <td>${list[0].hosp_name }</td>
                                                 </tr>
                                                 <tr>
                                                     <td>과 종류</td>
-                                                    <td>이비인후과/내과/외과</td>
+                                                    <td>${list[0].dept_name }</td>
                                                 </tr>
                                                 <tr>
                                                     <td>평일 영업 시간</td>
-                                                    <td>08:00 ~ 18:00</td>
+                                                    <td>${list[0].weekday_open } ~ ${list[0].weekday_close }</td>
                                                 </tr>
                                                 <tr>
                                                     <td>휴일 영업 시간</td>
-                                                    <td>09:00 ~ 14:00</td>
+                                                    <td>${list[0].weekend_open } ~ ${list[0].weekend_close }</td>
                                                 </tr>
                                                 <tr>
                                                     <td>점심 시간</td>
-                                                    <td>12:00 ~ 13:00</td>
+                                                    <td>${list[0].lunchtime }</td>
                                                 </tr>
                                                 <tr>
                                                     <td>주소</td>
-                                                    <td style="font-size: 0.9em">서울특별시 금천구 가산디지털1로 171 가산 에스케이 브이원 센터 2층 205호 (가산동)</td>
+                                                    <td style="font-size: 0.9em">${list[0].address }</td>
                                                 </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td style="font-size: 1.8em"> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td style="font-size: 1.8em"> </td>
+                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
