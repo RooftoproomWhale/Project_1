@@ -130,9 +130,9 @@ public class MedicineController {
 	
 	private MedicineInfoDTO mediShape(String encodeSearch,MedicineInfoDTO dto) {
 		try{
-			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람"),"UTF-8"); 
+			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람").replace("이알서방정", "8시간이알서방정"),"UTF-8"); 
 	        }catch(Exception e){ e.printStackTrace();  }
-	
+		System.out.println(encodeSearch);
 		String apiUrl = "http://apis.data.go.kr/1470000/MdcinGrnIdntfcInfoService/getMdcinGrnIdntfcInfoList?" +
                 "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
                 "&numOfRows=10" +
@@ -236,11 +236,14 @@ public class MedicineController {
 			for(int k=0;k<chList.getLength();k++) {
 				NodeList cchList = chList.item(k).getChildNodes();
 				for(int j=0;j<cchList.getLength();j++) {
-					//System.out.println(cchList.item(j).getTextContent());
+					System.out.println(cchList.item(j).getTextContent());
+					if(cchList.item(j).getTextContent()!="&nbsp;") {
+						nValue+="<p>"+cchList.item(j).getTextContent()+"</p>";
+					}
 				}
 			}
 		}
-
+		
 		return nValue;
 	}
 	
