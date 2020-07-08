@@ -106,5 +106,6 @@ public interface AdminService {
 		List<BoardDTO> detailNotice(Map map);
 		int getTotalRecordNotice(Map map);
 		List<Map> selectImage();
+		int hitNotice(Map map);
 
 }

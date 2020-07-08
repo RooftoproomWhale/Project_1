@@ -27,4 +27,16 @@ public class ChatBotServiceImpl implements ChatBotService{
 		return dao.selectPreList(map);
 	}
 
+	@Override
+	public int deleteReservation(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deleteReservation(map);
+	}
+
+	@Override
+	public int insertReservation(Map map) {
+		// TODO Auto-generated method stub
+		return dao.insertReservation(map);
+	}
+
 }

@@ -25,14 +25,14 @@
 			<div class="left-area">
 			</div>
 			<div class="right-area" style="float:right;">
-				<a class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span> 이전글</a>
-				<a class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span> 다음글</a>
-				<a class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> 목 록</a>
+				<a class="btn btn-default" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[0].noti_no -1}'/>"><span class="glyphicon glyphicon-chevron-up"></span> 이전글</a>
+				<a class="btn btn-default" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[0].noti_no +1}'/>"><span class="glyphicon glyphicon-chevron-down"></span> 다음글</a>
+				<a class="btn btn-default" href="<c:url value='/Admin/Notice.hst'/>"><span class="glyphicon glyphicon-th-list"></span> 목 록</a>
 			</div>
-			<p style="clear: both;"></p>
+			<p style="clear: both;"></p> 
 		</div>
 		<div class="row" style="border:1px solid gray; padding: 10px 10px; border-radius: 1%;min-height: 600px;'">
-			<div class="page-header" style="margin-top: 20px">
+			<div class="page-header" style="margin-top: 20px"> 
 				<div>
 					<p style="color: blue">[공지사항]</p>
 					<h3>${list[0].title}</h3>
@@ -40,7 +40,7 @@
 				<div>
 					<p>${list[0].mem_email}</p>
 					<span>${list[0].postdate}</span>
-					<span> 조회 100</span>
+					<span> 조회  ${list[0].hit}</span>
 				</div>
 			</div>
 			<div class="page-body">
@@ -50,14 +50,6 @@
 					</c:if>
 					${list[0].content}
 				</div>
-			</div>
-		</div>
-		<div class="bottom-button" style="padding-top: 5px;">
-			<div class="left-area" style="float:left;">
-				<a class="btn btn-default"><span class="glyphicon glyphicon-pencil"> 글쓰기</a>
-			</div>
-			<div class="right-area" style="float:right;">
-				<a class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> 목 록</a>
 			</div>
 		</div>
 	</div>
