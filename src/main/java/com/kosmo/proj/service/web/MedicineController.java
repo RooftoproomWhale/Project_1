@@ -18,6 +18,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -31,7 +36,6 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +43,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,7 +61,7 @@ public class MedicineController {
 	
 	
 	@RequestMapping("/Homespital/Management.hst")
-	public String management(@RequestParam String dname,Map map) {
+	public String management(@RequestParam String dname,Map map) throws ParserConfigurationException, SAXException, IOException {
 		System.out.println(dname);
 		MedicineInfoDTO info = new MedicineInfoDTO();
 		String encodeSearch="";
@@ -69,7 +78,7 @@ public class MedicineController {
 	
 	@RequestMapping(value="/Calendar/Management.hst",produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String calendarmanagement(@RequestParam String dname,Map map) {
+	public String calendarmanagement(@RequestParam String dname,Map map) throws ParserConfigurationException, SAXException, IOException {
 		System.out.println(dname);
 		MedicineInfoDTO info = new MedicineInfoDTO();
 		String encodeSearch="";
@@ -95,7 +104,7 @@ public class MedicineController {
 	}
 
 	@RequestMapping("/Homespital/MedicineForm.hst")
-	public String medicineForm(Map map) {
+	public String medicineForm(Map map) throws ParserConfigurationException, SAXException, IOException {
 		JSONObject jsonMedi = null;
 		MedicineInfoDTO dto = new MedicineInfoDTO();
 		String[] medi1 = {"어린이용타이레놀정80mg","타이레놀정160mg","타이레놀정500mg","어린이타이레놀현탁액","어린이부루펜시럽"};
@@ -152,10 +161,10 @@ public class MedicineController {
 	}
 	
 	
-	private MedicineInfoDTO mediInfo(String encodeSearch,MedicineInfoDTO dto) {
+	private MedicineInfoDTO mediInfo(String encodeSearch,MedicineInfoDTO dto) throws ParserConfigurationException, SAXException, IOException {
 		
 		try{
-			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람"),"UTF-8"); 
+			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람").replace("이알서방정", "8시간이알서방정"),"UTF-8"); 
 	        }catch(Exception e){ e.printStackTrace();  }
 		
 		String apiUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?" +
@@ -166,6 +175,17 @@ public class MedicineController {
         
         String responseBody = get(apiUrl);
       
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(apiUrl);
+        
+        doc.getDocumentElement().normalize();
+       
+        String eeDoc = getTagValue("EE_DOC_DATA",doc);
+        String udDoc = getTagValue("UD_DOC_DATA",doc);
+        String nbDoc = getTagValue("NB_DOC_DATA",doc);
+        
+        //System.out.println(responseBody);
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
@@ -180,6 +200,9 @@ public class MedicineController {
         	selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
         Gson gson = new Gson();
         dto = gson.fromJson(selecOne.toString(),MedicineInfoDTO.class);
+        dto.setEE_DOC(eeDoc);
+        dto.setUD_DOC(udDoc);
+        dto.setNB_DOC(nbDoc);
         
 		return dto;
 	}
@@ -201,6 +224,27 @@ public class MedicineController {
             con.disconnect(); // Connection�쓣 �옱�솢�슜�븷 �븘�슂媛� �뾾�뒗 �봽濡쒖꽭�뒪�씪 寃쎌슦
         }
     }
+	
+	private static String getTagValue(String tag, Document doc) {
+		NodeList nList = doc.getElementsByTagName(tag);
+		String nValue = "";
+		NodeList cList = nList.item(0).getChildNodes();
+		NodeList ccList = cList.item(0).getChildNodes();
+		for(int i=0;i<ccList.getLength();i++) {
+			NodeList chList = ccList.item(i).getChildNodes();
+			System.out.println(ccList.item(0).getNodeValue());
+			for(int k=0;k<chList.getLength();k++) {
+				NodeList cchList = chList.item(k).getChildNodes();
+				for(int j=0;j<cchList.getLength();j++) {
+					//System.out.println(cchList.item(j).getTextContent());
+				}
+			}
+		}
+
+		return nValue;
+	}
+	
+	
 	
 	private static HttpURLConnection connect(String apiUrl) {
         try {

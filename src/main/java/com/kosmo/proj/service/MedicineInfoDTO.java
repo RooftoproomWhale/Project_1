@@ -10,8 +10,35 @@ public class MedicineInfoDTO {
 	private String COLOR_CLASS1;
 	private String DRUG_SHAPE;
 	private String ITEM_IMAGE;
-
+	private String EE_DOC;
+	private String UD_DOC;
+	private String NB_DOC;
 	public MedicineInfoDTO() {}
+	
+	public String getEE_DOC() {
+		return EE_DOC;
+	}
+
+	public void setEE_DOC(String eE_DOC) {
+		EE_DOC = eE_DOC;
+	}
+
+	public String getUD_DOC() {
+		return UD_DOC;
+	}
+
+	public void setUD_DOC(String uD_DOC) {
+		UD_DOC = uD_DOC;
+	}
+
+	public String getNB_DOC() {
+		return NB_DOC;
+	}
+
+	public void setNB_DOC(String nB_DOC) {
+		NB_DOC = nB_DOC;
+	}
+
 	public String getCHART() {
 		return CHART;
 	}
