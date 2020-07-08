@@ -10,6 +10,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import com.google.gson.Gson;
 import com.kosmo.proj.service.MedicineInfoDTO;
@@ -30,7 +36,7 @@ public class AndroidMedicineController {
 	@CrossOrigin
 	private String mediShape(@RequestParam String encodeSearch) {
 		try{
-			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람"),"UTF-8"); 
+			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람").replace("이알서방정", "8시간이알서방정"),"UTF-8"); 
 	        }catch(Exception e){ e.printStackTrace();  }
 	
 		String apiUrl = "http://apis.data.go.kr/1470000/MdcinGrnIdntfcInfoService/getMdcinGrnIdntfcInfoList?" +
@@ -39,7 +45,7 @@ public class AndroidMedicineController {
                 "&pageNo=1" +
                 "&item_name="+encodeSearch;
 		String responseBody = get(apiUrl);   
-  
+ 
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
@@ -60,7 +66,7 @@ public class AndroidMedicineController {
 	private String mediInfo(@RequestParam String encodeSearch) {
 		
 		try{
-			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람"),"UTF-8"); 
+			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람").replace("이알서방정", "8시간이알서방정"),"UTF-8"); 
 	        }catch(Exception e){ e.printStackTrace();  }
 		
 		String apiUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?" +
@@ -71,6 +77,23 @@ public class AndroidMedicineController {
         
         String responseBody = get(apiUrl);
       
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder;
+		try {
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(apiUrl);
+	        doc.getDocumentElement().normalize();
+	        System.out.println(doc);
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
