@@ -68,8 +68,4 @@ public class MedicineInfoDTO {
 	public String getVALID_TERM() {
 		return VALID_TERM;
 	}
-
-
-
-
 }
