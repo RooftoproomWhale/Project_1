@@ -15,7 +15,7 @@ import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.Paging;
 import com.kosmo.proj.service.ReservationDTO;
 
-@Repository
+@Repository 
 public class AdminDAO implements AdminService {
 
 	@Resource(name="template")
@@ -234,7 +234,7 @@ public class AdminDAO implements AdminService {
 	@Override
 	public List<BoardDTO> viewNotice(Paging vo) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectList("listNotice", map);
+		return sqlMapper.selectList("listNotice", vo);
 	}
 
 	@Override
@@ -475,5 +475,9 @@ public class AdminDAO implements AdminService {
 		// TODO Auto-generated method stub
 		return sqlMapper.update("hitNotice",map);
 	}
+
+	
+
+
 
 }

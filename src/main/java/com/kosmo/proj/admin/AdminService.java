@@ -111,5 +111,5 @@ public interface AdminService {
 
 		List<CovidEditDTO> selectCovidList(Map map);
 		int updateCovidList(Map map);
-		List<BoardDTO> viewNotice(Map map);
+		
 }
