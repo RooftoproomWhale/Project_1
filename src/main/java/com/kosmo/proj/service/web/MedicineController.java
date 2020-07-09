@@ -79,7 +79,7 @@ public class MedicineController {
 	@RequestMapping(value="/Calendar/Management.hst",produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String calendarmanagement(@RequestParam String dname,Map map) throws ParserConfigurationException, SAXException, IOException {
-		System.out.println(dname);
+		
 		MedicineInfoDTO info = new MedicineInfoDTO();
 		String encodeSearch="";
 		 ObjectMapper mapper = new ObjectMapper();
@@ -88,18 +88,16 @@ public class MedicineController {
 		for(String data1 : data) {
 				System.out.println("데이타 : "+data1);
 		info = mediInfo(data1, info);
+		info = mediShape(data1, info);
         infos.add(info);
 		}
-		for(MedicineInfoDTO dats : infos) {
-			System.out.println("출력1: "+dats.getITEM_NAME());
-			System.out.println("출력2: "+dats.getENTP_NAME());
-		}
+
 		String jsonStr = null;
 		try {
 			 jsonStr = mapper.writeValueAsString(infos);
 		} catch (JsonProcessingException e) {e.printStackTrace();} 
         map.put("info", info);
-		System.out.println(jsonStr);
+	
 		return jsonStr;
 	}
 
@@ -132,7 +130,7 @@ public class MedicineController {
 		try{
 			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람").replace("이알서방정", "8시간이알서방정"),"UTF-8"); 
 	        }catch(Exception e){ e.printStackTrace();  }
-		System.out.println(encodeSearch);
+		
 		String apiUrl = "http://apis.data.go.kr/1470000/MdcinGrnIdntfcInfoService/getMdcinGrnIdntfcInfoList?" +
                 "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
                 "&numOfRows=10" +
@@ -166,15 +164,15 @@ public class MedicineController {
 		try{
 			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람").replace("이알서방정", "8시간이알서방정"),"UTF-8"); 
 	        }catch(Exception e){ e.printStackTrace();  }
-		
+		System.out.println("시작");
 		String apiUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?" +
                 "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
                 "&numOfRows=10" +
                 "&pageNo=1" +
                 "&item_name="+encodeSearch;
-        
+        System.out.println("1");
         String responseBody = get(apiUrl);
-      
+      System.out.println("2");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(apiUrl);
@@ -185,7 +183,7 @@ public class MedicineController {
         String udDoc = getTagValue("UD_DOC_DATA",doc);
         String nbDoc = getTagValue("NB_DOC_DATA",doc);
         nbDoc = nbDoc.substring(0, nbDoc.indexOf("2."));
-        
+        System.out.println("3");
         //System.out.println(responseBody);
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
@@ -203,7 +201,7 @@ public class MedicineController {
         dto.setEE_DOC(eeDoc);
         dto.setUD_DOC(udDoc);
         dto.setNB_DOC(nbDoc);
-        
+        System.out.println("4");
 		return dto;
 	}
 		
@@ -235,7 +233,7 @@ public class MedicineController {
 			//System.out.println(ccList.item(0).getNodeValue());
 			for(int k=0;k<chList.getLength();k++) {
 				if(chList.item(k).hasAttributes()) {
-					System.out.println(chList.item(k).getAttributes().getNamedItem("title").getNodeValue());
+					
 					nValue+=chList.item(k).getAttributes().getNamedItem("title").getNodeValue()+"<br/>";
 				}
 				NodeList cchList = chList.item(k).getChildNodes();

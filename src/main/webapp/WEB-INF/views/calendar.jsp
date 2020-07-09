@@ -144,24 +144,24 @@ border: 2px solid black ;
                         <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
-         	<table class="table table-bordered" style="text-align: center;">
+         	<table class="table table-bordered" style="text-align: center;vertical-align: middle;">
   <thead>
     <tr>
-      <th scope="col" style="text-align: center;padding-bottom: 0px;margin-bottom: 0px">제품명</th>
+      <th scope="col" style="text-align: center;">제품명</th>
       <td scope="col" colspan="5"  id="item_name" style="padding: 0px;margin-bottom: 0px;text-align: left;"></td>
     </tr>
   </thead>
   <tbody>
     <tr id="edit-update_01">
-      <th scope="row" style="line-height: 54px;padding: 0px;text-align: center;">복용기간</th>
-      <td  style="line-height: 54px;padding: 0px" id="item-date"></td> 
-       <th scope="row" style="line-height: 36px;text-align: center;">모양<br/></th>
-      <td colspan="3" style="line-height: 36px;padding: 0px" id="chart"></td>
+      <th scope="row" style="text-align: center;">복용기간</th>
+      <td id="item-date"></td> 
+       <th scope="row" style="text-align: center;">모양<br/></th>
+      <td colspan="3" id="chart"></td>
     </tr>
     <!--  -->
     <tr >
-        <th scope="row" style="line-height: 50px;padding: 0px 7px 0 7px;text-align: center;">효능 · 효과</th>
-      <td id="er" colspan="5" style="line-height: 50px;padding: 0px"></td>
+        <th scope="row" style="line-height: 94px;text-align: center;">효능 · 효과</th>
+      <td id="er" colspan="5" style="text-align: left;width: 600px" ></td>
     </tr>
     <tr>
       <th class="text-center" scope="row" colspan="5"><input type="button" class="btn" id="item-2" value="상세설명"/>
@@ -169,13 +169,14 @@ border: 2px solid black ;
       <input type="button" class="btn" id="item-3" value="용법·용량"/></th>
     </tr>
      <tr>
-      <td colspan="5" id="items-1" style="display: none;"><span id="nb_DOC"></span></td>
- <td id="items-2" colspan="5" style="text-align: left;padding: 20px">
+      <td style="width: 255px"> <img id="imgs" style="width: 255px;height: 250px" src="https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/154609804554800013"></td>
+      <td colspan="5" id="items-1" style="display: none; height: 320px"><span id="nb_DOC"></span></td>
+ <td id="items-2" colspan="5" style="text-align: left;padding: 20px;height: 320px;">
 <span id="material_NAME"></span>
 <br>보관방법: <span id="storage_METHOD"></span>
 <br>유통기한: <span id="valid_TERM"></span>
 <br>제조사:<span id="entp_NAME"></span></td>
- <td colspan="5" id="items-3" style="display: none;"><span id="ud_DOC"></span></td>
+ <td colspan="5" id="items-3" style="display: none; height: 320px;width: 522px"><span id="ud_DOC"></span></td>
  </tr>
 
   </tbody>	

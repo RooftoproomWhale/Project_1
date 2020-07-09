@@ -17,16 +17,9 @@ $('#item-date').text(event.start._i+"-"+event.end._i);
         	console.log('실행');
       	  console.log(response);
       	 $.each(response, function(i, el){
+      		 console.log('asdsada	',el);
       		 console.log(el.nb_DOC,i)
-      		 var nb_DOC=el.nb_DOC;
-      		 var nb_str=""
-      		 nb_DOC=nb_DOC.split('\n')
-      		console.log('--------------');
-      		 console.log(nb_DOC)
-      		 for(e=1;e<4;e++){
-      			 nb_str+="<span style='padding:20px'>"+nb_DOC[e]+"</span><br><br>"
-      		 }
-      		 console.log("최종"+nb_str)
+      	
    
       	  	$('<input type="button" class="btn items" id="item-'+i+'" value="'+el.item_NAME.substring(0,el.item_NAME.indexOf('('))+'"/>').appendTo('#item_name');
       	 
@@ -52,10 +45,11 @@ $('#item-date').text(event.start._i+"-"+event.end._i);
 	      	 $('#storage_METHOD').html(el.storage_METHOD);
 	      	 $('#valid_TERM').html(el.valid_TERM);
 	      	 $('#entp_NAME').html(el.entp_NAME);
-	      	 $('#nb_DOC').html(nb_str);
+	      	 $('#nb_DOC').html(el.nb_DOC);
 	      	 $('#er').html(el.ee_DOC.trim());
 	      	 $('#ud_DOC').html(el.ud_DOC);
-	      	 $('#chart').html(el.chart)
+	      	 $('#chart').html(el.chart);
+	      	 $('#imgs').attr("src",el.item_IMAGE);
       	  	})
       	  
       	  })
