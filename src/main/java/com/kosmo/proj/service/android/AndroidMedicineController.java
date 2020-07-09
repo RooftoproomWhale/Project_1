@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.google.gson.Gson;
@@ -45,7 +46,7 @@ public class AndroidMedicineController {
                 "&pageNo=1" +
                 "&item_name="+encodeSearch;
 		String responseBody = get(apiUrl);   
- 
+	       
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
@@ -57,7 +58,7 @@ public class AndroidMedicineController {
         }
         else
         	selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
-        
+
 		return selecOne.toString();
 	}
 	
@@ -76,14 +77,13 @@ public class AndroidMedicineController {
                 "&item_name="+encodeSearch;
         
         String responseBody = get(apiUrl);
-      
+        
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
+        Document doc = null;
 		try {
 			dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(apiUrl);
-	        doc.getDocumentElement().normalize();
-	        System.out.println(doc);
+			doc = dBuilder.parse(apiUrl);
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,6 +94,13 @@ public class AndroidMedicineController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
+        
+        doc.getDocumentElement().normalize();
+       
+        String eeDoc = getTagValue("EE_DOC_DATA",doc);
+        String udDoc = getTagValue("UD_DOC_DATA",doc);
+        String nbDoc = getTagValue("NB_DOC_DATA",doc);
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
@@ -106,10 +113,36 @@ public class AndroidMedicineController {
         }
         else 
         	selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
+
+        selecOne.put("EE_DOC_DATA", eeDoc);
+        selecOne.put("UD_DOC_DATA", udDoc);
+        selecOne.put("NB_DOC_DATA", nbDoc);
         
 		return selecOne.toString();
 	}
 	
+	private static String getTagValue(String tag, Document doc) {
+		NodeList nList = doc.getElementsByTagName(tag);
+		String nValue = "";
+		NodeList cList = nList.item(0).getChildNodes();
+		NodeList ccList = cList.item(0).getChildNodes();
+		for(int i=0;i<ccList.getLength();i++) {
+			NodeList chList = ccList.item(i).getChildNodes();
+			System.out.println(ccList.item(0).getNodeValue());
+			for(int k=0;k<chList.getLength();k++) {
+				NodeList cchList = chList.item(k).getChildNodes();
+				for(int j=0;j<cchList.getLength();j++) {
+					System.out.println(cchList.item(j).getTextContent());
+					if(cchList.item(j).getTextContent()!="&nbsp;") {
+						nValue+="<p>"+cchList.item(j).getTextContent()+"</p>";
+					}
+				}
+			}
+		}
+		
+		return nValue;
+	}
+
 	
 	private static String get(String apiUrl) {
         HttpURLConnection con = connect(apiUrl);
