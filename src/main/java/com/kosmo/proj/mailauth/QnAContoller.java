@@ -61,11 +61,17 @@ public class QnAContoller {
 		{
 			UserDetails userDetails = (UserDetails)auth.getPrincipal();
 			String user = userDetails.getUsername();
+
 			List<QnADTO> list = qnaService.viewQnA(map);
+
+			int hit = qnaService.hitQnA(map);
+			System.out.println(hit);
+
 			for(QnADTO val:list)
 			{
 				System.out.println(val.getQna_no());
 				System.out.println(val.getContent());
+				System.out.println(val.getHit());
 				System.out.println(list);
 			}
 			List<QnADTO> listA =  qnaService.selectComment(map);
@@ -73,6 +79,7 @@ public class QnAContoller {
 			{
 				System.out.println(val.getQna_no());
 				System.out.println(val.getContent());
+				System.out.println(val.getHit());
 				System.out.println(listA);
 			}
 
@@ -83,11 +90,15 @@ public class QnAContoller {
 		}
 		else
 		{
+
+			int hit = qnaService.hitQnA(map);
+			System.out.println(hit);
 			List<QnADTO> list = qnaService.viewQnA(map);
 			for(QnADTO val:list)
 			{
 				System.out.println(val.getQna_no());
 				System.out.println(val.getContent());
+				System.out.println(val.getHit());
 
 				model.addAttribute("list", list);
 
@@ -97,6 +108,7 @@ public class QnAContoller {
 			{
 				System.out.println(val.getQna_no());
 				System.out.println(val.getContent());
+				System.out.println(val.getHit());
 			}
 			model.addAttribute("listA", listA);
 		}

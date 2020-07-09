@@ -21,6 +21,7 @@ $(document).ready(function() {
      });
      
      $('#button').click(function(){
+
         if($('#title').val()==''){
            alert('제목을 입력하세요');
            $('#title').focus();
@@ -32,6 +33,7 @@ $(document).ready(function() {
            $('#summernote').focus();
            return;
         }
+
        $('#frm').submit(); 
      });
           

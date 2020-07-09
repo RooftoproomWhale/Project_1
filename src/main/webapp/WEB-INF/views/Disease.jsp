@@ -870,8 +870,8 @@ jQuery(document).ready(function(){
 </div>
 
 
-<script src="<c:url value='/js/jquery-accordion-menu.js'/>"
-	type="text/javascript"></script>
+<script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
+
 <script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {

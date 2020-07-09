@@ -1,31 +1,26 @@
 package com.kosmo.proj.service.web;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
 
-import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.proj.GetUser;
+import com.kosmo.proj.service.IllnessDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.ReservationDTO;
 import com.kosmo.proj.service.impl.CalendarServiceImpl;
 import com.kosmo.proj.service.impl.MemberServiceImpl;
+import com.kosmo.proj.service.impl.QnAServiceImpl;
 
 
 
@@ -37,7 +32,9 @@ public class MyPageController {
 	private MemberServiceImpl memberDAO;
 	@Resource(name="CalendarService")
 	private CalendarServiceImpl calendarDAO;
-	
+	@Resource(name="qnaService")
+	private QnAServiceImpl QnADAO;
+
 	// 유저 페이지
 	/// 내정보
 	@RequestMapping("/mypage/mypage.hst")
@@ -72,17 +69,17 @@ public class MyPageController {
 		}
 		System.out.println(Chronic);
 		model.addAttribute("ill_name", ill_name);
-		model.addAttribute("CHRONIC_ILL", Chronic);		
+		model.addAttribute("CHRONIC_ILL", Chronic);
 		if(count.get(0).get("RESDATE")!=null) {
 		SimpleDateFormat day= new SimpleDateFormat("yyyy-MM-dd");
 		String newdate=day.format(count.get(0).get("RESDATE"));
 		model.addAttribute("resdate",newdate);
 		}
 		model.addAttribute("newres",list2);
-		model.addAttribute("list", list);	
+		model.addAttribute("list", list);
 		model.addAttribute("count", count);
 		return "Mypage_Main.my_tiles";
-		
+
 	}/////myapge
 
 	// 회원탈퇴 이동
@@ -98,7 +95,7 @@ public class MyPageController {
 		String id=userDetails.getUsername();
 		map.put("id",id );
 		List<MemberDTO> list = memberDAO.selectList(map);
-		
+
 		if(map.get("userid").equals(id) && list.get(0).getMem_pwd().equals(map.get("userPasswd"))) {
 			int unmember = memberDAO.delete(map);
 			JOptionPane.showMessageDialog(null,"회원 탈퇴가 완료되었습니다.","홈스피탈",1);
@@ -108,7 +105,7 @@ public class MyPageController {
 		}
 		return "redirect:../User/Logout.hst";
 	}
-	
+
 	// 비밀번호 변경
 	@RequestMapping("/mypage/ChangePassword.hst")
 	public String ChangePassword() {
@@ -139,7 +136,7 @@ public class MyPageController {
 			JOptionPane.showMessageDialog(null,"비밀번호가 일치하지 않습니다.","홈스피탈",1);
 			return "redirect:../mypage/ChangeMember.hst";
 		}
-		
+
 		return "redirect:../mypage/mypage.hst";
 	}
 	// 진료예약 현황
@@ -147,7 +144,7 @@ public class MyPageController {
 	public String ReservationList(Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
-		
+
 		return "ReservationList.my_tiles";
 	}
 	//예약리스트
@@ -155,7 +152,7 @@ public class MyPageController {
 	public String ReservationLists(Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
-		
+
 		return "ReservationList.my_tiles";
 	}
 	// 복약관리
@@ -163,7 +160,7 @@ public class MyPageController {
 	public String administration(Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
-		
+
 		return "administration.my_tiles";
 	}
 
@@ -179,6 +176,33 @@ public class MyPageController {
 //		model.addAttribute("list", model);
 		return "Disease.my_tiles";
 	}
+
+	//내 예방정보 이동
+	@RequestMapping("/mypage/Prevention.hst")
+	public String Prevention(@RequestParam Map map,Authentication auth, Model model) {
+
+		UserDetails userDetails = (UserDetails)auth.getPrincipal();
+		String userEmail = userDetails.getUsername();
+		map.put("userEmail", userEmail);
+		map.put("id", userEmail);
+
+		List<MemberDTO> listgetName = memberDAO.selectList(map);
+
+		List<IllnessDTO> list = QnADAO.listIllness(map);
+		for(IllnessDTO val : list)
+		{
+			System.out.println(val.getIll_name());
+			System.out.println(val.getCause());
+			System.out.println(val.getIll_content());
+			System.out.println(val.getPrevention());
+		}
+		System.out.println(list);
+		model.addAttribute("list", list);
+		model.addAttribute("listgetName", listgetName);
+
+
+		return "Prevention.my_tiles";
+	}
 //	@RequestMapping(value = "/mypage/diseaseupdate.hst",method = RequestMethod.POST)
 //	@ResponseBody
 //	public String Diseaseupdate(@RequestParam(value="disarr[]")List<String> list,Map map,Authentication auth) {
@@ -186,20 +210,20 @@ public class MyPageController {
 //		String id=userDetails.getUsername();
 //		map.put("id", id);
 //		//int illdelete = memberDAO.ILLdelete(map);
-//	
-//		
+//
+//
 //
 //		return "";
 //	}
-	
-	
+
+
 	@RequestMapping(value = "/mypage/disease.hst",method = RequestMethod.POST)
 	public String diseaseupdate(@RequestParam Map map,Authentication auth) {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id",id );
 //		int update = memberDAO.diseaseupdate(map);
-		
+
 		return "redirect:../mypage/mypage.hst";
 	}
 
@@ -208,7 +232,7 @@ public class MyPageController {
 	public String toMain(Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
-		
+
 		return "Hospage_Main.hos_tiles";
 	}
 
@@ -216,7 +240,7 @@ public class MyPageController {
 	public String update(Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
-		
+
 		return "Hospage_Update.hos_tiles";
 	}
 
@@ -224,7 +248,7 @@ public class MyPageController {
 	public String cancel(Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
-		
+
 		return "Hospage_Cancel.hos_tiles";
 	}
 
@@ -232,9 +256,10 @@ public class MyPageController {
 	public String appointment(Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
-		
+
 		return "Hospage_Appointment.hos_tiles";
 	}
+
 
 //	   @RequestMapping("/Hospage/Chart.hst")
 //	   public String chart() {
