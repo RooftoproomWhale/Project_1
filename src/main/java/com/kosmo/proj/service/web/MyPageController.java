@@ -2,17 +2,24 @@ package com.kosmo.proj.service.web;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
+
+import org.apache.ibatis.javassist.expr.Instanceof;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.proj.GetUser;
 import com.kosmo.proj.service.MemberDTO;
@@ -35,6 +42,7 @@ public class MyPageController {
 	/// 내정보
 	@RequestMapping("/mypage/mypage.hst")
 	public String mypage(@RequestParam Map map,Authentication auth,Model model) {
+		System.out.println("연결");
 		if(auth == null) {
 			JOptionPane.showMessageDialog(null,"로그인후 이용해주세요.","홈스피탈",1);
 			return "member/Login.tiles";
@@ -43,10 +51,28 @@ public class MyPageController {
 		getUser.getUser(model, auth);
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
+		System.out.println(id);
 		map.put("id", id);
 		List<MemberDTO> list = memberDAO.selectList(map);
 		List<Map<String, Integer>> count = memberDAO.selectCount(map);
 		List<ReservationDTO> list2 = calendarDAO.selectnew(map);
+		List<Map<String,String>> ill=memberDAO.selectill(map);
+		String ill_name="";
+		String Chronic="";
+		for(Map data:ill) {
+			ill_name += data.get("ILL_NAME")+",";
+			Chronic = (String) data.get("CHRONIC_ILL");
+		}
+		if(ill_name.equals("")) {
+		ill_name = "설정된 질환이 없습니다.";
+		System.out.println(Chronic);
+		Chronic="설정된 질환이 없습니다.";
+		}else {
+			ill_name=ill_name.substring(0,ill_name.length()-1);
+		}
+		System.out.println(Chronic);
+		model.addAttribute("ill_name", ill_name);
+		model.addAttribute("CHRONIC_ILL", Chronic);		
 		if(count.get(0).get("RESDATE")!=null) {
 		SimpleDateFormat day= new SimpleDateFormat("yyyy-MM-dd");
 		String newdate=day.format(count.get(0).get("RESDATE"));
@@ -153,6 +179,20 @@ public class MyPageController {
 //		model.addAttribute("list", model);
 		return "Disease.my_tiles";
 	}
+//	@RequestMapping(value = "/mypage/diseaseupdate.hst",method = RequestMethod.POST)
+//	@ResponseBody
+//	public String Diseaseupdate(@RequestParam(value="disarr[]")List<String> list,Map map,Authentication auth) {
+//		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+//		String id=userDetails.getUsername();
+//		map.put("id", id);
+//		//int illdelete = memberDAO.ILLdelete(map);
+//	
+//		
+//
+//		return "";
+//	}
+	
+	
 	@RequestMapping(value = "/mypage/disease.hst",method = RequestMethod.POST)
 	public String diseaseupdate(@RequestParam Map map,Authentication auth) {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
