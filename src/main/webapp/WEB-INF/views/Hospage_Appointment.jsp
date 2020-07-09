@@ -4,89 +4,7 @@
 <!DOCTYPE html>
 <html>
 <script type="text/javascript">
-$(function() {
-$(".table-data-feature .item:first-child").on('click', function(){
-		
-		var tr = $(this).parent().parent().parent();
-		var td = tr.children();
-		var hosp_name = td.eq(1).text().trim();
-		console.log("승인 클릭", hosp_name);
-			$.ajax({ 
-				//url: "<c:url value='/Admin/ApproveAuth.hst'/>",
-				type: "get", //get, post 방식 
-				dataType: 'html', //or xml or script or html or json or text
-				data: {
-						"hosp_name" : hosp_name
-						}, //넘길 파라미터 
-				async: true, // true:비동기, false:동기 
-				success: function(data){
-					console.log('성공');
-					var newUrl = window.location.href;
-					console.log(newUrl);
-					window.location.href = newUrl;
-				},
-				error:function(request,status,error){
-					console.log('실패');
-					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-				} 
-			});
-	});
-	
-$(".table-data-feature .item:last-child").on('click', function(){
-		
-		var tr = $(this).parent().parent().parent();
-		var td = tr.children();
-		var hosp_name = td.eq(1).text().trim();
-		console.log("거절 클릭", hosp_name);
-		$.ajax({ 
-			//url: "<c:url value='/Admin/DenyAuth.hst'/>",
-			type: "get", //get, post 방식 
-		s	dataType: 'html', //or xml or script or html 
-			data: {
-				"hosp_name" : hosp_name
-				}, //넘길 파라미터 
-			async: true, // true:비동기, false:동기 
-			success: function(data){ 
-// 				console.log(data);
-					console.log('성공');
-					var newUrl = window.location.href;
-					console.log(newUrl);
-					window.location.href = newUrl;
-			},
-			error:function(request,status,error){
-				console.log("에러");
-				alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-			} 
-		});
-			
-	});
-	
-	$("#searchBtn").on("click", function(){
-		var keyword = $("#search").val();
-		console.log(keyword, "제휴 검색");
-		$.ajax({ 
-			//url: "<c:url value='/Admin/HosAuthSearch.hst'/>",
-			type: "get", //get, post 방식 
-			dataType: 'html', //or xml or script or html 
-			data: {
-				"search_keyword" : keyword
-				}, //넘길 파라미터 
-			async: true, // true:비동기, false:동기 
-			success: function(data){ 
-				console.log(data);
-					console.log('성공', keyword);
-// 					window.location.href = newUrl;
-// 					var renewURL = location.href;
-					window.location.href = "<c:url value='/Admin/HosAuthSearch.hst?search_keyword="+keyword+"'/>";
-			},
-			error:function(request,status,error){
-				console.log("에러");
-				alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-			} 
-		});
-	});
-});
-}
+
 </script>
 <head>
 <style>
@@ -219,7 +137,7 @@ a:hover, a:focus {
 								<table class="table table-data2">
 									<thead>
 										<tr>
-											<th>예약코드</th>
+											<th>예약번호</th>
 											<th>이름</th>
 											<th>이메일</th>
 											<th>전화번호</th>
@@ -230,7 +148,7 @@ a:hover, a:focus {
 									</thead>
 									<tbody>
 										<c:forEach var="item" items="${mem }" varStatus="loop">
-										<form action="<c:url value="/Hospage/Approved.hst"/>" method="post">
+										<form method="post">
 										<tr class="tr-shadow">
 											<td>${res[loop.index].RESERV_NO }</td>
 											<input type="hidden" name="res${loop.index }" value="${res[loop.index].RESERV_NO }"/>
@@ -242,21 +160,35 @@ a:hover, a:focus {
 											<td><span class="status--process">승인</span></td>
 											</c:if>
 											<c:if test="${res[loop.index].APPROVED == '승인대기중'}">  
-											<td><span class="status--denied">대기중</span></td>
+											<td><span style="color: #ffaa21;" >대기중</span></td>
 											</c:if>
+											<c:if test="${res[loop.index].APPROVED == '거절됨'}">  
+											<td><span class="status--denied">거절됨</span></td>
+											</c:if>
+											
 											
 											<td>
 												<div class="table-data-feature">
-													<button class="item" data-toggle="tooltip"
+													<c:if test="${res[loop.index].APPROVED == '승인대기중'}">  
+													<button class="item" type="submit" data-toggle="tooltip" formaction="<c:url value="/Hospage/Approved.hst"/>"
 														data-placement="top" title="승인">
 														<i class="zmdi zmdi-mail-send"></i>
 													</button>
-													<button class="item" data-toggle="tooltip"
+													
+													<button class="item" type="submit" data-toggle="tooltip" formaction="<c:url value="/Hospage/Denied.hst"/>"
 														data-placement="top" title="거절">
 														<i class="zmdi zmdi-delete"></i>
 													</button>
+													</c:if>
+													<c:if test="${res[loop.index].APPROVED == '승인됨'}">  
+													
+													</c:if>
+													<c:if test="${res[loop.index].APPROVED == '거절됨'}">  
+													
+													</c:if>
+													
 													<button class="item" data-toggle="modal"
-														data-placement="top" data-target="#AptModal${loop.index}" title="상세보기">
+													type="button"	data-placement="top" data-target="#AptModal${loop.index}" title="상세보기">
 														<i class="zmdi zmdi-more"></i>
 													</button>
 												</div>
@@ -298,6 +230,11 @@ a:hover, a:focus {
 									<td>${list[loop.index].dept_name }</td>
 								</tr>
 								<tr>
+									<td>증상</td>
+									<td>${res[loop.index].SEL_SYMP}</td>
+								</tr>
+								
+								<tr>
 									<td>email</td>
 									<td>${item.mem_email }</td>
 								</tr>
@@ -321,6 +258,7 @@ a:hover, a:focus {
 									<td>신청 시간</td>
 									<td>${res[loop.index].APPLY_TIME}</td>
 								</tr>
+								
 							</tbody>
 						</table>
 					</div>

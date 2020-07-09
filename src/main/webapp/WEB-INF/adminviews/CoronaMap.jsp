@@ -3,13 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <script>
-$(function() {
-		console.log(${msg});
-		if (${msg != null} ){
-			alert(${msg});
-		}
-	}
-
 
 </script>
 <html lang="en">
@@ -52,7 +45,7 @@ $(function() {
 			</div>
 			</c:forEach>
 				<div class="col col-md-10">
-					<button id="payment-button" type="submit"
+					<button id="payment-button" type="submit" onclick="ok()"
 						class="btn btn-lg btn-info btn-block">
 						<span id="payment-button-amount">수정</span> <span
 							id="payment-button-sending" style="display: none;">Sending…</span>
@@ -65,3 +58,8 @@ $(function() {
 
 </html>
 <!-- end document-->
+<script>
+function ok() {
+	alert('수정 성공');
+}
+</script>

@@ -38,4 +38,10 @@
 	<update id="updateRes" parameterType="java.util.Map">
 	update reservation set approved='승인됨' where reserv_no=#{resnum}
 	</update>
+	<update id="deniedRes" parameterType="java.util.Map">
+	update reservation set approved='거절됨' where reserv_no=#{resnum}
+	</update>
+	<update id="withdraw" parameterType="java.util.Map">
+	update member set mem_pwd='withdrawal' where mem_email=#{id}
+	</update>
 </mapper>

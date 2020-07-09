@@ -124,7 +124,7 @@ body{background:#FFFFFF;}
 				<input type="hidden" name="mode" value="delete" />
 				<div class="box-default">제휴 취소를 위하여 아이디와 비밀번호를 입력해 주세요.</div>
 				<div class="board-util-right">
-					<span class="board-util-text color-red">* 필수 입력 항목</span>
+					<span class="board-util-text color-red">한번 탈퇴하면 사용하셨던 아이디는 이용하실 수 없습니다!</span>
 				</div>
 				<div class="table-wrapper">
 					<table class="table-default board-form">
@@ -133,6 +133,7 @@ body{background:#FFFFFF;}
 							<col style="width: 140px" />
 							<col />
 						</colgroup>
+						<form method="post">
 						<tbody>
 							<!--<tr>
 									<th scope="row">아이디 <span class="required">*</span></th>
@@ -176,13 +177,11 @@ body{background:#FFFFFF;}
 				</div>
 				<div class="board-util">
 					<div class="board-util-right">
-						<button type="button" class="btn btn-primary" role="button"
+						<button type="submmit" class="btn btn-primary" role="button" formaction="<c:url value="/Hospage/CancelOK.hst"/>"
 							onclick="Form();">
 							<span class="button-text">제휴 취소</span>
 						</button>
-						<button type="button" class="btn" role="button" onclick="back();">
-							<span class="button-text">돌아가기</span>
-						</button>
+						</form>
 					</div>
 				</div>
 			</form>

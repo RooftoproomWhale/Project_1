@@ -46,16 +46,18 @@ private HospServiceImpl hosDAO;
 		Date now= new Date();
 		Calendar cal = new GregorianCalendar(Locale.KOREA);
 		cal.setTime(now);
-		cal.add(Calendar.DATE,-1);
+		cal.add(Calendar.DATE,+1);
 		Date prevday = sdf.parse((sdf.format(cal.getTime())));
 		Date thisday = sdf.parse((sdf.format(now)));
 		int today=0;
 		int yesterday=0;
 		for(ReservationDTO re:res) {
 			Date date=sdf.parse(re.getRES_DATE());
-			if(date == thisday) {
+			
+			
+			if(date.compareTo(thisday)==0) {
 				today++;
-			}else if(date == prevday) {
+			}else if(date.compareTo(prevday)==0) {
 				yesterday++;
 			}
 		}
@@ -269,5 +271,59 @@ private HospServiceImpl hosDAO;
 		model.addAttribute("res",res);
 		model.addAttribute("list",list);
 		return "Hospage_Appointment.hos_tiles";
+	}
+	@RequestMapping("/Hospage/Denied.hst")
+	public String denied(@RequestParam Map map,Authentication auth,Model model) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		System.out.println(id);
+		map.put("id", id);
+		List<HospitalDTO> list = hosDAO.selecthos(map);
+		Object code=null;
+		for(HospitalDTO i:list) {
+		code = i.getHosp_code();
+		map.put("hos_code", i.getHosp_code());
+		}
+		List<MemberDTO> mem= hosDAO.selectmem(map);
+		List<ReservationDTO> res = hosDAO.selectres(map);
+		for(int i=0;i<res.size();i++) {
+			Object resnum = map.get("res"+Integer.toString(i));
+			if(resnum !=null) {
+			map.put("resnum", resnum);
+			System.out.println(map);
+			hosDAO.deniedRes(map);
+			
+			}
+			}
+		mem=hosDAO.selectmem(map);
+		res =hosDAO.selectres(map);
+		model.addAttribute("mem",mem);
+		model.addAttribute("res",res);
+		model.addAttribute("list",list);
+		return "Hospage_Appointment.hos_tiles";
+	}
+	@RequestMapping("/Hospage/Cancel.hst")
+	public String cancel(@RequestParam Map map,Authentication auth,Model model) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		System.out.println(id);
+		map.put("id", id);
+		List<HospitalDTO> list = hosDAO.selecthos(map);
+		model.addAttribute("list",list);
+		return "Hospage_Cancel.hos_tiles";
+	}
+	@RequestMapping("/Hospage/CancelOK.hst")
+	public String cancelapply(@RequestParam Map map,Authentication auth,Model model) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		System.out.println(id);
+		map.put("id", id);
+		hosDAO.withdraw(map);
+		Object pwd=map.get("userPasswd");
+		List<HospitalDTO> list = hosDAO.selecthos(map);
+		System.out.println("탈퇴 완료");
+		
+		return "redirect:/User/Logout.hst";
+		
 	}
 }
