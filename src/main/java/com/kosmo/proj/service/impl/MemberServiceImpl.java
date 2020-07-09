@@ -124,12 +124,12 @@ public class MemberServiceImpl implements MemberService{
 
 
 	public List<Map<String, String>> selectill(Map map) {
-		
+
 		return dao.selectill(map);
 	}
 
 	public int ILLdelete(Map map) {
-		
+
 		return dao.illdelete(map);
 	}
 
@@ -151,7 +151,6 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.getPreMedi(map);
 	}
-
 
 
 }

@@ -138,8 +138,9 @@ body {
 	margin-bottom: 16px;
 	padding-left: 30px;
 	color: var(- -task-color);
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 500;
+	
 }.description-task :hover {
     transform: translatex(2px);
  }.task label {
@@ -188,71 +189,80 @@ label .label-text:before {
 <title>예방 정보</title>
 </head>
 <body>
-<div class="container-fluid">
-	<div class="row">
-		<div class="task-manager col-md-offset-2 col-md-10">
-			<div class="page-content">
-				<div class="header">내 예방 정보
-				<div class="alert alert-info" style="text-align: center;">
-					${listgetName[0].mem_name }님의 예방 정보 확인하기
-				</div>
-				</div>
-				<div class="content-categories">
-				<c:if test="${empty list}" var="isEmpty">
-				<div class="label-wrapper">
-						<input class="nav-item" name="nav" type="radio" >질병이 없습니다 
-					</div>
-				</c:if>
-				<c:if test="${not isEmpty}" var="isEmpty">
-				<c:forEach items="${list}" var="item" varStatus="loop">
-					<div class="label-wrapper">
-						<input class="nav-item" name="nav" type="radio" id="opt-${loop.index }">질병명 : 
-						<label class="category" for="opt-${loop.index }">${item.ill_name}</label>
-					</div>
-<!-- 					<div class="label-wrapper"> -->
-<!-- 						<input class="nav-item" name="nav" type="radio" id="opt-2"> -->
-<!-- 						<label class="category" for="opt-2">A형 간염</label> -->
-<!-- 					</div> -->
-<!-- 					<div class="label-wrapper"> -->
-<!-- 						<input class="nav-item" name="nav" type="radio" id="opt-3"> -->
-<!-- 						<label class="category" for="opt-3">B형 간염</label> -->
-<!-- 					</div> -->
-				</c:forEach>
-				</c:if>
-				</div>
-				
-				<div class="tasks-wrapper">
-				<c:forEach items="${list}" var="item" varStatus="loop">
-					
-						<div class="task">
-							<input class="task-item" name="task-gs" type="checkbox" id="illId${loop.index }"> 
-							<div class="col-md-2">
-							<h3>증상</h3>
-							</div>
-							<div class="col-md-10">
-							${item.ill_content}
-							</div>
-							<div class="col-md-2">
-							<h3>원인</h3>
-							</div>
-							<div class="col-md-10">
-							${item.cause}
-							</div>
-							<div class="col-md-2">
-							<h3>예방</h3>
-							</div>
-							<div class="col-md-10">
-							${item.prevention}
-							</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="task-manager col-md-offset-2 col-md-10">
+				<div class="page-content">
+					<div class="header">
+						내 예방 정보
+						<div class="alert alert-info" style="text-align: center;">
+							<strong>${listgetName[0].mem_name}</strong>님의 예방 정보 확인하기
 						</div>
-					
-				</c:forEach>
+					</div>
+					<div class="content-categories" style="font-size: 18px;">
+						<c:if test="${list[0].ill_name == '해당없음'}" var="isEmpty">
+							<div class="row">
+								<div class="col-md-12" style="text-align: center;">
+									<img style="width: 400px; height: auto" src="<c:url value='/images/medicine/notPres.png'/>" />
+								</div>
+							</div>
+						</c:if>
+						<c:if test="${not isEmpty}" var="isEmpty">
+							<c:forEach items="${list}" var="item" varStatus="loop">
+								<div class="label-wrapper">
+									<input class="nav-item" name="nav" type="radio" id="opt-${loop.index }"> 
+									<label style="color: blue;font-weight: bold;" class="category" for="opt-${loop.index }">${item.ill_name}</label>
+								</div>
+								<!-- <div class="label-wrapper"> -->
+								<!-- <input class="nav-item" name="nav" type="radio" id="opt-2"> -->
+								<!-- <label class="category" for="opt-2">A형 간염</label> -->
+								<!-- </div> -->
+								<!-- <div class="label-wrapper"> -->
+								<!-- <input class="nav-item" name="nav" type="radio" id="opt-3"> -->
+								<!-- <label class="category" for="opt-3">B형 간염</label> -->
+								<!-- </div> -->
+							</c:forEach>
+						</c:if>
+					</div>
+					<c:if test="${list[0].ill_name == '해당없음'}" var="isEmpty">
+					<div class="row">
+						<div class="col-md-12" style="text-align: center; font-size: 25px; padding-left:85px">
+							<input class="nav-item" name="nav" type="radio"><strong>등록된 질병이 없습니다.</strong>
+						</div>
+					</div>
+					</c:if>
+					<c:if test="${list[0].ill_name != '해당없음'}" var="isEmpty">
+						<div class="tasks-wrapper">
+							<c:forEach items="${list}" var="item" varStatus="loop">
+
+								<div class="task" style="border: none;">
+									<input class="task-item" name="task-gs" type="checkbox"
+										id="illId${loop.index }">
+									<div class="col-md-2">
+										<h3>증상:</h3>
+									</div>
+									<div class="col-md-10"
+										style="border-right: 1px solid; border-color: #00d9fa">${item.ill_content}</div>
+
+									<div class="col-md-2">
+										<h3>원인:</h3>
+									</div>
+									<div class="col-md-10"
+										style="border-right: 1px solid; border-color: #00d9fa">${item.cause}</div>
+									<div class="col-md-2">
+										<h3>예방:</h3>
+									</div>
+									<div class="col-md-10">${item.prevention}</div>
+								</div>
+
+							</c:forEach>
+						</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<script type="text/javascript">
+	<script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
 			return (a.textContent || a.innerText || "").toUpperCase().indexOf(
