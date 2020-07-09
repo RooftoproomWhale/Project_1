@@ -808,14 +808,6 @@ jQuery(document).ready(function(){
 <script src="<c:url value='/js/jquery-accordion-menu.js'/>"
 	type="text/javascript"></script>
 <script type="text/javascript">
-	(function($){
-		$.ajax({
-			url:,
-			
-		})
-	})	
-</script>
-<script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
 			return (a.textContent || a.innerText || "").toUpperCase().indexOf(
