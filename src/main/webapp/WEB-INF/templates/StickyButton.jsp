@@ -62,7 +62,7 @@
                         <div class="au-chat-info">
                            <div class="avatar-wrap online">
                               <div class="avatar avatar--small">
-                                 <img src="<c:url value='/img/logo.png'/>">
+                                 <img src="<c:url value='/images/botIcon.png'/>">
                               </div>
                            </div>
                            <span class="nick"> <a href="#">홈스피탈</a>
@@ -83,7 +83,7 @@
 							<div class="recei-mess-wrap">
 								<div class="recei-mess__inner">
 									<div class="avatar avatar--tiny">
-										<img src="<c:url value='/img/logo.png'/>">
+										<img src="<c:url value='/images/botIcon.png'/>">
 									</div>
 									<div class="recei-mess-list">
 										<div class="recei-mess">안녕하세요 홈스피탈 입니다.</div>
