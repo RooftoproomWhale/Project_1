@@ -53,23 +53,4 @@ public class AndroidAuthController {
 		return service.insert(map);
 	}
 	
-	@CrossOrigin
-	@GetMapping(value = "/myPage/recentApt", produces = "text/plain;charset=UTF-8")
-	public String recentApt(@RequestParam Map map)
-	{
-		System.out.println(map.get("userEmail"));
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonStr = null;
-		ReservationDTO dto = service.recentApt(map);
-		System.out.println(dto.getHOSP_NAME());
-		System.out.println(dto.getMEM_NAME());
-		
-		try {
-			jsonStr = mapper.writeValueAsString(dto);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-
-		return jsonStr.toString();
-	}
 }

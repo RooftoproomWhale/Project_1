@@ -452,4 +452,10 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.selectList("selectImg");
 	}
 
+	@Override
+	public int hitNotice(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.update("hitNotice",map);
+	}
+
 }

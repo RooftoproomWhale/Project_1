@@ -11,6 +11,7 @@ import com.kosmo.proj.service.HistoryDTO;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.MemberService;
+import com.kosmo.proj.service.PrescriptionDTO;
 import com.kosmo.proj.service.ReservationDTO;
 import com.kosmo.proj.util.CustomUserDetails;
 
@@ -125,6 +126,18 @@ public class MemberServiceImpl implements MemberService{
 	public ReservationDTO recentApt(Map map) {
 		// TODO Auto-generated method stub
 		return dao.recentApt(map);
+	}
+
+	@Override
+	public PrescriptionDTO recentPres(Map map) {
+		// TODO Auto-generated method stub
+		return dao.recentPres(map);
+	}
+
+	@Override
+	public List<PrescriptionDTO> getPreMedi(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getPreMedi(map);
 	}
 
 

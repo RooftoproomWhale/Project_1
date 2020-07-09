@@ -95,4 +95,16 @@ public class MapServiceImpl implements MapService{
 		return dao.getSymptom(map);
 	}
 
+	@Override
+	public boolean isPreviousReservation(Map map) {
+		// TODO Auto-generated method stub
+		return dao.isPreviousReservation(map);
+	}
+
+	@Override
+	public boolean isDuplicateReservation(Map map) {
+		// TODO Auto-generated method stub
+		return dao.isDuplicateReservation(map);
+	}
+
 }

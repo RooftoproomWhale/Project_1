@@ -42,47 +42,44 @@ img {
 		/* showComments(); */
 
 		//코멘트 입력 및 수정처리]
-		$('#submit')
-				.click(
-						function() {
-							if ($(this).val() == '등록') {
-								var action = "<c:url value='/QnA/InsertAnswer.hst'/>";
-								var answer = $('#answer').val();
-								var no = $('#no').html();
-							} else {
-								var action = "<c:url value='/QnA/comEdit.hst'/>";
-								var answer = $('#answer').val();
-								var no = $('#no').html();
-							}
+		$('#submit').click(function() {
+			if ($(this).val() == '등록') {
+				var action = "<c:url value='/QnA/InsertAnswer.hst'/>";
+				var answer = $('#answer').val();
+				var no = $('#no').html();
+			} else {
+				var action = "<c:url value='/QnA/comEdit.hst'/>";
+				var answer = $('#answer').val();
+				var no = $('#no').html();
+			}
 
-							//ajax로 요청]
-							console.log("answer: " + answer);
-							console.log("no: " + no);
-							$
-									.ajax({
-										url : action,
-										data : {
-											"answer" : answer,
-											"no" : no
-										},
-										dataType : 'text',
-										type : 'get',
-										success : function(data) {
-											console.log("성공");
-											console.log(data);
+			//ajax로 요청]
+			console.log("answer: " + answer);
+			console.log("no: " + no);
+			$.ajax({
+				url : action,
+				data : {
+					"answer" : answer,
+					"no" : no
+				},
+				dataType : 'text',
+				type : 'get',
+				success : function(data) {
+					console.log("성공");
+					console.log(data);
 
-											window.location.href = "<c:url value='/QnA/QnAView.hst?no="
-													+ no + "'/>";
-										},
-										error : function(request, status, error) {
-											console.log('실패');
-											alert("code = " + request.status
-													+ " message = "
-													+ request.responseText
-													+ " error = " + error); // 실패 시 처리
-										}
-									});
-						});
+					window.location.href = "<c:url value='/QnA/QnAView.hst?no="
+							+ no + "'/>";
+				},
+				error : function(request, status, error) {
+					console.log('실패');
+					alert("code = " + request.status
+							+ " message = "
+							+ request.responseText
+							+ " error = " + error); // 실패 시 처리
+				}
+			});
+		});
 	});///$(function(){})
 </script>
 <title>Q&A</title>
@@ -105,25 +102,55 @@ img {
 
 					<div class="row">
 						<div class="col-md-offset-2 col-md-8">
+							<!-- .center-block 사용시 해당 블락의 크기를 지정하자 -->
+							<c:if test="${username == list[0].mem_email}" var="flag">
+								<ul id="pillMenu" class="nav nav-pills"
+									style="width: 205px; margin-bottom: 10px">
+										<li><a
+											href="<c:url value='/QnA/QnAToEditForm.hst?no=${list[0].qna_no}&title=${list[0].title}&content=${list[0].content}&q_date=${list[0].q_date}&mem_email=${list[0].mem_email}'/>"
+											class="btn btn-primary">수정</a></li>
+										<li><a
+											href="<c:url value='/QnA/QnADelete.hst?no=${list[0].qna_no}'/>"
+											class="btn btn-danger">삭제</a></li>
+										<li><a href="<c:url value='/QnA/QnA.hst'/>"
+											class="btn btn-primary">목록</a></br></li>
+								</ul>
+							</c:if>
+					
+					
+					<div>
+					<c:if test="${!flag }">
+						<ul id="pillMenu" class="nav nav-pills"
+							style="width: 205px; margin-bottom: 10px; align-content: right;" >
+								<li><a href="<c:url value='/QnA/QnA.hst'/>"
+									class="btn btn-primary">목록</a></br></li>
+						</ul>
+					</c:if>
+						</div>
+					</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-offset-2 col-md-8">
 							<table class="table table-bordered table-striped">
 								<tr>
-									<th class="col-md-2 text-center">번호</th>
+									<th class="col-md-2 text-center" style="color: black">번호</th>
 									<td id="no">${list[0].qna_no}</td>
 								</tr>
 								<tr class="info">
-									<th class="text-center">제목</th>
+									<th class="text-center" style="color: black">제목</th>
 									<td>${list[0].title}</td>
 								</tr>
 								<tr>
-									<th class="text-center">작성자</th>
+									<th class="text-center" style="color: black">작성자</th>
 									<td>${list[0].mem_email}</td>
 								</tr>
 								<tr class="info">
-									<th class="text-center">등록일</th>
+									<th class="text-center" style="color: black">등록일</th>
 									<td>${list[0].q_date}</td>
 								</tr>
 								<tr>
-									<th class="text-center" colspan="2">내용</th>
+									<th class="text-center" colspan="2" style="color: black">내용</th>
 								</tr>
 								<tr class="info">
 									<td colspan="2">${list[0].content}</td>
@@ -132,30 +159,12 @@ img {
 							</br>
 						</div>
 					</div>
-					<!-- row -->
+
 					<div class="row">
 						<div class="col-md-offset-2 col-md-8">
-							<!-- .center-block 사용시 해당 블락의 크기를 지정하자 -->
-							<ul id="pillMenu" class="nav nav-pills center-block"
-								style="width: 205px; margin-bottom: 10px">
-								<c:if test="${username == list[0].mem_email}">
-									<li><a
-										href="<c:url value='/QnA/QnAToEditForm.hst?no=${list[0].qna_no}&title=${list[0].title}&content=${list[0].content}&q_date=${list[0].q_date}&mem_email=${list[0].mem_email}'/>"
-										class="btn btn-success">수정</a></li>
-									<li><a
-										href="<c:url value='/QnA/QnADelete.hst?no=${list[0].qna_no}'/>"
-										class="btn btn-success">삭제</a></li>
-								</c:if>
-								<li><a href="<c:url value='/QnA/QnA.hst'/>"
-									class="btn btn-success">목록</a></br></li>
-							</ul>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-offset-4 col-md-4">
 							<div class="text-center">
 								<!-- 한줄 코멘트 입력 폼-->
-								<h2>Q&A 답변</h2>
+								<h3 style="color: black">Q&A 답변</h3>
 								<form name="replyForm" method="post">
 									<input type="hidden" name="cno" />
 								</form>
@@ -169,23 +178,28 @@ img {
 									<div class="col-md-2">
 										<sec:authorize access="hasRole('ROLE_ADM')">
 											<c:if test="${listA[0].answer_content == null}" var="item">
-												<input class="btn btn-success" id="submit" type="button"
+												<input class="btn btn-primary" id="submit" type="button"
 													value="등록" />
 											</c:if>
 											<c:if test="${!item }">
-												<input class="btn btn-success" id="submit" type="button"
+												<input class="btn btn-primary" id="submit" type="button"
 													value="수정" />
 											</c:if>
+
+											</br>
+											</br>
 										</sec:authorize>
-										</br>
-										</br>
 									</div>
+									<div class="row">
+										<div class="page-header">
+											<textarea class="info" cols="90px" rows="10px" id="answerText"
+												disabled="disabled" style="background-color: white; font-size: 18px">${listA[0].answer_content}</textarea>
+										</div>
+									</div>
+									</br>
+									</br>
 								</div>
 							</div>
-							<div class="row">
-								<textarea cols="55px" rows="10px" id="answerText"
-									disabled="disabled">${listA[0].answer_content}</textarea>
-							</div></br></br>
 						</div>
 					</div>
 				</div>

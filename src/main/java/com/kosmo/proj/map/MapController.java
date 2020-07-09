@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,19 @@ public class MapController {
 	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/Reservation.hst",method=RequestMethod.POST)
 	public String reservation(@RequestParam Map map) {
+		
+		boolean isPreviousRes = mapService.isPreviousReservation(map);
+		
+		boolean isDuplicateRes = mapService.isDuplicateReservation(map);
+		
+		if(isPreviousRes)
+		{
+			return "2";
+		}
+		else if(isDuplicateRes)
+		{
+			return "3";
+		}
 		
 		int affected = mapService.insertReservation(map);
 		
@@ -295,8 +309,11 @@ public class MapController {
 	
 		System.out.println(JSONArray.toJSONString(list));
 		
+		SimpleDateFormat format = new SimpleDateFormat("MM월 dd일");
+		
+		
 		for(Map comment:list)
-			comment.put("DATE_",comment.get("DATE_").toString());
+			comment.put("DATE_",format.format(comment.get("DATE_")));
 		
 
 		return JSONArray.toJSONString(list);

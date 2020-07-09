@@ -70,7 +70,12 @@
 		(SELECT * FROM notification_bbs WHERE file_addr is not NULL ORDER BY noti_no DESC) n
 		WHERE ROWNUM BETWEEN 1 AND 4
     </select>
+    <!-- 공지사항 조회수 -->
+    <update id="hitNotice">
+    	UPDATE notification_bbs SET hit = hit+1 WHERE noti_no = #{no}
+    </update>
 
+	
    <insert id="presInsert" parameterType="java.util.Map">
       	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
    </insert>
@@ -91,7 +96,7 @@
 
 	<!-- 회원가입 검색 병원 -->
 	<select id="hosListSearch" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 10
+		SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 30
 	</select>
 	<select id="selectedHosp" parameterType="java.util.Map" resultType="HospitalDTO">
 		SELECT * FROM HOSPITAL WHERE HOSP_NAME = #{hosp_name}
@@ -150,5 +155,12 @@
 	<select id="AndRecentApt" parameterType="java.util.Map" resultType="ReservationDTO">
 		SELECT M.*, HR.* FROM MEMBER M JOIN (SELECT H.HOSP_NAME, R.* FROM HOSPITAL H JOIN RESERVATION R ON R.HOSP_CODE = H.HOSP_CODE) HR ON M.MEM_EMAIL = HR.MEM_EMAIL WHERE M.MEM_EMAIL = #{userEmail} AND ROWNUM <![CDATA[ <= ]]> 1
 	</select>
+	<select id="AndRecentPres" parameterType="java.util.Map" resultType="PrescriptionDTO">
+		SELECT * FROM PRESCRIPTION WHERE PRE_NO IN (SELECT PRE_NO FROM (SELECT PRE_NO FROM PRESCRIPTION WHERE MEM_EMAIL = #{userEmail} ORDER BY PRE_NO DESC) WHERE ROWNUM = 1)
+	</select>
+	<select id="AndPreAlarm" parameterType="java.util.Map" resultType="PrescriptionDTO">
+		SELECT p.medi_name, p.count, PM.* FROM PRE_MEDI PM JOIN PRESCRIPTION P ON PM.PRE_NO = P.PRE_NO WHERE PM.PRE_NO IN (SELECT PRE_NO FROM PRESCRIPTION WHERE MEM_EMAIL = #{userEmail}) ORDER BY ALARM
+	</select>
   
+
 </mapper>

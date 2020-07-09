@@ -57,7 +57,18 @@
       WHERE disData.distanceByXY <![CDATA[ <= ]]> 0.5
    </select>
    <select id="SelectReservationByAddr" parameterType="java.util.Map" resultType="int">
-		select count(*) from reservation where hosp_Code = (SELECT hosp_code FROM hospital WHERE address = #{address} AND AUTH = '제휴승인됨' AND approved = '승인됨') AND TO_CHAR(SYSDATE,'YYYY-MM-DD') <![CDATA[ <= ]]> RES_DATE
+		<!-- SELECT count(*) 
+		FROM reservation 
+		WHERE hosp_Code = (SELECT hosp_code FROM hospital WHERE address = #{address} AND AUTH = '제휴승인됨' AND approved = '승인됨') 
+		AND TO_CHAR(SYSDATE,'YYYY-MM-DD') <![CDATA[ = ]]> RES_DATE
+		AND RES_TIME <![CDATA[ > ]]> TO_CHAR(SYSDATE + 60/24/60 ,'HH24:MI') -->
+		SELECT count(*) 
+		FROM reservation 
+		WHERE hosp_code = 
+		(SELECT hosp_code FROM hospital WHERE address = #{address} AND AUTH = '제휴승인됨') 
+		AND approved = '승인됨' AND TO_CHAR(SYSDATE,'YYYY-MM-DD') <![CDATA[ = ]]> RES_DATE
+		AND RES_TIME <![CDATA[ < ]]> TO_CHAR(SYSDATE + 60/24/60 ,'hh24:mi')
+		AND RES_TIME <![CDATA[ > ]]> TO_CHAR(SYSDATE ,'hh24:mi')
 	</select>
 	<select id="SelectCheckReservation" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) 
@@ -67,24 +78,37 @@
 	    FROM hospital 
 	    WHERE address = #{address}) 
 	    AND 
-	    (TO_CHAR(SYSDATE,'YYYY-MM-DD') = RES_DATE 
-	    AND TO_NUMBER(SUBSTR(res_time,-2)) = TRUNC(TO_NUMBER(SUBSTR(TO_CHAR(SYSDATE,'HH24:MI'),-2)) / 10)*10
-	    AND TO_NUMBER(SUBSTR(res_time,1,2)) = TRUNC(TO_NUMBER(SUBSTR(TO_CHAR(SYSDATE,'HH24:MI'),1,2)))
+	    (TO_CHAR(SYSDATE,'YYYY-MM-DD') = #{datepick} 
+	    AND TO_NUMBER(SUBSTR(#{hourMinute},-2)) = TRUNC(TO_NUMBER(SUBSTR(TO_CHAR(SYSDATE,'HH24:MI'),-2)) / 10)*10
+	    AND TO_NUMBER(SUBSTR(#{hourMinute},1,2)) = TRUNC(TO_NUMBER(SUBSTR(TO_CHAR(SYSDATE,'HH24:MI'),1,2)))
 	    ) 
 	    AND approved='승인됨'
+	</select>
+	<select id="getReservationByEmail" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT m.mem_name,h.hosp_name, r.* 
+		FROM member m 
+		JOIN reservation r on m.mem_email = r.mem_email 
+		JOIN hospital h on r.hosp_code = h.hosp_code 
+		WHERE m.mem_email = #{mem_email}
+	</select>
+	<select id="isPreviousReservation" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT COUNT(*) FROM reservation WHERE RES_DATE = #{datepick} AND #{hourMinute} <![CDATA[ < ]]> TO_CHAR(SYSDATE,'HH24:MI')
 	</select>
 	<select	id="isDuplicateReservation" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM reservation 
 		WHERE hosp_Code = (SELECT hosp_code FROM hospital WHERE address = #{address}) 
 		AND mem_email = #{mem_email}
-		AND TO_CHAR(SYSDATE,'YYYY-MM-DD') = res_date 
+		AND TO_CHAR(SYSDATE,'YYYY-MM-DD') = #{datepick} 
 	</select>
 	<insert id="InsertReservation" parameterType="java.util.Map">
 		INSERT INTO reservation VALUES(SEQ_RESERVATION.NEXTVAL,
 		(SELECT hosp_code FROM hospital WHERE address = #{address}),
-		#{department},#{email},#{datepick},#{hourMinute},SYSDATE,#{symptom},'승인 대기중')
+		#{department},#{email},#{datepick},#{hourMinute},SYSDATE,#{symptom},'승인대기중')
 	</insert>
 	<select id="getSymptomByHospital" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM symptom WHERE dept_name = #{dept_name}
+	</select>
+	<select id="getPresByUser" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM prescription WHERE mem_email = #{mem_email}
 	</select>
 </mapper>
