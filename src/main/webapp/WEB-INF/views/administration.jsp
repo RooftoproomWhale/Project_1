@@ -32,16 +32,17 @@ $(function(){
 				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
 				comments+=element['PRES_DATE']+"</a></h4></div>";
 				comments+='<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
-				comments+='<div class="panel-body"><ul>';
+				comments+='<div class="panel-body"><table>';
 				$.each(element['MEDI_NAME'].split(','),function(k,val){
 					if(val!=""){
+						comments+=""
 						comments+="<li><a href='";
 						comments+='<c:url value="/Homespital/Management.hst?dname='+val+'"/>';
 						comments+="'>";
 						comments+="<h5>"+val+"</h5></a></li>";
 					}
 				})
-				comments+="<ul></div></div></div>";
+				comments+="<table></div></div></div>";
 			});
 		}
 		$('#accordion').html(comments);
