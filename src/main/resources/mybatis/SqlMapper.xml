@@ -32,10 +32,16 @@
 	<select id="seletnew" parameterType="java.util.Map" resultType="reservationDTO">
 		SELECT h.hosp_name,r.sel_symp FROM reservation r JOIN hospital h on r.hosp_code=h.hosp_code WHERE r.mem_email = #{id} AND RES_DATE=(SELECT MAX(RES_DATE)FROM reservation)
 	</select>
-	
+	<select id="selectill" parameterType="java.util.Map" resultType="java.util.Map">
+	select(select chronic_ill FROM history WHERE mem_email=#{id})CHRONIC_ILL,
+	ILL_NAME FROM  ILLNESS WHERE ILL_CODE IN (SELECT ILL_CODE FROM HIS_ILL WHERE HIST_NO = (select hist_no from history WHERE mem_email=#{id}))
+   	</select>
+   	<delete id="illdelete" parameterType="java.util.Map">
+   	DELETE HIS_ILL WHERE HIST_NO =(select hist_no from history WHERE mem_email=${id})
+   	</delete>
     <!-- 공지사항 추가하기 -->
     <insert id="insertNotice" parameterType="java.util.Map">
-        INSERT INTO notification_bbs VALUES(SEQ_NOTIFICATION.NEXTVAL,#{mem_email},#{title},#{content},SYSDATE,#{file_addr})
+        INSERT INTO notification_bbs VALUES(SEQ_NOTIFICATION.NEXTVAL,#{mem_email},#{title},#{content},SYSDATE,#{file_addr}, 0)
     </insert>
     <select id="getTotalRecordNotice" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM NOTIFICATION_BBS
@@ -74,6 +80,13 @@
     <update id="hitNotice">
     	UPDATE notification_bbs SET hit = hit+1 WHERE noti_no = #{no}
     </update>
+    <!-- 공지사항 첫/마지막 번호 -->
+    <select id="getLast" parameterType="java.util.Map" resultType="int">
+    	SELECT NOTI_NO FROM (SELECT NOTI_NO FROM NOTIFICATION_BBS ORDER BY NOTI_NO DESC) WHERE ROWNUM <![CDATA[ <= ]]> 1
+   	</select>
+   	<select id="getFirst" parameterType="java.util.Map" resultType="int">
+    	SELECT NOTI_NO FROM NOTIFICATION_BBS WHERE ROWNUM <![CDATA[ <= ]]> 1
+   	</select>
 
 	
    <insert id="presInsert" parameterType="java.util.Map">
@@ -123,7 +136,7 @@
 		WHERE RN BETWEEN #{start} AND #{end} 
 	</select>
 	<insert id="insertQnA" parameterType="java.util.Map">
-		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,#{user}, #{title}, #{content}, SYSDATE, NULL)
+		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL,#{user}, #{title}, #{content}, SYSDATE, NULL, 0)
 	</insert>
 	<update id="updateQnA" parameterType="java.util.Map">
 		UPDATE QNA SET title=#{title},content=#{content} WHERE qna_no=#{no}
@@ -134,6 +147,9 @@
 	<select id="viewQnA" parameterType="java.util.Map" resultType="QnADTO">
 		select * from qna where qna_no=#{no}
 	</select>
+    <update id="hitQnA">
+    	UPDATE QNA SET hit = hit+1 WHERE qna_no = #{no}
+    </update>
 
 	<!-- QnA 답글 -->
 	<select id="commentSelect" parameterType="java.util.Map" resultType="QnADTO">
@@ -151,4 +167,21 @@
 	<delete id="commentDeleteByNo" parameterType="java.util.Map">
 		DELETE QNA WHERE no = #{no}
 	</delete>
+	
+	<!-- 예방정보 -->
+	<select id="preventionList" parameterType="java.util.Map" resultType="IllnessDTO">
+		SELECT * FROM ILLNESS WHERE ILL_CODE IN (SELECT ILL_CODE FROM HIS_ILL WHERE HIST_NO IN (SELECT HIST_NO FROM HISTORY WHERE MEM_EMAIL = #{userEmail}))
+	</select>
+	
+	<select id="AndRecentApt" parameterType="java.util.Map" resultType="ReservationDTO">
+		SELECT M.*, HR.* FROM MEMBER M JOIN (SELECT H.HOSP_NAME, R.* FROM HOSPITAL H JOIN RESERVATION R ON R.HOSP_CODE = H.HOSP_CODE) HR ON M.MEM_EMAIL = HR.MEM_EMAIL WHERE M.MEM_EMAIL = #{userEmail} AND ROWNUM <![CDATA[ <= ]]> 1
+	</select>
+	<select id="AndRecentPres" parameterType="java.util.Map" resultType="PrescriptionDTO">
+		SELECT * FROM PRESCRIPTION WHERE PRE_NO IN (SELECT PRE_NO FROM (SELECT PRE_NO FROM PRESCRIPTION WHERE MEM_EMAIL = #{userEmail} ORDER BY PRE_NO DESC) WHERE ROWNUM = 1)
+	</select>
+	<select id="AndPreAlarm" parameterType="java.util.Map" resultType="PrescriptionDTO">
+		SELECT p.medi_name, p.count, PM.* FROM PRE_MEDI PM JOIN PRESCRIPTION P ON PM.PRE_NO = P.PRE_NO WHERE PM.PRE_NO IN (SELECT PRE_NO FROM PRESCRIPTION WHERE MEM_EMAIL = #{userEmail}) ORDER BY ALARM
+	</select>
+  
+
 </mapper>

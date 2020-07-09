@@ -588,19 +588,30 @@ jQuery(document).ready(function(){
 		if (is) {
 			var str = ""
 			var dis = $('.task-name');
+			var disarr=new Array()
 			for (i = 0; i < dis.length; i++) {
 				str += $.trim(dis.eq(i).text()) + ",";
+				disarr.push($.trim(dis.eq(i).text()))
 			}
-		/* 	   $.ajax({
-		            type: "get",
-		            url: "<c:url value='/mypage/disease.hst'/>",
-		            data: {
-		            	str.slice(0, -1)
-		            },
-		            success: function (response) {
+			for (i = 0; i < disarr.length; i++) {
+				console.log(disarr[i])
+			}
 
-		            }
-		        }); */
+		 	   $.ajax({
+		            type: "POST",
+		            url: "<c:url value='/mypage/diseaseupdate.hst'/>",
+		            data: 
+		            	{"disarr":disarr}
+		            ,
+		            success: function (response) {
+						console.log("성공")
+		            },error:function(request,error){
+		      			console.log('상태코드:',request.status);
+		      			console.log('서버로 부터 받은 HTML 데이타:',request.responseText);
+		      			console.log('에러:',error);
+		      		
+		      		}
+		        }); 
 		return console.log(str.slice(0, -1));
 		}
 	};
@@ -794,16 +805,8 @@ jQuery(document).ready(function(){
 </div>
 
 
-<script src="<c:url value='/js/jquery-accordion-menu.js'/>"
-	type="text/javascript"></script>
-<script type="text/javascript">
-	(function($){
-		$.ajax({
-			url:,
-			
-		})
-	})	
-</script>
+<script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
+
 <script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {

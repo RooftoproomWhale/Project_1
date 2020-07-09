@@ -458,4 +458,16 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.update("hitNotice",map);
 	}
 
+	@Override
+	public int getFirst(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("getFirst", map);
+	}
+
+	@Override
+	public int getLast(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("getLast", map);
+	}
+
 }
