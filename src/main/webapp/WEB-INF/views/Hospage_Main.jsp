@@ -35,7 +35,7 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
 					<div class="panel panel-teal panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-users color-blue"></em>
 							<div class="large">${total}</div>
-							<div class="text-muted">총 예약 수</div>
+							<div class="text-muted">지금까지 홈스피탈로 받으신 예약</div>
 						</div>
 					</div>
 				</div>
@@ -51,7 +51,7 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
 					<div class="panel panel-red panel-widget ">
 						<div class="row no-padding"><em class="fa fa-xl fa-users color-red"></em>
 							<div class="large">${prev }</div>
-							<div class="text-muted">어제 예약 수 </div>
+							<div class="text-muted">내일 예약 수 </div>
 						</div>
 					</div>
 				</div>

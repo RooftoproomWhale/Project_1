@@ -118,7 +118,7 @@ body {
 				</div>
 				<div class="board-util board-util-top02">
 					<div class="board-util-right">
-						<span class="board-util-text color-red">* 필수 입력 항목</span>
+						<span class="board-util-text color-red">모든 정보를 기재 해 주셔야 합니다!</span>
 					</div>
 				</div>
 
@@ -227,7 +227,7 @@ body {
 					<span class="board-util-text color-blue">※ 정보를 수정하신 후 확인 버튼을 클릭하셔야 정보 수정이 완료됩니다.</span>
 					<div class="board-util-right">
 						<button type="submit" class="btn btn-primary" role="button"
-							value="수정">
+							value="수정" onclick="passerror()">
 						수정
 						</button>
 						</form>
@@ -301,7 +301,7 @@ body {
 
 	}
 
-	function Form() {
+	
 
 		/* 	var userPasswd = $('#userPasswd');
 			if ($.trim(userPasswd.val()).length < 1
@@ -330,16 +330,22 @@ body {
 				return;
 			}
 		 */
-		var passok = $('#pass2');
+		function passerror() {
+			
+		
+		 var passok = $('#pass2');
 		if ($.trim(passok.val()).length < 1 || $.trim(passok.val()) == '') {
 			alert('비밀번호를 입력해주세요');
+			history.back();
 			passok.focus();
-			return;
+			
+			
 		}
-		if (confirm('정말로 변경하시겠습니까?')) {
-			$('form[name=passForm]').submit();
+		else{
+			alert('수정 성공');
+			
 		}
-	}
+		 }
 	
 </script>
 </html>

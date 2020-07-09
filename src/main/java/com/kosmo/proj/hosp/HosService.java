@@ -40,4 +40,6 @@ public interface HosService {
 	//예약정보
 	List<ReservationDTO> selectres(Map map);
 	int updateRes(Map map);
+	int deniedRes(Map map);
+	int withdraw(Map map);
 }

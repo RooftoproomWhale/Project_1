@@ -173,6 +173,18 @@ public class HospServiceImpl implements HosService{
 		// TODO 자동 생성된 메소드 스텁
 		return dao.updateRes(map);
 	}
+
+	@Override
+	public int deniedRes(Map map) {
+		// TODO 자동 생성된 메소드 스텁
+		return dao.deniedRes(map);
+	}
+
+	@Override
+	public int withdraw(Map map) {
+		// TODO 자동 생성된 메소드 스텁
+		return dao.withdraw(map);
+	}
 	
 
 }

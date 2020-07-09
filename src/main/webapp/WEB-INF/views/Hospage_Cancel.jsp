@@ -274,5 +274,9 @@ body{background:#FFFFFF;}
 			$(this).addClass("active");
 		})
 	})
+	function pass() {
+		alert('탈퇴 완료');
+	}
+	
 </script>
 </html>

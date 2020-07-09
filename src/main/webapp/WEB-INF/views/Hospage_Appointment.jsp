@@ -135,6 +135,7 @@ a:hover, a:focus {
 							</div>
 							<div class="table-responsive table-responsive-data2">
 								<table class="table table-data2">
+									
 									<thead>
 										<tr>
 											<th>예약번호</th>
@@ -202,6 +203,7 @@ a:hover, a:focus {
 									</tbody>
 								</table>
 							</div>
+							
 							<!-- END DATA TABLE -->
 						</div>
 					</div>
