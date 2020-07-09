@@ -24,12 +24,18 @@
 		$('#item-1').on("click",function(){
 			$('#items-1').css("display","");
 			$('#items-2').css("display","none ")
+			$('#items-3').css("display","none ")
 		})
 		$('#item-2').on("click",function(){
 			$('#items-2').css("display","");
 			$('#items-1').css("display","none")
+			$('#items-3').css("display","none")
 		})
-	
+			$('#item-3').on("click",function(){
+			$('#items-3').css("display","");
+			$('#items-1').css("display","none")
+			$('#items-2').css("display","none")
+		})
    		
 	})
    
@@ -63,6 +69,7 @@
 .click{
 border: 2px solid black ;
 }
+
   </style>
 </head>
 
@@ -148,25 +155,27 @@ border: 2px solid black ;
     <tr id="edit-update_01">
       <th scope="row" style="line-height: 54px;padding: 0px;text-align: center;">복용기간</th>
       <td  style="line-height: 54px;padding: 0px" id="item-date"></td> 
-      <th scope="row" style="line-height: 54px;padding: 0px;text-align: center;">효능 · 효과</th>
-      <td  style="line-height: 54px;padding: 0px" id="er">ㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁ</td>
+       <th scope="row" style="line-height: 36px;text-align: center;">모양<br/></th>
+      <td colspan="3" style="line-height: 36px;padding: 0px" id="chart"></td>
     </tr>
     <!--  -->
     <tr >
-      <th scope="row" style="line-height: 36px;text-align: center;">용법·용량<br/></th>
-      <td colspan="3" style="text-align: center;">1회 15mL 1일 2~3회 가글하여 사용한다.<br/>최대 5~7일간 사용하며, 그 이상 사용 시 의사와 상의한다.</td>
+        <th scope="row" style="line-height: 50px;padding: 0px 7px 0 7px;text-align: center;">효능 · 효과</th>
+      <td id="er" colspan="5" style="line-height: 50px;padding: 0px"></td>
     </tr>
     <tr>
-      <th class="text-center" scope="row" colspan="5"><input type="button" class="btn" id="item-2" value="상세설명"/><input type="button" class="btn" id="item-1" value="주의사항"/></th>
+      <th class="text-center" scope="row" colspan="5"><input type="button" class="btn" id="item-2" value="상세설명"/>
+      <input type="button" class="btn" id="item-1" value="주의사항"/>
+      <input type="button" class="btn" id="item-3" value="용법·용량"/></th>
     </tr>
      <tr>
-      <td colspan="5" id="items-1" style="display: none;">
-1) 매일 세 잔 이상 정기적으로 술을 마시는 사람이 이 약이나 다른 해열 진통제를 복용해야 할 경우 반드시 의사 또는 약사와 상의해야 한다. 이러한 사람이 이 약을 복용하면 간손상이 유발될 수 있다. 2) 아세트아미노펜을 복용한 환자에서 매우 드물게 급성 전신성 발진성 농포증(급성 전신성 발진성 고름물집증)(AGEP), 스티븐스 - 존슨 증후군(SJS), 독성 표피 괴사용해(TEN)와 같은 중대한 피부 반응이 보고되었고, 이러한 중대한 피부반응은 치명적일 수 있다. 따라서 이러한 중대한 피부반응의 징후에 대하여 환자들에게 충분히 알리고, 이 약 투여 후 피부발진이나 다른 과민반응의 징후가 나타나면 즉시 복용을 중단하도록 하여야 한다. 3) 이 약은 아세트아미노펜을 함유하고 있다. 아세트아미노펜으로 일일 최대 용량(4,000mg)을 초과할 경우 간손상을 일으킬 수 있으므로 이 약을 일일 최대 용량(4,000mg)을 초과하여 복용하여서는 아니되며, 아세트아미노펜을 포함하는 다른 제품과 함께 복용하여서는 안 된다. 1) 이 약에 과민증 환자 2) 소화성궤양 환자 3) 심한 혈액 이상 환자 4) 심한 간장애 환자 5) 심한 신장(콩팥)장애 환자 6) 심한 심장기능저하 환자 7) 아스피린 천식(비스테로이드성 소염(항염)제에 의한 천식발작 유발) 또는 그 병력이 있는 환자 8) 다음의 약물을 복용한 환자 : 바르비탈계 약물, 삼환계 항우울제 9) 알코올을 복용한 사람 10) 이 약은 유당을 함유하고 있으므로, 갈락토오스 불내성(galactose intolerance), Lapp 유당분해효소 결핍증(Lapp lactase deficiency) 또는 포도당-갈락토오스 흡수장애(glucose-galactose malabsorption) 등의 유전적인 문제가 있는 환자에게는 투여하면 안 된다. 1) 간장애 또는 그 병력이 있는 환자 2) 신장(콩팥)장애 또는 그 병력이 있는 환자 3) 소화성궤양의 병력이 있는 환자 4) 혈액이상 또는 그 병력이 있는 환자 5) 출혈경향이 있는 환자(혈소판기능이상이 나타날 수 있다.) 6) 심장기능이상이 있는 환자 7) 과민증의 병력이 있는 환자 8) 기관지 천식 환자 9) 고령자(노인) 10) 만 2세 미만의 소아 11) 임부 또는 수유부 12) 와파린을 장기복용하는 환자 13) 다음의 약물을 복용한 환자: 리튬, 치아짓계이뇨제 1) 쇽: 쇽, 아나필락시양 증상(과민성유사증상 : 호흡곤란, 온몸이 붉어짐, 혈관부기, 두드러기 등), 천식발작 2) 혈액: 혈소판 감소, 과립구감소, 용혈성(적혈구파괴성)빈혈, 메트헤모글로빈혈증, 혈소판기능 저하(출혈시간 연장), 청색증 3) 과민증: 과민증상(얼굴부기, 호흡곤란, 땀이 남, 저혈압, 쇽) 4) 소화기: 구역, 구토, 식욕부진, 장기복용 시 위장출혈, 소화성궤양, 천공(뚫림) 등의 위장관계 이상반응 5) 피부: 발진, 알레르기 반응, 피부점막안 증후군(스티븐스-존슨 증후군), 중독성표피괴사용해(리엘 증후군) 6) 기타: 장기투여시 만성간괴사, 급성췌장(이자)염, 만성간염, 신장(콩팥)독성 7) 과량투여: 간장, 신장(콩팥), 심근의 괴사 8) 이 약에 대해 시판 후 조사에서 보고된 추가적 이상반응은 아래 표와 같다. 발현빈도는 매우 흔히 ≥1/10, 흔히 ≥1/100 및 <1/10, 흔하지 않게 ≥1/1,000 및 <1/100, 드물게 ≥1/10,000 및 <1/1,000, 매우 드물게 <1/10,000 이다. 표. 자발적 보고율로부터 추정한 빈도에 따른 이 약의 시판후 경험에서 밝혀진 이상반응</td>
-<td id="items-2" colspan="5" style="text-align: left;padding: 20px">
+      <td colspan="5" id="items-1" style="display: none;"><span id="nb_DOC"></span></td>
+ <td id="items-2" colspan="5" style="text-align: left;padding: 20px">
 <span id="material_NAME"></span>
 <br>보관방법: <span id="storage_METHOD"></span>
 <br>유통기한: <span id="valid_TERM"></span>
 <br>제조사:<span id="entp_NAME"></span></td>
+ <td colspan="5" id="items-3" style="display: none;"><span id="ud_DOC"></span></td>
  </tr>
 
   </tbody>	
