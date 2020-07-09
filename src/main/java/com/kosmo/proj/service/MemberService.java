@@ -32,5 +32,10 @@ public interface MemberService {
    int hisInsert(Map map);
    HistoryDTO getNo(Map map);
    int illInsert(Map map);
+   
+   //안드로이드
+   ReservationDTO recentApt(Map map);
+   PrescriptionDTO recentPres(Map map);
+   List<PrescriptionDTO> getPreMedi(Map map);
 
 }

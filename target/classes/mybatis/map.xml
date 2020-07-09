@@ -91,13 +91,13 @@
 		JOIN hospital h on r.hosp_code = h.hosp_code 
 		WHERE m.mem_email = #{mem_email}
 	</select>
-	<select id="isPreviousReservation" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="isPreviousReservation" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM reservation WHERE RES_DATE = #{datepick} AND #{hourMinute} <![CDATA[ < ]]> TO_CHAR(SYSDATE,'HH24:MI')
 	</select>
 	<select	id="isDuplicateReservation" parameterType="java.util.Map" resultType="int">
 		SELECT count(*) FROM reservation 
 		WHERE hosp_Code = (SELECT hosp_code FROM hospital WHERE address = #{address}) 
-		AND mem_email = #{mem_email}
+		AND mem_email = #{email}
 		AND TO_CHAR(SYSDATE,'YYYY-MM-DD') = #{datepick} 
 	</select>
 	<insert id="InsertReservation" parameterType="java.util.Map">

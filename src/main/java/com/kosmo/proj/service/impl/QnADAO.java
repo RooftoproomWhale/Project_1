@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.proj.service.IllnessDTO;
 import com.kosmo.proj.service.Paging;
 import com.kosmo.proj.service.QnADTO;
 import com.kosmo.proj.service.QnAService;
@@ -81,6 +82,11 @@ public class QnADAO implements QnAService {
 	public int hitQnA(Map map) {
 		// TODO Auto-generated method stub
 		return sqlMapper.update("hitQnA", map);
+	}
+	@Override
+	public List<IllnessDTO> listIllness(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("preventionList", map);
 	}
 
 }

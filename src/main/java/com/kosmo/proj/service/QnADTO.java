@@ -14,7 +14,6 @@ public class QnADTO {
     private int hit;
 
 
-
     public int getHit() {
 		return hit;
 	}

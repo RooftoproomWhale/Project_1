@@ -539,10 +539,13 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
     	<form action="<c:url value='/mapping/mapping.hst'/>" method="post" enctype="multipart/form-data">
     		<div class="form-group">
 				<div class="upload-box">
-					<input type="file" accept="image/png,image/jpeg,image/jpg" class="upload-input" />
+					<input type="file" name="filename" accept="image/png,image/jpeg,image/jpg" class="upload-input" />
 					<div class="upload-action"></div>
 					<div class="preview-box"></div>
 				</div>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="등록">
 			</div>
 			<!-- 
 			<div>
@@ -609,6 +612,18 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 
 <script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
 
+<script>
+	(function($){
+		$.ajax({
+			
+		})
+	})
+	
+	
+	
+
+
+</script>
 <script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
@@ -660,36 +675,7 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 		})
 	})
 </script>
-<script>
 
-const loginBtn = document.getElementById('login');
-const signupBtn = document.getElementById('signup');
-
-loginBtn.addEventListener('click', (e) => {
-	let parent = e.target.parentNode.parentNode;
-	Array.from(e.target.parentNode.parentNode.classList).find((element) => {
-		if(element !== "slide-up") {
-			parent.classList.add('slide-up')
-		}else{
-			signupBtn.parentNode.classList.add('slide-up')
-			parent.classList.remove('slide-up')
-		}
-	});
-});
-
-signupBtn.addEventListener('click', (e) => {
-	let parent = e.target.parentNode;
-	Array.from(e.target.parentNode.classList).find((element) => {
-		if(element !== "slide-up") {
-			parent.classList.add('slide-up')
-		}else{
-			loginBtn.parentNode.parentNode.classList.add('slide-up')
-			parent.classList.remove('slide-up')
-		}
-	});
-});
-
-</script>
 <script>
 	var sel_file;
 	$(function(){

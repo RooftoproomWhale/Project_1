@@ -50,21 +50,19 @@ td{
 							<td colspan="3"><h4>효능/효과</h4></td>
 						</tr>
 						<tr>
-							<td colspan="3">1. 주효능 효과</br>다음 경우에 있어서의 소화기능이상 (식욕부진, 구역, 구토, 복부팽만감) : 위염, 기능성 유문협착, 담낭염, 담석증, 담도이상운동증, 마취 및 수술후 약물에 의한 구역 구토</br>		
-							2. 다음 질환에도 사용할 수 있다.</br>
-							고장(복부팽만감)성 소화불량, 습관성 및 신경성 구토</td>
+							<td colspan="3">${info['EE_DOC']}</td>
 						</tr>
 						<tr>
 							<td colspan="3"><h4>용법/용량</h4></td>
 						</tr>
 						<tr>
-							<td colspan="3">조심히 드세요</td>
+							<td colspan="3">${info['UD_DOC']}</td>
 						</tr>
 						<tr>
 							<td colspan="3"><h4>사용상의 주의사항</h4></td>
 						</tr>
 						<tr>
-							<td colspan="3">주의하세요</td>
+							<td colspan="3">${info['NB_DOC']}</td>
 						</tr>
 						<tr>
 							<td colspan="3"><h4>기타정보</h4></td>

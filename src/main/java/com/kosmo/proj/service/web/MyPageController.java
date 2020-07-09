@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kosmo.proj.GetUser;
+import com.kosmo.proj.service.IllnessDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.ReservationDTO;
 import com.kosmo.proj.service.impl.CalendarServiceImpl;
 import com.kosmo.proj.service.impl.MemberServiceImpl;
+import com.kosmo.proj.service.impl.QnAServiceImpl;
 
 
 
@@ -30,6 +32,8 @@ public class MyPageController {
 	private MemberServiceImpl memberDAO;
 	@Resource(name="CalendarService")
 	private CalendarServiceImpl calendarDAO;
+	@Resource(name="qnaService")
+	private QnAServiceImpl QnADAO;
 
 	// 유저 페이지
 	/// 내정보
@@ -156,7 +160,27 @@ public class MyPageController {
 
 	//내 예방정보 이동
 	@RequestMapping("/mypage/Prevention.hst")
-	public String diseaseupdate(@RequestParam Map map,Authentication auth) {
+	public String Prevention(@RequestParam Map map,Authentication auth, Model model) {
+
+		UserDetails userDetails = (UserDetails)auth.getPrincipal();
+		String userEmail = userDetails.getUsername();
+		map.put("userEmail", userEmail);
+		map.put("id", userEmail);
+
+		List<MemberDTO> listgetName = memberDAO.selectList(map);
+
+		List<IllnessDTO> list = QnADAO.listIllness(map);
+		for(IllnessDTO val : list)
+		{
+			System.out.println(val.getIll_name());
+			System.out.println(val.getCause());
+			System.out.println(val.getIll_content());
+			System.out.println(val.getPrevention());
+		}
+		System.out.println(list);
+		model.addAttribute("list", list);
+		model.addAttribute("listgetName", listgetName);
+
 
 		return "Prevention.my_tiles";
 	}
@@ -193,6 +217,7 @@ public class MyPageController {
 
 		return "Hospage_Appointment.hos_tiles";
 	}
+
 
 //	   @RequestMapping("/Hospage/Chart.hst")
 //	   public String chart() {

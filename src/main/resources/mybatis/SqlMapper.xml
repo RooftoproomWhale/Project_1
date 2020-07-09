@@ -163,4 +163,20 @@
 	</delete>
 	
 	<!-- 예방정보 -->
+	<select id="preventionList" parameterType="java.util.Map" resultType="IllnessDTO">
+		SELECT * FROM ILLNESS WHERE ILL_CODE IN (SELECT ILL_CODE FROM HIS_ILL WHERE HIST_NO IN (SELECT HIST_NO FROM HISTORY WHERE MEM_EMAIL = #{userEmail}))
+	</select>
+	
+	
+	<select id="AndRecentApt" parameterType="java.util.Map" resultType="ReservationDTO">
+		SELECT M.*, HR.* FROM MEMBER M JOIN (SELECT H.HOSP_NAME, R.* FROM HOSPITAL H JOIN RESERVATION R ON R.HOSP_CODE = H.HOSP_CODE) HR ON M.MEM_EMAIL = HR.MEM_EMAIL WHERE M.MEM_EMAIL = #{userEmail} AND ROWNUM <![CDATA[ <= ]]> 1
+	</select>
+	<select id="AndRecentPres" parameterType="java.util.Map" resultType="PrescriptionDTO">
+		SELECT * FROM PRESCRIPTION WHERE PRE_NO IN (SELECT PRE_NO FROM (SELECT PRE_NO FROM PRESCRIPTION WHERE MEM_EMAIL = #{userEmail} ORDER BY PRE_NO DESC) WHERE ROWNUM = 1)
+	</select>
+	<select id="AndPreAlarm" parameterType="java.util.Map" resultType="PrescriptionDTO">
+		SELECT p.medi_name, p.count, PM.* FROM PRE_MEDI PM JOIN PRESCRIPTION P ON PM.PRE_NO = P.PRE_NO WHERE PM.PRE_NO IN (SELECT PRE_NO FROM PRESCRIPTION WHERE MEM_EMAIL = #{userEmail}) ORDER BY ALARM
+	</select>
+  
+
 </mapper>

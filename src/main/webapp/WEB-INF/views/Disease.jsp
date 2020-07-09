@@ -481,6 +481,16 @@ jQuery(document).ready(function(){
 	    		}
 		    });
 		
+		/*사용자 히스토리 select*/
+		(function($){
+			$.ajax({
+				url:"<c:url value='/Disease/diseaseSelec.hst'/>",
+				type:'post',
+				success:showList_,
+				error:function(e){console.log('에러:',e)}
+			});		
+			
+		})
 
 								
 
@@ -784,8 +794,8 @@ jQuery(document).ready(function(){
 </div>
 
 
-<script src="<c:url value='/js/jquery-accordion-menu.js'/>"
-	type="text/javascript"></script>
+<script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
+
 <script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
