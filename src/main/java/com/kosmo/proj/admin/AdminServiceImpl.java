@@ -455,4 +455,16 @@ public class AdminServiceImpl implements AdminService {
 		return dao.hitNotice(map);
 	}
 
+	@Override
+	public int getFirst(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getFirst(map);
+	}
+
+	@Override
+	public int getLast(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getLast(map);
+	}
+
 }

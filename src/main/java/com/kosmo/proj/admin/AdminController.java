@@ -652,6 +652,10 @@ public class AdminController {
 		int hit = adminService.hitNotice(map);
 		System.out.println(hit);
 
+		int first = adminService.getFirst(map);
+		int last = adminService.getLast(map);
+		System.out.println("first: " + first + "last: " + last);
+
 		for(BoardDTO val:list)
 		{
 			System.out.println(val.getFile_addr());
@@ -661,6 +665,9 @@ public class AdminController {
 		}
 
 		model.addAttribute("list", list);
+		model.addAttribute("first", first);
+		model.addAttribute("last", last);
+
 		return "NoticeDetail.tiles";
 	}
 

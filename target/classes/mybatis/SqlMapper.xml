@@ -74,6 +74,13 @@
     <update id="hitNotice">
     	UPDATE notification_bbs SET hit = hit+1 WHERE noti_no = #{no}
     </update>
+    <!-- 공지사항 첫/마지막 번호 -->
+    <select id="getLast" parameterType="java.util.Map" resultType="int">
+    	SELECT NOTI_NO FROM (SELECT NOTI_NO FROM NOTIFICATION_BBS ORDER BY NOTI_NO DESC) WHERE ROWNUM <![CDATA[ <= ]]> 1
+   	</select>
+   	<select id="getFirst" parameterType="java.util.Map" resultType="int">
+    	SELECT NOTI_NO FROM NOTIFICATION_BBS WHERE ROWNUM <![CDATA[ <= ]]> 1
+   	</select>
 
 	
    <insert id="presInsert" parameterType="java.util.Map">
@@ -154,4 +161,6 @@
 	<delete id="commentDeleteByNo" parameterType="java.util.Map">
 		DELETE QNA WHERE no = #{no}
 	</delete>
+	
+	<!-- 예방정보 -->
 </mapper>

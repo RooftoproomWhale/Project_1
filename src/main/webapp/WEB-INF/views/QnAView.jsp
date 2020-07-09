@@ -114,8 +114,6 @@ img {
 										class="btn btn-primary">목록</a></br></li>
 								</ul>
 							</c:if>
-					
-					
 					<div>
 					<c:if test="${!flag }">
 						<ul id="pillMenu" class="nav nav-pills"
@@ -127,7 +125,7 @@ img {
 						</div>
 					</div>
 					</div>
-
+					
 					<div class="row">
 						<div class="col-md-offset-2 col-md-8">
 							<table class="table table-bordered table-striped">
@@ -157,6 +155,10 @@ img {
 								<tr>
 									<td colspan="2">${list[0].content}</td>
 								</tr>
+								<a class="btn btn-default" 
+									href="<c:url value='/QnA/QnAView.hst?no=${list[0].qna_no -1}'/>"><span class="glyphicon glyphicon-chevron-up"></span> 이전글</a>
+								<a class="btn btn-default" 
+									href="<c:url value='/QnA/QnAView.hst?no=${list[0].qna_no +1}'/>"><span class="glyphicon glyphicon-chevron-down"></span> 다음글</a>
 							</table>
 							</br>
 						</div>
