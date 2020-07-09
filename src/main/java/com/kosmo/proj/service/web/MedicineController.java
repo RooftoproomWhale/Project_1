@@ -79,7 +79,7 @@ public class MedicineController {
 	@RequestMapping(value="/Calendar/Management.hst",produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String calendarmanagement(@RequestParam String dname,Map map) throws ParserConfigurationException, SAXException, IOException {
-		System.out.println(dname);
+		
 		MedicineInfoDTO info = new MedicineInfoDTO();
 		String encodeSearch="";
 		 ObjectMapper mapper = new ObjectMapper();
@@ -88,18 +88,16 @@ public class MedicineController {
 		for(String data1 : data) {
 				System.out.println("데이타 : "+data1);
 		info = mediInfo(data1, info);
+		info = mediShape(data1, info);
         infos.add(info);
 		}
-		for(MedicineInfoDTO dats : infos) {
-			System.out.println("출력1: "+dats.getITEM_NAME());
-			System.out.println("출력2: "+dats.getENTP_NAME());
-		}
+
 		String jsonStr = null;
 		try {
 			 jsonStr = mapper.writeValueAsString(infos);
 		} catch (JsonProcessingException e) {e.printStackTrace();} 
         map.put("info", info);
-		System.out.println(jsonStr);
+	
 		return jsonStr;
 	}
 

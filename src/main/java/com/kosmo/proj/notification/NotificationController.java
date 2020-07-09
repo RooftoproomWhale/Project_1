@@ -149,7 +149,7 @@ public class NotificationController {
 		String user = userDetails.getUsername();
 		map.put("user", user);
 		int currAptCountUser = notificationService.currAptCountUser(map);
-		System.out.println("currAptCountUser: " + currAptCountUser);
+	
 		return currAptCountUser;
 	}
 }
