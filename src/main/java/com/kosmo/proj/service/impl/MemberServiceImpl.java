@@ -122,6 +122,18 @@ public class MemberServiceImpl implements MemberService{
 	   return dao.illInsert(map);
 	}
 
+
+	public List<Map<String, String>> selectill(Map map) {
+		
+		return dao.selectill(map);
+	}
+
+	public int ILLdelete(Map map) {
+		
+		return dao.illdelete(map);
+	}
+
+
 	@Override
 	public ReservationDTO recentApt(Map map) {
 		// TODO Auto-generated method stub
@@ -139,6 +151,7 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.getPreMedi(map);
 	}
+
 
 
 }

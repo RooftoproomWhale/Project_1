@@ -39,6 +39,7 @@ public class MyPageController {
 	/// 내정보
 	@RequestMapping("/mypage/mypage.hst")
 	public String mypage(@RequestParam Map map,Authentication auth,Model model) {
+		System.out.println("연결");
 		if(auth == null) {
 			JOptionPane.showMessageDialog(null,"로그인후 이용해주세요.","홈스피탈",1);
 			return "member/Login.tiles";
@@ -47,10 +48,28 @@ public class MyPageController {
 		getUser.getUser(model, auth);
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
+		System.out.println(id);
 		map.put("id", id);
 		List<MemberDTO> list = memberDAO.selectList(map);
 		List<Map<String, Integer>> count = memberDAO.selectCount(map);
 		List<ReservationDTO> list2 = calendarDAO.selectnew(map);
+		List<Map<String,String>> ill=memberDAO.selectill(map);
+		String ill_name="";
+		String Chronic="";
+		for(Map data:ill) {
+			ill_name += data.get("ILL_NAME")+",";
+			Chronic = (String) data.get("CHRONIC_ILL");
+		}
+		if(ill_name.equals("")) {
+		ill_name = "설정된 질환이 없습니다.";
+		System.out.println(Chronic);
+		Chronic="설정된 질환이 없습니다.";
+		}else {
+			ill_name=ill_name.substring(0,ill_name.length()-1);
+		}
+		System.out.println(Chronic);
+		model.addAttribute("ill_name", ill_name);
+		model.addAttribute("CHRONIC_ILL", Chronic);
 		if(count.get(0).get("RESDATE")!=null) {
 		SimpleDateFormat day= new SimpleDateFormat("yyyy-MM-dd");
 		String newdate=day.format(count.get(0).get("RESDATE"));
@@ -183,6 +202,29 @@ public class MyPageController {
 
 
 		return "Prevention.my_tiles";
+	}
+//	@RequestMapping(value = "/mypage/diseaseupdate.hst",method = RequestMethod.POST)
+//	@ResponseBody
+//	public String Diseaseupdate(@RequestParam(value="disarr[]")List<String> list,Map map,Authentication auth) {
+//		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+//		String id=userDetails.getUsername();
+//		map.put("id", id);
+//		//int illdelete = memberDAO.ILLdelete(map);
+//
+//
+//
+//		return "";
+//	}
+
+
+	@RequestMapping(value = "/mypage/disease.hst",method = RequestMethod.POST)
+	public String diseaseupdate(@RequestParam Map map,Authentication auth) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		map.put("id",id );
+//		int update = memberDAO.diseaseupdate(map);
+
+		return "redirect:../mypage/mypage.hst";
 	}
 
 	// 병원 페이지

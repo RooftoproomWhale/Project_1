@@ -17,7 +17,10 @@ $('#item-date').text(event.start._i+"-"+event.end._i);
         	console.log('실행');
       	  console.log(response);
       	 $.each(response, function(i, el){
-      	  	console.log(i)
+      		 console.log('asdsada	',el);
+      		 console.log(el.nb_DOC,i)
+      	
+   
       	  	$('<input type="button" class="btn items" id="item-'+i+'" value="'+el.item_NAME.substring(0,el.item_NAME.indexOf('('))+'"/>').appendTo('#item_name');
       	 
       	  	if(i ==0){
@@ -39,9 +42,14 @@ $('#item-date').text(event.start._i+"-"+event.end._i);
 			}
       	  		console.log(i+'번째 클릭 이번트')
 	      	  $('#material_NAME').html(el.material_NAME);
-	      	 $('#storage_METHOD').text(el.storage_METHOD);
-	      	 $('#valid_TERM').text(el.valid_TERM);
-	      	 $('#entp_NAME').text(el.entp_NAME);
+	      	 $('#storage_METHOD').html(el.storage_METHOD);
+	      	 $('#valid_TERM').html(el.valid_TERM);
+	      	 $('#entp_NAME').html(el.entp_NAME);
+	      	 $('#nb_DOC').html(el.nb_DOC);
+	      	 $('#er').html(el.ee_DOC.trim());
+	      	 $('#ud_DOC').html(el.ud_DOC);
+	      	 $('#chart').html(el.chart);
+	      	 $('#imgs').attr("src",el.item_IMAGE);
       	  	})
       	  
       	  })
