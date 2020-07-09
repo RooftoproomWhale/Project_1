@@ -232,26 +232,20 @@ public class MedicineController {
 		NodeList ccList = cList.item(0).getChildNodes();
 		for(int i=0;i<ccList.getLength();i++) {
 			NodeList chList = ccList.item(i).getChildNodes();
-			//System.out.println(ccList.item(0).getNodeValue());
 			for(int k=0;k<chList.getLength();k++) {
 				if(chList.item(k).hasAttributes()) {
-					System.out.println(chList.item(k).getAttributes().getNamedItem("title").getNodeValue());
 					nValue+=chList.item(k).getAttributes().getNamedItem("title").getNodeValue()+"<br/>";
 				}
 				NodeList cchList = chList.item(k).getChildNodes();
-				//System.out.println(chList.item(k).toString());
 				for(int j=0;j<cchList.getLength();j++) {
-					//System.out.println(cchList.item(j).getTextContent());
 					if(cchList.item(j).hasAttributes()){
 						if(cchList.item(j).getAttributes().getNamedItem("tagName").getNodeValue().equalsIgnoreCase("p")) {
-							//System.out.println(cchList.item(j).toString());
 							nValue+="&nbsp"+cchList.item(j).getTextContent()+"<br/>";
 						}
 					}
 				}
 			}
 		}
-		
 		return nValue;
 	}
 	
