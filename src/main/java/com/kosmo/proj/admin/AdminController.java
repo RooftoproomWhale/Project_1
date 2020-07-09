@@ -641,12 +641,17 @@ public class AdminController {
 
 		List<BoardDTO> list = adminService.detailNotice(map);
 		String phisicalPath = req.getServletContext().getRealPath("/Upload");
+		System.out.println("no:::::" + map.get("no"));
+		int hit = adminService.hitNotice(map);
+		System.out.println(hit);
 
 		for(BoardDTO val:list)
 		{
 			System.out.println(val.getFile_addr());
 			System.out.println(val.getNoti_no());
 			System.out.println(val.getContent());
+			System.out.println(val.getHit());
+			System.out.println(val.getNoti_no());
 		}
 
 		model.addAttribute("list", list);

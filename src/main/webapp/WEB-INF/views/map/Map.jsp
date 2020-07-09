@@ -53,7 +53,7 @@
        background: white;
        font-size: small;
    }
-   .map_button{position: absolute;bottom: 32px;right: 8px;z-index: 2;flex-direction: column;}
+   .map_button{position: absolute;bottom: 19px;right: 8px;z-index: 2;flex-direction: column;}
    .current_refresh
    {
       width: 44px;
@@ -80,6 +80,11 @@
       height: 54px;
       background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/shadow/img_navi.png) no-repeat 0 0;
       cursor: pointer;
+   }
+   .infoWindowDiv{
+   	  display:inline-block;
+   	  padding:5px;
+   	  white-space: nowrap;
    }
    .top_area{
       position: relative;
@@ -232,7 +237,7 @@
 	  }
 	.b{
 	 
-	    background-color: #DF101C;
+	    background-color: #03A9F4;
 	 }
     .ui-autocomplete {
        position: absolute;
@@ -276,7 +281,7 @@
       <div class="top_area">
          <div class="top_absfilter_area">
             <button class="filter_button" id="filter_hospital" type="button">
-               <img src="<c:url value='/images/map/hospital_image/hospital_button.png'/>" style="width: 34px;height: 34px;">
+               <img src="<c:url value='/images/map/hospital_image/hospital.png'/>" style="width: 34px;height: 34px;">
             </button>
             <button class="filter_button" id="filter_pharmacy" type="button">
                <img src="<c:url value='/images/map/pharmacy_image/pharmacy_button.png'/>" style="width: 34px;height: 34px;">
@@ -358,6 +363,9 @@
 	         <div  style="display: inline-block; padding: 30px; ">
 	         	<div  class="reservation_info">
 	         	</div>
+	         	<div class="currentResByAddr">
+	         		<h3>회원님은 현재 이 병원에 14:00에 예약하셨습니다</h3>
+	         	</div>
 	         </div>
 	         	
          </div>
@@ -383,7 +391,7 @@
          		var emptyDiv = '<div class="tableInfoInner g" ><div>';
              	var reservationDiv = '<div class="tableInfoInner b"><div>';
              	$(".reservation_info").append('<h3>현재 예약인원은 '+count+'명 입니다</h3>');
-             	for(var i=1;i<=25;i++){
+             	for(var i=1;i<=	15;i++){
              		if(i<=count)
              		{
              			$(".reservation_info").append(reservationDiv);
@@ -403,7 +411,7 @@
    </div>
    <div class="menu_wrap">
       <button class="current_refresh"  type="button" onclick="changeApi(0)">
-         <img src="<c:url value='/images/map/hospital_image/hospital_button.png'/>" style="width: 34px;height: 34px;">
+         <img src="<c:url value='/images/map/hospital_image/hospital.png'/>" style="width: 34px;height: 34px;">
       </button>
       <button class="current_refresh"  type="button" onclick="changeApi(1)">
          <img src="<c:url value='/images/map/pharmacy_image/pharmacy_button.png'/>" style="width: 34px;height: 34px;">
@@ -473,7 +481,7 @@
                   <div class="col-sm-6">
                      <div class="form-group">
 	                   <span class="form-label">진료 증상</span>
-	                   <select id="symptom" name="symptom" class="form-control">
+	                   <select id="symptom" name="symptom" class="form-control" data-validation-required-message="증상을 선택해주세요" required>
 	                   		
 	                   </select>
                        <span class="select-arrow"></span>
@@ -494,7 +502,7 @@
                         <div class="col-sm-6">
                            <div class="form-group">
                               <span class="form-label">시</span>
-                              <select id="Hour" name="hour" class="form-control">
+                              <select id="Hour" name="hour" class="form-control" required>
                                  <!-- <option>1</option>
                                  <option>2</option>
                                  <option>3</option>
@@ -514,7 +522,7 @@
                         <div class="col-sm-6">
                            <div class="form-group">
                               <span class="form-label">분</span>
-                              <select id="Minute" name="minute" class="form-control">
+                              <select id="Minute" name="minute" class="form-control" required>
                                  <!-- <option>05</option>
                                  <option>10</option>
                                  <option>15</option>
@@ -536,7 +544,7 @@
                </div>
             </div>
             <div class="modal-footer">
-               <button class="btn btn-success" id="resBtn_confirm">예약</button>
+               <button type="submit" class="btn btn-success" id="resBtn_confirm">예약</button>
                <button class="btn btn-info" data-dismiss="modal">닫기</button>
             </div>
          </form>
@@ -714,7 +722,46 @@
       
       $(".reservation_info").hide();
       
-      $("#resBtn_confirm").click(function(){	
+	  $("#reservation_form").submit(function(){	
+    	  
+    	  $(':disabled').each(function(e) {
+    	      $(this).removeAttr('disabled');
+    	  })
+    	  
+    	  console.log($('#reservation_form').serialize()+"&hourMinute="+$('#Hour').val()+":"+$('#Minute').val());
+    	  
+    	  $.ajax({
+				url:"<c:url value='/Homespital/Map/Reservation.hst'/>",
+				data:$('#reservation_form').serialize()+"&hourMinute="+$('#Hour').val()+":"+$('#Minute').val(),
+				dataType:'text',
+				type:'post',
+				success:function(data){
+					console.log(data);
+					if(data == 1)
+					{
+						alert("예약이 완료되었습니다");
+					}
+					else if(data == 2)
+					{
+						alert("현재시간 이전의 시간으로는 예약할 수 없습니다");
+					}
+					else if(data == 3)
+					{
+						alert("이미 오늘 이 병원에 예약을 하셨습니다");
+					}
+				},
+				error:function(e){
+		            console.log(e);   
+	            }
+		  });
+
+    	  $('#name').attr('disabled', true);
+    	  $('#email').attr('disabled', true);
+    	  $('#tel').attr('disabled', true);
+    	  $('#modal_hosp_name').attr('disabled', true);
+      });
+      
+      /* $("#resBtn_confirm").click(function(){	
     	  
     	  $(':disabled').each(function(e) {
     	      $(this).removeAttr('disabled');
@@ -743,7 +790,7 @@
     	  $('#email').attr('disabled', true);
     	  $('#tel').attr('disabled', true);
     	  $('#modal_hosp_name').attr('disabled', true);
-      });
+      }); */
       
       $('#reservation_date').datepicker({
          dateFormat: "yy-mm-dd",
@@ -916,17 +963,30 @@
                var jsonData = JSON.parse(data);
                console.log("연결성공", jsonData,typeof(jsonData));
                $.each(jsonData, function(i, item) {
+                  if(item.auth=='제휴승인됨')
+                  {
+                	  var marker = new kakao.maps.Marker({
+                          //map : map,
+                          position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
+                          image :  new kakao.maps.MarkerImage(
+                                "<c:url value='/images/map/hospital_image/hospital.png'/>",
+                                  new kakao.maps.Size(35, 35))
+                       });
+                  }
+                  else
+                  {
+                	  var marker = new kakao.maps.Marker({
+                          //map : map,
+                          position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
+                          image :  new kakao.maps.MarkerImage(
+                                "<c:url value='/images/map/hospital_image/hospital_normal.png'/>",
+                                  new kakao.maps.Size(35, 35))
+                       });
+                  }
                   
-                  var marker = new kakao.maps.Marker({
-                     //map : map,
-                     position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
-                     image :  new kakao.maps.MarkerImage(
-                           "<c:url value='/images/map/hospital_image/hospital.png'/>",
-                             new kakao.maps.Size(35, 35))
-                  });
                   var dept_item = '';
                   
-                  var iwContent = '<div style="padding:5px;">'+item.hosp_name+'</div>';
+                  var iwContent = '<div class="infoWindowDiv">'+item.hosp_name+'</div>';
                      
                   var infowindow = new kakao.maps.InfoWindow({
                       content : iwContent
@@ -956,8 +1016,10 @@
                         $('.info-toggle').removeClass('left_toggle');
                      }
                     
+                     var time = "평일 : " + item.weekday_open + ":00~" + item.weekday_close + ":00<br/>" 
+                     + "주말 : " + item.weekend_open + ":00~" + item.weekend_close + ":00" 
                      
-                     listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel);
+                     listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel,time,item.lunchtime,item.cor_y, item.cor_x);
                      $('.search_list').html(listitem);
                   });
                   
@@ -1031,11 +1093,11 @@
                      //map : map,
                      position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
                      image :  new kakao.maps.MarkerImage(
-                           "<c:url value='/images/map/pharmacy_image/pharmacy.png'/>",
+                           "<c:url value='/images/map/pharmacy_image/pharmacy_button.png'/>",
                              new kakao.maps.Size(35, 35))
                   });
                   
-                  var iwContent = '<div style="padding:5px;">'+item.phar_name+'</div>';
+                  var iwContent = '<div class="infoWindowDiv">'+item.phar_name+'</div>';
                      
                   var infowindow = new kakao.maps.InfoWindow({
                       content : iwContent
@@ -1051,7 +1113,7 @@
                         $('.info-toggle').removeClass('left_toggle');
                         
                      }
-                     listitem = getDetailPharItem(item.phar_name,item.address,item.tel);
+                     listitem = getDetailPharItem(item.phar_name,item.address,item.tel,item.cor_y, item.cor_x);
                      $('.search_list').html(listitem);
                   });
                   
@@ -1127,7 +1189,7 @@
                              new kakao.maps.Size(35, 35))
                   });
                   
-                  var iwContent = '<div style="padding:5px;">'+item.name+'</div>';
+                  var iwContent = '<div class="infoWindowDiv">'+item.name+'</div>';
                      
                   var infowindow = new kakao.maps.InfoWindow({
                       content : iwContent
@@ -1211,46 +1273,53 @@
                console.log("코로나 데이터",jsonData);
                $.each(jsonData, function(i, item) {
                   console.log("코로나 데이터",item);
-                  geocoder.addressSearch(item.CONTENT, function(result, status) {
-                      if (status === kakao.maps.services.Status.OK) {
-                         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                  console.log("코로나 데이터",item.LAT, item.LNG);
+                  var coords = new kakao.maps.LatLng(item.LAT, item.LNG);
                          
-                         var marker = new kakao.maps.Marker({
-                            image :  new kakao.maps.MarkerImage(
-                                    "<c:url value='/images/map/corona_image/corona_patient.png'/>",
-                                      new kakao.maps.Size(65, 65)),
-                              position: coords
-                          });
-                         
-                         var isSame = false;
-                           for (var j = 0; j < markers.length; j++)
-                           {
-                              console.log(marker.getPosition().equals(markers[j].getPosition()));
-                              if(marker.getPosition().equals(markers[j].getPosition()))
-                              {
-                                 isSame = true;
-                              }
-                              
-                           }
-                           
-                           if(!isSame)
-                           {
-                              marker.setMap(map);
-                              console.log("중복이 아닌 마커",marker.getPosition());
-                              markers.push(marker);
-                              
-                           }
-                           else
-                           {
-                              console.log("중복 마커",marker.getPosition());
-                           }
-                         
-                      }
-                      else
-                   	  {
-                    	  console.log("없는 주소 입니다");
-                   	  }
+                  var marker = new kakao.maps.Marker({
+                      image :  new kakao.maps.MarkerImage(
+                      "<c:url value='/images/map/corona_image/corona_button.png'/>",
+                      new kakao.maps.Size(45, 45)),
+                      position: coords
                   });
+                  
+                  
+                  var iwContent = '<div class="infoWindowDiv">'+item.DATE_+" "+item.CONTENT+'</div>';
+                  
+                  var infowindow = new kakao.maps.InfoWindow({
+                      content : iwContent
+                  });
+                  
+                  kakao.maps.event.addListener(marker, 'mouseover', function() {
+                    // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                      infowindow.open(map, marker);
+                  });
+
+                  // 마커에 마우스아웃 이벤트를 등록합니다
+                  kakao.maps.event.addListener(marker, 'mouseout', function() {
+                      // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                      infowindow.close();
+                  });
+                  
+                  var isSame = false;
+                  for (var j = 0; j < markers.length; j++)
+                  {
+                      console.log(marker.getPosition().equals(markers[j].getPosition()));
+                      if(marker.getPosition().equals(markers[j].getPosition()))
+                      {
+                          isSame = true;
+                      } 
+                  }
+                  if(!isSame)
+                  {
+                      marker.setMap(map);
+                      console.log("중복이 아닌 마커",marker.getPosition());
+                      markers.push(marker);
+                  }
+                  else
+                  {
+                      console.log("중복 마커",marker.getPosition());
+                  }   
                });
             },
             error:function(e){
@@ -1535,12 +1604,12 @@
                      if(apiStatus == 0)
                      {
                         console.log(jsonData[0]['HOSP_NAME']);
-                        item = getDetailHospItem(jsonData[0]['HOSP_NAME'],jsonData[0]['DEPT_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'])
+                        item = getDetailHospItem(jsonData[0]['HOSP_NAME'],jsonData[0]['DEPT_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'],jsonData[0]['WEEKDAY_OPEN'],jsonData[0]['LUNCHTIME'],coords.getLat(),coords.getLng())
                      }
                      else if (apiStatus == 1)
                      {
                         console.log(jsonData[0]['PHAR_NAME']);
-                        item = getDetailHospItem(jsonData[0]['PHAR_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'])
+                        item = getDetailPharItem(jsonData[0]['PHAR_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'],coords.getLat(),coords.getLng())
                      }
                      $(".reservation_info").show();
                      $('.search_list').html(item);
@@ -1554,7 +1623,7 @@
          });
       }
 
-      function getDetailHospItem(hospname,deptname,address,tel)
+      function getDetailHospItem(hospname,deptname,address,tel,time,detail,lat,lng)
       {
          item = '<div class="inner_top">'+
                   '<div class="inner_title_area">'+
@@ -1567,39 +1636,38 @@
                   '</div>'+
                   '<div class="inner_btn_area">'+
                      '<div class="btn_direction">'+
-                        '<button class="find_way_btn">길찾기</button>'+
+                     '<a class="find_way_btn" href="https://map.kakao.com/link/to/'+hospname+','+lat+','+lng+'" style="color:blue" target="_blank">길찾기</a>'+
                         '<sec:authorize access="hasRole('ROLE_MEM')">'+
                         	'<button class="reservation_btn" onclick="reservation_show();">예약</button>'+
                         '</sec:authorize>'+
                      '</div>'+
                   '</div>'+
                   '<div class="inner_final_area">'+
-                     '<div class="inner_detail_address">'+
-                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/address.png'/>">'+
-                        '<div class="inner_end_box">'+address+'</div>'+
-                     '</div>'+
-                     '<div class="inner_detail_tel">'+
-                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/tel.png'/>">'+
-                        '<div class="inner_end_box">'+tel+'</div>'+
-                     '</div>'+
-                     '<div class="inner_detail_time">'+
-                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/time.png'/>">'+
-                        '<div class="inner_end_box">11:00~16:00</div>'+
-                     '</div>'+
-                     '<div class="inner_detail_time2">'+
-                        '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/detail_info.png'/>">'+
-                        '<div class="inner_end_box">'+
-                           '영업시간 11:00~ 14:40 16:00~ 20:30<br/>'+
-                           '휴무: 매주 월요일'+
-                        '</div>'+
-                     '</div>'+
-                  '</div>'+
+	                  '<div class="inner_detail_address">'+
+	                     '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/address.png'/>">'+
+	                     '<div class="inner_end_box">'+address+'</div>'+
+	                  '</div>'+
+	                  '<div class="inner_detail_tel">'+
+	                     '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/tel.png'/>">'+
+	                     '<div class="inner_end_box">'+tel+'</div>'+
+	                  '</div>'+
+	                  '<div class="inner_detail_time">'+
+	                     '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/time.png'/>">'+
+	                     '<div class="inner_end_box">'+time+'</div>'+
+	                  '</div>'+
+	                  '<div class="inner_detail_time2">'+
+	                     '<img class="inner_final_icon" src="<c:url value='/images/map/detail_view/detail_info.png'/>">'+
+	                     '<div class="inner_end_box">'+
+	                        '점심시간 '+detail+'<br/>'+
+	                     '</div>'+
+	                  '</div>'+
+	               '</div>'+
                '</div>';
                
          return item;
       }
       
-      function getDetailPharItem(pharname,address,tel)
+      function getDetailPharItem(pharname,address,tel,lat,lng)
       {
          item = '<div class="inner_top">'+
                   '<div class="inner_title_area">'+
@@ -1612,7 +1680,7 @@
                   '</div>'+
                   '<div class="inner_btn_area">'+
                      '<div class="btn_direction">'+
-                        '<button class="find_way_btn">길찾기</button>'+
+                        '<a class="find_way_btn" href="https://map.kakao.com/link/to/'+pharname+','+lat+','+lng+'" style="color:blue" target="_blank">길찾기</a>'+
                      '</div>'+
                   '</div>'+
                   '<div class="inner_final_area">'+
@@ -1663,7 +1731,7 @@
                 var option="";
                 for(var i = 0; i < jsonData.length; i++)
 	       		{
-                	option += "<label class='keyboard disable radio-inline form-label'><input type='radio' name='optradio' value='"+jsonData[i].DEPT_NAME+"'>"+jsonData[i].DEPT_NAME+"</label>";
+                	option += "<label class='keyboard disable radio-inline form-label'><input type='radio' name='optradio' value='"+jsonData[i].DEPT_NAME+"' required>"+jsonData[i].DEPT_NAME+"</label>";
 	       		}
                 $('#dept_radio').append(option);
                 $('#symptom').empty();
@@ -1780,7 +1848,7 @@
     	  
     	  var option
     	  
-    	  if((date.getHours() < 13 && date.getHours() >= 0) || (day.getDate() != date.getDate()))
+    	  if(day.getDate() != date.getDate())
     	  {
         	  $("#Minute").empty();
     		  

@@ -92,7 +92,7 @@ $('#next').on('click', function(){
 							<input type="text" id="text-input" name="title" style="width: 40%;" placeholder="제목" />
 							<br> <br>
 							<textarea id="summernote" name="content"></textarea>
-							<input id="next" type="button" value="글 작성" class="btn btn-success" style="float: right;" />
+							<input id="next" type="button" value="글 작성" class="btn btn-primary" style="float: right;" />
 						</form></br></br></br>
 					</div>
 				</div>
