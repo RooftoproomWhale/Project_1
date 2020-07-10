@@ -20,7 +20,11 @@
     <link rel="stylesheet" href="<c:url value='https://fonts.googleapis.com/icon?family=Material+Icons'/>"/>
 <link rel="stylesheet" href="<c:url value='/calendar/css/main.css'/>"/>
    <script>
+
+	  
+   
    	$(function() {
+   	   $('#loading').hide();  
 		$('#item-1').on("click",function(){
 			$('#items-1').css("display","");
 			$('#items-2').css("display","none ")
@@ -38,7 +42,9 @@
 		})
    		
 	})
-   
+
+
+
    </script>
 <style>  
 #calendar {
@@ -69,7 +75,23 @@
 .click{
 border: 2px solid black ;
 }
-
+#loading {
+ width: 100%;   
+ height: 100%;   
+ top: 0px;
+ left: 0px;
+ position: fixed;   
+ display: block;   
+ opacity: 0.7;   
+ background-color: #fff;   
+ z-index: 9999;   
+ text-align: center; }  
+  
+#loading-image {   
+ position: absolute;   
+ top: 50%;   
+ left: 50%;  
+ z-index: 100; } 
   </style>
 </head>
 
@@ -79,7 +101,6 @@ border: 2px solid black ;
    
 
         <div id="wrapper">
-            <div id="loading"></div>
             <div id="calendar"></div>
         </div>
         <!--병원예약정보-->
@@ -125,8 +146,7 @@ border: 2px solid black ;
                     <div class="modal-footer modalBtnContainer-modifyEvent">
                         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                           <button type="button" class="btn btn-danger" id="deleteEvent_no1">예약취소</button>
-                          <button type="button" class="btn btn-danger" id="updateEvents_no1" style="display: none;">예약변경확인</button>
-                        <button type="button" class="btn btn-danger" id="updateEvent_no1">예약변경</button>
+
 						
 					
                     </div>
@@ -181,6 +201,7 @@ border: 2px solid black ;
 
   </tbody>	
 </table>
+
                     </div>
                     
                     <div class="modal-footer modalBtnContainer-modifyEvent">
@@ -314,6 +335,7 @@ border: 2px solid black ;
             </div>
  -->
         </div>
+<div id="loading"><img id="loading-image" src="<c:url value='/img/ajax-loader.gif'/>" alt="Loading..." /></div>
 
 <script src='<c:url value="/calendar/vendor/js/moment.min.js"/>'></script>
 
@@ -327,6 +349,7 @@ border: 2px solid black ;
 <script src='<c:url value="/calendar/js/addEvent.js"/>'></script>
 <script src='<c:url value="/calendar/js/editEvent.js"/>'></script>
 <script src='<c:url value="/calendar/js/etcSetting.js"/>'></script>
+
 
 
 
