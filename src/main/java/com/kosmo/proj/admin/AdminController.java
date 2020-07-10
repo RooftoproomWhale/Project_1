@@ -360,7 +360,9 @@ public class AdminController {
 	@RequestMapping("ApproveAuth.hst")
 	public String approve(@RequestParam Map map, Model model) {
 		int check = adminService.approveAuth(map);
+		int check_ = adminService.approveAuth_(map);
 		System.out.println(check);
+		System.out.println(check_);
 		return "HosAuth.ad_tiles";
 	}
 
@@ -581,7 +583,7 @@ public class AdminController {
 			System.out.println("null이 아니야");
 
 			renameFile = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-			file_addr = phisicalPath+File.separator+renameFile;
+			file_addr = "http://192.168.0.66:8080/proj/Upload/"+renameFile;
 			System.out.println(file_addr);
 
 			File file = new File(phisicalPath+File.separator+renameFile);
@@ -592,7 +594,7 @@ public class AdminController {
 		map.put("mem_email",dto.getMem_email().toString());
 		map.put("title",dto.getTitle().toString());
 		map.put("content",dto.getContent().toString());
-		map.put("file_addr",renameFile);
+		map.put("file_addr",file_addr);
 
 
 		int check = adminService.insertNotice(map);

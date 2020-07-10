@@ -344,6 +344,7 @@ width: 100%;
                $.each(data,function(i, item) {
                   console.log(item);
                      items += 
+                  	   
                         '<table class="table">' + 
                            '<tbody style="font-size:13px">' + 
                      /*          '<tr>' +
@@ -352,6 +353,7 @@ width: 100%;
                                  '<th class="col-md-2 text-left">번호</th>' +
                               '</tr>'+  */
                               '<tr id="hosCheck" onclick="searchHospClick('+ i + ')" style="cursor:hand">' + 
+                              '<input type="hidden" id="hospCode'+ i +'" value="' + item['hosp_code'] + '"/>' +
                                  '<td class="col-md-4 text-left" id="hospName'+i+'">' + item['hosp_name'] + '</td>' + 
                                  '<td class="col-md-4 text-left" id="hospAddr'+i+'">' + item['address'] + '</td>' + 
                                  '<td class="col-md-2 text-left" id="hospTel'+i+'">' + item['tel'] + '</td>' + 
@@ -551,7 +553,7 @@ width: 100%;
               
              $('.form-control1').keyup(function(){
               var sample4_detailAddress = $("input[name='sample4_detailAddress']");
-           var regExp = /^[0-9]+$/;
+         	  var regExp = /^[가-힣0-9]+$/;
              if(sample4_detailAddress.val()=="")
             {
                    console.log(sample4_detailAddress.val(), 1);
@@ -1068,7 +1070,7 @@ width: 100%;
                        "height" : 0,
                        "weight" : 0,
                        "role" : "ROLE_HOS",
-                       "enable" : "1"
+                       "enable" : "0"
                     },
                     success : function(data) {
                        alert('제휴신청이 완료되었습니다');
@@ -1082,20 +1084,21 @@ width: 100%;
    });
    
    function searchHospClick(i) {
-      var hospName = $('#hospName' + i).html();
-      console.log('#hospName' + i);
-      console.log(hospName);
+      var hospCode = $('#hospCode' + i).val();
+
+      console.log('#hospCode' + i);
+      console.log('hospCode: ' + hospCode);
       
             $.ajax({
                url : "<c:url value='/Member/HosSearchList.hst'/>",
                type : "get", //get, post 방식 
                dataType : 'json', //or xml or script or html 
                data : {
-                  "hosp_name" : hospName
+                  "hosp_code" : hospCode
                }, //넘길 파라미터 
                async : true, // true:비동기, false:동기 
                success : function(data) {
-                  console.log(data);
+                  console.log("병원 선택 성공: " + data);
             
                   var items = '<label style="font-size: 1.1em; padding-top:10px; padding-left:10px">병원 :</label>'
                         + '<div class="col-md-10">'

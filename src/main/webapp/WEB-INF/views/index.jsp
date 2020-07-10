@@ -58,7 +58,8 @@ window.onload = function(){
 		             console.log("gap: " + timeGap);
 		             if(timeGap > 0 && timeGap <= 30)
 		             {
-		            	 memNoti();
+		            	 memNoti30();
+// 		            	 androidMemFCM();
 							return false;
 		             }
 		         })
@@ -91,9 +92,10 @@ window.onload = function(){
 			             console.log("time: " + time);
 			             timeGap = time - currTime;
 			             console.log("gap: " + timeGap);
-			             if(timeGap == 30)
+			             if(timeGap == 0)
 			             {
-			            	 memNoti();
+			            	 memNoti0();
+			            	 androidMemFCM();
 								return false;
 			             }
 			         })
@@ -206,8 +208,23 @@ window.onload = function(){
 	}
 
 	var text;
-	function memNoti() {
+	function memNoti30() {
 		text = '30분 안에 복용 해야할 약이 있습니다';
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('복약 알림이 있습니다', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/mypage/administration.hst'/>";
+			};
+		}
+	
+	function memNoti0() {
+		text = '약 복용 시간입니다';
 		var options = 
 			{
 			      body: text,
@@ -285,6 +302,21 @@ window.onload = function(){
 			};
 		}
 	
+	function androidMemFCM() {
+			
+			$.ajax({
+				url:'<c:url value="/Noti/androidFCM.hst"/>',
+				dataType:'text',
+				success:function(data){
+						console.log("androidFCM 요청 성공");
+					},
+				error:function(request,error){
+					console.log('에러:',error);
+				}
+			});
+			
+			}
+	
 }
 </script>
 <head>
@@ -306,7 +338,7 @@ window.onload = function(){
 				<div class="container">
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 intro-text">
-							<h1> We Are Interact ${currAptCount}</h1>
+							<h1> We Are Home'spital ${currAptCount}</h1>
 							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
 							<a href="<c:url value='/Android/WebTest.hst'/>" id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
 						</div>
@@ -327,23 +359,23 @@ window.onload = function(){
 					<div class="img-thumbnail" data-u="slides"
 						style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 						<div data-p="680">
-							<a id="noti1" href="/Covid/status.hst">
-								<img id="img1" data-u="image" src="#" />
+							<a id="noti1" href="#">
+								<img id="img1" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti2" href="/corona/Corona_Mask.hst">
-								<img id="img2" data-u="image" src="#" />
+							<a id="noti2" href="#">
+								<img id="img2" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti3" href="/corona/Corona_Patient.hst">
-								<img id="img3" data-u="image" src="#" />
+							<a id="noti3" href="#">
+								<img id="img3" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti4" href="/prev/Season.hst">
-								<img id="img4" data-u="image" src="#" />
+							<a id="noti4" href="#">
+								<img id="img4" data-u="image" src='<c:url value="/images/no_noti.png"/>'" />
 							</a>
 						</div>
 					</div>
@@ -516,13 +548,11 @@ window.onload = function(){
 				success:function(data){
 					console.log(data);
 					var noti = JSON.parse(data);
-					console.log(noti[0]['FILE_ADDR']);
-					$('#noti1').attr('href');
-					$('#img1').attr('src','<c:url value="/Upload/'+noti[0]['FILE_ADDR']+'"/>');
+					$('#img1').attr('src',noti[0]["FILE_ADDR"]);
 					console.log($('#img1').attr('src'));
-					$('#img2').attr('src','<c:url value="/Upload/'+noti[1]['FILE_ADDR']+'"/>');
-					$('#img3').attr('src','<c:url value="/Upload/'+noti[2]['FILE_ADDR']+'"/>');
-					$('#img4').attr('src','<c:url value="/Upload/'+noti[3]['FILE_ADDR']+'"/>');
+					$('#img2').attr('src',noti[1]["FILE_ADDR"]);
+					$('#img3').attr('src',noti[2]["FILE_ADDR"]);
+					$('#img4').attr('src',noti[3]["FILE_ADDR"]);
 					//$('.img-thumbnail').html(comments);
 				},
 				error:function(e){console.log('에러:',e)}

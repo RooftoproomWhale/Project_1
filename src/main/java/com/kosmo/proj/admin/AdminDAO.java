@@ -470,4 +470,10 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.selectOne("getLast", map);
 	}
 
+	@Override
+	public int approveAuth_(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.update("updateAuthEnable", map);
+	}
+
 }
