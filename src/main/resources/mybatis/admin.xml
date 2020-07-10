@@ -242,6 +242,7 @@
 	<select id="selectAuth_Search" parameterType="java.util.Map" resultType="HospitalDTO">
 		SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
+	
 	<!-- snslogin user 정보 받기 -->
 	<select id="getUserById" resultType="CustomUserDetails">
 		SELECT * FROM member WHERE mem_email = #{username}
