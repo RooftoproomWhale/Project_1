@@ -168,7 +168,7 @@ img {
 						<div class="col-md-offset-2 col-md-8">
 							<div class="text-center">
 								<!-- 한줄 코멘트 입력 폼-->
-								<h3 style="color: black">Q&A 답변</h3><br>
+								<h3 style="color: black;">Q&A 답변</h3><br>
 								<form name="replyForm" method="post">
 									<input type="hidden" name="cno" />
 								</form>
@@ -197,7 +197,7 @@ img {
 									<div class="row">
 										<div class="page-header">
 											<textarea class="info" cols="90px" rows="5px" id="answerText"
-												disabled="disabled" style="background-color: white; border-color:black; font-size: 18px">${listA[0].answer_content}</textarea>
+												disabled="disabled" style="background-color: white; border-color:black; font-size: 18px; text-align: center; padding-top:15px; padding-left:15px; padding-right: 15px; border-right: none; border-left:none ">${listA[0].answer_content}</textarea>
 										</div>
 									</div>
 									</br>

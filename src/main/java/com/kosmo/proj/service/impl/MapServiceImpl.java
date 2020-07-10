@@ -107,4 +107,10 @@ public class MapServiceImpl implements MapService{
 		return dao.isDuplicateReservation(map);
 	}
 
+	@Override
+	public HospitalDTO selectHospListByAddr(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectHospListByAddr(map);
+	}
+
 }

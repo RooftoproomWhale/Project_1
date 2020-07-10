@@ -93,6 +93,7 @@ public interface AdminService {
 		//병원 제휴
 		List<HospitalDTO> selectList_Auth_All(Paging vo);
 		int approveAuth(Map map);
+		int approveAuth_(Map map);
 		int denyAuth(Map map);
 		List<HospitalDTO> selectList_Auth_Search(Map map);
 		int getTotalRecordHosAuth(Map map);

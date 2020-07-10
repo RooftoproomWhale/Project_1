@@ -364,7 +364,7 @@
 	         	<div  class="reservation_info">
 	         	</div>
 	         	<div class="currentResByAddr">
-	         		<h3>회원님은 현재 이 병원에 14:00에 예약하셨습니다</h3>
+	         		<h3>회원님은 현재 이 병원에 14:00에 예약하셨습니다(테스트)</h3>
 	         	</div>
 	         </div>
 	         	
@@ -737,6 +737,7 @@
 				type:'post',
 				success:function(data){
 					console.log(data);
+					
 					if(data == 1)
 					{
 						alert("예약이 완료되었습니다");
@@ -812,12 +813,7 @@
            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],   // 한글 요일 표시 부분
       });
 
-      $('#Hour').change(function(){
-    	  
-      });
-      $('#Minute').change(function(){
-    	  
-      });
+      
    });
 </script>
 <script>
@@ -1015,11 +1011,40 @@
                         $('.info_wrap').removeClass('warp_invisible');
                         $('.info-toggle').removeClass('left_toggle');
                      }
-                    
-                     var time = "평일 : " + item.weekday_open + ":00~" + item.weekday_close + ":00<br/>" 
-                     + "주말 : " + item.weekend_open + ":00~" + item.weekend_close + ":00" 
                      
-                     listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel,time,item.lunchtime,item.cor_y, item.cor_x);
+                     var weekday_open = ((item.weekday_open != undefined) ? item.weekday_open : '800')
+                     var weekday_close = ((item.weekday_close != undefined) ? item.weekday_close : '2200')
+                     var weekend_open = ((item.weekend_open != undefined) ? item.weekend_open : '900')
+                     var weekend_close = ((item.weekend_close != undefined) ? item.weekend_close : '1200')
+                     var lunchtime = ((item.lunchtime != undefined || item.lunchtime != '0' || item.lunchtime.length != 0) ? item.lunchtime : '12:30~1:30')
+                    		 
+                     console.log("lunchtime",lunchtime);
+                     console.log("item.lunchtime.length",item.lunchtime.length);
+                    		 
+                     var weekday_open_H = weekday_open.substring(0,parseInt(weekday_open.length/2));
+	               	 console.log("weekday_open",weekday_open_H);
+	               	 var weekday_open_M = weekday_open.substring(parseInt(weekday_open.length/2),weekday_open.length);
+	               	 console.log("weekday_open",weekday_open_M);
+	               	  
+	               	 var weekday_close_H = weekday_close.substring(0,parseInt(weekday_close.length/2));
+	               	 console.log("weekday_close",weekday_close_H);
+	               	 var weekday_close_M = weekday_close.substring(parseInt(weekday_close.length/2),weekday_close.length);
+	               	 console.log("weekday_close",weekday_close_M);
+	               	  
+	               	 var weekend_open_H = weekend_open.substring(0,parseInt(weekend_open.length/2));
+	               	 console.log("weekend_open",weekend_open_H);
+	               	 var weekend_open_M = weekend_open.substring(parseInt(weekend_open.length/2),weekend_open.length);
+	               	 console.log("weekend_open",weekend_open_M);
+	               	  
+	               	 var weekend_close_H = weekend_close.substring(0,parseInt(weekend_close.length/2));
+	               	 console.log("weekend_close",weekend_close_H);
+	               	 var weekend_close_M = weekend_close.substring(parseInt(weekend_close.length/2),weekend_close.length);
+	               	 console.log("weekend_close",weekend_close_M);
+                    
+                     var time = "평일 : " + weekday_open_H + ":" + weekday_open_M + "~" + weekday_close_H + ":"+weekday_close_M+"<br/>" 
+                     + "주말 : " + weekend_open_H + ":" + weekend_open_M + "~" + weekend_close_H + ":"+ weekend_close_M;
+                     
+                     listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel,time,lunchtime,item.cor_y, item.cor_x);
                      $('.search_list').html(listitem);
                   });
                   
@@ -1839,119 +1864,181 @@
       }
       
       function changeSelector(date,day) {
-    	  $("#Hour").empty();
-    	  
 
-    	  console.log(day.getDate());
-    	  console.log((date.getHours() + 24) % 12 || 12);
-    	  console.log(date.getMinutes());
     	  
-    	  var option
-    	  
-    	  if(day.getDate() != date.getDate())
-    	  {
-        	  $("#Minute").empty();
-    		  
-    		  option = "";
-    		  for(var i = 8; i <= 22; i++)
-    		  {
-    			  if(i<10)
-    			  {
-    				  option += "<option>0"+i+"</option>";
-    			  }
-    			  else
-    			  {
-    				  option += "<option>"+i+"</option>";
-    			  }
-    		  }
-    		  $('#Hour').append(option);
-    		  
-    		  option = "";
-    		  for(var i = 0; i <= 50; i=i+10)
-    		  {
-    			  if(i==0)
-    			  {
-    				  option += "<option>0"+i+"</option>";
-    			  }
-    			  else
-    			  {
-    				  option += "<option>"+i+"</option>";
-    			  }
-    		  }
-    		  
-    		  $('#Minute').append(option);
-    	  }
-    	  else
-    	  {
-	    	  $("#Minute").empty();
+    	  $.ajax({
+          	  url:"<c:url value='/Homespital/Map/getHospital.hst'/>",
+          	  type:'get',
+              datatype:'json',
+              data:{"address":$('#address').val()},
+              success:function(data){
+              	  console.log(data); 
+              	  var jsonData = JSON.parse(data);
+              	  console.log(jsonData); 
+              	  var weekday_open = jsonData.weekday_open != undefined ? jsonData.weekday_open : '800'
+              	  var weekday_close = jsonData.weekday_close != undefined ? jsonData.weekday_close : '2200'
+              	  var weekend_open = jsonData.weekend_open != undefined ? jsonData.weekend_open : '900'
+              	  var weekend_close = jsonData.weekend_close != undefined ? jsonData.weekend_close : '1200'
+              	  var lunchtime = (jsonData.lunchtime != undefined || jsonData.lunchtime != '0') ? jsonData.lunchtime : '12:30~1:30'
+              	  
+              	  console.log("weekday_open",weekday_open);
+              	  
 
-			  option = ""; 
-			  var min = ((Math.floor(date.getMinutes() / 10)) * 10) + 10;
-			  console.log(min);
-			  
-			  if(min == 60)
-			  {
-				  for(var i = 0; i <= 50; i=i+10)
-	    		  {
-					  if(i==0)
-	    			  {
-	    				  option += "<option>0"+i+"</option>";
-	    			  }
-	    			  else
-	    			  {
-	    				  option += "<option>"+i+"</option>";
-	    			  }
-	    		  }
-				  console.log(option)
-				  $('#Minute').append(option);
-				  
-				  option = "";
-				  for(var i = date.getHours()+1; i <= 22; i++)
-				  {
-					  if(i<10)
-	    			  {
-	    				  option += "<option>0"+i+"</option>";
-	    			  }
-	    			  else
-	    			  {
-	    				  option += "<option>"+i+"</option>";
-	    			  }
-				  }
-				  console.log(option)
-				  $('#Hour').append(option);
-			  }
-			  else
-			  {
-				  for(var i = min; i <= 50; i=i+10)
-	    		  {
-					  if(i==0)
-	    			  {
-	    				  option += "<option>0"+i+"</option>";
-	    			  }
-	    			  else
-	    			  {
-	    				  option += "<option>"+i+"</option>";
-	    			  }
-	    		  }
-				  console.log(option)
-				  $('#Minute').append(option);
-				  
-				  option = "";
-				  for(var i = date.getHours(); i <= 22; i++)
-				  {
-					  if(i<10)
-	    			  {
-	    				  option += "<option>0"+i+"</option>";
-	    			  }
-	    			  else
-	    			  {
-	    				  option += "<option>"+i+"</option>";
-	    			  }
-				  }
-				  console.log(option)
-				  $('#Hour').append(option);
-			  } 
-    	  }
+            	  $("#Hour").empty();
+            	  
+            	  console.log("weekday_open.length",weekday_open.length);
+            	  var weekday_open_H = weekday_open.substring(0,parseInt(weekday_open.length/2));
+            	  console.log("weekday_open",weekday_open_H);
+            	  var weekday_open_M = weekday_open.substring(parseInt(weekday_open.length/2),weekday_open.length);
+            	  console.log("weekday_open",weekday_open_M);
+            	  
+            	  var weekday_close_H = weekday_close.substring(0,parseInt(weekday_close.length/2));
+            	  console.log("weekday_close",weekday_close_H);
+            	  var weekday_close_M = weekday_close.substring(parseInt(weekday_close.length/2),weekday_close.length);
+            	  console.log("weekday_close",weekday_close_M);
+            	  
+            	  var weekend_open_H = weekend_open.substring(0,parseInt(weekend_open.length/2));
+            	  console.log("weekend_open",weekend_open_H);
+            	  var weekend_open_M = weekend_open.substring(parseInt(weekend_open.length/2),weekend_open.length);
+            	  console.log("weekend_open",weekend_open_M);
+            	  
+            	  var weekend_close_H = weekend_close.substring(0,parseInt(weekend_close.length/2));
+            	  console.log("weekend_close",weekend_close_H);
+            	  var weekend_close_M = weekend_close.substring(parseInt(weekend_close.length/2),weekend_close.length);
+            	  console.log("weekend_close",weekend_close_M);
+            	  
+            	  console.log("lunchtime",lunchtime.split('~')[0])
+            	  
+            	  var lunchtime_start_H = lunchtime.split('~')[0].substring(0,lunchtime.split('~')[0].indexOf(':'));
+            	  console.log("lunchtime",lunchtime_start_H)
+            	  var lunchtime_start_M = lunchtime.split('~')[0].substring(lunchtime.split('~')[0].indexOf(':')+1,lunchtime.split('~')[0].length);
+            	  console.log("lunchtime",lunchtime_start_M)
+            	  
+            	  console.log("lunchtime",lunchtime.split('~')[1])
+            	  
+            	  var lunchtime_end_H = lunchtime.split('~')[1].substring(0,lunchtime.split('~')[1].indexOf(':'));
+            	  console.log("lunchtime",lunchtime_end_H)
+            	  var lunchtime_end_M = lunchtime.split('~')[1].substring(lunchtime.split('~')[1].indexOf(':')+1,lunchtime.split('~')[1].length);
+            	  console.log("lunchtime",lunchtime_end_M)
+            	  
+            	  console.log(day.getDate());
+            	  console.log((date.getHours() + 24) % 12 || 12);
+            	  console.log(date.getMinutes());
+            	  
+            	  var option
+            	  
+            	  if(day.getDate() != date.getDate())
+            	  {
+                	  $("#Minute").empty();
+            		  
+            		  option = "";
+            		  for(var i = weekday_open_H; i <= weekday_close_H-1; i++)
+            		  {
+            			  if(i<10)
+            			  {
+            				  option += "<option>0"+i+"</option>";
+            			  }
+            			  else
+            			  {
+            				  option += "<option>"+i+"</option>";
+            			  }
+            		  }
+            		  $('#Hour').append(option);
+            		  
+            		  option = "";
+            		  for(var i = 0; i <= 50; i=i+10)
+            		  {
+            			  if(i==0)
+            			  {
+            				  option += "<option>0"+i+"</option>";
+            			  }
+            			  else
+            			  {
+            				  option += "<option>"+i+"</option>";
+            			  }
+            		  }
+            		  
+            		  $('#Minute').append(option);
+            	  }
+            	  else
+            	  {
+        	    	  $("#Minute").empty();
+
+        			  option = ""; 
+        			  var min = ((Math.floor(date.getMinutes() / 10)) * 10) + 10;
+        			  console.log(min);
+        			  
+        			  if(min == 60)
+        			  {
+        				  for(var i = 0; i <= 50; i=i+10)
+        	    		  {
+        					  if(i==0)
+        	    			  {
+        	    				  option += "<option>0"+i+"</option>";
+        	    			  }
+        	    			  else
+        	    			  {
+        	    				  option += "<option>"+i+"</option>";
+        	    			  }
+        	    		  }
+        				  console.log(option)
+        				  $('#Minute').append(option);
+        				  
+        				  option = "";
+        				  for(var i = date.getHours()+1; i <= weekday_close_H-1; i++)
+        				  {
+        					  if(i<10)
+        	    			  {
+        	    				  option += "<option>0"+i+"</option>";
+        	    			  }
+        	    			  else
+        	    			  {
+        	    				  option += "<option>"+i+"</option>";
+        	    			  }
+        				  }
+        				  console.log(option)
+        				  $('#Hour').append(option);
+        			  }
+        			  else
+        			  {
+        				  for(var i = min; i <= 50; i=i+10)
+        	    		  {
+        					  if(i==0)
+        	    			  {
+        	    				  option += "<option>0"+i+"</option>";
+        	    			  }
+        	    			  else
+        	    			  {
+        	    				  option += "<option>"+i+"</option>";
+        	    			  }
+        	    		  }
+        				  console.log(option)
+        				  $('#Minute').append(option);
+        				  
+        				  option = "";
+        				  for(var i = date.getHours(); i <= weekday_close_H-1; i++)
+        				  {
+        					  if(i<10)
+        	    			  {
+        	    				  option += "<option>0"+i+"</option>";
+        	    			  }
+        	    			  else
+        	    			  {
+        	    				  option += "<option>"+i+"</option>";
+        	    			  }
+        				  }
+        				  console.log(option)
+        				  $('#Hour').append(option);
+        			  } 
+            	  }
+
+            	  
+              },
+              error:function(e){
+              	  console.log(e); 
+              }
+          });
+    	  
 	  }
       //yy-mm-dd
       function parse(str) {
