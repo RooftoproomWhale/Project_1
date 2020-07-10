@@ -581,7 +581,7 @@ public class AdminController {
 			System.out.println("null이 아니야");
 
 			renameFile = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-			file_addr = phisicalPath+File.separator+renameFile;
+			file_addr = "http://192.168.0.66:8080/proj/Upload/"+renameFile;
 			System.out.println(file_addr);
 
 			File file = new File(phisicalPath+File.separator+renameFile);
