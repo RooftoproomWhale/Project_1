@@ -159,5 +159,10 @@ public List<PrescriptionDTO> getPreMedi(Map map) {
 	return sqlMapper.selectList("AndPreAlarm", map);
 }
 
+public List<Map<String, String>> getDeptone(Map map) {
+	// TODO Auto-generated method stub
+	return sqlMapper.selectList("deptone",map);
+}
+
 
 }

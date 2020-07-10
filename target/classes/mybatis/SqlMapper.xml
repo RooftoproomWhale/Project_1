@@ -20,7 +20,14 @@
 		(SELECT count(*)
 		resercount FROM reservation WHERE MEM_EMAIL = #{id})r
 	</select>
+	<select id="deptone" parameterType="java.util.Map" resultType="java.util.Map">
+	select (select dept_name from (select dept_name,count(*) c from reservation WHERE mem_email = #{id} group by dept_name ORDER by c desc)WHERE rownum=1)dept_name
+,(SELECT hosp_name FROM 
+(select hosp_code,count(*) c from reservation WHERE mem_email = #{id} group by hosp_code ORDER by c desc)q
+join hospital h on q.hosp_code = h.hosp_code
+WHERE rownum=1)hosp_name from reservation WHERE rownum=1
 
+	</select>
 	<delete id="signDelete" parameterType="MemberDTO">
 		DELETE FROM MEMBER WHERE MEM_EMAIL = #{userid}
 	</delete>
