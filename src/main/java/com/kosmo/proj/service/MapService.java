@@ -8,6 +8,7 @@ public interface MapService {
 	List<Map> selectList();
 	//병원 목록
 	List<Map> selectList(Map map);
+	HospitalDTO selectHospListByAddr(Map map);
 	//안드로이드용 병원
 	List<Map> selectHospitalList(Map map);
 	//약국 목록

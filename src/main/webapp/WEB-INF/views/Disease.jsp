@@ -639,145 +639,210 @@ jQuery(document).ready(function(){
 					</div>
 					<div class="label-wrapper">
 						<input class="nav-item" name="nav" type="radio" id="opt-2">
-						<label class="category" for="opt-2">외과</label>
+						<label class="category" for="opt-2">내분비내과</label>
 					</div>
 					<div class="label-wrapper">
 						<input class="nav-item" name="nav" type="radio" id="opt-3">
-						<label class="category" for="opt-3">신경외과</label>
+						<label class="category" for="opt-3">심혈관내과</label>
 					</div>
 					<div class="label-wrapper">
 						<input class="nav-item" name="nav" type="radio" id="opt-4">
-						<label class="category" for="opt-4">정형외과</label>
+						<label class="category" for="opt-4">피부과</label>
 					</div>
 					<div class="label-wrapper">
 						<input class="nav-item" name="nav" type="radio" id="opt-5">
-						<label class="category" for="opt-5">비뇨기과</label>
+						<label class="category" for="opt-5">호흡기내과</label>
 					</div>
 					<div class="label-wrapper">
 						<input class="nav-item" name="nav" type="radio" id="opt-6">
-						<label class="category" for="opt-6">정신과</label>
+						<label class="category" for="opt-6">소화기내과</label>
 					</div>
 					<div class="label-wrapper">
 						<input class="nav-item" name="nav" type="radio" id="opt-7">
-						<label class="category" for="opt-7">이비인후과</label>
+						<label class="category" for="opt-7">신경과</label>
 					</div>
 					<div class="label-wrapper">
 						<input class="nav-item" name="nav" type="radio" id="opt-8">
-						<label class="category" for="opt-8">신경과 </label>
+						<label class="category" for="opt-8">정형외과 </label>
 					</div>
 					<div class="label-wrapper">
 						<input class="nav-item" name="nav" type="radio" id="opt-9">
-						<label class="category" for="opt-9">소화기내과 </label>
+						<label class="category" for="opt-9">비뇨기과 </label>
 					</div>
 					<div class="label-wrapper">
 						<input class="nav-item" name="nav" type="radio" id="opt-10">
-						<label class="category" for="opt-10">호흡기내과 </label>
+						<label class="category" for="opt-10">안과 </label>
 					</div>
 					<div class="label-wrapper">
 						<input class="nav-item" name="nav" type="radio" id="opt-11">
-						<label class="category" for="opt-11">피부과 </label>
+						<label class="category" for="opt-11">이비인후과 </label>
 					</div>
 				</div>
 
 				<!-- task wrapper 시작 -->
 				<div class="tasks-wrapper">
-					<!-- 외과 -->
+					<!-- 내분비내과 -->
 					<div class="task">
 						<input class="task-item" name="task-gs" type="checkbox"
 							id="item-1" checked> <label for="item-1"> <span
-							class="label-text">만성폐쇄성 폐질환</span>
+							class="label-text">당뇨병</span>
 						</label> <span class="tag progress" id="items-1">UnSelection</span>
 					</div>
 					<div class="task">
 						<input class="task-item" name="task-gs" type="checkbox"
 							id="item-2"> <label for="item-2"> <span
-							class="label-text">당뇨병</span>
+							class="label-text">골다공증</span>
 						</label> <span class="tag progress" >UnSelection</span>
 					</div>
+					<!-- 내분비내과 끝-->
+					<!-- 심혈관내과 -->
 					<div class="task">
-						<input class="task-item" name="task-gs" type="checkbox"
-							id="item-3" checked> <label for="item-3"> <span
-							class="label-text">고혈압</span>
+						<input class="task-item" name="task-ns" type="checkbox"
+							id="item-3"> <label for="item-3"> <span
+							class="label-text">심장질환</span>
 						</label> <span class="tag progress">UnSelection</span>
 					</div>
-					<!-- 외과 끝-->
-					<!-- 신경외과 -->
 					<div class="task">
 						<input class="task-item" name="task-ns" type="checkbox"
 							id="item-4"> <label for="item-4"> <span
-							class="label-text">천식</span>
+							class="label-text">고혈압</span>
 						</label> <span class="tag progress">UnSelection</span>
 					</div>
-					<!-- 신경외과 끝 -->
-					<!-- 정형외과 -->
+					<!-- 심혈관내과 끝 -->
+					<!-- 피부과 -->
 					<div class="task">
 						<input class="task-item" name="task-os" type="checkbox"
 							id="item-5"> <label for="item-5"> <span
-							class="label-text">치매</span>
+							class="label-text">대상포진</span>
 						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<div class="task">
 						<input class="task-item" name="task-os" type="checkbox"
 							id="item-6"> <label for="item-6"> <span
-							class="label-text">골관절염</span>
+							class="label-text">아토피 피부염</span>
 						</label> <span class="tag progress">UnSelection</span>
 					</div>
-					<!-- 정형외과 끝 -->
-					<!-- 비뇨 기과 -->
+					<!-- 피부과 끝 -->
+					<!-- 호흡기내과 -->
 					<div class="task">
 						<input class="task-item" name="task-uro" type="checkbox"
 							id="item-7"> <label for="item-7"> <span
-							class="label-text">심장</span>
+							class="label-text">폐렴</span>
 						</label> <span class="tag progress">UnSelection</span>
 					</div>
-					<!-- 비뇨 기과 끝 -->
-					<!-- 정신과 -->
 					<div class="task">
-						<input class="task-item" name="task-np" type="checkbox"
+						<input class="task-item" name="task-uro" type="checkbox"
 							id="item-8"> <label for="item-8"> <span
-							class="label-text">암</span>
+							class="label-text">천식</span>
 						</label> <span class="tag progress">UnSelection</span>
 					</div>
-					<!-- 정신과 끝 -->
-					<!-- 이비인후과 -->
 					<div class="task">
-						<input class="task-item" name="task-ent" type="checkbox"
+						<input class="task-item" name="task-uro" type="checkbox"
 							id="item-9"> <label for="item-9"> <span
-							class="label-text">질병</span>
+							class="label-text">기흉</span>
 						</label> <span class="tag progress">UnSelection</span>
 					</div>
-					<!-- 이비인후과 끝 -->
-					<!-- 신경과 -->
 					<div class="task">
-						<input class="task-item" name="task-nr" type="checkbox"
-							id="item-9"> <label for="item-9"> <span
-							class="label-text">질병</span>
-						</label> <span class="tag progress">UnSelection</span>
-					</div>
-					<!-- 신경과 끝 -->
-					<!-- 소화기내과  -->
-					<div class="task">
-						<input class="task-item" name="task-gi" type="checkbox"
-							id="item-9"> <label for="item-9"> <span
-							class="label-text">질병</span>
-						</label> <span class="tag progress">UnSelection</span>
-					</div>
-					<!-- 소화기내과  끝 -->
-					<!-- 호흡기내과 -->
-					<div class="task">
-						<input class="task-item" name="task-p" type="checkbox" id="item-9">
-						<label for="item-9"> <span class="label-text">질병</span>
+						<input class="task-item" name="task-uro" type="checkbox"
+							id="item-10"> <label for="item-10"> <span
+							class="label-text">결핵</span>
 						</label> <span class="tag progress">UnSelection</span>
 					</div>
 					<!-- 호흡기내과 끝 -->
-					<!-- 피부과  -->
+					<!-- 소화기내과 -->
 					<div class="task">
-						<input class="task-item" name="task-der" type="checkbox"
-							id="item-9"> <label for="item-9"> <span
-							class="label-text">질병</span>
+						<input class="task-item" name="task-np" type="checkbox"
+							id="item-11"> <label for="item-11"> <span
+							class="label-text">간염</span>
 						</label> <span class="tag progress">UnSelection</span>
 					</div>
-					<!-- 피부과  끝 -->
+					<div class="task">
+						<input class="task-item" name="task-np" type="checkbox"
+							id="item-12"> <label for="item-12"> <span
+							class="label-text">소화불량</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<div class="task">
+						<input class="task-item" name="task-np" type="checkbox"
+							id="item-13"> <label for="item-13"> <span
+							class="label-text">담석</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<!-- 소화기내과 끝 -->
+					<!-- 신경과 -->
+					<div class="task">
+						<input class="task-item" name="task-ent" type="checkbox"
+							id="item-14"> <label for="item-14"> <span
+							class="label-text">간질</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<div class="task">
+						<input class="task-item" name="task-ent" type="checkbox"
+							id="item-15"> <label for="item-15"> <span
+							class="label-text">치매</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<div class="task">
+						<input class="task-item" name="task-ent" type="checkbox"
+							id="item-16"> <label for="item-16"> <span
+							class="label-text">뇌졸증</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<!-- 신경과 끝 -->
+					<!-- 정형외과 -->
+					<div class="task">
+						<input class="task-item" name="task-nr" type="checkbox"
+							id="item-17"> <label for="item-17"> <span
+							class="label-text">관절염</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<div class="task">
+						<input class="task-item" name="task-nr" type="checkbox"
+							id="item-18"> <label for="item-18"> <span
+							class="label-text">디스크</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<!-- 정형외과 끝 -->
+					<!-- 비뇨기과  -->
+					<div class="task">
+						<input class="task-item" name="task-gi" type="checkbox"
+							id="item-19"> <label for="item-19"> <span
+							class="label-text">전립선염</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<div class="task">
+						<input class="task-item" name="task-gi" type="checkbox"
+							id="item-20"> <label for="item-20"> <span
+							class="label-text">요로결석</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<!-- 비뇨기과  끝 -->
+					<!-- 이비인후과 -->
+					<div class="task">
+						<input class="task-item" name="task-p" type="checkbox" id="item-21">
+						<label for="item-21"> <span class="label-text">비염</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<div class="task">
+						<input class="task-item" name="task-p" type="checkbox" id="item-22">
+						<label for="item-22"> <span class="label-text">축농증</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<!-- 이비인후과 끝 -->
+					<!-- 안과  -->
+					<div class="task">
+						<input class="task-item" name="task-der" type="checkbox"
+							id="item-23"> <label for="item-23"> <span
+							class="label-text">백내장</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<div class="task">
+						<input class="task-item" name="task-der" type="checkbox"
+							id="item-24"> <label for="item-24"> <span
+							class="label-text">녹내장</span>
+						</label> <span class="tag progress">UnSelection</span>
+					</div>
+					<!-- 안과  끝 -->
 
 
 
