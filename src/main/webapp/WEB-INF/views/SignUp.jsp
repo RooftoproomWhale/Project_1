@@ -1068,7 +1068,7 @@ width: 100%;
                        "height" : 0,
                        "weight" : 0,
                        "role" : "ROLE_HOS",
-                       "enable" : "1"
+                       "enable" : "0"
                     },
                     success : function(data) {
                        alert('제휴신청이 완료되었습니다');
