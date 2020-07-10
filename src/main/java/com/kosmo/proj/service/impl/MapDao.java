@@ -111,4 +111,10 @@ public class MapDao implements MapService{
 		return (Integer)sqlMapper.selectOne("isDuplicateReservation", map)==0 ? false : true;
 	}
 
+	@Override
+	public HospitalDTO selectHospListByAddr(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("hospitalSelectByAddr", map);
+	}
+
 }
