@@ -93,9 +93,10 @@ public class SignUpController {
       ObjectMapper mapper = new ObjectMapper();
       String jsonStr = null;
       List<HospitalDTO> list = memberService.selectedHosp(map);
+      System.out.println("list : " + list);
       for (HospitalDTO val : list) {
-    	  System.out.println(val.getHosp_name());
-    	  System.out.println(val.getAddress());
+    	  System.out.println("병원명 : " + val.getHosp_name());
+    	  System.out.println("병원주소: " + val.getAddress());
       }
       try {
          jsonStr = mapper.writeValueAsString(list);
@@ -104,7 +105,7 @@ public class SignUpController {
       }
 
       model.addAttribute("list", list);
-      System.out.println(jsonStr);
+      System.out.println("json : " + jsonStr);
       return jsonStr.toString();
    }
 

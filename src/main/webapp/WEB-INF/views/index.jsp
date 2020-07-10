@@ -338,7 +338,7 @@ window.onload = function(){
 				<div class="container">
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2 intro-text">
-							<h1> We Are Interact ${currAptCount}</h1>
+							<h1> We Are Home'spital ${currAptCount}</h1>
 							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
 							<a href="<c:url value='/Android/WebTest.hst'/>" id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
 						</div>

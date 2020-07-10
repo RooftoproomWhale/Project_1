@@ -101,7 +101,7 @@
 		SELECT count(*) FROM reservation 
 		WHERE hosp_Code = (SELECT hosp_code FROM hospital WHERE address = #{address}) 
 		AND mem_email = #{email}
-		AND TO_CHAR(SYSDATE,'YYYY-MM-DD') = #{datepick} 
+		AND res_date = #{datepick} 
 	</select>
 	<insert id="InsertReservation" parameterType="java.util.Map">
 		INSERT INTO reservation VALUES(SEQ_RESERVATION.NEXTVAL,
