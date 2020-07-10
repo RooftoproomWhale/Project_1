@@ -112,10 +112,10 @@
 		SELECT * FROM (SELECT * FROM HOSPITAL WHERE HOSP_NAME LIKE '%' || #{search_keyword} || '%') WHERE ROWNUM <![CDATA[ <= ]]> 30
 	</select>
 	<select id="selectedHosp" parameterType="java.util.Map" resultType="HospitalDTO">
-		SELECT * FROM HOSPITAL WHERE HOSP_NAME = #{hosp_name}
+		SELECT * FROM HOSPITAL WHERE HOSP_CODE = #{hosp_code}
 	</select>
 	<update id="hosAuthSub" parameterType="java.util.Map">
-      UPDATE HOSPITAL SET AUTH = '승인대기중' WHERE HOSP_NAME = #{name}
+      UPDATE HOSPITAL SET AUTH = '승인대기중' WHERE HOSP_CODE = #{hospCode}
   	</update>
   	<update id="hosIdUpdate" parameterType="java.util.Map">
       UPDATE HOSPITAL SET MEM_EMAIL = #{email}, AUTH_DATE = SYSDATE WHERE HOSP_CODE = #{hospCode}
