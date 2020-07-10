@@ -318,7 +318,9 @@ window.onload = function(){
 		<ul class="nav menu">
 			<li class="active"><a href="<c:url value='/Home/ToHomePage.hst'/>"><em class="fa fa-home"></em> Homespital 홈으로 이동 </a></li>
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-				<em class="fa fa-navicon">&nbsp;</em> 개인 정보 관리 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon">&nbsp;</em> 개인 정보 관리 
+					<span data-toggle="collapse" href="#sub-item-1" class="icon pull-right">
+				<em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-1">
 					<li><a class="" href="<c:url value='/mypage/mypage.hst'/>">
@@ -334,7 +336,20 @@ window.onload = function(){
 			</li>
 			<li><a href="<c:url value='/mypage/administration.hst'/>"><i class="fas fa-pills">&nbsp;</i> 복약 관리</a></li>
 			<li><a href="<c:url value='/mypage/ReservationList.hst'/>"><em class="fa fa-calendar">&nbsp;</em> 진료 예약 현황</a></li>
-			<li><a href="<c:url value='/mypage/Disease.hst'/>"><i class="fas fa-syringe"></i>&nbsp; 내 질병 관리</a></li>
+			<li class="parent "><a data-toggle="collapse" href="#sub-item-2">
+				<em class="fa fa-navicon">&nbsp;</em> 질병 관리 
+					<span data-toggle="collapse" href="#sub-item-2" class="icon pull-right">
+				<em class="fa fa-plus"></em></span>
+				</a>
+			<%-- <li><a href="<c:url value='/mypage/Disease.hst'/>"><i class="fas fa-syringe"></i>&nbsp; 질병 관리</a></li>	 --%>
+			<ul class="children collapse" id="sub-item-2">
+				<li><a class="" href="<c:url value='/mypage/Disease.hst'/>">
+					<span class="fa fa-arrow-right">&nbsp;</span> 내 질병 관리
+				</a></li>
+				<li><a class="" href="<c:url value='/mypage/Prevention.hst'/>">
+					<span class="fa fa-arrow-right">&nbsp;</span> 내 예방 정보
+				</a></li>
+			</ul>
 			<li><a href="<c:url value='/User/Login.hst'/>"><em class="fa fa-power-off">&nbsp;</em> 로그아웃 </a></li>
 		</ul>
 	</div><!-- /.sidebar -->

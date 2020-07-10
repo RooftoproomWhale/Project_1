@@ -9,6 +9,9 @@
    <select id="hospitalSelect" resultType="java.util.Map">
       SELECT * FROM hospital
    </select>
+   <select id="hospitalSelectByAddr" resultType="HospitalDTO">
+      SELECT * FROM hospital WHERE address = #{address}
+   </select>
    <select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
       <!-- SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%' -->
       SELECT H.*, D.dept_name FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code

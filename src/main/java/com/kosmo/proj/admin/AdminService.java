@@ -108,4 +108,7 @@ public interface AdminService {
 		List<Map> selectImage();
 		int hitNotice(Map map);
 
+		int getFirst(Map map);
+		int getLast(Map map);
+
 }

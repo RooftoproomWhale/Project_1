@@ -19,6 +19,9 @@ public interface QnAService {
 	int updateQnA(Map map);
 	List<QnADTO> viewQnA(Map map);
 	List<QnADTO> selectComment(Map map);
+	int hitQnA(Map map);
 
+	//예방 정보
+	List<IllnessDTO>listIllness(Map map);
 
 }

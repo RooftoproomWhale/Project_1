@@ -78,7 +78,7 @@ img {
 					<img src="../img/111.jpg" align="right">
 					<div class="jumbotron" style="background-color: white">
 						<h1 style="color: #e0dada">Homespital</h1>
-					</div>
+					</div></br></br>
 					<table class="table" style="border: none;">
 						<thead>
 							<tr class="info">
@@ -86,6 +86,7 @@ img {
 								<th scope="col" class="" style="text-align: center;">제목</th>
 								<th scope="col" class="" style="width: 120px; text-align: center;">작성자</th>
 								<th scope="col" class="" style="width: 120px; text-align: center;">작성일</th>
+								<th scope="col" class="" style="width: 120px; text-align: center;">조회수</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -102,6 +103,7 @@ img {
 										<a href='<c:url value="/Admin/NoticeDetail.hst?no=${item.noti_no}"/>'>${item.title }</td>
 										<td>${item.mem_email }</td>
 										<td>${item.postdate }</td>
+										<td>${item.hit }</td>
 									</tr>
 								</c:forEach>
 							</c:if>
