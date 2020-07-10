@@ -5,175 +5,175 @@
 <html lang="en">
 <script>
 $(function() {
-	
-// // 	필터
-// 	$("#filter").change(function(){
-// 		var state = jQuery('#filter option:selected').val();
-// 		if ( state == 'all' ) 
-// 		{
-// 			console.log(state);
-// 			$.ajax({ 
-// 				url: "<c:url value='/Admin/Accounts.hst'/>",
-// 				data: {
-// 						}, //넘길 파라미터 
-// 				dataType: 'html',
-// 				async: true, // true:비동기, false:동기 
-// 				success: function(data){ 
-// 					console.log('성공');
-// 					window.location.href = "<c:url value='/Admin/Accounts.hst'/>";
-// 				},
-// 				error:function(request,status,error){
-// 					console.log('실패');
-// 					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-// 				} 
-// 			});
-// 		} 
-// 		else if ( state == 'user' )
-// 		{
-// 			console.log(state);
-// 			$.ajax({ 
-// 				url: "<c:url value='/Admin/AccountsUser.hst'/>",
-// 				data: {
-// 						}, //넘길 파라미터 
-// 				dataType: 'html',
-// 				async: true, // true:비동기, false:동기 
-// 				success: function(data){ 
-// 					console.log('성공');
-// 					window.location.href = "<c:url value='/Admin/AccountsUser.hst'/>";
-					
-// 				},
-// 				error:function(request,status,error){
-// 					console.log('실패');
-// 					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-// 				} 
-// 			});
-// 		}
-// 		else
-// 		{
-// 			console.log(state);
-// 			$.ajax({ 
-// 				url: "<c:url value='/Admin/AccountsHosp.hst'/>",
-// 				data: {
-// 						}, //넘길 파라미터 
-// 				dataType: 'html',
-// 				async: true, // true:비동기, false:동기 
-// 				success: function(data){ 
-// 					console.log('성공');
-// 					window.location.href = "<c:url value='/Admin/AccountsHosp.hst'/>";
-// 				},
-// 				error:function(request,status,error){
-// 					console.log('실패');
-// 					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-// 				} 
-// 			});
-// 		}
-		
-// 	});
-	
-	$(".table-data-feature .item:first-child").on('click', function(){
-		
-		var tr = $(this).parent().parent().parent();
-		var td = tr.children();
-		var hosp_name = td.eq(1).text().trim();
-		console.log("승인 클릭", hosp_name);
-			$.ajax({ 
-				url: "<c:url value='/Admin/ApproveAuth.hst'/>",
-				type: "get", //get, post 방식 
-				dataType: 'html', //or xml or script or html or json or text
-				data: {
-						"hosp_name" : hosp_name
-						}, //넘길 파라미터 
-				async: true, // true:비동기, false:동기 
-				success: function(data){
-					console.log('성공');
-					var newUrl = window.location.href;
-					console.log(newUrl);
-					window.location.href = newUrl;
-				},
-				error:function(request,status,error){
-					console.log('실패');
-					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-				} 
-			});
-	});
-	
+   
+// //    필터
+//    $("#filter").change(function(){
+//       var state = jQuery('#filter option:selected').val();
+//       if ( state == 'all' ) 
+//       {
+//          console.log(state);
+//          $.ajax({ 
+//             url: "<c:url value='/Admin/Accounts.hst'/>",
+//             data: {
+//                   }, //넘길 파라미터 
+//             dataType: 'html',
+//             async: true, // true:비동기, false:동기 
+//             success: function(data){ 
+//                console.log('성공');
+//                window.location.href = "<c:url value='/Admin/Accounts.hst'/>";
+//             },
+//             error:function(request,status,error){
+//                console.log('실패');
+//                alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+//             } 
+//          });
+//       } 
+//       else if ( state == 'user' )
+//       {
+//          console.log(state);
+//          $.ajax({ 
+//             url: "<c:url value='/Admin/AccountsUser.hst'/>",
+//             data: {
+//                   }, //넘길 파라미터 
+//             dataType: 'html',
+//             async: true, // true:비동기, false:동기 
+//             success: function(data){ 
+//                console.log('성공');
+//                window.location.href = "<c:url value='/Admin/AccountsUser.hst'/>";
+               
+//             },
+//             error:function(request,status,error){
+//                console.log('실패');
+//                alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+//             } 
+//          });
+//       }
+//       else
+//       {
+//          console.log(state);
+//          $.ajax({ 
+//             url: "<c:url value='/Admin/AccountsHosp.hst'/>",
+//             data: {
+//                   }, //넘길 파라미터 
+//             dataType: 'html',
+//             async: true, // true:비동기, false:동기 
+//             success: function(data){ 
+//                console.log('성공');
+//                window.location.href = "<c:url value='/Admin/AccountsHosp.hst'/>";
+//             },
+//             error:function(request,status,error){
+//                console.log('실패');
+//                alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+//             } 
+//          });
+//       }
+      
+//    });
+   
+   $(".table-data-feature .item:first-child").on('click', function(){
+      
+      var tr = $(this).parent().parent().parent();
+      var td = tr.children();
+      var email = td.eq(2).text().trim();
+      console.log("승인 클릭", email);
+         $.ajax({ 
+            url: "<c:url value='/Admin/ApproveAuth.hst'/>",
+            type: "get", //get, post 방식 
+            dataType: 'html', //or xml or script or html or json or text
+            data: {
+                  "email" : email
+                  }, //넘길 파라미터 
+            async: true, // true:비동기, false:동기 
+            success: function(data){
+               console.log('성공');
+               var newUrl = window.location.href;
+               console.log(newUrl);
+               window.location.href = newUrl;
+            },
+            error:function(request,status,error){
+               console.log('실패');
+               alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+            } 
+         });
+   });
+   
 $(".table-data-feature .item:last-child").on('click', function(){
-		
-		var tr = $(this).parent().parent().parent();
-		var td = tr.children();
-		var hosp_name = td.eq(1).text().trim();
-		console.log("거절 클릭", hosp_name);
-		$.ajax({ 
-			url: "<c:url value='/Admin/DenyAuth.hst'/>",
-			type: "get", //get, post 방식 
-			dataType: 'html', //or xml or script or html 
-			data: {
-				"hosp_name" : hosp_name
-				}, //넘길 파라미터 
-			async: true, // true:비동기, false:동기 
-			success: function(data){ 
-// 				console.log(data);
-					console.log('성공');
-					var newUrl = window.location.href;
-					console.log(newUrl);
-					window.location.href = newUrl;
-			},
-			error:function(request,status,error){
-				console.log("에러");
-				alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-			} 
-		});
-			
-	});
-	
-	$("#searchBtn").on("click", function(){
-		var keyword = $("#search").val();
-		console.log(keyword, "제휴 검색");
-		$.ajax({ 
-			url: "<c:url value='/Admin/HosAuthSearch.hst'/>",
-			type: "get", //get, post 방식 
-			dataType: 'html', //or xml or script or html 
-			data: {
-				"search_keyword" : keyword
-				}, //넘길 파라미터 
-			async: true, // true:비동기, false:동기 
-			success: function(data){ 
-				console.log(data);
-					console.log('성공', keyword);
-// 					window.location.href = newUrl;
-// 					var renewURL = location.href;
-					window.location.href = "<c:url value='/Admin/HosAuthSearch.hst?search_keyword="+keyword+"'/>";
-			},
-			error:function(request,status,error){
-				console.log("에러");
-				alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-			} 
-		});
-	});
+      
+      var tr = $(this).parent().parent().parent();
+      var td = tr.children();
+      var email = td.eq(2).text().trim();
+      console.log("거절 클릭", email);
+      $.ajax({ 
+         url: "<c:url value='/Admin/DenyAuth.hst'/>",
+         type: "get", //get, post 방식 
+         dataType: 'html', //or xml or script or html 
+         data: {
+            "email" : email
+            }, //넘길 파라미터 
+         async: true, // true:비동기, false:동기 
+         success: function(data){ 
+//             console.log(data);
+               console.log('성공');
+               var newUrl = window.location.href;
+               console.log(newUrl);
+               window.location.href = newUrl;
+         },
+         error:function(request,status,error){
+            console.log("에러");
+            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+         } 
+      });
+         
+   });
+   
+   $("#searchBtn").on("click", function(){
+      var keyword = $("#search").val();
+      console.log(keyword, "제휴 검색");
+      $.ajax({ 
+         url: "<c:url value='/Admin/HosAuthSearch.hst'/>",
+         type: "get", //get, post 방식 
+         dataType: 'html', //or xml or script or html 
+         data: {
+            "search_keyword" : keyword
+            }, //넘길 파라미터 
+         async: true, // true:비동기, false:동기 
+         success: function(data){ 
+            console.log(data);
+               console.log('성공', keyword);
+//                window.location.href = newUrl;
+//                var renewURL = location.href;
+               window.location.href = "<c:url value='/Admin/HosAuthSearch.hst?search_keyword="+keyword+"'/>";
+         },
+         error:function(request,status,error){
+            console.log("에러");
+            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+         } 
+      });
+   });
 });
 </script>
 <body class="animsition">
-	<div class="page-wrapper">
-		<!-- PAGE CONTAINER-->
-		<div class="page-container">
-			<!-- HEADER DESKTOP-->
-			<header class="header-desktop">
-				<div class="section__content section__content--p30">
-					<div class="container-fluid">
-						<div class="header-wrap">
-							<form class="form-header" method="">
-								<input class="au-input au-input--xl" type="text" id="search"
-									placeholder="병원명 검색" />
-								<button class="au-btn--submit" type="button" id="searchBtn">
-									<i class="zmdi zmdi-search"></i>
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</header>
-			<!-- END HEADER DESKTOP-->
-
+   <div class="page-wrapper">
+      <!-- PAGE CONTAINER-->
+      <div class="page-container">
+         <!-- HEADER DESKTOP-->
+         <header class="header-desktop">
+            <div class="section__content section__content--p30">
+               <div class="container-fluid">
+                  <div class="header-wrap">
+                     <form class="form-header" method="">
+                        <input class="au-input au-input--xl" type="text" id="search"
+                           placeholder="병원명 검색" />
+                        <button class="au-btn--submit" type="button" id="searchBtn">
+                           <i class="zmdi zmdi-search"></i>
+                        </button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </header>
+         <!-- END HEADER DESKTOP-->
+         
 			<!-- MAIN CONTENT-->
 			<div class="main-content">
 				<div class="section__content section__content--p30">
@@ -222,7 +222,7 @@ $(".table-data-feature .item:last-child").on('click', function(){
 																type="checkbox"> <span class="au-checkmark"></span>
 														</label></td>
 														<td>${item.hosp_name }</td>
-														<td><span class="block-email">${item.id }</span></td>
+														<td><span class="block-email">${item.mem_email }</span></td>
 														<td class="desc">${item.tel }</td>
 														<td>${item.approved_date }</td>
 														<td><c:if test="${item.auth == '승인대기중'}">

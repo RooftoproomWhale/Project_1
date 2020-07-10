@@ -152,5 +152,10 @@ public class MemberServiceImpl implements MemberService{
 		return dao.getPreMedi(map);
 	}
 
+	public List<Map<String, String>> selectdept(Map map) {
+		
+		return dao.getDeptone(map);
+	}
+
 
 }

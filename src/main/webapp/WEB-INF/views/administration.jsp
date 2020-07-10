@@ -339,192 +339,224 @@ ul{
     box-shadow:0 3px 20px 0px rgba(0, 0, 0, 0.1)
 }
 
-.form-modal button{
-    cursor: pointer;
-    position: relative;
-    text-transform: capitalize;
-    font-size:1em;
-    z-index: 2;
-    outline: none;
-    background:#fff;
-    transition:0.2s;
+.form-modal button {
+	cursor: pointer;
+	position: relative;
+	text-transform: capitalize;
+	font-size: 1em;
+	z-index: 2;
+	outline: none;
+	background: #fff;
+	transition: 0.2s;
 }
 
-.form-modal .btn{
-    border-radius: 20px;
-    border:none;
-    font-weight: bold;
-    font-size:1.2em;
-    padding:0.8em 1em 0.8em 1em!important;
-    transition:0.5s;
-    border:1px solid #ebebeb;
-    margin-bottom:0.5em;
-    margin-top:0.5em;
+.form-modal .btn {
+	border-radius: 20px;
+	border: none;
+	font-weight: bold;
+	font-size: 1.2em;
+	padding: 0.8em 1em 0.8em 1em !important;
+	transition: 0.5s;
+	border: 1px solid #ebebeb;
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
 }
 
-.form-modal .login , .form-modal .signup{
-    background:#57b846;
-    color:#fff;
+.form-modal .login, .form-modal .signup {
+	background: #57b846;
+	color: #fff;
 }
 
-.form-modal .login:hover , .form-modal .signup:hover{
-    background:#222;
+.form-modal .login:hover, .form-modal .signup:hover {
+	background: #222;
 }
 
-.form-toggle{
-    position: relative;
-    width:100%;
-    height:auto;
+.form-toggle {
+	position: relative;
+	width: 100%;
+	height: auto;
 }
 
-.form-toggle button{
-    width:50%;
-    float:left;
-    padding:1.5em;
-    margin-bottom:1.5em;
-    border:none;
-    transition: 0.2s;
-    font-size:1.1em;
-    font-weight: bold;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
+.form-toggle button {
+	width: 50%;
+	float: left;
+	padding: 1.5em;
+	margin-bottom: 1.5em;
+	border: none;
+	transition: 0.2s;
+	font-size: 1.1em;
+	font-weight: bold;
+	border-top-right-radius: 20px;
+	border-top-left-radius: 20px;
 }
 
-.form-toggle button:nth-child(1){
-    border-bottom-right-radius: 20px;
+.form-toggle button:nth-child(1) {
+	border-bottom-right-radius: 20px;
 }
 
-.form-toggle button:nth-child(2){
-    border-bottom-left-radius: 20px;
+.form-toggle button:nth-child(2) {
+	border-bottom-left-radius: 20px;
 }
 
-#login-toggle{
-    background:#57b846;
-    color:#ffff;
+#login-toggle {
+	background: #57b846;
+	color: #ffff;
 }
 
-.form-modal form{
-    position: relative;
-    width:90%;
-    height:auto;
-    left:50%;
-    transform:translateX(-50%);  
+.form-modal form {
+	position: relative;
+	width: 90%;
+	height: auto;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
-#login-form , #signup-form{
-    position:relative;
-    width:100%;
-    height:auto;
-    padding-bottom:1em;
+#login-form, #signup-form {
+	position: relative;
+	width: 100%;
+	height: auto;
+	padding-bottom: 1em;
 }
 
-#signup-form{
-    display: none;
+#signup-form {
+	display: none;
 }
 
-
-#login-form button , #signup-form button{
-    width:100%;
-    margin-top:0.5em;
-    padding:0.6em;
+#login-form button, #signup-form button {
+	width: 100%;
+	margin-top: 0.5em;
+	padding: 0.6em;
 }
 
-.form-modal input{
-    position: relative;
-    width:100%;
-    font-size:1em;
-    padding:1.2em 1.7em 1.2em 1.7em;
-    margin-top:0.6em;
-    margin-bottom:0.6em;
-    border-radius: 20px;
-    border:none;
-    background:#ebebeb;
-    outline:none;
-    font-weight: bold;
-    transition:0.4s;
+.form-modal input {
+	position: relative;
+	width: 100%;
+	font-size: 1em;
+	padding: 1.2em 1.7em 1.2em 1.7em;
+	margin-top: 0.6em;
+	margin-bottom: 0.6em;
+	border-radius: 20px;
+	border: none;
+	background: #ebebeb;
+	outline: none;
+	font-weight: bold;
+	transition: 0.4s;
 }
 
-.form-modal input:focus , .form-modal input:active{
-    transform:scaleX(1.02);
+.form-modal input:focus, .form-modal input:active {
+	transform: scaleX(1.02);
 }
 
-.form-modal input::-webkit-input-placeholder{
-    color:#222;
+.form-modal input::-webkit-input-placeholder {
+	color: #222;
 }
 
-
-.form-modal p{
-    font-size:16px;
-    font-weight: bold;
+.form-modal p {
+	font-size: 16px;
+	font-weight: bold;
 }
 
-.form-modal p a{
-    color:#57b846;
-    text-decoration: none;
-    transition:0.2s;
+.form-modal p a {
+	color: #57b846;
+	text-decoration: none;
+	transition: 0.2s;
 }
 
-.form-modal p a:hover{
-    color:#222;
+.form-modal p a:hover {
+	color: #222;
 }
-
 
 .form-modal i {
-    position: absolute;
-    left:10%;
-    top:50%;
-    transform:translateX(-10%) translateY(-50%); 
+	position: absolute;
+	left: 10%;
+	top: 50%;
+	transform: translateX(-10%) translateY(-50%);
 }
 
-.fa-google{
-    color:#dd4b39;
+.fa-google {
+	color: #dd4b39;
 }
 
-.fa-linkedin{
-    color:#3b5998;
+.fa-linkedin {
+	color: #3b5998;
 }
 
-.fa-windows{
-    color:#0072c6;
+.fa-windows {
+	color: #0072c6;
 }
 
-.-box-sd-effect:hover{
-    box-shadow: 0 4px 8px hsla(210,2%,84%,.2);
+.-box-sd-effect:hover {
+	box-shadow: 0 4px 8px hsla(210, 2%, 84%, .2);
 }
 
-@media only screen and (max-width:500px){
-    .form-modal{
-        width:100%;
-    }
+@media only screen and (max-width:500px) {
+	.form-modal {
+		width: 100%;
+	}
 }
 
-@media only screen and (max-width:400px){
-    i{
-        display: none!important;
-    }
+@media only screen and (max-width:400px) {
+	i {
+		display: none !important;
+	}
 }
-
 
 body {
-background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 68%, rgba(255, 206, 196, 0.5) 163%),linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%, rgba(239, 112, 138, 0.5) 40%),linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%, rgba(237, 106, 134, 0.5) 169%),linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%, rgba(247, 126, 132, 0.5) 43%); background-blend-mode: overlay,multiply,color,normal;}
-.contents{
+	background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773)
+		68%, rgba(255, 206, 196, 0.5) 163%),
+		linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%,
+		rgba(239, 112, 138, 0.5) 40%),
+		linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%,
+		rgba(237, 106, 134, 0.5) 169%),
+		linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%,
+		rgba(247, 126, 132, 0.5) 43%);
+	background-blend-mode: overlay, multiply, color, normal;
+}
+
+.contents {
 	background: white;
 	top: 100px;
 	left: 120px;
-	padding-bottom: 100px;}
- @media (min-width: 992px){
-.col-md-offset-10 {
-    margin-left: 89.33333333%;
-}}
+	padding-bottom: 100px;
+}
 
-.img_wrap{
+@media ( min-width : 992px) {
+	.col-md-offset-10 {
+		margin-left: 89.33333333%;
+	}
+}
+
+.img_wrap {
 	width: 300px;
 	margin-top: 50px;
-	margin-bottom:50px;
+	margin-bottom: 50px;
 	align-content: center;
 }
-.img_wrap img{
+
+.img_wrap img {
 	max-width: 100%;
+}
+
+.btn-file {
+	position: relative;
+	overflow: hidden;
+	font-size: x-large;
+}
+
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
 }
 </style>
 
@@ -564,14 +596,18 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg">
-    	<div class="modal-content">
+    	<div class="modal-content" style="text-align: center;">
     	<form action="<c:url value='/mapping/mapping.hst'/>" method="post" enctype="multipart/form-data">
-			<div>
-				<input type='file' id='input_img' name='input_img' />
+			<div style="width: 100%;text-align: center;">
+				<span class="btn btn-primary btn-file" style="padding: 2px;margin: 5px;">
+					사진 선택 <input style="display: inline-block;" type='file' id='filename' name='filename' />
+				</span>
 			</div>
-			<div style="width: 500px;height: auto;text-align: center;" class="img_wrap">
-				<img style="width: 100%;height: auto;" id="img" />
-				<input id="submit" class="btn btn-lg btn-primary" type="submit" value="등록"/>
+			<div style="width: 600px;height: 600px;display: inline-block;" class="img_wrap">
+				<img style="width: 100%;height: auto;padding-bottom: 5px;margin: 0" id="img" />
+				<input id="submit" class="btn btn-lg btn-primary" type="submit" value="등록" />
+			</div>
+			<div style="width: 600px;height: 600px;display: inline-block;border:1px dashed gray;padding: 2px;" class="blank">
 			</div>
 		</form>
 		</div>
@@ -697,7 +733,8 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 <script>
 	var sel_file;
 	$(function(){
-		$("#input_img").on("change",handleImgFileSelect);
+		$("#filename").on("change",handleImgFileSelect);
+		$(".img_wrap").hide();
 	});
 	
 	function handleImgFileSelect(e){
@@ -713,9 +750,10 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				$("#img").attr("src",e.target.result);
+				$(".blank").hide();
+				$(".img_wrap").show();
 			}
 			reader.readAsDataURL(f);
 		});
 	}	
 </script>
-

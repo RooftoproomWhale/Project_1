@@ -231,17 +231,18 @@
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<update id="updateAuth_O" parameterType="java.util.Map">
-		UPDATE HOSPITAL SET AUTH = '제휴승인됨', APPROVED_DATE = SYSDATE WHERE HOSP_NAME = #{hosp_name}
+		UPDATE HOSPITAL SET AUTH = '제휴승인됨', APPROVED_DATE = SYSDATE WHERE MEM_EMAIL = #{email}
 	</update>
 	<update id="updateAuth_X" parameterType="java.util.Map">
-		UPDATE HOSPITAL SET AUTH = '제휴거절됨' WHERE HOSP_NAME = #{hosp_name}
+		UPDATE HOSPITAL SET AUTH = '제휴거절됨' WHERE MEM_EMAIL = #{email}
 	</update>
 	<update id="updateAuthEnable">
-		UPDATE MEMBER SET ENABLE = 1 WHERE MEM_EMAIL = (SELECT MEM_EMAIL FROM HOSPITAL WHERE HOSP_NAME= #{hosp_name})
+		UPDATE MEMBER SET ENABLE = 1 WHERE MEM_EMAIL = #{email}
 	</update>
 	<select id="selectAuth_Search" parameterType="java.util.Map" resultType="HospitalDTO">
 		SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
 	</select>
+	
 	<!-- snslogin user 정보 받기 -->
 	<select id="getUserById" resultType="CustomUserDetails">
 		SELECT * FROM member WHERE mem_email = #{username}
