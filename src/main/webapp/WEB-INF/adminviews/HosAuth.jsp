@@ -271,7 +271,6 @@ $(".table-data-feature .item:last-child").on('click', function(){
                          </c:when> 
                      </c:choose> 
                    </c:forEach> 
-                   
                   <c:if test="${paging.endPage != paging.lastPage}"> 
                   <a 
                          href="<c:url value='/Admin/HosAuth.hst?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}'/>">&gt;</a>
