@@ -238,7 +238,6 @@
 	</update>
 	<update id="updateAuthEnable">
 		UPDATE MEMBER SET ENABLE = 1 WHERE MEM_EMAIL = #{email}
-<!-- 		UPDATE MEMBER SET ENABLE = 1 WHERE MEM_EMAIL = (SELECT MEM_EMAIL FROM HOSPITAL WHERE HOSP_NAME= #{hosp_name}) -->
 	</update>
 	<select id="selectAuth_Search" parameterType="java.util.Map" resultType="HospitalDTO">
 		SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
