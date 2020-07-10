@@ -1068,7 +1068,7 @@ width: 100%;
                        "height" : 0,
                        "weight" : 0,
                        "role" : "ROLE_HOS",
-                       "enable" : "1"
+                       "enable" : "0"
                     },
                     success : function(data) {
                        alert('제휴신청이 완료되었습니다');
@@ -1248,6 +1248,7 @@ width: 100%;
         String filePath1 = application.getRealPath("/file/서비스이용약관.txt");
         String filePath2 = application.getRealPath("/file/개인정보 이용 약관.txt");/* <---input 파일을 연다. */
         String filePath3 = application.getRealPath("/file/위치기반서비스 이용 약관.txt");
+        System.out.println(filePath1);
         reader1 = new BufferedReader(new FileReader(filePath1));
         reader2 = new BufferedReader(new FileReader(filePath2));
         reader3 = new BufferedReader(new FileReader(filePath3));

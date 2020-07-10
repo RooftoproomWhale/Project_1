@@ -34,30 +34,10 @@
                                 <i class="fas fa-table"></i>예약 관리</a>
                         </li>
                         <li>
-                            <a href="<c:url value='/Admin/Form.hst'/>">
-                                <i class="far fa-check-square"></i>폼(삭제예정)</a>
-                        </li>
-                        <li>
                             <a href="<c:url value='/Admin/Corona_Map.hst'/>">
                                 <i class="fas fa-map-marker-alt"></i>확진자 동선</a>
                         </li>
                       
-                        
-<!--                         <li class="has-sub"> -->
-<!--                             <a class="js-arrow" href="#"> -->
-<!--                                 <i class="fas fa-copy"></i>Pages</a> -->
-<!--                             <ul class="list-unstyled navbar__sub-list js-sub-list"> -->
-<!--                                 <li> -->
-<%--                                     <a href="<c:url value='/Admin/Login.hst'/>">Login</a> --%>
-<!--                                 </li> -->
-<!--                                 <li> -->
-<%--                                     <a href="<c:url value='/Admin/Register.hst'/>">Register</a> --%>
-<!--                                 </li> -->
-<!--                                 <li> -->
-<%--                                     <a href="<c:url value='/Admin/Forget-pass.hst'/>">Forget Password</a> --%>
-<!--                                 </li> -->
-<!--                             </ul> -->
-<!--                         </li> -->
                     </ul>
                 </nav>
             </div>

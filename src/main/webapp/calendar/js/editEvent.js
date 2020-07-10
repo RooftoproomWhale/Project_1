@@ -1,12 +1,14 @@
 /* ****************
  *  일정 편집
  * ************** */
-var editEvent = function (event, element, view) {
 
+var editEvent = function (event, element, view) {
 	$('#item_name').empty();
 
 	
 	if(event.type=='복용약등록'){
+	   	 $('#loading').show();
+
 $('#item-date').text(event.start._i+"-"+event.end._i);
     $.ajax({
         type: "post",
@@ -54,6 +56,7 @@ $('#item-date').text(event.start._i+"-"+event.end._i);
       	  
       	  })
       	$("#item-0").trigger("click");
+      	 $('#loading').hide();
       }
         ,error:function(request,error){
   			console.log('상태코드:',request.status);
