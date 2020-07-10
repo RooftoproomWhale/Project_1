@@ -548,11 +548,6 @@ window.onload = function(){
 				success:function(data){
 					console.log(data);
 					var noti = JSON.parse(data);
-					console.log(noti[0]['FILE_ADDR']);
-					$('#noti1').attr('href',noti[][]);
-					$('#noti1').attr('href');
-					$('#noti1').attr('href');
-					$('#noti1').attr('href');
 					$('#img1').attr('src',noti[0]["FILE_ADDR"]);
 					console.log($('#img1').attr('src'));
 					$('#img2').attr('src',noti[1]["FILE_ADDR"]);
