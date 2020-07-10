@@ -360,7 +360,9 @@ public class AdminController {
 	@RequestMapping("ApproveAuth.hst")
 	public String approve(@RequestParam Map map, Model model) {
 		int check = adminService.approveAuth(map);
+		int check_ = adminService.approveAuth_(map);
 		System.out.println(check);
+		System.out.println(check_);
 		return "HosAuth.ad_tiles";
 	}
 

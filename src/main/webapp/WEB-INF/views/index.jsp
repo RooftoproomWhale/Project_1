@@ -58,7 +58,8 @@ window.onload = function(){
 		             console.log("gap: " + timeGap);
 		             if(timeGap > 0 && timeGap <= 30)
 		             {
-		            	 memNoti();
+		            	 memNoti30();
+// 		            	 androidMemFCM();
 							return false;
 		             }
 		         })
@@ -91,9 +92,10 @@ window.onload = function(){
 			             console.log("time: " + time);
 			             timeGap = time - currTime;
 			             console.log("gap: " + timeGap);
-			             if(timeGap == 30)
+			             if(timeGap == 0)
 			             {
-			            	 memNoti();
+			            	 memNoti0();
+			            	 androidMemFCM();
 								return false;
 			             }
 			         })
@@ -206,8 +208,23 @@ window.onload = function(){
 	}
 
 	var text;
-	function memNoti() {
+	function memNoti30() {
 		text = '30분 안에 복용 해야할 약이 있습니다';
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('복약 알림이 있습니다', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/mypage/administration.hst'/>";
+			};
+		}
+	
+	function memNoti0() {
+		text = '약 복용 시간입니다';
 		var options = 
 			{
 			      body: text,
@@ -284,6 +301,21 @@ window.onload = function(){
 				window.location.href = "<c:url value='/mypage/ReservationList.hst'/>";
 			};
 		}
+	
+	function androidMemFCM() {
+			
+			$.ajax({
+				url:'<c:url value="/Noti/androidFCM.hst"/>',
+				dataType:'text',
+				success:function(data){
+						console.log("androidFCM 요청 성공");
+					},
+				error:function(request,error){
+					console.log('에러:',error);
+				}
+			});
+			
+			}
 	
 }
 </script>

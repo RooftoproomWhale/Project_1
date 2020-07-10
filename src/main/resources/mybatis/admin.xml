@@ -177,7 +177,13 @@
 
    <!-- 사용자 관리 -->
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="MemberDTO">
-		SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A)
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.*
+					 FROM (
+							SELECT * FROM MEMBER ORDER BY SIGNUP_DATE DESC
+							) A
+					)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<select id="selectMemberListUser" parameterType="java.util.Map" resultType="MemberDTO">
@@ -219,7 +225,7 @@
 		FROM (
 			SELECT ROWNUM RN, A.* 
 				FROM (
-						SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL 
+						SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL ORDER BY AUTH_DATE DESC
 						) A
 				)
 		WHERE RN BETWEEN #{start} AND #{end}
@@ -229,6 +235,9 @@
 	</update>
 	<update id="updateAuth_X" parameterType="java.util.Map">
 		UPDATE HOSPITAL SET AUTH = '제휴거절됨' WHERE HOSP_NAME = #{hosp_name}
+	</update>
+	<update id="updateAuthEnable">
+		UPDATE MEMBER SET ENABLE = 1 WHERE MEM_EMAIL = (SELECT MEM_EMAIL FROM HOSPITAL WHERE HOSP_NAME= #{hosp_name})
 	</update>
 	<select id="selectAuth_Search" parameterType="java.util.Map" resultType="HospitalDTO">
 		SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL AND HOSP_NAME LIKE '%' || #{search_keyword} || '%'
@@ -244,7 +253,7 @@
 		FROM (
 			SELECT ROWNUM RN, A.* 
 				FROM (
-						SELECT H.HOSP_CODE, H.HOSP_NAME, R.MEM_EMAIL, r.apply_time, r.approved, r.dept_name, r.res_date, r.res_time, r.reserv_no, r.sel_symp FROM RESERVATION R JOIN HOSPITAL H ON R.HOSP_CODE = H.HOSP_CODE
+						SELECT H.HOSP_CODE, H.HOSP_NAME, R.MEM_EMAIL, r.apply_time, r.approved, r.dept_name, r.res_date, r.res_time, r.reserv_no, r.sel_symp FROM RESERVATION R JOIN HOSPITAL H ON R.HOSP_CODE = H.HOSP_CODE ORDER BY APPLY_TIME DESC
 						) A
 				)
 		WHERE RN BETWEEN #{start} AND #{end}

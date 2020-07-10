@@ -467,4 +467,10 @@ public class AdminServiceImpl implements AdminService {
 		return dao.getLast(map);
 	}
 
+	@Override
+	public int approveAuth_(Map map) {
+		// TODO Auto-generated method stub
+		return dao.approveAuth_(map);
+	}
+
 }

@@ -1,21 +1,28 @@
 package com.kosmo.proj.service.android;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kosmo.proj.notification.NotificationService;
 import com.kosmo.proj.service.MemberService;
 import com.kosmo.proj.service.PrescriptionDTO;
 import com.kosmo.proj.service.ReservationDTO;
+import com.kosmo.proj.util.FcmUtil;
 
 @RestController
 @RequestMapping("/Android/Basic")
@@ -23,7 +30,7 @@ public class AndroidBasicController {
 	
 	@Resource(name = "memberService")
 	private MemberService service;
-	
+
 	@CrossOrigin
 	@GetMapping(value = "/myPage/recentApt", produces = "text/plain;charset=UTF-8")
 	public String recentApt(@RequestParam Map map)
