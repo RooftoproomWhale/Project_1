@@ -3,6 +3,30 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
+<style>
+	table {
+		width: 100%;
+	}
+	table th {
+		text-align:center;
+		border-bottom: 2px solid gray;
+		background-color: #EDFFFF;
+		padding: 3px;
+	}
+	
+	table td {
+		border-bottom: 1px solid gray;
+		padding: 3px;
+	}
+	
+	table tr:last-child td {
+		border:none;
+	}
+
+	a:hover {
+		color: blue;
+	}
+</style>
 <script>
 $(function(){
 	console.log('실행전');
@@ -25,6 +49,7 @@ $(function(){
 			comments+="<h3>등록된 처방전이 없어요!</h3>";
 		}
 		else{
+			
 			$.each(JSON.parse(data),function(i,element){
 				comments+="<div class='panel panel-default'>";
 				comments+='<div class="panel-heading" role="tab" id="heading'+i+'">';
@@ -32,17 +57,20 @@ $(function(){
 				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
 				comments+=element['PRES_DATE']+"</a></h4></div>";
 				comments+='<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
-				comments+='<div class="panel-body"><table>';
+				comments+='<div style="margin:0;padding:0" class="panel-body"><table class="table-striped">';
+				comments+='<thead><th><h3>약품명</h3></th><th><h3>복용일수</h3></th><th><h3>일일 복용 횟수</h3></th></thead>';
 				$.each(element['MEDI_NAME'].split(','),function(k,val){
 					if(val!=""){
-						comments+=""
-						comments+="<li><a href='";
+						comments+="<tbody><tr>"
+						comments+="<td><a href='";
 						comments+='<c:url value="/Homespital/Management.hst?dname='+val+'"/>';
 						comments+="'>";
-						comments+="<h5>"+val+"</h5></a></li>";
+						comments+="<h4>"+val+"</h4></a></td>";
+						comments+="<td><h4>"+element['DURATION']+" 일 </h4></td>";
+						comments+="<td><h4>"+element['COUNT']+" 회 </h4></td></tr></tbody>";
 					}
 				})
-				comments+="<table></div></div></div>";
+				comments+="</table></div></div></div>";
 			});
 		}
 		$('#accordion').html(comments);
@@ -538,24 +566,13 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 	<div class="modal-dialog modal-lg">
     	<div class="modal-content">
     	<form action="<c:url value='/mapping/mapping.hst'/>" method="post" enctype="multipart/form-data">
-    		<div class="form-group">
-				<div class="upload-box">
-					<input type="file" name="filename" accept="image/png,image/jpeg,image/jpg" class="upload-input" />
-					<div class="upload-action"></div>
-					<div class="preview-box"></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<input type="submit" value="등록">
-			</div>
-			<!-- 
 			<div>
-				<div class="img_wrap col-md-offset-4">
-					<img id="img" />
-					<input id="submit" class="btn btn-lg btn-primary" type="submit" value="등록"/>
-				</div>
+				<input type='file' id='input_img' name='input_img' />
 			</div>
-			-->
+			<div style="width: 500px;height: auto;text-align: center;" class="img_wrap">
+				<img style="width: 100%;height: auto;" id="img" />
+				<input id="submit" class="btn btn-lg btn-primary" type="submit" value="등록"/>
+			</div>
 		</form>
 		</div>
 	</div>
@@ -699,33 +716,6 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 			}
 			reader.readAsDataURL(f);
 		});
-	}
-	
-	
-	
-</script>
-<script>
-$(".upload-action").click(function() {
-	  $(".upload-input").click();
-	  $(".upload-input").change(function() {
-	    preview(this, $('.preview-box'));
-	  });
-	});
-
-	function preview(file, previewBox) {
-	  if (file.files && file.files[0]) {
-	    var reader = new FileReader();
-	    reader.onload = function(e) {
-	      previewBox.html('<img src="' + e.target.result + '" />');
-	    };
-	    reader.readAsDataURL(file.files[0]);
-	  } else {
-	    previewBox.html(
-	      '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' +
-	        file.value +
-	        "'\"></div>"
-	    );
-	  }
-	}
+	}	
 </script>
 
