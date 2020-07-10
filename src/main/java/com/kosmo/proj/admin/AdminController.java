@@ -594,7 +594,7 @@ public class AdminController {
 		map.put("mem_email",dto.getMem_email().toString());
 		map.put("title",dto.getTitle().toString());
 		map.put("content",dto.getContent().toString());
-		map.put("file_addr",renameFile);
+		map.put("file_addr",file_addr);
 
 
 		int check = adminService.insertNotice(map);
