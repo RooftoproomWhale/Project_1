@@ -851,7 +851,12 @@
 
       $('#select_department').on("change", function() {
           console.log(this.value);
+          var idx = $("#select_department option").index( $("#select_department option:selected") );
+
+          console.log("선택한 index : " + idx);
           console.log(markers);
+          
+          deptStatus = idx;
       });
       
    });
@@ -879,6 +884,25 @@
    var geocoder = new kakao.maps.services.Geocoder();
    
    var apiStatus = 2; // 0:병원, 1: 약국, 2: 공적마스크, 3: 확진자 동선
+   
+   var deptStatus = 0; //~14
+   /*
+   	전체
+	내과
+	비뇨기과
+	산부인과
+	성형외과
+	소아청소년과
+	신경과
+	안과
+	이비인후과
+	일반외과
+	정신건강의학과
+	정형외과
+	치과
+	피부과
+	한방과
+   */
    
    
    kakao.maps.event.addListener(map, 'dragend', function() {

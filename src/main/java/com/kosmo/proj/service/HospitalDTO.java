@@ -1,6 +1,6 @@
 package com.kosmo.proj.service;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class HospitalDTO {
 	private String hosp_code;
@@ -22,11 +22,17 @@ public class HospitalDTO {
 	private String jeondam;
 	private String exjeondam;
 	private String mem_email;
+	private Date auth_date;
 	
 	private String dept_name;
 	
 	
-	
+	public Date getAuth_date() {
+		return auth_date;
+	}
+	public void setAuth_date(Date auth_date) {
+		this.auth_date = auth_date;
+	}
 	public String getAnsim() {
 		return ansim;
 	}
