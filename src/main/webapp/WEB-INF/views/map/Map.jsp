@@ -27,31 +27,44 @@
        background-color: rgba( 255, 255, 255, 0.5 );
       z-index: 1231234;
    }
+   .map_top
+   {
+   		position: absolute;
+   		top: 100px;
+        left: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 2;
+   }
    .search 
    {
-      position: absolute;
-       top: 100px;
-       left: 16px;
-       display: flex;
-       justify-content: space-between;
-       z-index: 2;
-       align-items: center;
        border-radius: 24px;
        background: white;
-       padding: 13px 24px 13px 24px;
-       width: auto;
+       padding: 3px 24px 13px 24px;
+       width: 343px;
        right: 16px;
-       max-width: 343px;
        height: 46px;
        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
        background-color: #ffffff;
    }
    .searchInput
    {
-      width: 90%;
+	   width: 80%;
        border: 0 !important;
        background: white;
        font-size: small;
+   }
+   .map_select{
+   		
+   }
+   #select_department
+   {
+   	   margin-left: 10px;
+       padding: 6px;
+       color: #333333;
+       font-weight: 700;
+       display: none;
    }
    .map_button{position: absolute;bottom: 19px;right: 8px;z-index: 2;flex-direction: column;}
    .current_refresh
@@ -257,10 +270,32 @@
    <div class="load_wrap">
       <img class="load_img" style="vertical-align: bottom;" src="<c:url value='/images/map/mask_loader.gif'/>">
    </div>
-   <div class="search">
-      <input class="searchInput" id="searchAddress" placeholder="지도상 현재 위치의 주소가 표시됩니다" disabled>
-      <img style="width: 43px;cursor: pointer;"src="<c:url value='/images/map/search.png'/>" onclick="addressSearch()" ></img>
+   <div class="map_top">
+   	  <div class="search">
+      	<input class="searchInput" id="searchAddress" placeholder="지도상 현재 위치의 주소가 표시됩니다" disabled>
+      	<img style="width: 43px;cursor: pointer;"src="<c:url value='/images/map/search.png'/>" onclick="addressSearch()" ></img>
+   	  </div>
+	  <div class="map_select">
+	   	 <select name="select_department" id="select_department">
+		    <option>전체</option>
+		    <option>내과</option>
+		    <option>비뇨기과</option>
+		    <option>산부인과</option>
+		    <option>성형외과</option>
+		    <option>소아청소년과</option>
+		    <option>신경과</option>
+		    <option>안과</option>
+		    <option>이비인후과</option>
+		    <option>일반외과</option>
+		    <option>정신건강의학과</option>
+		    <option>정형외과</option>
+		    <option>치과</option>
+		    <option>피부과</option>
+		    <option>한방과</option>
+	     </select>
+	  </div>
    </div>
+   
    <div class="map_button">
       <button class="current_refresh" type="button" onclick="currentPosition()">
          <img src="<c:url value='/images/map/current_position.png'/>" style="width: 34px;height: 34px;">
@@ -269,6 +304,7 @@
          <img src="<c:url value='/images/map/refresh.png'/>" style="width: 34px;height: 34px;">
       </button>
    </div>
+   
    <!-- 
    <div class="current">
       <button type="button" onclick="currentPosition()">현재위치</button>
@@ -813,6 +849,15 @@
            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],   // 한글 요일 표시 부분
       });
 
+      $('#select_department').on("change", function() {
+          console.log(this.value);
+          var idx = $("#select_department option").index( $("#select_department option:selected") );
+
+          console.log("선택한 index : " + idx);
+          console.log(markers);
+          
+          deptStatus = idx;
+      });
       
    });
 </script>
@@ -839,6 +884,25 @@
    var geocoder = new kakao.maps.services.Geocoder();
    
    var apiStatus = 2; // 0:병원, 1: 약국, 2: 공적마스크, 3: 확진자 동선
+   
+   var deptStatus = 0; //~14
+   /*
+   	전체
+	내과
+	비뇨기과
+	산부인과
+	성형외과
+	소아청소년과
+	신경과
+	안과
+	이비인후과
+	일반외과
+	정신건강의학과
+	정형외과
+	치과
+	피부과
+	한방과
+   */
    
    
    kakao.maps.event.addListener(map, 'dragend', function() {
@@ -976,7 +1040,8 @@
                           position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
                           image :  new kakao.maps.MarkerImage(
                                 "<c:url value='/images/map/hospital_image/hospital_normal.png'/>",
-                                  new kakao.maps.Size(35, 35))
+                                  new kakao.maps.Size(35, 35)),
+                          title : item.hosp_name
                        });
                   }
                   
@@ -1370,28 +1435,25 @@
             success:function(data){
                var jsonData = JSON.parse(data);
                console.log("연결성공", jsonData,typeof(jsonData));
-               var items = '';
-               $.each(jsonData, function(i, item) {
-                  console.log(item);
-               
-                  items += '<div class="search_item" onclick="searchItemClick(\''+item['ADDRESS']+'\');">'+
-                           '<div class="search_item_detail">'+
-                              '<div class="detail_content">'+
-                                 '<div class="content_title">'+
-                                    '<strong>'+item['HOSP_NAME']+'</strong>'+
-                                 '</div>'+
-                                 '<div class="content_body">'+
-                                    //item['ADDRESS']+
-                                    item['DEPT_NAME']+' '+ 
-                                    item['TEL']+
-                                 '</div>'+
-                                 '<div class="content_body">'+
-                                    item['ADDRESS']+
-                                 '</div>'+
-                              '</div>'+
-                           '</div>'+
-                        '</div>'
-               });
+
+               var items = '<div class="search_item" onclick="searchItemClick(\''+jsonData['ADDRESS']+'\');">'+
+	                          '<div class="search_item_detail">'+
+	                             '<div class="detail_content">'+
+	                                '<div class="content_title">'+
+	                                   '<strong>'+jsonData['HOSP_NAME']+'</strong>'+
+	                                '</div>'+
+	                                '<div class="content_body">'+
+	                                   //item['ADDRESS']+
+	                                   jsonData['DEPT_NAME']+' '+ 
+	                                   jsonData['TEL']+
+	                                '</div>'+
+	                                '<div class="content_body">'+
+	                                   jsonData['ADDRESS']+
+	                                '</div>'+
+	                             '</div>'+
+	                          '</div>'+
+	                       '</div>'
+
                $('.search_list').html(items);
             },
             error:function(e){
@@ -1815,6 +1877,15 @@
       {
          apiStatus = status;
          console.log('상태',apiStatus);
+         if(apiStatus==0)
+         {
+        	 $('#select_department').show();
+         }
+         else
+         {
+        	 $('#select_department').hide();
+         }
+         
          refreshMap();
       }
       function refreshMap()
