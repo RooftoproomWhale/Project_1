@@ -222,7 +222,7 @@ $(".table-data-feature .item:last-child").on('click', function(){
 																type="checkbox"> <span class="au-checkmark"></span>
 														</label></td>
 														<td>${item.hosp_name }</td>
-														<td><span class="block-email">${item.id }</span></td>
+														<td><span class="block-email">${item.mem_email }</span></td>
 														<td class="desc">${item.tel }</td>
 														<td>${item.approved_date }</td>
 														<td><c:if test="${item.auth == '승인대기중'}">

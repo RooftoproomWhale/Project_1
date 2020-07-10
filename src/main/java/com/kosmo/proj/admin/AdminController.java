@@ -696,6 +696,7 @@ public class AdminController {
 		return "NoticeDetail.tiles";
 	}
 
+	
 	@RequestMapping("NoticeDelete.hst")
 	public String noticeEdit(@RequestParam Map map) {
 
