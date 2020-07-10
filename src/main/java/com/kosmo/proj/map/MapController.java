@@ -218,11 +218,22 @@ public class MapController {
 	{
 		List<Map> list = mapService.selectList(map);
 		
-		String search_keyword = map.get("search_keyword").toString();
+		String depart = "";
+		for (int i = 0; i < list.size(); i++) {
+			if(i==list.size()-1)
+			{
+				depart += list.get(i).get("DEPT_NAME").toString() + "<br/>";
+			}
+			else
+			{
+				depart += list.get(i).get("DEPT_NAME").toString() + ',';
+			}
+		}
+		list.get(0).replace("DEPT_NAME", depart);
 
-		System.out.println(JSONArray.toJSONString(list));
+		System.out.println(JSONObject.valueToString(list.get(0)));
 		
-		return JSONArray.toJSONString(list);
+		return JSONObject.valueToString(list.get(0));
 	}
 	
 	@ResponseBody
