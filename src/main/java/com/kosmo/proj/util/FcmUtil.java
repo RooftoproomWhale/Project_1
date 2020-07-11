@@ -16,7 +16,7 @@ public class FcmUtil {
 		try {
 			System.out.println(System.getProperty("user.dir"));
 			///Project_1/src/main/webapp/file/homespitalfcm-firebase-adminsdk-gt58d-85667e5532.json
-			FileInputStream refreshToken = new FileInputStream("C:\\YSJ\\Workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp2\\wtpwebapps\\Project_1\\file\\homespitalfcm-firebase-adminsdk-gt58d-85667e5532.json");
+			FileInputStream refreshToken = new FileInputStream("E:\\SGW\\Workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp6\\wtpwebapps\\Project_1\\file\\homespitalfcm-firebase-adminsdk-gt58d-85667e5532.json");
 			
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(refreshToken))
@@ -40,7 +40,7 @@ public class FcmUtil {
 							.setNotification(AndroidNotification.builder()
 									.setTitle(title)
 									.setBody(content)
-									.setIcon("C:\\YSJ\\Workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp2\\wtpwebapps\\Project_1\\images\\logo1")
+									.setIcon("E:\\SGW\\Workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp6\\wtpwebapps\\Project_1\\images\\logo1")
 									.setColor("#f45342")
 									.build())
 							.build())

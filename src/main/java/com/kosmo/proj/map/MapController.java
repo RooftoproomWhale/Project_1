@@ -153,6 +153,14 @@ public class MapController {
 //		}
 //		list.get(0).replace("DEPT_NAME", depart);
 		
+		for(Map comment:list)
+		{
+			comment.put("AUTH_DATE",comment.get("AUTH_DATE").toString());
+			comment.put("APPROVED_DATE",comment.get("APPROVED_DATE").toString());
+		}
+		
+		System.out.println(JSONArray.toJSONString(list));
+		
 //		return JSONArray.toJSONString(list);
 		return JSONArray.toJSONString(list);
 	}
