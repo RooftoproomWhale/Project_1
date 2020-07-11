@@ -241,40 +241,10 @@ public class MyPageController {
 	}
 
 	
-	// 병원 페이지
-	@RequestMapping("/Hospage/main.hst")
-	public String toMain(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
 
-		return "Hospage_Main.hos_tiles";
-	}
 	
 
 
-	@RequestMapping("/Hospage/Update.hst")
-	public String update(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-
-		return "Hospage_Update.hos_tiles";
-	}
-
-	@RequestMapping("/Hospage/Cancel.hst")
-	public String cancel(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-
-		return "Hospage_Cancel.hos_tiles";
-	}
-
-	@RequestMapping("/Hospage/Appointment.hst")
-	public String appointment(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-
-		return "Hospage_Appointment.hos_tiles";
-	}
 
 
 //	   @RequestMapping("/Hospage/Chart.hst")
