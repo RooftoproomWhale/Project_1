@@ -340,7 +340,7 @@ window.onload = function(){
 			</div>
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">
-					<sec:authentication property="principal.username"/>
+				${mem_name}님
 				</div>
 				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>

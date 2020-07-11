@@ -1,6 +1,7 @@
 package com.kosmo.proj.service.web;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -91,14 +92,17 @@ public class MyPageController {
 		model.addAttribute("newres",list2);
 		model.addAttribute("list", list);
 		model.addAttribute("count", count);
+		model.addAttribute("mem_name", mem_name(id));
 		return "Mypage_Main.my_tiles";
 
 	}/////myapge
 
 	// 회원탈퇴 이동
 	@RequestMapping(value="/mypage/unmember.hst",method=RequestMethod.GET)
-	public String unmember() {
-
+	public String unmember(Authentication auth,Model model) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		model.addAttribute("mem_name", mem_name(id));
 		return "unmember.my_tiles";
 	}
 	//회원탈퇴
@@ -121,7 +125,10 @@ public class MyPageController {
 	
 	// 비밀번호 변경
 	@RequestMapping("/mypage/ChangePassword.hst")
-	public String ChangePassword() {
+	public String ChangePassword(Authentication auth,Model model) {
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		model.addAttribute("mem_name", mem_name(id));
 		return "ChangePassword.my_tiles";
 	}
 
@@ -133,6 +140,7 @@ public class MyPageController {
 		map.put("id",id);
 				List<MemberDTO> list = memberDAO.selectList(map);
 				model.addAttribute("list",list);
+				model.addAttribute("mem_name", mem_name(id));
 		return "ChangeMember.my_tiles";
 	}
 	//회원 정보 수정
@@ -154,9 +162,15 @@ public class MyPageController {
 	}
 	// 진료예약 현황
 	@RequestMapping("/mypage/ReservationList.hst")
-	public String ReservationList(Authentication auth,Model model) {
+	public String ReservationList(@RequestParam Map map,Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		map.put("id", id);
+		List<MemberDTO> list = memberDAO.selectList(map);
+		model.addAttribute("mem_name",list.get(0).getMem_name());
+
 		
 		return "ReservationList.my_tiles";
 	}
@@ -165,15 +179,22 @@ public class MyPageController {
 	public String ReservationLists(Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
-		
+
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		model.addAttribute("mem_name", mem_name(id));
+
 		return "ReservationList.my_tiles";
 	}
 	// 복약관리
 	@RequestMapping("/mypage/administration.hst")
 	public String administration(Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
+		
 		getUser.getUser(model, auth);
-
+		UserDetails userDetails=(UserDetails)auth.getPrincipal();
+		String id=userDetails.getUsername();
+		model.addAttribute("mem_name", mem_name(id));
 		return "administration.my_tiles";
 	}
 
@@ -183,6 +204,7 @@ public class MyPageController {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id",id );
+		model.addAttribute("mem_name", mem_name(id));
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
 //		List<MemberDTO> list = memberDAO.selectDiseaseList(map);
@@ -198,7 +220,7 @@ public class MyPageController {
 		String userEmail = userDetails.getUsername();
 		map.put("userEmail", userEmail);
 		map.put("id", userEmail);
-
+		model.addAttribute("mem_name", mem_name(userEmail));
 		List<MemberDTO> listgetName = memberDAO.selectList(map);
 
 		List<IllnessDTO> list = QnADAO.listIllness(map);
@@ -235,6 +257,7 @@ public class MyPageController {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id",id );
+
 //		int update = memberDAO.diseaseupdate(map);
 		
 		return "redirect:../mypage/mypage.hst";
@@ -251,5 +274,12 @@ public class MyPageController {
 //	   public String chart() {
 //	      return "Hospage_Chart.hos_tiles";
 //	   }
-
+	public String mem_name(String id) {
+		Map<String, String> map =new HashMap<String, String>();
+		map.put("id", id);
+		List<MemberDTO> list = memberDAO.selectList(map);
+	
+		return list.get(0).getMem_name();
+		
+	}
 }
