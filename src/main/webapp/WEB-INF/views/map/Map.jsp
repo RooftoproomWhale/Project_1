@@ -120,7 +120,22 @@
       padding: 0 0 20px 0;
    }
    .top_filter_area{
-      padding: 5px 20px;
+      padding: 14px 0 9px;
+      margin: 0 20px;
+      display: none;
+   }
+   .filter_li{
+   		display: inline-block;
+    margin: 0 5px 5px 0;
+    font-size: 12px;
+    line-height: 24px;
+    color: #333;
+    vertical-align: top;
+   }
+   .filter_btn_active{
+   	background-color: #0475f4;
+    border-color: transparent;
+    color: #fff;
    }
    .filter_button{
       width: 44px;
@@ -134,6 +149,12 @@
        border-image: initial;
        margin: 0 10px;
        outline: 0;
+   }
+   .filter_btn{
+   		display: inline-block;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 15px;
+    padding: 0 12px;
    }
    .selected_filter{
       box-shadow: rgba(0, 255, 0, 1) 0px 3px 3px 0px;
@@ -332,6 +353,40 @@
             <button type="button" class="search_keyword_submit"></button>
          </div>
          <div class="top_filter_area">
+         <!-- 
+		   	전체
+			내과
+			비뇨기과
+			산부인과
+			성형외과
+			소아청소년과
+			신경과
+			안과
+			이비인후과
+			일반외과
+			정신건강의학과
+			정형외과
+			치과
+			피부과
+			한방과
+	      -->	
+         	<ul>
+         		<li class="filter_li"><button class="filter_btn filter_btn_active">전체</button></li>
+         		<li class="filter_li"><button class="filter_btn">내과</button></li>
+         		<li class="filter_li"><button class="filter_btn">비뇨기과</button></li>
+         		<li class="filter_li"><button class="filter_btn">산부인과</button></li>
+         		<li class="filter_li"><button class="filter_btn">성형외과</button></li>
+         		<li class="filter_li"><button class="filter_btn">소아청소년과</button></li>
+         		<li class="filter_li"><button class="filter_btn">신경과</button></li>
+         		<li class="filter_li"><button class="filter_btn">안과</button></li>
+         		<li class="filter_li"><button class="filter_btn">이비인후과</button></li>
+         		<li class="filter_li"><button class="filter_btn">일반외과</button></li>
+         		<li class="filter_li"><button class="filter_btn">정신건강의학과</button></li>
+         		<li class="filter_li"><button class="filter_btn">정형외과</button></li>
+         		<li class="filter_li"><button class="filter_btn">치과</button></li>
+         		<li class="filter_li"><button class="filter_btn">피부과</button></li>
+         		<li class="filter_li"><button class="filter_btn">한방과</button></li>
+         	</ul>
          </div>
       </div>
       <div class="scroll_area">
@@ -400,7 +455,7 @@
 	         	<div  class="reservation_info">
 	         	</div>
 	         	<div class="currentResByAddr">
-	         		<h3>회원님은 현재 이 병원에 14:00에 예약하셨습니다(테스트)</h3>
+	         		
 	         	</div>
 	         </div>
 	         	
@@ -627,6 +682,13 @@
          $('.info_wrap').css("transform","translateX(-391px)");
          $('.info-toggle').css("left","0");
       }); */
+      $('.filter_btn').on('click',function(){
+    	  console.log(this)
+    	  console.log($(this).html())
+    	  $('.filter_btn').removeClass('filter_btn_active');
+    	  $(this).toggleClass('filter_btn_active');
+    	  filter_apply($(this).html(),$(this).html());
+      });
       $('.search_keyword_input').autocomplete({
          source : function(request, response) {
             $.ajax({
@@ -668,13 +730,21 @@
       $('.search_keyword_submit').click(function(){
 
          console.log('검색',$('.search_keyword_input').val().length);
+         console.log($('.filter_btn_active').html());
          $(".reservation_info").hide();
          var search_val = $('.search_keyword_input').val();
+         var search_dept = $('.filter_btn_active').html()
+         
+         if(search_dept == '전체')
+         {
+        	 search_dept = '';
+         }
+         
          if($('.search_keyword_input').val().length > 0)
          {
             switch (apiStatus) {
             case 0:
-               loadHospitalList(search_val);
+               loadHospitalList(search_val,search_dept);
                break;
             case 1:
             case 2:
@@ -700,6 +770,7 @@
          $('.search_list').html('');
          $('.search_keyword_input').val('');
          $(".reservation_info").hide();
+         $('.top_filter_area').show();
          
          $('#filter_hospital').addClass('selected_filter');
          $('#filter_pharmacy').removeClass('selected_filter');
@@ -711,6 +782,7 @@
          $('.search_list').html('');
          $('.search_keyword_input').val('');
          $(".reservation_info").hide();
+         $('.top_filter_area').hide();
          
          $('#filter_hospital').removeClass('selected_filter');
          $('#filter_pharmacy').addClass('selected_filter');
@@ -722,6 +794,7 @@
          $('.search_list').html('');
          $('.search_keyword_input').val('');
          $(".reservation_info").hide();
+         $('.top_filter_area').hide();
          
          $('#filter_hospital').removeClass('selected_filter');
          $('#filter_pharmacy').removeClass('selected_filter');
@@ -850,13 +923,8 @@
       });
 
       $('#select_department').on("change", function() {
-          console.log(this.value);
-          var idx = $("#select_department option").index( $("#select_department option:selected") );
-
-          console.log("선택한 index : " + idx);
-          console.log(markers);
-          
-          deptStatus = idx;
+    	  var idx = $("#select_department option").index( $("#select_department option:selected") );
+    	  filter_apply(this.value,idx);
       });
       
    });
@@ -864,6 +932,7 @@
 <script>
 
    var markers = [];
+   var currentMarkers = [];
 
    var intervalReservation;
    
@@ -903,7 +972,6 @@
 	피부과
 	한방과
    */
-   
    
    kakao.maps.event.addListener(map, 'dragend', function() {
       // 지도의  레벨을 얻어옵니다
@@ -991,15 +1059,31 @@
          switch (status) {
          case 0:
             loadHospital(latitude,longitude);
+            $('.top_filter_area').show();
+            $('#filter_hospital').addClass('selected_filter');
+            $('#filter_pharmacy').removeClass('selected_filter');
+            $('#filter_mask').removeClass('selected_filter');
             break;
          case 1:
             loadPharmacy(latitude,longitude);
+            $('.top_filter_area').hide();
+            $('#filter_hospital').removeClass('selected_filter');
+            $('#filter_pharmacy').addClass('selected_filter');
+            $('#filter_mask').removeClass('selected_filter');
             break;
          case 2:
             storesByGeo(latitude,longitude);
+            $('.top_filter_area').hide();
+            $('#filter_hospital').removeClass('selected_filter');
+            $('#filter_pharmacy').removeClass('selected_filter');
+            $('#filter_mask').addClass('selected_filter');
             break;
          default:
             loadCovidMap();
+            $('.top_filter_area').hide();
+            $('#filter_hospital').removeClass('selected_filter');
+            $('#filter_pharmacy').removeClass('selected_filter');
+            $('#filter_mask').removeClass('selected_filter');
             break;
          }
       }
@@ -1022,6 +1106,7 @@
                console.log(data);
                var jsonData = JSON.parse(data);
                console.log("연결성공", jsonData,typeof(jsonData));
+               currentMarkers = jsonData;
                $.each(jsonData, function(i, item) {
                   if(item.auth=='제휴승인됨')
                   {
@@ -1030,7 +1115,8 @@
                           position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
                           image :  new kakao.maps.MarkerImage(
                                 "<c:url value='/images/map/hospital_image/hospital.png'/>",
-                                  new kakao.maps.Size(35, 35))
+                                  new kakao.maps.Size(35, 35)),
+                          title : item.hosp_name
                        });
                   }
                   else
@@ -1417,13 +1503,13 @@
             }
          });
       }
-      function loadHospitalList(search_val)
+      function loadHospitalList(search_val,search_dept)
       {
          $.ajax({
             url:"<c:url value='/Homespital/Map/hospitalList.hst'/>",
             type:'get',
             datatype:'json',
-            data:{"search_keyword":search_val},
+            data:{"search_keyword":search_val,"search_dept":search_dept},
             beforeSend: function () {
                console.log("beforeSend");
                FunLoadingBarStart();
@@ -1435,25 +1521,27 @@
             success:function(data){
                var jsonData = JSON.parse(data);
                console.log("연결성공", jsonData,typeof(jsonData));
-
-               var items = '<div class="search_item" onclick="searchItemClick(\''+jsonData['ADDRESS']+'\');">'+
+               var items = '';
+               $.each(jsonData, function(i, item) {
+                   console.log(item);
+	               items += '<div class="search_item" onclick="searchItemClick(\''+item['ADDRESS']+'\',\''+search_dept+'\');">'+
 	                          '<div class="search_item_detail">'+
 	                             '<div class="detail_content">'+
 	                                '<div class="content_title">'+
-	                                   '<strong>'+jsonData['HOSP_NAME']+'</strong>'+
+	                                   '<strong>'+item['HOSP_NAME']+'</strong>'+
 	                                '</div>'+
 	                                '<div class="content_body">'+
 	                                   //item['ADDRESS']+
-	                                   jsonData['DEPT_NAME']+' '+ 
-	                                   jsonData['TEL']+
+	                                   item['DEPT_NAME']+' '+ 
+	                                   item['TEL']+
 	                                '</div>'+
 	                                '<div class="content_body">'+
-	                                   jsonData['ADDRESS']+
+	                                   item['ADDRESS']+
 	                                '</div>'+
 	                             '</div>'+
 	                          '</div>'+
 	                       '</div>'
-
+               });
                $('.search_list').html(items);
             },
             error:function(e){
@@ -1657,7 +1745,7 @@
               }
           }    
       }
-      function searchItemClick(address)
+      function searchItemClick(address,search_dept)
       {
          geocoder.addressSearch(address,function(result, status){
             if (status === kakao.maps.services.Status.OK) {
@@ -1674,7 +1762,7 @@
                   url:"<c:url value='/Homespital/Map/detailView.hst'/>",
                   type:'get',
                   datatype:'json',
-                  data:{"address":address,"apiStatus" : apiStatus},
+                  data:{"address":address,"apiStatus" : apiStatus,"search_dept":search_dept},
                   beforeSend: function () {
                      console.log("beforeSend");
                      FunLoadingBarStart();
@@ -2111,6 +2199,58 @@
           });
     	  
 	  }
+      
+      function filter_apply(value,idx)
+      {
+    	  for(var i = 0; i < markers.length; i++)
+          {
+    		  markers[i].setMap(null);
+          }
+    	  
+    	  var deptMarkers = []
+          console.log(value);
+          
+
+          console.log("선택한 index : " + idx);
+          console.log(markers);
+          
+          deptStatus = idx;
+          
+          console.log(currentMarkers);
+          
+          for(var i = 0; i < currentMarkers.length; i++)
+          {
+        	  if(idx == 0 || idx == '전체')
+        	  {
+        		  for(var i = 0; i < markers.length; i++)
+                  {
+            		  markers[i].setMap(map);
+                  }
+        		  return;
+        	  }
+              else if(value == currentMarkers[i].dept_name)
+        	  {
+        		  console.log(currentMarkers[i])
+        		  deptMarkers.push(currentMarkers[i])
+        	  }
+          }
+          console.log(deptMarkers)
+          
+          for(var i = 0; i < markers.length; i++)
+          {
+        	  for(var j = 0; j < deptMarkers.length; j++)
+              {
+        		  console.log(markers[i].getTitle())
+        		  console.log(deptMarkers[j].hosp_name)
+        		  if(markers[i].getTitle() == deptMarkers[j].hosp_name)
+            	  {
+            		  console.log(markers[i])
+            		  markers[i].setMap(map);
+            	  }
+              }
+          }
+      }
+      
       //yy-mm-dd
       function parse(str) {
 	   	  var y = str.substr(0, 2);

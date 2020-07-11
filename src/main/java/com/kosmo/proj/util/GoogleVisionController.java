@@ -211,7 +211,7 @@ public class GoogleVisionController {
 		
 		service.insertPre(map);
 		
-		return "testView.tiles";
+		return "administration.my_tiles";
 	}
 	
 	

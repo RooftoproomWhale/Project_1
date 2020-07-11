@@ -15,7 +15,7 @@
    <select id="hospitalSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
       <!-- SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%' -->
       SELECT H.*, D.dept_name FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code
-	  WHERE H.hosp_name LIKE '%' || #{search_keyword} || '%'
+	  WHERE H.hosp_name LIKE '%' || #{search_keyword} || '%' AND D.dept_name = #{search_dept}
    </select>
    <select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
       SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
@@ -31,7 +31,7 @@
    
    <select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
       SELECT H.*, D.dept_name FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code
-      WHERE H.address = #{address}
+      WHERE H.address = #{address} AND D.dept_name = #{search_dept}
    </select>
 
    <select id="hospitalSelectByXY" parameterType="java.util.Map" resultType="HospitalDTO">
