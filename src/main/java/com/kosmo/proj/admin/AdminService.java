@@ -94,6 +94,7 @@ public interface AdminService {
 		//병원 제휴
 		List<HospitalDTO> selectList_Auth_All(Paging vo);
 		int approveAuth(Map map);
+		int approveAuth_(Map map);
 		int denyAuth(Map map);
 		List<HospitalDTO> selectList_Auth_Search(Map map);
 		int getTotalRecordHosAuth(Map map);
@@ -109,7 +110,13 @@ public interface AdminService {
 		List<Map> selectImage();
 		int hitNotice(Map map);
 
+
 		List<CovidEditDTO> selectCovidList(Map map);
 		int updateCovidList(Map map);
 		
+
+		int getFirst(Map map);
+		int getLast(Map map);
+
+
 }

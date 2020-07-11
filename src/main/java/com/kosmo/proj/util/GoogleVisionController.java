@@ -209,9 +209,9 @@ public class GoogleVisionController {
 		map.put("hospital",hospital);
 		map.put("count",count);
 		
-		//service.insertPre(map);
+		service.insertPre(map);
 		
-		return "testView.tiles";
+		return "administration.my_tiles";
 	}
 	
 	

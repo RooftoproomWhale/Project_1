@@ -79,7 +79,7 @@ public class MedicineController {
 	@RequestMapping(value="/Calendar/Management.hst",produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String calendarmanagement(@RequestParam String dname,Map map) throws ParserConfigurationException, SAXException, IOException {
-		System.out.println(dname);
+		
 		MedicineInfoDTO info = new MedicineInfoDTO();
 		String encodeSearch="";
 		 ObjectMapper mapper = new ObjectMapper();
@@ -88,18 +88,16 @@ public class MedicineController {
 		for(String data1 : data) {
 				System.out.println("데이타 : "+data1);
 		info = mediInfo(data1, info);
+		info = mediShape(data1, info);
         infos.add(info);
 		}
-		for(MedicineInfoDTO dats : infos) {
-			System.out.println("출력1: "+dats.getITEM_NAME());
-			System.out.println("출력2: "+dats.getENTP_NAME());
-		}
+
 		String jsonStr = null;
 		try {
 			 jsonStr = mapper.writeValueAsString(infos);
 		} catch (JsonProcessingException e) {e.printStackTrace();} 
         map.put("info", info);
-		System.out.println(jsonStr);
+	
 		return jsonStr;
 	}
 
@@ -184,6 +182,7 @@ public class MedicineController {
         String eeDoc = getTagValue("EE_DOC_DATA",doc);
         String udDoc = getTagValue("UD_DOC_DATA",doc);
         String nbDoc = getTagValue("NB_DOC_DATA",doc);
+        nbDoc = nbDoc.substring(0, nbDoc.indexOf("2."));
         
         //System.out.println(responseBody);
         
@@ -193,7 +192,6 @@ public class MedicineController {
         	return new MedicineInfoDTO();
         }
         else if((long)jsonMedi.getJSONObject("response").getJSONObject("body").get("totalCount")>1) {
-        
         	selecOne = (JSONObject)jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").get(0);
         }
         else 
@@ -232,18 +230,20 @@ public class MedicineController {
 		NodeList ccList = cList.item(0).getChildNodes();
 		for(int i=0;i<ccList.getLength();i++) {
 			NodeList chList = ccList.item(i).getChildNodes();
-			System.out.println(ccList.item(0).getNodeValue());
 			for(int k=0;k<chList.getLength();k++) {
+				if(chList.item(k).hasAttributes()) {
+					nValue+=chList.item(k).getAttributes().getNamedItem("title").getNodeValue()+"<br/>";
+				}
 				NodeList cchList = chList.item(k).getChildNodes();
 				for(int j=0;j<cchList.getLength();j++) {
-					System.out.println(cchList.item(j).getTextContent());
-					if(cchList.item(j).getTextContent()!="&nbsp;") {
-						nValue+="<p>"+cchList.item(j).getTextContent()+"</p>";
+					if(cchList.item(j).hasAttributes()){
+						if(cchList.item(j).getAttributes().getNamedItem("tagName").getNodeValue().equalsIgnoreCase("p")) {
+							nValue+="&nbsp"+cchList.item(j).getTextContent()+"<br/>";
+						}
 					}
 				}
 			}
 		}
-		
 		return nValue;
 	}
 	

@@ -50,16 +50,16 @@ padding-bottom: 150px}
 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
 						<div class="row no-padding"><i class="far fa-file-alt color-teal"></i>
-							<div class="large">${count[0]["PRECOUNT"]}</div>
-							<div class="text-muted">복용 중인 약품수</div>
+							<div class="large">${count[0]["RESERCOUNT"]}</div>
+							<div class="text-muted">진료 예약 현황</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding"><i class="fas fa-pills color-blue"></i>
-							<div class="large">${count[0]["RESERCOUNT"]}</div>
-							<div class="text-muted">진료 예약 현황</div>
+							<div class="large">${count[0]["PRECOUNT"]}</div>
+							<div class="text-muted">복용 중인 약품수</div>
 						</div>
 					</div>
 				</div>
@@ -127,15 +127,15 @@ padding-bottom: 150px}
                             <tbody>
                                 <tr>
                                     <td>자주 방문하는 병원</td>
-                                    <td>삼성병원</td>
+                                    <td>${hosp_name}</td>
                                 </tr>
                                 <tr>
                                     <td>자주 방문하는 과</td>
-                                    <td>이비인후과</td>
+                                    <td>${dept_name}</td>
                                 </tr>
                                 <tr>
                                     <td>가지고 있는 질환</td>
-                                    <td>천식, 폐렴</td>
+                                    <td>${ill_name}</td>
                                 </tr>
                                 <tr>
                                     <td>최근 방문 증상</td>
@@ -167,7 +167,7 @@ padding-bottom: 150px}
                                 </tr>
                                 <tr>
                                     <td>가지고 있는 만성 질환</td>
-                                    <td>비염, 갑각류 알레르기</td>
+                                    <td>${CHRONIC_ILL}</td>
                                 </tr>
                             </tbody>
                         </table>

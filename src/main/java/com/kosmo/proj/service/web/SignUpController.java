@@ -35,19 +35,25 @@ public class SignUpController {
    {
       int memCheck = memberService.insert(map);
       System.out.println("memChekck: " + memCheck);
+
       int hisCheck = memberService.hisInsert(map);
       System.out.println("hisCheck: " + hisCheck);
+
       HistoryDTO getNo = memberService.getNo(map);
       String histNo = getNo.getHist_no();
       System.out.println("histNo: " + histNo);
+
       map.put("histNo", histNo);
+
       String illStr = map.get("illStr").toString();
       String[] illArray = illStr.split("-");
+
       for(int i=0; i<illArray.length; i++)
       {
          String ill = illArray[i];
          System.out.println(Integer.parseInt(ill));
          map.put("illCode", Integer.parseInt(ill));
+
          int illCheck = memberService.illInsert(map);
          System.out.println(i + "번째 illCheck: " + illCheck);
       }
@@ -58,8 +64,8 @@ public class SignUpController {
    @ResponseBody
    @RequestMapping(value = "/Member/HospitalSearch.hst", produces = "text/html; charset=UTF-8")
    public String hospitalSearch(@RequestParam Map map, Model model,
-         @RequestParam(value = "nowPage", required = false) String nowPage,
-         @RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
+		   @RequestParam(value = "nowPage", required = false) String nowPage,
+		   @RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
 //      int total = adminService.getTotalRecordAptSearch(map);
 //      System.out.println(total);
       ObjectMapper mapper = new ObjectMapper();
@@ -87,9 +93,10 @@ public class SignUpController {
       ObjectMapper mapper = new ObjectMapper();
       String jsonStr = null;
       List<HospitalDTO> list = memberService.selectedHosp(map);
+      System.out.println("list : " + list);
       for (HospitalDTO val : list) {
-         System.out.println(val.getHosp_name());
-         System.out.println(val.getAddress());
+    	  System.out.println("병원명 : " + val.getHosp_name());
+    	  System.out.println("병원주소: " + val.getAddress());
       }
       try {
          jsonStr = mapper.writeValueAsString(list);
@@ -98,7 +105,7 @@ public class SignUpController {
       }
 
       model.addAttribute("list", list);
-      System.out.println(jsonStr);
+      System.out.println("json : " + jsonStr);
       return jsonStr.toString();
    }
 
@@ -106,10 +113,13 @@ public class SignUpController {
    public String hosAuthSub(@RequestParam Map map, Model model)
    {
       System.out.println("AUTHSUBCONT");
+
       int inCheck = memberService.insert(map);
       System.out.println("MEM IN:" + inCheck);
+
       int upCheck = memberService.hosAuthSub(map);
       System.out.println("HOSAUTH UP: " + upCheck);
+
       int upCheck2 = memberService.hosIdUpdate(map);
       System.out.println("HOSID UP: " + upCheck2);
 

@@ -27,31 +27,44 @@
        background-color: rgba( 255, 255, 255, 0.5 );
       z-index: 1231234;
    }
+   .map_top
+   {
+   		position: absolute;
+   		top: 100px;
+        left: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 2;
+   }
    .search 
    {
-      position: absolute;
-       top: 100px;
-       left: 16px;
-       display: flex;
-       justify-content: space-between;
-       z-index: 2;
-       align-items: center;
        border-radius: 24px;
        background: white;
-       padding: 13px 24px 13px 24px;
-       width: auto;
+       padding: 3px 24px 13px 24px;
+       width: 343px;
        right: 16px;
-       max-width: 343px;
        height: 46px;
        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
        background-color: #ffffff;
    }
    .searchInput
    {
-      width: 90%;
+	   width: 80%;
        border: 0 !important;
        background: white;
        font-size: small;
+   }
+   .map_select{
+   		
+   }
+   #select_department
+   {
+   	   margin-left: 10px;
+       padding: 6px;
+       color: #333333;
+       font-weight: 700;
+       display: none;
    }
    .map_button{position: absolute;bottom: 19px;right: 8px;z-index: 2;flex-direction: column;}
    .current_refresh
@@ -107,7 +120,22 @@
       padding: 0 0 20px 0;
    }
    .top_filter_area{
-      padding: 5px 20px;
+      padding: 14px 0 9px;
+      margin: 0 20px;
+      display: none;
+   }
+   .filter_li{
+   		display: inline-block;
+    margin: 0 5px 5px 0;
+    font-size: 12px;
+    line-height: 24px;
+    color: #333;
+    vertical-align: top;
+   }
+   .filter_btn_active{
+   	background-color: #0475f4;
+    border-color: transparent;
+    color: #fff;
    }
    .filter_button{
       width: 44px;
@@ -121,6 +149,12 @@
        border-image: initial;
        margin: 0 10px;
        outline: 0;
+   }
+   .filter_btn{
+   		display: inline-block;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 15px;
+    padding: 0 12px;
    }
    .selected_filter{
       box-shadow: rgba(0, 255, 0, 1) 0px 3px 3px 0px;
@@ -257,10 +291,32 @@
    <div class="load_wrap">
       <img class="load_img" style="vertical-align: bottom;" src="<c:url value='/images/map/mask_loader.gif'/>">
    </div>
-   <div class="search">
-      <input class="searchInput" id="searchAddress" placeholder="지도상 현재 위치의 주소가 표시됩니다" disabled>
-      <img style="width: 43px;cursor: pointer;"src="<c:url value='/images/map/search.png'/>" onclick="addressSearch()" ></img>
+   <div class="map_top">
+   	  <div class="search">
+      	<input class="searchInput" id="searchAddress" placeholder="지도상 현재 위치의 주소가 표시됩니다" disabled>
+      	<img style="width: 43px;cursor: pointer;"src="<c:url value='/images/map/search.png'/>" onclick="addressSearch()" ></img>
+   	  </div>
+	  <div class="map_select">
+	   	 <select name="select_department" id="select_department">
+		    <option>전체</option>
+		    <option>내과</option>
+		    <option>비뇨기과</option>
+		    <option>산부인과</option>
+		    <option>성형외과</option>
+		    <option>소아청소년과</option>
+		    <option>신경과</option>
+		    <option>안과</option>
+		    <option>이비인후과</option>
+		    <option>일반외과</option>
+		    <option>정신건강의학과</option>
+		    <option>정형외과</option>
+		    <option>치과</option>
+		    <option>피부과</option>
+		    <option>한방과</option>
+	     </select>
+	  </div>
    </div>
+   
    <div class="map_button">
       <button class="current_refresh" type="button" onclick="currentPosition()">
          <img src="<c:url value='/images/map/current_position.png'/>" style="width: 34px;height: 34px;">
@@ -269,6 +325,7 @@
          <img src="<c:url value='/images/map/refresh.png'/>" style="width: 34px;height: 34px;">
       </button>
    </div>
+   
    <!-- 
    <div class="current">
       <button type="button" onclick="currentPosition()">현재위치</button>
@@ -296,6 +353,40 @@
             <button type="button" class="search_keyword_submit"></button>
          </div>
          <div class="top_filter_area">
+         <!-- 
+		   	전체
+			내과
+			비뇨기과
+			산부인과
+			성형외과
+			소아청소년과
+			신경과
+			안과
+			이비인후과
+			일반외과
+			정신건강의학과
+			정형외과
+			치과
+			피부과
+			한방과
+	      -->	
+         	<ul>
+         		<li class="filter_li"><button class="filter_btn filter_btn_active">전체</button></li>
+         		<li class="filter_li"><button class="filter_btn">내과</button></li>
+         		<li class="filter_li"><button class="filter_btn">비뇨기과</button></li>
+         		<li class="filter_li"><button class="filter_btn">산부인과</button></li>
+         		<li class="filter_li"><button class="filter_btn">성형외과</button></li>
+         		<li class="filter_li"><button class="filter_btn">소아청소년과</button></li>
+         		<li class="filter_li"><button class="filter_btn">신경과</button></li>
+         		<li class="filter_li"><button class="filter_btn">안과</button></li>
+         		<li class="filter_li"><button class="filter_btn">이비인후과</button></li>
+         		<li class="filter_li"><button class="filter_btn">일반외과</button></li>
+         		<li class="filter_li"><button class="filter_btn">정신건강의학과</button></li>
+         		<li class="filter_li"><button class="filter_btn">정형외과</button></li>
+         		<li class="filter_li"><button class="filter_btn">치과</button></li>
+         		<li class="filter_li"><button class="filter_btn">피부과</button></li>
+         		<li class="filter_li"><button class="filter_btn">한방과</button></li>
+         	</ul>
          </div>
       </div>
       <div class="scroll_area">
@@ -364,7 +455,7 @@
 	         	<div  class="reservation_info">
 	         	</div>
 	         	<div class="currentResByAddr">
-	         		<h3>회원님은 현재 이 병원에 14:00에 예약하셨습니다</h3>
+	         		
 	         	</div>
 	         </div>
 	         	
@@ -591,6 +682,13 @@
          $('.info_wrap').css("transform","translateX(-391px)");
          $('.info-toggle').css("left","0");
       }); */
+      $('.filter_btn').on('click',function(){
+    	  console.log(this)
+    	  console.log($(this).html())
+    	  $('.filter_btn').removeClass('filter_btn_active');
+    	  $(this).toggleClass('filter_btn_active');
+    	  filter_apply($(this).html(),$(this).html());
+      });
       $('.search_keyword_input').autocomplete({
          source : function(request, response) {
             $.ajax({
@@ -632,13 +730,21 @@
       $('.search_keyword_submit').click(function(){
 
          console.log('검색',$('.search_keyword_input').val().length);
+         console.log($('.filter_btn_active').html());
          $(".reservation_info").hide();
          var search_val = $('.search_keyword_input').val();
+         var search_dept = $('.filter_btn_active').html()
+         
+         if(search_dept == '전체')
+         {
+        	 search_dept = '';
+         }
+         
          if($('.search_keyword_input').val().length > 0)
          {
             switch (apiStatus) {
             case 0:
-               loadHospitalList(search_val);
+               loadHospitalList(search_val,search_dept);
                break;
             case 1:
             case 2:
@@ -664,6 +770,7 @@
          $('.search_list').html('');
          $('.search_keyword_input').val('');
          $(".reservation_info").hide();
+         $('.top_filter_area').show();
          
          $('#filter_hospital').addClass('selected_filter');
          $('#filter_pharmacy').removeClass('selected_filter');
@@ -675,6 +782,7 @@
          $('.search_list').html('');
          $('.search_keyword_input').val('');
          $(".reservation_info").hide();
+         $('.top_filter_area').hide();
          
          $('#filter_hospital').removeClass('selected_filter');
          $('#filter_pharmacy').addClass('selected_filter');
@@ -686,6 +794,7 @@
          $('.search_list').html('');
          $('.search_keyword_input').val('');
          $(".reservation_info").hide();
+         $('.top_filter_area').hide();
          
          $('#filter_hospital').removeClass('selected_filter');
          $('#filter_pharmacy').removeClass('selected_filter');
@@ -737,6 +846,7 @@
 				type:'post',
 				success:function(data){
 					console.log(data);
+					
 					if(data == 1)
 					{
 						alert("예약이 완료되었습니다");
@@ -812,17 +922,17 @@
            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],   // 한글 요일 표시 부분
       });
 
-      $('#Hour').change(function(){
-    	  
+      $('#select_department').on("change", function() {
+    	  var idx = $("#select_department option").index( $("#select_department option:selected") );
+    	  filter_apply(this.value,idx);
       });
-      $('#Minute').change(function(){
-    	  
-      });
+      
    });
 </script>
 <script>
 
    var markers = [];
+   var currentMarkers = [];
 
    var intervalReservation;
    
@@ -844,6 +954,24 @@
    
    var apiStatus = 2; // 0:병원, 1: 약국, 2: 공적마스크, 3: 확진자 동선
    
+   var deptStatus = 0; //~14
+   /*
+   	전체
+	내과
+	비뇨기과
+	산부인과
+	성형외과
+	소아청소년과
+	신경과
+	안과
+	이비인후과
+	일반외과
+	정신건강의학과
+	정형외과
+	치과
+	피부과
+	한방과
+   */
    
    kakao.maps.event.addListener(map, 'dragend', function() {
       // 지도의  레벨을 얻어옵니다
@@ -931,15 +1059,31 @@
          switch (status) {
          case 0:
             loadHospital(latitude,longitude);
+            $('.top_filter_area').show();
+            $('#filter_hospital').addClass('selected_filter');
+            $('#filter_pharmacy').removeClass('selected_filter');
+            $('#filter_mask').removeClass('selected_filter');
             break;
          case 1:
             loadPharmacy(latitude,longitude);
+            $('.top_filter_area').hide();
+            $('#filter_hospital').removeClass('selected_filter');
+            $('#filter_pharmacy').addClass('selected_filter');
+            $('#filter_mask').removeClass('selected_filter');
             break;
          case 2:
             storesByGeo(latitude,longitude);
+            $('.top_filter_area').hide();
+            $('#filter_hospital').removeClass('selected_filter');
+            $('#filter_pharmacy').removeClass('selected_filter');
+            $('#filter_mask').addClass('selected_filter');
             break;
          default:
             loadCovidMap();
+            $('.top_filter_area').hide();
+            $('#filter_hospital').removeClass('selected_filter');
+            $('#filter_pharmacy').removeClass('selected_filter');
+            $('#filter_mask').removeClass('selected_filter');
             break;
          }
       }
@@ -962,6 +1106,7 @@
                console.log(data);
                var jsonData = JSON.parse(data);
                console.log("연결성공", jsonData,typeof(jsonData));
+               currentMarkers = jsonData;
                $.each(jsonData, function(i, item) {
                   if(item.auth=='제휴승인됨')
                   {
@@ -970,7 +1115,8 @@
                           position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
                           image :  new kakao.maps.MarkerImage(
                                 "<c:url value='/images/map/hospital_image/hospital.png'/>",
-                                  new kakao.maps.Size(35, 35))
+                                  new kakao.maps.Size(35, 35)),
+                          title : item.hosp_name
                        });
                   }
                   else
@@ -980,7 +1126,8 @@
                           position : new kakao.maps.LatLng(item.cor_y, item.cor_x),
                           image :  new kakao.maps.MarkerImage(
                                 "<c:url value='/images/map/hospital_image/hospital_normal.png'/>",
-                                  new kakao.maps.Size(35, 35))
+                                  new kakao.maps.Size(35, 35)),
+                          title : item.hosp_name
                        });
                   }
                   
@@ -1015,11 +1162,40 @@
                         $('.info_wrap').removeClass('warp_invisible');
                         $('.info-toggle').removeClass('left_toggle');
                      }
-                    
-                     var time = "평일 : " + item.weekday_open + ":00~" + item.weekday_close + ":00<br/>" 
-                     + "주말 : " + item.weekend_open + ":00~" + item.weekend_close + ":00" 
                      
-                     listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel,time,item.lunchtime,item.cor_y, item.cor_x);
+                     var weekday_open = ((item.weekday_open != undefined) ? item.weekday_open : '800')
+                     var weekday_close = ((item.weekday_close != undefined) ? item.weekday_close : '2200')
+                     var weekend_open = ((item.weekend_open != undefined) ? item.weekend_open : '900')
+                     var weekend_close = ((item.weekend_close != undefined) ? item.weekend_close : '1200')
+                     var lunchtime = ((item.lunchtime != undefined || item.lunchtime != '0' || item.lunchtime.length != 0) ? item.lunchtime : '12:30~1:30')
+                    		 
+                     console.log("lunchtime",lunchtime);
+                     console.log("item.lunchtime.length",item.lunchtime.length);
+                    		 
+                     var weekday_open_H = weekday_open.substring(0,parseInt(weekday_open.length/2));
+	               	 console.log("weekday_open",weekday_open_H);
+	               	 var weekday_open_M = weekday_open.substring(parseInt(weekday_open.length/2),weekday_open.length);
+	               	 console.log("weekday_open",weekday_open_M);
+	               	  
+	               	 var weekday_close_H = weekday_close.substring(0,parseInt(weekday_close.length/2));
+	               	 console.log("weekday_close",weekday_close_H);
+	               	 var weekday_close_M = weekday_close.substring(parseInt(weekday_close.length/2),weekday_close.length);
+	               	 console.log("weekday_close",weekday_close_M);
+	               	  
+	               	 var weekend_open_H = weekend_open.substring(0,parseInt(weekend_open.length/2));
+	               	 console.log("weekend_open",weekend_open_H);
+	               	 var weekend_open_M = weekend_open.substring(parseInt(weekend_open.length/2),weekend_open.length);
+	               	 console.log("weekend_open",weekend_open_M);
+	               	  
+	               	 var weekend_close_H = weekend_close.substring(0,parseInt(weekend_close.length/2));
+	               	 console.log("weekend_close",weekend_close_H);
+	               	 var weekend_close_M = weekend_close.substring(parseInt(weekend_close.length/2),weekend_close.length);
+	               	 console.log("weekend_close",weekend_close_M);
+                    
+                     var time = "평일 : " + weekday_open_H + ":" + weekday_open_M + "~" + weekday_close_H + ":"+weekday_close_M+"<br/>" 
+                     + "주말 : " + weekend_open_H + ":" + weekend_open_M + "~" + weekend_close_H + ":"+ weekend_close_M;
+                     
+                     listitem = getDetailHospItem(item.hosp_name,item.dept_name,item.address,item.tel,time,lunchtime,item.cor_y, item.cor_x);
                      $('.search_list').html(listitem);
                   });
                   
@@ -1327,13 +1503,13 @@
             }
          });
       }
-      function loadHospitalList(search_val)
+      function loadHospitalList(search_val,search_dept)
       {
          $.ajax({
             url:"<c:url value='/Homespital/Map/hospitalList.hst'/>",
             type:'get',
             datatype:'json',
-            data:{"search_keyword":search_val},
+            data:{"search_keyword":search_val,"search_dept":search_dept},
             beforeSend: function () {
                console.log("beforeSend");
                FunLoadingBarStart();
@@ -1347,25 +1523,24 @@
                console.log("연결성공", jsonData,typeof(jsonData));
                var items = '';
                $.each(jsonData, function(i, item) {
-                  console.log(item);
-               
-                  items += '<div class="search_item" onclick="searchItemClick(\''+item['ADDRESS']+'\');">'+
-                           '<div class="search_item_detail">'+
-                              '<div class="detail_content">'+
-                                 '<div class="content_title">'+
-                                    '<strong>'+item['HOSP_NAME']+'</strong>'+
-                                 '</div>'+
-                                 '<div class="content_body">'+
-                                    //item['ADDRESS']+
-                                    item['DEPT_NAME']+' '+ 
-                                    item['TEL']+
-                                 '</div>'+
-                                 '<div class="content_body">'+
-                                    item['ADDRESS']+
-                                 '</div>'+
-                              '</div>'+
-                           '</div>'+
-                        '</div>'
+                   console.log(item);
+	               items += '<div class="search_item" onclick="searchItemClick(\''+item['ADDRESS']+'\',\''+search_dept+'\');">'+
+	                          '<div class="search_item_detail">'+
+	                             '<div class="detail_content">'+
+	                                '<div class="content_title">'+
+	                                   '<strong>'+item['HOSP_NAME']+'</strong>'+
+	                                '</div>'+
+	                                '<div class="content_body">'+
+	                                   //item['ADDRESS']+
+	                                   item['DEPT_NAME']+' '+ 
+	                                   item['TEL']+
+	                                '</div>'+
+	                                '<div class="content_body">'+
+	                                   item['ADDRESS']+
+	                                '</div>'+
+	                             '</div>'+
+	                          '</div>'+
+	                       '</div>'
                });
                $('.search_list').html(items);
             },
@@ -1570,7 +1745,7 @@
               }
           }    
       }
-      function searchItemClick(address)
+      function searchItemClick(address,search_dept)
       {
          geocoder.addressSearch(address,function(result, status){
             if (status === kakao.maps.services.Status.OK) {
@@ -1587,7 +1762,7 @@
                   url:"<c:url value='/Homespital/Map/detailView.hst'/>",
                   type:'get',
                   datatype:'json',
-                  data:{"address":address,"apiStatus" : apiStatus},
+                  data:{"address":address,"apiStatus" : apiStatus,"search_dept":search_dept},
                   beforeSend: function () {
                      console.log("beforeSend");
                      FunLoadingBarStart();
@@ -1790,6 +1965,15 @@
       {
          apiStatus = status;
          console.log('상태',apiStatus);
+         if(apiStatus==0)
+         {
+        	 $('#select_department').show();
+         }
+         else
+         {
+        	 $('#select_department').hide();
+         }
+         
          refreshMap();
       }
       function refreshMap()
@@ -1839,120 +2023,234 @@
       }
       
       function changeSelector(date,day) {
-    	  $("#Hour").empty();
-    	  
 
-    	  console.log(day.getDate());
-    	  console.log((date.getHours() + 24) % 12 || 12);
-    	  console.log(date.getMinutes());
     	  
-    	  var option
-    	  
-    	  if(day.getDate() != date.getDate())
-    	  {
-        	  $("#Minute").empty();
-    		  
-    		  option = "";
-    		  for(var i = 8; i <= 22; i++)
-    		  {
-    			  if(i<10)
-    			  {
-    				  option += "<option>0"+i+"</option>";
-    			  }
-    			  else
-    			  {
-    				  option += "<option>"+i+"</option>";
-    			  }
-    		  }
-    		  $('#Hour').append(option);
-    		  
-    		  option = "";
-    		  for(var i = 0; i <= 50; i=i+10)
-    		  {
-    			  if(i==0)
-    			  {
-    				  option += "<option>0"+i+"</option>";
-    			  }
-    			  else
-    			  {
-    				  option += "<option>"+i+"</option>";
-    			  }
-    		  }
-    		  
-    		  $('#Minute').append(option);
-    	  }
-    	  else
-    	  {
-	    	  $("#Minute").empty();
+    	  $.ajax({
+          	  url:"<c:url value='/Homespital/Map/getHospital.hst'/>",
+          	  type:'get',
+              datatype:'json',
+              data:{"address":$('#address').val()},
+              success:function(data){
+              	  console.log(data); 
+              	  var jsonData = JSON.parse(data);
+              	  console.log(jsonData); 
+              	  var weekday_open = jsonData.weekday_open != undefined ? jsonData.weekday_open : '800'
+              	  var weekday_close = jsonData.weekday_close != undefined ? jsonData.weekday_close : '2200'
+              	  var weekend_open = jsonData.weekend_open != undefined ? jsonData.weekend_open : '900'
+              	  var weekend_close = jsonData.weekend_close != undefined ? jsonData.weekend_close : '1200'
+              	  var lunchtime = (jsonData.lunchtime != undefined || jsonData.lunchtime != '0') ? jsonData.lunchtime : '12:30~1:30'
+              	  
+              	  console.log("weekday_open",weekday_open);
+              	  
 
-			  option = ""; 
-			  var min = ((Math.floor(date.getMinutes() / 10)) * 10) + 10;
-			  console.log(min);
-			  
-			  if(min == 60)
-			  {
-				  for(var i = 0; i <= 50; i=i+10)
-	    		  {
-					  if(i==0)
-	    			  {
-	    				  option += "<option>0"+i+"</option>";
-	    			  }
-	    			  else
-	    			  {
-	    				  option += "<option>"+i+"</option>";
-	    			  }
-	    		  }
-				  console.log(option)
-				  $('#Minute').append(option);
-				  
-				  option = "";
-				  for(var i = date.getHours()+1; i <= 22; i++)
-				  {
-					  if(i<10)
-	    			  {
-	    				  option += "<option>0"+i+"</option>";
-	    			  }
-	    			  else
-	    			  {
-	    				  option += "<option>"+i+"</option>";
-	    			  }
-				  }
-				  console.log(option)
-				  $('#Hour').append(option);
-			  }
-			  else
-			  {
-				  for(var i = min; i <= 50; i=i+10)
-	    		  {
-					  if(i==0)
-	    			  {
-	    				  option += "<option>0"+i+"</option>";
-	    			  }
-	    			  else
-	    			  {
-	    				  option += "<option>"+i+"</option>";
-	    			  }
-	    		  }
-				  console.log(option)
-				  $('#Minute').append(option);
-				  
-				  option = "";
-				  for(var i = date.getHours(); i <= 22; i++)
-				  {
-					  if(i<10)
-	    			  {
-	    				  option += "<option>0"+i+"</option>";
-	    			  }
-	    			  else
-	    			  {
-	    				  option += "<option>"+i+"</option>";
-	    			  }
-				  }
-				  console.log(option)
-				  $('#Hour').append(option);
-			  } 
-    	  }
+            	  $("#Hour").empty();
+            	  
+            	  console.log("weekday_open.length",weekday_open.length);
+            	  var weekday_open_H = weekday_open.substring(0,parseInt(weekday_open.length/2));
+            	  console.log("weekday_open",weekday_open_H);
+            	  var weekday_open_M = weekday_open.substring(parseInt(weekday_open.length/2),weekday_open.length);
+            	  console.log("weekday_open",weekday_open_M);
+            	  
+            	  var weekday_close_H = weekday_close.substring(0,parseInt(weekday_close.length/2));
+            	  console.log("weekday_close",weekday_close_H);
+            	  var weekday_close_M = weekday_close.substring(parseInt(weekday_close.length/2),weekday_close.length);
+            	  console.log("weekday_close",weekday_close_M);
+            	  
+            	  var weekend_open_H = weekend_open.substring(0,parseInt(weekend_open.length/2));
+            	  console.log("weekend_open",weekend_open_H);
+            	  var weekend_open_M = weekend_open.substring(parseInt(weekend_open.length/2),weekend_open.length);
+            	  console.log("weekend_open",weekend_open_M);
+            	  
+            	  var weekend_close_H = weekend_close.substring(0,parseInt(weekend_close.length/2));
+            	  console.log("weekend_close",weekend_close_H);
+            	  var weekend_close_M = weekend_close.substring(parseInt(weekend_close.length/2),weekend_close.length);
+            	  console.log("weekend_close",weekend_close_M);
+            	  
+            	  console.log("lunchtime",lunchtime.split('~')[0])
+            	  
+            	  var lunchtime_start_H = lunchtime.split('~')[0].substring(0,lunchtime.split('~')[0].indexOf(':'));
+            	  console.log("lunchtime",lunchtime_start_H)
+            	  var lunchtime_start_M = lunchtime.split('~')[0].substring(lunchtime.split('~')[0].indexOf(':')+1,lunchtime.split('~')[0].length);
+            	  console.log("lunchtime",lunchtime_start_M)
+            	  
+            	  console.log("lunchtime",lunchtime.split('~')[1])
+            	  
+            	  var lunchtime_end_H = lunchtime.split('~')[1].substring(0,lunchtime.split('~')[1].indexOf(':'));
+            	  console.log("lunchtime",lunchtime_end_H)
+            	  var lunchtime_end_M = lunchtime.split('~')[1].substring(lunchtime.split('~')[1].indexOf(':')+1,lunchtime.split('~')[1].length);
+            	  console.log("lunchtime",lunchtime_end_M)
+            	  
+            	  console.log(day.getDate());
+            	  console.log((date.getHours() + 24) % 12 || 12);
+            	  console.log(date.getMinutes());
+            	  
+            	  var option
+            	  
+            	  if(day.getDate() != date.getDate())
+            	  {
+                	  $("#Minute").empty();
+            		  
+            		  option = "";
+            		  for(var i = weekday_open_H; i <= weekday_close_H-1; i++)
+            		  {
+            			  if(i<10)
+            			  {
+            				  option += "<option>0"+i+"</option>";
+            			  }
+            			  else
+            			  {
+            				  option += "<option>"+i+"</option>";
+            			  }
+            		  }
+            		  $('#Hour').append(option);
+            		  
+            		  option = "";
+            		  for(var i = 0; i <= 50; i=i+10)
+            		  {
+            			  if(i==0)
+            			  {
+            				  option += "<option>0"+i+"</option>";
+            			  }
+            			  else
+            			  {
+            				  option += "<option>"+i+"</option>";
+            			  }
+            		  }
+            		  
+            		  $('#Minute').append(option);
+            	  }
+            	  else
+            	  {
+        	    	  $("#Minute").empty();
+
+        			  option = ""; 
+        			  var min = ((Math.floor(date.getMinutes() / 10)) * 10) + 10;
+        			  console.log(min);
+        			  
+        			  if(min == 60)
+        			  {
+        				  for(var i = 0; i <= 50; i=i+10)
+        	    		  {
+        					  if(i==0)
+        	    			  {
+        	    				  option += "<option>0"+i+"</option>";
+        	    			  }
+        	    			  else
+        	    			  {
+        	    				  option += "<option>"+i+"</option>";
+        	    			  }
+        	    		  }
+        				  console.log(option)
+        				  $('#Minute').append(option);
+        				  
+        				  option = "";
+        				  for(var i = date.getHours()+1; i <= weekday_close_H-1; i++)
+        				  {
+        					  if(i<10)
+        	    			  {
+        	    				  option += "<option>0"+i+"</option>";
+        	    			  }
+        	    			  else
+        	    			  {
+        	    				  option += "<option>"+i+"</option>";
+        	    			  }
+        				  }
+        				  console.log(option)
+        				  $('#Hour').append(option);
+        			  }
+        			  else
+        			  {
+        				  for(var i = min; i <= 50; i=i+10)
+        	    		  {
+        					  if(i==0)
+        	    			  {
+        	    				  option += "<option>0"+i+"</option>";
+        	    			  }
+        	    			  else
+        	    			  {
+        	    				  option += "<option>"+i+"</option>";
+        	    			  }
+        	    		  }
+        				  console.log(option)
+        				  $('#Minute').append(option);
+        				  
+        				  option = "";
+        				  for(var i = date.getHours(); i <= weekday_close_H-1; i++)
+        				  {
+        					  if(i<10)
+        	    			  {
+        	    				  option += "<option>0"+i+"</option>";
+        	    			  }
+        	    			  else
+        	    			  {
+        	    				  option += "<option>"+i+"</option>";
+        	    			  }
+        				  }
+        				  console.log(option)
+        				  $('#Hour').append(option);
+        			  } 
+            	  }
+
+            	  
+              },
+              error:function(e){
+              	  console.log(e); 
+              }
+          });
+    	  
 	  }
+      
+      function filter_apply(value,idx)
+      {
+    	  for(var i = 0; i < markers.length; i++)
+          {
+    		  markers[i].setMap(null);
+          }
+    	  
+    	  var deptMarkers = []
+          console.log(value);
+          
+
+          console.log("선택한 index : " + idx);
+          console.log(markers);
+          
+          deptStatus = idx;
+          
+          console.log(currentMarkers);
+          
+          for(var i = 0; i < currentMarkers.length; i++)
+          {
+        	  if(idx == 0 || idx == '전체')
+        	  {
+        		  for(var i = 0; i < markers.length; i++)
+                  {
+            		  markers[i].setMap(map);
+                  }
+        		  return;
+        	  }
+              else if(value == currentMarkers[i].dept_name)
+        	  {
+        		  console.log(currentMarkers[i])
+        		  deptMarkers.push(currentMarkers[i])
+        	  }
+          }
+          console.log(deptMarkers)
+          
+          for(var i = 0; i < markers.length; i++)
+          {
+        	  for(var j = 0; j < deptMarkers.length; j++)
+              {
+        		  console.log(markers[i].getTitle())
+        		  console.log(deptMarkers[j].hosp_name)
+        		  if(markers[i].getTitle() == deptMarkers[j].hosp_name)
+            	  {
+            		  console.log(markers[i])
+            		  markers[i].setMap(map);
+            	  }
+              }
+          }
+      }
+      
       //yy-mm-dd
       function parse(str) {
 	   	  var y = str.substr(0, 2);

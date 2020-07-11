@@ -47,7 +47,7 @@ $(function(){
 				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
 				comments+=' 예약일시: '+element['res_DATE']+" "+element['res_TIME']+"</a></h4></div>";
 				comments+='<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
-				comments+='<div class="panel-body"> <span class="panelspan">병원</span>: '+element['hosp_NAME']+'&emsp;<span class="panelspan">환자</span>: '+element["mem_NAME"]+"<span class='panelspan'>&emsp;증상</span>: "+element['sel_SYMP']+"<span class='panelspan'>&emsp;증상</span>: 진료과:"+element['dept_NAME']+"<span class='panelspan'>&emsp;예약상태</span>:<span class='"+color+"'> "+element['approved']+"</span>";
+				comments+='<div class="panel-body"> <span class="panelspan">병원</span>: '+element['hosp_NAME']+'&emsp;<span class="panelspan">환자</span>: '+element["mem_NAME"]+"<span class='panelspan'>&emsp;증상</span>: "+element['sel_SYMP']+"<span class='panelspan'>&emsp;진료과</span>:"+element['dept_NAME']+"<span class='panelspan'>&emsp;예약상태</span>:<span class='"+color+"'> "+element['approved']+"</span>";
 				comments+="</div></div></div>";
 		
 			});

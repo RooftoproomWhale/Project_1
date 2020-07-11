@@ -18,7 +18,11 @@
 		<typeAlias alias="PrescriptionDTO" type="com.kosmo.proj.service.PrescriptionDTO"/>
 		<typeAlias alias="QnADTO" type="com.kosmo.proj.service.QnADTO"/>
 		<typeAlias alias="HistoryDTO" type="com.kosmo.proj.service.HistoryDTO"/>
+
 		<typeAlias alias="CovidEditDTO" type="com.kosmo.proj.service.CovidEditDTO"/>
+
+		<typeAlias alias="IllnessDTO" type="com.kosmo.proj.service.IllnessDTO"/>
+
 <!-- 		<typeAlias alias="PrescriptionDTO" type="com.kosmo.proj.service.PrescriptionDTO"/>		 -->
 		<!--MemoCommentDTO는 별칭 불필요. SELECT결과를 Map에 저장하기때문에  -->
 	</typeAliases>

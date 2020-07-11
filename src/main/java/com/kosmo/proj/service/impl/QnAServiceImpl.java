@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.kosmo.proj.service.IllnessDTO;
 import com.kosmo.proj.service.Paging;
 import com.kosmo.proj.service.QnADTO;
 import com.kosmo.proj.service.QnAService;
@@ -69,6 +70,18 @@ public class QnAServiceImpl implements QnAService {
 	public List<QnADTO> selectComment(Map map) {
 		// TODO Auto-generated method stub
 		return dao.selectComment(map);
+	}
+
+	@Override
+	public int hitQnA(Map map) {
+		// TODO Auto-generated method stub
+		return dao.hitQnA(map);
+	}
+
+	@Override
+	public List<IllnessDTO> listIllness(Map map) {
+		// TODO Auto-generated method stub
+		return dao.listIllness(map);
 	}
 
 

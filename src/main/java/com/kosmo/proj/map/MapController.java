@@ -8,7 +8,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,12 +69,23 @@ public class MapController {
 	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/Reservation.hst",method=RequestMethod.POST)
 	public String reservation(@RequestParam Map map) {
-		
-		boolean isPreviousRes = mapService.isPreviousReservation(map);
-		
 		boolean isDuplicateRes = mapService.isDuplicateReservation(map);
 		
-		if(isPreviousRes)
+		String datepick = map.get("datepick").toString();
+		String time = map.get("hourMinute").toString();
+		
+		System.out.println(datepick+" "+time);
+		Date resDate = null; Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		try {
+			resDate = format.parse(datepick+" "+time);
+			System.out.println(resDate.compareTo(date) < 0);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(resDate.compareTo(date) < 0)
 		{
 			return "2";
 		}
@@ -156,6 +169,15 @@ public class MapController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/Homespital/Map/getHospital.hst",produces = "text/html; charset=UTF-8")
+	public String getHospital(@RequestParam Map map) {
+		
+		HospitalDTO dto =  mapService.selectHospListByAddr(map); 
+
+		return net.sf.json.JSONObject.fromObject(dto).toString();
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/Homespital/Map/detailView.hst",produces = "text/html; charset=UTF-8")
 	public String detailList(@RequestParam Map map) {
 		
@@ -166,18 +188,18 @@ public class MapController {
 		if(apiStatus.equals("0"))
 		{
 			list = mapService.selectHospitalOne(map);
-			String depart = "";
-			for (int i = 0; i < list.size(); i++) {
-				if(i==list.size()-1)
-				{
-					depart += list.get(i).get("DEPT_NAME").toString();
-				}
-				else
-				{
-					depart += list.get(i).get("DEPT_NAME").toString() + ',';
-				}
-			}
-			list.get(0).replace("DEPT_NAME", depart);
+//			String depart = "";
+//			for (int i = 0; i < list.size(); i++) {
+//				if(i==list.size()-1)
+//				{
+//					depart += list.get(i).get("DEPT_NAME").toString();
+//				}
+//				else
+//				{
+//					depart += list.get(i).get("DEPT_NAME").toString() + ',';
+//				}
+//			}
+//			list.get(0).replace("DEPT_NAME", depart);
 			
 		}
 		else if(apiStatus.equals("1") || apiStatus.equals("2"))
@@ -196,7 +218,18 @@ public class MapController {
 	{
 		List<Map> list = mapService.selectList(map);
 		
-		String search_keyword = map.get("search_keyword").toString();
+//		String depart = "";
+//		for (int i = 0; i < list.size(); i++) {
+//			if(i==list.size()-1)
+//			{
+//				depart += list.get(i).get("DEPT_NAME").toString() + "<br/>";
+//			}
+//			else
+//			{
+//				depart += list.get(i).get("DEPT_NAME").toString() + ',';
+//			}
+//		}
+//		list.get(0).replace("DEPT_NAME", depart);
 
 		System.out.println(JSONArray.toJSONString(list));
 		

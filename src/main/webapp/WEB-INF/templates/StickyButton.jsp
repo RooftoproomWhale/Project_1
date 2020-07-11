@@ -12,7 +12,46 @@
 
 <!-- Main CSS-->
 <link href="<c:url value='/css/theme.css'/>" rel="stylesheet" media="all">
-
+<script>
+$(function() {
+	
+//메시지 수신 받는 eventListener 등록
+window.addEventListener( 'message', receiveMsgFromChild );
+var child = document.getElementById('iframe');
+console.log('---------------')
+console.log(child)
+console.log('---------------')
+// 자식으로부터 메시지 수신
+function receiveMsgFromChild( e ) {
+    console.log( '자식으로부터 받은 메시지 ', e.data );
+    var dname=e.data
+    console.log(dname)
+    $.ajax({		
+        type: "post",
+        dataType:"json",
+        url: "/proj/Calendar/Management.hst",/*"/proj/calendar/data.json",*/
+        data: {'dname':dname},
+        success: function (response) {
+        	
+        	console.log(response);
+        	sendMsgToChild(response);
+      
+      }
+        ,error:function(request,error){
+  			console.log('상태코드:',request.status);
+  			console.log('서버로 부터 받은 HTML 데이타:',request.responseText);
+  			console.log('에러:',error);
+  		
+  		}
+      })
+      function sendMsgToChild( msg ) {
+    child.contentWindow.postMessage( msg, '*' );
+}
+    
+    
+}
+})
+</script>
 <style>
 
 .sticky-btn {
@@ -21,6 +60,7 @@
    right: 100px;
    z-index: 1231234;
    color: #ff0000
+   
 }
 
 #fa1:hover {
@@ -68,15 +108,17 @@
                            <span class="nick"> <a href="#">홈스피탈</a>
                            </span>
                         </div>
-                     </div>
-                     <sec:authorize access="hasRole('ROLE_MEM')">
-                     	 <sec:authentication var="principal" property="principal" />﻿
-	                     <iframe
+                        </div>
+                        <sec:authorize access="hasRole('ROLE_MEM')">
+                        <sec:authentication var="principal" property="principal" /><iframe
+	                      	id="iframe"
 	                         style="min-height: 60vh;"
 	                         width="100%"
 	                         height="90%"
-	                         src="https://cc0c8346f20b.ngrok.io?mem_email=${principal.username}">
+	                         src="https://709f1c60fd7e.ngrok.io?mem_email=${principal.username}">
+	                     
 	                     </iframe>
+	                     
 	                 </sec:authorize>
 	                 <sec:authorize access="isAnonymous()">
 	                 	<div class="au-chat__content au-chat__content2 js-scrollbar5">

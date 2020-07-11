@@ -1,17 +1,17 @@
 package com.kosmo.proj.service;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class HospitalDTO {
 	private String hosp_code;
 	private String hosp_name;
 	private String tel;
-	private int weekday_open;
-	private int weekday_close;
-	private int weekend_open;
-	private int weekend_close;
+	private String weekday_open;
+	private String weekday_close;
+	private String weekend_open;
+	private String weekend_close;
 	private String lunchtime;
-	private String mem_email;
+	
 	private String mem_pwd;
 	
 	private String address;
@@ -20,10 +20,45 @@ public class HospitalDTO {
 	private String id;
 	private String auth;
 	private Date approved_date;
+	private String ansim;
+	private String jeondam;
+	private String exjeondam;
+	private String mem_email;
+	private Date auth_date;
+	
 	private String dept_name;
 	
 	
-	
+	public Date getAuth_date() {
+		return auth_date;
+	}
+	public void setAuth_date(Date auth_date) {
+		this.auth_date = auth_date;
+	}
+	public String getAnsim() {
+		return ansim;
+	}
+	public void setAnsim(String ansim) {
+		this.ansim = ansim;
+	}
+	public String getJeondam() {
+		return jeondam;
+	}
+	public void setJeondam(String jeondam) {
+		this.jeondam = jeondam;
+	}
+	public String getExjeondam() {
+		return exjeondam;
+	}
+	public void setExjeondam(String exjeondam) {
+		this.exjeondam = exjeondam;
+	}
+	public String getMem_email() {
+		return mem_email;
+	}
+	public void setMem_email(String mem_email) {
+		this.mem_email = mem_email;
+	}
 	public String getDept_name() {
 		return dept_name;
 	}
@@ -66,28 +101,29 @@ public class HospitalDTO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public int getWeekday_open() {
+	
+	public String getWeekday_open() {
 		return weekday_open;
 	}
-	public void setWeekday_open(int weekday_open) {
+	public void setWeekday_open(String weekday_open) {
 		this.weekday_open = weekday_open;
 	}
-	public int getWeekday_close() {
+	public String getWeekday_close() {
 		return weekday_close;
 	}
-	public void setWeekday_close(int weekday_close) {
+	public void setWeekday_close(String weekday_close) {
 		this.weekday_close = weekday_close;
 	}
-	public int getWeekend_open() {
+	public String getWeekend_open() {
 		return weekend_open;
 	}
-	public void setWeekend_open(int weekend_open) {
+	public void setWeekend_open(String weekend_open) {
 		this.weekend_open = weekend_open;
 	}
-	public int getWeekend_close() {
+	public String getWeekend_close() {
 		return weekend_close;
 	}
-	public void setWeekend_close(int weekend_close) {
+	public void setWeekend_close(String weekend_close) {
 		this.weekend_close = weekend_close;
 	}
 	public String getLunchtime() {
@@ -120,12 +156,6 @@ public class HospitalDTO {
 	}
 	public void setMem_pwd(String mem_pwd) {
 		this.mem_pwd = mem_pwd;
-	}
-	public String getMem_email() {
-		return mem_email;
-	}
-	public void setMem_email(String mem_email) {
-		this.mem_email = mem_email;
 	}
 	
 	

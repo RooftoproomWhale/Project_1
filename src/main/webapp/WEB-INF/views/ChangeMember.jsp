@@ -165,16 +165,16 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 									<div class="input-inside-table">
 										<select style="width: 176px; height: 24px;" title="나이" id="age" name="age" value="${list[0]['age']}" class="input-width-small07">
 											<option>나이</option>
-											<option value="10세 이하">10세 이하</option>
+											<option value="10">10세 이하</option>
 											<option value="10">10대</option>
-											<option value="20대">20대</option>
-											<option value="30대">30대</option>
-											<option value="40대">40대</option>
-											<option value="50대">50대</option>
-											<option value="60대">60대</option>
-											<option value="70대">70대</option>
-											<option value="80대">80대</option>
-											<option value="90대">90대</option>
+											<option value="20">20대</option>
+											<option value="30">30대</option>
+											<option value="40">40대</option>
+											<option value="50">50대</option>
+											<option value="60">60대</option>
+											<option value="70">70대</option>
+											<option value="80">80대</option>
+											<option value="90">90대</option>
 										</select>
 								
 									</div>

@@ -20,19 +20,31 @@
     <link rel="stylesheet" href="<c:url value='https://fonts.googleapis.com/icon?family=Material+Icons'/>"/>
 <link rel="stylesheet" href="<c:url value='/calendar/css/main.css'/>"/>
    <script>
+
+	  
+   
    	$(function() {
+   	   $('#loading').hide();  
 		$('#item-1').on("click",function(){
 			$('#items-1').css("display","");
 			$('#items-2').css("display","none ")
+			$('#items-3').css("display","none ")
 		})
 		$('#item-2').on("click",function(){
 			$('#items-2').css("display","");
 			$('#items-1').css("display","none")
+			$('#items-3').css("display","none")
 		})
-	
+			$('#item-3').on("click",function(){
+			$('#items-3').css("display","");
+			$('#items-1').css("display","none")
+			$('#items-2').css("display","none")
+		})
    		
 	})
-   
+
+
+
    </script>
 <style>  
 #calendar {
@@ -63,6 +75,23 @@
 .click{
 border: 2px solid black ;
 }
+#loading {
+ width: 100%;   
+ height: 100%;   
+ top: 0px;
+ left: 0px;
+ position: fixed;   
+ display: block;   
+ opacity: 0.7;   
+ background-color: #fff;   
+ z-index: 9999;   
+ text-align: center; }  
+  
+#loading-image {   
+ position: absolute;   
+ top: 50%;   
+ left: 50%;  
+ z-index: 100; } 
   </style>
 </head>
 
@@ -72,7 +101,6 @@ border: 2px solid black ;
    
 
         <div id="wrapper">
-            <div id="loading"></div>
             <div id="calendar"></div>
         </div>
         <!--병원예약정보-->
@@ -118,8 +146,7 @@ border: 2px solid black ;
                     <div class="modal-footer modalBtnContainer-modifyEvent">
                         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                           <button type="button" class="btn btn-danger" id="deleteEvent_no1">예약취소</button>
-                          <button type="button" class="btn btn-danger" id="updateEvents_no1" style="display: none;">예약변경확인</button>
-                        <button type="button" class="btn btn-danger" id="updateEvent_no1">예약변경</button>
+
 						
 					
                     </div>
@@ -137,59 +164,44 @@ border: 2px solid black ;
                         <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
-         	<table class="table table-bordered" style="text-align: center;">
+         	<table class="table table-bordered" style="text-align: center;vertical-align: middle;">
   <thead>
     <tr>
-      <th scope="col" style="text-align: center;padding-bottom: 0px;margin-bottom: 0px">제품명</th>
+      <th scope="col" style="text-align: center;">제품명</th>
       <td scope="col" colspan="5"  id="item_name" style="padding: 0px;margin-bottom: 0px;text-align: left;"></td>
     </tr>
   </thead>
   <tbody>
     <tr id="edit-update_01">
-      <th scope="row" style="line-height: 54px;padding: 0px;text-align: center;">복용기간</th>
-      <td  style="line-height: 54px;padding: 0px" id="item-date"></td> 
-      <th scope="row" style="line-height: 54px;padding: 0px;text-align: center;">효능 · 효과</th>
-      <td  style="line-height: 54px;padding: 0px" id="er">ㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁ</td>
+      <th scope="row" style="text-align: center;">복용기간</th>
+      <td id="item-date"></td> 
+       <th scope="row" style="text-align: center;">모양<br/></th>
+      <td colspan="3" id="chart"></td>
     </tr>
     <!--  -->
     <tr >
-      <th scope="row" style="line-height: 36px;text-align: center;">용법·용량<br/></th>
-      <td colspan="3" style="text-align: center;">1회 15mL 1일 2~3회 가글하여 사용한다.<br/>최대 5~7일간 사용하며, 그 이상 사용 시 의사와 상의한다.</td>
+        <th scope="row" style="line-height: 94px;text-align: center;">효능 · 효과</th>
+      <td id="er" colspan="5" style="text-align: left;width: 600px" ></td>
     </tr>
     <tr>
-      <th class="text-center" scope="row" colspan="5"><input type="button" class="btn" id="item-2" value="상세설명"/><input type="button" class="btn" id="item-1" value="주의사항"/></th>
+      <th class="text-center" scope="row" colspan="5"><input type="button" class="btn" id="item-2" value="상세설명"/>
+      <input type="button" class="btn" id="item-1" value="주의사항"/>
+      <input type="button" class="btn" id="item-3" value="용법·용량"/></th>
     </tr>
      <tr>
-      <td colspan="5" id="items-1" style="display: none;">
-1. 다음과 같은 사람은 이 약을 사용하지 말 것
-이 약의 구성성분에 과민반응이 있는 환자
-<br/><br/>
-2. 이 약을 사용하는 동안 다음의 약을 사용하지 말 것
-이 약의 상호작용에 관련된 연구는 없으나, 다른 살균제와 동시에 사용하지 않는다.
-<br/><br/>
-3. 다음과 같은 경우 이 약의 사용을 즉각 중지하고 의사, 약사와 상의할 것. 상담 시 가능한 한 이 첨부문서를 소지할 것
-이 약을 특히 장기간 사용할 경우 과민반응을 유발할 수 있으며, 과민반응 발생 시 사용을 중지하고 의사와 상의한다.
-<br/><br/>
-4. 기타 이 약의 사용시 주의할 사항
-1) 에탄올(알코올)을 함유하고 있어 운동선수의 경우 도핑 약물 검사에서 알코올 양성 반응을 나타낼 수 있다.
-2) 국소 마취 작용과 관련된 입 안의 가벼운 감각 감퇴 증상이 발생할 수 있다.
-3) 가벼운 일시적 작열감과 같은 나타나는 불내성 증상이 발생할 수 있지만, 이 증상으로 인해 사용을 중단할 필요는 없다.
-) 벤지다민 또는 세틸피리디늄을 국소 적용하는 경우 과량투여 증상이 확인되지 않았다. 벤지다민을 전신으로 과량 투여시 흥분, 경련, 발한, 운동실조, 떨림 및 구토 등의 독성 증상으로 나타난다.
-세틸피리디늄과 같은 4차 암모늄 화합물을 상당한 양으로 복용하는 경우 메스꺼움, 구토, 호흡 곤란, 청색증, 중추신경계 억제, 저혈압 및 혼수 상태 등의 증상이 나타날 수 있다.
-특정 해독제가 없으므로 벤지다민으로 인한 급성 중독 또는 세틸피리디늄 과량 투여시 대증적으로 치료한다.
-<br/><br/>
-5. 저장상의 주의사항
-1) 어린이의 손이 닿지 않는 곳에 보관한다.
-2) 의약품을 원래 용기에서 꺼내어 다른 용기에 보관하는 것은 의약품 오용에 따른 사고 발생이나 의약품 품질 저하의 원인이 될 수 있으므로 원래의 용기에 넣고 꼭 닫아 보관한다.</td>
-<td id="items-2" colspan="5" style="text-align: left;padding: 20px">
+      <td style="width: 255px"> <img id="imgs" style="width: 255px;height: 250px" src="https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/154609804554800013"></td>
+      <td colspan="5" id="items-1" style="display: none; height: 320px"><span id="nb_DOC"></span></td>
+ <td id="items-2" colspan="5" style="text-align: left;padding: 20px;height: 320px;">
 <span id="material_NAME"></span>
 <br>보관방법: <span id="storage_METHOD"></span>
 <br>유통기한: <span id="valid_TERM"></span>
 <br>제조사:<span id="entp_NAME"></span></td>
+ <td colspan="5" id="items-3" style="display: none; height: 320px;width: 522px"><span id="ud_DOC"></span></td>
  </tr>
 
   </tbody>	
 </table>
+
                     </div>
                     
                     <div class="modal-footer modalBtnContainer-modifyEvent">
@@ -323,6 +335,7 @@ border: 2px solid black ;
             </div>
  -->
         </div>
+<div id="loading"><img id="loading-image" src="<c:url value='/img/ajax-loader.gif'/>" alt="Loading..." /></div>
 
 <script src='<c:url value="/calendar/vendor/js/moment.min.js"/>'></script>
 
@@ -336,6 +349,7 @@ border: 2px solid black ;
 <script src='<c:url value="/calendar/js/addEvent.js"/>'></script>
 <script src='<c:url value="/calendar/js/editEvent.js"/>'></script>
 <script src='<c:url value="/calendar/js/etcSetting.js"/>'></script>
+
 
 
 

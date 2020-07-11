@@ -7,8 +7,38 @@
 	box-shadow: 0 20px 30px #333;
 	height: 850px;
 }
+#btnimg{
+width: 200px;
+height: 36px;
+}
+   .info-toggle{position: fixed;top: 50%;left: 0;left: 390px;z-index: 20;background: blue;}
+   .info_btn_toggle{
+   	width:140px	;
+      position: fixed;
+      top: 24px;
+      left: 0;
+      margin: auto;
+      width: 70px;
+      height: 32px;
+      cursor: auto;    
+   }
+
 </style>
 <script>
+$(function() {
+	$('.info_btn_toggle').on('click',function(){
+		if($('#btnimg').attr('src')=="<c:url value='/img/button2.jpg'/>"){
+			$('#btnimg').attr('src','<c:url value="/img/button.jpg"/>')
+			$('#sidebar-collapse').toggle('slow');
+			}
+		else{
+			$('#btnimg').attr('src','<c:url value="/img/button2.jpg"/>')
+		$('#sidebar-collapse').toggle('slow');
+		}
+		
+	})
+})
+
 window.onload = function(){
 	Notification.requestPermission().then(function(result) {
 		  console.log(result);
@@ -297,14 +327,16 @@ window.onload = function(){
 		}
 	
 }
-</script>
-
+</script><div class="info-toggle left_toggle">
+<button class="info_btn_toggle" type="button" style="border-radius: 1em;"><img id="btnimg"style="border-radius: 4em" src="<c:url value='/img/button2.jpg'/>"></button>
+</div>
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+
 <input type="hidden" id="userId" value="${user }"/>
 <input type="hidden" id="userRole" value="${role }"/>
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+				<img src="<c:url value='/img/mypage.jpg'/>" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">
@@ -318,7 +350,10 @@ window.onload = function(){
 		<ul class="nav menu">
 			<li class="active"><a href="<c:url value='/Home/ToHomePage.hst'/>"><em class="fa fa-home"></em> Homespital 홈으로 이동 </a></li>
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-				<em class="fa fa-navicon">&nbsp;</em> 개인 정보 관리 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon">&nbsp;</em> 개인 정보 관리 
+					<span data-toggle="collapse" href="#sub-item-1" class="icon pull-right">
+					
+				<em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-1">
 					<li><a class="" href="<c:url value='/mypage/mypage.hst'/>">
@@ -332,9 +367,24 @@ window.onload = function(){
 					</a></li>
 				</ul>
 			</li>
+			
 			<li><a href="<c:url value='/mypage/administration.hst'/>"><i class="fas fa-pills">&nbsp;</i> 복약 관리</a></li>
 			<li><a href="<c:url value='/mypage/ReservationList.hst'/>"><em class="fa fa-calendar">&nbsp;</em> 진료 예약 현황</a></li>
-			<li><a href="<c:url value='/mypage/Disease.hst'/>"><i class="fas fa-syringe"></i>&nbsp; 내 질병 관리</a></li>
-			<li><a href="<c:url value='/User/Login.hst'/>"><em class="fa fa-power-off">&nbsp;</em> 로그아웃 </a></li>
+			<li class="parent "><a data-toggle="collapse" href="#sub-item-2">
+				<em class="fa fa-navicon">&nbsp;</em> 질병 관리 
+					<span data-toggle="collapse" href="#sub-item-2" class="icon pull-right">
+				<em class="fa fa-plus"></em></span>
+				</a>
+				
+			<%-- <li><a href="<c:url value='/mypage/Disease.hst'/>"><i class="fas fa-syringe"></i>&nbsp; 질병 관리</a></li>	 --%>
+			<ul class="children collapse" id="sub-item-2">
+			<%-- 	<li><a class="" href="<c:url value='/mypage/Disease.hst'/>">
+					<span class="fa fa-arrow-right">&nbsp;</span> 내 질병 관리
+				</a></li> --%>
+				<li><a class="" href="<c:url value='/mypage/Prevention.hst'/>">
+					<span class="fa fa-arrow-right">&nbsp;</span> 내 예방 정보
+				</a></li>
+			</ul>
+			<li><a href="<c:url value='/User/Logout.hst'/>"><em class="fa fa-power-off">&nbsp;</em> 로그아웃 </a></li>
 		</ul>
 	</div><!-- /.sidebar -->

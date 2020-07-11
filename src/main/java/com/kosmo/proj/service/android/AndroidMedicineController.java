@@ -10,6 +10,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.google.gson.Gson;
 import com.kosmo.proj.service.MedicineInfoDTO;
@@ -30,7 +37,7 @@ public class AndroidMedicineController {
 	@CrossOrigin
 	private String mediShape(@RequestParam String encodeSearch) {
 		try{
-			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람"),"UTF-8"); 
+			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람").replace("이알서방정", "8시간이알서방정"),"UTF-8"); 
 	        }catch(Exception e){ e.printStackTrace();  }
 	
 		String apiUrl = "http://apis.data.go.kr/1470000/MdcinGrnIdntfcInfoService/getMdcinGrnIdntfcInfoList?" +
@@ -39,7 +46,7 @@ public class AndroidMedicineController {
                 "&pageNo=1" +
                 "&item_name="+encodeSearch;
 		String responseBody = get(apiUrl);   
-  
+	       
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
@@ -51,7 +58,7 @@ public class AndroidMedicineController {
         }
         else
         	selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
-        
+
 		return selecOne.toString();
 	}
 	
@@ -60,7 +67,7 @@ public class AndroidMedicineController {
 	private String mediInfo(@RequestParam String encodeSearch) {
 		
 		try{
-			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람"),"UTF-8"); 
+			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람").replace("이알서방정", "8시간이알서방정"),"UTF-8"); 
 	        }catch(Exception e){ e.printStackTrace();  }
 		
 		String apiUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?" +
@@ -70,7 +77,30 @@ public class AndroidMedicineController {
                 "&item_name="+encodeSearch;
         
         String responseBody = get(apiUrl);
-      
+        
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder;
+        Document doc = null;
+		try {
+			dBuilder = dbFactory.newDocumentBuilder();
+			doc = dBuilder.parse(apiUrl);
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+        doc.getDocumentElement().normalize();
+       
+        String eeDoc = getTagValue("EE_DOC_DATA",doc);
+        String udDoc = getTagValue("UD_DOC_DATA",doc);
+        String nbDoc = getTagValue("NB_DOC_DATA",doc);
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
@@ -83,10 +113,36 @@ public class AndroidMedicineController {
         }
         else 
         	selecOne = jsonMedi.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONObject("item");
+
+        selecOne.put("EE_DOC_DATA", eeDoc);
+        selecOne.put("UD_DOC_DATA", udDoc);
+        selecOne.put("NB_DOC_DATA", nbDoc);
         
 		return selecOne.toString();
 	}
 	
+	private static String getTagValue(String tag, Document doc) {
+		NodeList nList = doc.getElementsByTagName(tag);
+		String nValue = "";
+		NodeList cList = nList.item(0).getChildNodes();
+		NodeList ccList = cList.item(0).getChildNodes();
+		for(int i=0;i<ccList.getLength();i++) {
+			NodeList chList = ccList.item(i).getChildNodes();
+			System.out.println(ccList.item(0).getNodeValue());
+			for(int k=0;k<chList.getLength();k++) {
+				NodeList cchList = chList.item(k).getChildNodes();
+				for(int j=0;j<cchList.getLength();j++) {
+					System.out.println(cchList.item(j).getTextContent());
+					if(cchList.item(j).getTextContent()!="&nbsp;") {
+						nValue+="<p>"+cchList.item(j).getTextContent()+"</p>";
+					}
+				}
+			}
+		}
+		
+		return nValue;
+	}
+
 	
 	private static String get(String apiUrl) {
         HttpURLConnection con = connect(apiUrl);

@@ -137,14 +137,14 @@ $(function() {
 								<h3 class="title-5 m-b-35">Appointment</h3>
 								<div class="table-data__tool">
 									<div class="table-data__tool-left">
-										<div class="rs-select2--light rs-select2--md">
-											<select class="js-select2" name="property">
-												<option selected="selected">All</option>
-												<option value="">This Week</option>
-												<option value="">This Month</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
+<!-- 										<div class="rs-select2--light rs-select2--md"> -->
+<!-- 											<select class="js-select2" name="property"> -->
+<!-- 												<option selected="selected">All</option> -->
+<!-- 												<option value="">This Week</option> -->
+<!-- 												<option value="">This Month</option> -->
+<!-- 											</select> -->
+<!-- 											<div class="dropDownSelect2"></div> -->
+<!-- 										</div> -->
 									</div>
 								</div>
 								<div class="table-responsive table-responsive-data2">

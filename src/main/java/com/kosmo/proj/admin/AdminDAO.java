@@ -467,9 +467,6 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.selectList("selectImg");
 	}
 
-	
-	
-	
 	@Override
 	public int hitNotice(Map map) {
 		// TODO Auto-generated method stub
@@ -479,5 +476,23 @@ public class AdminDAO implements AdminService {
 	
 
 
+
+	@Override
+	public int getFirst(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("getFirst", map);
+	}
+
+	@Override
+	public int getLast(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("getLast", map);
+	}
+
+	@Override
+	public int approveAuth_(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.update("updateAuthEnable", map);
+	}
 
 }
