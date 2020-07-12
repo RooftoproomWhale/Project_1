@@ -45,7 +45,7 @@ width: 100%;
 			</div>
 			<div class="page-body">
 				<div>
-					<h3>내용: ${list[0].content}</h3>
+					<h3>${list[0].content}</h3>
 					<c:if test="${not empty list[0]['file_addr']}">
 					<p><img src='${list[0]["file_addr"]}' alt="이미지"></p>
 					</c:if>

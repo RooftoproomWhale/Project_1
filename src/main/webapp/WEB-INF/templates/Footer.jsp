@@ -4,10 +4,14 @@
 <style>
  	#footer 
  	{ 
-		/* position: absolute; 
+		position: absolute; 
 		width:100%; 
 		left:0px; 
- 		bottom:0px;  */
+<<<<<<< HEAD
+ 		bottom:0px;  
+=======
+ 		bottom:0px;
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
  		background-color:#474747;
  		height: 150px
  		

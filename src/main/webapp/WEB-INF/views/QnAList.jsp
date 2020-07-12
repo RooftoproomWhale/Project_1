@@ -12,7 +12,8 @@
 	left: 0px;
 	margin-top:1000px;
 	background-color: #474747;
-	height: 150px
+	height: 150px;
+	top:100px;
 }
 .jumbotron{ 
   	background-size: cover;
@@ -35,16 +36,16 @@ img{
 	<div class="container" style="padding-top: 100px; box-shadow: 20em;">
 		<div class="row">
 			<main id="main">
-				<div class="col-md-offset-1 col-md-3">
+				<div class="col-md-offset-2 col-md-3">
 					<img src="../img/222.PNG">
 				</div>
-				<br />
+				</br>
 				<div class="container" style="box-shadow:3px 3px 3px 5px rgba(227, 225, 225); ">
-					<div class="jumbotron" style="background-color: white">
+					<div class="jumbotron" style="background-color: white;">
 						<h1 style="color: #e0dada"> Homespital </h1>
 					</div>
 					<div class="row" style="margin-bottom: 10px">
-						<div class="col-md-12 text-right">
+						<div class="col-md-12 text-right" style="padding-top:60px">
 						<sec:authorize access="hasRole('ROLE_MEM')">
 							<a href="<c:url value='/QnA/ToInsertForm.hst'/>" class="glyphicon glyphicon-pencil">작성하기</a>
 						</sec:authorize>
