@@ -247,7 +247,7 @@ width: 100%;
            var email = $('#email').val();
            var pwd = $('#pwd').val();
            var name = $('#name').val();
-           var tel = parseInt($('#phone').val());
+           var tel = $('#phone').val();
            var gender = $('#gender').val();
            var age = parseInt($('#age').val());
            var height = parseInt($('#height').val());
