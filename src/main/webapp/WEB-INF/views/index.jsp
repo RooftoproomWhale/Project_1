@@ -19,6 +19,10 @@
         .jssora051:hover {opacity:.8;}
         .jssora051.jssora051dn {opacity:.5;}
         .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
+        
+#footer{
+	top:2250px;
+}
 </style>
 <script>
 window.onload = function(){

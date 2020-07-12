@@ -230,7 +230,7 @@ width: 100%;
 }
 #footer{
 position:absolute;
-top: 2000px;
+top: 1500px;
 width: 100%;
 }
 
