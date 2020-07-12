@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
@@ -193,7 +195,7 @@ background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 6
 			<div class="row">
 				<div class=" col-sm-12" style="padding-left: 70px;">
 					<div class="alert alert-warning alert-dismissible mt-3" role="alert">
-						<strong>윤성준님</strong>의 진료예약 현황입니다
+						<strong>${mem_name}님</strong>의 진료예약 현황입니다
 					</div>
 					<br />
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

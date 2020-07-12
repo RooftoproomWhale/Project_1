@@ -153,6 +153,14 @@ public class MapController {
 //		}
 //		list.get(0).replace("DEPT_NAME", depart);
 		
+		for(Map comment:list)
+		{
+			comment.put("AUTH_DATE",comment.get("AUTH_DATE").toString());
+			comment.put("APPROVED_DATE",comment.get("APPROVED_DATE").toString());
+		}
+		
+		System.out.println(JSONArray.toJSONString(list));
+		
 //		return JSONArray.toJSONString(list);
 		return JSONArray.toJSONString(list);
 	}
@@ -188,18 +196,18 @@ public class MapController {
 		if(apiStatus.equals("0"))
 		{
 			list = mapService.selectHospitalOne(map);
-			String depart = "";
-			for (int i = 0; i < list.size(); i++) {
-				if(i==list.size()-1)
-				{
-					depart += list.get(i).get("DEPT_NAME").toString();
-				}
-				else
-				{
-					depart += list.get(i).get("DEPT_NAME").toString() + ',';
-				}
-			}
-			list.get(0).replace("DEPT_NAME", depart);
+//			String depart = "";
+//			for (int i = 0; i < list.size(); i++) {
+//				if(i==list.size()-1)
+//				{
+//					depart += list.get(i).get("DEPT_NAME").toString();
+//				}
+//				else
+//				{
+//					depart += list.get(i).get("DEPT_NAME").toString() + ',';
+//				}
+//			}
+//			list.get(0).replace("DEPT_NAME", depart);
 			
 		}
 		else if(apiStatus.equals("1") || apiStatus.equals("2"))
@@ -218,22 +226,22 @@ public class MapController {
 	{
 		List<Map> list = mapService.selectList(map);
 		
-		String depart = "";
-		for (int i = 0; i < list.size(); i++) {
-			if(i==list.size()-1)
-			{
-				depart += list.get(i).get("DEPT_NAME").toString() + "<br/>";
-			}
-			else
-			{
-				depart += list.get(i).get("DEPT_NAME").toString() + ',';
-			}
-		}
-		list.get(0).replace("DEPT_NAME", depart);
+//		String depart = "";
+//		for (int i = 0; i < list.size(); i++) {
+//			if(i==list.size()-1)
+//			{
+//				depart += list.get(i).get("DEPT_NAME").toString() + "<br/>";
+//			}
+//			else
+//			{
+//				depart += list.get(i).get("DEPT_NAME").toString() + ',';
+//			}
+//		}
+//		list.get(0).replace("DEPT_NAME", depart);
 
-		System.out.println(JSONObject.valueToString(list.get(0)));
+		System.out.println(JSONArray.toJSONString(list));
 		
-		return JSONObject.valueToString(list.get(0));
+		return JSONArray.toJSONString(list);
 	}
 	
 	@ResponseBody

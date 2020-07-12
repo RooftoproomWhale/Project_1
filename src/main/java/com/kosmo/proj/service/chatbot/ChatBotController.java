@@ -61,6 +61,8 @@ public class ChatBotController {
 	@PostMapping(value = "/InsertReservation", produces = "text/plain;charset=UTF-8")
 	public int InsertReservation(@RequestParam Map map)
 	{
+//		String hospName = map.get("hosp_name").toString();
+		
 		int affected = service.insertReservation(map);
 		
 		return affected;

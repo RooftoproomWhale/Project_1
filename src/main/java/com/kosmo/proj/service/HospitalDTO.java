@@ -12,6 +12,8 @@ public class HospitalDTO {
 	private String weekend_close;
 	private String lunchtime;
 	
+	private String mem_pwd;
+	
 	private String address;
 	private float cor_x;
 	private float cor_y;
@@ -147,6 +149,13 @@ public class HospitalDTO {
 	}
 	public void setCor_y(float cor_y) {
 		this.cor_y = cor_y;
+	}
+	
+	public String getMem_pwd() {
+		return mem_pwd;
+	}
+	public void setMem_pwd(String mem_pwd) {
+		this.mem_pwd = mem_pwd;
 	}
 	
 	
