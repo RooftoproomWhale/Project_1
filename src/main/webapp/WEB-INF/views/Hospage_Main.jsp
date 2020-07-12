@@ -88,11 +88,11 @@ body > div.col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main > div:nth-chi
                                                 </tr>
                                                 <tr>
                                                     <td>키</td>
-                                                    <td>${mem[0].weight }(cm)</td>
+                                                    <td>${mem[0].height}(cm)</td>
                                                 </tr>
                                                 <tr>
                                                     <td>몸무게</td>
-                                                    <td>${mem[0].height }(kg)</td>
+                                                    <td>${mem[0].weight}(kg)</td>
                                                 </tr>
                                             </tbody>
                                         </table>

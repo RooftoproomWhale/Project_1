@@ -6,9 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.HashMap;
@@ -45,9 +47,10 @@ public class HomeController {
 
 	/**
 	 * Simply selects the home view to render by returning its name.
+	 * @throws UnknownHostException 
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model, Authentication auth) 
+	public String home(Locale locale, Model model, Authentication auth) throws UnknownHostException 
 	{
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);

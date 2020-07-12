@@ -47,7 +47,7 @@ padding-bottom: 150px}
 		
 		<div class="panel panel-container">
 			<div class="row" >
-				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
+				<div class="col-xs-6 col-md-6 col-lg-6 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
 						<div class="row no-padding"><i class="far fa-file-alt color-teal"></i>
 							<div class="large">${count[0]["RESERCOUNT"]}</div>
@@ -55,7 +55,7 @@ padding-bottom: 150px}
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
+				<div class="col-xs-6 col-md-6 col-lg-6 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
 						<div class="row no-padding"><i class="fas fa-pills color-blue"></i>
 							<div class="large">${count[0]["PRECOUNT"]}</div>
@@ -63,14 +63,14 @@ padding-bottom: 150px}
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-4 col-md-4 col-lg-4 no-padding">
-					<div class="panel panel-red panel-widget ">
-						<div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
-							<div class="large">5.2k</div>
-							<div class="text-muted">방문 수 </div>
-						</div>
-					</div>
-				</div>
+<!-- 				<div class="col-xs-4 col-md-4 col-lg-4 no-padding"> -->
+<!-- 					<div class="panel panel-red panel-widget "> -->
+<!-- 						<div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em> -->
+<!-- 							<div class="large">5.2k</div> -->
+<!-- 							<div class="text-muted">방문 수 </div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 			</div><!--/.row-->
 		</div>
 		

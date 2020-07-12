@@ -115,7 +115,7 @@ function receiveMsgFromChild( e ) {
 	                         style="min-height: 60vh;"
 	                         width="100%"
 	                         height="90%"
-	                         src="https://373d2bc0dca8.ngrok.io?mem_email=${principal.username}">
+	                         src="https://ec1436d5c1ed.ngrok.io/?mem_email=${principal.username}">
 	                     
 	                     </iframe>
 	                     

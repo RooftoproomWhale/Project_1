@@ -7,7 +7,6 @@
 <style>
 #footer{
 position:absolute;
-top: 1300px;
 width: 100%;
 }
 
