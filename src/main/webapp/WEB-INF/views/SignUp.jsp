@@ -1394,9 +1394,9 @@ width: 100%;
 							<option>나이</option>
 							<option value="10세이하">10세 이하</option>
 							<option value="10대">10대</option>
-							<option value="10대">20대</option>
-							<option value="10대">30대</option>
-							<option value="10대">40대</option>
+							<option value="20대">20대</option>
+							<option value="30대">30대</option>
+							<option value="40대">40대</option>
 							<option value="50대">50대</option>
 							<option value="60대">60대</option>
 							<option value="70대">70대</option>
