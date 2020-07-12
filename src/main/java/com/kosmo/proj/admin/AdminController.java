@@ -3,6 +3,7 @@ package com.kosmo.proj.admin;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -590,40 +591,45 @@ public class AdminController {
 	}
 
 	@RequestMapping("Noticeinsert.hst")
-	public String noticeinsert(BoardDTO dto,HttpServletRequest req,Map map) throws IllegalStateException, IOException {
+	   public String noticeinsert(BoardDTO dto,HttpServletRequest req,Map map) throws IllegalStateException, IOException {
 
-		String phisicalPath = req.getServletContext().getRealPath("/Upload");
-		System.out.println(dto.getUpload());
+	      String phisicalPath = req.getServletContext().getRealPath("/Upload");
+	      System.out.println(dto.getUpload());
 
-		MultipartFile upload = dto.getUpload();
-		System.out.println(upload);
+	      MultipartFile upload = dto.getUpload();
+	      System.out.println(upload);
 
-		String file_addr=null;
-		String renameFile = null;
+	      String file_addr=null;
+	      String renameFile = null;
+	      
+	      InetAddress local = InetAddress.getLocalHost();
+	       
+	      String ip = local.getHostAddress();
+	      System.out.println("ip:" + ip);
 
-		if(upload.getOriginalFilename()!="") {
-			System.out.println("null이 아니야");
+	      if(upload.getOriginalFilename()!="") {
+	         System.out.println("null이 아니야");
 
-			renameFile = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
-			file_addr = "http://192.168.0.66:8080/proj/Upload/"+renameFile;
-			System.out.println(file_addr);
+	         renameFile = FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+	         file_addr = "http://"+ip+":8090/proj/Upload/"+renameFile;
+	         System.out.println(file_addr);
 
-			File file = new File(phisicalPath+File.separator+renameFile);
-			upload.transferTo(file);
-		}
-
-
-		map.put("mem_email",dto.getMem_email().toString());
-		map.put("title",dto.getTitle().toString());
-		map.put("content",dto.getContent().toString());
-		map.put("file_addr",file_addr);
+	         File file = new File(phisicalPath+File.separator+renameFile);
+	         upload.transferTo(file);
+	      }
 
 
-		int check = adminService.insertNotice(map);
-		System.out.println(check);
+	      map.put("mem_email",dto.getMem_email().toString());
+	      map.put("title",dto.getTitle().toString());
+	      map.put("content",dto.getContent().toString());
+	      map.put("file_addr",file_addr);
 
-		return "redirect:/Admin/Notice.hst";
-	}
+
+	      int check = adminService.insertNotice(map);
+	      System.out.println(check);
+
+	      return "redirect:/Admin/Notice.hst";
+	   }
 
 	@RequestMapping("NoticeWrite.hst")
 	public String noticeWrite(Authentication auth, Model model) {
