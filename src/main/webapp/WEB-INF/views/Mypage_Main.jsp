@@ -127,11 +127,11 @@ padding-bottom: 150px}
                             <tbody>
                                 <tr>
                                     <td>자주 방문하는 병원</td>
-                                    <td>삼성병원</td>
+                                    <td>${hosp_name}</td>
                                 </tr>
                                 <tr>
                                     <td>자주 방문하는 과</td>
-                                    <td>이비인후과</td>
+                                    <td>${dept_name}</td>
                                 </tr>
                                 <tr>
                                     <td>가지고 있는 질환</td>

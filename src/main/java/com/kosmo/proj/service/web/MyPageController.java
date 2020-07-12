@@ -54,6 +54,19 @@ public class MyPageController {
 		List<Map<String, Integer>> count = memberDAO.selectCount(map);
 		List<ReservationDTO> list2 = calendarDAO.selectnew(map);
 		List<Map<String,String>> ill=memberDAO.selectill(map);
+		List<Map<String, String>>deptname=memberDAO.selectdept(map);
+		String dept_name="자주 방문하는 진료과가 없습니다.";
+		String hosp_name="자주 방문하는 병원이 없습니다.";
+		for(Map data:deptname) {
+			if(!data.get("DEPT_NAME").equals(""))
+			dept_name=(String) data.get("DEPT_NAME");
+			System.out.println("확인"+dept_name);
+			if(!data.get("HOSP_NAME").equals(""))
+				hosp_name=(String) data.get("HOSP_NAME");
+			System.out.println("확인"+hosp_name);
+		}
+		model.addAttribute("hosp_name", hosp_name);
+		model.addAttribute("dept_name", dept_name);
 		String ill_name="";
 		String Chronic="";
 		for(Map data:ill) {
@@ -127,6 +140,11 @@ public class MyPageController {
 	public String updatemember(@RequestParam Map map,Authentication auth) {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
+		System.out.println(map.get("name"));
+		System.out.println(map.get("age"));
+		System.out.println(map.get("tel"));
+		System.out.println(map.get("gender"));
+		
 		map.put("id",id );
 		List<MemberDTO> list = memberDAO.selectList(map);
 		if(list.get(0).getMem_pwd().equals(map.get("pass"))) {
