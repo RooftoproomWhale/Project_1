@@ -56,10 +56,13 @@ $(function() {
 			var no = btnId.replace("idDelBtn", "");
 			
 			var userEmail = document.getElementById("idEmail"+no).innerHTML.trim();
+			var hospCode = $('#hospCode').val();
 			console.log(userEmail);
+			console.log(hospCode);
 			var sendJson=
 							{
 								"userEmail" : userEmail,
+								"hospCode" : hospCode
 							}
 				$.ajax({ 
 					url: "<c:url value='/Admin/AptDelete.hst'/>",
@@ -172,6 +175,7 @@ $(function() {
 													<tr class="tr-shadow">
 														<td><label class="au-checkbox"> 
 														<input type="checkbox"> <span class="au-checkmark"></span>
+														<input type="hidden" id="hospCode" value="${item.HOSP_CODE }"/>
 														</label></td>
 														<td><span class="block-email" id="idEmail${loop.index }">${item.MEM_EMAIL }</span>
 														</td>
