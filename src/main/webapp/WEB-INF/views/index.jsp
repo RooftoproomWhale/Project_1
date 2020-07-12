@@ -19,6 +19,10 @@
         .jssora051:hover {opacity:.8;}
         .jssora051.jssora051dn {opacity:.5;}
         .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
+        
+#footer{
+	top:2250px;
+}
 </style>
 <script>
 window.onload = function(){
@@ -340,7 +344,7 @@ window.onload = function(){
 						<div class="col-md-8 col-md-offset-2 intro-text">
 							<h1> We Are Home'spital ${currAptCount}</h1>
 							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
-							<a href="<c:url value='/Android/WebTest.hst'/>" id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
+<%-- 							<a href="<c:url value='/Android/WebTest.hst'/>" id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a> --%>
 						</div>
 					</div>
 				</div>
@@ -458,7 +462,7 @@ window.onload = function(){
 			</div>
 			<div class="row">
 				<div class="col-md-4" style="cursor: pointer"
-					onclick="location.href='<c:url value='/Homespital/Health_info.hst'/>'">
+					onclick="location.href='<c:url value='/mypage/Prevention.hst'/>'">
 					<i class="fa fa-language"></i>
 					<div class="service-desc">
 						<h3>예방 정보</h3>

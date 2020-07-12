@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.kosmo.proj.service.BoardDTO;
+import com.kosmo.proj.service.CovidEditDTO;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.Paging;
@@ -439,6 +440,18 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public List<CovidEditDTO> selectCovidList(Map map) {
+		// TODO 자동 생성된 메소드 스텁
+		return dao.selectCovidList(map);
+	}
+
+	@Override
+	public int updateCovidList(Map map) {
+		// TODO 자동 생성된 메소드 스텁
+		return dao.updateCovidList(map);
+	}
+
+	@Override
 	public int getTotalRecordNotice(Map map) {
 		// TODO Auto-generated method stub
 		return dao.getTotalRecordNotice(map);
@@ -448,6 +461,9 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.selectImage();
 	}
+
+	
+	
 
 	@Override
 	public int hitNotice(Map map) {
