@@ -3,6 +3,7 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
+
 #footer{
 position:absolute;
 top: 1000px;
