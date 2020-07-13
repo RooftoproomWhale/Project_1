@@ -86,7 +86,7 @@ public class MedicineController {
 		List<MedicineInfoDTO> infos = new ArrayList<MedicineInfoDTO>();
 		String[] data=dname.split(",");
 		for(String data1 : data) {
-				System.out.println("데이타 : "+data1);
+			
 		info = mediInfo(data1, info);
 		info = mediShape(data1, info);
         infos.add(info);
@@ -130,7 +130,7 @@ public class MedicineController {
 		try{
 			encodeSearch = URLEncoder.encode(encodeSearch.replace("mg","밀리그람").replace("이알서방정", "8시간이알서방정"),"UTF-8"); 
 	        }catch(Exception e){ e.printStackTrace();  }
-		System.out.println(encodeSearch);
+		
 		String apiUrl = "http://apis.data.go.kr/1470000/MdcinGrnIdntfcInfoService/getMdcinGrnIdntfcInfoList?" +
                 "ServiceKey=Vm09Doz%2BtjX%2B4q029cKoP7ZUtqFyG%2FfICadUOVNJ701bRToKiPDGC%2B2BRMd3Epq%2Bp24rhPTlajTxis4s2T6QQQ%3D%3D" +
                 "&numOfRows=10" +
