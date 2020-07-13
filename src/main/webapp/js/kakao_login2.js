@@ -17,23 +17,23 @@ Kakao.init('c0e6cc61e58211222f29b50be0f8c221')
 		    success: function(response) {
 		        console.log(response);
 		        console.log(response['kakao_account']['email']);
-		        let param = {};
-			      param.name = response['properties']['nickname'];
-			      param.email = response['kakao_account']['email'];
-			      param.userEmail = response['kakao_account']['email'];
-			      param.gender = response['kakao_account']['gender'];
-			      param.pwd = response['id'];
-			      param.tel = '010-1234-5678';
-			      param.role = 'ROLE_MEM';
-			      param.enable = 1;
-			      param.age = response['kakao_account']['age_range'].substring(0,2);
-			      console.log(param.age);
-			      param.weight = null;
-			      param.height = null;
-			      
+		        let params = {};
+			      params.name = response['properties']['nickname'];
+			      params.email = response['kakao_account']['email'];
+			      params.userEmail = response['kakao_account']['email'];
+			      params.gender = response['kakao_account']['gender'];
+			      params.pwd = response['id'];
+			      params.tel = '010-1234-5678';
+			      params.role = 'ROLE_MEM';
+			      params.enable = 1;
+			      params.age = response['kakao_account']['age_range'].substring(0,2);
+			      console.log(params.age);
+			      params.weight = null;
+			      params.height = null;
+			      console.log("파람스"+params.tel);
 			      $.ajax({
 						url:'./snsInsert.hst',
-						data:param,
+						data:params,
 						type:'post',
 						success:function(data){
 							console.log(data);
