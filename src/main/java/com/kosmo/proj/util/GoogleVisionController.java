@@ -206,7 +206,7 @@ public class GoogleVisionController {
 		Date pres_date = Date.valueOf(presDate);
 		map.put("pres_date", pres_date);
 		map.put("duration",duration);
-		map.put("hospital",hospital);
+		map.put("hos_name",hospital);
 		map.put("count",count);
 		
 		service.insertPre(map);

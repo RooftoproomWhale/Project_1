@@ -97,7 +97,7 @@ WHERE rownum=1)hosp_name from reservation WHERE rownum=1
 
 	<!-- 처방전 등록  -->
    	<insert id="presInsert" parameterType="java.util.Map">
-      	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
+      	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name},#{hos_name})
    	</insert>
 
 	<!-- 회원가입 -->
