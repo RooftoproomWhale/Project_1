@@ -64,7 +64,7 @@
    </select>
    
    <select id="under10" resultType="int">
-      SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ < ]]> 10
+      SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ < ]]> 10 AND ROLE='ROLE_MEM'
    </select>
    <select id="over10under20" resultType="int">
       SELECT COUNT(*) FROM MEMBER WHERE AGE <![CDATA[ >= ]]> 10 AND AGE <![CDATA[ < ]]> 20
