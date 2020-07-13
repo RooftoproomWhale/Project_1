@@ -122,7 +122,6 @@ form{
    </c:if>
 </sec:authorize>
 <div class="container-fluid">
-<<<<<<< HEAD
 		<div class="row main-contents bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 				<span style="width: 150px;height: 150px;align-self: center;" class="company__logo"><img style="width: 100%; height: auto;" class="img-responsive" src='<c:url value="/images/logo_white.png"/>' alt="로고이미지"></span></h2></span>
@@ -182,67 +181,6 @@ form{
 			</div>
 		</div>
 	</div>
-=======
-      <div class="row main-contents bg-success text-center">
-         <div class="col-md-4 text-center company__info">
-            <span style="width: 150px;height: 150px;align-self: center;" class="company__logo"><img style="width: 100%; height: auto;" class="img-responsive" src='<c:url value="/img/logo.png"/>' alt="로고이미지"></span></h2></span>
-            <h4 class="company_title" style="color: white;">홈스피탈</h4>
-         </div>
-         <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
-            <div class="container-fluid">
-               <div class="row">
-                  <h2 style="margin-bottom: 0;margin-top: 20px;">로그인</h2>
-               </div>
-               <div class="row">
-                  <form id="login" method="post" action="<c:url value='/User/LoginProcess.hst'/>" control="#" class="form-group">
-                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                     <div class="row">
-                        <input type="text" name="id" id="id" class="form__input" placeholder="아이디">
-                     </div>
-                     <div class="row">
-                        <!-- <span class="fa fa-lock"></span> -->
-                        <input type="password" name="pass" id="pass" class="form__input" placeholder="비밀번호">
-                     </div>
-                     <div class="checkbox">
-                        <label for="remember_me">
-                           <input type="checkbox" name="saveId" id="saveId">
-                           아이디 저장
-                        </label>
-                     </div>
-                     <div class="row">
-                        <button class="btn" onclick="login();">로그인</button>
-                     </div>
-                  </form>
-                  <div class="row">
-                  <p>계정이 없으신가요? <a href="<c:url value='/Account/SignForm.hst'/>">회원가입</a></p>
-               </div>
-               </div>
-               <div class="hr-sect">or</div>
-               <div class="row" style="padding-bottom: 15px;">
-                  <div class="col-md-offset-2 col-md-8">
-                     <div class="col-md-4 col-xs-6">
-                        <a id="naver" href="#"> <img width="60"
-                           src='<c:url value="/images/snslogo/naver.png"/>' alt="네이버 로그인">
-                        </a>
-                     </div>
-                     <div class="col-md-4 col-xs-6">
-                        <a id="kakao" href="javascript:loginWithKakao()"> <img width="60"
-                           src='<c:url value="/images/snslogo/kakao.png"/>' alt="카카오 로그인">
-                        </a>
-                     </div>
-                     <div class="col-md-4 col-xs-6">
-                        <a id="facebook" href="javascript:checkLoginState()"> <img width="60"
-                           src='<c:url value="/images/snslogo/facebook.png"/>' alt="페이스북 로그인">
-                        </a>
-                     </div>
-         
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 <script>
    function login() {
       var id = $('#id');
