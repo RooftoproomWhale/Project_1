@@ -27,10 +27,10 @@ Kakao.init('c0e6cc61e58211222f29b50be0f8c221')
 			      params.role = 'ROLE_MEM';
 			      params.enable = 1;
 			      params.age = response['kakao_account']['age_range'].substring(0,2);
-			      console.log(param.age);
+			      console.log(params.age);
 			      params.weight = null;
 			      params.height = null;
-			      
+			      console.log("파람스"+params.tel);
 			      $.ajax({
 						url:'./snsInsert.hst',
 						data:params,
