@@ -318,7 +318,6 @@ $(function() {
                         <div class="header-wrap2">
                             <div class="header-button2">
                                 <div class="header-button-item has-noti js-item-menu">
-                                    <i class="zmdi zmdi-notifications"></i>
                                     <div class="notifi-dropdown js-dropdown">
                                         <div class="notifi__title">
                                             <p>You have 3 Notifications</p>

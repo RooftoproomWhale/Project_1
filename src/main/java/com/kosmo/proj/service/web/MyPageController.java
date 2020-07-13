@@ -1,4 +1,5 @@
 package com.kosmo.proj.service.web;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +41,6 @@ public class MyPageController {
 	/// 내정보
 	@RequestMapping("/mypage/mypage.hst")
 	public String mypage(@RequestParam Map map,Authentication auth,Model model) {
-		System.out.println("연결");
 		if(auth == null) {
 			JOptionPane.showMessageDialog(null,"로그인후 이용해주세요.","홈스피탈",1);
 			return "member/Login.tiles";
@@ -122,7 +122,7 @@ public class MyPageController {
 		}
 		return "redirect:../User/Logout.hst";
 	}
-
+	
 	// 비밀번호 변경
 	@RequestMapping("/mypage/ChangePassword.hst")
 	public String ChangePassword(Authentication auth,Model model) {
@@ -148,11 +148,6 @@ public class MyPageController {
 	public String updatemember(@RequestParam Map map,Authentication auth) {
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
-		System.out.println(map.get("name"));
-		System.out.println(map.get("age"));
-		System.out.println(map.get("tel"));
-		System.out.println(map.get("gender"));
-		
 		map.put("id",id );
 		List<MemberDTO> list = memberDAO.selectList(map);
 		if(list.get(0).getMem_pwd().equals(map.get("pass"))) {
@@ -175,6 +170,7 @@ public class MyPageController {
 		map.put("id", id);
 		List<MemberDTO> list = memberDAO.selectList(map);
 		model.addAttribute("mem_name",list.get(0).getMem_name());
+
 		
 		return "ReservationList.my_tiles";
 	}
@@ -183,9 +179,11 @@ public class MyPageController {
 	public String ReservationLists(Authentication auth,Model model) {
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
+
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		model.addAttribute("mem_name", mem_name(id));
+
 		return "ReservationList.my_tiles";
 	}
 	// 복약관리
@@ -261,42 +259,15 @@ public class MyPageController {
 		map.put("id",id );
 
 //		int update = memberDAO.diseaseupdate(map);
-
+		
 		return "redirect:../mypage/mypage.hst";
 	}
 
-	// 병원 페이지
-	@RequestMapping("/Hospage/main.hst")
-	public String toMain(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
+	
 
-		return "Hospage_Main.hos_tiles";
-	}
+	
 
-	@RequestMapping("/Hospage/Update.hst")
-	public String update(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
 
-		return "Hospage_Update.hos_tiles";
-	}
-
-	@RequestMapping("/Hospage/Cancel.hst")
-	public String cancel(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-
-		return "Hospage_Cancel.hos_tiles";
-	}
-
-	@RequestMapping("/Hospage/Appointment.hst")
-	public String appointment(Authentication auth,Model model) {
-		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-
-		return "Hospage_Appointment.hos_tiles";
-	}
 
 
 //	   @RequestMapping("/Hospage/Chart.hst")

@@ -138,7 +138,7 @@ body {
 	margin-bottom: 16px;
 	padding-left: 30px;
 	color: var(- -task-color);
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 500;
 	
 }.description-task :hover {

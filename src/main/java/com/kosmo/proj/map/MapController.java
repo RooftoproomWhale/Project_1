@@ -140,6 +140,8 @@ public class MapController {
 		JSONArray ja = new JSONArray();
 		
 		list = mapService.selectHospitalOne(map);
+		
+		System.out.println(list.get(0));
 //		String depart = "";
 //		for (int i = 0; i < list.size(); i++) {
 //			if(i==list.size()-1)
@@ -152,6 +154,20 @@ public class MapController {
 //			}
 //		}
 //		list.get(0).replace("DEPT_NAME", depart);
+		System.out.println(list.get(0).get("AUTH_DATE") );
+		if(list.get(0).get("AUTH_DATE") != null)
+		{
+			for(Map comment:list)
+			{
+				System.out.println(comment.get("AUTH_DATE").toString());
+				comment.put("AUTH_DATE",comment.get("AUTH_DATE").toString());
+				comment.put("APPROVED_DATE",comment.get("APPROVED_DATE").toString());
+			}
+		}
+		
+		
+		
+		System.out.println(JSONArray.toJSONString(list));
 		
 //		return JSONArray.toJSONString(list);
 		return JSONArray.toJSONString(list);

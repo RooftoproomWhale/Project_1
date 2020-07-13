@@ -11,7 +11,8 @@
 	left: 0px;
 	margin-top: 1000px;
 	background-color: #474747;
-	height: 150px
+	height: 150px;
+	top:100px;
 }
 
 .jumbotron {
@@ -66,19 +67,17 @@ img {
 <link rel="stylesheet" href="./css/sidebar.css">
 </head>
 <body>
-	<div class="container" style="padding-top: 88px;">
+	<div class="container" style="padding-top: 100px;">
 		<div class="row ">
 			<main id="main">
-				<div class="page-header board-util-text color-red">
-					<h2 style="color: blue">공지사항</h2>
+				<div class="col-md-offset-2 col-md-3">
+					<img src="../img/22222.PNG">
 				</div>
-				<p class="lead">[ 홈스피탈 공지사항 ]</p>
 				</br>
 				<div class="container" style="box-shadow: 3px 3px 3px 5px rgba(227, 225, 225);">
-					<img src="../img/111.jpg" align="right">
 					<div class="jumbotron" style="background-color: white">
 						<h1 style="color: #e0dada">Homespital</h1>
-					</div></br></br>
+					</div></br></br></br></br></br>
 					<table class="table" style="border: none;">
 						<thead>
 							<tr class="info">

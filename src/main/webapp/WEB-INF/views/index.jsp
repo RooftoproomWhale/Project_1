@@ -19,10 +19,19 @@
         .jssora051:hover {opacity:.8;}
         .jssora051.jssora051dn {opacity:.5;}
         .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
+        
+#footer{
+	top:2250px;
+}
+header .intro-text {
+    padding-top: 287px;
+}
 </style>
 <script>
 window.onload = function(){
-
+	var date = new Date();
+	date = moment(date).format('YYYY-MM-DD HH:mm');
+	$('#date_co').text("(실시간:"+date+")")
 	//web notification 설정
 	var icon = '../img/logo.png';
 	var userRole = $('#userRole').val();
@@ -340,7 +349,8 @@ window.onload = function(){
 						<div class="col-md-8 col-md-offset-2 intro-text">
 							<h1> We Are Home'spital ${currAptCount}</h1>
 							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
-							<a href="<c:url value='/Android/WebTest.hst'/>" id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
+<!-- 							<a id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a> -->
+<%-- 							<a href="<c:url value='/Android/WebTest.hst'/>" id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a> --%>
 						</div>
 					</div>
 				</div>
@@ -416,7 +426,7 @@ window.onload = function(){
 			<!-- Issue Section -->
 			<div class="col-md-5 col-md-offset-1 col-sm-12" style="">
 				<div class="row" style="margin-bottom: 14px">
-					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보</span>
+					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보<spam id=date_co style="font-size:0.7em;color:#5D5D5D"></spam></span>
 				</div>
 				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px;"></div>
 			</div>
@@ -458,7 +468,7 @@ window.onload = function(){
 			</div>
 			<div class="row">
 				<div class="col-md-4" style="cursor: pointer"
-					onclick="location.href='<c:url value='/Homespital/Health_info.hst'/>'">
+					onclick="location.href='<c:url value='/mypage/Prevention.hst'/>'">
 					<i class="fa fa-language"></i>
 					<div class="service-desc">
 						<h3>예방 정보</h3>
@@ -525,13 +535,13 @@ window.onload = function(){
 					type:'get',
 					dataType:"json",
 					success:function(data){
-						var news = "<table class='table' style='width:80%; border: 3px solid #0051ff'>";
+						var news = "<table class='table' style='width:80%;border: 2px solid rgba(0,0,0,.12);'>";
 						if(data.length==0){
 							news+="<li>뉴스 데이터가 없습니다</li>";
 						} 
 						$.each(data, function(index, element) {
 							console.log(element)
-							news+="<tr><td><a href='"+element.href+"' target=_blank>"+element.title+"</a><td></tr>";
+							news+="<tr><td style='border-top:none;border-bottom:1px solid #ddd'><a href='"+element.href+"' target=_blank>"+element.title+"</a><td></tr>";
 						});
 						news+="</table>";
 						$('#news').html(news);
@@ -563,4 +573,5 @@ window.onload = function(){
 	});
 	
 </script>
+<script src='<c:url value="/calendar/vendor/js/moment.min.js"/>'></script>
 </html>

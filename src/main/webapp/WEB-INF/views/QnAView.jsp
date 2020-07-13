@@ -19,7 +19,8 @@
 	left: 0px;
 	margin-top: 1000px;
 	background-color: #474747;
-	height: 150px
+	height: 150px;
+	top:350px;
 }
 
 .jumbotron {
