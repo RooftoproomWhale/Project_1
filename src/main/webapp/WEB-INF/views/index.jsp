@@ -29,9 +29,7 @@ header .intro-text {
 </style>
 <script>
 window.onload = function(){
-	var date = new Date();
-	date = moment(date).format('YYYY-MM-DD HH:mm');
-	$('#date_co').text("(실시간:"+date+")")
+	
 	//web notification 설정
 	var icon = '../img/logo.png';
 	var userRole = $('#userRole').val();
@@ -556,6 +554,9 @@ window.onload = function(){
 				url:"<c:url value='/Admin/NoticeImages.hst'/>",
 				type:'post',
 				success:function(data){
+					var date = new Date();
+					date = moment(date).format('YYYY-MM-DD HH:mm');
+					$('#date_co').text("(실시간:"+date+")")
 					console.log(data);
 					var noti = JSON.parse(data);
 					$('#img1').attr('src',noti[0]["FILE_ADDR"]);
