@@ -21,8 +21,10 @@ Kakao.init('c0e6cc61e58211222f29b50be0f8c221')
 			      param.name = response['properties']['nickname'];
 			      param.email = response['kakao_account']['email'];
 			      param.userEmail = response['kakao_account']['email'];
+			      param.mem_email = response['kakao_account']['email'];
 			      param.gender = response['kakao_account']['gender'];
 			      param.pwd = response['id'];
+			      param.mem_pwd = response['id'];
 			      param.tel = '010-1234-5678';
 			      param.role = 'ROLE_MEM';
 			      param.enable = 1;
