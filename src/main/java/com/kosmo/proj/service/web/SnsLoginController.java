@@ -54,8 +54,8 @@ public class SnsLoginController {
 		  SecurityContext sc = SecurityContextHolder.getContext();
 		  //아이디, 패스워드, 권한을 설정합니다. 아이디는 Object단위로 넣어도 무방하며
 		  //패스워드는 null로 하여도 값이 생성됩니다.
-		  CustomUserDetails user = userService.loadUserByUsername(map.get("mem_email").toString());
-		  sc.setAuthentication(new UsernamePasswordAuthenticationToken(user, map.get("mem_pwd"), list));
+		  CustomUserDetails user = userService.loadUserByUsername(map.get("email").toString());
+		  sc.setAuthentication(new UsernamePasswordAuthenticationToken(user, map.get("pwd"), list));
 		  HttpSession session = req.getSession(true);
 		  //위에서 설정한 값을 Spring security에서 사용할 수 있도록 세션에 설정해줍니다.
 		  session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);

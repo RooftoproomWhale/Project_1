@@ -199,8 +199,7 @@ form{
       $('#login').submit();
    }
 </script>
-   
-<script type="text/javascript" src='<c:url value="/js/kakao_login.js"/>'></script>
+<script type="text/javascript" src='<c:url value="/js/kakao_login2.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/js/naver_login.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/js/facebook_login.js"/>'></script>
 

@@ -4,7 +4,7 @@
 <style>
  	#footer 
  	{ 
-		position: absolute; 
+		position: inherit; 
 		width:100%; 
 		left:0px; 
  		bottom: auto; 
