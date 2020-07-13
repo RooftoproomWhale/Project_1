@@ -18,13 +18,13 @@ Kakao.init('c0e6cc61e58211222f29b50be0f8c221')
 		        console.log(response);
 		        console.log(response['kakao_account']['email']);
 		        let param = {};
-			      param.mem_name = response['properties']['nickname'];
-			      param.mem_email = response['kakao_account']['email'];
+			      param.name = response['properties']['nickname'];
+			      param.email = response['kakao_account']['email'];
 			      param.userEmail = response['kakao_account']['email'];
 			      param.gender = response['kakao_account']['gender'];
-			      param.mem_pwd = response['id'];
+			      param.pwd = response['id'];
 			      param.tel = '010-1234-5678';
-			      param.role = 'MEM';
+			      param.role = 'ROLE_MEM';
 			      param.enable = 1;
 			      param.age = response['kakao_account']['age_range'].substring(0,2);
 			      console.log(param.age);
