@@ -109,7 +109,10 @@ form{
 	line-height: 0px;
 	margin: 0px 16px;
 }
-
+#footer
+{
+	top:820px
+}
 </style>
 <sec:authorize access="isAnonymous()">
 	<c:if test="${not empty param.NotLogin}">
