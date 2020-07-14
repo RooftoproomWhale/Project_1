@@ -424,7 +424,7 @@ window.onload = function(){
 			<!-- Issue Section -->
 			<div class="col-md-5 col-md-offset-1 col-sm-12" style="">
 				<div class="row" style="margin-bottom: 14px">
-					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보<spam id=date_co style="font-size:0.7em;color:#5D5D5D"></spam></span>
+					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보<span id=date_co style="font-size:0.7em;color:#5D5D5D"></span></span>
 				</div>
 				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px;"></div>
 			</div>
