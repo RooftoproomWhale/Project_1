@@ -530,7 +530,7 @@ window.onload = function(){
 					type:'get',
 					dataType:"json",
 					success:function(data){
-						var news = "<table class='table' style='width:80%; border: 3px solid #0051ff'>";
+						var news = "<table class='table' id='news' style='width:80%; border: 2px solid #008ae6;border-radius:7px 7px 7px 7px;'>";
 						if(data.length==0){
 							news+="<li>뉴스 데이터가 없습니다</li>";
 						} 

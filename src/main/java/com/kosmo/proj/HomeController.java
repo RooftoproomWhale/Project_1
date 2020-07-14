@@ -62,9 +62,9 @@ public class HomeController {
 	public String toHome(Authentication auth, Model model)
 	{
 		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-		
+		String role = getUser.getUser(model, auth);
 		return "index.tiles";
+		
 	}
 	
 	
