@@ -50,6 +50,7 @@ $.ajax({
     	   	var mayAptCount = 40;
     	   	var junAptCount = 36;
     	   	var julAptCount = $('#julAptCount').val();
+    	   	
     	    // Recent Report 2
     	    const bd_brandProduct2 = 'rgba(0,181,233,0.9)'
     	    const bd_brandService2 = 'rgba(0,173,95,0.9)'

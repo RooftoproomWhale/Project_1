@@ -112,7 +112,6 @@ public interface AdminService {
 
 		List<CovidEditDTO> selectCovidList(Map map);
 		int updateCovidList(Map map);
-		
 		int getFirst(Map map);
 		int getLast(Map map);
 		

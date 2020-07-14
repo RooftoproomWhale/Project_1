@@ -265,7 +265,7 @@
 		DELETE FROM HISTORY WHERE MEM_EMAIL = #{userEmail}
 	</delete>
 	<update id="updateHos" parameterType="java.util.Map">
-		UPDATE HOSPITAL SET MEM_EMAIL = 'NOAUTH'
+		UPDATE HOSPITAL SET MEM_EMAIL = 'NOAUTH' WHERE MEM_EMAIL = #{userEmail}
 	</update>
 	<delete id="deleteReserv" parameterType="java.util.Map">
 		DELETE FROM RESERVATION WHERE MEM_EMAIL = #{userEmail}

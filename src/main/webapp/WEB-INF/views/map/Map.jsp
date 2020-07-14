@@ -850,6 +850,7 @@
 					if(data == 1)
 					{
 						alert("예약이 완료되었습니다");
+						$('#reservation-modal').modal('hide');
 					}
 					else if(data == 2)
 					{
@@ -906,7 +907,6 @@
          dateFormat: "yy-mm-dd",
          onSelect: function(dateText, inst) {
              var date = new Date();
-             alert('선택하신 날짜는'+ date.getHours());
              console.log(date.getDate());
              console.log(parse(dateText));
              changeSelector(date,parse(dateText));
@@ -1163,13 +1163,14 @@
                         $('.info-toggle').removeClass('left_toggle');
                      }
                      
-                     var weekday_open = ((item.weekday_open != undefined) ? item.weekday_open : '800')
-                     var weekday_close = ((item.weekday_close != undefined) ? item.weekday_close : '2200')
-                     var weekend_open = ((item.weekend_open != undefined) ? item.weekend_open : '900')
-                     var weekend_close = ((item.weekend_close != undefined) ? item.weekend_close : '1200')
-                     var lunchtime = ((item.lunchtime != undefined || item.lunchtime != '0' || item.lunchtime.length != 0) ? item.lunchtime : '12:30~1:30')
+                     var weekday_open = ((item.weekday_open == undefined || item.weekday_open == '0' || item.weekday_open.length == 0 || item.weekday_open == '') ? '800' : item.weekday_open)
+                     var weekday_close = ((item.weekday_close == undefined || item.weekday_close == '0' || item.weekday_close.length == 0 || item.weekday_close == '') ? '2200' : item.weekday_close)
+                     var weekend_open = ((item.weekend_open == undefined || item.weekend_open == '0' || item.weekend_open.length == 0 || item.weekend_open == '') ? '900' : item.weekend_open)
+                     var weekend_close = ((item.weekend_close == undefined || item.weekend_close == '0' || item.weekend_close.length == 0 || item.weekend_close == '') ? '1200' : item.weekend_close)
+                     var lunchtime = ((item.lunchtime == undefined || item.lunchtime == '0' || item.lunchtime.length == 0 || item.lunchtime.length == '') ? '12:30~1:30' : item.lunchtime)
                     		 
                      console.log("lunchtime",lunchtime);
+                     console.log("typeof lunchtime",typeof lunchtime);
                      console.log("item.lunchtime.length",item.lunchtime.length);
                     		 
                      var weekday_open_H = weekday_open.substring(0,parseInt(weekday_open.length/2));

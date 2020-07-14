@@ -101,10 +101,10 @@ WHERE rownum=1)hosp_name from reservation WHERE rownum=1
     	SELECT NOTI_NO FROM NOTIFICATION_BBS WHERE ROWNUM <![CDATA[ <= ]]> 1
    	</select>
 
-	
-   <insert id="presInsert" parameterType="java.util.Map">
-      	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},#{pres_date},#{duration},#{count},#{medi_name})
-   </insert>
+	<!-- 처방전 등록  -->
+   	<insert id="presInsert" parameterType="java.util.Map">
+      	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},SYSDATE,#{duration},#{count},#{medi_name},#{hos_name})
+   	</insert>
 
 	<!-- 회원가입 -->
 	<insert id="signInsert" parameterType="java.util.Map">

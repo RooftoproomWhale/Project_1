@@ -16,14 +16,8 @@ $('#item-date').text(event.start._i+"-"+event.end._i);
         url: "/proj/Calendar/Management.hst",/*"/proj/calendar/data.json",*/
         data: {'dname':event.title},
         success: function (response) {
-        	console.log('실행');
-      	  console.log(response);
       	 $.each(response, function(i, el){
-      		 console.log('asdsada	',el);
-      		 console.log(el.nb_DOC,i)
-      	
-   
-      	  	$('<input type="button" class="btn items" id="item-'+i+'" value="'+el.item_NAME.substring(0,el.item_NAME.indexOf('('))+'"/>').appendTo('#item_name');
+      		$('<input type="button" class="btn items" id="item-'+i+'" value="'+el.item_NAME.substring(0,el.item_NAME.indexOf('('))+'"/>').appendTo('#item_name');
       	 
       	  	if(i ==0){
   			$('#item-0').addClass("click"); 
@@ -42,7 +36,6 @@ $('#item-date').text(event.start._i+"-"+event.end._i);
 			case 3:$('#item-3').addClass("click"); break;
 			default:$('#item-4').addClass("click"); break;
 			}
-      	  		console.log(i+'번째 클릭 이번트')
 	      	  $('#material_NAME').html(el.material_NAME);
 	      	 $('#storage_METHOD').html(el.storage_METHOD);
 	      	 $('#valid_TERM').html(el.valid_TERM);

@@ -16,7 +16,7 @@
       <!-- SELECT * FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%' -->
       SELECT H.*, D.dept_name FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code
 	  WHERE H.hosp_name LIKE '%' || #{search_keyword} || '%' 
-	  <if test="!search_dept.equals('')">
+	  <if test="!(search_dept == null || search_dept.equals(''))">
 	  	  AND D.dept_name = #{search_dept}
 	  </if>
    </select>
@@ -35,7 +35,7 @@
    <select id="hospitalDetailSelect" parameterType="java.util.Map" resultType="java.util.Map">
       SELECT H.*, D.dept_name FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code
       WHERE H.address = #{address}
-      <if test="search_dept != null">
+      <if test="!(search_dept == null || search_dept.equals(''))">
 	  	  AND D.dept_name = #{search_dept}
 	  </if>
    </select>
