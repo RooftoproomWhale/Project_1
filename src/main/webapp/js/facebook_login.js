@@ -25,13 +25,13 @@
 	    FB.api('/me',{fields: 'email,name,gender'}, function(response) {
 	      console.log(response);
 	      let param = {};
-	      param.mem_name = response.name;
-	      param.mem_email = response.email;
+	      param.name = response.name;
+	      param.email = response.email;
 	      param.userEmail = response.email;
 	      param.gender = response.gender;
-	      param.mem_pwd = response.id;
+	      param.pwd = response.id;
 	      param.tel = '010-1234-5678';
-	      param.role = 'MEM';
+	      param.role = 'ROLE_MEM';
 	      param.enable = 1;
 	      param.age = null;
 	      param.weight = null;

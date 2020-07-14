@@ -12,102 +12,102 @@
 
 <style>
 body{
-	padding-top: 70px;
+   padding-top: 70px;
 }
 .main-contents{
-	width: 50%;
-	border-radius: 20px;
-	box-shadow: 0 5px 5px rgba(0,0,0,.4);
-	margin: 5em auto;
-	display: flex;
+   width: 50%;
+   border-radius: 20px;
+   box-shadow: 0 5px 5px rgba(0,0,0,.4);
+   margin: 5em auto;
+   display: flex;
 }
 .company__info{
-	background-color: #5ca9fb;
-	border-top-left-radius: 20px;
-	border-bottom-left-radius: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	color: #fff;
+   background-color: #5ca9fb;
+   border-top-left-radius: 20px;
+   border-bottom-left-radius: 20px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   color: #fff;
 }
 .fa-android{
-	font-size:3em;
+   font-size:3em;
 }
 @media screen and (max-width: 640px) {
-	.main-content{width: 90%;}
-	.company__info{
-		display: none;
-	}
-	.login_form{
-		border-top-left-radius:20px;
-		border-bottom-left-radius:20px;
-	}
+   .main-content{width: 90%;}
+   .company__info{
+      display: none;
+   }
+   .login_form{
+      border-top-left-radius:20px;
+      border-bottom-left-radius:20px;
+   }
 }
 @media screen and (min-width: 642px) and (max-width:800px){
-	.main-content{width: 70%;}
+   .main-content{width: 70%;}
 }
 .row > h2{
-	color:#5ca9fb;
-	
+   color:#5ca9fb;
+   
 }
 .login_form{
-	background-color: #fff;
-	border-top-right-radius:20px;
-	border-bottom-right-radius:20px;
-	border-top:1px solid #ccc;
-	border-right:1px solid #ccc;
+   background-color: #fff;
+   border-top-right-radius:20px;
+   border-bottom-right-radius:20px;
+   border-top:1px solid #ccc;
+   border-right:1px solid #ccc;
 }
 form{
-	padding: 0 2em;
+   padding: 0 2em;
 }
 .form__input{
-	width: 100%;
-	border:0px solid transparent;
-	border-radius: 0;
-	border-bottom: 1px solid #aaa;
-	padding: 1em .5em .5em;
-	padding-left: 2em;
-	outline:none;
-	margin:1em auto;
-	transition: all .5s ease;
+   width: 100%;
+   border:0px solid transparent;
+   border-radius: 0;
+   border-bottom: 1px solid #aaa;
+   padding: 1em .5em .5em;
+   padding-left: 2em;
+   outline:none;
+   margin:1em auto;
+   transition: all .5s ease;
 }
 .form__input:focus{
-	border-bottom-color: #5ca9fb;
-	box-shadow: 0 0 5px rgba(0,80,80,.4); 
-	border-radius: 4px;
+   border-bottom-color: #5ca9fb;
+   box-shadow: 0 0 5px rgba(0,80,80,.4); 
+   border-radius: 4px;
 }
 .btn{
-	transition: all .5s ease;
-	width: 100%;
-	border-radius: 30px;
-	color:#5ca9fb;
-	font-weight: 600;
-	background-color: #fff;
-	border: 1px solid #5ca9fb;
-	margin-top: 1.5em;
-	margin-bottom: 1em;
+   transition: all .5s ease;
+   width: 100%;
+   border-radius: 30px;
+   color:#5ca9fb;
+   font-weight: 600;
+   background-color: #fff;
+   border: 1px solid #5ca9fb;
+   margin-top: 1.5em;
+   margin-bottom: 1em;
 }
 .btn:hover, .btn:focus{
-	background-color: #5ca9fb;
-	color:#fff;
+   background-color: #5ca9fb;
+   color:#fff;
 }
 .hr-sect {
-	display: flex;
-	flex-basis: 100%;
-	align-items: center;
-	color: rgba(0, 0, 0, 0.35);
-	font-size: 20px;
-	margin: 8px 0px;
+   display: flex;
+   flex-basis: 100%;
+   align-items: center;
+   color: rgba(0, 0, 0, 0.35);
+   font-size: 20px;
+   margin: 8px 0px;
 }
 .hr-sect::before,
 .hr-sect::after {
-	content: "";
-	flex-grow: 1;
-	background: rgba(0, 0, 0, 0.35);
-	height: 1px;
-	font-size: 0px;
-	line-height: 0px;
-	margin: 0px 16px;
+   content: "";
+   flex-grow: 1;
+   background: rgba(0, 0, 0, 0.35);
+   height: 1px;
+   font-size: 0px;
+   line-height: 0px;
+   margin: 0px 16px;
 }
 #footer
 {
@@ -115,17 +115,17 @@ form{
 }
 </style>
 <sec:authorize access="isAnonymous()">
-	<c:if test="${not empty param.NotLogin}">
-	<script>
-		alert('존재하지 않는 아이디입니다');
-	</script>
-	</c:if>
+   <c:if test="${not empty param.NotLogin}">
+   <script>
+      alert('존재하지 않는 아이디입니다');
+   </script>
+   </c:if>
 </sec:authorize>
 <div class="container-fluid">
 		<div class="row main-contents bg-success text-center">
 			<div class="col-md-4 text-center company__info">
-				<span style="width: 150px;height: 150px;align-self: center;" class="company__logo"><img style="width: 100%; height: auto;" class="img-responsive" src='<c:url value="/img/logo.png"/>' alt="로고이미지"></span></h2></span>
-				<h4 class="company_title" style="color: white;">홈스피탈</h4>
+				<span style="width: 150px;height: 150px;align-self: center;" class="company__logo"><img style="width: 100%; height: auto;" class="img-responsive" src='<c:url value="/images/logo_white.png"/>' alt="로고이미지"></span></h2></span>
+				<h3 class="company_title" style="color: white;"><u>Home'spital</u></h3>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
@@ -182,26 +182,24 @@ form{
 		</div>
 	</div>
 <script>
-	function login() {
-		var id = $('#id');
-		var pass = $('#pass');
-		if ($.trim(id.val()) == '') {
-			alert('아이디를 입력해 주세요.');
-			id.focus();
-			return;
-		}
-		if ($.trim(pass.val()) == '') {
-			alert('비밀번호를 입력해 주세요.');
-			pass.focus();
-			return;
-		}
+   function login() {
+      var id = $('#id');
+      var pass = $('#pass');
+      if ($.trim(id.val()) == '') {
+         alert('아이디를 입력해 주세요.');
+         id.focus();
+         return;
+      }
+      if ($.trim(pass.val()) == '') {
+         alert('비밀번호를 입력해 주세요.');
+         pass.focus();
+         return;
+      }
 
-		$('#login').submit();
-	}
+      $('#login').submit();
+   }
 </script>
-	
-<script type="text/javascript" src='<c:url value="/js/kakao_login.js"/>'></script>
+<script type="text/javascript" src='<c:url value="/js/kakao_login2.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/js/naver_login.js"/>'></script>
 <script type="text/javascript" src='<c:url value="/js/facebook_login.js"/>'></script>
-
 

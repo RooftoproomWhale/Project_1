@@ -197,7 +197,7 @@ border: 2px solid black ;
     </tr>
      <tr>
       <td style="width: 255px"> <img id="imgs" style="width: 255px;height: 250px" src="https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/154609804554800013"></td>
-      <td colspan="5" id="items-1" style="display: none; height: 320px"><span id="nb_DOC"></span></td>
+      <td colspan="5" id="items-1" style="display: none; height: 320px"><div style="overflow: auto;height: 320px"><span id="nb_DOC"></span></div></td>
  <td id="items-2" colspan="5" style="text-align: left;padding: 20px;height: 320px;">
 <span id="material_NAME"></span>
 <br>보관방법: <span id="storage_METHOD"></span>
@@ -342,7 +342,7 @@ border: 2px solid black ;
             </div>
  -->
         </div>
-<div id="loading"><img id="loading-image" src="<c:url value='/img/ajax-loader.gif'/>" alt="Loading..." /></div>
+<div id="loading"><img id="loading-image" src="<c:url value='/img/ajax-loader.gif'/>" alt="Loading..."/></div>
 
 <script src='<c:url value="/calendar/vendor/js/moment.min.js"/>'></script>
 

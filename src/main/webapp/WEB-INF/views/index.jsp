@@ -23,10 +23,13 @@
 #footer{
 	top:2250px;
 }
+header .intro-text {
+    padding-top: 287px;
+}
 </style>
 <script>
 window.onload = function(){
-
+	
 	//web notification 설정
 	var icon = '../img/logo.png';
 	var userRole = $('#userRole').val();
@@ -364,22 +367,22 @@ window.onload = function(){
 					<div class="img-thumbnail" data-u="slides"
 						style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 						<div data-p="680">
-							<a id="noti1" href="#">
+							<a id="noti1" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[0].noti_no }'/>">
 								<img id="img1" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti2" href="#">
+							<a id="noti2" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[1].noti_no }'/>">
 								<img id="img2" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti3" href="#">
+							<a id="noti3" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[2].noti_no }'/>">
 								<img id="img3" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti4" href="#">
+							<a id="noti4" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[3].noti_no }'/>">
 								<img id="img4" data-u="image" src='<c:url value="/images/no_noti.png"/>'" />
 							</a>
 						</div>
@@ -421,7 +424,7 @@ window.onload = function(){
 			<!-- Issue Section -->
 			<div class="col-md-5 col-md-offset-1 col-sm-12" style="">
 				<div class="row" style="margin-bottom: 14px">
-					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보</span>
+					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보<spam id=date_co style="font-size:0.7em;color:#5D5D5D"></spam></span>
 				</div>
 				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px;"></div>
 			</div>
@@ -530,13 +533,13 @@ window.onload = function(){
 					type:'get',
 					dataType:"json",
 					success:function(data){
-						var news = "<table class='table' style='width:80%; border: 3px solid #0051ff'>";
+						var news = "<table class='table' style='width:80%;border: 2px solid rgba(0,0,0,.12);'>";
 						if(data.length==0){
 							news+="<li>뉴스 데이터가 없습니다</li>";
 						} 
 						$.each(data, function(index, element) {
 							console.log(element)
-							news+="<tr><td><a href='"+element.href+"' target=_blank>"+element.title+"</a><td></tr>";
+							news+="<tr><td style='border-top:none;border-bottom:1px solid #ddd'><a href='"+element.href+"' target=_blank>"+element.title+"</a><td></tr>";
 						});
 						news+="</table>";
 						$('#news').html(news);
@@ -550,15 +553,19 @@ window.onload = function(){
 			$.ajax({
 				url:"<c:url value='/Admin/NoticeImages.hst'/>",
 				type:'post',
+				dataType:"json",
 				success:function(data){
-					console.log(data);
-					var noti = JSON.parse(data);
-					$('#img1').attr('src',noti[0]["FILE_ADDR"]);
+					console.log("noti: " + data);
+					$('#img1').attr('src', data[0].file_addr);
 					console.log($('#img1').attr('src'));
-					$('#img2').attr('src',noti[1]["FILE_ADDR"]);
-					$('#img3').attr('src',noti[2]["FILE_ADDR"]);
-					$('#img4').attr('src',noti[3]["FILE_ADDR"]);
-					//$('.img-thumbnail').html(comments);
+					$('#img2').attr('src', data[1].file_addr);
+					$('#img3').attr('src', data[2].file_addr);
+					$('#img4').attr('src', data[3].file_addr);
+					
+					$('#noti1').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[0].noti_no + " '/>");
+					$('#noti2').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[1].noti_no + " '/>");
+					$('#noti3').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[2].noti_no + " '/>");
+					$('#noti4').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[3].noti_no + " '/>");
 				},
 				error:function(e){console.log('에러:',e)}
 			})
@@ -568,4 +575,5 @@ window.onload = function(){
 	});
 	
 </script>
+<script src='<c:url value="/calendar/vendor/js/moment.min.js"/>'></script>
 </html>

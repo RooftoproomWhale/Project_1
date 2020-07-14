@@ -157,5 +157,11 @@ public class MemberServiceImpl implements MemberService{
 		return dao.getDeptone(map);
 	}
 
+	@Override
+	public int usingIncrease(Map map) {
+		// TODO Auto-generated method stub
+		return dao.usingIncrease(map);
+	}
+
 
 }

@@ -14,9 +14,14 @@ public class BoardDTO {
 	private String file_addr;
 	private MultipartFile upload;
 	private int hit;
-
-
-
+	private int rownum;
+	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public int getHit() {
 		return hit;
 	}

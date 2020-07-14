@@ -103,6 +103,7 @@ body {
 	padding: 20px;
 	cursor: pointer;
 	}
+#opt-0:checked + label ,
 #opt-1:checked + label ,
 #opt-2:checked +  label ,
 #opt-3:checked +  label ,
@@ -124,7 +125,7 @@ body {
 }
 
 .tasks-wrapper {
-	padding: 20px 0;
+	padding: 0px 0;
 	flex: 1;
 	overflow-y: auto;
 	height: 100%;
@@ -238,21 +239,17 @@ label .label-text:before {
 								<div class="task" style="border: none;">
 									<input class="task-item" name="task-gs" type="checkbox"
 										id="illId${loop.index }">
-									<div class="col-md-2">
-										<h3>증상:</h3>
-									</div>
+		
 									<div class="col-md-10"
-										style="border-right: 1px solid; border-color: #00d9fa">${item.ill_content}</div>
+										style="border-right: 1px solid; border-color: #00d9fa"><h3 style="text-align: center;padding: 8px">증상</h3>${item.ill_content}</div>
 
-									<div class="col-md-2">
-										<h3>원인:</h3>
-									</div>
 									<div class="col-md-10"
-										style="border-right: 1px solid; border-color: #00d9fa">${item.cause}</div>
-									<div class="col-md-2">
-										<h3>예방:</h3>
-									</div>
-									<div class="col-md-10">${item.prevention}</div>
+										style="border-right: 1px solid; border-color: #00d9fa"><h3 style="text-align: center;padding: 8px">원인</h3>${item.cause}</div>
+							
+									<div class="col-md-10"><h3 style="text-align: center;padding: 8px">예방</h3>${item.prevention}</div>
+										<div><button class='btn' type="button" onclick="modal_show()"><img style="width: 1000px"id="imgs${loop.index}" src="https://img.youtube.com/vi/sUmHGSLMQJ0/0.jpg"/></button><h4 style="text-align: center;">예방관련동영상1</h4>
+										<button class='btn' type="button" onclick="modal_show2()"><img style="width: 1000px" id="imgr${loop.index}" src="https://img.youtube.com/vi/sUmHGSLMQJ0/0.jpg"/></button><h4 style="text-align: center;">예방관련동영상2</h4></div>
+								
 								</div>
 
 							</c:forEach>
@@ -262,7 +259,74 @@ label .label-text:before {
 			</div>
 		</div>
 	</div>
+	<!-- 동영상 -->
+	  <div class="modal fade" id="chat-modal" style="left:-500px;top:80px">
+      <div class="modal-dialog">
+         <div class="col-lg-12">
+            <div class="au-card au-card--no-shadow au-card--no-pad m-b-40 au-card--border" style="width: 1000px">
+               <div class="au-card-title"
+                  style="background-image: url('images/bg-title-02.jpg');height: 90px">
+                  <div class="bg-overlay bg-overlay--white" style="background: #5D5D5D;height: 96px"></div>
+                  <h3 style="top:-9px">
+                     <i class="glyphicon glyphicon-facetime-video"></i>동영상
+                  </h3>
+                  <button class="au-btn-plus">
+                     <i class="zmdi zmdi-plus"></i>
+                  </button>
+               </div>
+               <div class="au-inbox-wrap">
+                  <div class="au-chat au-chat--border">
+                     
+                       <iframe
+	                      	id="iframe"
+	                         style="min-height: 60vh;"
+	                         width="101%"
+	                         height="101%"
+	                         src="https://www.youtube.com/embed//A_5aBZLWUfQ"
+	                         allowfullscreen="allowfullscreen">
+	                     
+	                     </iframe>       
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+		  <div class="modal fade" id="youtube" style="left:-500px;top:80px">
+      <div class="modal-dialog">
+         <div class="col-lg-12">
+            <div class="au-card au-card--no-shadow au-card--no-pad m-b-40 au-card--border" style="width: 1000px">
+               <div class="au-card-title"
+                  style="background-image: url('images/bg-title-02.jpg');height: 90px">
+                  <div class="bg-overlay bg-overlay--white" style="background: #5D5D5D;height: 96px"></div>
+                  <h3 style="top:-9px">
+                     <i class="glyphicon glyphicon-facetime-video"></i>동영상
+                  </h3>
+                  <button class="au-btn-plus">
+                     <i class="zmdi zmdi-plus"></i>
+                  </button>
+               </div>
+               <div class="au-inbox-wrap">
+                  <div class="au-chat au-chat--border">
+                     
+                       <iframe
+	                      	id="iframe2"
+	                         style="min-height: 60vh;"
+	                         width="101%"
+	                         height="101%"
+	                         src="https://www.youtube.com/embed//A_5aBZLWUfQ"
+	                         allowfullscreen="allowfullscreen">
+	                     
+	                     </iframe>       
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 	<script type="text/javascript">
+	
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
 			return (a.textContent || a.innerText || "").toUpperCase().indexOf(
@@ -299,12 +363,23 @@ label .label-text:before {
 	});
 </script>
 <script type="text/javascript">
-
+function modal_show() {
+	$('#chat-modal').modal('show');
+}
+function modal_show2() {
+	$('#youtube').modal('show');
+}
 	$(function() {
+		$('#opt-0').trigger("click");
+		if($('#opt-0').is(":checked") == true){
+			 name = $('#opt-0').next().text();
+				src(name,0)
+		}
 		$('.task').hide();
 		$('#illId0').closest("div").show();
 		
 		$(".task-item").change(function() {
+			
 			var txt = $(this).next().text();
 			var disease = $('.task-name');
 			var taskbox = $('.task-box');
@@ -345,51 +420,144 @@ label .label-text:before {
 		$("input[name=nav]").change(function() {
 
 			var idx = $('input[name=nav]').index(this);
-
+			var name=""
 			switch (idx) {
 			case 0:
 				$('.task').hide();
 				$('#illId0').closest("div").show();
+			 name = $('#opt-0').next().text();
+					src(name,0)
 				break;
 			case 1:
 				$('.task').hide();
 				$('#illId1').closest("div").show();
+				 name = $('#opt-1').next().text();
+				 src(name,1)
 				break;
 			case 2:
 				$('.task').hide();
 				$('#illId2').closest("div").show();
+				name = $('#opt-2').next().text();
+				 src(name,2)
 				break;
 			case 3:
 				$('.task').hide();
 				$('#illId3').closest("div").show();
+				 name = $('#opt-3').next().text();
+				 src(name,3)
 				break;
 			case 4:
 				$('.task').hide();
 				$('#illId4').closest("div").show();
+				 name = $('#opt-4').next().text();
+				 src(name,4)
 				break;
 			case 5:
 				$('.task').hide();
 				$('#illId5').closest("div").show();
+				 name = $('#opt-5').next().text();
+				 src(name,5)
 				break;
 			case 6:
 				$('.task').hide();
 				$('#illId6').closest("div").show();
+				 name = $('#opt-6').next().text();
+				 src(name,6)
 				break;
 			case 7:
 				$('.task').hide();
 				$('#illId7').closest("div").show();
+				 name = $('#opt-7').next().text();
+				 src(name,7)
 				break;
 			case 8:
 				$('.task').hide();
 				$('#illId8').closest("div").show();
+				 name = $('#opt-1').next().text();
+				 src(name,1)
 				break;
 			default:
 				$('.task').hide();
 				$('#illId0').closest("div").show();
+				 name = $('#opt-8').next().text();
+				 src(name,8)
 				break;
 			}
 		});
 	});
+	
+	function uriname(name) {
+		var uri=""
+		var url=""
+		switch (name) {
+		case '기흉':
+			uri="https://www.youtube.com/watch?v=A_5aBZLWUfQ"
+			url="https://www.youtube.com/watch?v=mr8Aw3pIdNI"
+			break;
+		case 'A형 간염':
+			uri="https://www.youtube.com/watch?v=CKhzdTN3Au0"
+			url="https://www.youtube.com/watch?v=YeTJ22R7wdA"
+			break;
+		case '암':
+			uri="https://www.youtube.com/watch?v=Ml5z4Ancb_k"
+				url="https://www.youtube.com/watch?v=eOUNmsyo43c"
+				break;
+		case '고혈압':
+			uri="https://www.youtube.com/watch?v=rM9Mfa-bNIA"
+				url="https://www.youtube.com/watch?v=jp3hCquse4Y"
+				break;
+		case '뇌질환':
+			uri="https://www.youtube.com/watch?v=NB1VpZO02nc"
+				url="https://www.youtube.com/watch?v=bvDKuzisrCQ"
+				break;
+		case 'B형 간염':
+			uri="https://www.youtube.com/watch?v=p028hbyy4Ak"
+				url="https://www.youtube.com/watch?v=oYVPvZ3fxTI"
+			break;
+		case '결핵':
+			uri="https://www.youtube.com/watch?v=OxfSKJE9kTY"
+				url="https://www.youtube.com/watch?v=onDwFBbfLNo"
+			break;
+		case '당뇨':
+			uri="https://www.youtube.com/watch?v=9jGaam5NStQ"
+				url="https://www.youtube.com/watch?v=prRuOJMN5UE"
+			break;
+		case '천식':
+			uri="https://www.youtube.com/watch?v=EPn-qz122bg"
+				url="https://www.youtube.com/watch?v=kKTWdC747Rg"
+			break;
+			
+		case '심장질환':
+			uri="https://www.youtube.com/watch?v=0zhrQu47l9o"
+				url="https://www.youtube.com/watch?v=X6iXTMfS0_s"
+			break;
+			
+		default:"폐렴"
+			uri="https://www.youtube.com/watch?v=jlQjyjLXhlM"
+				url="https://www.youtube.com/watch?v=peKczU3T_Oc"
+			break;
+		}
+		var id = youtubename(uri)
+		var id2=youtubename(url)
+		return [id,id2];
+	}
+	function youtubename(uri) {
+		 youtube_uri=uri
+		 console.log(youtube_uri)
+		    index = youtube_uri.indexOf('=')
+		    console.log('1',index)
+		    youtube_uri=youtube_uri.substring(index+1,youtube_uri.lenght);
+		 console.log('2',youtube_uri)
+		  return  youtube_uri
+	}
+	function src(name,i) {
+		console.log('테스트',uriname(name))
+		 $('#imgs'+i).attr('src',"https://img.youtube.com/vi/"+uriname(name)[0]+"/0.jpg");
+		$('#iframe').attr('src',"https://www.youtube.com/embed//"+uriname(name)[0]);
+		 $('#imgr'+i).attr('src',"https://img.youtube.com/vi/"+uriname(name)[1]+"/0.jpg");
+			$('#iframe2').attr('src',"https://www.youtube.com/embed//"+uriname(name)[1]);
+		
+	}
 </script>
 </body>
 </html>

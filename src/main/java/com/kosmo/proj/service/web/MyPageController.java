@@ -58,6 +58,8 @@ public class MyPageController {
 		List<Map<String, String>>deptname=memberDAO.selectdept(map);
 		String dept_name="자주 방문하는 진료과가 없습니다.";
 		String hosp_name="자주 방문하는 병원이 없습니다.";
+		System.out.println(deptname);
+		if(deptname.get(0) !=null) {
 		for(Map data:deptname) {
 			if(!data.get("DEPT_NAME").equals(""))
 			dept_name=(String) data.get("DEPT_NAME");
@@ -65,6 +67,7 @@ public class MyPageController {
 			if(!data.get("HOSP_NAME").equals(""))
 				hosp_name=(String) data.get("HOSP_NAME");
 			System.out.println("확인"+hosp_name);
+		}
 		}
 		model.addAttribute("hosp_name", hosp_name);
 		model.addAttribute("dept_name", dept_name);

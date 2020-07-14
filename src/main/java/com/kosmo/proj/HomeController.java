@@ -12,7 +12,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -57,9 +59,74 @@ public class HomeController {
 		
 		return "index.tiles";
 	}
+	
+	@RequestMapping("/Home/FirstHomePage.hst")
+	public String firstHome(Authentication auth, Model model, Map map)
+	{
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
+		
+		SimpleDateFormat format = new SimpleDateFormat("HH");
+		int time_ = Integer.parseInt(format.format(new Date()));
+		System.out.println("시간: " + time_);
+		
+		if(time_ >= 0 && time_ < 2)
+		{
+			map.put("usingTime", "0_2");
+		}
+		else if(time_ >= 2 && time_ < 4)
+		{
+			map.put("usingTime", "2_4");
+		}
+		else if(time_ >= 4 && time_ < 6)
+		{
+			map.put("usingTime", "4_6");
+		}
+		else if(time_ >= 6 && time_ < 8)
+		{
+			map.put("usingTime", "6_8");
+		}
+		else if(time_ >= 8 && time_ < 10)
+		{
+			map.put("usingTime", "8_10");
+		}
+		else if(time_ >= 10 && time_ <12)
+		{
+			map.put("usingTime", "10_12");
+		}
+		else if(time_ >= 12 && time_ < 14)
+		{
+			map.put("usingTime", "12_14");
+		}
+		else if(time_ >= 14 && time_ < 16)
+		{
+			map.put("usingTime", "14_16");
+		}
+		else if(time_ >= 16 && time_ < 18)
+		{
+			map.put("usingTime", "16_18");
+		}
+		else if(time_ >= 18 && time_ < 20)
+		{
+			map.put("usingTime", "18_20");
+		}
+		else if(time_ >= 20 && time_ < 22)
+		{
+			map.put("usingTime", "20_22");
+		}
+		else if(time_ >= 22 && time_ < 24)
+		{
+			map.put("usingTime", "22_24");
+		}
+		
+		int check = memberService.usingIncrease(map);
+		System.out.println(check);
+		
+		return "index.tiles";
+	}
 
 	@RequestMapping("/Home/ToHomePage.hst")
-	public String toHome(Authentication auth, Model model)
+	public String toHome(Authentication auth, Model model, Map map)
 	{
 		GetUser getUser = new GetUser();
 		getUser.getUser(model, auth);
