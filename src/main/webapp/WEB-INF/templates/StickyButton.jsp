@@ -110,14 +110,15 @@ function receiveMsgFromChild( e ) {
                         </div>
                         </div>
                         <sec:authorize access="hasRole('ROLE_MEM')">
-                        <sec:authentication var="principal" property="principal" />
-                        <iframe
+                        <sec:authentication var="principal" property="principal" /><iframe
 	                      	id="iframe"
-	                        style="min-height: 60vh;"
-	                        width="100%"
-	                        height="90%"
-	                        src="https://ec1436d5c1ed.ngrok.io/?mem_email=${principal.username}">
+	                         style="min-height: 60vh;"
+	                         width="100%"
+	                         height="90%"
+	                         src="https://3c9144b4f594.ngrok.io?mem_email=${principal.username}">
+	                     
 	                     </iframe>
+	                     
 	                 </sec:authorize>
 	                 <sec:authorize access="isAnonymous()">
 	                 	<div class="au-chat__content au-chat__content2 js-scrollbar5">
