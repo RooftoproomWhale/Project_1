@@ -462,7 +462,7 @@ public class AdminDAO implements AdminService {
 	}
 
 	@Override
-	public List<Map> selectImage() {
+	public List<BoardDTO> selectImage() {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectList("selectImg");
 	}
@@ -493,6 +493,132 @@ public class AdminDAO implements AdminService {
 	public int approveAuth_(Map map) {
 		// TODO Auto-generated method stub
 		return sqlMapper.update("updateAuthEnable", map);
+	}
+
+	@Override
+	public int t0_2() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t0_2");
+	}
+
+	@Override
+	public int t2_4() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t2_4");
+	}
+
+	@Override
+	public int t4_6() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t4_6");
+	}
+
+	@Override
+	public int t6_8() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t6_8");
+	}
+
+	@Override
+	public int t8_10() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t8_10");
+	}
+
+	@Override
+	public int t10_12() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t10_12");
+	}
+
+	@Override
+	public int t12_14() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t12_14");
+	}
+
+	@Override
+	public int t14_16() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t14_16");
+	}
+
+	@Override
+	public int t16_18() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t16_18");
+	}
+
+	@Override
+	public int t18_20() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t18_20");
+	}
+
+	@Override
+	public int t20_22() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t20_22");
+	}
+
+	@Override
+	public int t22_24() {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("t22_24");
+	}
+
+	@Override
+	public int deletePM(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deletePM", map);
+	}
+
+	@Override
+	public int deletePres(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deletePres", map);
+	}
+
+	@Override
+	public int deleteHI(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deleteHI", map);
+	}
+
+	@Override
+	public int deleteHist(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deleteHist", map);
+	}
+
+	@Override
+	public int deleteHD(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deleteHD", map);
+	}
+
+	@Override
+	public int updateHos(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.update("updateHos", map);
+	}
+
+	@Override
+	public int deleteReserv(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deleteReserv", map);
+	}
+
+	@Override
+	public int deleteNoti(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deleteNoti", map);
+	}
+
+	@Override
+	public int deleteQna(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("deleteQna", map);
 	}
 
 }

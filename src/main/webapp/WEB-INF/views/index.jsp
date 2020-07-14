@@ -340,7 +340,7 @@ window.onload = function(){
 						<div class="col-md-8 col-md-offset-2 intro-text">
 							<h1> We Are Home'spital ${currAptCount}</h1>
 							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
-							<a id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a>
+<!-- 							<a id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a> -->
 <%-- 							<a href="<c:url value='/Android/WebTest.hst'/>" id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a> --%>
 						</div>
 					</div>
@@ -360,22 +360,22 @@ window.onload = function(){
 					<div class="img-thumbnail" data-u="slides"
 						style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 						<div data-p="680">
-							<a id="noti1" href="#">
+							<a id="noti1" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[0].noti_no }'/>">
 								<img id="img1" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti2" href="#">
+							<a id="noti2" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[1].noti_no }'/>">
 								<img id="img2" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti3" href="#">
+							<a id="noti3" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[2].noti_no }'/>">
 								<img id="img3" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti4" href="#">
+							<a id="noti4" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[3].noti_no }'/>">
 								<img id="img4" data-u="image" src='<c:url value="/images/no_noti.png"/>'" />
 							</a>
 						</div>
@@ -546,14 +546,20 @@ window.onload = function(){
 			$.ajax({
 				url:"<c:url value='/Admin/NoticeImages.hst'/>",
 				type:'post',
+				dataType:"json",
 				success:function(data){
-					console.log(data);
-					var noti = JSON.parse(data);
-					$('#img1').attr('src',noti[0]["FILE_ADDR"]);
+					console.log("noti: " + data);
+// 					var noti = JSON.parse(data);
+					$('#img1').attr('src', data[0].file_addr);
 					console.log($('#img1').attr('src'));
-					$('#img2').attr('src',noti[1]["FILE_ADDR"]);
-					$('#img3').attr('src',noti[2]["FILE_ADDR"]);
-					$('#img4').attr('src',noti[3]["FILE_ADDR"]);
+					$('#img2').attr('src', data[1].file_addr);
+					$('#img3').attr('src', data[2].file_addr);
+					$('#img4').attr('src', data[3].file_addr);
+					
+					$('#noti1').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[0].noti_no + " '/>");
+					$('#noti2').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[1].noti_no + " '/>");
+					$('#noti3').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[2].noti_no + " '/>");
+					$('#noti4').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[3].noti_no + " '/>");
 					//$('.img-thumbnail').html(comments);
 				},
 				error:function(e){console.log('에러:',e)}

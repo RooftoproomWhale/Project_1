@@ -114,6 +114,34 @@ public class AdminController {
 		model.addAttribute("over40under50", over40under50);
 		model.addAttribute("over50under60", over50under60);
 		model.addAttribute("over60", over60);
+		
+		//UsingTime
+		int t0_2 = adminService.t0_2();
+		int t2_4 = adminService.t2_4();
+		int t4_6 = adminService.t4_6();
+		int t6_8 = adminService.t6_8();
+		int t8_10 = adminService.t8_10();
+		int t10_12 = adminService.t10_12();
+		int t12_14 = adminService.t12_14();
+		int t14_16 = adminService.t14_16();
+		int t16_18 = adminService.t16_18();
+		int t18_20 = adminService.t18_20();
+		int t20_22 = adminService.t20_22();
+		int t22_24 = adminService.t22_24();
+		
+		model.addAttribute("t0_2", t0_2);
+		model.addAttribute("t2_4", t2_4);
+		model.addAttribute("t4_6", t4_6);
+		model.addAttribute("t6_8", t6_8);
+		model.addAttribute("t8_10", t8_10);
+		model.addAttribute("t10_12", t10_12);
+		model.addAttribute("t12_14", t12_14);
+		model.addAttribute("t14_16", t14_16);
+		model.addAttribute("t16_18", t16_18);
+		model.addAttribute("t18_20", t18_20);
+		model.addAttribute("t20_22", t20_22);
+		model.addAttribute("t22_24", t22_24);
+		
 
 		return "Ad_Index.ad_tiles";
 	}
@@ -194,9 +222,26 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "UserDelete.hst")
 	public String userDelete(@RequestParam Map map) {
-		int delete = adminService.delete(map);
-		System.out.println(delete);
-		String deletestr = Integer.toString(delete);
+		int deletePM = adminService.deletePM(map);
+		System.out.println("deletePM: " + deletePM);
+		int deletePres = adminService.deletePres(map);
+		System.out.println("deletePres: " + deletePres);
+		int deleteHI = adminService.deleteHI(map);
+		System.out.println("deleteHI: " + deleteHI);
+		int deleteHist = adminService.deleteHist(map);
+		System.out.println("deleteHist: " + deleteHist);
+		int updateHos = adminService.updateHos(map);
+		System.out.println("updateHos: " + updateHos);
+		int deleteReserv = adminService.deleteReserv(map);
+		System.out.println("deleteReserv: " + deleteReserv);
+		int deleteNoti = adminService.deleteNoti(map);
+		System.out.println("deleteNoti: " + deleteNoti);
+		int deleteQna = adminService.deleteQna(map);
+		System.out.println("deleteQna: " + deleteQna);
+		int deleteMem = adminService.delete(map);
+		System.out.println("deleteMem: " + deleteMem);
+		
+		String deletestr = Integer.toString(deleteMem);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("del", deletestr);
 
@@ -526,6 +571,11 @@ public class AdminController {
 	public String ageChart() {
 		return "Chart.ad_tiles";
 	}
+	
+	@RequestMapping("UsingTime.hst")
+	public String usingTimeChart() {
+		return "Chart.ad_tiles";
+	}
 
 	@RequestMapping("Corona_Map.hst")
 	public String toMap(@RequestParam Map map,Model model) {
@@ -736,11 +786,27 @@ public class AdminController {
 
 	@RequestMapping(value="NoticeImages.hst",produces = "text/html; charset=UTF-8")
 	@ResponseBody
-	public String noticeImg() {
-		List<Map> list = adminService.selectImage();
+	public String noticeImg(Model model) {
+	
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = null;
+		List<BoardDTO> list = adminService.selectImage();
 		System.out.println(list);
-		System.out.println(JSONArray.toJSONString(list));
-		return JSONArray.toJSONString(list);
+		for(BoardDTO val:list)
+		{
+			System.out.println("파주: " + val.getFile_addr());
+			System.out.println("파넘: " + val.getNoti_no());
+		}
+		try {
+			jsonStr = mapper.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+//		System.out.println(JSONArray.toJSONString(list));
+		model.addAttribute("list", list);
+		
+		return jsonStr.toString();
 	}
 
 }

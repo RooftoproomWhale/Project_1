@@ -98,7 +98,7 @@ img {
 									<tr id="notice" style="text-align: center">
 										<td>${item.noti_no }</td>
 										<td style="text-align: left;">
-										<a href='<c:url value="/Admin/NoticeDetail.hst?no=${item.noti_no}"/>'>${item.title }</td>
+										<a href='<c:url value="/Admin/NoticeDetail.hst?no=${item.noti_no}"/>'>${item.title }</a></td>
 										<td>${item.mem_email }</td>
 										<td>${item.postdate }</td>
 										<td>${item.hit }</td>
