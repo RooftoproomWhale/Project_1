@@ -182,18 +182,18 @@ $(".table-data-feature .item:last-child").on('click', function(){
                      <div class="col-md-12">
                         <!-- DATA TABLE -->
                         <h3 class="title-5 m-b-35">Authorization</h3>
-                        <!--                                 <div class="table-data__tool"> -->
-                        <!--                                     <div class="table-data__tool-left"> -->
-                        <!--                                         <div class="rs-select2--light rs-select2--sm"> -->
-                        <!--                                             <select class="js-select2" name="time"> -->
-                        <!--                                                 <option selected="selected">All</option> -->
-                        <!--                                                 <option value="">Authorized</option> -->
-                        <!--                                                 <option value="">Denied</option> -->
-                        <!--                                             </select> -->
-                        <!--                                             <div class="dropDownSelect2"></div> -->
-                        <!--                                         </div> -->
-                        <!--                                     </div> -->
-                        <!--                                 </div> -->
+                           <div class="table-data__tool">
+                               <div class="table-data__tool-left">
+                                   <div class="rs-select2--light rs-select2--sm">
+                                       <select class="js-select2" name="time">
+                                           <option selected="selected">All</option>
+                                           <option value="">Authorized</option>
+                                           <option value="">Denied</option>
+                                       </select>
+                                       <div class="dropDownSelect2"></div>
+                                   </div>
+                               </div>
+                           </div>
                         <div class="table-responsive table-responsive-data2">
                            <table class="table table-data2">
                               <thead>
@@ -280,7 +280,6 @@ $(".table-data-feature .item:last-child").on('click', function(){
          </div>
       </div>
    </div>
-=======
          
 			<!-- MAIN CONTENT-->
 			<div class="main-content">

@@ -128,6 +128,7 @@ $(function() {
 	    success:function(data){
 	       console.log("연결성공", typeof(data));
 	       try {
+
 //             var janMemCount = $('#janMemCount').val();
 //             var febMemCount = $('#febMemCount').val();
 //             var marMemCount = $('#marMemCount').val();
@@ -155,6 +156,7 @@ $(function() {
             var mayAptCount = 52;
             var junAptCount = 36;
             var julAptCount = $('#julAptCount').val();
+            
 	    	    // Recent Report 2
 	    	    const bd_brandProduct2 = 'rgba(0,181,233,0.9)'
 	    	    const bd_brandService2 = 'rgba(0,173,95,0.9)'
@@ -314,6 +316,104 @@ $(function() {
 	    	  } catch (error) {
 	    	    console.log(error);
 	    	  }
+	    }
+	});
+	
+	//USING TIME
+	$.ajax({
+	    url:"<c:url value='/Admin/UsingTime.hst'/>",
+	    type:'get',
+	    datatype:'html',
+	    data:{},
+	    beforeSend: function () {
+	       console.log("beforeSend");
+	    },
+	    complete: function () {
+	       console.log("complete");
+	    },
+	    success:function(data){
+	       console.log("연결성공", typeof(data));
+				try {
+				    //line chart
+				    var t0_2 = $('#t0_2').val();
+				    var t2_4 = $('#t2_4').val();
+				    var t4_6 = $('#t4_6').val();
+				    var t6_8 = $('#t6_8').val();
+				    var t8_10 = $('#t8_10').val();
+				    var t10_12 = $('#t10_12').val();
+				    var t12_14 = $('#t12_14').val();
+				    var t14_16 = $('#t14_16').val();
+				    var t16_18 = $('#t16_18').val();
+				    var t18_20 = $('#t18_20').val();
+				    var t20_22 = $('#t20_22').val();
+				    var t22_24 = $('#t22_24').val();
+				    
+				    var ctx = document.getElementById("usingTimeChart");
+				    if (ctx) {
+				      ctx.height = 150;
+				      var myChart = new Chart(ctx, {
+				        type: 'line',
+				        data: {
+				          labels: ["0~2", "2~4", "4~6", "6~8", "8~10", "10~12", "12~14", "14~16", "16~18", "18~20", "20~22", "22~24"],
+				          defaultFontFamily: "Poppins",
+				          datasets: [
+				        	  {
+					              label: "USER COUNT",
+					              borderColor: "rgba(0, 123, 255, 0.9)",
+					              borderWidth: "1",
+					              backgroundColor: "rgba(0, 123, 255, 0.5)",
+					              pointHighlightStroke: "rgba(26,179,148,1)",
+					              data: [t0_2, t2_4, t4_6, t6_8, t8_10, t10_12, t12_14, t14_16, t16_18, t18_20, t20_22, t22_24]
+					            },
+// 				        	  {
+// 					              label: "This Month",
+// 					              borderColor: "rgba(0,0,0,.09)",
+// 					              borderWidth: "1",
+// 					              backgroundColor: "rgba(0,0,0,.07)",
+// 					              data: [7, 5, 4, 12, 15, 20, 22, 30, 25, 35, 40, 23]
+// 					            },
+				          ]
+				        },
+				        options: {
+				          legend: {
+				            position: 'top',
+				            labels: {
+				              fontFamily: 'Poppins'
+				            }
+			
+				          },
+				          responsive: true,
+				          tooltips: {
+				            mode: 'index',
+				            intersect: false
+				          },
+				          hover: {
+				            mode: 'nearest',
+				            intersect: true
+				          },
+				          scales: {
+				            xAxes: [{
+				              ticks: {
+				                fontFamily: "Poppins"
+			
+				              }
+				            }],
+				            yAxes: [{
+				              ticks: {
+				                beginAtZero: true,
+				                fontFamily: "Poppins"
+				              }
+				            }]
+				          }
+			
+				        }
+				      });
+				    }
+			
+			
+				  } catch (error) {
+				    console.log(error);
+				  }
 	    }
 	});
 });
@@ -493,7 +593,19 @@ $(function() {
                             	<div class="au-card m-b-30">
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-40">Using Times</h3>
-                                        <canvas id="lineChart"></canvas>
+                                        <input type="hidden" value="${t0_2}" id="t0_2"/>
+                                        <input type="hidden" value="${t2_4}" id="t2_4"/>
+                                        <input type="hidden" value="${t4_6}" id="t4_6"/>
+                                        <input type="hidden" value="${t6_8}" id="t6_8"/>
+                                        <input type="hidden" value="${t8_10}" id="t8_10"/>
+                                        <input type="hidden" value="${t10_12}" id="t10_12"/>
+                                        <input type="hidden" value="${t12_14}" id="t12_14"/>
+                                        <input type="hidden" value="${t14_16}" id="t14_16"/>
+                                        <input type="hidden" value="${t16_18}" id="t16_18"/>
+                                        <input type="hidden" value="${t18_20}" id="t18_20"/>
+                                        <input type="hidden" value="${t20_22}" id="t20_22"/>
+                                        <input type="hidden" value="${t22_24}" id="t22_24"/>
+                                        <canvas id="usingTimeChart"></canvas>
                                     </div>
                                 </div>
                             </div>

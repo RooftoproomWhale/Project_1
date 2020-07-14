@@ -33,6 +33,8 @@ public interface MemberService {
    HistoryDTO getNo(Map map);
    int illInsert(Map map);
    
+   int usingIncrease(Map map);
+   
    //안드로이드
    ReservationDTO recentApt(Map map);
    PrescriptionDTO recentPres(Map map);

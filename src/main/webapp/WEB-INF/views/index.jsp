@@ -372,17 +372,17 @@ window.onload = function(){
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti2" href="#">
+							<a id="noti2" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[1].noti_no }'/>">
 								<img id="img2" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti3" href="#">
+							<a id="noti3" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[2].noti_no }'/>">
 								<img id="img3" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti4" href="#">
+							<a id="noti4" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[3].noti_no }'/>">
 								<img id="img4" data-u="image" src='<c:url value="/images/no_noti.png"/>'" />
 							</a>
 						</div>
@@ -424,7 +424,7 @@ window.onload = function(){
 			<!-- Issue Section -->
 			<div class="col-md-5 col-md-offset-1 col-sm-12" style="">
 				<div class="row" style="margin-bottom: 14px">
-					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보</span>
+					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보<spam id=date_co style="font-size:0.7em;color:#5D5D5D"></spam></span>
 				</div>
 				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px;"></div>
 			</div>
