@@ -480,7 +480,6 @@ window.onload = function(){
 						<p>복용 알림 서비스 및 해당 병원 예약 서비스</p>
 					</div>
 				</div>
-
 				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Covid/View.hst'/>'">
 
 					<i class="fa fa-pie-chart"></i>
