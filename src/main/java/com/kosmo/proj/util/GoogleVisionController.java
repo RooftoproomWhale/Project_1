@@ -83,10 +83,11 @@ public class GoogleVisionController {
 		List<AnnotateImageRequest> requests = new ArrayList<>();
 		String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
 		String presDate = "";
-		StringBuffer medi_name = new StringBuffer();
+		//StringBuffer medi_name = new StringBuffer();
 		String duration = "";
 		String hospital = "";
 		String count = "";
+		String medi_name="";
 		//new FileInputStream(fileName)
 		ByteString imgBytes = ByteString.readFrom(file.getInputStream());
 		Image img = Image.newBuilder().setContent(imgBytes).build();
@@ -143,22 +144,22 @@ public class GoogleVisionController {
 								/*의약품명1*/
 								if(min_x>=240 && max_x<=440 && min_y>=145 && max_y<=170) {
 									for (Symbol symbol: word.getSymbolsList()) {
-											medi1 = medi1 + symbol.getText();
+										medi1 = medi1 + symbol.getText();
 									}
-									
 								}
+								/*의약품명3*/
 								if(min_x>=240 && max_x<=440 && min_y>=275 && max_y<=300) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi3 = medi3 + symbol.getText();
 									}
-									
 								}
+								/*의약품명5*/
 								if(min_x>=240 && max_x<=440 && min_y>=405 && max_y<=430) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi5 = medi5 + symbol.getText();
 									}
-									
 								}
+								/*의약품명7*/
 								if(min_x>=240 && max_x<=440 && min_y>=535 && max_y<=560) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi7 = medi7 + symbol.getText();
@@ -168,28 +169,26 @@ public class GoogleVisionController {
 								if(min_x>=580 && max_x<=780 && min_y>=145 && max_y<=170) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi2 = medi2 + symbol.getText();
-										
 									}
-									
 								}
+								/*의약품명4*/
 								if(min_x>=580 && max_x<=780 && min_y>=275 && max_y<=300) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi4 = medi4 + symbol.getText();
 										
 									}
-									
 								}
+								/*의약품명6*/
 								if(min_x>=580 && max_x<=780 && min_y>=405 && max_y<=430) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi6 = medi6 + symbol.getText();
 									}
-									
 								}
+								/*의약품명8*/
 								if(min_x>=580 && max_x<=780 && min_y>=535 && max_y<=560) {
 									for (Symbol symbol: word.getSymbolsList()) {
 											medi8 = medi8+ symbol.getText();
 									}
-									
 								}
 							}
 						}
@@ -197,11 +196,36 @@ public class GoogleVisionController {
 				}
 			}
 		}
+		if(medi1!="") {
+			medi_name+=medi1;
+		}
+		if(medi2!="") {
+			medi_name+=","+medi2;
+		}
+		if(medi3!="") {
+			medi_name+=","+medi3;
+		}
+		if(medi4!="") {
+			medi_name+=","+medi4;
+		}
+		if(medi5!="") {
+			medi_name+=","+medi5;
+		}
+		if(medi6!="") {
+			medi_name+=","+medi6;
+		}
+		if(medi7!="") {
+			medi_name+=","+medi7;
+		}
+		if(medi8!="") {
+			medi_name+=","+medi8;
+		}
 		UserDetails userDetails = (UserDetails)auth.getPrincipal();
 		String mem_email = userDetails.getUsername();
-		String totalMedi = String.format("%s,%s,%s,%s,%s,%s,%s,%s", medi1,medi2,medi3,medi4,medi5,medi6,medi7,medi8);
-		medi_name.append(totalMedi);
-		map.put("medi_name", medi_name.toString());
+		//String totalMedi = String.format("%s,%s,%s,%s,%s,%s,%s,%s", medi1,medi2,medi3,medi4,medi5,medi6,medi7,medi8);
+		//medi_name.append(totalMedi);
+		System.out.println(medi_name);
+		map.put("medi_name", medi_name);
 		map.put("mem_email", mem_email);
 		Date pres_date = Date.valueOf(presDate);
 		map.put("pres_date", pres_date);
