@@ -566,7 +566,6 @@ window.onload = function(){
 					$('#noti2').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[1].noti_no + " '/>");
 					$('#noti3').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[2].noti_no + " '/>");
 					$('#noti4').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[3].noti_no + " '/>");
-					//$('.img-thumbnail').html(comments);
 				},
 				error:function(e){console.log('에러:',e)}
 			})
