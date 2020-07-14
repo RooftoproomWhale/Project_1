@@ -1,12 +1,19 @@
 package com.kosmo.proj;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
+
+import com.kosmo.proj.service.MemberDTO;
+import com.kosmo.proj.service.impl.MemberServiceImpl;
 
 public class GetUser {
 

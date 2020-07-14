@@ -23,21 +23,33 @@ $.ajax({
 //        console.log(data);
        console.log("연결성공", typeof(data));
        try {
-    	   	var janMemCount = $('#janMemCount').val();
-    	   	var febMemCount = $('#febMemCount').val();
-    	   	var marMemCount = $('#marMemCount').val();
-    	   	var aprMemCount = $('#aprMemCount').val();
-    	   	var mayMemCount = $('#mayMemCount').val();
-    	   	var junMemCount = $('#junMemCount').val();
-    	   	var julMemCount = $('#julMemCount').val();
-    	   	
-    	   	var janAptCount = $('#janAptCount').val();
-    	   	var febAptCount = $('#febAptCount').val();
-    	   	var marAptCount = $('#marAptCount').val();
-    	   	var aprAptCount = $('#aprAptCount').val();
-    	   	var mayAptCount = $('#mayAptCount').val();
-    	   	var junAptCount = $('#junAptCount').val();
-    	   	var julAptCount = $('#julAptCount').val();
+//         var janMemCount = $('#janMemCount').val();
+//         var febMemCount = $('#febMemCount').val();
+//         var marMemCount = $('#marMemCount').val();
+//         var aprMemCount = $('#aprMemCount').val();
+//         var mayMemCount = $('#mayMemCount').val();
+//         var junMemCount = $('#junMemCount').val();
+        var janMemCount = 12;
+        var febMemCount = 17;
+        var marMemCount = 25;
+        var aprMemCount = 40;
+        var mayMemCount = 33;
+        var junMemCount = 38;
+        var julMemCount = $('#julMemCount').val();
+        
+//         var janAptCount = $('#janAptCount').val();
+//         var febAptCount = $('#febAptCount').val();
+//         var marAptCount = $('#marAptCount').val();
+//         var aprAptCount = $('#aprAptCount').val();
+//         var mayAptCount = $('#mayAptCount').val();
+//         var junAptCount = $('#junAptCount').val();
+        var janAptCount = 8;
+        var febAptCount = 16;
+        var marAptCount = 28;
+        var aprAptCount = 44;
+        var mayAptCount = 52;
+        var junAptCount = 36;
+        var julAptCount = $('#julAptCount').val();
     	    // Recent Report 2
     	    const bd_brandProduct2 = 'rgba(0,181,233,0.9)'
     	    const bd_brandService2 = 'rgba(0,173,95,0.9)'

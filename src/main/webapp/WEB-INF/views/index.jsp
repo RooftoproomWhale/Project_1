@@ -23,6 +23,9 @@
 #footer{
 	top:2250px;
 }
+header .intro-text {
+    padding-top: 287px;
+}
 </style>
 <script>
 window.onload = function(){
@@ -530,13 +533,13 @@ window.onload = function(){
 					type:'get',
 					dataType:"json",
 					success:function(data){
-						var news = "<table class='table' id='news' style='width:80%; border: 2px solid #008ae6;border-radius:7px 7px 7px 7px;'>";
-						if(data.length==0){
+						var news = "<table class='table' style='width:80%;border: 2px solid rgba(0,0,0,.12);'>";
+			if(data.length==0){
 							news+="<li>뉴스 데이터가 없습니다</li>";
 						} 
 						$.each(data, function(index, element) {
 							console.log(element)
-							news+="<tr><td><a href='"+element.href+"' target=_blank>"+element.title+"</a><td></tr>";
+							news+="<tr><td style='border-top:none;border-bottom:1px solid #ddd'><a href='"+element.href+"' target=_blank>"+element.title+"</a><td></tr>";
 						});
 						news+="</table>";
 						$('#news').html(news);

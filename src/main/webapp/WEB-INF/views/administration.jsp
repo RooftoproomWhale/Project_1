@@ -55,7 +55,7 @@ $(function(){
 				comments+='<div class="panel-heading" role="tab" id="heading'+i+'">';
 				comments+='<h4 class="panel-title">';
 				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
-				comments+=element['PRES_DATE']+"</a></h4></div>";
+				comments+=element['HOS_NAME']+"-"+element['PRES_DATE']+"</a></h4></div>";
 				comments+='<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
 				comments+='<div style="margin:0;padding:0" class="panel-body"><table class="table-striped">';
 				comments+='<thead><th><h3>약품명</h3></th><th><h3>복용일수</h3></th><th><h3>일일 복용 횟수</h3></th></thead>';

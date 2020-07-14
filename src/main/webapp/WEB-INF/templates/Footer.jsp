@@ -4,10 +4,10 @@
 <style>
  	#footer 
  	{ 
-		position: absolute; 
+		position: inherit; 
 		width:100%; 
 		left:0px; 
- 		bottom:0px;  
+ 		bottom: auto; 
  		background-color:#474747;
  		height: 150px
  		
