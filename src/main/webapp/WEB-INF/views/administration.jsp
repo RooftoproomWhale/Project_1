@@ -40,10 +40,9 @@ $(function(){
 		});			
 	};
 	
-	function showList_(data){		
-		console.log('처방전 목록:',data);
-		console.log(data.isnull);
+	function showList_(data){	
 		var comments="";
+		$('#name').html(JSON.parse(data)[0]['MEM_NAME']+'님');
 		if(data=='[]'){
 			comments+="<img style='width:300px;height:auto' src='"+'<c:url value="/images/medicine/notPres.png"/>'+"'/>";
 			comments+="<h3>등록된 처방전이 없어요!</h3>";
@@ -51,13 +50,21 @@ $(function(){
 		else{
 			
 			$.each(JSON.parse(data),function(i,element){
+				var count = Number(element['COUNT']);
+				var alarmTime='<form>';
+				for(k=1;k<=count;k++){
+					alarmTime +='<div class="form-group"><input type="time" pattern="([1]?[0-9]|2[0-3]):[0-5][0-9]"></div>';
+				}
+				alarmTime+='</form>';
+				$('#alarmBody').html(alarmTime);
 				comments+="<div class='panel panel-default'>";
-				comments+='<div class="panel-heading" role="tab" id="heading'+i+'">';
+				comments+='<div class="panel-heading col-md-11" role="tab" id="heading'+i+'">';
 				comments+='<h4 class="panel-title">';
 				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
 				comments+=element['HOS_NAME']+"-"+element['PRES_DATE']+"</a></h4></div>";
-				comments+='<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
-				comments+='<div style="margin:0;padding:0" class="panel-body"><table class="table-striped">';
+				comments+='<div data-toggle="modal" data-target="#alarmModal" ><a style="text-align:left;" class="btn col-md-1"><img alt="알람설정" src="../images/alarm.png"></a></div>';
+				comments+='<div style="padding:0 5px 0 5px;" id="collapse'+i+'" class="panel-collapse collapse col-md-11" role="tabpanel">';
+				comments+='<div style="padding:0" class="panel-body"><table class="table-striped">';
 				comments+='<thead><th><h3>약품명</h3></th><th><h3>복용일수</h3></th><th><h3>일일 복용 횟수</h3></th></thead>';
 				$.each(element['MEDI_NAME'].split(','),function(k,val){
 					if(val!=""){
@@ -74,9 +81,10 @@ $(function(){
 			});
 		}
 		$('#accordion').html(comments);
-		
 	};
+	
 });
+
 </script>
 <style>
 .upload-box {
@@ -578,8 +586,7 @@ body {
 			<div class="row">
 				<div class=" col-sm-12" style="padding-left: 15px;">
 					<div class="alert alert-warning alert-dismissible mt-3" role="alert">
-						복약 순응도란 처방받은 약을 환자가 전문 의료인의 지시에 따라 정확하게 복용. 복약
-						순응도가 높을수록 치료효과가 높아진다.
+						<strong id="name"></strong>의 복약목록입니다.
 					</div>
 					<br />
 					<div class="button-container">
@@ -664,20 +671,25 @@ body {
 </div>
 -->
 
+<div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><img src='<c:url value="/images/alarm.png"/>'>복용 알람 설정</h4>
+      </div>
+      <div id="alarmBody" class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">알람설정</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
 
-<script>
-	(function($){
-		$.ajax({
-			
-		})
-	})
-	
-	
-	
-
-
-</script>
 <script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {

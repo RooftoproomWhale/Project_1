@@ -99,6 +99,10 @@ WHERE rownum=1)hosp_name from reservation WHERE rownum=1
    	<insert id="presInsert" parameterType="java.util.Map">
       	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},SYSDATE,#{duration},#{count},#{medi_name},#{hos_name})
    	</insert>
+   	<!-- 처장전 리스트 -->
+	<select id="presSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT m.mem_name,p.* FROM prescription p JOIN member m ON p.mem_email=m.mem_email WHERE p.mem_email = #{mem_email}
+	</select>
 
 	<!-- 회원가입 -->
 	<insert id="signInsert" parameterType="java.util.Map">

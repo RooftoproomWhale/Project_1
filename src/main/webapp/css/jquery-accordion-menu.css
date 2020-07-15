@@ -289,7 +289,7 @@
 
 .black.jquery-accordion-menu ul ul.submenu li:hover>a {
 	border-left-color: #222
-=======
+
 .jquery-accordion-menu,.jquery-accordion-menu * {
 	font-family: 'Open Sans',sans-serif;
 	box-sizing: border-box;
@@ -581,5 +581,5 @@
 
 .black.jquery-accordion-menu ul ul.submenu li:hover>a {
 	border-left-color: #222
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
+
 }

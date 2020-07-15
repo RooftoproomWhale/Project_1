@@ -74,21 +74,40 @@ public class GoogleVisionController {
 
 	@RequestMapping("/mapping/mapping.hst")
 	public String vision(MultipartHttpServletRequest req,Authentication auth,Map map) throws IOException {
-		//MultipartFile로 직접 받기MultipartHttpServletRequest req
+
 		MultipartFile file = req.getFile("filename");
-		//fileName = "C://Users//kosmo_12//Desktop//about.jpg"; 
+
+		map = visionAPI(file, map);
+		UserDetails userDetails = (UserDetails)auth.getPrincipal();
+		String mem_email = userDetails.getUsername();
+		//String totalMedi = String.format("%s,%s,%s,%s,%s,%s,%s,%s", medi1,medi2,medi3,medi4,medi5,medi6,medi7,medi8);
+		//medi_name.append(totalMedi);
+		map.put("mem_email", mem_email);
+		
+		service.insertPre(map);
+		
+		return "administration.my_tiles";
+	}
+	
+	public Map visionAPI(MultipartFile file,Map map) throws IOException {
+		
+		/*각 의약품명*/
+		String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
+		/*전체 의약품명*/
+		String medi_name="";
+		/*처방날짜*/
+		String presDate = "";
+		/*복용일수*/
+		String duration = "";
+		/*처방병원*/
+		String hospital = "";
+		/*일일 복용 횟수*/
+		String count = "";
+		
 		BufferedImage bi = ImageIO.read(file.getInputStream());
 		int height = bi.getHeight();
 		int width = bi.getWidth();
 		List<AnnotateImageRequest> requests = new ArrayList<>();
-		String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
-		String presDate = "";
-		//StringBuffer medi_name = new StringBuffer();
-		String duration = "";
-		String hospital = "";
-		String count = "";
-		String medi_name="";
-		//new FileInputStream(fileName)
 		ByteString imgBytes = ByteString.readFrom(file.getInputStream());
 		Image img = Image.newBuilder().setContent(imgBytes).build();
 		Feature feat = Feature.newBuilder().setType(Type.DOCUMENT_TEXT_DETECTION).build();
@@ -100,7 +119,7 @@ public class GoogleVisionController {
 			for (AnnotateImageResponse res : responses) {
 				if (res.hasError()) {
 					System.out.printf("Error: %s\n", res.getError().getMessage());
-					return "";
+					return null;
 				}
 				TextAnnotation annotation = res.getFullTextAnnotation();
 				for (Page page: annotation.getPagesList()) {
@@ -128,14 +147,14 @@ public class GoogleVisionController {
 									}
 								}
 								/*복용기간*/
-								if(min_x>=120 && max_x<=158 && min_y>=110 && max_y<=130) {
+								if(min_x>=(width*0.125) && max_x<=(width*0.165) && min_y>=(height*0.152) && max_y<=(height*0.18)) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										duration = duration + symbol.getText();
 									}
 								}
 								/*진료기관*/
-								if(min_x>=320 && max_x<=465 && min_y>=125 && max_y<=155) {
+								if(min_x>=(width*0.33) && max_x<=(width*0.48) && min_y>=(height*0.173) && max_y<=(height*0.215)) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										hospital = hospital + symbol.getText();
@@ -220,22 +239,14 @@ public class GoogleVisionController {
 		if(medi8!="") {
 			medi_name+=","+medi8;
 		}
-		UserDetails userDetails = (UserDetails)auth.getPrincipal();
-		String mem_email = userDetails.getUsername();
-		//String totalMedi = String.format("%s,%s,%s,%s,%s,%s,%s,%s", medi1,medi2,medi3,medi4,medi5,medi6,medi7,medi8);
-		//medi_name.append(totalMedi);
-		System.out.println(medi_name);
 		map.put("medi_name", medi_name);
-		map.put("mem_email", mem_email);
 		Date pres_date = Date.valueOf(presDate);
 		map.put("pres_date", pres_date);
 		map.put("duration",duration);
 		map.put("hos_name",hospital);
 		map.put("count",count);
 		
-		service.insertPre(map);
-		
-		return "administration.my_tiles";
+		return map;
 	}
 	
 	
