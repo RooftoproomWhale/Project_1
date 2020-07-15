@@ -88,7 +88,7 @@ $(function() {
 			
 			noti.onclick = function(event) {
 				console.log('noti click');
-				window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+				window.location.href = "<c:url value='/Admin/HosAuth.hst'/>";
 			};
 		}
 	
