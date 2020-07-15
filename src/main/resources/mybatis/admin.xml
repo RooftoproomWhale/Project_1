@@ -24,6 +24,12 @@
    <select id="countRecordHosAuth" resultType="int">
       SELECT COUNT(*) FROM HOSPITAL WHERE AUTH IS NOT NULL
    </select>
+   <select id="countRecordHosAuthApp" resultType="int">
+      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH = '제휴승인됨'
+   </select>
+   <select id="countRecordHosAuthWait" resultType="int">
+      SELECT COUNT(*) FROM HOSPITAL WHERE AUTH = '승인대기중'
+   </select>
    <select id="countRecordAccount" resultType="int">
       SELECT COUNT(*) FROM MEMBER
    </select>
@@ -288,6 +294,26 @@
 			SELECT ROWNUM RN, A.* 
 				FROM (
 						SELECT * FROM HOSPITAL WHERE AUTH IS NOT NULL ORDER BY AUTH_DATE DESC
+						) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	<select id="selectAuthListApp" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * FROM HOSPITAL WHERE AUTH = '제휴승인됨' ORDER BY AUTH_DATE DESC
+						) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	<select id="selectAuthListWait" parameterType="java.util.Map" resultType="HospitalDTO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * FROM HOSPITAL WHERE AUTH = '승인대기중' ORDER BY AUTH_DATE DESC
 						) A
 				)
 		WHERE RN BETWEEN #{start} AND #{end}

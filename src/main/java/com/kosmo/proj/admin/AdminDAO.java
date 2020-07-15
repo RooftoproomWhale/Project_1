@@ -621,4 +621,28 @@ public class AdminDAO implements AdminService {
 		return sqlMapper.delete("deleteQna", map);
 	}
 
+	@Override
+	public List<HospitalDTO> selectList_Auth_App(Paging vo) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectAuthListApp", vo);
+	}
+
+	@Override
+	public List<HospitalDTO> selectList_Auth_Wait(Paging vo) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("selectAuthListWait", vo);
+	}
+
+	@Override
+	public int getTotalRecordHosAuthApp(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("count", map);
+	}
+
+	@Override
+	public int getTotalRecordHosAuthWait(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("", map);
+	}
+
 }

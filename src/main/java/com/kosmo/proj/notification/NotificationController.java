@@ -159,12 +159,7 @@ public class NotificationController {
 	@RequestMapping("/Noti/androidFCM.hst")
 	public int androidFCM(@RequestParam Map map, Model model, Authentication auth)
 	{
-//		UserDetails userDetails = (UserDetails)auth.getPrincipal();
-//		Collection authorities = userDetails.getAuthorities();
-//		String user = userDetails.getUsername();
-//		map.put("user", user);	
-		
-		System.out.println("안드로이드 FCM In");
+
 		String tokenId="dlnZZSKAT20:APA91bHfEEG_DUZmG52zoKHXhIOkHbYAHSD2o1PLnVt6RbAuutkGuNlci5M07vVXozVPdtatGTsTqovYIJUDN5x29uTFLczHIVSgC1eT7A_cKdAUfDzjFvSgw3dgN9Uix8_oCFks449E";
 		String title="복약 알림입니다";
 		String content = "지금 복용해야할 약이 있습니다";

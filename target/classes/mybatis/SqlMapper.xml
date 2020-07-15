@@ -105,6 +105,13 @@ WHERE rownum=1)hosp_name from reservation WHERE rownum=1
    	<insert id="presInsert" parameterType="java.util.Map">
       	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},SYSDATE,#{duration},#{count},#{medi_name},#{hos_name})
    	</insert>
+   	<!-- 약 복용 -->
+   	<select id="getCurrCount" resultType="int">
+   		SELECT COUNT FROM PRESCRIPTION WHERE PRE_NO=#{preNo}
+   	</select>
+   	<update id="takePills">
+   		UPDATE PRESCRIPTION SET COUNT = COUNT - 1 WHERE PRE_NO = #{preNo}
+   	</update>
 
 	<!-- 회원가입 -->
 	<insert id="signInsert" parameterType="java.util.Map">
