@@ -389,20 +389,60 @@ public class AdminController {
 
       return "HosAuth.ad_tiles";
    }
+   
+   @RequestMapping("HosAuthApp.hst")
+   public String toHosAuthApp(@RequestParam Map map, Paging vo, Model model,
+         @RequestParam(value = "nowPage", required = false) String nowPage,
+         @RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
+      int total = adminService.getTotalRecordHosAuthApp(map);
+      System.out.println(total);
+      if (nowPage == null && cntPerPage == null) {
+         nowPage = "1";
+         cntPerPage = "5";
+      } else if (nowPage == null) {
+         nowPage = "1";
+      } else if (cntPerPage == null) {
+         cntPerPage = "5";
+      }
 
-//   @RequestMapping("HosAuth.hst")
-//   public String toHosAuth(@RequestParam Map map, Model model)
-//   {
-//
-//      List<HospitalDTO> list =adminService.selectList_Auth_All(map);
-//      for(HospitalDTO val:list)
-//      {
-//         System.out.println(val.getHosp_name());
-//      }
-//      model.addAttribute("list", list);
-//
-//      return "HosAuth.ad_tiles";
-//   }
+      vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+      List<HospitalDTO> list = adminService.selectList_Auth_App(vo);
+      for (HospitalDTO val : list) {
+         System.out.println(val.getHosp_name());
+      }
+      model.addAttribute("paging", vo);
+      model.addAttribute("list", list);
+
+      return "HosAuthApp.ad_tiles";
+   }
+   
+   @RequestMapping("HosAuthWait.hst")
+   public String toHosAuthWait(@RequestParam Map map, Paging vo, Model model,
+         @RequestParam(value = "nowPage", required = false) String nowPage,
+         @RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
+      int total = adminService.getTotalRecordHosAuthWait(map);
+      System.out.println(total);
+      if (nowPage == null && cntPerPage == null) {
+         nowPage = "1";
+         cntPerPage = "5";
+      } else if (nowPage == null) {
+         nowPage = "1";
+      } else if (cntPerPage == null) {
+         cntPerPage = "5";
+      }
+
+      vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+      List<HospitalDTO> list = adminService.selectList_Auth_Wait(vo);
+      for (HospitalDTO val : list) {
+         System.out.println(val.getHosp_name());
+      }
+      model.addAttribute("paging", vo);
+      model.addAttribute("list", list);
+
+      return "HosAuthWait.ad_tiles";
+   }
+
+
 
    @RequestMapping("ApproveAuth.hst")
    public String approve(@RequestParam Map map, Model model) {

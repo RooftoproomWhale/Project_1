@@ -613,4 +613,28 @@ public class AdminServiceImpl implements AdminService {
 		return dao.deleteQna(map);
 	}
 
+	@Override
+	public List<HospitalDTO> selectList_Auth_App(Paging vo) {
+		// TODO Auto-generated method stub
+		return dao.selectList_Auth_App(vo);
+	}
+
+	@Override
+	public List<HospitalDTO> selectList_Auth_Wait(Paging vo) {
+		// TODO Auto-generated method stub
+		return dao.selectList_Auth_Wait(vo);
+	}
+
+	@Override
+	public int getTotalRecordHosAuthApp(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordHosAuthApp(map);
+	}
+
+	@Override
+	public int getTotalRecordHosAuthWait(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordHosAuthWait(map);
+	}
+
 }

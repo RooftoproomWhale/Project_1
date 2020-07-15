@@ -187,9 +187,9 @@ $(".table-data-feature .item:last-child").on('click', function(){
                                <div class="table-data__tool-left">
                                    <div class="rs-select2--light rs-select2--sm">
                                        <select class="js-select2" name="filter" id="filter">
-                                           <option selected="selected" value = "all">All</option>
+                                           <option value = "all">All</option>
                                            <option value="approved">승인됨</option>
-                                           <option value="standBy">대기중</option>
+                                           <option selected="selected" value="standBy">대기중</option>
                                        </select>
                                        <div class="dropDownSelect2"></div>
                                    </div>
