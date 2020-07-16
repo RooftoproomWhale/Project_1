@@ -108,6 +108,17 @@ public class GoogleVisionController {
 		int height = bi.getHeight();
 		int width = bi.getWidth();
 		List<AnnotateImageRequest> requests = new ArrayList<>();
+<<<<<<< HEAD
+=======
+		String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
+		String presDate = "";
+		StringBuffer medi_name = new StringBuffer();
+		String duration = "";
+		String hospital = "";
+		String count = "";
+		int remainingCount = 0;
+		//new FileInputStream(fileName)
+>>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 		ByteString imgBytes = ByteString.readFrom(file.getInputStream());
 		Image img = Image.newBuilder().setContent(imgBytes).build();
 		Feature feat = Feature.newBuilder().setType(Type.DOCUMENT_TEXT_DETECTION).build();
@@ -139,18 +150,19 @@ public class GoogleVisionController {
 										presDate = presDate + symbol.getText();
 									}
 								}
-								/*복용횟수*/
-								if(min_x>=(width*0.56) && max_x<=(width*0.6) && min_y>=(height*0.35) && max_y<=(height*0.39)) {
-									System.out.println(word);
-									for (Symbol symbol: word.getSymbolsList()) {
-										count = count + symbol.getText();
-									}
-								}
 								/*복용기간*/
 								if(min_x>=(width*0.125) && max_x<=(width*0.165) && min_y>=(height*0.152) && max_y<=(height*0.18)) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										duration = duration + symbol.getText();
+									}
+								}
+								/*복용횟수*/
+								if(min_x>=(width*0.56) && max_x<=(width*0.6) && min_y>=(height*0.35) && max_y<=(height*0.39)) {
+									System.out.println(word);
+									for (Symbol symbol: word.getSymbolsList()) {
+										count = count + symbol.getText();
+										remainingCount = Integer.parseInt(count) * Integer.parseInt(duration);
 									}
 								}
 								/*진료기관*/
@@ -244,7 +256,7 @@ public class GoogleVisionController {
 		map.put("pres_date", pres_date);
 		map.put("duration",duration);
 		map.put("hos_name",hospital);
-		map.put("count",count);
+		map.put("count", remainingCount);
 		
 		return map;
 	}

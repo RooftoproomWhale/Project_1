@@ -164,5 +164,11 @@ public List<Map<String, String>> getDeptone(Map map) {
 	return sqlMapper.selectList("deptone",map);
 }
 
+@Override
+public int usingIncrease(Map map) {
+	// TODO Auto-generated method stub
+	return sqlMapper.update("usingIncrease", map);
+}
+
 
 }

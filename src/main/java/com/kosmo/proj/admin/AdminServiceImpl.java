@@ -457,13 +457,11 @@ public class AdminServiceImpl implements AdminService {
 		return dao.getTotalRecordNotice(map);
 	}
 	@Override
-	public List<Map> selectImage() {
+	public List<BoardDTO> selectImage() {
 		// TODO Auto-generated method stub
 		return dao.selectImage();
 	}
 
-	
-	
 
 	@Override
 	public int hitNotice(Map map) {
@@ -487,6 +485,156 @@ public class AdminServiceImpl implements AdminService {
 	public int approveAuth_(Map map) {
 		// TODO Auto-generated method stub
 		return dao.approveAuth_(map);
+	}
+
+	@Override
+	public int t0_2() {
+		// TODO Auto-generated method stub
+		return dao.t0_2();
+	}
+
+	@Override
+	public int t2_4() {
+		// TODO Auto-generated method stub
+		return dao.t2_4();
+	}
+
+	@Override
+	public int t4_6() {
+		// TODO Auto-generated method stub
+		return dao.t4_6();
+	}
+
+	@Override
+	public int t6_8() {
+		// TODO Auto-generated method stub
+		return dao.t6_8();
+	}
+
+	@Override
+	public int t8_10() {
+		// TODO Auto-generated method stub
+		return dao.t8_10();
+	}
+
+	@Override
+	public int t10_12() {
+		// TODO Auto-generated method stub
+		return dao.t10_12();
+	}
+
+	@Override
+	public int t12_14() {
+		// TODO Auto-generated method stub
+		return dao.t12_14();
+	}
+
+	@Override
+	public int t14_16() {
+		// TODO Auto-generated method stub
+		return dao.t14_16();
+	}
+
+	@Override
+	public int t16_18() {
+		// TODO Auto-generated method stub
+		return dao.t16_18();
+	}
+
+	@Override
+	public int t18_20() {
+		// TODO Auto-generated method stub
+		return dao.t18_20();
+	}
+
+	@Override
+	public int t20_22() {
+		// TODO Auto-generated method stub
+		return dao.t20_22();
+	}
+
+	@Override
+	public int t22_24() {
+		// TODO Auto-generated method stub
+		return dao.t22_24();
+	}
+
+	@Override
+	public int deletePM(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deletePM(map);
+	}
+
+	@Override
+	public int deletePres(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deletePres(map);
+	}
+
+	@Override
+	public int deleteHI(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deleteHI(map);
+	}
+
+	@Override
+	public int deleteHist(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deleteHist(map);
+	}
+
+	@Override
+	public int deleteHD(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deleteHD(map);
+	}
+
+	@Override
+	public int updateHos(Map map) {
+		// TODO Auto-generated method stub
+		return dao.updateHos(map);
+	}
+
+	@Override
+	public int deleteReserv(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deleteReserv(map);
+	}
+
+	@Override
+	public int deleteNoti(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deleteNoti(map);
+	}
+
+	@Override
+	public int deleteQna(Map map) {
+		// TODO Auto-generated method stub
+		return dao.deleteQna(map);
+	}
+
+	@Override
+	public List<HospitalDTO> selectList_Auth_App(Paging vo) {
+		// TODO Auto-generated method stub
+		return dao.selectList_Auth_App(vo);
+	}
+
+	@Override
+	public List<HospitalDTO> selectList_Auth_Wait(Paging vo) {
+		// TODO Auto-generated method stub
+		return dao.selectList_Auth_Wait(vo);
+	}
+
+	@Override
+	public int getTotalRecordHosAuthApp(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordHosAuthApp(map);
+	}
+
+	@Override
+	public int getTotalRecordHosAuthWait(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getTotalRecordHosAuthWait(map);
 	}
 
 }

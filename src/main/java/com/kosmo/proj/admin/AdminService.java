@@ -93,11 +93,15 @@ public interface AdminService {
 
 		//병원 제휴
 		List<HospitalDTO> selectList_Auth_All(Paging vo);
+		List<HospitalDTO> selectList_Auth_App(Paging vo);
+		List<HospitalDTO> selectList_Auth_Wait(Paging vo);
 		int approveAuth(Map map);
 		int approveAuth_(Map map);
 		int denyAuth(Map map);
 		List<HospitalDTO> selectList_Auth_Search(Map map);
 		int getTotalRecordHosAuth(Map map);
+		int getTotalRecordHosAuthApp(Map map);
+		int getTotalRecordHosAuthWait(Map map);
 		int getTotalRecordHosSearch(Map map);
 
 		//공지사항
@@ -107,16 +111,35 @@ public interface AdminService {
 		int deleteNotice(Map map);
 		List<BoardDTO> detailNotice(Map map);
 		int getTotalRecordNotice(Map map);
-		List<Map> selectImage();
+		List<BoardDTO> selectImage();
 		int hitNotice(Map map);
-
 
 		List<CovidEditDTO> selectCovidList(Map map);
 		int updateCovidList(Map map);
-		
-
 		int getFirst(Map map);
 		int getLast(Map map);
-
+		
+		int t0_2();
+		int t2_4();
+		int t4_6();
+		int t6_8();
+		int t8_10();
+		int t10_12();
+		int t12_14();
+		int t14_16();
+		int t16_18();
+		int t18_20();
+		int t20_22();
+		int t22_24();
+		
+		int deletePM(Map map);
+		int deletePres(Map map);
+		int deleteHI(Map map);
+		int deleteHist(Map map);
+		int deleteHD(Map map);
+		int updateHos(Map map);
+		int deleteReserv(Map map);
+		int deleteNoti(Map map);
+		int deleteQna(Map map);
 
 }

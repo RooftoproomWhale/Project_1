@@ -367,22 +367,22 @@ window.onload = function(){
 					<div class="img-thumbnail" data-u="slides"
 						style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 						<div data-p="680">
-							<a id="noti1" href="#">
+							<a id="noti1" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[0].noti_no }'/>">
 								<img id="img1" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti2" href="#">
+							<a id="noti2" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[1].noti_no }'/>">
 								<img id="img2" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti3" href="#">
+							<a id="noti3" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[2].noti_no }'/>">
 								<img id="img3" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti4" href="#">
+							<a id="noti4" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[3].noti_no }'/>">
 								<img id="img4" data-u="image" src='<c:url value="/images/no_noti.png"/>'" />
 							</a>
 						</div>
@@ -424,7 +424,7 @@ window.onload = function(){
 			<!-- Issue Section -->
 			<div class="col-md-5 col-md-offset-1 col-sm-12" style="">
 				<div class="row" style="margin-bottom: 14px">
-					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보<spam id=date_co style="font-size:0.7em;color:#5D5D5D"></spam></span>
+					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보<span id=date_co style="font-size:0.7em;color:#5D5D5D"></span></span>
 				</div>
 				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px;"></div>
 			</div>
@@ -480,7 +480,6 @@ window.onload = function(){
 						<p>복용 알림 서비스 및 해당 병원 예약 서비스</p>
 					</div>
 				</div>
-
 				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Covid/View.hst'/>'">
 
 					<i class="fa fa-pie-chart"></i>
@@ -553,18 +552,19 @@ window.onload = function(){
 			$.ajax({
 				url:"<c:url value='/Admin/NoticeImages.hst'/>",
 				type:'post',
+				dataType:"json",
 				success:function(data){
-					var date = new Date();
-					date = moment(date).format('YYYY-MM-DD HH:mm');
-					$('#date_co').text("(실시간:"+date+")")
-					console.log(data);
-					var noti = JSON.parse(data);
-					$('#img1').attr('src',noti[0]["FILE_ADDR"]);
+					console.log("noti: " + data);
+					$('#img1').attr('src', data[0].file_addr);
 					console.log($('#img1').attr('src'));
-					$('#img2').attr('src',noti[1]["FILE_ADDR"]);
-					$('#img3').attr('src',noti[2]["FILE_ADDR"]);
-					$('#img4').attr('src',noti[3]["FILE_ADDR"]);
-					//$('.img-thumbnail').html(comments);
+					$('#img2').attr('src', data[1].file_addr);
+					$('#img3').attr('src', data[2].file_addr);
+					$('#img4').attr('src', data[3].file_addr);
+					
+					$('#noti1').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[0].noti_no + " '/>");
+					$('#noti2').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[1].noti_no + " '/>");
+					$('#noti3').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[2].noti_no + " '/>");
+					$('#noti4').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[3].noti_no + " '/>");
 				},
 				error:function(e){console.log('에러:',e)}
 			})

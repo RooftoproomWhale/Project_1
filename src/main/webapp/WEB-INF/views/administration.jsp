@@ -29,6 +29,11 @@
 </style>
 <script>
 $(function(){
+	
+	$("#takePill0").on('click', function() {
+			alert('지금 복용하시겠습니까?');
+        });
+	
 	console.log('실행전');
 	showList();
 	function showList(){
@@ -61,11 +66,10 @@ $(function(){
 				comments+='<div class="panel-heading col-md-11" role="tab" id="heading'+i+'">';
 				comments+='<h4 class="panel-title">';
 				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
-				comments+=element['HOS_NAME']+"-"+element['PRES_DATE']+"</a></h4></div>";
-				comments+='<div data-toggle="modal" data-target="#alarmModal" ><a style="text-align:left;" class="btn col-md-1"><img alt="알람설정" src="../images/alarm.png"></a></div>';
-				comments+='<div style="padding:0 5px 0 5px;" id="collapse'+i+'" class="panel-collapse collapse col-md-11" role="tabpanel">';
-				comments+='<div style="padding:0" class="panel-body"><table class="table-striped">';
-				comments+='<thead><th><h3>약품명</h3></th><th><h3>복용일수</h3></th><th><h3>일일 복용 횟수</h3></th></thead>';
+				comments+=element['HOS_NAME']+" : "+element['PRES_DATE']+"</a></h4></div>";
+				comments+='<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
+				comments+='<div style="margin:0;padding:0" class="panel-body"><table class="table-striped">';
+				comments+='<thead><th><h3>약품명</h3></th><th><h3>총복용일수</h3></th><th><h3>남은 복용 횟수</h3></th><th><h3><span id="takePill'+i+'"><a href="<c:url value="/Administration/takePills.hst?preNo='+ element['PRE_NO'] +'"/>">복용하기</a></span></h3></th></thead>';
 				$.each(element['MEDI_NAME'].split(','),function(k,val){
 					if(val!=""){
 						comments+="<tbody><tr>"
@@ -590,7 +594,7 @@ body {
 					</div>
 					<br />
 					<div class="button-container">
-						 <div class='button -blue center' data-toggle="modal" data-target=".bs-example-modal-lg">
+						 <div class='button -blue center' id="test" data-toggle="modal" data-target=".bs-example-modal-lg">
 						 	<i class="fas fa-plus"></i> 복용약 추가</div>
 					</div>
 					<div style="text-align: center;" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
