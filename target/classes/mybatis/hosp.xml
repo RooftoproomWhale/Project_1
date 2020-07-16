@@ -16,7 +16,7 @@
 	select R.* from
 	HOSPITAL H join RESERVATION R on 
 	 H.HOSP_CODE = R.HOSP_CODE join MEMBER M on
-	  M.MEM_EMAIL = R.MEM_EMAIL where H.HOSP_CODE=#{hos_code} order by R.RES_DATE desc
+	  M.MEM_EMAIL = R.MEM_EMAIL where H.HOSP_CODE=#{hos_code} order by R.apply_time desc
 	</select>
 	<update id="updatehos" parameterType="java.util.Map">
 	update hospital set 

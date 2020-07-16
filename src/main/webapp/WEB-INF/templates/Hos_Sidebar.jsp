@@ -358,7 +358,7 @@ window.onload = function(){
 			<li><a href="<c:url value='/Hospage/Edit.hst'/>"> 정보 수정</a></li>
 			<li><a href="<c:url value='/Hospage/Appointment.hst'/>"> 예약 관리</a></li>
 			<li><a href="<c:url value='/Hospage/Cancel.hst'/>"> 제휴 관리</a></li>
-			<li><a href="<c:url value='/User/Logout.hst'/>"> 로그 아웃 </a></li>
+			<li><a href="<c:url value='/User/Logout.hst'/>"> 로그아웃 </a></li>
 <%-- 			<li><a href="<c:url value='/Hospage/Chart.hst'/>"><i class="fas fa-chart-bar"></i> 통계 </a></li> --%>
 		<!--  	<li><a href="<c:url value='/User/Login.hst'/>"><em class="fa fa-power-off">&nbsp;</em> 로그아웃 </a></li>-->
 		</ul>

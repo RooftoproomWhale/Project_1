@@ -45,6 +45,7 @@ private HospServiceImpl hosDAO;
 		}
 		System.out.println(map);
 		List<MemberDTO> mem= hosDAO.selectmem(map);
+		
 		List<ReservationDTO> res = hosDAO.selectres(map);
 		Date now= new Date();
 		Calendar cal = new GregorianCalendar(Locale.KOREA);

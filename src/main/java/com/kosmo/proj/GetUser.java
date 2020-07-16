@@ -17,6 +17,7 @@ import com.kosmo.proj.service.impl.MemberServiceImpl;
 
 public class GetUser {
 
+
 	public String getUser(Model model, Authentication auth)
 	{
 		String role=null;
@@ -64,3 +65,4 @@ public class GetUser {
 		
 	}
 }
+
