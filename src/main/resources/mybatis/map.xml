@@ -114,10 +114,16 @@
 		(SELECT hosp_code FROM hospital WHERE address = #{address}),
 		#{department},#{email},#{datepick},#{hourMinute},SYSDATE,#{symptom},'승인대기중')
 	</insert>
+	<delete id="deleteReservation" parameterType="java.util.Map">
+		DELETE FROM reservation WHERE reserv_no=#{reserv_no}
+	</delete>
 	<select id="getSymptomByHospital" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM symptom WHERE dept_name = #{dept_name}
 	</select>
 	<select id="getPresByUser" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM prescription WHERE mem_email = #{mem_email}
+	</select>
+	<select id="searchHospital" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM hospital WHERE AUTH='제휴승인됨' AND ADDRESS  LIKE '%' || #{hosp_name} || '%'
 	</select>
 </mapper>
