@@ -19,17 +19,46 @@
         .jssora051:hover {opacity:.8;}
         .jssora051.jssora051dn {opacity:.5;}
         .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
-        
+       
+        #news {
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+}
+        #tit {
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
 #footer{
-	top:2250px;
+	top:2200px;
 }
 header .intro-text {
     padding-top: 287px;
 }
+.sectionOne
+{
+    opacity:0;
+    margin-top:-100px;    
+    max-width:100%;
+}
+.sectionTwo
+{
+    opacity:0;
+    margin-top:300px;    
+    max-width:100%;
+}
 </style>
 <script>
 window.onload = function(){
-	
+
 	//web notification 설정
 	var icon = '../img/logo.png';
 	var userRole = $('#userRole').val();
@@ -152,27 +181,27 @@ window.onload = function(){
 	}
 	else if(userRole == "HOS")
 	{
-		$.ajax({
-			url:'<c:url value="/Noti/dayAptCount.hst"/>',
-			dataType:'html',
-			success:function(data){
-						console.log("병원 성공");
-						if(data != 0)
-						{
-							console.log("오늘 예약 수: " + data);
-							hosNotiDay(data);
-						}
-						else
-						{
-							console.log("오늘 예약 수: " + data);
-							hosNotiDayNo();
-						}
+// 		$.ajax({
+// 			url:'<c:url value="/Noti/dayAptCount.hst"/>',
+// 			dataType:'html',
+// 			success:function(data){
+// 						console.log("병원 성공");
+// 						if(data != 0)
+// 						{
+// 							console.log("오늘 예약 수: " + data);
+// 							hosNotiDay(data);
+// 						}
+// 						else
+// 						{
+// 							console.log("오늘 예약 수: " + data);
+// 							hosNotiDayNo();
+// 						}
 						
-					},
-			error:function(request,error){
-				console.log('에러:',error);
-			}
-		});
+// 					},
+// 			error:function(request,error){
+// 				console.log('에러:',error);
+// 			}
+// 		});
 		
 		$.ajax({
 			url:'<c:url value="/Noti/preAptCount.hst"/>',
@@ -344,9 +373,9 @@ window.onload = function(){
 			<div class="overlay">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-8 col-md-offset-2 intro-text">
+						<div class="col-md-8 col-md-offset-2 intro-text" id="tit">
 							<h1> We Are Home'spital ${currAptCount}</h1>
-							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
+							<p style="font-weight: bold; color: gray;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
 <!-- 							<a id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a> -->
 <%-- 							<a href="<c:url value='/Android/WebTest.hst'/>" id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a> --%>
 						</div>
@@ -357,6 +386,7 @@ window.onload = function(){
 	</header>
 
 	<div class="container-fluid">
+	<div class="sectionOne">
 		<div class="row" style="padding-top: 50px">
 			<div class="col-md-5 col-md-offset-1 col-sm-12">
 				<div id="jssor_1"
@@ -367,7 +397,7 @@ window.onload = function(){
 					<div class="img-thumbnail" data-u="slides"
 						style="cursor: default; position: relative; top: 0px; left: 0px; width: 680px; height: 380px; overflow: hidden;">
 						<div data-p="680">
-							<a id="noti1" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[0].noti_no }'/>">
+							<a id="noti1" href="#">
 								<img id="img1" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
@@ -429,10 +459,12 @@ window.onload = function(){
 				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px;"></div>
 			</div>
 		</div>
+		</div>
 	
 
 
 	<!-- Services Section -->
+	<div class="sectionTwo">
 	<div id="services" class="text-center">
 		<div class="container">
 			<div class="section-title">
@@ -496,6 +528,7 @@ window.onload = function(){
 		</div>
 	</div>
 </div>
+</div>
 </body>
 <script>
 	$(function(){
@@ -532,8 +565,8 @@ window.onload = function(){
 					type:'get',
 					dataType:"json",
 					success:function(data){
-						var news = "<table class='table' style='width:80%;border: 2px solid rgba(0,0,0,.12);'>";
-						if(data.length==0){
+						var news = "<table class='table' id='news' style='width:80%;border: 2px solid rgba(0,0,0,.12);'>";
+			if(data.length==0){
 							news+="<li>뉴스 데이터가 없습니다</li>";
 						} 
 						$.each(data, function(index, element) {
@@ -552,27 +585,46 @@ window.onload = function(){
 			$.ajax({
 				url:"<c:url value='/Admin/NoticeImages.hst'/>",
 				type:'post',
-				dataType:"json",
 				success:function(data){
-					console.log("noti: " + data);
-					$('#img1').attr('src', data[0].file_addr);
+					console.log(data);
+					var noti = JSON.parse(data);
+					$('#img1').attr('src',noti[0]["FILE_ADDR"]);
 					console.log($('#img1').attr('src'));
-					$('#img2').attr('src', data[1].file_addr);
-					$('#img3').attr('src', data[2].file_addr);
-					$('#img4').attr('src', data[3].file_addr);
-					
-					$('#noti1').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[0].noti_no + " '/>");
-					$('#noti2').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[1].noti_no + " '/>");
-					$('#noti3').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[2].noti_no + " '/>");
-					$('#noti4').attr('href', "<c:url value='/Admin/NoticeDetail.hst?no= " + data[3].noti_no + " '/>");
+					$('#img2').attr('src',noti[1]["FILE_ADDR"]);
+					$('#img3').attr('src',noti[2]["FILE_ADDR"]);
+					$('#img4').attr('src',noti[3]["FILE_ADDR"]);
+					//$('.img-thumbnail').html(comments);
 				},
 				error:function(e){console.log('에러:',e)}
 			})
 			
 		}
 		
+		$(window).scroll( function(){
+	        $('.sectionOne').each( function(i){
+	            
+	            var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+	            var bottom_of_window = $(window).scrollTop() + $(window).height();
+	            
+	            if( bottom_of_window > bottom_of_element - 100 ){
+	                $(this).animate({'opacity':'1','margin-top':'0px'}, 1000);
+	            }
+	            
+	        }); 
+	        
+			$('.sectionTwo').each( function(i){
+	            
+	            var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+	            var bottom_of_window = $(window).scrollTop() + $(window).height();
+	            
+	            if( bottom_of_window > bottom_of_element - 900 ){
+	                $(this).animate({'opacity':'1','margin-top':'0px'}, 1000);
+	            }
+	            
+	        }); 
+	    });
+		
 	});
 	
 </script>
-<script src='<c:url value="/calendar/vendor/js/moment.min.js"/>'></script>
 </html>

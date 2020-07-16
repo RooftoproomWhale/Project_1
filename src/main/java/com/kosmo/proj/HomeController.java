@@ -64,7 +64,7 @@ public class HomeController {
 	public String firstHome(Authentication auth, Model model, Map map)
 	{
 		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
+		String role=getUser.getUser(model, auth);
 		
 		SimpleDateFormat format = new SimpleDateFormat("HH");
 		int time_ = Integer.parseInt(format.format(new Date()));
@@ -121,17 +121,24 @@ public class HomeController {
 		
 		int check = memberService.usingIncrease(map);
 		System.out.println(check);
-		
-		return "index.tiles";
+	      if(role.equals("ROLE_HOS")){
+	         return "redirect:/Hospage/main.hst";
+	      }
+	      else if(role.equals("ROLE_ADM")) {
+	         return "redirect:/Admin/Index.hst";
+	      }
+	      else {
+	      return "index.tiles";
+	      }
 	}
 
 	@RequestMapping("/Home/ToHomePage.hst")
 	public String toHome(Authentication auth, Model model, Map map)
 	{
 		GetUser getUser = new GetUser();
-		getUser.getUser(model, auth);
-		
+		String role = getUser.getUser(model, auth);
 		return "index.tiles";
+		
 	}
 	
 	
