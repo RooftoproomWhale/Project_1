@@ -214,7 +214,7 @@ $(function() {
 	    	                beginAtZero: true,
 	    	                maxTicksLimit: 1,
 	    	                stepSize: 10,
-	    	                max: 50,
+	    	                max: 60,
 	    	                fontFamily: "Poppins",
 	    	                fontSize: 12
 	    	              },

@@ -38,7 +38,7 @@
     }
 }
 #footer{
-	top:2250px;
+	top:2200px;
 }
 header .intro-text {
     padding-top: 287px;
@@ -618,7 +618,7 @@ window.onload = function(){
 	            var bottom_of_window = $(window).scrollTop() + $(window).height();
 	            
 	            if( bottom_of_window > bottom_of_element - 900 ){
-	                $(this).animate({'opacity':'1','margin-top':'0px'}, 1200);
+	                $(this).animate({'opacity':'1','margin-top':'0px'}, 1000);
 	            }
 	            
 	        }); 
