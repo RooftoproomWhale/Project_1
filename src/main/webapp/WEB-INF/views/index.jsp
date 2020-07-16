@@ -166,27 +166,27 @@ window.onload = function(){
 	}
 	else if(userRole == "HOS")
 	{
-		$.ajax({
-			url:'<c:url value="/Noti/dayAptCount.hst"/>',
-			dataType:'html',
-			success:function(data){
-						console.log("병원 성공");
-						if(data != 0)
-						{
-							console.log("오늘 예약 수: " + data);
-							hosNotiDay(data);
-						}
-						else
-						{
-							console.log("오늘 예약 수: " + data);
-							hosNotiDayNo();
-						}
+// 		$.ajax({
+// 			url:'<c:url value="/Noti/dayAptCount.hst"/>',
+// 			dataType:'html',
+// 			success:function(data){
+// 						console.log("병원 성공");
+// 						if(data != 0)
+// 						{
+// 							console.log("오늘 예약 수: " + data);
+// 							hosNotiDay(data);
+// 						}
+// 						else
+// 						{
+// 							console.log("오늘 예약 수: " + data);
+// 							hosNotiDayNo();
+// 						}
 						
-					},
-			error:function(request,error){
-				console.log('에러:',error);
-			}
-		});
+// 					},
+// 			error:function(request,error){
+// 				console.log('에러:',error);
+// 			}
+// 		});
 		
 		$.ajax({
 			url:'<c:url value="/Noti/preAptCount.hst"/>',

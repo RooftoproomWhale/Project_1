@@ -178,18 +178,27 @@ window.onload = function(){
 	}
 	else if(userRole == "HOS")
 	{
-// 		$.ajax({
-// 			url:'<c:url value="/Noti/dayAptCount.hst"/>',
-// 			dataType:'html',
-// 			success:function(data){
-// 					console.log("병원 성공");
-// 					console.log("오늘 예약 수: " + data);
-// 						hosNotiDay(data);
-// 					},
-// 			error:function(request,error){
-// 				console.log('에러:',error);
-// 			}
-// 		});
+		$.ajax({
+			url:'<c:url value="/Noti/dayAptCount.hst"/>',
+			dataType:'html',
+			success:function(data){
+						console.log("병원 성공");
+						if(data != 0)
+						{
+							console.log("오늘 예약 수: " + data);
+							hosNotiDay(data);
+						}
+						else
+						{
+							console.log("오늘 예약 수: " + data);
+							hosNotiDayNo();
+						}
+						
+					},
+			error:function(request,error){
+				console.log('에러:',error);
+			}
+		});
 		
 		$.ajax({
 			url:'<c:url value="/Noti/preAptCount.hst"/>',
@@ -272,6 +281,22 @@ window.onload = function(){
 			      icon: icon
 		  	}
 			var noti = new Notification('예약 알림이 있습니다', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+			};
+		}
+	
+	function hosNotiDayNo() {
+		text = '오늘은 예약이 없습니다';
+		console.log(text);
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('예약 알림', options)
 			
 			noti.onclick = function(event) {
 				console.log('noti click');
