@@ -514,10 +514,15 @@ body {
 }
 
 .contents {
-	background: white;
-	top: 100px;
-	left: 120px;
-	padding-bottom: 100px;
+	margin-top: 70px;
+    padding-left: 30px;
+    margin-bottom: 190px;
+    background: white;
+    border-radius: 4px;
+    width: 78%;
+    height: 850px;
+    bottom: 10px;
+    left: 40px;
 }
 
 @media ( min-width : 992px) {
@@ -558,6 +563,7 @@ body {
 	cursor: inherit;
 	display: block;
 }
+
 </style>
 
 <head>
@@ -570,7 +576,7 @@ body {
 		<div class="contents col-md-8">
 			<div class="row" style="padding-left: 15px;">
 				<div class="page-header">
-					<h2 style="color: blue">복약관리</h2>
+					<h2>복약관리</h2>
 				</div>
 				<p style="color: red;">3세 이하 유아는 사용이 권장되지 않으며 임부는 반드시 의사와 사전에 상의하고 사용하도록 합니다</p>
 			</div>
@@ -581,8 +587,8 @@ body {
 						복약 순응도란 처방받은 약을 환자가 전문 의료인의 지시에 따라 정확하게 복용. 복약
 						순응도가 높을수록 치료효과가 높아진다.
 					</div>
-					<br />
-					<div class="button-container">
+					<br /><br /><br />
+					<div class="button-container" style="padding-bottom: 10px">
 						 <div class='button -blue center' data-toggle="modal" data-target=".bs-example-modal-lg">
 						 	<i class="fas fa-plus"></i> 복용약 추가</div>
 					</div>

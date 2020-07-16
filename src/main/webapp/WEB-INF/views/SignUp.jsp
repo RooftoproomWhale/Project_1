@@ -938,6 +938,7 @@ width: 100%;
                         complete : function() {
                            current_fs.hide();
                            animating = false;
+                           $('html').scrollTop(0);
                         },
                         //사용자가 정의 플러그인에서 나옴
                         easing : 'easeInOutBack'

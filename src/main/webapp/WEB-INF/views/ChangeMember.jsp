@@ -31,12 +31,38 @@
 	color: #6e7179;
 }
 
-.table-wrapper .table-default tbody tr td :not (:first-child ){
-	position: relative;
-	padding-right: 0;
-	padding-left: 0;
-}
+.table-wrapper
+ 
+.table-default
+ 
+tbody
+ 
+tr
+ 
+td
+ 
+:not
+ 
+(
+:first-child
+ 
+){
+position
+:
+ 
+relative
+;
 
+	
+padding-right
+:
+ 
+0;
+padding-left
+:
+ 
+0;
+}
 .table-wrapper .table-default tbody tr td .input-conut-limit {
 	position: absolute;
 	bottom: 9px;
@@ -61,8 +87,8 @@ table {
 
 .board-util-right {
 	float: right;
-	height: 50px
-	;left:-80px
+	height: 50px;
+	left: -80px
 }
 
 .board-util {
@@ -75,8 +101,9 @@ table {
 	height: 48px;
 	width: 100px;
 }
-.board-util-text{
-margin-left: 80px
+
+.board-util-text {
+	margin-left: 80px
 }
 
 caption {
@@ -99,71 +126,90 @@ caption {
 }
 
 body {
-background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773) 68%, rgba(255, 206, 196, 0.5) 163%),linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%, rgba(239, 112, 138, 0.5) 40%),linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%, rgba(237, 106, 134, 0.5) 169%),linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%, rgba(247, 126, 132, 0.5) 43%); background-blend-mode: overlay,multiply,color,normal;}
-.memberchange{background: white;  border-radius: 4px;margin-bottom:40px;
-padding-left: 20px;padding-top: 30px;width: 89%}
-.page-header{width:89%;top:5px;
-background: white;margin-bottom: 0px;padding-bottom:40px;  border-radius: 4px;
-padding-top: 50px;margin-right: 80px;margin-top:60px;
-}
-.page-header h2{padding-left: 20px}
-
-.content {
-	width: 260px;
-	margin: 100px auto;
+	background-image: linear-gradient(21deg, rgba(64, 83, 206, 0.3697003234675773)
+		68%, rgba(255, 206, 196, 0.5) 163%),
+		linear-gradient(163deg, rgba(49, 146, 170, 0.07944489965716128) 86%,
+		rgba(239, 112, 138, 0.5) 40%),
+		linear-gradient(30deg, rgba(76, 79, 173, 0.6173675716587805) 22%,
+		rgba(237, 106, 134, 0.5) 169%),
+		linear-gradient(48deg, rgba(31, 85, 147, 0.7323890641868473) 64%,
+		rgba(247, 126, 132, 0.5) 43%);
+	background-blend-mode: overlay, multiply, color, normal;
 }
 
+.memberchange {
+	background: white;
+	border-radius: 4px;
+	margin-bottom: 40px;
+	padding-left: 20px;
+	padding-top: 30px;
+	width: 89%
+}
+
+.page-header {
+	width: 89%;
+	top: 5px;
+	background: white;
+	margin-bottom: 0px;
+	padding-bottom: 40px;
+	border-radius: 4px;
+	padding-top: 50px;
+	margin-right: 80px;
+	margin-top: 60px;
+}
+
+.page-header h2 {
+	padding-left: 20px
+}
 </style>
 </head>
 <body>
 	<div id="page-wrapper" class="container-fluid">
-		<div class="row" style="padding-left: 350px;margin-right: -15px;margin-left: 80px;margin-top: 67px;">
+		<div class="row" style="padding-left:370px;">
 			<div class="page-header">
 				<h2 style="color: blue">회원 정보 수정</h2>
 			</div>
 			<form class="memberchange" method="post" action="<c:url value='/mypage/ChangeMember.hst'/>">
-				<div class="box-default" style="padding-left: 100px">
-					<span class="board-util-text color-blue">
-						※ 고객님께서 입력해주신 정보를 통하여 추후 고객 맞춤 정보 등 유익한 서비스가 제공되오니, 정확한 입력 부탁 드립니다. 
-					</span>
+				<div class="box-default">
+					<span> ※ 고객님께서 입력해주신 정보를
+						통하여 추후 고객 맞춤 정보 등 유익한 서비스가 제공되오니, 정확한 입력 부탁 드립니다. </span>
 				</div>
 				<div class="board-util board-util-top02">
 					<div class="board-util-right">
 						<span class="board-util-text color-red">* 필수 입력 항목</span>
 					</div>
-				</div>
+				</div></br></br>
 
 				<div class="table-wrapper" role="form">
-					<table class="table-default board-form table-member-modify" style="margin-left: 100px">
+					<table class="table-default board-form table-member-modify"
+						style="margin-left: 100px">
 						<caption>개인정보 수정</caption>
-						<colgroup>
-							<col style="width: 140px;" />
-							<col />
-							<col style="width: 140px;" />
-							<col />
-						</colgroup>
 						<tbody>
-
 							<tr>
 								<th scope="row">이름</th>
 								<td style="padding-top: 10px; width: 30%">
 									<div class="input-inside-table">
-										<input type="text" id="name" name="name" class="input-text" title="이름" value="${list[0]['mem_name']}" role="textbox" />
+										<input type="text" id="name" name="name" class="input-text"
+											title="이름" value="${list[0]['mem_name']}" role="textbox" />
 									</div>
 								</td>
 								<th scope="row" style="width: 15%; padding-left: 80px">키</th>
 								<td>
 									<div class="input-inside-table">
-										<input type="text" id="height"  name="height" class="input-text" title="키" value="${list[0]['height']}" role="textbox" />
+										<input type="text" id="height" name="height"
+											class="input-text" title="키" value="${list[0]['height']}"
+											role="textbox" />
 									</div>
 								</td>
 							</tr>
-							
+
 							<tr>
 								<th scope="row">나이</th>
 								<td>
 									<div class="input-inside-table">
-										<select style="width: 176px; height: 24px;" title="나이" id="age" name="age" value="${list[0]['age']}" class="input-width-small07">
+										<select style="width: 176px; height: 24px;" title="나이"
+											id="age" name="age" value="${list[0]['age']}"
+											class="input-width-small07">
 											<option>나이</option>
 											<option value="10">10세 이하</option>
 											<option value="10">10대</option>
@@ -176,13 +222,15 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 											<option value="80">80대</option>
 											<option value="90">90대</option>
 										</select>
-								
+
 									</div>
 								</td>
 								<th scope="row" style="padding-left: 80px">몸무게</th>
 								<td>
 									<div class="input-inside-table">
-										<input type="text" id="weight" name="weight" class="input-text" title="몸무게" value="${list[0]['weight']}" role="textbox" />
+										<input type="text" id="weight" name="weight"
+											class="input-text" title="몸무게" value="${list[0]['weight']}"
+											role="textbox" />
 									</div>
 								</td>
 							</tr>
@@ -190,7 +238,9 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 								<th scope="row" style="width: 15%; margin-top: 6px">성별</th>
 								<td>
 									<div class="input-inside-table">
-										<select id="gender" name="gender"  value="${list[0]['gender']}" style="width: 176px; height: 24px;" title="성별" class="input-width-small07">
+										<select id="gender" name="gender" value="${list[0]['gender']}"
+											style="width: 176px; height: 24px;" title="성별"
+											class="input-width-small07">
 											<option>성별</option>
 											<option value="남자">남자</option>
 											<option value="여자">여자</option>
@@ -202,7 +252,8 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 								<th scope="row">휴대폰번호 <span class="color-red">*</span></th>
 								<td colspan="3" class="phone">
 									<div class="input-inside-table" style="padding-top: 10px;">
-										<select name="hand_no1" id="hand_no1" title="휴대폰번호 앞자리" class="input-width-small" required="required">
+										<select name="hand_no1" id="hand_no1" title="휴대폰번호 앞자리"
+											class="input-width-small" required="required">
 											<option value="">선택</option>
 											<option value="010">010</option>
 											<option value="011">011</option>
@@ -218,8 +269,8 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 										<input type="text" name="hand_no3" id="hand_no3"
 											class="input-text input-width-small" title="휴대폰번호 끝자리"
 											role="textbox" required="required" onkeyup="number(this);"
-											maxlength="4" value="" />
-										<input type="hidden" id="tel" name='tel' value="${list[0]['tel']}"/>
+											maxlength="4" value="" /> <input type="hidden" id="tel"
+											name='tel' value="${list[0]['tel']}" />
 
 
 										<div class="option-check">
@@ -240,7 +291,7 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 								</td>
 
 							</tr>
-						
+
 
 							<tr>
 								<th scope="row">비밀번호 확인 <span class="required">*</span></th>
@@ -249,9 +300,8 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 									<div class="input-inside-table">
 										<input type="password" name="pass" id="pass2"
 											class="input-text" title="비밀번호 확인" role="textbox"
-											maxlength="20" /> <span
-											id="messagePw" class="input-description">비밀번호 확인을 위해
-											입력해 주세요</span>
+											maxlength="20" /> <span id="messagePw"
+											class="input-description">비밀번호 확인을 위해 입력해 주세요</span>
 									</div>
 
 								</td>
@@ -334,12 +384,11 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 		})
 		var strarry = $('#tel').val().split('-');
 
-	$("#hand_no1").val(strarry[0]);
-	$("#hand_no2").val(strarry[1]);
-	$("#hand_no3").val(strarry[2]);
-	
+		$("#hand_no1").val(strarry[0]);
+		$("#hand_no2").val(strarry[1]);
+		$("#hand_no3").val(strarry[2]);
+
 	});
-	
 
 	function back() {
 		close = confirm("취소하시겠습니까?")
@@ -356,27 +405,28 @@ padding-top: 50px;margin-right: 80px;margin-top:60px;
 			passok.focus();
 			return;
 		}
-		if($('#name').val()==""){
+		if ($('#name').val() == "") {
 			alert('이름을 입력해주세요');
 			$('#name').focus();
 			return;
 		}
-		if($('#gender').val()=="성별"){
+		if ($('#gender').val() == "성별") {
 			alert('성별을 선택해주세요');
 			return;
 		}
-		if($('#age').val()=="나이"){
+		if ($('#age').val() == "나이") {
 			alert('나이를 선택해주세요');
 			return;
 		}
-		
-		
+
 		if (confirm('정말로 변경하시겠습니까?')) {
 
-			$("#tel").val ($("#hand_no1").val()+"-"+$("#hand_no2").val()+"-"+$("#hand_no3").val());
+			$("#tel").val(
+					$("#hand_no1").val() + "-" + $("#hand_no2").val() + "-"
+							+ $("#hand_no3").val());
 			$('.memberchange').submit();
 		}
-		
+
 	}
 </script>
 </html>
