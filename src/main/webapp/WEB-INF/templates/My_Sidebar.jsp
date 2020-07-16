@@ -157,7 +157,7 @@ window.onload = function(){
 			             console.log("time: " + time);
 			             timeGap = time - currTime;
 			             console.log("gap: " + timeGap);
-			             if(timeGap == 30)
+			             if(timeGap == 0)
 			             {
 			            	 memNoti();
 								return false;

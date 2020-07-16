@@ -24,5 +24,17 @@ public class PrescriptionServiceImpl implements PrescriptionService{
 	public int insertPre(Map map) {
 		return dao.insertPre(map);
 	}
+
+	@Override
+	public int takePills(Map map) {
+		// TODO Auto-generated method stub
+		return dao.takePills(map);
+	}
+
+	@Override
+	public int getCurrCount(Map map) {
+		// TODO Auto-generated method stub
+		return dao.getCurrCount(map);
+	}
 	
 }

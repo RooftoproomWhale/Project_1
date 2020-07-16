@@ -84,11 +84,11 @@ $(function() {
 			      body: text,
 			      icon: icon
 		  	}
-			var noti = new Notification('예약 알림이 있습니다', options)
+			var noti = new Notification('새로운 제휴 신청이 있습니다', options)
 			
 			noti.onclick = function(event) {
 				console.log('noti click');
-				window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+				window.location.href = "<c:url value='/Admin/HosAuth.hst'/>";
 			};
 		}
 	

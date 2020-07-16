@@ -87,6 +87,7 @@ public class GoogleVisionController {
 		String duration = "";
 		String hospital = "";
 		String count = "";
+		int remainingCount = 0;
 		//new FileInputStream(fileName)
 		ByteString imgBytes = ByteString.readFrom(file.getInputStream());
 		Image img = Image.newBuilder().setContent(imgBytes).build();
@@ -119,18 +120,19 @@ public class GoogleVisionController {
 										presDate = presDate + symbol.getText();
 									}
 								}
-								/*복용횟수*/
-								if(min_x>=(width*0.56) && max_x<=(width*0.6) && min_y>=(height*0.35) && max_y<=(height*0.39)) {
-									System.out.println(word);
-									for (Symbol symbol: word.getSymbolsList()) {
-										count = count + symbol.getText();
-									}
-								}
 								/*복용기간*/
 								if(min_x>=120 && max_x<=158 && min_y>=110 && max_y<=130) {
 									System.out.println(word);
 									for (Symbol symbol: word.getSymbolsList()) {
 										duration = duration + symbol.getText();
+									}
+								}
+								/*복용횟수*/
+								if(min_x>=(width*0.56) && max_x<=(width*0.6) && min_y>=(height*0.35) && max_y<=(height*0.39)) {
+									System.out.println(word);
+									for (Symbol symbol: word.getSymbolsList()) {
+										count = count + symbol.getText();
+										remainingCount = Integer.parseInt(count) * Integer.parseInt(duration);
 									}
 								}
 								/*진료기관*/
@@ -207,7 +209,7 @@ public class GoogleVisionController {
 		map.put("pres_date", pres_date);
 		map.put("duration",duration);
 		map.put("hos_name",hospital);
-		map.put("count",count);
+		map.put("count", remainingCount);
 		
 		service.insertPre(map);
 		
