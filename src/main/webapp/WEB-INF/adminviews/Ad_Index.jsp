@@ -84,7 +84,7 @@ $(function() {
 			      body: text,
 			      icon: icon
 		  	}
-			var noti = new Notification('예약 알림이 있습니다', options)
+			var noti = new Notification('새로운 제휴 신청이 있습니다', options)
 			
 			noti.onclick = function(event) {
 				console.log('noti click');
@@ -214,7 +214,7 @@ $(function() {
 	    	                beginAtZero: true,
 	    	                maxTicksLimit: 1,
 	    	                stepSize: 10,
-	    	                max: 50,
+	    	                max: 60,
 	    	                fontFamily: "Poppins",
 	    	                fontSize: 12
 	    	              },

@@ -159,8 +159,11 @@ public class NotificationController {
 	@RequestMapping("/Noti/androidFCM.hst")
 	public int androidFCM(@RequestParam Map map, Model model, Authentication auth)
 	{
-
+		
+//		신건웅
 		String tokenId="dlnZZSKAT20:APA91bHfEEG_DUZmG52zoKHXhIOkHbYAHSD2o1PLnVt6RbAuutkGuNlci5M07vVXozVPdtatGTsTqovYIJUDN5x29uTFLczHIVSgC1eT7A_cKdAUfDzjFvSgw3dgN9Uix8_oCFks449E";
+//		윤성준
+//		String tokenId="dg_JwbyU3dg:APA91bEQn6_sF0YzLhml495282pt6bJfs2KRRysGRyFjRDiE7kbCc5A33p412_5hyD0wkHcmre6Lb1KfZi-wr1yHbtWNizovyS_BsW0ZEwkId2hYLvT5IrqjFvjatlPZ0mtd3jQ2-UBf";
 		String title="복약 알림입니다";
 		String content = "지금 복용해야할 약이 있습니다";
 		

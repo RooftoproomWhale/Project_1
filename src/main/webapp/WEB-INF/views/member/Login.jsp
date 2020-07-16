@@ -111,7 +111,7 @@ form{
 }
 #footer
 {
-   top:820px
+	top:820px
 }
 </style>
 <sec:authorize access="isAnonymous()">

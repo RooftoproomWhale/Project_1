@@ -80,7 +80,7 @@ padding-bottom: 150px}
                 <div class="top-campaign">
                     <h3 class="title-3 m-b-30"> 개인정보 </h3>
                     <div class="table-responsive">
-                        <table class="table table-top-campaign">
+                        <table class="table table-top-campaign"></br></br>
                             <tbody>
                            
                                 <tr>
@@ -123,7 +123,7 @@ padding-bottom: 150px}
                 <div class="top-campaign">
                     <h3 class="title-3 m-b-30"> 질환 정보 </h3>
                     <div class="table-responsive">
-                        <table class="table table-top-campaign">
+                        <table class="table table-top-campaign"></br></br>
                             <tbody>
                                 <tr>
                                     <td>자주 방문하는 병원</td>
