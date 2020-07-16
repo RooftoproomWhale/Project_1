@@ -19,7 +19,21 @@
         .jssora051:hover {opacity:.8;}
         .jssora051.jssora051dn {opacity:.5;}
         .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
-        
+       
+        #news {
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
+@-webkit-keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
 #footer{
 	top:2250px;
 }
@@ -532,7 +546,7 @@ window.onload = function(){
 					type:'get',
 					dataType:"json",
 					success:function(data){
-						var news = "<table class='table' style='width:80%;border: 2px solid rgba(0,0,0,.12);'>";
+						var news = "<table class='table' id='news' style='width:80%;border: 2px solid rgba(0,0,0,.12);'>";
 			if(data.length==0){
 							news+="<li>뉴스 데이터가 없습니다</li>";
 						} 
