@@ -39,4 +39,10 @@ public class ChatBotServiceImpl implements ChatBotService{
 		return dao.insertReservation(map);
 	}
 
+	@Override
+	public List<Map> selectHospitalList(Map map) {
+		// TODO Auto-generated method stub
+		return dao.selectHospitalList(map);
+	}
+
 }
