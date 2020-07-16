@@ -26,6 +26,18 @@
 header .intro-text {
     padding-top: 287px;
 }
+.sectionOne
+{
+    opacity:0;
+    margin-top:-100px;    
+    max-width:100%;
+}
+.sectionTwo
+{
+    opacity:0;
+    margin-top:300px;    
+    max-width:100%;
+}
 </style>
 <script>
 window.onload = function(){
@@ -357,6 +369,7 @@ window.onload = function(){
 	</header>
 
 	<div class="container-fluid">
+	<div class="sectionOne">
 		<div class="row" style="padding-top: 50px">
 			<div class="col-md-5 col-md-offset-1 col-sm-12">
 				<div id="jssor_1"
@@ -429,10 +442,12 @@ window.onload = function(){
 				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px;"></div>
 			</div>
 		</div>
+		</div>
 	
 
 
 	<!-- Services Section -->
+	<div class="sectionTwo">
 	<div id="services" class="text-center">
 		<div class="container">
 			<div class="section-title">
@@ -495,6 +510,7 @@ window.onload = function(){
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 </body>
 <script>
@@ -570,6 +586,30 @@ window.onload = function(){
 			})
 			
 		}
+		
+		$(window).scroll( function(){
+	        $('.sectionOne').each( function(i){
+	            
+	            var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+	            var bottom_of_window = $(window).scrollTop() + $(window).height();
+	            
+	            if( bottom_of_window > bottom_of_element - 100 ){
+	                $(this).animate({'opacity':'1','margin-top':'0px'}, 1000);
+	            }
+	            
+	        }); 
+	        
+			$('.sectionTwo').each( function(i){
+	            
+	            var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+	            var bottom_of_window = $(window).scrollTop() + $(window).height();
+	            
+	            if( bottom_of_window > bottom_of_element - 900 ){
+	                $(this).animate({'opacity':'1','margin-top':'0px'}, 1200);
+	            }
+	            
+	        }); 
+	    });
 		
 	});
 	
