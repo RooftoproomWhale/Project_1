@@ -104,21 +104,14 @@ public class GoogleVisionController {
 		/*일일 복용 횟수*/
 		String count = "";
 		
+		int remainingCount = 0;
+		//new FileInputStream(fileName)
+		
 		BufferedImage bi = ImageIO.read(file.getInputStream());
 		int height = bi.getHeight();
 		int width = bi.getWidth();
 		List<AnnotateImageRequest> requests = new ArrayList<>();
-<<<<<<< HEAD
-=======
-		String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
-		String presDate = "";
-		StringBuffer medi_name = new StringBuffer();
-		String duration = "";
-		String hospital = "";
-		String count = "";
-		int remainingCount = 0;
-		//new FileInputStream(fileName)
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
+
 		ByteString imgBytes = ByteString.readFrom(file.getInputStream());
 		Image img = Image.newBuilder().setContent(imgBytes).build();
 		Feature feat = Feature.newBuilder().setType(Type.DOCUMENT_TEXT_DETECTION).build();

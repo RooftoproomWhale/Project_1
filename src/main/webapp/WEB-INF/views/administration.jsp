@@ -3,92 +3,135 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
-<style>
-	table {
-		width: 100%;
-	}
-	table th {
-		text-align:center;
-		border-bottom: 2px solid gray;
-		background-color: #EDFFFF;
-		padding: 3px;
-	}
-	
-	table td {
-		border-bottom: 1px solid gray;
-		padding: 3px;
-	}
-	
-	table tr:last-child td {
-		border:none;
-	}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
 
-	a:hover {
-		color: blue;
-	}
+
+<style>
+table {
+	width: 100%;
+}
+
+table th {
+	text-align: center;
+	border-bottom: 2px solid gray;
+	background-color: #EDFFFF;
+	padding: 3px;
+}
+
+table td {
+	border-bottom: 1px solid gray;
+	padding: 3px;
+}
+
+table tr:last-child td {
+	border: none;
+}
+
+a:hover {
+	color: blue;
+}
+
+input #timePicker {
+	border: 2px solid whitesmoke;
+	border-radius: 20px;
+	padding: 12px 10px;
+	text-align: center;
+	width: 250px;
+}
 </style>
 <script>
-$(function(){
-	
-	$("#takePill0").on('click', function() {
+	$(function() {
+
+		$("#takePill0").on('click', function() {
 			alert('지금 복용하시겠습니까?');
-        });
-	
-	console.log('실행전');
-	showList();
-	function showList(){
-		$.ajax({
-			url:"<c:url value='/mapping/mappingList.hst'/>",
-			type:'post',
-			success:showList_,
-			error:function(e){console.log('에러:',e)}
-		});			
-	};
-	
-	function showList_(data){	
-		var comments="";
-		$('#name').html(JSON.parse(data)[0]['MEM_NAME']+'님');
-		if(data=='[]'){
-			comments+="<img style='width:300px;height:auto' src='"+'<c:url value="/images/medicine/notPres.png"/>'+"'/>";
-			comments+="<h3>등록된 처방전이 없어요!</h3>";
-		}
-		else{
-			
-			$.each(JSON.parse(data),function(i,element){
-				var count = Number(element['COUNT']);
-				var alarmTime='<form>';
-				for(k=1;k<=count;k++){
-					alarmTime +='<div class="form-group"><input type="time" pattern="([1]?[0-9]|2[0-3]):[0-5][0-9]"></div>';
+		});
+
+		console.log('실행전');
+		showList();
+		function showList() {
+			$.ajax({
+				url : "<c:url value='/mapping/mappingList.hst'/>",
+				type : 'post',
+				success : showList_,
+				error : function(e) {
+					console.log('에러:', e)
 				}
-				alarmTime+='</form>';
-				$('#alarmBody').html(alarmTime);
-				comments+="<div class='panel panel-default'>";
-				comments+='<div class="panel-heading col-md-11" role="tab" id="heading'+i+'">';
-				comments+='<h4 class="panel-title">';
-				comments+='<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
-				comments+=element['HOS_NAME']+" : "+element['PRES_DATE']+"</a></h4></div>";
-				comments+='<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
-				comments+='<div style="margin:0;padding:0" class="panel-body"><table class="table-striped">';
-				comments+='<thead><th><h3>약품명</h3></th><th><h3>총복용일수</h3></th><th><h3>남은 복용 횟수</h3></th><th><h3><span id="takePill'+i+'"><a href="<c:url value="/Administration/takePills.hst?preNo='+ element['PRE_NO'] +'"/>">복용하기</a></span></h3></th></thead>';
-				$.each(element['MEDI_NAME'].split(','),function(k,val){
-					if(val!=""){
-						comments+="<tbody><tr>"
-						comments+="<td><a href='";
-						comments+='<c:url value="/Homespital/Management.hst?dname='+val+'"/>';
-						comments+="'>";
-						comments+="<h4>"+val+"</h4></a></td>";
-						comments+="<td><h4>"+element['DURATION']+" 일 </h4></td>";
-						comments+="<td><h4>"+element['COUNT']+" 회 </h4></td></tr></tbody>";
-					}
-				})
-				comments+="</table></div></div></div>";
 			});
 		}
-		$('#accordion').html(comments);
-	};
-	
-});
+		;
 
+		function showList_(data) {
+			var comments = "";
+			$('#name').html(JSON.parse(data)[0]['MEM_NAME'] + '님');
+			if (data == '[]') {
+				comments += "<img style='width:300px;height:auto' src='"
+						+ '<c:url value="/images/medicine/notPres.png"/>'
+						+ "'/>";
+				comments += "<h3>등록된 처방전이 없어요!</h3>";
+			} else {
+
+				$
+						.each(
+								JSON.parse(data),
+								function(i, element) {
+									var count = Number(element['COUNT']);
+									var mediArr = element['MEDI_NAME']
+											.split(',');
+									console.log('길이:' + mediArr.length);
+									
+									comments += "<div class='panel panel-default'>";
+									comments += '<div class="panel-heading col-md-11" role="tab" id="heading'+i+'">';
+									comments += '<h4 class="panel-title">';
+									comments += '<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
+									comments += element['HOS_NAME'] + " : "
+											+ element['PRES_DATE'];
+									if (element['COUNT'] == "0") {
+										comments += "<span style='color:red'> [복용이 끝난 약입니다]</span></a></h4></div>";
+									}
+									comments += '</a></h4></div><div data-toggle="modal" data-target="#alarmModal" ><a style="text-align:left;" class="btn col-md-1"><img alt="알람설정" src="../images/alarm.png"></a></div>';
+									comments += '<div style="padding:0 5px 0 5px;" id="collapse'+i+'" class="panel-collapse collapse col-md-11" role="tabpanel">';
+									comments += '<div style="padding:0" class="panel-body"><table class="table-striped">';
+									comments += '<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
+									comments += '<div style="margin:0;padding:0" class="panel-body"><table class="table-striped">';
+									comments += '<tr><td><h3>약품명</h3></td><td><h3>총복용일수</h3></td><td><h3>남은 복용 횟수</h3></td><td rowspan="'
+											+ (element["MEDI_NAME"].split(",").length + 1)
+											+ '"><h3><span id="takePill'+i+'"><a href="<c:url value="/Administration/takePills.hst?preNo='
+											+ element['PRE_NO']
+											+ '"/>"><img alt="복용하기" src="../images/icon/drugeat.png"></a></span></h3></td></tr>';
+
+									$
+											.each(
+													element['MEDI_NAME']
+															.split(','),
+													function(k, val) {
+														if (val != "") {
+															comments += "<tr>"
+															comments += "<td><a href='";
+															comments += '<c:url value="/Homespital/Management.hst?dname='
+																	+ val
+																	+ '"/>';
+															comments += "'>";
+															comments += "<h4>"
+																	+ val
+																	+ "</h4></a></td>";
+															comments += "<td><h4>"
+																	+ element['DURATION']
+																	+ " 일 </h4></td>";
+															comments += "<td><h4>"
+																	+ element['COUNT']
+																	+ " 회 </h4></td></tr>";
+														}
+
+													})
+									comments += "</table></div></div></div>";
+								});
+			}
+			$('#accordion').html(comments);
+		}
+		;
+
+	});
 </script>
 <style>
 .upload-box {
@@ -570,6 +613,13 @@ body {
 	cursor: inherit;
 	display: block;
 }
+#timePicker{
+  border: 2px solid whitesmoke;
+  border-radius: 20px;
+  padding: 12px 10px;
+  text-align: center;
+  width: 250px;
+}
 </style>
 
 <head>
@@ -683,17 +733,19 @@ body {
         <h4 class="modal-title" id="myModalLabel"><img src='<c:url value="/images/alarm.png"/>'>복용 알람 설정</h4>
       </div>
       <div id="alarmBody" class="modal-body">
+      	 <h2>Time Picker</h2>
+    	<input type="text" id="timePicker" placeholder="Please select Time">
+ 		</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary">알람설정</button>
       </div>
     </div>
   </div>
-</div>
 
 
 <script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <script type="text/javascript">
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
@@ -746,6 +798,14 @@ body {
 	})
 </script>
 
+<script>
+$("#timePicker").flatpickr({
+    enableTime: true,
+    noCalendar: true,
+    time_24hr: true,
+    dateFormat: "H:i",
+});
+</script>
 <script>
 	var sel_file;
 	$(function(){
