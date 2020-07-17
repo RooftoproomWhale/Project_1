@@ -110,22 +110,12 @@ function receiveMsgFromChild( e ) {
                         </div>
                         </div>
                         <sec:authorize access="hasRole('ROLE_MEM')">
-<<<<<<< HEAD
                         <sec:authentication var="principal" property="principal" /><iframe id="iframe">
 	                        style="min-height: 60vh;"
 	                        width="100%"
 	                        height="90%"
 	                        src="https://0b18246f1149.ngrok.io/?mem_email=${principal.username}">
 
-=======
-                        <sec:authentication var="principal" property="principal" /><iframe
-	                      	id="iframe"
-	                         style="min-height: 60vh;"
-	                         width="100%"
-	                         height="90%"
-	                         src="https://0b18246f1149.ngrok.io?mem_email=${principal.username}">
-	                     
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 	                     </iframe>
 	                     
 	                 </sec:authorize>

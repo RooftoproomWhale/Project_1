@@ -10,4 +10,8 @@ public interface PrescriptionService {
 	//약 복용
 	int getCurrCount(Map map);
 	int takePills(Map map);
+	//알람설정
+	int alarmInsert(Map map);
+	int alarmDelete(Map map);
+	List<Map> alarmSelect(String preno);
 }

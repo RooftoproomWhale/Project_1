@@ -3,8 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link href="<c:url value='/css/jquery-accordion-menu.css'/>" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
+<link rel='stylesheet' type='text/css'href='<c:url value="/css/timepicker/timepicker.css"/>'/>
+<script type='text/javascript'src='<c:url value="/js/jquery.min.js"/>'></script>
 
 
 <style>
@@ -41,6 +41,7 @@ input #timePicker {
 }
 </style>
 <script>
+
 	$(function() {
 
 		$("#takePill0").on('click', function() {
@@ -65,67 +66,47 @@ input #timePicker {
 			var comments = "";
 			$('#name').html(JSON.parse(data)[0]['MEM_NAME'] + '님');
 			if (data == '[]') {
-				comments += "<img style='width:300px;height:auto' src='"
-						+ '<c:url value="/images/medicine/notPres.png"/>'
-						+ "'/>";
+				comments += "<img style='width:300px;height:auto' src='" + '<c:url value="/images/medicine/notPres.png"/>' + "'/>";
 				comments += "<h3>등록된 처방전이 없어요!</h3>";
 			} else {
+				$.each( JSON.parse(data), function(i, element) { 
+					var count = Number(element['COUNT']);
+					var mediArr = element['MEDI_NAME'] .split(',');
+					comments += "<div class='panel panel-default'>";
+					comments += '<div class="panel-heading col-md-11" role="tab" id="heading'+i+'">';
+					comments += '<h4 class="panel-title">';
+					comments += '<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
+					comments += element['HOS_NAME'] + " : "
+							+ element['PRES_DATE'];
+					if (element['COUNT'] == "0") {
+						comments += "<span style='color:red'> [복용이 끝난 약입니다]</span></a></h4></div>";
+					}
+					comments += '</a></h4></div><div data-toggle="modal" data-target="#alarmModal" data-preno="'+element['PRE_NO']+'"><a style="text-align:left;" class="btn col-md-1"><img alt="알람설정" src="../images/alarm.png"></a></div>';
+					comments += '<div style="padding:0 5px 0 5px;" id="collapse'+i+'" class="panel-collapse collapse col-md-11" role="tabpanel">';
+					comments += '<div style="padding:0" class="panel-body"><table class="table-striped">';
+					comments += '<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
+					comments += '<div style="margin:0;padding:0" class="panel-body"><table class="table-striped">';
+					comments += '<tr><td><h3>약품명</h3></td><td><h3>총복용일수</h3></td><td><h3>남은 복용 횟수</h3></td><td rowspan="'
+							+ (element["MEDI_NAME"].split(",").length + 1)
+							+ '"><h3><span><a id="takePill'+i+'" href="<c:url value="/Administration/takePills.hst?preNo='
+							+ element['PRE_NO']
+							+ '"/>"><img alt="복용하기" src="../images/icon/drugeat.png"></a></span></h3></td></tr>';
 
-				$
-						.each(
-								JSON.parse(data),
-								function(i, element) {
-									var count = Number(element['COUNT']);
-									var mediArr = element['MEDI_NAME']
-											.split(',');
-									console.log('길이:' + mediArr.length);
-									
-									comments += "<div class='panel panel-default'>";
-									comments += '<div class="panel-heading col-md-11" role="tab" id="heading'+i+'">';
-									comments += '<h4 class="panel-title">';
-									comments += '<a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+i+'">';
-									comments += element['HOS_NAME'] + " : "
-											+ element['PRES_DATE'];
-									if (element['COUNT'] == "0") {
-										comments += "<span style='color:red'> [복용이 끝난 약입니다]</span></a></h4></div>";
-									}
-									comments += '</a></h4></div><div data-toggle="modal" data-target="#alarmModal" ><a style="text-align:left;" class="btn col-md-1"><img alt="알람설정" src="../images/alarm.png"></a></div>';
-									comments += '<div style="padding:0 5px 0 5px;" id="collapse'+i+'" class="panel-collapse collapse col-md-11" role="tabpanel">';
-									comments += '<div style="padding:0" class="panel-body"><table class="table-striped">';
-									comments += '<div id="collapse'+i+'" class="panel-collapse collapse" role="tabpanel">';
-									comments += '<div style="margin:0;padding:0" class="panel-body"><table class="table-striped">';
-									comments += '<tr><td><h3>약품명</h3></td><td><h3>총복용일수</h3></td><td><h3>남은 복용 횟수</h3></td><td rowspan="'
-											+ (element["MEDI_NAME"].split(",").length + 1)
-											+ '"><h3><span id="takePill'+i+'"><a href="<c:url value="/Administration/takePills.hst?preNo='
-											+ element['PRE_NO']
-											+ '"/>"><img alt="복용하기" src="../images/icon/drugeat.png"></a></span></h3></td></tr>';
-
-									$
-											.each(
-													element['MEDI_NAME']
-															.split(','),
-													function(k, val) {
-														if (val != "") {
-															comments += "<tr>"
-															comments += "<td><a href='";
-															comments += '<c:url value="/Homespital/Management.hst?dname='
-																	+ val
-																	+ '"/>';
-															comments += "'>";
-															comments += "<h4>"
-																	+ val
-																	+ "</h4></a></td>";
-															comments += "<td><h4>"
-																	+ element['DURATION']
-																	+ " 일 </h4></td>";
-															comments += "<td><h4>"
-																	+ element['COUNT']
-																	+ " 회 </h4></td></tr>";
-														}
-
-													})
-									comments += "</table></div></div></div>";
-								});
+					$.each(
+						element['MEDI_NAME'] .split(','),
+						function(k, val) {
+							if (val != "") {
+								comments += "<tr>"
+								comments += "<td><a href='";
+								comments += '<c:url value="/Homespital/Management.hst?dname=' + val + '"/>';
+								comments += "'>";
+								comments += "<h4>" + val + "</h4></a></td>";
+								comments += "<td><h4>" + element['DURATION'] + " 일 </h4></td>";
+								comments += "<td><h4>" + element['COUNT'] + " 회 </h4></td></tr>";
+							}
+						})
+					comments += "</table></div></div></div>";
+				});
 			}
 			$('#accordion').html(comments);
 		}
@@ -618,7 +599,7 @@ body {
 	cursor: inherit;
 	display: block;
 }
-<<<<<<< HEAD
+
 #timePicker{
   border: 2px solid whitesmoke;
   border-radius: 20px;
@@ -626,9 +607,7 @@ body {
   text-align: center;
   width: 250px;
 }
-=======
 
->>>>>>> branch 'master' of https://github.com/RooftoproomWhale/Project_1.git
 </style>
 
 <head>
@@ -653,7 +632,7 @@ body {
 					</div>
 					<br /><br /><br />
 					<div class="button-container" style="padding-bottom: 10px">
-						 <div class='button -blue center' data-toggle="modal" data-target=".bs-example-modal-lg">
+						 <div class='button -blue center' data-toggle="modal" data-target="#vision">
 						 	<i class="fas fa-plus"></i> 복용약 추가</div>
 					</div>
 					<div style="text-align: center;" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -664,7 +643,7 @@ body {
 	</div>
 </body>
 
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+<div class="modal fade bs-example-modal-lg" tabindex="-1" id="vision" role="dialog">
 	<div class="modal-dialog modal-lg">
     	<div class="modal-content" style="text-align: center;">
     	<form action="<c:url value='/mapping/mapping.hst'/>" method="post" enctype="multipart/form-data">
@@ -734,29 +713,116 @@ body {
 </div>
 -->
 
-<div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"><img src='<c:url value="/images/alarm.png"/>'>복용 알람 설정</h4>
-      </div>
-      <div id="alarmBody" class="modal-body">
-      	 <h2>Time Picker</h2>
-    	<input type="text" id="timePicker" placeholder="Please select Time">
- 		</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">알람설정</button>
-      </div>
-    </div>
-  </div>
+<div class="modal fade" id="alarmModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<img src='<c:url value="/images/alarm.png"/>'>복용 알람 설정
+				</h4>
+			</div>
+			<div id="alarmBody" class="modal-body">
+				<div>
+					<form id="alarmForm">
+						<input type="hidden" id="preno" name="preno" value="1234"/>
+						<div>
+						<label> 아 침 </label>
+						<input id='timepickerM' type='text' class="timepicker" name='timepickerM'/>
+						</div>
+						<div>
+						<label> 점 심 </label>
+						<input id='timepickerA' type='text' class="timepicker" name='timepickerA'/>
+						</div>
+						<div>
+						<label> 저 녁 </label>
+						<input id='timepickerE' type='text' class="timepicker" name='timepickerE'/>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button onclick="javascript:alarmfn()" id="alarmbtn" type="button" class="btn btn-primary">알람설정</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 <script src="<c:url value='/js/jquery-accordion-menu.js'/>" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+<script type='text/javascript'src='<c:url value="/js/timepicker/timepicker.js"/>'></script>
+
+<script>
+$(document).ready(function() {
+		$('#alarmModal').on('show.bs.modal', function (event) {
+			var button = $(event.relatedTarget);
+			var preno = button.data('preno');
+			console.log(preno);
+			$.ajax({
+				url : "<c:url value='/alarmSelec.hst'/>",
+				type : 'post',
+				data : {'preno':preno},
+				success : function(data){
+					console.log(data);
+					if (data == '[]') {
+						$('#timepickerM').val('09 : 00');
+						$('#timepickerA').val('12 : 00');
+						$('#timepickerE').val('18 : 00');
+					} else {
+						$('#timepickerM').val(JSON.parse(data)[0]['ALARM']);
+						$('#timepickerA').val(JSON.parse(data)[1]['ALARM']);
+						$('#timepickerE').val(JSON.parse(data)[2]['ALARM']);
+					}
+				},
+				error : function(e) {
+					console.log('에러:', e)
+				}
+			})
+			$('#preno').val(preno);
+			console.log($('#preno').val());
+		})
+	});
+</script>
+
+<script>
+function alarmfn(){
+var params = jQuery("#alarmForm").serialize();
+	$.ajax({
+		url : "<c:url value='/alarm.hst'/>",
+		type : 'post',
+		data : params,
+		success : function(){
+			$('#alarmModal').modal('hide');
+		},
+		error : function(e) {
+			console.log('에러:', e)
+		}
+	});
+}
+</script>
+
+<script>
+var options = { now: "12:35", //hh:mm 24 hour format only, defaults to current time 
+		twentyFour: true, //Display 24 hour format, defaults to false 
+		upArrow: 'wickedpicker__controls__control-up', //The up arrow class selector to use, for custom CSS 
+		downArrow: 'wickedpicker__controls__control-down', //The down arrow class selector to use, for custom CSS 
+		close: 'wickedpicker__close', //The close class selector to use, for custom CSS 
+		hoverState: 'hover-state', //The hover state class to use, for custom CSS 
+		title: '알람시간', //The Wickedpicker's title, s
+		showSeconds: false, //Whether or not to show seconds, 
+		secondsInterval: 1, //Change interval for seconds, defaults to 1 , 
+		minutesInterval: 1, //Change interval for minutes, defaults to 1 
+		beforeShow: null, //A function to be called before the Wickedpicker is shown 
+		show: null, //A function to be called when the Wickedpicker is shown 
+		clearable: false, //Make the picker's input clearable (has clickable "x") 
+		};
+	var timepicker = $('.timepicker').wickedpicker(options);
+</script>
+
 <script type="text/javascript">
-	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
 			return (a.textContent || a.innerText || "").toUpperCase().indexOf(
 					m[3].toUpperCase()) >= 0;
@@ -807,14 +873,6 @@ body {
 	})
 </script>
 
-<script>
-$("#timePicker").flatpickr({
-    enableTime: true,
-    noCalendar: true,
-    time_24hr: true,
-    dateFormat: "H:i",
-});
-</script>
 <script>
 	var sel_file;
 	$(function(){

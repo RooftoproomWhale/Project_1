@@ -71,6 +71,37 @@ public class GoogleVisionController {
 		return JSONArray.toJSONString(list);
 	}
 
+	@ResponseBody
+	@RequestMapping(value="/alarm.hst",produces = "text/html; charset=UTF-8")
+	public void alarm(@RequestParam Map params,Map map) {
+		System.out.println(params.get("preno"));
+		map.put("preno", params.get("preno"));
+		service.alarmDelete(map);
+		map.put("alarm", params.get("timepickerM").toString().replace(" : ",""));
+		service.alarmInsert(map);
+		map.put("alarm", params.get("timepickerA").toString().replace(" : ",""));
+		service.alarmInsert(map);
+		map.put("alarm", params.get("timepickerE").toString().replace(" : ",""));
+		service.alarmInsert(map);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/alarmSelec.hst",produces = "text/html; charset=UTF-8")
+	public String alarm(@RequestParam String preno,Map map) {
+		System.out.println(preno);
+		List<Map> list = service.alarmSelect(preno);
+		for(Map premap:list) {
+			String alarm = premap.get("ALARM").toString().substring(0,2)+" : "+premap.get("ALARM").toString().substring(2,4);
+			premap.put("ALARM",alarm);
+		}
+		return JSONArray.toJSONString(list);
+	}
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping("/mapping/mapping.hst")
 	public String vision(MultipartHttpServletRequest req,Authentication auth,Map map) throws IOException {
