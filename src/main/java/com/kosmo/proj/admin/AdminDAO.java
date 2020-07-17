@@ -636,13 +636,13 @@ public class AdminDAO implements AdminService {
 	@Override
 	public int getTotalRecordHosAuthApp(Map map) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectOne("count", map);
+		return sqlMapper.selectOne("countRecordHosAuthApp", map);
 	}
 
 	@Override
 	public int getTotalRecordHosAuthWait(Map map) {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectOne("", map);
+		return sqlMapper.selectOne("countRecordHosAuthWait", map);
 	}
 
 }
