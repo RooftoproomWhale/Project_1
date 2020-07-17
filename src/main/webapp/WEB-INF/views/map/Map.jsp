@@ -860,6 +860,7 @@
 					{
 						alert("이미 오늘 이 병원에 예약을 하셨습니다");
 					}
+
 				},
 				error:function(e){
 		            console.log(e);   
@@ -1779,8 +1780,45 @@
                      var item = '';
                      if(apiStatus == 0)
                      {
-                        console.log(jsonData[0]['HOSP_NAME']);
-                        item = getDetailHospItem(jsonData[0]['HOSP_NAME'],jsonData[0]['DEPT_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'],jsonData[0]['WEEKDAY_OPEN'],jsonData[0]['LUNCHTIME'],coords.getLat(),coords.getLng())
+                        console.log("detailView:",jsonData[0]['WEEKDAY_OPEN'],jsonData[0]['LUNCHTIME']);
+                        console.log("detailView:",jsonData[0]['WEEKDAY_OPEN'],jsonData[0]['LUNCHTIME']);
+                        
+                        var weekday_open = ((jsonData[0]['WEEKDAY_OPEN'] == undefined || jsonData[0]['WEEKDAY_OPEN'] == '0' || jsonData[0]['WEEKDAY_OPEN'].length == 0 || jsonData[0]['WEEKDAY_OPEN'] == '') ? '800' : jsonData[0]['WEEKDAY_OPEN'] + '')
+                        var weekday_close = ((jsonData[0]['WEEKDAY_CLOSE'] == undefined || jsonData[0]['WEEKDAY_CLOSE'] == '0' || jsonData[0]['WEEKDAY_CLOSE'].length == 0 || jsonData[0]['WEEKDAY_CLOSE'] == '') ? '2200' : jsonData[0]['WEEKDAY_CLOSE'] + '')
+                        var weekend_open = ((jsonData[0]['WEEKEND_OPEN'] == undefined || jsonData[0]['WEEKEND_OPEN'] == '0' || jsonData[0]['WEEKEND_OPEN'].length == 0 || jsonData[0]['WEEKEND_OPEN'] == '') ? '900' : jsonData[0]['WEEKEND_OPEN'] + '')
+                        var weekend_close = ((jsonData[0]['WEEKEND_CLOSE'] == undefined || jsonData[0]['WEEKEND_CLOSE'] == '0' || jsonData[0]['WEEKEND_CLOSE'].length == 0 || jsonData[0]['WEEKEND_CLOSE'] == '') ? '1200' : jsonData[0]['WEEKEND_CLOSE'] + '')
+                        var lunchtime = ((jsonData[0]['LUNCHTIME'] == undefined || jsonData[0]['LUNCHTIME'] == '0' || jsonData[0]['LUNCHTIME'].length == 0 || jsonData[0]['LUNCHTIME'] == '') ? '12:30~1:30' : jsonData[0]['LUNCHTIME'] + '')
+
+                        console.log("weekday_open:",weekday_open);
+                        console.log("weekday_close:",weekday_close);
+                        console.log("weekend_open:",weekend_open);
+                        console.log("weekend_close:",weekend_close);
+                        console.log("lunchtime:",lunchtime);
+                        
+                        var weekday_open_H = weekday_open.substring(0,parseInt(weekday_open.length/2));
+   	               	    console.log("weekday_open",weekday_open_H);
+   	               	    var weekday_open_M = weekday_open.substring(parseInt(weekday_open.length/2),weekday_open.length);
+   	               	    console.log("weekday_open",weekday_open_M);
+   	               	  
+   	               	    var weekday_close_H = weekday_close.substring(0,parseInt(weekday_close.length/2));
+   	               	    console.log("weekday_close",weekday_close_H);
+   	               	    var weekday_close_M = weekday_close.substring(parseInt(weekday_close.length/2),weekday_close.length);
+   	               	 	console.log("weekday_close",weekday_close_M);
+   	               	  
+   	               	 	var weekend_open_H = weekend_open.substring(0,parseInt(weekend_open.length/2));
+   	               	 	console.log("weekend_open",weekend_open_H);
+   	               	 	var weekend_open_M = weekend_open.substring(parseInt(weekend_open.length/2),weekend_open.length);
+   	               	 	console.log("weekend_open",weekend_open_M);
+   	               	  
+   	               	 	var weekend_close_H = weekend_close.substring(0,parseInt(weekend_close.length/2));
+   	               	 	console.log("weekend_close",weekend_close_H);
+   	               	 	var weekend_close_M = weekend_close.substring(parseInt(weekend_close.length/2),weekend_close.length);
+   	               		console.log("weekend_close",weekend_close_M);
+                       
+                        var time = "평일 : " + weekday_open_H + ":" + weekday_open_M + "~" + weekday_close_H + ":"+weekday_close_M+"<br/>" 
+                        + "주말 : " + weekend_open_H + ":" + weekend_open_M + "~" + weekend_close_H + ":"+ weekend_close_M;
+                        
+                        item = getDetailHospItem(jsonData[0]['HOSP_NAME'],jsonData[0]['DEPT_NAME'],jsonData[0]['ADDRESS'],jsonData[0]['TEL'],time,lunchtime,coords.getLat(),coords.getLng())
                      }
                      else if (apiStatus == 1)
                      {
