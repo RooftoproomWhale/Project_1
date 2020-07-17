@@ -40,4 +40,10 @@ public class ChatBotDAO implements ChatBotService{
 		return sqlMapper.insert("InsertReservation", map);
 	}
 
+	@Override
+	public List<Map> selectHospitalList(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("searchHospital", map);
+	}
+
 }
