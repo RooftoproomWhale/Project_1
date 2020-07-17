@@ -90,10 +90,12 @@ public class GoogleVisionController {
 	public String alarm(@RequestParam String preno,Map map) {
 		System.out.println(preno);
 		List<Map> list = service.alarmSelect(preno);
-		for(Map premap:list) {
-			String alarm = premap.get("ALARM").toString().substring(0,2)+" : "+premap.get("ALARM").toString().substring(2,4);
-			premap.put("ALARM",alarm);
-		}
+		String alarm = list.get(0).get("ALARM").toString().substring(0,2)+" : "+list.get(0).get("ALARM").toString().substring(2,4);
+		list.get(0).put("ALARM",alarm);
+		alarm = list.get(1).get("ALARM").toString().substring(0,2)+" : "+list.get(1).get("ALARM").toString().substring(2,4);
+		list.get(1).put("ALARM",alarm);
+		alarm = list.get(2).get("ALARM").toString().substring(0,2)+" : "+list.get(2).get("ALARM").toString().substring(2,4);
+		list.get(2).put("ALARM",alarm);
 		return JSONArray.toJSONString(list);
 	}
 	
