@@ -113,4 +113,10 @@ public class MapServiceImpl implements MapService{
 		return dao.selectHospListByAddr(map);
 	}
 
+	@Override
+	public boolean isAnotherReservation(Map map) {
+		// TODO Auto-generated method stub
+		return dao.isAnotherReservation(map);
+	}
+
 }

@@ -109,15 +109,27 @@
 		AND mem_email = #{email}
 		AND res_date = #{datepick} 
 	</select>
+	<select	id="isAnotherReservation" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) FROM reservation 
+		WHERE hosp_Code != (SELECT hosp_code FROM hospital WHERE address = #{address}) 
+		AND mem_email = #{email}
+		AND RES_DATE = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	</select>
 	<insert id="InsertReservation" parameterType="java.util.Map">
 		INSERT INTO reservation VALUES(SEQ_RESERVATION.NEXTVAL,
 		(SELECT hosp_code FROM hospital WHERE address = #{address}),
 		#{department},#{email},#{datepick},#{hourMinute},SYSDATE,#{symptom},'승인대기중')
 	</insert>
+	<delete id="deleteReservation" parameterType="java.util.Map">
+		DELETE FROM reservation WHERE reserv_no=#{reserv_no}
+	</delete>
 	<select id="getSymptomByHospital" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM symptom WHERE dept_name = #{dept_name}
 	</select>
 	<select id="getPresByUser" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM prescription WHERE mem_email = #{mem_email}
+	</select>
+	<select id="searchHospital" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM hospital WHERE AUTH='제휴승인됨' AND ADDRESS  LIKE '%' || #{hosp_name} || '%'
 	</select>
 </mapper>

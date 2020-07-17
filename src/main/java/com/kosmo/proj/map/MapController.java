@@ -93,7 +93,7 @@ public class MapController {
 		{
 			return "3";
 		}
-		
+
 		int affected = mapService.insertReservation(map);
 		
 		System.out.println(affected);
@@ -204,6 +204,14 @@ public class MapController {
 		if(apiStatus.equals("0"))
 		{
 			list = mapService.selectHospitalOne(map);
+			
+			for(Map comment:list)
+			{
+				if(comment.get("AUTH_DATE") != null)
+					comment.put("AUTH_DATE",comment.get("AUTH_DATE").toString());
+				if(comment.get("APPROVED_DATE") != null)
+					comment.put("APPROVED_DATE",comment.get("APPROVED_DATE").toString());
+			}
 //			String depart = "";
 //			for (int i = 0; i < list.size(); i++) {
 //				if(i==list.size()-1)
@@ -246,6 +254,15 @@ public class MapController {
 //			}
 //		}
 //		list.get(0).replace("DEPT_NAME", depart);
+		
+		for(Map comment:list)
+		{
+			if(comment.get("AUTH_DATE") != null)
+				comment.put("AUTH_DATE",comment.get("AUTH_DATE").toString());
+			if(comment.get("APPROVED_DATE") != null)
+				comment.put("APPROVED_DATE",comment.get("APPROVED_DATE").toString());
+		}
+			
 
 		System.out.println(JSONArray.toJSONString(list));
 		

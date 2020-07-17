@@ -117,4 +117,10 @@ public class MapDao implements MapService{
 		return sqlMapper.selectOne("hospitalSelectByAddr", map);
 	}
 
+	@Override
+	public boolean isAnotherReservation(Map map) {
+		// TODO Auto-generated method stub
+		return (Integer)sqlMapper.selectOne("isAnotherReservation", map)==0 ? false : true;
+	}
+
 }
