@@ -41,4 +41,22 @@ public class PrescriptionDAO implements PrescriptionService {
 		return sqlMapper.selectOne("getCurrCount", map);
 	}
 
+	@Override
+	public int alarmInsert(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.insert("alarmInsert",map);
+	}
+
+	@Override
+	public int alarmDelete(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.delete("alarmDelete",map);
+	}
+
+	@Override
+	public List<Map> alarmSelect(String preno) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("alarmSelect",preno);
+	}
+
 }

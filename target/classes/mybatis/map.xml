@@ -23,10 +23,7 @@
    <select id="hospitalNameSelectByKeyWord" parameterType="java.util.Map" resultType="java.util.Map">
       SELECT distinct hosp_name FROM hospital WHERE hosp_name LIKE '%' || #{search_keyword} || '%'
    </select>
-   <select id="presSelectList" parameterType="java.util.Map" resultType="java.util.Map">
-      SELECT * FROM prescription WHERE mem_email = #{mem_email}
-   </select>
-   
+
    <select id="hospitalDepartCntSelect" parameterType="java.util.Map" resultType="int">
       SELECT COUNT(*) FROM hospital H JOIN hos_dept D ON H.hosp_code = D.hosp_code
 	  WHERE H.address = #{address}
