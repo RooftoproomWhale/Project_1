@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kosmo.proj.GetUser;
 import com.kosmo.proj.service.HospitalDTO;
 import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.ReservationDTO;
@@ -31,6 +32,8 @@ private HospServiceImpl hosDAO;
 //병원 페이지
 	@RequestMapping("/Hospage/main.hst")
 	public String toMain(@RequestParam Map map,Authentication auth,Model model) throws ParseException {
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
@@ -42,6 +45,7 @@ private HospServiceImpl hosDAO;
 		}
 		System.out.println(map);
 		List<MemberDTO> mem= hosDAO.selectmem(map);
+		
 		List<ReservationDTO> res = hosDAO.selectres(map);
 		Date now= new Date();
 		Calendar cal = new GregorianCalendar(Locale.KOREA);

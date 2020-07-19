@@ -101,6 +101,7 @@ public class AndroidMedicineController {
         String eeDoc = getTagValue("EE_DOC_DATA",doc);
         String udDoc = getTagValue("UD_DOC_DATA",doc);
         String nbDoc = getTagValue("NB_DOC_DATA",doc);
+        nbDoc = nbDoc.substring(0, nbDoc.indexOf("2."));
         
         JSONObject jsonMedi = XML.toJSONObject(responseBody);
         JSONObject selecOne = new JSONObject();
@@ -128,18 +129,20 @@ public class AndroidMedicineController {
 		NodeList ccList = cList.item(0).getChildNodes();
 		for(int i=0;i<ccList.getLength();i++) {
 			NodeList chList = ccList.item(i).getChildNodes();
-			System.out.println(ccList.item(0).getNodeValue());
 			for(int k=0;k<chList.getLength();k++) {
+				if(chList.item(k).hasAttributes()) {
+					nValue+=chList.item(k).getAttributes().getNamedItem("title").getNodeValue()+"<br/>";
+				}
 				NodeList cchList = chList.item(k).getChildNodes();
 				for(int j=0;j<cchList.getLength();j++) {
-					System.out.println(cchList.item(j).getTextContent());
-					if(cchList.item(j).getTextContent()!="&nbsp;") {
-						nValue+="<p>"+cchList.item(j).getTextContent()+"</p>";
+					if(cchList.item(j).hasAttributes()){
+						if(cchList.item(j).getAttributes().getNamedItem("tagName").getNodeValue().equalsIgnoreCase("p")) {
+							nValue+=cchList.item(j).getTextContent()+"<br/>";
+						}
 					}
 				}
 			}
 		}
-		
 		return nValue;
 	}
 

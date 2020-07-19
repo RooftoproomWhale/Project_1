@@ -96,25 +96,52 @@ public class AdminController {
       model.addAttribute("junAptCount", junAptCount);
       model.addAttribute("julAptCount", julAptCount);
 
-      // age chart
-      int under10 = adminService.under10Count();
-      int over10under20 = adminService.over10under20Count();
-      int over20under30 = adminService.over20under30Count();
-      int over30under40 = adminService.over30under40Count();
-      int over40under50 = adminService.over40under50Count();
-      int over50under60 = adminService.over50under60Count();
-      int over60 = adminService.over60Count();
-      System.out.println("10세미만: " + under10 + " 10~19: " + over10under20 + " 20~29: " + over20under30 + " 30~39: "
-            + over30under40 + " 40~49: " + over40under50 + " 50~59: " + over50under60 + " 60이상: " + over60);
-      ;
-      model.addAttribute("under10", under10);
-      model.addAttribute("over10under20", over10under20);
-      model.addAttribute("over20under30", over20under30);
-      model.addAttribute("over30under40", over30under40);
-      model.addAttribute("over40under50", over40under50);
-      model.addAttribute("over50under60", over50under60);
-      model.addAttribute("over60", over60);
-
+		// age chart
+		int under10 = adminService.under10Count();
+		int over10under20 = adminService.over10under20Count();
+		int over20under30 = adminService.over20under30Count();
+		int over30under40 = adminService.over30under40Count();
+		int over40under50 = adminService.over40under50Count();
+		int over50under60 = adminService.over50under60Count();
+		int over60 = adminService.over60Count();
+		System.out.println("10세미만: " + under10 + " 10~19: " + over10under20 + " 20~29: " + over20under30 + " 30~39: "
+				+ over30under40 + " 40~49: " + over40under50 + " 50~59: " + over50under60 + " 60이상: " + over60);
+		;
+		model.addAttribute("under10", under10);
+		model.addAttribute("over10under20", over10under20);
+		model.addAttribute("over20under30", over20under30);
+		model.addAttribute("over30under40", over30under40);
+		model.addAttribute("over40under50", over40under50);
+		model.addAttribute("over50under60", over50under60);
+		model.addAttribute("over60", over60);
+		
+		//UsingTime
+		int t0_2 = adminService.t0_2();
+		int t2_4 = adminService.t2_4();
+		int t4_6 = adminService.t4_6();
+		int t6_8 = adminService.t6_8();
+		int t8_10 = adminService.t8_10();
+		int t10_12 = adminService.t10_12();
+		int t12_14 = adminService.t12_14();
+		int t14_16 = adminService.t14_16();
+		int t16_18 = adminService.t16_18();
+		int t18_20 = adminService.t18_20();
+		int t20_22 = adminService.t20_22();
+		int t22_24 = adminService.t22_24();
+		
+		model.addAttribute("t0_2", t0_2);
+		model.addAttribute("t2_4", t2_4);
+		model.addAttribute("t4_6", t4_6);
+		model.addAttribute("t6_8", t6_8);
+		model.addAttribute("t8_10", t8_10);
+		model.addAttribute("t10_12", t10_12);
+		model.addAttribute("t12_14", t12_14);
+		model.addAttribute("t14_16", t14_16);
+		model.addAttribute("t16_18", t16_18);
+		model.addAttribute("t18_20", t18_20);
+		model.addAttribute("t20_22", t20_22);
+		model.addAttribute("t22_24", t22_24);
+		
       return "Ad_Index.ad_tiles";
    }
 
@@ -191,14 +218,32 @@ public class AdminController {
       return "Accounts.ad_tiles";
    }
 
-   @ResponseBody
-   @RequestMapping(value = "UserDelete.hst")
-   public String userDelete(@RequestParam Map map) {
-      int delete = adminService.delete(map);
-      System.out.println(delete);
-      String deletestr = Integer.toString(delete);
-      JSONObject jsonObject = new JSONObject();
-      jsonObject.put("del", deletestr);
+	@ResponseBody
+	@RequestMapping(value = "UserDelete.hst")
+	public String userDelete(@RequestParam Map map) {
+		
+		int deletePM = adminService.deletePM(map);
+		System.out.println("deletePM: " + deletePM);
+		int deletePres = adminService.deletePres(map);
+		System.out.println("deletePres: " + deletePres);
+		int deleteHI = adminService.deleteHI(map);
+		System.out.println("deleteHI: " + deleteHI);
+		int deleteHist = adminService.deleteHist(map);
+		System.out.println("deleteHist: " + deleteHist);
+		int updateHos = adminService.updateHos(map);
+		System.out.println("updateHos: " + updateHos);
+		int deleteReserv = adminService.deleteReserv(map);
+		System.out.println("deleteReserv: " + deleteReserv);
+		int deleteNoti = adminService.deleteNoti(map);
+		System.out.println("deleteNoti: " + deleteNoti);
+		int deleteQna = adminService.deleteQna(map);
+		System.out.println("deleteQna: " + deleteQna);
+		int deleteMem = adminService.delete(map);
+		System.out.println("deleteMem: " + deleteMem);
+		
+		String deletestr = Integer.toString(deleteMem);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("del", deletestr);
 
       return jsonObject.toString();
    }
@@ -344,20 +389,60 @@ public class AdminController {
 
       return "HosAuth.ad_tiles";
    }
+   
+   @RequestMapping("HosAuthApp.hst")
+   public String toHosAuthApp(@RequestParam Map map, Paging vo, Model model,
+         @RequestParam(value = "nowPage", required = false) String nowPage,
+         @RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
+      int total = adminService.getTotalRecordHosAuthApp(map);
+      System.out.println(total);
+      if (nowPage == null && cntPerPage == null) {
+         nowPage = "1";
+         cntPerPage = "5";
+      } else if (nowPage == null) {
+         nowPage = "1";
+      } else if (cntPerPage == null) {
+         cntPerPage = "5";
+      }
 
-//   @RequestMapping("HosAuth.hst")
-//   public String toHosAuth(@RequestParam Map map, Model model)
-//   {
-//
-//      List<HospitalDTO> list =adminService.selectList_Auth_All(map);
-//      for(HospitalDTO val:list)
-//      {
-//         System.out.println(val.getHosp_name());
-//      }
-//      model.addAttribute("list", list);
-//
-//      return "HosAuth.ad_tiles";
-//   }
+      vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+      List<HospitalDTO> list = adminService.selectList_Auth_App(vo);
+      for (HospitalDTO val : list) {
+         System.out.println(val.getHosp_name());
+      }
+      model.addAttribute("paging", vo);
+      model.addAttribute("list", list);
+
+      return "HosAuthApp.ad_tiles";
+   }
+   
+   @RequestMapping("HosAuthWait.hst")
+   public String toHosAuthWait(@RequestParam Map map, Paging vo, Model model,
+         @RequestParam(value = "nowPage", required = false) String nowPage,
+         @RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
+      int total = adminService.getTotalRecordHosAuthWait(map);
+      System.out.println(total);
+      if (nowPage == null && cntPerPage == null) {
+         nowPage = "1";
+         cntPerPage = "5";
+      } else if (nowPage == null) {
+         nowPage = "1";
+      } else if (cntPerPage == null) {
+         cntPerPage = "5";
+      }
+
+      vo = new Paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+      List<HospitalDTO> list = adminService.selectList_Auth_Wait(vo);
+      for (HospitalDTO val : list) {
+         System.out.println(val.getHosp_name());
+      }
+      model.addAttribute("paging", vo);
+      model.addAttribute("list", list);
+
+      return "HosAuthWait.ad_tiles";
+   }
+
+
 
    @RequestMapping("ApproveAuth.hst")
    public String approve(@RequestParam Map map, Model model) {
@@ -522,10 +607,15 @@ public class AdminController {
       return "Chart.ad_tiles";
    }
 
-   @RequestMapping("AgeChart.hst")
-   public String ageChart() {
-      return "Chart.ad_tiles";
-   }
+	@RequestMapping("AgeChart.hst")
+	public String ageChart() {
+		return "Chart.ad_tiles";
+	}
+	
+	@RequestMapping("UsingTime.hst")
+	public String usingTimeChart() {
+		return "Chart.ad_tiles";
+	}
 
    @RequestMapping("Corona_Map.hst")
    public String toMap(@RequestParam Map map,Model model) {
@@ -734,13 +824,29 @@ public class AdminController {
       return "forward:Notice.hst";
    }
 
-   @RequestMapping(value="NoticeImages.hst",produces = "text/html; charset=UTF-8")
-   @ResponseBody
-   public String noticeImg() {
-      List<Map> list = adminService.selectImage();
-      System.out.println(list);
-      System.out.println(JSONArray.toJSONString(list));
-      return JSONArray.toJSONString(list);
-   }
+	@RequestMapping(value="NoticeImages.hst",produces = "text/html; charset=UTF-8")
+	@ResponseBody
+	public String noticeImg(Model model) {
+	
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = null;
+		List<BoardDTO> list = adminService.selectImage();
+		System.out.println(list);
+		for(BoardDTO val:list)
+		{
+			System.out.println("파주: " + val.getFile_addr());
+			System.out.println("파넘: " + val.getNoti_no());
+		}
+		try {
+			jsonStr = mapper.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+//		System.out.println(JSONArray.toJSONString(list));
+		model.addAttribute("list", list);
+		
+		return jsonStr.toString();
+	}
 
 }

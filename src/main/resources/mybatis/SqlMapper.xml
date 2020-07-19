@@ -9,6 +9,9 @@
 	<select id="memberIsLoginJson" parameterType="MemberDTO" resultType="MemberDTO">
       	SELECT * FROM member WHERE mem_email=#{mem_email} AND mem_pwd=#{mem_pwd}
     </select>
+    <update id="usingIncrease">
+    	UPDATE USING_TIME_COUNT SET COUNT = COUNT + 1 WHERE TIME_ = #{usingTime}
+    </update>
 
 	<select id="signView" parameterType="java.util.Map" resultType="MemberDTO">
 		SELECT * FROM MEMBER WHERE MEM_EMAIL = #{id}
@@ -78,7 +81,7 @@ WHERE rownum=1)hosp_name from reservation WHERE rownum=1
         update NOTIFICATION_BBS set title=#{title} , content = #{content} where noti_no = #{no} 
     </update> 
     <!-- 공지사항 카루셀 -->
-    <select id="selectImg" resultType="java.util.Map">
+    <select id="selectImg" resultType="BoardDTO">
     	SELECT file_addr,noti_no,ROWNUM FROM 
 		(SELECT * FROM notification_bbs WHERE file_addr is not NULL ORDER BY noti_no DESC) n
 		WHERE ROWNUM BETWEEN 1 AND 4
@@ -94,11 +97,34 @@ WHERE rownum=1)hosp_name from reservation WHERE rownum=1
    	<select id="getFirst" parameterType="java.util.Map" resultType="int">
     	SELECT NOTI_NO FROM NOTIFICATION_BBS WHERE ROWNUM <![CDATA[ <= ]]> 1
    	</select>
+   	<select id="getNoticeNo" parameterType="java.util.Map" resultType="int">
+    	SELECT NOTI_NO FROM NOTIFICATION_BBS WHERE ROWNUM <![CDATA[ <= ]]> 1
+   	</select>
 
 	<!-- 처방전 등록  -->
    	<insert id="presInsert" parameterType="java.util.Map">
       	INSERT INTO prescription VALUES(SEQ_PRESCRIPTION.NEXTVAL,#{mem_email},SYSDATE,#{duration},#{count},#{medi_name},#{hos_name})
    	</insert>
+   	<!-- 처장전 리스트 -->
+	<select id="presSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT m.mem_name,p.* FROM prescription p JOIN member m ON p.mem_email=m.mem_email WHERE p.mem_email = #{mem_email}
+	</select>
+   	<!-- 약 복용 -->
+   	<select id="getCurrCount" resultType="int">
+   		SELECT COUNT FROM PRESCRIPTION WHERE PRE_NO=#{preNo}
+   	</select>
+   	<update id="takePills" >
+   		UPDATE PRESCRIPTION SET COUNT = COUNT - 1 WHERE PRE_NO = #{preNo}
+   	</update>
+   	<insert id="alarmInsert" parameterType="java.util.Map">
+   		INSERT INTO pre_medi VALUES(#{preno},#{alarm})
+   	</insert>
+   	<delete id="alarmDelete" parameterType="java.util.Map">
+   		DELETE pre_medi WHERE pre_no=#{preno}
+   	</delete>
+   	<select id="alarmSelect" parameterType="java.lang.String" resultType="java.util.Map">
+   		SELECT alarm FROM pre_medi WHERE pre_no=#{preno} order by alarm
+   	</select>
 
 	<!-- 회원가입 -->
 	<insert id="signInsert" parameterType="java.util.Map">

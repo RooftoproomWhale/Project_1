@@ -40,6 +40,21 @@ public class ChatBotController {
 	}
 	
 	@CrossOrigin
+	@GetMapping(value = "/GetHospital", produces = "text/plain;charset=UTF-8")
+	public String getHospital(@RequestParam Map map)
+	{
+		List<Map> hospList  = service.selectHospitalList(map);
+		
+		for(Map res:hospList)
+		{
+			res.put("AUTH_DATE",res.get("AUTH_DATE").toString());
+			res.put("APPROVED_DATE",res.get("APPROVED_DATE").toString());
+		}
+		
+		return JSONArray.toJSONString(hospList);
+	}
+	
+	@CrossOrigin
 	@GetMapping(value = "/GetPrescription", produces = "text/plain;charset=UTF-8")
 	public String getPrescription(@RequestParam Map map)
 	{

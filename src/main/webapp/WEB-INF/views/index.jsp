@@ -19,17 +19,46 @@
         .jssora051:hover {opacity:.8;}
         .jssora051.jssora051dn {opacity:.5;}
         .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
-        
+       
+        #news {
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+}
+        #tit {
+    animation: fadein 2s;
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
 #footer{
-	top:2250px;
+	top:2200px;
 }
 header .intro-text {
     padding-top: 287px;
 }
+.sectionOne
+{
+    opacity:0;
+    margin-top:-100px;    
+    max-width:100%;
+}
+.sectionTwo
+{
+    opacity:0;
+    margin-top:300px;    
+    max-width:100%;
+}
 </style>
 <script>
 window.onload = function(){
-	
+
 	//web notification 설정
 	var icon = '../img/logo.png';
 	var userRole = $('#userRole').val();
@@ -152,27 +181,27 @@ window.onload = function(){
 	}
 	else if(userRole == "HOS")
 	{
-		$.ajax({
-			url:'<c:url value="/Noti/dayAptCount.hst"/>',
-			dataType:'html',
-			success:function(data){
-						console.log("병원 성공");
-						if(data != 0)
-						{
-							console.log("오늘 예약 수: " + data);
-							hosNotiDay(data);
-						}
-						else
-						{
-							console.log("오늘 예약 수: " + data);
-							hosNotiDayNo();
-						}
+// 		$.ajax({
+// 			url:'<c:url value="/Noti/dayAptCount.hst"/>',
+// 			dataType:'html',
+// 			success:function(data){
+// 						console.log("병원 성공");
+// 						if(data != 0)
+// 						{
+// 							console.log("오늘 예약 수: " + data);
+// 							hosNotiDay(data);
+// 						}
+// 						else
+// 						{
+// 							console.log("오늘 예약 수: " + data);
+// 							hosNotiDayNo();
+// 						}
 						
-					},
-			error:function(request,error){
-				console.log('에러:',error);
-			}
-		});
+// 					},
+// 			error:function(request,error){
+// 				console.log('에러:',error);
+// 			}
+// 		});
 		
 		$.ajax({
 			url:'<c:url value="/Noti/preAptCount.hst"/>',
@@ -344,9 +373,9 @@ window.onload = function(){
 			<div class="overlay">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-8 col-md-offset-2 intro-text">
+						<div class="col-md-8 col-md-offset-2 intro-text" id="tit">
 							<h1> We Are Home'spital ${currAptCount}</h1>
-							<p style="font-weight: bold;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
+							<p style="font-weight: bold; color: gray;">컴퓨터와 스마트폰으로 병원 예약 및 복약 관리를 손쉽게 하세요!</p>
 <!-- 							<a id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a> -->
 <%-- 							<a href="<c:url value='/Android/WebTest.hst'/>" id="" class="btn btn-custom btn-lg page-scroll"><span style="font-weight: bold; font-size: 16px;">이용하기</span></a> --%>
 						</div>
@@ -357,6 +386,7 @@ window.onload = function(){
 	</header>
 
 	<div class="container-fluid">
+	<div class="sectionOne">
 		<div class="row" style="padding-top: 50px">
 			<div class="col-md-5 col-md-offset-1 col-sm-12">
 				<div id="jssor_1"
@@ -372,17 +402,17 @@ window.onload = function(){
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti2" href="#">
+							<a id="noti2" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[1].noti_no }'/>">
 								<img id="img2" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti3" href="#">
+							<a id="noti3" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[2].noti_no }'/>">
 								<img id="img3" data-u="image" src='<c:url value="/images/no_noti.png"/>' />
 							</a>
 						</div>
 						<div data-p="680">
-							<a id="noti4" href="#">
+							<a id="noti4" href="<c:url value='/Admin/NoticeDetail.hst?no=${list[3].noti_no }'/>">
 								<img id="img4" data-u="image" src='<c:url value="/images/no_noti.png"/>'" />
 							</a>
 						</div>
@@ -424,15 +454,17 @@ window.onload = function(){
 			<!-- Issue Section -->
 			<div class="col-md-5 col-md-offset-1 col-sm-12" style="">
 				<div class="row" style="margin-bottom: 14px">
-					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보<spam id=date_co style="font-size:0.7em;color:#5D5D5D"></spam></span>
+					<span style="color: #000000; font-size: 20pt; font-weight: bold;">코로나 속보<span id=date_co style="font-size:0.7em;color:#5D5D5D"></span></span>
 				</div>
 				<div class="row" id="news" style="font-size: 12pt; padding-bottom: 20px;"></div>
 			</div>
+		</div>
 		</div>
 	
 
 
 	<!-- Services Section -->
+	<div class="sectionTwo">
 	<div id="services" class="text-center">
 		<div class="container">
 			<div class="section-title">
@@ -480,7 +512,6 @@ window.onload = function(){
 						<p>복용 알림 서비스 및 해당 병원 예약 서비스</p>
 					</div>
 				</div>
-
 				<div class="col-md-4" style="cursor: pointer" onclick="location.href='<c:url value='/Covid/View.hst'/>'">
 
 					<i class="fa fa-pie-chart"></i>
@@ -496,6 +527,7 @@ window.onload = function(){
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 </body>
 <script>
@@ -533,8 +565,8 @@ window.onload = function(){
 					type:'get',
 					dataType:"json",
 					success:function(data){
-						var news = "<table class='table' style='width:80%;border: 2px solid rgba(0,0,0,.12);'>";
-						if(data.length==0){
+						var news = "<table class='table' id='news' style='width:80%;border: 2px solid rgba(0,0,0,.12);'>";
+			if(data.length==0){
 							news+="<li>뉴스 데이터가 없습니다</li>";
 						} 
 						$.each(data, function(index, element) {
@@ -554,9 +586,6 @@ window.onload = function(){
 				url:"<c:url value='/Admin/NoticeImages.hst'/>",
 				type:'post',
 				success:function(data){
-					var date = new Date();
-					date = moment(date).format('YYYY-MM-DD HH:mm');
-					$('#date_co').text("(실시간:"+date+")")
 					console.log(data);
 					var noti = JSON.parse(data);
 					$('#img1').attr('src',noti[0]["FILE_ADDR"]);
@@ -568,11 +597,33 @@ window.onload = function(){
 				},
 				error:function(e){console.log('에러:',e)}
 			})
-			
 		}
+		
+		$(window).scroll( function(){
+	        $('.sectionOne').each( function(i){
+	            
+	            var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+	            var bottom_of_window = $(window).scrollTop() + $(window).height();
+	            
+	            if( bottom_of_window > bottom_of_element - 100 ){
+	                $(this).animate({'opacity':'1','margin-top':'0px'}, 1000);
+	            }
+	            
+	        }); 
+	        
+			$('.sectionTwo').each( function(i){
+	            
+	            var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+	            var bottom_of_window = $(window).scrollTop() + $(window).height();
+	            
+	            if( bottom_of_window > bottom_of_element - 900 ){
+	                $(this).animate({'opacity':'1','margin-top':'0px'}, 1000);
+	            }
+	            
+	        }); 
+	    });
 		
 	});
 	
 </script>
-<script src='<c:url value="/calendar/vendor/js/moment.min.js"/>'></script>
 </html>

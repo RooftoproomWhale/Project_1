@@ -230,7 +230,7 @@ width: 100%;
 }
 #footer{
 position:absolute;
-top: 1500px;
+top: 1300px;
 width: 100%;
 }
 
@@ -363,7 +363,7 @@ width: 100%;
                         '</table>';
                   });
                }
-
+				
             $('#searchTable').html(items);
          },
          error : function(request, status, error) {
@@ -728,7 +728,7 @@ width: 100%;
                });
 
             });
-
+	  
       $(".submit").click(function() {
          return false;
       })
@@ -736,8 +736,7 @@ width: 100%;
             .click(
                   function() {
                      console.log($(".input-group-addon"), "검색")
-                     console
-                           .log('검색',
+                     console.log('검색',
                                  $('#input_hospital').val().length);
                      var search_val = $('#input_hospital').val();
                      if (search_val.length > 0) {
@@ -939,6 +938,7 @@ width: 100%;
                         complete : function() {
                            current_fs.hide();
                            animating = false;
+                           $('html').scrollTop(0);
                         },
                         //사용자가 정의 플러그인에서 나옴
                         easing : 'easeInOutBack'

@@ -28,7 +28,7 @@
 		<security:form-login
 			
 			login-page="/User/Login.hst"
-			default-target-url="/Home/ToHomePage.hst"
+			default-target-url="/Home/FirstHomePage.hst"
 			authentication-failure-url="/User/Login.hst?NotLogin=error"
 			login-processing-url="/User/LoginProcess.hst"
 			username-parameter="id"

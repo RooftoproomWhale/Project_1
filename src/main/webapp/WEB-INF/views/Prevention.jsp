@@ -195,7 +195,7 @@ label .label-text:before {
 			<div class="task-manager col-md-offset-2 col-md-10">
 				<div class="page-content">
 					<div class="header">
-						내 예방 정보
+						<h2>내 예방 정보</h2></br>
 						<div class="alert alert-info" style="text-align: center;">
 							<strong>${listgetName[0].mem_name}</strong>님의 예방 정보 확인하기
 						</div>

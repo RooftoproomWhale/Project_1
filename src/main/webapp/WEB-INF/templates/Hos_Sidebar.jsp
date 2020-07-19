@@ -178,18 +178,27 @@ window.onload = function(){
 	}
 	else if(userRole == "HOS")
 	{
-// 		$.ajax({
-// 			url:'<c:url value="/Noti/dayAptCount.hst"/>',
-// 			dataType:'html',
-// 			success:function(data){
-// 					console.log("병원 성공");
-// 					console.log("오늘 예약 수: " + data);
-// 						hosNotiDay(data);
-// 					},
-// 			error:function(request,error){
-// 				console.log('에러:',error);
-// 			}
-// 		});
+		$.ajax({
+			url:'<c:url value="/Noti/dayAptCount.hst"/>',
+			dataType:'html',
+			success:function(data){
+						console.log("병원 성공");
+						if(data != 0)
+						{
+							console.log("오늘 예약 수: " + data);
+							hosNotiDay(data);
+						}
+						else
+						{
+							console.log("오늘 예약 수: " + data);
+							hosNotiDayNo();
+						}
+						
+					},
+			error:function(request,error){
+				console.log('에러:',error);
+			}
+		});
 		
 		$.ajax({
 			url:'<c:url value="/Noti/preAptCount.hst"/>',
@@ -279,6 +288,22 @@ window.onload = function(){
 			};
 		}
 	
+	function hosNotiDayNo() {
+		text = '오늘은 예약이 없습니다';
+		console.log(text);
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('예약 알림', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/Hospage/Appointment.hst'/>";
+			};
+		}
+	
 	function userAptNoti() {
 		text = '승인 대기중이던 예약이 승인되었습니다';
 		console.log(text);
@@ -333,7 +358,7 @@ window.onload = function(){
 			<li><a href="<c:url value='/Hospage/Edit.hst'/>"> 정보 수정</a></li>
 			<li><a href="<c:url value='/Hospage/Appointment.hst'/>"> 예약 관리</a></li>
 			<li><a href="<c:url value='/Hospage/Cancel.hst'/>"> 제휴 관리</a></li>
-			<li><a href="<c:url value='/User/Logout.hst'/>"> 로그 아웃 </a></li>
+			<li><a href="<c:url value='/User/Logout.hst'/>"> 로그아웃 </a></li>
 <%-- 			<li><a href="<c:url value='/Hospage/Chart.hst'/>"><i class="fas fa-chart-bar"></i> 통계 </a></li> --%>
 		<!--  	<li><a href="<c:url value='/User/Login.hst'/>"><em class="fa fa-power-off">&nbsp;</em> 로그아웃 </a></li>-->
 		</ul>
