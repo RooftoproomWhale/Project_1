@@ -4,7 +4,7 @@
 
 var editEvent = function (event, element, view) {
 	$('#item_name').empty();
-
+	console.log(event.type);
 	
 	if(event.type=='복용약등록'){
 	   	 $('#loading').show();
@@ -92,7 +92,7 @@ $('#item-date').text(event.start._i+"-"+event.end._i);
     	 	change();
     }
      else if(event.type=="병원예약"){
- 
+    	 modalTitle.html('예약 상세페이지');
     	 start = moment(event.start).format('YYYY-MM-DD HH:mm');
     	 
     	 $('#apply_time').html(event.apply_TIME);
@@ -171,7 +171,7 @@ $('#updateEvents_no1,#updateEvents_no1').on('click',function(){
 });
 //상세보기로 변경
 function change() {
-	 modalTitle.html('예약 상세페이지');
+
 	 $('#approved').html(event.approved);
 	 $('#dept_NAME').html(event.dept_NAME);
 	 $('#sel_SYMP').html(event.sel_SYMP);

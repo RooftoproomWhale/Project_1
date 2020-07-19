@@ -326,7 +326,7 @@ label .label-text:before {
       </div>
    </div>
 	<script type="text/javascript">
-	
+
 	(function($) {
 		$.expr[":"].Contains = function(a, i, m) {
 			return (a.textContent || a.innerText || "").toUpperCase().indexOf(

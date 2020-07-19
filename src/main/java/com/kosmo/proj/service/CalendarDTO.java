@@ -3,15 +3,22 @@ package com.kosmo.proj.service;
 import java.sql.Date;
 
 public class CalendarDTO {
-		
+		private String MEM_NAME;
+	
 		private int pre_no;
 		private String mem_email;
 		private Date pres_date;
 		private int duration;
 		private int count;
 		private String medi_name;
+		public String getMEM_NAME() {
+			return MEM_NAME;
+		}
 		public int getPre_no() {
 			return pre_no;
+		}
+		public void setMEM_NAME(String mem_NAME) {
+			this.MEM_NAME = mem_NAME;
 		}
 		public void setPre_no(int pre_no) {
 			this.pre_no = pre_no;

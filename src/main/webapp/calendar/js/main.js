@@ -90,7 +90,7 @@ var calendar = $('#calendar').fullCalendar({
         }).append('<p><strong>'+name+':</strong> ' + event.mem_NAME + '</p>')
         .append('<p><strong>구분:</strong> ' + event.type + '</p>')
         .append('<p><strong>'+h+':</strong> ' + getDisplayEventDate(event) + '</p>')
-        .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
+        ,
       delay: {
         show: "800",
         hide: "50"
