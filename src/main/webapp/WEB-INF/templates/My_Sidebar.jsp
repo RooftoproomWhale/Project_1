@@ -105,34 +105,36 @@ window.onload = function(){
 		var currMin = (date.getMinutes()<10?'0':'') + date.getMinutes();
 		var currTime = parseInt(currHour) * 60 + parseInt(currMin);
 		
-		$.ajax({
-			url:'<c:url value="/Noti/getMediTime.hst"/>',
-			dataType:'json',
-			success:function(data){
-				console.log("멤버 성공")
-				console.log(data);
-				console.log("현재시간: " + currTime);
-				$.each(data, function(i, item) {
-		             console.log(item.alarm);
-		             var takeTime = item.alarm;
-		             console.log("takeTime: " + takeTime);
-		             var hour = takeTime.substring(0, 2);
-		             var min = takeTime.substring(2, 4);
-		             var time = parseInt(hour) * 60 + parseInt(min);
-		             console.log("time: " + time);
-		             timeGap = time - currTime;
-		             console.log("gap: " + timeGap);
-		             if(timeGap > 0 && timeGap <= 30)
-		             {
-		            	 memNoti();
-							return false;
-		             }
-		         })
-				},
-			error:function(request,error){
-				console.log('에러:',error);
-			}
-		});
+// 		$.ajax({
+// 			url:'<c:url value="/Noti/getMediTime.hst"/>',
+// 			dataType:'json',
+// 			success:function(data){
+// 				console.log("멤버 성공")
+// 				console.log(data);
+// 				console.log("현재시간: " + currTime);
+// 				$.each(data, function(i, item) {
+// 		             console.log(item.alarm);
+// 		             var takeTime = item.alarm;
+// 		             console.log("takeTime: " + takeTime);
+// 		             var hour = takeTime.substring(0, 2);
+// 		             var min = takeTime.substring(2, 4);
+// 		             var time = parseInt(hour) * 60 + parseInt(min);
+// 		             console.log("time: " + time);
+// 		             timeGap = time - currTime;
+// 		             console.log("gap: " + timeGap);
+// 		             if(timeGap > 0 && timeGap <= 30)
+// 		             {
+// 		            	 console.log("30 사이 인");
+// 		            	 memNoti30();
+// // 		            	 androidMemFCM();
+// 							return false;
+// 		             }
+// 		         })
+// 				},
+// 			error:function(request,error){
+// 				console.log('에러:',error);
+// 			}
+// 		});
 		
 		window.setInterval(function(){
 			date = new Date();
@@ -159,7 +161,8 @@ window.onload = function(){
 			             console.log("gap: " + timeGap);
 			             if(timeGap == 0)
 			             {
-			            	 memNoti();
+			            	 memNoti0();
+			            	 androidMemFCM();
 								return false;
 			             }
 			         })
@@ -263,8 +266,23 @@ window.onload = function(){
 	}
 
 	var text;
-	function memNoti() {
+	function memNoti30() {
 		text = '30분 안에 복용 해야할 약이 있습니다';
+		var options = 
+			{
+			      body: text,
+			      icon: icon
+		  	}
+			var noti = new Notification('복약 알림이 있습니다', options)
+			
+			noti.onclick = function(event) {
+				console.log('noti click');
+				window.location.href = "<c:url value='/mypage/administration.hst'/>";
+			};
+		}
+	
+	function memNoti0() {
+		text = '약 복용 시간입니다';
 		var options = 
 			{
 			      body: text,
@@ -324,6 +342,21 @@ window.onload = function(){
 				console.log('noti click');
 				window.location.href = "<c:url value='/mypage/ReservationList.hst'/>";
 			};
+		}
+	
+	function androidMemFCM() {
+		
+		$.ajax({
+			url:'<c:url value="/Noti/androidFCM.hst"/>',
+			dataType:'text',
+			success:function(data){
+					console.log("androidFCM 요청 성공");
+				},
+			error:function(request,error){
+				console.log('에러:',error);
+			}
+		});
+		
 		}
 	
 }
