@@ -597,7 +597,6 @@ window.onload = function(){
 				},
 				error:function(e){console.log('에러:',e)}
 			})
-			
 		}
 		
 		$(window).scroll( function(){

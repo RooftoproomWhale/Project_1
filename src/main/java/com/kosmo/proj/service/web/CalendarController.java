@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kosmo.proj.GetUser;
 import com.kosmo.proj.service.CalendarDTO;
 import com.kosmo.proj.service.MedicineInfoDTO;
 import com.kosmo.proj.service.ReservationDTO;
@@ -109,7 +111,15 @@ public class CalendarController {
 
 
 	@RequestMapping("/Calendar/calendar.hst")
-	public String calendar() {
+	public String calendar(@RequestParam Map map,Authentication auth, Model model) {
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
+		
+		UserDetails userDetails = (UserDetails)auth.getPrincipal();
+		String userEmail = userDetails.getUsername();
+		System.out.println("email: " + userEmail);
+		map.put("userEmail", userEmail);
+		map.put("id", userEmail);
 		return "calendar.tiles";
 	}/////calendar
 	

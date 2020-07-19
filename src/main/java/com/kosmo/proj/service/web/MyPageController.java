@@ -204,6 +204,7 @@ public class MyPageController {
 	// 내 질병관리 이동
 	@RequestMapping("/mypage/Disease.hst")
 	public String Disease(@RequestParam Map map,Authentication auth,Model model) {
+		
 		UserDetails userDetails=(UserDetails)auth.getPrincipal();
 		String id=userDetails.getUsername();
 		map.put("id",id );
@@ -218,6 +219,8 @@ public class MyPageController {
 	//내 예방정보 이동
 	@RequestMapping("/mypage/Prevention.hst")
 	public String Prevention(@RequestParam Map map,Authentication auth, Model model) {
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
 
 		UserDetails userDetails = (UserDetails)auth.getPrincipal();
 		String userEmail = userDetails.getUsername();

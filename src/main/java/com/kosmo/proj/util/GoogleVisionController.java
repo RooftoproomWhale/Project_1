@@ -16,8 +16,11 @@ import com.google.cloud.vision.v1.TextAnnotation;
 import com.google.cloud.vision.v1.Vertex;
 import com.google.cloud.vision.v1.Word;
 import com.google.protobuf.ByteString;
+import com.kosmo.proj.GetUser;
+import com.kosmo.proj.service.MemberDTO;
 import com.kosmo.proj.service.PrescriptionDTO;
 import com.kosmo.proj.service.PrescriptionService;
+import com.kosmo.proj.service.impl.MemberServiceImpl;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -29,6 +32,7 @@ import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +54,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Controller
 public class GoogleVisionController {
+	@Resource(name="memberService")
+	private MemberServiceImpl memberDAO;
 	@Resource(name = "presService")
 	private PrescriptionService service;
 	
@@ -99,18 +105,13 @@ public class GoogleVisionController {
 		return JSONArray.toJSONString(list);
 	}
 	
-	
-	
-	
-	
-	
 
 	@RequestMapping("/mapping/mapping.hst")
-	public String vision(MultipartHttpServletRequest req,Authentication auth,Map map) throws IOException {
-
+	public String vision(MultipartHttpServletRequest req,Authentication auth,Map map, Model model) throws IOException {
+		//MultipartFile로 직접 받기MultipartHttpServletRequest req
 		MultipartFile file = req.getFile("filename");
 
-		map = visionAPI(file, map);
+		map = visionAPI(file, map, auth, model);
 		UserDetails userDetails = (UserDetails)auth.getPrincipal();
 		String mem_email = userDetails.getUsername();
 		//String totalMedi = String.format("%s,%s,%s,%s,%s,%s,%s,%s", medi1,medi2,medi3,medi4,medi5,medi6,medi7,medi8);
@@ -122,7 +123,7 @@ public class GoogleVisionController {
 		return "administration.my_tiles";
 	}
 	
-	public Map visionAPI(MultipartFile file,Map map) throws IOException {
+	public Map visionAPI(MultipartFile file,Map map, Authentication auth, Model model) throws IOException {
 		
 		/*각 의약품명*/
 		String medi1="",medi2="",medi3="",medi4="",medi5="",medi6="",medi7="",medi8="";
@@ -253,6 +254,21 @@ public class GoogleVisionController {
 				}
 			}
 		}
+		GetUser getUser = new GetUser();
+		getUser.getUser(model, auth);
+		
+		UserDetails userDetails = (UserDetails)auth.getPrincipal();
+		String userEmail = userDetails.getUsername();
+		System.out.println("email: " + userEmail);
+		map.put("userEmail", userEmail);
+		map.put("id", userEmail);
+		String mem_email = userDetails.getUsername();
+		String mem_name = mem_name(mem_email);
+		String totalMedi = String.format("%s,%s,%s,%s,%s,%s,%s,%s", medi1,medi2,medi3,medi4,medi5,medi6,medi7,medi8);
+//		medi_name.append(totalMedi);
+		map.put("medi_name", medi_name.toString());
+		map.put("mem_email", mem_email);
+		map.put("mem_name", mem_name);
 		if(medi1!="") {
 			medi_name+=medi1;
 		}
@@ -285,6 +301,15 @@ public class GoogleVisionController {
 		map.put("count", remainingCount);
 		
 		return map;
+	}
+
+
+	private String mem_name(String mem_email) {
+		Map<String, String> map =new HashMap<String, String>();
+		map.put("id", mem_email);
+		List<MemberDTO> list = memberDAO.selectList(map);
+	
+		return list.get(0).getMem_name();
 	}
 	
 	
